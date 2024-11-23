@@ -131,10 +131,10 @@
     <value>Сформировать отчет для ОТОБРАЖАЕМЫХ треков</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1286, 613</value>
+    <value>1284, 611</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1269, 48</value>
+    <value>1267, 48</value>
   </data>
   <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
     <value>Экспорт тегов в файл для использования в сторонних приложениях. Таблица сортируется по группирующим тегам слева направо после нажатия кнопки "Просмотр". Отмеченные пресеты автоматически применятются при запуске MusicBee. ~Отмечено для автоматического применения: %%TICKED-PRESETS%%~Автоматическое применение пресетов отключено в настройках плагина. </value>
@@ -771,9 +771,6 @@
 Отчет будет создан, но не будет отображен
 Вы сможете экспортировать созданный отчет в файл как обычно</value>
   </data>
-  <data name="presetChainIsWrongPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>622, 63</value>
-  </data>
   <data name="smartOperationCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>1012, 171</value>
   </data>
@@ -1027,7 +1024,7 @@
     <value>288, 59</value>
   </data>
   <data name="useAnotherPresetAsSourceComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>330, 23</value>
+    <value>358, 23</value>
   </data>
   <data name="useAnotherPresetAsSourceComboBox.ToolTip" xml:space="preserve">
     <value>Выберите пресет, использующий фильтрацию по условию
@@ -1041,15 +1038,8 @@
   </data>
   <data name="useAnotherPresetAsSourceCheckBox.ToolTip" xml:space="preserve">
     <value>Получение списка треков из другого пресета имеет смысл только, если этот пресет 
-использует фильтрацию по условию.
-Пресеты для получения списка треков могут быть организованы в цепочку:
-Пресет для получения списка треков, или другие пресеты в цепочке, 
-не выбраны, или больше не используют фильтрацию по условию, 
-а значит, цепочка пресетов бесполезна!:
-Выбранный пресет, или другие пресеты в цепочке, либо были удалены, 
-либо теперь включены в зацикленную цепочку пресетов!:
-Сейчас этот пресет не может быть использован!
-Проверьте цепочку пресетов!</value>
+использует фильтрацию по условию
+Пресеты для получения списка треков могут быть организованы в цепочку</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>915, 32</value>
@@ -1169,19 +1159,19 @@
     <value>Введите название пресета (в противном случае оно будет сформировано автоматически)</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 148</value>
+    <value>0, 146</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1276, 195</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1240, 128</value>
+    <value>1240, 126</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1268, 148</value>
+    <value>1268, 146</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1276, 343</value>
+    <value>1274, 341</value>
   </data>
   <data name="dataGridViewCellStyle2.NullValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1201,10 +1191,10 @@
 </value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1250, 165</value>
+    <value>1248, 166</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1252, 168</value>
+    <value>1250, 169</value>
   </data>
   <data name="tabPage1.Text" xml:space="preserve">
     <value>Просмотр</value>
@@ -1219,10 +1209,10 @@
     <value>Вы сняли отметку с последнего выражения для поля:\\%%FIELD-NAME%%\\Вы хотите удалить это поле?</value>
   </data>
   <data name="expressionsDataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>723, 0</value>
+    <value>722, 0</value>
   </data>
   <data name="expressionsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>521, 105</value>
+    <value>520, 108</value>
   </data>
   <data name="tagsDataGridViewCheckedColumn.ToolTipText" xml:space="preserve">
     <value>Снимите отметку, чтобы удалить группировку/функцию из пресета</value>
@@ -1243,7 +1233,7 @@
     <value>Разделитель элементов для группировок или тег, относительно которого считается среднее, для функций</value>
   </data>
   <data name="tagsDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>719, 105</value>
+    <value>718, 108</value>
   </data>
   <data name="tagsDataGridView.ToolTip" xml:space="preserve">
     <value>Порядок колонок в отчете соответствует порядку, в котором они были добавлены, но 
@@ -1251,10 +1241,10 @@
 Смотрите реальный порядок колонок в таблице предварительного просмотра.</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1244, 105</value>
+    <value>1242, 108</value>
   </data>
   <data name="buttonAddFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>996, 34</value>
+    <value>994, 34</value>
   </data>
   <data name="buttonAddFunction.Text" xml:space="preserve">
     <value>Добавить:Отказаться</value>
@@ -1263,7 +1253,7 @@
     <value>Добавить определение новой колонки:Отказаться от изменений</value>
   </data>
   <data name="buttonUpdateFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1124, 34</value>
+    <value>1122, 34</value>
   </data>
   <data name="buttonUpdateFunction.Text" xml:space="preserve">
     <value>Сохранить :  Обновить </value>
@@ -1345,7 +1335,7 @@
     <value>Очистить выражение</value>
   </data>
   <data name="buttonHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>721, 34</value>
+    <value>719, 34</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonHelp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -1397,22 +1387,22 @@
     <value>220, 23</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1244, 166</value>
+    <value>1250, 169</value>
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Определения колонок</value>
   </data>
   <data name="presetTabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1260, 196</value>
+    <value>1258, 197</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1276, 208</value>
+    <value>1274, 208</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1276, 554</value>
+    <value>1274, 552</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>343</value>
+    <value>341</value>
   </data>
 </root>

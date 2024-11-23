@@ -29,7 +29,7 @@ namespace MusicBeePlugin
             albumRatingTagListCustom = namesComboBoxes["albumRatingTagList"];
 
 
-            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
+            ReplaceButtonBitmap(buttonSettings, Gear);
 
             calculateAlbumRatingAtStartUpCheckBox.Checked = SavedSettings.calculateAlbumRatingAtStartUp;
             calculateAlbumRatingAtTagsChangedCheckBox.Checked = SavedSettings.calculateAlbumRatingAtTagsChanged;

@@ -65,9 +65,13 @@ namespace MusicBeePlugin
         private CustomComboBox parameterTag2ListCustom;
         private CustomComboBox parameterTagListCustom;
 
+        private CustomComboBox nextPresetComboBoxCustom;
         private CustomComboBox playlistComboBoxCustom;
         private CustomComboBox filterComboBoxCustom;
 
+
+        private bool nextPresetComboBoxTextChanging = false;
+        private bool ignoreNextPresetComboBoxTextChanged = false;
 
         private const int tableColumnCount = 20; //IT'S COLUMN COUNT OF "previewTable" !!!
         const int ColumnsTrackWidth = 400;
@@ -90,6 +94,9 @@ namespace MusicBeePlugin
         private Bitmap checkedState;
         private Bitmap uncheckedState;
 
+        private Bitmap filterPresetChain;
+        private Bitmap filterPresetChainDimmed;
+
         private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
         private readonly DataGridViewCellStyle dimmedCellStyle = new DataGridViewCellStyle(DimmedCellStyle);
@@ -98,7 +105,7 @@ namespace MusicBeePlugin
 
 
         private List<Row> rows = new List<Row>();
-        BindingSource source = new BindingSource();
+        private BindingSource source = new BindingSource();
 
         private static readonly Encoding Unicode = Encoding.UTF8;
 
@@ -122,7 +129,7 @@ namespace MusicBeePlugin
 
         internal static string PresetsPath;
         internal static SortedDictionary<Guid, Preset> Presets;
-        private SortedDictionary<Guid, Preset> presetsWorkingCopy = new SortedDictionary<Guid, Preset>();
+        private static SortedDictionary<Guid, Preset> PresetsInteractiveWorkingCopy = new SortedDictionary<Guid, Preset>();
 
         private SortedDictionary<Guid, bool> autoAppliedAsrPresetGuids;
         private int asrPresetsWithHotkeysCount;
@@ -154,6 +161,8 @@ namespace MusicBeePlugin
         private int AllTagsPresetsCantBeAutoAppliedCountdown;
         private bool selectedPresetUsesAllTags;
 
+        private bool showOnlyChainedPresets;
+
         private bool showTickedOnlyChecked;
         private bool showPredefinedChecked;
         private bool showCustomizedChecked;
@@ -161,6 +170,7 @@ namespace MusicBeePlugin
         private bool showPlaylistLimitedChecked;
         private bool showFunctionIdAssignedChecked;
         private bool showHotkeyAssignedChecked;
+        private bool showHiddenChecked;
 
         private bool untickAllChecked;
 
@@ -202,14 +212,28 @@ namespace MusicBeePlugin
             parameterTag2ListCustom = namesComboBoxes["parameterTag2List"];
             parameterTagListCustom = namesComboBoxes["parameterTagList"];
 
+            nextPresetComboBoxCustom = namesComboBoxes["nextPresetComboBox"];
             playlistComboBoxCustom = namesComboBoxes["playlistComboBox"];
             filterComboBoxCustom = namesComboBoxes["filterComboBox"];
+
+
+            if (useSkinColors)
+                nextPresetComboBoxCustom.SelectedIndexChanged += new EventHandler(nextPresetComboBox_SelectedIndexChanged_DropDownClosed);
+            else
+                nextPresetComboBoxCustom.comboBox.DropDownClosed += new EventHandler(nextPresetComboBox_SelectedIndexChanged_DropDownClosed);
 
 
             warning = ReplaceBitmap(null, Warning);
             warningWide = ReplaceBitmap(null, WarningWide);
             checkedState = ReplaceBitmap(null, CheckedState);
             uncheckedState = ReplaceBitmap(null, UncheckedState);
+
+
+            nextPresetComboBoxCustom.Width = nextPresetComboBoxCustom.Width + nextPresetComboBoxCustom.Left - playlistComboBox.Left;
+            nextPresetComboBoxCustom.Left = playlistComboBox.Left;
+
+            if (!useSkinColors)
+                nextPresetComboBoxCustom.SetToolTip(toolTip1, nextPresetComboBoxCustom.GetToolTip(toolTip1).Split('\r')[0]);
 
             //Setting control not standard properties
             //var heightField = presetList.GetType().GetField(
@@ -235,17 +259,32 @@ namespace MusicBeePlugin
             playlistPictureBox.Image = ReplaceBitmap(playlistPictureBox.Image, PlaylistPresetsDimmed);
             functionIdPictureBox.Image = ReplaceBitmap(functionIdPictureBox.Image, FunctionIdPresetsDimmed);
             hotkeyPictureBox.Image = ReplaceBitmap(hotkeyPictureBox.Image, HotkeyPresetsDimmed);
+            hiddenPictureBox.Image = ReplaceBitmap(hiddenPictureBox.Image, HiddenPresetsDimmed);
             uncheckAllFiltersPictureBox.Image = ReplaceBitmap(uncheckAllFiltersPictureBox.Image, UncheckAllFiltersDimmed);
 
             buttonLabels[clearSearchButton] = string.Empty;
             clearSearchButton.Text = string.Empty;
-            clearSearchButton.Image = ReplaceBitmap(clearSearchButton.Image, ClearField);
+            ReplaceButtonBitmap(clearSearchButton, ClearField);
 
             buttonLabels[clearIdButton] = string.Empty;
             clearIdButton.Text = string.Empty;
-            clearIdButton.Image = ReplaceBitmap(clearIdButton.Image, ClearField);
+            ReplaceButtonBitmap(clearIdButton, ClearField);
 
-            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
+            buttonLabels[clearNextPresetButton] = string.Empty;
+            clearNextPresetButton.Text = string.Empty;
+            ReplaceButtonBitmap(clearNextPresetButton, ClearField);
+
+
+            filterPresetChain = CopyBitmap(FilterPresetChain);
+            filterPresetChainDimmed = CopyBitmap(FilterPresetChainDimmed);
+
+            buttonLabels[showOnlyChainedPresetsButton] = string.Empty;
+            showOnlyChainedPresetsButton.Text = string.Empty;
+            ReplaceButtonBitmap(showOnlyChainedPresetsButton, filterPresetChain);
+
+            ReplaceButtonBitmap(gotoNextPresetButton, Follow);
+
+            ReplaceButtonBitmap(buttonSettings, Gear);
 
             //Setting themed colors
             descriptionBox.ForeColor = DimmedHighlight;
@@ -253,16 +292,17 @@ namespace MusicBeePlugin
 
 
             //Initialization
-            presetsWorkingCopy = new SortedDictionary<Guid, Preset>();
+            PresetsInteractiveWorkingCopy = new SortedDictionary<Guid, Preset>();
             foreach (var preset in Presets.Values)
-            {
-                var presetCopy = new Preset(preset);
-                presetsWorkingCopy.Add(presetCopy.guid, presetCopy);
-            }
+                PresetsInteractiveWorkingCopy.Add(preset.guid, new Preset(preset));
+
+            foreach (var preset in PresetsInteractiveWorkingCopy.Values)
+                preset.refreshReferredCount();
+
 
             autoAppliedAsrPresetGuids = new SortedDictionary<Guid, bool>();
             foreach (var guid in SavedSettings.autoAppliedAsrPresetGuids)
-                autoAppliedAsrPresetGuids.Add(guid, false);
+                autoAppliedAsrPresetGuids.Add(guid);
 
             asrPresetsWithHotkeysGuids = new Guid[MaximumNumberOfAsrHotkeys];
             for (var j = 0; j < MaximumNumberOfAsrHotkeys; j++)
@@ -270,7 +310,7 @@ namespace MusicBeePlugin
                 if (SavedSettings.asrPresetsWithHotkeysGuids[j] != Guid.Empty)
                 {
                     asrPresetsWithHotkeysGuids[j] = SavedSettings.asrPresetsWithHotkeysGuids[j];
-                    presetsWorkingCopy[asrPresetsWithHotkeysGuids[j]].hotkeyAssigned = true;
+                    PresetsInteractiveWorkingCopy[asrPresetsWithHotkeysGuids[j]].hotkeyAssigned = true;
                 }
                 else
                 {
@@ -307,8 +347,8 @@ namespace MusicBeePlugin
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
-                FalseValue = Plugin.ColumnUncheckedState,
-                TrueValue = Plugin.ColumnCheckedState,
+                FalseValue = ColumnUncheckedState,
+                TrueValue = ColumnCheckedState,
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
@@ -336,8 +376,6 @@ namespace MusicBeePlugin
             previewTable.Columns[17].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[18].HeaderCell.Style = headerCellStyle;
             previewTable.Columns[19].HeaderCell.Style = headerCellStyle;
-
-            previewTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
 
             var tagNameFontSize = previewTable.DefaultCellStyle.Font.Size * 0.8f; //Maybe it's worth to adjust fine size !!!
@@ -414,16 +452,18 @@ namespace MusicBeePlugin
 
             ProcessPresetChanges = false;
 
-            presetList.Sorted = false;
+            //presetList.Sorted = false; //---
             ignoreCheckedPresetEvent = false;
 
             autoAppliedPresetCount = 0;
-            foreach (var preset in presetsWorkingCopy.Values)
-                presetList.Items.Add(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
+            foreach (var preset in PresetsInteractiveWorkingCopy.Values)
+                if (!preset.hidden)
+                    presetList.Items.Add(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
 
-            presetList.Sorted = true;
+            //presetList.Sorted = true; //---
 
 
+            nextPresetCheckBox.Checked = false;
             assignHotkeyCheckBox.Checked = false;
 
 
@@ -493,11 +533,16 @@ namespace MusicBeePlugin
             TempTag4 = -204
         }
 
-        public class Preset
+        public class Preset : IComparable
         {
+            internal int referredCount = 0;
+
             public DateTime modifiedUtc;
 
             public bool favorite;
+            public bool hidden;
+
+            public Guid nextPresetGuid;
 
             public bool userPreset;
             public bool customizedByUser;
@@ -599,6 +644,8 @@ namespace MusicBeePlugin
             {
                 modifiedUtc = DateTime.UtcNow;
                 favorite = false;
+                hidden = false;
+                nextPresetGuid = Guid.Empty;
                 userPreset = false;
                 customizedByUser = false;
                 removePreset = false;
@@ -624,6 +671,8 @@ namespace MusicBeePlugin
                 {
                     modifiedUtc = originalPreset.modifiedUtc;
                     favorite = originalPreset.favorite;
+                    hidden = originalPreset.hidden;
+                    nextPresetGuid = originalPreset.nextPresetGuid;
                     userPreset = originalPreset.userPreset;
                     customizedByUser = originalPreset.customizedByUser;
                     if (copyGuid)
@@ -677,9 +726,7 @@ namespace MusicBeePlugin
                 }
 
                 foreach (var width in originalPreset.columnWeights)
-                {
                     columnWeights.Add(width);
-                }
 
                 condition = originalPreset.condition;
                 playlist = originalPreset.playlist;
@@ -758,6 +805,50 @@ namespace MusicBeePlugin
                 dneLimitation5 = originalPreset.dneLimitation5;
             }
 
+            public int CompareTo(object referencePreset)
+            {
+                if (referencePreset == null)
+                    referencePreset = string.Empty;
+
+                return this.ToString().CompareTo(referencePreset.ToString());
+            }
+
+            internal void setDefaultColumnWeights(int columnIndex)
+            {
+                for (int i = columnWeights.Count; i <= columnIndex; i++)
+                    columnWeights.Add(0);
+
+                float columnWeightsSum = 0;
+                int columnWeightsCount = 0;
+
+                for (int i = 4; i < columnWeights.Count; i++)
+                {
+                    if (columnWeights[i] > 0)
+                    {
+                        columnWeightsSum += columnWeights[i];
+                        columnWeightsCount++;
+                    }
+                }
+
+
+                float columnWeightAvg = 50;
+                if (columnWeightsCount > 0)
+                    columnWeightAvg = columnWeightsSum / columnWeightsCount;
+
+                for (int i = 0; i < columnWeights.Count; i++)
+                {
+                    if (!(columnWeights[i] > 0))
+                    {
+                        if (i < 3) //Fixed size or invisible columns
+                            columnWeights[i] = 1;
+                        else if (i == 3) //Track representation
+                            columnWeights[i] = 100;
+                        else
+                            columnWeights[i] = columnWeightAvg;
+                    }
+                }
+            }
+
             private string getHotkeyChar()
             {
                 if (!hotkeyAssigned)
@@ -783,12 +874,35 @@ namespace MusicBeePlugin
                 return AsrPresetHotkeyDescription + "⌕: " + getName() + getHotkeyPostfix();
             }
 
+            internal void refreshReferredCount()
+            {
+                    referredCount = 0;
+
+                    foreach (var preset in PresetsInteractiveWorkingCopy.Values)
+                        if (PresetsInteractiveWorkingCopy.TryGetValue(preset.nextPresetGuid, out var nextPreset) && nextPreset.guid == guid)
+                            referredCount++;
+            }
+
+            private string getNextPresetChars(Preset referencePreset, string currentRemark = "")
+            {
+                if (string.IsNullOrEmpty(currentRemark)) //It's the 1st iteration
+                    for (int i = 0; i < referredCount; i++)
+                        currentRemark += "";
+
+
+                if (PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.nextPresetGuid, out var nextPreset))
+                    return getNextPresetChars(nextPreset, currentRemark + "  ");
+                else
+                    return currentRemark;
+            }
+
             public override string ToString()
             {
                 var changedPostfix = changed ? " ⚠" : string.Empty;
 
                 return (favorite ? "♥ " : string.Empty) + GetDictValue(names, Language) + (getCustomizationsFlag() ? " " : string.Empty) + (userPreset ? " " : string.Empty)
-                    + (condition ? " " : string.Empty) + (!string.IsNullOrEmpty(id) ? " " : string.Empty) + getHotkeyPostfix() + changedPostfix;
+                    + (condition ? " " : string.Empty) + (hidden ? " " : string.Empty) + (!string.IsNullOrEmpty(id) ? " " : string.Empty) 
+                    + getNextPresetChars(this) + getHotkeyPostfix() + changedPostfix;
             }
 
             internal string getName(bool getEnglishName = false)
@@ -867,6 +981,10 @@ namespace MusicBeePlugin
                 else if (preserveValues != referencePreset.preserveValues)
                     areFineCustomizationsMade = true;
                 else if (favorite != referencePreset.favorite)
+                    areFineCustomizationsMade = true;
+                else if (hidden != referencePreset.hidden)
+                    areFineCustomizationsMade = true;
+                else if (nextPresetGuid != referencePreset.nextPresetGuid)
                     areFineCustomizationsMade = true;
 
                 return areFineCustomizationsMade;
@@ -1338,7 +1456,7 @@ namespace MusicBeePlugin
 
                 var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
+                //parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
 
                 var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.TitleCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
@@ -1412,7 +1530,7 @@ namespace MusicBeePlugin
 
                 var exceptedWords = parameter1.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
+                //parameter0 = ChangeCase.ChangeWordsCase(parameter0, ChangeCase.ChangeCaseOptions.LowerCase);
 
                 var result = ChangeCase.ChangeSentenceCase(parameter0, ChangeCase.ChangeCaseOptions.SentenceCase, exceptedWords, false,
                     SavedSettings.exceptionCharsAsr.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
@@ -2591,6 +2709,40 @@ namespace MusicBeePlugin
             }
         }
 
+        private static bool ApplyPresetIfConditionSatisfied(string currentFile, Preset preset)
+        {
+            var conditionSatisfied = true;
+
+            if (preset.condition)
+            {
+                conditionSatisfied = false;
+
+                MbApiInterface.Playlist_QueryPlaylists();
+                var playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
+
+                while (playlist != null)
+                {
+                    if (playlist == preset.playlist)
+                    {
+                        conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
+                        break;
+                    }
+
+                    playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
+                }
+            }
+
+            if (conditionSatisfied)
+            {
+                ReplaceTags(currentFile, preset);
+
+                if (Presets.TryGetValue(preset.nextPresetGuid, out var nextPreset))
+                    ApplyPresetIfConditionSatisfied(currentFile, nextPreset);
+            }
+
+            return conditionSatisfied;
+        }
+
         internal static void AsrAutoApplyPresets(string currentFile)
         {
             if (!SavedSettings.allowAsrLrPresetAutoExecution)
@@ -2610,32 +2762,8 @@ namespace MusicBeePlugin
                         SetStatusBarText(MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
                             .Replace("%%PRESET-NAME%%!", preset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
 
-                    var conditionSatisfied = true;
-
-                    if (preset.condition)
-                    {
-                        conditionSatisfied = false;
-
-                        MbApiInterface.Playlist_QueryPlaylists();
-                        var playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-
-                        while (playlist != null)
-                        {
-                            if (playlist == preset.playlist)
-                            {
-                                conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
-                                break;
-                            }
-
-                            playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-                        }
-                    }
-
-                    if (conditionSatisfied)
-                    {
-                        ReplaceTags(currentFile, preset);
+                    if (ApplyPresetIfConditionSatisfied(currentFile, preset))
                         appliedPresets.AddSkip(preset.guid);
-                    }
                 }
 
                 if (appliedPresets.Count > 1)
@@ -2691,8 +2819,6 @@ namespace MusicBeePlugin
                     .Replace("%%PRESET-NAME%%!", preset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
 
 
-            var conditionSatisfied = true;
-
             if (!preset.applyToPlayingTrack)
             {
                 MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var files);
@@ -2707,30 +2833,8 @@ namespace MusicBeePlugin
                 {
                     var currentFile = files[i];
 
-                    if (preset.condition)
-                    {
-                        conditionSatisfied = false;
-
-                        MbApiInterface.Playlist_QueryPlaylists();
-                        var playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-
-                        while (playlist != null)
-                        {
-                            if (playlist == preset.playlist)
-                            {
-                                conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
-                                break;
-                            }
-
-                            playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-                        }
-                    }
-
-                    if (conditionSatisfied)
-                    {
-                        ReplaceTags(currentFile, preset);
+                    if (ApplyPresetIfConditionSatisfied(currentFile, preset))
                         SetStatusBarText(SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
-                    }
                 }
             }
             else
@@ -2739,30 +2843,8 @@ namespace MusicBeePlugin
 
                 if (!string.IsNullOrEmpty(currentFile))
                 {
-                    if (preset.condition)
-                    {
-                        conditionSatisfied = false;
-
-                        MbApiInterface.Playlist_QueryPlaylists();
-                        var playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-
-                        while (playlist != null)
-                        {
-                            if (playlist == preset.playlist)
-                            {
-                                conditionSatisfied = MbApiInterface.Playlist_IsInList(playlist, currentFile);
-                                break;
-                            }
-
-                            playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
-                        }
-                    }
-
-                    if (conditionSatisfied)
-                    {
-                        ReplaceTags(currentFile, preset);
+                    if (ApplyPresetIfConditionSatisfied(currentFile, preset))
                         SetStatusBarText(SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
-                    }
                 }
             }
 
@@ -3008,7 +3090,7 @@ namespace MusicBeePlugin
                                                             tagCombination.parameterTag5Id = tagId5;
                                                             tagCombination.parameterTag6Id = tagId6;
 
-                                                            tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination, false);
+                                                            tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination);
                                                         }
                                                     }
                                                     else
@@ -3021,7 +3103,7 @@ namespace MusicBeePlugin
                                                         tagCombination.parameterTag5Id = tagId5;
                                                         tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
-                                                        tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination, false);
+                                                        tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination);
                                                     }
                                                 }
                                             }
@@ -3035,7 +3117,7 @@ namespace MusicBeePlugin
                                                 tagCombination.parameterTag5Id = preset.parameterTag5Id;
                                                 tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
-                                                tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination, false);
+                                                tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination);
                                             }
                                         }
                                     }
@@ -3049,7 +3131,7 @@ namespace MusicBeePlugin
                                         tagCombination.parameterTag5Id = preset.parameterTag5Id;
                                         tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
-                                        tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination, false);
+                                        tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination);
                                     }
                                 }
                             }
@@ -3063,7 +3145,7 @@ namespace MusicBeePlugin
                                 tagCombination.parameterTag5Id = preset.parameterTag5Id;
                                 tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
-                                tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination, false);
+                                tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination);
                             }
                         }
                     }
@@ -3077,7 +3159,7 @@ namespace MusicBeePlugin
                         tagCombination.parameterTag5Id = preset.parameterTag5Id;
                         tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
-                        tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination, false);
+                        tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination);
                     }
                 }
             }
@@ -3091,7 +3173,7 @@ namespace MusicBeePlugin
                 tagCombination.parameterTag5Id = preset.parameterTag5Id;
                 tagCombination.parameterTag6Id = preset.parameterTag6Id;
 
-                tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination, false);
+                tagIdCombinationsForAllTagsPseudoTag.Add(tagCombination);
             }
 
             return tagIdCombinationsForAllTagsPseudoTag;
@@ -3225,7 +3307,6 @@ namespace MusicBeePlugin
         {
             previewIsGenerated = true;
 
-            // ReSharper disable once RedundantAssignment
             string[] tag = { "Checked", "Preset GUID", "URL", "newTag1", "newTag2", "newTag3", "newTag4", "newTag5" };
 
             presetProcessingCopies = generatePresetsForAllTagsPseudoTags(selectedPreset);
@@ -3270,7 +3351,7 @@ namespace MusicBeePlugin
                         {
                             tag = new string[8];
 
-                            tag[0] = (minResult == ChangesDetectionResult.NoExclusionsDetected ? Plugin.ColumnCheckedState : Plugin.ColumnUncheckedState);
+                            tag[0] = (minResult == ChangesDetectionResult.NoExclusionsDetected ? ColumnCheckedState : ColumnUncheckedState);
                             tag[1] = processingCopyGuidPreset.Key;
                             tag[2] = currentFile;
                             tag[3] = searchedAndReplacedTags.replacedTagValue;
@@ -3312,7 +3393,7 @@ namespace MusicBeePlugin
 
                             Row row = new Row
                             {
-                                Checked = minResult == ChangesDetectionResult.NoExclusionsDetected ? Plugin.ColumnCheckedState : Plugin.ColumnUncheckedState,
+                                Checked = minResult == ChangesDetectionResult.NoExclusionsDetected ? ColumnCheckedState : ColumnUncheckedState,
                                 PresetGuid = processingCopyGuidPreset.Key,
                                 File = currentFile,
                                 Track = track,
@@ -3378,7 +3459,7 @@ namespace MusicBeePlugin
                 var combinationPreset = presetProcessingCopies[tags[i][1]];
                 var currentFile = tags[i][2];
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                 {
                     lock (Presets)
                     {
@@ -3493,12 +3574,21 @@ namespace MusicBeePlugin
 
         private void editPreset(Preset preset, bool itsNewPreset, bool readOnly)
         {
+            string backedUpPresetName = preset.getName();
+
             bool presetChanged;
             using (var tagToolsForm = new AsrPresetEditor(TagToolsPlugin))
                 presetChanged = tagToolsForm.editPreset(preset, readOnly);
 
             if (presetChanged)
             {
+                SerializableDictionary<string, string> normalizedNames = new SerializableDictionary<string, string>();
+                foreach (var namePair in preset.names)
+                    normalizedNames.Add(namePair.Key, namePair.Value.Trim(' '));
+
+                preset.names = normalizedNames;
+
+
                 if (!readOnly)
                 {
                     preset.modifiedUtc = DateTime.UtcNow;
@@ -3515,18 +3605,12 @@ namespace MusicBeePlugin
 
                 if (itsNewPreset)
                 {
-                    presetsWorkingCopy.Add(preset.guid, preset);
-
+                    PresetsInteractiveWorkingCopy.Add(preset.guid, preset);
                     presetList.Items.Add(preset);
+                }
 
-                    presetListLastSelectedIndex = -1;
-                    refreshPresetList(preset.guid);
-                }
-                else// if (preset.getName() != backedUpPresetName || descriptionBox.Text != GetDictValue(preset.descriptions, Language)
-                    //|| preset.userPreset != backedUpPreset.userPreset || preset.customizedByUser != backedUpPreset.customizedByUser)
-                {
-                    refreshPresetList(preset.guid);
-                }
+                presetListLastSelectedIndex = -1;
+                refreshPresetList(preset.guid, false, false);
             }
         }
 
@@ -3552,16 +3636,16 @@ namespace MusicBeePlugin
         {
             var savedPresetPaths = new SortedDictionary<string, bool>();
             var countedPresetFilenames = new SortedDictionary<string, int>();
-            foreach (var preset in presetsWorkingCopy.Values)
+            foreach (var preset in PresetsInteractiveWorkingCopy.Values)
             {
                 var presetFilename = getCountedPresetFilename(countedPresetFilenames, preset.getSafeFileName());
-                savedPresetPaths.Add(preset.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)), false);
+                savedPresetPaths.Add(preset.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)));
             }
 
             if (MSR != null)
             {
                 var presetFilename = getCountedPresetFilename(countedPresetFilenames, MSR.getSafeFileName());
-                savedPresetPaths.Add(MSR.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)), false);
+                savedPresetPaths.Add(MSR.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)));
             }
 
 
@@ -3574,7 +3658,7 @@ namespace MusicBeePlugin
 
 
             Presets = new SortedDictionary<Guid, Preset>();
-            foreach (var preset in presetsWorkingCopy.Values)
+            foreach (var preset in PresetsInteractiveWorkingCopy.Values)
             {
                 preset.changed = false;
                 var presetCopy = new Preset(preset);
@@ -3621,10 +3705,21 @@ namespace MusicBeePlugin
             unsavedChanges = false;
             buttonClose.Image = Resources.transparent_15;
             toolTip1.SetToolTip(buttonClose, string.Empty);
+
+            backedUpPreset = new Preset(selectedPreset);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            DialogResult result = DialogResult.No;
+
+            if (selectedPreset.nextPresetGuid != Guid.Empty && !SavedSettings.dontShowInteractivePresetChainWarning)
+                MessageBox.Show(this, MsgAsrPresetChainWontBeExecutedInInteractiveMode, string.Empty, 
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.Yes)
+                SavedSettings.dontShowInteractivePresetChainWarning = true;
+
             if (prepareBackgroundTask())
                 switchOperation(applyToSelected, sender as Button, buttonOK, buttonPreview, buttonClose, true, null);
         }
@@ -3651,7 +3746,7 @@ namespace MusicBeePlugin
             Close();
         }
 
-        private void deletePreset(Preset presetToRemove)
+        private void deletePreset(Preset presetToRemove, bool reselectPreset)
         {
             if (autoAppliedAsrPresetGuids.RemoveExisting(presetToRemove.guid))
                 autoAppliedPresetCount--;
@@ -3680,9 +3775,20 @@ namespace MusicBeePlugin
             }
 
 
-            presetsWorkingCopy.Remove(presetToRemove.guid);
-            if (presetList.Items.Contains(presetToRemove))
-                presetList.Items.Remove(presetToRemove);
+            int index = presetList.Items.IndexOf(presetToRemove);
+
+            PresetsInteractiveWorkingCopy.Remove(presetToRemove.guid);
+            presetList.Items.Remove(presetToRemove);
+
+
+            if (reselectPreset)
+            {
+                presetListLastSelectedIndex = -1;
+                if (index >= 0 && index < presetList.Items.Count)
+                    presetList.SelectedIndex = index;
+                else if (index >= 0 && presetList.Items.Count > 0)
+                    presetList.SelectedIndex = presetList.Items.Count - 1;
+            }
 
             unsavedChanges = true;
             buttonClose.Image = warningWide;
@@ -3696,7 +3802,7 @@ namespace MusicBeePlugin
             if (result == DialogResult.No)
                 return;
 
-            deletePreset(presetList.SelectedItem as Preset);
+            deletePreset(presetList.SelectedItem as Preset, true);
             showAutoApplyingWarningIfRequired();
         }
 
@@ -3798,8 +3904,9 @@ namespace MusicBeePlugin
 
         private void initPreset()
         {
-            presetsWorkingCopy.TryGetValue((presetList.SelectedItem as Preset).guid, out selectedPreset);
+            PresetsInteractiveWorkingCopy.TryGetValue((presetList.SelectedItem as Preset).guid, out selectedPreset);
             backedUpPreset = new Preset(selectedPreset);
+
 
             if (!selectedPreset.userPreset && !DeveloperMode)
                 editButtonEnabled = false;
@@ -3855,6 +3962,28 @@ namespace MusicBeePlugin
 
             applyToPlayingTrackCheckBox.Checked = selectedPreset.applyToPlayingTrack;
             favoriteCheckBox.Checked = selectedPreset.favorite;
+            hiddenCheckBox.Checked = selectedPreset.hidden;
+
+
+            nextPresetCheckBox.Enable(true);
+            showOnlyChainedPresetsButton.Enable(true);
+            clearNextPresetButton.Enable(true);
+
+            PresetsInteractiveWorkingCopy.TryGetValue(selectedPreset.nextPresetGuid, out var nextPreset);
+            nextPresetComboBoxCustom.Text = nextPreset == null ? string.Empty : nextPreset.ToString();
+
+            nextPresetComboBoxCustom.Sorted = false;
+
+            FilterList(nextPresetComboBoxCustom.Items, PresetsInteractiveWorkingCopy.Values, selectedPreset, nextPreset,
+                ExcludePresetFromChain, string.Empty, ExcludedCainChars);
+
+            nextPresetComboBoxCustom.Sorted = true;
+
+            nextPresetComboBoxCustom.SelectedItem = nextPreset;
+
+            nextPresetCheckBox.Checked = (nextPreset != null);
+            nextPresetCheckBox_CheckedChanged(null, null);
+
 
             idTextBox.Text = selectedPreset.id;
 
@@ -3940,21 +4069,7 @@ namespace MusicBeePlugin
             if (selectedPreset.columnWeights == null)
                 selectedPreset.columnWeights = new List<float>();
 
-            if (selectedPreset.columnWeights.Count < 3 + 3 || !(selectedPreset.columnWeights[3] > 0)) //3 fixed size or invisible columns + minimum 3 real columns
-                selectedPreset.columnWeights.Clear();
-
-            for (int i = 0; i < selectedPreset.columnWeights.Count - 1; i++)
-            {
-                if (!(selectedPreset.columnWeights[i] > 0))
-                {
-                    if (i < 3) //Fixed size or invisible columns
-                        selectedPreset.columnWeights[i] = 1;
-                    else if (i == 3) //Track representation
-                        selectedPreset.columnWeights[i] = 100;
-                    else
-                        selectedPreset.columnWeights[i] = 30;
-                }
-            }
+            selectedPreset.setDefaultColumnWeights(selectedPreset.columnWeights.Count - 1);
 
 
             if (allTagsReplaceIdsCount == 0)
@@ -3980,32 +4095,13 @@ namespace MusicBeePlugin
                     previewTable.Columns[6].Visible = true;
                 }
 
-                if (selectedPreset.columnWeights.Count > 3 + 3) //3 fixed size or invisible columns + minimum 3 real columns
-                {
-                    previewTable.Columns[3].FillWeight = selectedPreset.columnWeights[3];
-                    previewTable.Columns[4].FillWeight = selectedPreset.columnWeights[4];
-                    previewTable.Columns[5].FillWeight = selectedPreset.columnWeights[5];
-                    previewTable.Columns[6].FillWeight = selectedPreset.columnWeights[6]; //---
-                }
-                else
-                {
-                    previewTable.Columns[3].Width = ColumnsTrackWidth;
-                    previewTable.Columns[4].Width = 100;
-                    previewTable.Columns[5].Width = 100;
-                    previewTable.Columns[6].Width = 100;
-                    previewTable.Columns[7].Width = 100;
-                    previewTable.Columns[8].Width = 100;
-                    previewTable.Columns[9].Width = 100;
-                    previewTable.Columns[10].Width = 100;
-                    previewTable.Columns[11].Width = 100;
-                    previewTable.Columns[12].Width = 100;
-                    previewTable.Columns[13].Width = 100;
-                    previewTable.Columns[14].Width = 100;
-                    previewTable.Columns[15].Width = 100;
-                    previewTable.Columns[16].Width = 100;
-                    previewTable.Columns[17].Width = 100;
-                    previewTable.Columns[18].Width = 100;
-                }
+                
+                selectedPreset.setDefaultColumnWeights(6);
+
+                previewTable.Columns[3].FillWeight = selectedPreset.columnWeights[3];
+                previewTable.Columns[4].FillWeight = selectedPreset.columnWeights[4];
+                previewTable.Columns[5].FillWeight = selectedPreset.columnWeights[5];
+                previewTable.Columns[6].FillWeight = selectedPreset.columnWeights[6];
 
 
                 if (!string.IsNullOrEmpty(selectedPreset.searchedPattern2))
@@ -4033,12 +4129,12 @@ namespace MusicBeePlugin
                         previewTable.Columns[8].Visible = false;
                     }
 
-                    if (selectedPreset.columnWeights.Count > 3 + 6) //3 fixed size or invisible columns + 6 real columns
-                    {
-                        previewTable.Columns[7].FillWeight = selectedPreset.columnWeights[7];
-                        previewTable.Columns[8].FillWeight = selectedPreset.columnWeights[8];
-                        previewTable.Columns[9].FillWeight = selectedPreset.columnWeights[9];
-                    }
+
+                    selectedPreset.setDefaultColumnWeights(9);
+
+                    previewTable.Columns[7].FillWeight = selectedPreset.columnWeights[7];
+                    previewTable.Columns[8].FillWeight = selectedPreset.columnWeights[8];
+                    previewTable.Columns[9].FillWeight = selectedPreset.columnWeights[9];
 
 
                     if (!string.IsNullOrEmpty(selectedPreset.searchedPattern3))
@@ -4066,12 +4162,12 @@ namespace MusicBeePlugin
                             previewTable.Columns[11].Visible = false;
                         }
 
-                        if (selectedPreset.columnWeights.Count > 3 + 9) //3 fixed size or invisible columns + 9 real columns
-                        {
-                            previewTable.Columns[10].FillWeight = selectedPreset.columnWeights[10];
-                            previewTable.Columns[11].FillWeight = selectedPreset.columnWeights[11];
-                            previewTable.Columns[12].FillWeight = selectedPreset.columnWeights[12];
-                        }
+
+                        selectedPreset.setDefaultColumnWeights(12);
+
+                        previewTable.Columns[10].FillWeight = selectedPreset.columnWeights[10];
+                        previewTable.Columns[11].FillWeight = selectedPreset.columnWeights[11];
+                        previewTable.Columns[12].FillWeight = selectedPreset.columnWeights[12];
 
 
                         if (!string.IsNullOrEmpty(selectedPreset.searchedPattern4))
@@ -4099,12 +4195,12 @@ namespace MusicBeePlugin
                                 previewTable.Columns[14].Visible = false;
                             }
 
-                            if (selectedPreset.columnWeights.Count > 3 + 12) //3 fixed size or invisible columns + 12 real columns
-                            {
-                                previewTable.Columns[13].FillWeight = selectedPreset.columnWeights[13];
-                                previewTable.Columns[14].FillWeight = selectedPreset.columnWeights[14];
-                                previewTable.Columns[15].FillWeight = selectedPreset.columnWeights[15];
-                            }
+
+                            selectedPreset.setDefaultColumnWeights(15);
+
+                            previewTable.Columns[13].FillWeight = selectedPreset.columnWeights[13];
+                            previewTable.Columns[14].FillWeight = selectedPreset.columnWeights[14];
+                            previewTable.Columns[15].FillWeight = selectedPreset.columnWeights[15];
 
 
                             if (!string.IsNullOrEmpty(selectedPreset.searchedPattern5))
@@ -4132,12 +4228,12 @@ namespace MusicBeePlugin
                                     previewTable.Columns[17].Visible = false;
                                 }
 
-                                if (selectedPreset.columnWeights.Count > 3 + 15) //3 fixed size or invisible columns + 15 real columns
-                                {
-                                    previewTable.Columns[16].FillWeight = selectedPreset.columnWeights[16];
-                                    previewTable.Columns[17].FillWeight = selectedPreset.columnWeights[17];
-                                    previewTable.Columns[18].FillWeight = selectedPreset.columnWeights[18];
-                                }
+
+                                selectedPreset.setDefaultColumnWeights(18);
+
+                                previewTable.Columns[16].FillWeight = selectedPreset.columnWeights[16];
+                                previewTable.Columns[17].FillWeight = selectedPreset.columnWeights[17];
+                                previewTable.Columns[18].FillWeight = selectedPreset.columnWeights[18];
                             }
                             else
                             {
@@ -4253,6 +4349,8 @@ namespace MusicBeePlugin
                 previewTable.Columns[17].Visible = false;
                 previewTable.Columns[18].Visible = false;
             }
+
+            previewTable.AutoResizeColumnHeadersHeight();
         }
 
         private void setCheckedState(PictureBox label, bool flag)
@@ -4284,6 +4382,12 @@ namespace MusicBeePlugin
             if (presetListLastSelectedIndex != -2) //It's not form init
                 Enable(false, autoApplyPresetsLabel, null);
 
+            nextPresetComboBoxCustom.DroppedDown = false;
+
+            nextPresetCheckBox.Checked = false;
+            nextPresetComboBoxCustom.SelectedItem = null;
+            nextPresetComboBoxCustom.Text = string.Empty;
+
             descriptionBox.Text = string.Empty;
 
             setCheckedState(userPresetPictureBox, false);
@@ -4306,6 +4410,7 @@ namespace MusicBeePlugin
             parameterTag6ListCustom.ItemsClear();
 
 
+            hiddenCheckBox.Checked = false;
             conditionCheckBox.Checked = false;
             assignHotkeyCheckBox.Checked = false;
             applyToPlayingTrackCheckBox.Checked = false;
@@ -4320,18 +4425,15 @@ namespace MusicBeePlugin
                 enableDisablePreviewOptionControls(true, true);
                 disableQueryingOrUpdatingButtons();
 
+
                 if (presetListLastSelectedIndex != -2) //It's during form init
                 {
                     Enable(true, autoApplyPresetsLabel, null);
                     presetList.Focus();
                 }
 
-
                 updateCustomScrollBars(previewTable);
                 updateCustomScrollBars(descriptionBox);
-
-                if (presetListLastSelectedIndex != -2) //It's during form init
-                    Enable(true, autoApplyPresetsLabel, null);
             }
             else
             {
@@ -4368,7 +4470,11 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel) return;
 
+            Preset exportPresetCopy = new Preset(selectedPreset);
+            exportPresetCopy.nextPresetGuid = Guid.Empty;
+
             exportPreset(selectedPreset, dialog.FileName);
+
             dialog.Dispose();
         }
 
@@ -4386,23 +4492,26 @@ namespace MusicBeePlugin
             SavedSettings.defaultAsrPresetsExportFolder = dialog.SelectedPath;
 
             var countedPresetFileNames = new SortedDictionary<string, int>();
-            foreach (var currentPresetKVPair in presetsWorkingCopy)
+            foreach (var currentPresetKVPair in PresetsInteractiveWorkingCopy)
             {
                 if (currentPresetKVPair.Value.userPreset ^ developerExport)
                 {
+                    Preset exportPresetCopy = new Preset(currentPresetKVPair.Value);
                     string presetFilename;
 
                     if (developerExport)
                     {
-                        presetFilename = "!" + currentPresetKVPair.Value.guid.ToString("B");
+                        exportPresetCopy.columnWeights = null;
+                        presetFilename = "!" + exportPresetCopy.guid.ToString("B");
                     }
                     else
                     {
-                        presetFilename = getCountedPresetFilename(countedPresetFileNames, currentPresetKVPair.Value.getSafeFileName());
+                        exportPresetCopy.nextPresetGuid = Guid.Empty;
+                        presetFilename = getCountedPresetFilename(countedPresetFileNames, exportPresetCopy.getSafeFileName());
                     }
 
                     var presetFilePath = @"\\?\" + Path.Combine(dialog.SelectedPath, presetFilename + AsrPresetExtension);
-                    exportPreset(currentPresetKVPair.Value, presetFilePath);
+                    exportPreset(exportPresetCopy, presetFilePath);
                 }
             }
 
@@ -4449,7 +4558,7 @@ namespace MusicBeePlugin
                 {
                     var newPreset = Preset.LoadPreset(filename, presetSerializer);
 
-                    presetsWorkingCopy.TryGetValue(newPreset.guid, out var existingPreset);
+                    PresetsInteractiveWorkingCopy.TryGetValue(newPreset.guid, out var existingPreset);
 
                     if (newPreset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
                     {
@@ -4477,21 +4586,21 @@ namespace MusicBeePlugin
                             {
                                 var newPresetCopy = new Preset(newPreset, true, false, null, "*");
 
-                                presetsWorkingCopy.Add(newPresetCopy.guid, newPresetCopy);
+                                PresetsInteractiveWorkingCopy.Add(newPresetCopy.guid, newPresetCopy);
                                 numberOfImportedAsCopyPresets++;
                             }
                             else
                             {
                                 newPreset.copyExtendedCustomizationsFrom(existingPreset);
 
-                                presetsWorkingCopy.Remove(newPreset.guid);
-                                presetsWorkingCopy.Add(newPreset.guid, newPreset);
+                                PresetsInteractiveWorkingCopy.Remove(newPreset.guid);
+                                PresetsInteractiveWorkingCopy.Add(newPreset.guid, newPreset);
                                 numberOfImportedPresets++;
                             }
                         }
                         else //if (existingPreset == null)
                         {
-                            presetsWorkingCopy.Add(newPreset.guid, newPreset);
+                            PresetsInteractiveWorkingCopy.Add(newPreset.guid, newPreset);
                             numberOfImportedPresets++;
                         }
                     }
@@ -4509,7 +4618,7 @@ namespace MusicBeePlugin
 
             dialog.Dispose();
 
-            refreshPresetList(selectedPresetGuid);
+            refreshPresetList(selectedPresetGuid, true, false);
 
             var message = string.Empty;
             if (isMsrImported)
@@ -4541,32 +4650,85 @@ namespace MusicBeePlugin
             toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
         }
 
-        internal void refreshPresetList(Guid selectedPresetGuid)
+        internal void refreshPresetList(Guid selectedPresetGuid, bool resetFilters, bool fillOnlyChainedPresets)
         {
-            searchTextBox.Text = string.Empty;
-            showPlaylistLimitedChecked = false;
-            showFunctionIdAssignedChecked = false;
-            showHotkeyAssignedChecked = false;
-            showTickedOnlyChecked = false;
+            PresetsInteractiveWorkingCopy.TryGetValue(selectedPresetGuid, out selectedPreset);
+
+            if (resetFilters)
+            {
+                searchTextBox.Text = string.Empty;
+
+                untickAllChecked = false;
+
+                showHotkeyAssignedChecked = false;
+                showFunctionIdAssignedChecked = false;
+                showPlaylistLimitedChecked = false;
+                showUserChecked = false;
+                showCustomizedChecked = false;
+                showPredefinedChecked = false;
+                showTickedOnlyChecked = false;
+            }
+
+            bool showHiddenCheckedBackup = showHiddenChecked;
+            showHiddenChecked |= fillOnlyChainedPresets;
 
             presetList.Items.Clear();
-            presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
+
+            var filteredPresets = new List<Preset>();
+
             autoAppliedPresetCount = 0;
-            foreach (var preset in presetsWorkingCopy.Values)
+            foreach (var preset in PresetsInteractiveWorkingCopy.Values)
+            {
+                if (checkFilters(preset, Array.Empty<string>()))
+                {
+                    if (fillOnlyChainedPresets)
+                    {
+                        if (!ExcludePresetFromChain(selectedPreset, preset))
+                            filteredPresets.AddUnique(preset);
+                    }
+                    else
+                    {
+                        filteredPresets.AddUnique(preset);
+                    }
+                }
+            }
+
+
+            bool newPresetsAreAdded;
+
+            do
+            {
+                newPresetsAreAdded = false;
+
+                int filteredPresetsCount = filteredPresets.Count;
+                for (int i = 0; i < filteredPresetsCount; i++)
+                    if (PresetsInteractiveWorkingCopy.TryGetValue(filteredPresets[i].nextPresetGuid, out var nextPreset))
+                        newPresetsAreAdded |= filteredPresets.AddUnique(nextPreset);
+            }
+            while (newPresetsAreAdded);
+
+            showHiddenChecked = showHiddenCheckedBackup;
+            setCheckedPicturesStates();
+
+
+            foreach (var preset in filteredPresets)
                 presetList.Items.Add(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
 
-            presetList.SelectedIndex = -1;
-            presetList_SelectedIndexChanged(null, null);
-            ignoreCheckedPresetEvent = true;
-            presetList.Sorted = true;
-
-
-            if (!presetsWorkingCopy.TryGetValue(selectedPresetGuid, out var value))
+            if (selectedPreset == null)
                 presetList.SelectedIndex = -1;
             else if ((presetList.SelectedItem as Preset)?.guid != selectedPresetGuid)
-                presetList.SelectedItem = value;
+                presetList.SelectedItem = selectedPreset;
 
+            ProcessPresetChanges = false;
+
+            presetListLastSelectedIndex = -1;
+            presetListSelectedIndexChanged(presetList.SelectedIndex);
+            presetListLastSelectedIndex = presetList.SelectedIndex;
+
+            ProcessPresetChanges = true;
+
+            ignoreCheckedPresetEvent = true;
 
             updateCustomScrollBars(presetList);
         }
@@ -4617,7 +4779,7 @@ namespace MusicBeePlugin
 
                         if (newPreset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
                         {
-                            presetsWorkingCopy.TryGetValue(newPreset.guid, out var existingPreset);
+                            PresetsInteractiveWorkingCopy.TryGetValue(newPreset.guid, out var existingPreset);
 
                             if (existingPreset != null)
                             {
@@ -4656,15 +4818,16 @@ namespace MusicBeePlugin
 
                                     if (newPreset.removePreset && removePresets)
                                     {
-                                        deletePreset(existingPreset);
+                                        deletePreset(existingPreset, false);
                                         numberOfRemovedPresets++;
                                     }
                                     else if (!anyCustomization || resetCustomizedByUser)
                                     {
                                         newPreset.copyBasicCustomizationsFrom(existingPreset);
 
-                                        presetsWorkingCopy.Remove(newPreset.guid);
-                                        presetsWorkingCopy.Add(newPreset.guid, newPreset);
+                                        PresetsInteractiveWorkingCopy.Remove(newPreset.guid);
+                                        PresetsInteractiveWorkingCopy.Add(newPreset.guid, newPreset);
+
                                         if (newPreset.modifiedUtc > existingPreset.modifiedUtc) //Updating
                                             numberOfUpdatedPresets++;
                                         else
@@ -4675,8 +4838,9 @@ namespace MusicBeePlugin
                                         newPreset.copyAdvancedCustomizationsFrom(existingPreset);
                                         newPreset.preserveValues = existingPreset.preserveValues;
 
-                                        presetsWorkingCopy.Remove(newPreset.guid);
-                                        presetsWorkingCopy.Add(newPreset.guid, newPreset);
+                                        PresetsInteractiveWorkingCopy.Remove(newPreset.guid);
+                                        PresetsInteractiveWorkingCopy.Add(newPreset.guid, newPreset);
+
                                         if (newPreset.modifiedUtc > existingPreset.modifiedUtc) //Updating
                                             numberOfUpdatedCustomizedPresets++;
                                         else
@@ -4701,7 +4865,7 @@ namespace MusicBeePlugin
 
                                     if (removePresets)
                                     {
-                                        deletePreset(existingPreset);
+                                        deletePreset(existingPreset, false);
                                         numberOfRemovedPresets++;
                                     }
                                 }
@@ -4711,16 +4875,16 @@ namespace MusicBeePlugin
                                     {
                                         newPreset.copyExtendedCustomizationsFrom(existingPreset);
 
-                                        presetsWorkingCopy.Remove(newPreset.guid);
-                                        presetsWorkingCopy.Add(newPreset.guid, newPreset);
+                                        PresetsInteractiveWorkingCopy.Remove(newPreset.guid);
+                                        PresetsInteractiveWorkingCopy.Add(newPreset.guid, newPreset);
                                         numberOfUpdatedPresets++;
                                     }
                                     else //Update preset to latest version, and copy *all* customizations
                                     {
                                         newPreset.copyAdvancedCustomizationsFrom(existingPreset);
 
-                                        presetsWorkingCopy.Remove(newPreset.guid);
-                                        presetsWorkingCopy.Add(newPreset.guid, newPreset);
+                                        PresetsInteractiveWorkingCopy.Remove(newPreset.guid);
+                                        PresetsInteractiveWorkingCopy.Add(newPreset.guid, newPreset);
                                         numberOfUpdatedCustomizedPresets++;
                                     }
                                 }
@@ -4733,7 +4897,7 @@ namespace MusicBeePlugin
                             {
                                 if (installAll || newPreset.modifiedUtc > SavedSettings.lastAsrImportDateUtc)
                                 {
-                                    presetsWorkingCopy.Add(newPreset.guid, newPreset);
+                                    PresetsInteractiveWorkingCopy.Add(newPreset.guid, newPreset);
                                     numberOfInstalledPresets++;
                                 }
                                 else
@@ -4759,7 +4923,7 @@ namespace MusicBeePlugin
                 SavedSettings.lastAsrImportDateUtc = DateTime.UtcNow;
 
 
-            refreshPresetList(selectedPresetGuid);
+            refreshPresetList(selectedPresetGuid, true, false);
 
 
             var message = string.Empty;
@@ -4811,18 +4975,20 @@ namespace MusicBeePlugin
             if (selectedPreset != null)
                 selectedPresetGuid = selectedPreset.guid;
 
+            presetList.Sorted = false;
+            presetList.SelectedIndex = -1;
+            presetList_SelectedIndexChanged(null, null);
+
             var predefinedPresets = new List<Preset>();
-            foreach (var presetKeyValuePair in presetsWorkingCopy)
+            foreach (var presetKeyValuePair in PresetsInteractiveWorkingCopy)
             {
                 if (!presetKeyValuePair.Value.userPreset)
-                {
                     predefinedPresets.Add(presetKeyValuePair.Value);
-                }
             }
 
             foreach (var preset in predefinedPresets)
             {
-                deletePreset(preset);
+                deletePreset(preset, false);
                 numberOfDeletedPresets++;
             }
 
@@ -4830,21 +4996,23 @@ namespace MusicBeePlugin
             showPlaylistLimitedChecked = false;
             showFunctionIdAssignedChecked = false;
             showHotkeyAssignedChecked = false;
+            showHiddenChecked = false;
             showTickedOnlyChecked = false;
 
             presetList.Items.Clear();
-            presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
             autoAppliedPresetCount = 0;
-            foreach (var preset in presetsWorkingCopy.Values)
+            foreach (var preset in PresetsInteractiveWorkingCopy.Values)
                 presetList.Items.Add(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
 
-            refreshPresetList(selectedPresetGuid);
+
+            presetList.Sorted = true;
+
+            refreshPresetList(selectedPresetGuid, true, false);
 
             showAutoApplyingWarningIfRequired();
 
             ignoreCheckedPresetEvent = true;
-            presetList.Sorted = true;
 
 
             var message = string.Empty;
@@ -5271,9 +5439,12 @@ namespace MusicBeePlugin
 
             playlistComboBoxCustom.Enable(conditionCheckBox.Checked);
 
+            if (conditionCheckBox.Checked)
+                playlistComboBoxCustom.Focus();
+
             if (conditionCheckBox.Checked && playlistComboBoxCustom.SelectedIndex == -1 && playlistComboBoxCustom.Items.Count > 0)
             {
-                playlistComboBoxCustom.SelectedIndex = 0;
+                    playlistComboBoxCustom.SelectedIndex = 0;
             }
             else if (conditionCheckBox.Checked && playlistComboBoxCustom.Items.Count == 0)
             {
@@ -5387,9 +5558,9 @@ namespace MusicBeePlugin
                 var check = true;
                 var indeterminate = false;
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                     check = false;
-                else if (isChecked == Plugin.ColumnUncheckedState)
+                else if (isChecked == ColumnUncheckedState)
                     ;
                 else
                     indeterminate = true;
@@ -5515,7 +5686,7 @@ namespace MusicBeePlugin
             {
                 if (previewTable.Rows[rowIndex].Cells[columnIndex].Visible)
                 {
-                    if (previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                    if (previewTable.Rows[rowIndex].Cells[0].Value as string == ColumnCheckedState)
                         previewTable.Rows[rowIndex].Cells[columnIndex].Style = unchangedCellStyle;
                     else
                         previewTable.Rows[rowIndex].Cells[columnIndex].Style = dimmedCellStyle;
@@ -5523,9 +5694,9 @@ namespace MusicBeePlugin
             }
 
 
-            for (var columnIndex = 1; columnIndex < previewTable.ColumnCount; columnIndex++)
+            for (var columnIndex = 6; columnIndex < previewTable.ColumnCount; columnIndex += 3)
             {
-                if (columnIndex == 6 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                if (columnIndex == 6 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == ColumnCheckedState)
                 {
                     var cell = previewTable.Rows[rowIndex].Cells[6];
                     var changeType = rows[rowIndex].ChangeType1;
@@ -5539,7 +5710,7 @@ namespace MusicBeePlugin
                     else if (changeType == ChangesDetectionResult.NoExclusionsDetected)
                         cell.Style = changedCellStyle;
                 }
-                else if (columnIndex == 9 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                else if (columnIndex == 9 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == ColumnCheckedState)
                 {
                     var cell = previewTable.Rows[rowIndex].Cells[9];
                     var changeType2 = rows[rowIndex].ChangeType2;
@@ -5547,27 +5718,26 @@ namespace MusicBeePlugin
                     if (changeType2 == ChangesDetectionResult.PreservedTagsDetected)
                     {
                         cell.Style = preservedTagCellStyle;
-                        return;
+                        continue;
                     }
                     else if (changeType2 == ChangesDetectionResult.PreservedTagValuesDetected)
                     {
                         cell.Style = preservedTagValueCellStyle;
-                        return;
+                        continue;
                     }
 
 
                     if (previewTable.Columns[8].Visible)
                     {
-                        if (cell.Value as string == previewTable.Rows[rowIndex].Cells[8].Value as string)
-                            cell.Style = unchangedCellStyle;
-                        else
+                        if (cell.Value as string != previewTable.Rows[rowIndex].Cells[8].Value as string)
                             cell.Style = changedCellStyle;
 
-                        return;
+                        continue;
                     }
+                    
+                    if (previewTable.Columns[6].Visible)
+                        continue;
 
-                    if (previewTable.Columns[5].Visible)
-                        break;
 
                     var changeTypeI = rows[rowIndex].ChangeType1;
 
@@ -5575,12 +5745,10 @@ namespace MusicBeePlugin
                         cell.Style = preservedTagCellStyle;
                     else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
                         cell.Style = preservedTagValueCellStyle;
-                    else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[5].Value as string)
-                        cell.Style = unchangedCellStyle;
-                    else
+                    else if (cell.Value as string != previewTable.Rows[rowIndex].Cells[5].Value as string)
                         cell.Style = changedCellStyle;
                 }
-                else if (columnIndex == 12 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                else if (columnIndex == 12 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == ColumnCheckedState)
                 {
                     var cell = previewTable.Rows[rowIndex].Cells[12];
                     var changeType3 = rows[rowIndex].ChangeType3;
@@ -5588,25 +5756,25 @@ namespace MusicBeePlugin
                     if (changeType3 == ChangesDetectionResult.PreservedTagsDetected)
                     {
                         cell.Style = preservedTagCellStyle;
-                        return;
+                        continue;
                     }
                     else if (changeType3 == ChangesDetectionResult.PreservedTagValuesDetected)
                     {
                         cell.Style = preservedTagValueCellStyle;
-                        return;
+                        continue;
                     }
+
 
                     if (previewTable.Columns[11].Visible)
                     {
-                        if (cell.Value as string == previewTable.Rows[rowIndex].Cells[11].Value as string)
-                            cell.Style = unchangedCellStyle;
-                        else
+                        if (cell.Value as string != previewTable.Rows[rowIndex].Cells[11].Value as string)
                             cell.Style = changedCellStyle;
 
-                        return;
+                        continue;
                     }
 
-                    var i = 8;
+
+                    var i = 9;
                     do
                     {
                         if (previewTable.Columns[i].Visible)
@@ -5614,10 +5782,10 @@ namespace MusicBeePlugin
 
                         i -= 3;
                     }
-                    while (i >= 5);
+                    while (i >= 6);
 
                     ChangesDetectionResult changeTypeI;
-                    if (i == 8)
+                    if (i == 9)
                         changeTypeI = rows[rowIndex].ChangeType2;
                     else
                         changeTypeI = rows[rowIndex].ChangeType1;
@@ -5626,12 +5794,10 @@ namespace MusicBeePlugin
                         cell.Style = preservedTagCellStyle;
                     else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
                         cell.Style = preservedTagValueCellStyle;
-                    else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
-                        cell.Style = unchangedCellStyle;
-                    else
+                    else if (cell.Value as string != previewTable.Rows[rowIndex].Cells[i - 1].Value as string)
                         cell.Style = changedCellStyle;
                 }
-                else if (columnIndex == 15 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                else if (columnIndex == 15 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == ColumnCheckedState)
                 {
                     var cell = previewTable.Rows[rowIndex].Cells[15];
                     var changeType4 = rows[rowIndex].ChangeType4;
@@ -5639,25 +5805,25 @@ namespace MusicBeePlugin
                     if (changeType4 == ChangesDetectionResult.PreservedTagsDetected)
                     {
                         cell.Style = preservedTagCellStyle;
-                        return;
+                        continue;
                     }
                     else if (changeType4 == ChangesDetectionResult.PreservedTagValuesDetected)
                     {
                         cell.Style = preservedTagValueCellStyle;
-                        return;
+                        continue;
                     }
+
 
                     if (previewTable.Columns[14].Visible)
                     {
-                        if (cell.Value as string == previewTable.Rows[rowIndex].Cells[14].Value as string)
-                            cell.Style = unchangedCellStyle;
-                        else
+                        if (cell.Value as string != previewTable.Rows[rowIndex].Cells[14].Value as string)
                             cell.Style = changedCellStyle;
 
-                        return;
+                        continue;
                     }
 
-                    var i = 11;
+
+                    var i = 12;
                     do
                     {
                         if (previewTable.Columns[i].Visible)
@@ -5665,12 +5831,12 @@ namespace MusicBeePlugin
 
                         i -= 3;
                     }
-                    while (i >= 5);
+                    while (i >= 6);
 
                     ChangesDetectionResult changeTypeI;
-                    if (i == 11)
+                    if (i == 12)
                         changeTypeI = rows[rowIndex].ChangeType3;
-                    else if (i == 8)
+                    else if (i == 9)
                         changeTypeI = rows[rowIndex].ChangeType2;
                     else
                         changeTypeI = rows[rowIndex].ChangeType1;
@@ -5679,12 +5845,10 @@ namespace MusicBeePlugin
                         cell.Style = preservedTagCellStyle;
                     else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
                         cell.Style = preservedTagValueCellStyle;
-                    else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
-                        cell.Style = unchangedCellStyle;
-                    else
+                    else if (cell.Value as string != previewTable.Rows[rowIndex].Cells[i - 1].Value as string)
                         cell.Style = changedCellStyle;
                 }
-                else if (columnIndex == 18 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == Plugin.ColumnCheckedState)
+                else if (columnIndex == 18 && previewTable.Columns[columnIndex].Visible && previewTable.Rows[rowIndex].Cells[0].Value as string == ColumnCheckedState)
                 {
                     var cell = previewTable.Rows[rowIndex].Cells[18];
                     var changeType5 = rows[rowIndex].ChangeType5;
@@ -5692,25 +5856,25 @@ namespace MusicBeePlugin
                     if (changeType5 == ChangesDetectionResult.PreservedTagsDetected)
                     {
                         cell.Style = preservedTagCellStyle;
-                        return;
+                        continue;
                     }
                     else if (changeType5 == ChangesDetectionResult.PreservedTagValuesDetected)
                     {
                         cell.Style = preservedTagValueCellStyle;
-                        return;
+                        continue;
                     }
+
 
                     if (previewTable.Columns[17].Visible)
                     {
-                        if (cell.Value as string == previewTable.Rows[rowIndex].Cells[17].Value as string)
-                            cell.Style = unchangedCellStyle;
-                        else
+                        if (cell.Value as string != previewTable.Rows[rowIndex].Cells[17].Value as string)
                             cell.Style = changedCellStyle;
 
-                        return;
+                        continue;
                     }
 
-                    var i = 14;
+
+                    var i = 15;
                     do
                     {
                         if (previewTable.Columns[i].Visible)
@@ -5718,14 +5882,14 @@ namespace MusicBeePlugin
 
                         i -= 3;
                     }
-                    while (i >= 5);
+                    while (i >= 6);
 
                     ChangesDetectionResult changeTypeI;
-                    if (i == 14)
+                    if (i == 15)
+                        changeTypeI = rows[rowIndex].ChangeType4;
+                    else if (i == 12)
                         changeTypeI = rows[rowIndex].ChangeType3;
-                    else if (i == 11)
-                        changeTypeI = rows[rowIndex].ChangeType2;
-                    else if (i == 8)
+                    else if (i == 9)
                         changeTypeI = rows[rowIndex].ChangeType2;
                     else
                         changeTypeI = rows[rowIndex].ChangeType1;
@@ -5734,9 +5898,7 @@ namespace MusicBeePlugin
                         cell.Style = preservedTagCellStyle;
                     else if (changeTypeI == ChangesDetectionResult.PreservedTagValuesDetected)
                         cell.Style = preservedTagValueCellStyle;
-                    else if (cell.Value as string == previewTable.Rows[rowIndex].Cells[i].Value as string)
-                        cell.Style = unchangedCellStyle;
-                    else
+                    else if (cell.Value as string != previewTable.Rows[rowIndex].Cells[i - 1].Value as string)
                         cell.Style = changedCellStyle;
                 }
             }
@@ -5757,6 +5919,8 @@ namespace MusicBeePlugin
 
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
+            bool initialEnable = enable;
+
             if (enable && previewIsGenerated)
                 return;
 
@@ -5771,11 +5935,32 @@ namespace MusicBeePlugin
             if (selectedPreset == null)
                 enable = false;
 
+            nextPresetCheckBox.Enable(enable && (nextPresetCheckBox.IsEnabled() || !dontChangeDisabled));
+            nextPresetComboBoxCustom.Enable(enable && nextPresetCheckBox.Checked && (nextPresetCheckBox.IsEnabled() || !dontChangeDisabled));
+
+            showOnlyChainedPresetsButton.Enable(enable 
+                && (selectedPreset.referredCount > 0  //-V3125
+                       || ((nextPresetCheckBox.Checked && selectedPreset.nextPresetGuid != Guid.Empty && nextPresetCheckBox.IsEnabled()) || !dontChangeDisabled)
+                   ));
+
+            clearNextPresetButton.Enable(enable && nextPresetCheckBox.Checked && (nextPresetCheckBox.IsEnabled() || !dontChangeDisabled));
+
+            gotoNextPresetButton.Enable(enable && (nextPresetCheckBox.Checked && selectedPreset.nextPresetGuid != Guid.Empty)
+                && (showOnlyChainedPresetsButton.IsEnabled() || !dontChangeDisabled));
+
+            showOnlyChainedPresetsButton.Enable((initialEnable && showOnlyChainedPresets) 
+                || ((enable && ((nextPresetCheckBox.Checked && selectedPreset.nextPresetGuid != Guid.Empty)
+                    || selectedPreset.referredCount > 0)))
+                && (showOnlyChainedPresetsButton.IsEnabled() || !dontChangeDisabled));
+
+            clearNextPresetButton.Enable(enable && nextPresetCheckBox.Checked && (clearNextPresetButton.IsEnabled() || !dontChangeDisabled));
+
             assignHotkeyCheckBox.Enable(enable && (assignHotkeyCheckBox.IsEnabled() || !dontChangeDisabled));
             applyToPlayingTrackCheckBox.Enable(enable && assignHotkeyCheckBox.Checked);
             conditionCheckBox.Enable(enable && (conditionCheckBox.IsEnabled() || !dontChangeDisabled));
             playlistComboBoxCustom.Enable(conditionCheckBox.Checked);
             favoriteCheckBox.Enable(enable);
+            hiddenCheckBox.Enable(enable);
             idTextBox.Enable(enable);
             clearIdButton.Enable(enable);
 
@@ -5842,51 +6027,58 @@ namespace MusicBeePlugin
             buttonPreview.Enable(false);
         }
 
+        private bool checkFilters(Preset preset, string[] searchStrings)
+        {
+            var filteringCriteriaAreMeet = true;
+
+
+            if (!showHiddenChecked && preset.hidden)
+                filteringCriteriaAreMeet = false;
+            else if (showHotkeyAssignedChecked && !preset.hotkeyAssigned)
+                filteringCriteriaAreMeet = false;
+            else if (showFunctionIdAssignedChecked && string.IsNullOrEmpty(preset.id))
+                filteringCriteriaAreMeet = false;
+            else if (showPlaylistLimitedChecked && !preset.condition)
+                filteringCriteriaAreMeet = false;
+            else if (showUserChecked && !preset.userPreset)
+                filteringCriteriaAreMeet = false;
+            else if (showCustomizedChecked && !preset.getCustomizationsFlag())
+                filteringCriteriaAreMeet = false;
+            else if (showPredefinedChecked && preset.userPreset)
+                filteringCriteriaAreMeet = false;
+
+
+            if (filteringCriteriaAreMeet)
+            {
+                var presetName = preset.ToString();
+
+                foreach (var searchString in searchStrings)
+                {
+                    if (!Regex.IsMatch(presetName, Regex.Escape(searchString), RegexOptions.IgnoreCase))
+                    {
+                        filteringCriteriaAreMeet = false;
+                        break;
+                    }
+                }
+            }
+
+            return filteringCriteriaAreMeet;
+        }
+
         private void filterPresetList()
         {
             var searchStrings = searchTextBox.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
+            var currentPreset = presetList.SelectedItem as Preset;
+
             presetList.Items.Clear();
-            presetList.Sorted = false;
             ignoreCheckedPresetEvent = false;
 
             setCheckedPicturesStates();
 
-            foreach (var preset in presetsWorkingCopy.Values)
+            foreach (var preset in PresetsInteractiveWorkingCopy.Values)
             {
-                var filteringCriteriaAreMeet = true;
-
-
-                if (showHotkeyAssignedChecked && !preset.hotkeyAssigned)
-                    filteringCriteriaAreMeet = false;
-                else if (showFunctionIdAssignedChecked && string.IsNullOrEmpty(preset.id))
-                    filteringCriteriaAreMeet = false;
-                else if (showPlaylistLimitedChecked && !preset.condition)
-                    filteringCriteriaAreMeet = false;
-                else if (showUserChecked && !preset.userPreset)
-                    filteringCriteriaAreMeet = false;
-                else if (showCustomizedChecked && !preset.getCustomizationsFlag())
-                    filteringCriteriaAreMeet = false;
-                else if (showPredefinedChecked && preset.userPreset)
-                    filteringCriteriaAreMeet = false;
-
-
-                if (filteringCriteriaAreMeet)
-                {
-                    var presetName = preset.ToString();
-
-                    foreach (var searchString in searchStrings)
-                    {
-                        if (!Regex.IsMatch(presetName, Regex.Escape(searchString), RegexOptions.IgnoreCase))
-                        {
-                            filteringCriteriaAreMeet = false;
-                            break;
-                        }
-                    }
-                }
-
-
-                if (filteringCriteriaAreMeet)
+                if (checkFilters(preset, searchStrings))
                 {
                     var autoApply = autoAppliedAsrPresetGuids.ContainsKey(preset.guid);
                     if (!showTickedOnlyChecked || autoApply)
@@ -5898,9 +6090,11 @@ namespace MusicBeePlugin
                 }
             }
 
+            presetList.SelectedItem = currentPreset;
+            presetListLastSelectedIndex = presetList.SelectedIndex;
+
             showAutoApplyingWarningIfRequired();
             ignoreCheckedPresetEvent = true;
-            presetList.Sorted = true;
         }
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
@@ -6011,6 +6205,41 @@ namespace MusicBeePlugin
             }
         }
 
+        private static bool IncludePresetFromChain(Preset selected, Preset current)
+        {
+            if (selected == current)
+                return true;
+
+
+            if (current != null && current.nextPresetGuid != Guid.Empty)
+            {
+                if (PresetsInteractiveWorkingCopy.TryGetValue(current.nextPresetGuid, out var next))
+                    return IncludePresetFromChain(selected, next);
+                else
+                    return false;
+            }
+
+            return true;
+        }
+
+        //Returns: false if some preset in preset chain is already ticked for auto-applying, otherwise true
+        private bool checkAutoAppliedPresetChain(Preset referencePreset)
+        {
+            List<object> nextPresetList = new List<object>();
+            foreach (var preset in nextPresetComboBoxCustom.Items)
+                nextPresetList.Add(preset);
+
+            if (FilterList(nextPresetList, PresetsInteractiveWorkingCopy.Values, referencePreset, null,
+                IncludePresetFromChain, null, ExcludedCainChars))
+            {
+                foreach (Preset preset in nextPresetList)
+                    if (autoAppliedAsrPresetGuids.ContainsKey(preset.guid))
+                        return false;
+            }
+
+            return true;
+        }
+
         private void presetList_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (ignoreCheckedPresetEvent)
@@ -6034,22 +6263,29 @@ namespace MusicBeePlugin
                     return;
                 }
 
-                autoAppliedPresetCount++;
-                if (presetList.SelectedIndex != -1)
+                if (!checkAutoAppliedPresetChain(checkedChangedPreset))
                 {
-                    autoAppliedAsrPresetGuids.Add(checkedChangedPreset.guid, false);
+                    e.NewValue = CheckState.Unchecked;
 
                     if (!SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound)
-                        System.Media.SystemSounds.Exclamation.Play();
+                        System.Media.SystemSounds.Hand.Play();
+
+                    MessageBox.Show(this, MsgAsrWrongAutoExecutionChain, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    return;
                 }
+
+
+                autoAppliedPresetCount++;
+                autoAppliedAsrPresetGuids.Add(checkedChangedPreset.guid);
+
+                if (!SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound)
+                    System.Media.SystemSounds.Exclamation.Play();
             }
             else
             {
                 autoAppliedPresetCount--;
-                if (presetList.SelectedIndex != -1)
-                {
-                    autoAppliedAsrPresetGuids.Remove(checkedChangedPreset.guid);
-                }
+                autoAppliedAsrPresetGuids.Remove(checkedChangedPreset.guid);
             }
 
 
@@ -6149,7 +6385,6 @@ namespace MusicBeePlugin
 
             selectedPreset.favorite = favoriteCheckBox.Checked;
             selectedPreset.setCustomizationsFlag(this, backedUpPreset);
-            refreshPresetList(selectedPreset.guid);
         }
 
         private void favoriteCheckBoxLabel_Click(object sender, EventArgs e)
@@ -6158,6 +6393,250 @@ namespace MusicBeePlugin
                 return;
 
             favoriteCheckBox.Checked = !favoriteCheckBox.Checked;
+        }
+
+        private void hiddenCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ProcessPresetChanges)
+                return;
+
+            selectedPreset.hidden = hiddenCheckBox.Checked;
+            selectedPreset.setCustomizationsFlag(this, backedUpPreset);
+            filterPresetList();
+
+            if (presetList.SelectedItem == null)
+            {
+                presetListLastSelectedIndex = -3;
+                presetList_SelectedIndexChanged(null, null);
+            }
+        }
+
+        private void hiddenCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!hiddenCheckBox.IsEnabled())
+                return;
+
+            hiddenCheckBox.Checked = !hiddenCheckBox.Checked;
+            selectedPreset.setCustomizationsFlag(this, backedUpPreset);
+        }
+
+        private void nextPresetCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ProcessPresetChanges)
+                return;
+
+            if (nextPresetCheckBox.Checked)
+            {
+                selectedPreset.nextPresetGuid = nextPresetComboBoxCustom.SelectedItem == null ? Guid.Empty : (nextPresetComboBoxCustom.SelectedItem as Preset).guid;
+                nextPresetComboBoxCustom.Focus();
+            }
+            else
+            {
+                selectedPreset.nextPresetGuid = Guid.Empty;
+            }
+
+            selectedPreset.setCustomizationsFlag(this, backedUpPreset);
+
+            nextPresetComboBoxCustom.Enable(nextPresetCheckBox.Checked);
+            clearNextPresetButton.Enable(nextPresetCheckBox.Checked);
+
+            showOnlyChainedPresetsButton.Enable(selectedPreset.referredCount > 0
+                    || (nextPresetCheckBox.Checked && selectedPreset.nextPresetGuid != Guid.Empty) 
+                );
+        }
+
+        private void nextPresetCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!nextPresetCheckBox.IsEnabled())
+                return;
+
+            nextPresetCheckBox.Checked = !nextPresetCheckBox.Checked;
+        }
+
+        private static bool ExcludePresetFromChain(Preset selected, Preset current)
+        {
+            if (selected == current)
+                return false;
+
+            if (current != null && current.nextPresetGuid != Guid.Empty)
+            {
+                if (PresetsInteractiveWorkingCopy.TryGetValue(current.nextPresetGuid, out var next))
+                    return ExcludePresetFromChain(selected, next);
+                else
+                    return true;
+            }
+
+            return true;
+        }
+
+        private void filterNextPresetComboBoxCustom()
+        {
+            string text = nextPresetComboBoxCustom.Text;
+            var oldNextPresetComboBoxCustomSelectedItem = nextPresetComboBoxCustom.SelectedItem as Preset;
+
+
+            nextPresetComboBoxCustom.HideDropDownContent();
+            nextPresetComboBoxCustom.Sorted = false;
+
+
+            List<object> nextPresetList = new List<object>();
+            foreach (var preset in nextPresetComboBoxCustom.Items)
+                nextPresetList.Add(preset);
+
+            if (FilterList(nextPresetList, PresetsInteractiveWorkingCopy.Values, selectedPreset, oldNextPresetComboBoxCustomSelectedItem,
+                ExcludePresetFromChain, text, ExcludedCainChars))
+            {
+                FillListByList(nextPresetComboBoxCustom.Items, nextPresetList);
+
+                if (!string.IsNullOrEmpty(text))
+                    nextPresetComboBoxCustom.DroppedDown = true;
+            }
+
+            nextPresetComboBoxCustom.Sorted = true;
+            nextPresetComboBoxCustom.ShowDropDownContent();
+
+
+            if (oldNextPresetComboBoxCustomSelectedItem != null && RemoveSubstrings(oldNextPresetComboBoxCustomSelectedItem.ToString()) == RemoveSubstrings(text))
+                nextPresetComboBoxCustom.SelectedItem = oldNextPresetComboBoxCustomSelectedItem;
+            else if (nextPresetComboBoxCustom.SelectedItem == null || RemoveSubstrings(nextPresetComboBoxCustom.SelectedItem.ToString()) != RemoveSubstrings(text))
+                nextPresetComboBoxCustom.SelectedItem = null;
+        }
+
+        private void nextPresetComboBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!ProcessPresetChanges)
+                return;
+
+
+            if (nextPresetComboBoxTextChanging)
+                return;
+
+
+            nextPresetComboBoxTextChanging = true;
+
+
+            int oldNextPresetComboBoxCustomSelectionStart = nextPresetComboBoxCustom.SelectionStart;
+            int oldNextPresetComboBoxCustomSelectionLength = nextPresetComboBoxCustom.SelectionLength;
+
+            string text = nextPresetComboBoxCustom.Text;
+
+
+            if (ignoreNextPresetComboBoxTextChanged)
+                ignoreNextPresetComboBoxTextChanged = false;
+            else if (!string.IsNullOrEmpty(nextPresetComboBoxCustom.Text))
+                nextPresetComboBoxCustom.DroppedDown = true;
+
+
+            Preset oldNextPreset = null;
+            if (selectedPreset.nextPresetGuid != Guid.Empty)
+                PresetsInteractiveWorkingCopy.TryGetValue(selectedPreset.nextPresetGuid, out oldNextPreset);
+
+            
+            filterNextPresetComboBoxCustom();
+
+
+            if (nextPresetComboBoxCustom.comboBox != null)
+            {
+                if (nextPresetComboBoxCustom.comboBox.Text != text)
+                    nextPresetComboBoxCustom.comboBox.Text = text;
+
+                if (oldNextPresetComboBoxCustomSelectionStart > text.Length)
+                    nextPresetComboBoxCustom.comboBox.SelectionStart = text.Length;
+                else
+                    nextPresetComboBoxCustom.comboBox.SelectionStart = oldNextPresetComboBoxCustomSelectionStart;
+
+                if (nextPresetComboBoxCustom.comboBox.SelectionStart + oldNextPresetComboBoxCustomSelectionLength > text.Length + 1)
+                    nextPresetComboBoxCustom.comboBox.SelectionLength = 0;
+                else
+                    nextPresetComboBoxCustom.comboBox.SelectionLength = oldNextPresetComboBoxCustomSelectionLength;
+            }
+
+            oldNextPreset?.refreshReferredCount();
+            presetList.Refresh();
+
+            nextPresetComboBoxTextChanging = false;
+        }
+
+        private void nextPresetComboBox_SelectedIndexChanged_DropDownClosed(object sender, EventArgs e)
+        {
+            if (!ProcessPresetChanges)
+                return;
+
+
+            Preset oldNextPreset = null;
+            if (selectedPreset.nextPresetGuid != Guid.Empty)
+                PresetsInteractiveWorkingCopy.TryGetValue(selectedPreset.nextPresetGuid, out oldNextPreset);
+
+            if (nextPresetComboBoxCustom.SelectedItem != null)
+            {
+                selectedPreset.nextPresetGuid = (nextPresetComboBoxCustom.SelectedItem as Preset).guid;
+                (nextPresetComboBoxCustom.SelectedItem as Preset).refreshReferredCount();
+
+                ignoreNextPresetComboBoxTextChanged = true;
+                nextPresetComboBoxCustom.SetText(nextPresetComboBoxCustom.SelectedItem.ToString(), true);
+            }
+            else
+            {
+                selectedPreset.nextPresetGuid = Guid.Empty; //-V3095
+            }
+
+
+            selectedPreset?.setCustomizationsFlag(this, backedUpPreset);
+            oldNextPreset?.refreshReferredCount();
+            presetList.Refresh();
+
+
+            gotoNextPresetButton.Enable(nextPresetCheckBox.Checked && selectedPreset.nextPresetGuid != Guid.Empty); //-V3125
+
+            showOnlyChainedPresetsButton.Enable(selectedPreset.referredCount > 0
+                || (nextPresetCheckBox.Checked && selectedPreset.nextPresetGuid != Guid.Empty)
+            );
+        }
+
+        private void clearNextPresetButton_Click(object sender, EventArgs e)
+        {
+            Preset oldNextPreset = null;
+            if (selectedPreset.nextPresetGuid != Guid.Empty)
+                PresetsInteractiveWorkingCopy.TryGetValue(selectedPreset.nextPresetGuid, out oldNextPreset);
+
+            selectedPreset.nextPresetGuid = Guid.Empty; //-V3095
+            nextPresetComboBoxCustom.SelectedItem = null;
+            ignoreNextPresetComboBoxTextChanged = true;
+            nextPresetComboBoxCustom.Text = string.Empty;
+
+            nextPresetComboBoxCustom.DroppedDown = false;
+
+            selectedPreset?.setCustomizationsFlag(this, backedUpPreset);
+            oldNextPreset?.refreshReferredCount();
+            presetList.Refresh();
+
+            gotoNextPresetButton.Enable(false);
+            showOnlyChainedPresetsButton.Enable(selectedPreset.referredCount > 0); //-V3125
+        }
+
+        private void showOnlyChainedPresetsButton_Click(object sender, EventArgs e)
+        {
+            showOnlyChainedPresets = !showOnlyChainedPresets;
+
+            if (showOnlyChainedPresets)
+            {
+                showOnlyChainedPresetsButton.Image = filterPresetChainDimmed;
+                refreshPresetList(selectedPreset.guid, true, true);
+            }
+            else
+            {
+                showOnlyChainedPresetsButton.Image = filterPresetChain;
+                refreshPresetList(selectedPreset.guid, true, false);
+            }
+        }
+
+        private void gotoNextPresetButton_Click(object sender, EventArgs e)
+        {
+            showOnlyChainedPresets = true;
+            showOnlyChainedPresetsButton.Image = filterPresetChainDimmed;
+            refreshPresetList(selectedPreset.guid, true, true);
+
+            presetList.SelectedItem = nextPresetComboBoxCustom.SelectedItem;
         }
 
         private void saveColumnWidths(Preset savedPreset)
@@ -6248,6 +6727,17 @@ namespace MusicBeePlugin
         {
             var checkedCount = 0;
             var checkedFilter = 0;
+
+            if (showHiddenChecked)
+            {
+                hiddenPictureBox.Image = ReplaceBitmap(hiddenPictureBox.Image, HiddenPresetsAccent);
+                checkedCount++;
+                checkedFilter = 8;
+            }
+            else
+            {
+                hiddenPictureBox.Image = ReplaceBitmap(hiddenPictureBox.Image, HiddenPresetsDimmed);
+            }
 
             if (showHotkeyAssignedChecked)
             {
@@ -6352,7 +6842,6 @@ namespace MusicBeePlugin
                 uncheckAllFiltersPictureBox.Image = ReplaceBitmap(uncheckAllFiltersPictureBox.Image, UncheckAllFiltersAccent);
             else
                 uncheckAllFiltersPictureBox.Image = ReplaceBitmap(uncheckAllFiltersPictureBox.Image, UncheckAllFiltersDimmed);
-
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
@@ -6399,6 +6888,10 @@ namespace MusicBeePlugin
                         showHotkeyAssignedChecked = !showHotkeyAssignedChecked;
 
                         break;
+                    case 8:
+                        showHiddenChecked = !showHiddenChecked;
+
+                        break;
                 }
             }
             else if (filterComboBoxCustom.SelectedIndex >= 0)
@@ -6410,6 +6903,7 @@ namespace MusicBeePlugin
                 showPlaylistLimitedChecked = false;
                 showFunctionIdAssignedChecked = false;
                 showHotkeyAssignedChecked = false;
+                showHiddenChecked = false;
 
                 switch (filterComboBoxCustom.SelectedIndex)
                 {
@@ -6441,6 +6935,10 @@ namespace MusicBeePlugin
                         showHotkeyAssignedChecked = true;
 
                         break;
+                    case 8:
+                        showHiddenChecked = true;
+
+                        break;
                 }
             }
 
@@ -6460,6 +6958,7 @@ namespace MusicBeePlugin
                 showPlaylistLimitedChecked = false;
                 showFunctionIdAssignedChecked = false;
                 showHotkeyAssignedChecked = false;
+                showHiddenChecked = false;
             }
 
             filterPresetList();
@@ -6477,6 +6976,7 @@ namespace MusicBeePlugin
                 showPlaylistLimitedChecked = false;
                 showFunctionIdAssignedChecked = false;
                 showHotkeyAssignedChecked = false;
+                showHiddenChecked = false;
             }
             else if (showPredefinedChecked && showUserChecked)
             {
@@ -6498,6 +6998,7 @@ namespace MusicBeePlugin
                 showPlaylistLimitedChecked = false;
                 showFunctionIdAssignedChecked = false;
                 showHotkeyAssignedChecked = false;
+                showHiddenChecked = false;
             }
             else if (showCustomizedChecked && showUserChecked)
             {
@@ -6519,6 +7020,7 @@ namespace MusicBeePlugin
                 showPlaylistLimitedChecked = false;
                 showFunctionIdAssignedChecked = false;
                 showHotkeyAssignedChecked = false;
+                showHiddenChecked = false;
             }
             else if (showCustomizedChecked && showUserChecked)
             {
@@ -6545,6 +7047,7 @@ namespace MusicBeePlugin
                 showUserChecked = false;
                 showFunctionIdAssignedChecked = false;
                 showHotkeyAssignedChecked = false;
+                showHiddenChecked = false;
             }
 
             filterPresetList();
@@ -6562,6 +7065,7 @@ namespace MusicBeePlugin
                 showUserChecked = false;
                 showPlaylistLimitedChecked = false;
                 showHotkeyAssignedChecked = false;
+                showHiddenChecked = false;
             }
 
             filterPresetList();
@@ -6579,6 +7083,25 @@ namespace MusicBeePlugin
                 showUserChecked = false;
                 showPlaylistLimitedChecked = false;
                 showFunctionIdAssignedChecked = false;
+                showHiddenChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void hiddenPictureBox_Click(object sender, EventArgs e)
+        {
+            showHiddenChecked = !showHiddenChecked;
+
+            if (showHiddenChecked && ModifierKeys != Keys.Control)
+            {
+                showTickedOnlyChecked = false;
+                showPredefinedChecked = false;
+                showCustomizedChecked = false;
+                showUserChecked = false;
+                showPlaylistLimitedChecked = false;
+                showFunctionIdAssignedChecked = false;
+                showHotkeyAssignedChecked = false;
             }
 
             filterPresetList();
@@ -6588,6 +7111,7 @@ namespace MusicBeePlugin
         {
             untickAllChecked = false;
 
+            showHiddenChecked = false;
             showHotkeyAssignedChecked = false;
             showFunctionIdAssignedChecked = false;
             showPlaylistLimitedChecked = false;

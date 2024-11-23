@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <AssemblyVersion>9.1.9021.29534</AssemblyVersion>
+    <AssemblyVersion>9.2.9093.31053</AssemblyVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -216,6 +216,12 @@
     </Compile>
     <Compile Include="Helpers\PluginSampleWindow.Designer.cs">
       <DependentUpon>PluginSampleWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\CustomSortingForColumnBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\CustomSortingForColumnBrowser.Designer.cs">
+      <DependentUpon>CustomSortingForColumnBrowser.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugin\PasteTagsFromClipboard.cs" />
     <Compile Include="Helpers\CustomControls.cs" />
@@ -415,6 +421,13 @@
     <EmbeddedResource Include="Helpers\PluginSampleWindow.resx">
       <DependentUpon>PluginSampleWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CustomSortingForColumnBrowser.resx">
+      <DependentUpon>CustomSortingForColumnBrowser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\CustomSortingForColumnBrowser.ru.resx">
+      <DependentUpon>CustomSortingForColumnBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Plugin\LibraryReports.ru.resx">
       <DependentUpon>LibraryReports.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -558,13 +571,14 @@
     <None Include="Properties\Resources\thumb-middle-horizontal-c.png" />
     <None Include="Properties\Resources\thumb-middle-vertical-c.png" />
     <None Include="Properties\Resources\down-arrow-combobox-b.png" />
-    <None Include="Properties\Resources\error.png" />
-    <None Include="Properties\Resources\fatal-error.png" />
-    <None Include="Properties\Resources\error-fatal-error.png" />
-    <None Include="Properties\Resources\error-fatal-error-wide.png" />
-    <None Include="Properties\Resources\error-wide.png" />
-    <None Include="Properties\Resources\fatal-error-wide.png" />
     <None Include="Properties\Resources\click.wav" />
+    <None Include="Properties\Resources\hidden-presets.png" />
+    <None Include="Properties\Resources\filter-next-presets.png" />
+    <None Include="Properties\Resources\filter-next-presets-dimmed.png" />
+    <None Include="Properties\Resources\follow.png" />
+    <None Include="Properties\Resources\play.png" />
+    <None Include="Properties\Resources\record.png" />
+    <None Include="Properties\Resources\stop.png" />
     <Content Include="wrench.ico" />
     <None Include="Properties\Resources\warning-15.png" />
     <None Include="Properties\Resources\warning-wide-15.png" />

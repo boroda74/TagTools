@@ -24,7 +24,7 @@ namespace MusicBeePlugin
 
 
         private List<Row> rows = new List<Row>();
-        BindingSource source = new BindingSource();
+        private BindingSource source = new BindingSource();
 
         private string[] files = Array.Empty<string>();
         private readonly List<string[]> currentTracks = new List<string[]>();
@@ -51,7 +51,7 @@ namespace MusicBeePlugin
             usedEncodingListCustom = namesComboBoxes["usedEncodingList"];
 
 
-            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
+            ReplaceButtonBitmap(buttonSettings, Gear);
 
             defaultEncoding = Encoding.Default;
             var encodings = Encoding.GetEncodings();
@@ -81,8 +81,8 @@ namespace MusicBeePlugin
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
-                FalseValue = Plugin.ColumnUncheckedState,
-                TrueValue = Plugin.ColumnCheckedState,
+                FalseValue = ColumnUncheckedState,
+                TrueValue = ColumnCheckedState,
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
@@ -297,10 +297,10 @@ namespace MusicBeePlugin
 
             for (var fileCounter = 0; fileCounter < rows.Count; fileCounter++)
             {
-                if (rows[fileCounter].Checked == Plugin.ColumnCheckedState)
-                    currentTracks[fileCounter][0] = Plugin.ColumnCheckedState;
+                if (rows[fileCounter].Checked == ColumnCheckedState)
+                    currentTracks[fileCounter][0] = ColumnCheckedState;
                 else
-                    currentTracks[fileCounter][0] = Plugin.ColumnUncheckedState;
+                    currentTracks[fileCounter][0] = ColumnUncheckedState;
             }
 
             ignoreClosingForm = true;
@@ -329,11 +329,11 @@ namespace MusicBeePlugin
                 SetStatusBarTextForFileOperations(ReEncodeTagSbText, true, fileCounter, files.Length, currentFile);
 
                 var currentTags = new string[numberOfWritableTags + 2];
-                currentTags[0] = Plugin.ColumnCheckedState;
+                currentTags[0] = ColumnCheckedState;
                 currentTags[1] = currentFile;
 
                 var newTags = new string[numberOfWritableTags + 2];
-                newTags[0] = Plugin.ColumnCheckedState;
+                newTags[0] = ColumnCheckedState;
                 newTags[1] = currentFile;
 
                 if (!string.IsNullOrEmpty(GetFileTag(currentFile, MetaDataType.Cuesheet)))
@@ -360,7 +360,7 @@ namespace MusicBeePlugin
 
                 Row row = new Row
                 {
-                    Checked = Plugin.ColumnCheckedState,
+                    Checked = ColumnCheckedState,
                     File = currentFile,
                     Track = GetTrackRepresentation(currentTags, newTags, tagNames, previewSortTags),
                     NewTrack = GetTrackRepresentation(newTags, currentTags, tagNames, previewSortTags),
@@ -409,7 +409,7 @@ namespace MusicBeePlugin
 
                 var isChecked = newTracks[i][0];
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                 {
                     var currentFile = newTracks[i][1];
 
@@ -500,9 +500,9 @@ namespace MusicBeePlugin
                     continue;
 
                 if (state)
-                    rows[0].Checked = Plugin.ColumnUncheckedState;
+                    rows[0].Checked = ColumnUncheckedState;
                 else
-                    rows[0].Checked = Plugin.ColumnCheckedState;
+                    rows[0].Checked = ColumnCheckedState;
             }
 
             int firstRow = previewTable.FirstDisplayedCell.RowIndex;
@@ -521,17 +521,17 @@ namespace MusicBeePlugin
 
                 var isChecked = previewTable.Rows[e.RowIndex].Cells[0].Value as string;
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                 {
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = ColumnUncheckedState;
 
                     sourceTagValue = previewTable.Rows[e.RowIndex].Cells[2].Value as string;
 
                     previewTable.Rows[e.RowIndex].Cells[3].Value = sourceTagValue;
                 }
-                else if (isChecked == Plugin.ColumnUncheckedState)
+                else if (isChecked == ColumnUncheckedState)
                 {
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnCheckedState;
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = ColumnCheckedState;
 
                     sourceTagValue = previewTable.Rows[e.RowIndex].Cells[2].Value as string;
 

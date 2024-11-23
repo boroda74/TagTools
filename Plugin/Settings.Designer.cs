@@ -65,6 +65,8 @@
             this.showHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.highlightChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.scrollPreviewToEndCheckBoxLabel = new System.Windows.Forms.Label();
+            this.scrollPreviewToEndCheckBox = new System.Windows.Forms.CheckBox();
             this.legendGroupBox = new System.Windows.Forms.GroupBox();
             this.preservedTagValuesLegendTextBox = new System.Windows.Forms.TextBox();
             this.preservedTagsLegendTextBox = new System.Windows.Forms.TextBox();
@@ -96,6 +98,8 @@
             this.contextMenuCheckBox = new System.Windows.Forms.CheckBox();
             this.showCTCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.showCustomSortingForColumnBrowserCheckBoxLabel = new System.Windows.Forms.Label();
+            this.showCustomSortingForColumnBrowserCheckBox = new System.Windows.Forms.CheckBox();
             this.contextMenuCheckBoxLabel = new System.Windows.Forms.Label();
             this.allowCommandExecutionWithoutPreviewCheckBoxLabel = new System.Windows.Forms.Label();
             this.allowCommandExecutionWithoutPreviewCheckBox = new System.Windows.Forms.CheckBox();
@@ -345,6 +349,8 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.scrollPreviewToEndCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.scrollPreviewToEndCheckBox);
             this.groupBox2.Controls.Add(this.legendGroupBox);
             this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBoxLabel);
             this.groupBox2.Controls.Add(this.highlightChangedTagsCheckBox);
@@ -366,6 +372,18 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             this.groupBox2.Tag = "#tabPage1@pinned-to-parent-x";
+            // 
+            // scrollPreviewToEndCheckBoxLabel
+            // 
+            resources.ApplyResources(this.scrollPreviewToEndCheckBoxLabel, "scrollPreviewToEndCheckBoxLabel");
+            this.scrollPreviewToEndCheckBoxLabel.Name = "scrollPreviewToEndCheckBoxLabel";
+            this.scrollPreviewToEndCheckBoxLabel.Click += new System.EventHandler(this.scrollPreviewToEndCheckBoxLabel_Click);
+            // 
+            // scrollPreviewToEndCheckBox
+            // 
+            resources.ApplyResources(this.scrollPreviewToEndCheckBox, "scrollPreviewToEndCheckBox");
+            this.scrollPreviewToEndCheckBox.Name = "scrollPreviewToEndCheckBox";
+            this.scrollPreviewToEndCheckBox.Tag = "#scrollPreviewToEndCheckBoxLabel";
             // 
             // legendGroupBox
             // 
@@ -584,6 +602,8 @@
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.showCustomSortingForColumnBrowserCheckBoxLabel);
+            this.groupBox1.Controls.Add(this.showCustomSortingForColumnBrowserCheckBox);
             this.groupBox1.Controls.Add(this.contextMenuCheckBoxLabel);
             this.groupBox1.Controls.Add(this.contextMenuCheckBox);
             this.groupBox1.Controls.Add(this.allowCommandExecutionWithoutPreviewCheckBoxLabel);
@@ -616,6 +636,19 @@
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             this.groupBox1.Tag = "#tabPage1@pinned-to-parent-x";
+            // 
+            // showCustomSortingForColumnBrowserCheckBoxLabel
+            // 
+            resources.ApplyResources(this.showCustomSortingForColumnBrowserCheckBoxLabel, "showCustomSortingForColumnBrowserCheckBoxLabel");
+            this.showCustomSortingForColumnBrowserCheckBoxLabel.Name = "showCustomSortingForColumnBrowserCheckBoxLabel";
+            this.showCustomSortingForColumnBrowserCheckBoxLabel.Click += new System.EventHandler(this.showCustomSortingForColumnBrowserCheckBoxLabel_Click);
+            // 
+            // showCustomSortingForColumnBrowserCheckBox
+            // 
+            resources.ApplyResources(this.showCustomSortingForColumnBrowserCheckBox, "showCustomSortingForColumnBrowserCheckBox");
+            this.showCustomSortingForColumnBrowserCheckBox.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.showCustomSortingForColumnBrowserCheckBox.Name = "showCustomSortingForColumnBrowserCheckBox";
+            this.showCustomSortingForColumnBrowserCheckBox.Tag = "#showCustomSortingForColumnBrowserCheckBoxLabel";
             // 
             // contextMenuCheckBoxLabel
             // 
@@ -960,5 +993,9 @@
         private System.Windows.Forms.Label useCustomFontCheckBoxLabel;
         private System.Windows.Forms.CheckBox useCustomFontCheckBox;
         private System.Windows.Forms.Button customFontButton;
+        private System.Windows.Forms.Label scrollPreviewToEndCheckBoxLabel;
+        private System.Windows.Forms.CheckBox scrollPreviewToEndCheckBox;
+        private System.Windows.Forms.Label showCustomSortingForColumnBrowserCheckBoxLabel;
+        private System.Windows.Forms.CheckBox showCustomSortingForColumnBrowserCheckBox;
     }
 }

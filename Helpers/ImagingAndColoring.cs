@@ -177,7 +177,6 @@ namespace MusicBeePlugin
 
                     var brightness = (byte)Math.Round(brightnessF);
 
-                    // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                     if (opaque) //-V3022
                         brightness = (brightnessF < 420/* MUST BE "some constant" - OpacityThreshold*/) ? byte.MinValue : byte.MaxValue; //----- greyLevelF LESS THAN 420 ???
 
@@ -386,7 +385,7 @@ namespace MusicBeePlugin
             return (sampleColor.R + sampleColor.G + sampleColor.B) / 3.0f / 255f;
         }
 
-        internal static Color GetInvertedAverageBrightnessColor(Color sampleColor)
+        internal static Color GetInvertedAverageBrightnessColor(Color sampleColor, float contrast)
         {
             float avgBr = GetAverageBrightness(sampleColor);
 
@@ -396,15 +395,15 @@ namespace MusicBeePlugin
 
             if (avgBr > 0.5f) //Let's decrease brightness
             {
-                R = (int)Math.Round((sampleColor.R - 127) / 4f + 63f);
-                G = (int)Math.Round((sampleColor.G - 127) / 4f + 63f);
-                B = (int)Math.Round((sampleColor.B - 127) / 4f + 63f);
+                R = (int)Math.Round((sampleColor.R - 127) / 4f + 63f / contrast);
+                G = (int)Math.Round((sampleColor.G - 127) / 4f + 63f / contrast);
+                B = (int)Math.Round((sampleColor.B - 127) / 4f + 63f / contrast);
             }
             else //Let's increase brightness
             {
-                R = (int)Math.Round((sampleColor.R - 127) / 4f + 191f);
-                G = (int)Math.Round((sampleColor.G - 127) / 4f + 191f);
-                B = (int)Math.Round((sampleColor.B - 127) / 4f + 191f);
+                R = (int)Math.Round((sampleColor.R - 127) / 4f + 255f - 63f / contrast);
+                G = (int)Math.Round((sampleColor.G - 127) / 4f + 255f - 63f / contrast);
+                B = (int)Math.Round((sampleColor.B - 127) / 4f + 255f - 63f / contrast);
             }
 
 

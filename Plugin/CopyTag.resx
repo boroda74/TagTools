@@ -142,7 +142,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 5</value>
+    <value>191, 5</value>
   </data>
   <data name="buttonPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -172,7 +172,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>946, 363</value>
+    <value>944, 361</value>
   </data>
   <data name="previewTable.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -280,7 +280,7 @@
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>934, 217</value>
+    <value>932, 215</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -317,6 +317,12 @@
   </data>
   <data name="addCheckBoxLabel.Text" xml:space="preserve">
     <value>Add source tag to the beginning of destination tag placing between them:</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>140, 17</value>
+  </metadata>
+  <data name="addCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Add text to the end of the copied tag:</value>
   </data>
   <data name="&gt;&gt;addCheckBoxLabel.Name" xml:space="preserve">
     <value>addCheckBoxLabel</value>
@@ -386,6 +392,9 @@
   </data>
   <data name="appendCheckBoxLabel.Text" xml:space="preserve">
     <value>Append source tag to the end of destination tag placing between them:</value>
+  </data>
+  <data name="appendCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Add text at the beginning of the copied tag:</value>
   </data>
   <data name="&gt;&gt;appendCheckBoxLabel.Name" xml:space="preserve">
     <value>appendCheckBoxLabel</value>
@@ -594,9 +603,6 @@
   <data name="smartOperationCheckBoxLabel.Text" xml:space="preserve">
     <value>Smart copy (important only for working with multiple artists/composers per track)</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>140, 17</value>
-  </metadata>
   <data name="smartOperationCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Every byte of the source tag (including the service characters that identify the roles of the artists) 
 will be preserved if this option is unchecked, however this may only be useful 
@@ -798,7 +804,7 @@ for copying it to a temporary tag</value>
     <value>4, 4, 6, 4</value>
   </data>
   <data name="addedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>508, 23</value>
+    <value>506, 23</value>
   </data>
   <data name="addedTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -828,7 +834,7 @@ for copying it to a temporary tag</value>
     <value>4, 4, 6, 4</value>
   </data>
   <data name="appendedTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>508, 23</value>
+    <value>506, 23</value>
   </data>
   <data name="appendedTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -855,7 +861,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="buttonBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>408, 59</value>
+    <value>406, 59</value>
   </data>
   <data name="buttonBrowse.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 4</value>
@@ -894,7 +900,7 @@ for copying it to a temporary tag</value>
     <value>4, 4, 4, 4</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>270, 23</value>
+    <value>268, 23</value>
   </data>
   <data name="fileNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -957,7 +963,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>408, 5</value>
+    <value>406, 5</value>
   </data>
   <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 6, 4</value>
@@ -993,7 +999,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 5</value>
+    <value>298, 5</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1029,7 +1035,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 5</value>
+    <value>147, 5</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -1062,7 +1068,7 @@ for copying it to a temporary tag</value>
     <value>3, 0, 0, 0</value>
   </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>513, 140</value>
+    <value>511, 140</value>
   </data>
   <data name="fieldsPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1090,6 +1096,54 @@ for copying it to a temporary tag</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Copy Tag</value>
+  </data>
+  <data name="&gt;&gt;File.Name" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="&gt;&gt;File.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Track.Name" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="&gt;&gt;Track.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SupposedDestinationTagValue.Name" xml:space="preserve">
+    <value>SupposedDestinationTagValue</value>
+  </data>
+  <data name="&gt;&gt;SupposedDestinationTagValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SupposedDestinationTagValueNormalized.Name" xml:space="preserve">
+    <value>SupposedDestinationTagValueNormalized</value>
+  </data>
+  <data name="&gt;&gt;SupposedDestinationTagValueNormalized.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OriginalDestinationTagValue.Name" xml:space="preserve">
+    <value>OriginalDestinationTagValue</value>
+  </data>
+  <data name="&gt;&gt;OriginalDestinationTagValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OriginalDestinationTagValueNormalized.Name" xml:space="preserve">
+    <value>OriginalDestinationTagValueNormalized</value>
+  </data>
+  <data name="&gt;&gt;OriginalDestinationTagValueNormalized.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NewDestinationTagValue.Name" xml:space="preserve">
+    <value>NewDestinationTagValue</value>
+  </data>
+  <data name="&gt;&gt;NewDestinationTagValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NewDestinationTagValueNormalized.Name" xml:space="preserve">
+    <value>NewDestinationTagValueNormalized</value>
+  </data>
+  <data name="&gt;&gt;NewDestinationTagValueNormalized.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
     <value>dirtyErrorProvider</value>
@@ -1151,59 +1205,11 @@ for copying it to a temporary tag</value>
   <data name="&gt;&gt;dataGridViewTextBoxColumn8.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;File.Name" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="&gt;&gt;File.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Track.Name" xml:space="preserve">
-    <value>Track</value>
-  </data>
-  <data name="&gt;&gt;Track.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SupposedDestinationTagValue.Name" xml:space="preserve">
-    <value>SupposedDestinationTagValue</value>
-  </data>
-  <data name="&gt;&gt;SupposedDestinationTagValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SupposedDestinationTagValueNormalized.Name" xml:space="preserve">
-    <value>SupposedDestinationTagValueNormalized</value>
-  </data>
-  <data name="&gt;&gt;SupposedDestinationTagValueNormalized.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OriginalDestinationTagValue.Name" xml:space="preserve">
-    <value>OriginalDestinationTagValue</value>
-  </data>
-  <data name="&gt;&gt;OriginalDestinationTagValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;OriginalDestinationTagValueNormalized.Name" xml:space="preserve">
-    <value>OriginalDestinationTagValueNormalized</value>
-  </data>
-  <data name="&gt;&gt;OriginalDestinationTagValueNormalized.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NewDestinationTagValue.Name" xml:space="preserve">
-    <value>NewDestinationTagValue</value>
-  </data>
-  <data name="&gt;&gt;NewDestinationTagValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;NewDestinationTagValueNormalized.Name" xml:space="preserve">
-    <value>NewDestinationTagValueNormalized</value>
-  </data>
-  <data name="&gt;&gt;NewDestinationTagValueNormalized.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>CopyTag</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.1.9014.37143, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.2.9091.7405, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

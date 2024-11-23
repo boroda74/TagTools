@@ -514,7 +514,7 @@ namespace ExtensionMethods
 
             if (control is TextBox || control is NumericUpDown)
             {
-                control.ReadOnly(!enable);
+                control.Enabled = enable; //----- ReadOnly? But carefully!!!
                 form.textBoxNamesEnableStatuses.AddReplace(control.Name, enable);
                 form.setSkinnedControlColors(control, enable);
                 return;

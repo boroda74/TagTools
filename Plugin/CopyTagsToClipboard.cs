@@ -13,8 +13,8 @@ namespace MusicBeePlugin
     {
         private CustomComboBox tagSetComboBoxCustom;
 
-
         private bool ignoreTagSetComboBoxTextChanged;
+        private string currentPrefix;
 
         private string[] availableTags;
         private string[] prefixedTags;
@@ -30,7 +30,7 @@ namespace MusicBeePlugin
 
         public CopyTagsToClipboard(Plugin plugin, string formTitle, string copyButtonName) : this(plugin)
         {
-            tagSetComboBox.Visible = false;
+            tagSetComboBoxCustom.Visible = false;
             Text = formTitle;
             buttonOK.Text = copyButtonName;
             returnSelectedTags = true;
@@ -46,6 +46,8 @@ namespace MusicBeePlugin
         internal protected override void initializeForm()
         {
             base.initializeForm();
+
+            currentPrefix = SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].getPrefix();
 
             tagSetComboBoxCustom = namesComboBoxes["tagSetComboBox"];
             tagSetComboBoxCustom.Visible = tagSetComboBox.Visible;
@@ -64,7 +66,7 @@ namespace MusicBeePlugin
                 tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[9].setName);
 
                 prepareAvailableTags(true, true, true);
-                tagSetComboBox_DropDownClosed(null, null);
+                tagSetComboBox_SelectedIndexChanged(null, null);
 
                 buttonOK.Enable(checkedSourceTagList.Items.Count > 0);
             }
@@ -317,66 +319,34 @@ namespace MusicBeePlugin
             updateCustomScrollBars(checkedSourceTagList);
         }
 
-        private void tagSetComboBox_DropDownClosed(object sender, EventArgs e)
+        private void tagSetComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tagSetComboBoxCustom.SelectedIndex == -1)
-            {
                 tagSetComboBoxCustom.SelectedIndex = SavedSettings.lastInteractiveTagSet;
-            }
             else if (tagSetComboBoxCustom.SelectedIndex == SavedSettings.lastInteractiveTagSet)
-            {
                 return;
-            }
             else
-            {
                 SavedSettings.lastInteractiveTagSet = tagSetComboBoxCustom.SelectedIndex;
-            }
 
+            currentPrefix = SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].getPrefix();
 
-            //checkedSourceTagList.SuspendPainting();
-            //sourceTagList.SuspendPainting();
-
+            tagSetComboBoxCustom.SelectionStart = currentPrefix.Length;
+            tagSetComboBoxCustom.SelectionLength = 0;
 
             fillTagsFromTagSet(SavedSettings.lastInteractiveTagSet);
-
-
-            //checkedSourceTagList.Repaint();
-            //sourceTagList.Repaint();
         }
 
         private void tagSetComboBox_TextChanged(object sender, EventArgs e)
         {
-            if (ignoreTagSetComboBoxTextChanged)
+            if (ignoreTagSetComboBoxTextChanged || tagSetComboBoxCustom.SelectedIndex != SavedSettings.lastInteractiveTagSet)
                 return;
 
 
             ignoreTagSetComboBoxTextChanged = true;
 
-            var prefix = SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].getPrefix();
+            if (tagSetComboBoxCustom.Text.Substring(0, currentPrefix.Length) != currentPrefix)
+                tagSetComboBoxCustom.Text = currentPrefix + tagSetComboBoxCustom.Text.Substring(currentPrefix.Length);
 
-            if (!tagSetComboBoxCustom.Text.StartsWith(prefix))
-            {
-                var matchingLength = 0;
-                for (var i = 1; i <= prefix.Length && i <= tagSetComboBoxCustom.Text.Length; i++)
-                {
-                    if (prefix.Substring(0, i) == tagSetComboBoxCustom.Text.Substring(0, i))
-                        matchingLength = i;
-                    else
-                        break;
-                }
-
-                var selectionStart = tagSetComboBoxCustom.SelectionStart;
-                if (matchingLength > 0)
-                {
-                    tagSetComboBoxCustom.Text = prefix + tagSetComboBoxCustom.Text.Substring(matchingLength);
-                    tagSetComboBoxCustom.SelectionStart = prefix.Length - matchingLength + selectionStart;
-                }
-                else
-                {
-                    tagSetComboBoxCustom.Text = prefix + tagSetComboBoxCustom.Text;
-                    tagSetComboBoxCustom.SelectionStart = prefix.Length + selectionStart + 1;
-                }
-            }
 
             tagSetComboBoxCustom.Items[SavedSettings.lastInteractiveTagSet] = tagSetComboBoxCustom.Text;
             SavedSettings.copyTagsTagSets[SavedSettings.lastInteractiveTagSet].setName = tagSetComboBoxCustom.Text;

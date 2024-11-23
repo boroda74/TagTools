@@ -124,20 +124,18 @@
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
-  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>185, 16</value>
-  </data>
-  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
-  </data>
-  <data name="buttonClose.Text" xml:space="preserve">
-    <value>Закрыть</value>
-  </data>
-  <data name="buttonClose.ToolTip" xml:space="preserve">
-    <value>Есть несохраненные изменения</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1177, 661</value>
+  </data>
+  <data name="hiddenPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>777, 6</value>
+  </data>
+  <data name="hiddenPictureBox.ToolTip" xml:space="preserve">
+    <value>Щелкните для показа также скрытых пресетов
+Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
+
+Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО
+</value>
   </data>
   <data name="filterComboBox.Items" xml:space="preserve">
     <value>(Без фильтра)</value>
@@ -163,12 +161,11 @@
   <data name="filterComboBox.Items7" xml:space="preserve">
     <value>С назначенными комбинациями клавиш</value>
   </data>
-  <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>860, 4</value>
+  <data name="filterComboBox.Items8" xml:space="preserve">
+    <value>Скрытые</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="filterComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 6, 3</value>
+  <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>864, 4</value>
   </data>
   <data name="filterComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 23</value>
@@ -179,295 +176,98 @@
 Щелкните с нажатой клавишей Ctrl, чтобы 
 добавить фильтр к существующим или отключить его</value>
   </data>
-  <data name="uncheckAllFiltersPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAAA0ZJREFUWEftl99L21AUx8dcW83U1qcZVzc7+zut+xtk7mlS9uKQYcH9NRPLSkHp
-        8LmUhA1lVPTBYgktLaXF/2C+iNSHlVIoZaEg3Te9acw0qTWNHQO/HMrN5Z7zyb09uffcR+1/pAfw0HQF
-        brVatVrt7Ozs9B6EsAgOhARTguv1+s7O1/eh0NulJcMtFArF43EgJJgSfHFx8Wl9fXJi3GI2G24IGw6H
-        K5WKBFOCz8/PP66ujo5aTCYTRY1N2axTU7ZBzWalKAoBEfbDygoWXIKpgqmxsUgkkstmC4UCfrNZHpbP
-        5/F4qzCMjJfcc7lYLIZp9AW2Wid3d78LgoBcQCfHccVisVqtXl5eSkM1hAG1arVUKrEsC0e4t1rC/n4K
-        AfsF7+3tNptN9ESjX2iaZhgmk8kgLXuwRWqtxvN8MMDQ9HRkcxPuCHJncKPR+MZxMzSN1Bi1WNwuJ6/N
-        lqlejweD4QI2m0w2mw094JOT8kIwiEBPRkYQzON28bwKm1DxvxIqBuM3wDDlckkPWBB+y5PAHCS2x40e
-        JbtLzfq8ElX5ikgUHWBBuYBdtgVtmU0GIIF9Xq/qwiC79IDRSUIr2QBgcpgi+iF8MIzfp0qFu34wpMH2
-        HhwcHB4eMn6/FhUaCAypsh1zLx2OuR5UaFAwpGC7CVs2LSpkABhCUOxfqVTqxawdvMcdoTFrt6dSP1S3
-        tv8ZjKDKpQZXtntcagVVTC4Cez5Dw9CQ2OLeYmhyESp2RLI3EYxz/hVOMBgaXTb2luv7mn6wFjV9dPSr
-        o3Q63YOtE9ylSvuwkkpSCULj+PjY6ZzvsPFp/bWn6gOLh0QPKvFCA8PAdjmdN9l4+zuDO8fiyesF8VjU
-        ohLdZMMlGAiUy2Wd5zHHsTjPxTJRm0p0jU0KgUQioQdMSp9IZJOefub3eXtQiWQ2jg24bGx8hrue0gd/
-        D1IDnSybRL3Ym0pE2KgMk8kEHOF+t+RCeRuLRVGqol4U69V8DoZweLxVGEbGwxGPeOPt7a1+y9tOQU91
-        CvqBZbM9vbWgl68wZrPJcJsYHw+vralfYXCjwr1qefndm8VFww1ht7e21C9tSASkBlbj9PSn4YawCC7v
-        /9AVeMh6AA9J7fYf3xelcBWJgwsAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>818, 6</value>
+    <value>820, 6</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.ToolTip" xml:space="preserve">
     <value>Отключить все фильтры</value>
   </data>
-  <data name="hotkeyPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAAA7pJREFUWEftlt1L01EYx8Ntbm4L21a+pJHrH+jFUDJ8w8gQ7ELxhUBMsgsxMVBU
-        CGWIf4DXUhiJeJ8IkmwIIoTdhAwmY7tQRBFFJiIOMeyz/Q4jf26/l0V545dzsXPO83y/e57fOc95rp1d
-        Eq6EteNXHGKiH2kKR6PR3d3dSGT/5ORELOlEmsJ7e3sfJyampr7s7++LJZ1IR5gMB4PB2trnL+vrw+GQ
-        WNWJdISPj499Pm9Ozq38vNylpSXSLjb0IB1hvu7AQL/NarXZrMPDH0i72NAD3cLkeW1traTksclkyjSZ
-        npaVkfY0jrduYfL8bX7e6XAYDBkMl8vp9XpZFNuaoVt4Z2fnfW+v1ZqVEQc/+vv6SL7Y1gx9wqQ0EAg8
-        fHCfPEvC/CgufkTy9WZbn/DR0dHs7Ncb2dkGSTYjlm2H48bc3JzebJ8TxpmCsLm5ubGxnnT4/auv29uz
-        sixCNg6mbzo6/H6/zDgxIIRW9s/OCRPQ+Pj4287O5uamxoaGi6Ou7kVebo7JaBSacTBlkS2ZsTSgghBa
-        yIVMHPKIV1d/1tRUO50OTo3FbJaNzExUzqlKYJEtmTEDEqgghFYpYg5IJBIhaU1NjXa7XRaZXuAOCRFD
-        CK3s9CU5XOQkHA6PjIy4XC7iEDQ6gSPuHo8HKlmSJSQRBjx2W1tb09PTbneRxWLm6GoHxrjcc7tnZmYg
-        SfVuJhcGp6enFOHl5eWysid8KqNRkzhmGFNHccQdEkF3ASmFAV/l4OCAitHe1ma321Q/OQbX7Xbu21og
-        gKNySVESlsBphKi7q4tDLRRSAIN33d1UMdkBTgp1YcCn6u3pybKcqxsXgQFlHGPhpgh1YTJGEKXxd1Ao
-        pAAGpaUlGuu2unA0eszD53LG3kFlxF5Jp8Pn9WrpSdSFefIGBwfoNwR9HCaTkTvDkJ04zIYGB7W8kurC
-        NBjcKJoNiTp2Tc3mgtv5Q0NDvMS0XUwTyUj0JMI5NVSESdri4iJthkRNoNyrZzU1iz7fRgzrCwsLFRXl
-        dpuNLQwwu+ly4aKabRVhigDtHE2d0WCQAh0bGw2FQoeHh5wgwH0lPo9nJD8/Two93gEOq3aAKsJoVFaU
-        U4yIqbqqkq52e3tbVgWZspgIHeOqykocxXYKKAmTrpWV7+6iu3cKC8dGR0PBYKp69EfonsLCAir8j5UV
-        5WwrCVOAJic/vWptTRroRUihc/daW1o+T04q1y+ViAmCu6FaeBOQQscFx/QjhkWCmGuGcPvLR+If4Ur4
-        v+GShM/OfgN2qfNxBI6QuAAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>776, 6</value>
+    <value>748, 6</value>
   </data>
   <data name="hotkeyPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только пресеты с назначенными комбинациями клавиш
+    <value>Щелкните для показа только пресетов с назначенными комбинациями клавиш
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
-  </data>
-  <data name="functionIdPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        +HrxXyM+O/sbD02llAoUHMcAAAAASUVORK5CYII=
-</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 6</value>
+    <value>718, 6</value>
   </data>
   <data name="functionIdPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только пресеты с назначенными ID-ми функций виртуальных тегов
+    <value>Щелкните для показа только пресетов с назначенными ID-ми функций виртуальных тегов
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
-  </data>
-  <data name="playlistPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAABBZJREFUWEftlt9Lm1cYx4fGJBpNzDajaXJhqlsH22htS0zXmiJqV2pvqpSFrqP/
-        worDhQVGFIWw4S471n9gvZIRSBCDXsqoBCUoBkkISlBCQolIMIjiPutJXzhhFXam2U2/HA6vz6t+3+fX
-        93neO/mf8I64ZpCIj4+Pi8ViJpNeW1tLp9M8Y6m8O2tIxDDF5udveDx2e0dvr3tubq5YfIX96OioVCrx
-        9pUq9vf3Dw8PBYuARJzJZL644TEaDTpdPbfbfR2/sUM5Ozs7PT39oxKCweCvz57lcruCRUAiJsL4Cmtd
-        XR13u82WSCSwZ7Pb9+8Pt1osJlOTwmk2mVwuV3JjQ7AIVHmcJs4Vjw2G69euCY9TqZTX26dvaOCD1GCz
-        2eLxZcEi8A859nh6O9rbyXE0GiU92Hd3d0dHR/hjqxLet1o/uXRJ+KBBIq5Udbq6qimNra2t1dXVl0pY
-        Xn5JzIQPGiTiWqKa+ODgoFDIZ7PZfD7Pc8V6DpCIadbNzc2xsbE7d4aePv02mUxiqbw7a0jEOOrzfWVu
-        aTYajdwPH45ub29jJ8e0OGW5pIQ/l5bw4bQcr6+vOxwXdDodDcBtt9upMuxU9cgIVd1mtbYqnNdV/XE6
-        nRIsAhLxZjL5UXd3w+t+5e666OJLsZ97H+dzuZmZnzvabRazmV/9KRTK5XLYSQHKZW1FuVTQ3Gy6iHIl
-        365c6PjOzs7CwsIvMzOx2DzPh+Uydho6HP6D75icmFA4U5OTz5//JnzQIBEDFKNcLtNI3NpMZDod/Lfp
-        VCqdOp0AZLDSRdwa8XlADnW5THij0QjBiUQipBa/K+/OGhIxaQiFQra2NnNLS9uHH0xNTYnE4D1Chnoj
-        L2rAH8RAsAhIxDRPd1fXm3bSuVydohRh9fu/93q9DC6Fw6gdefBAaJEGiRgBcTodmoBceCMgyNbg4EBT
-        UyPfpAAEAF1KJFYFi4BETFKfPPnGbG5pbDRyP3rkw4Id4qGhQXYJvb5B4Rj0evwRy4wGiZhiRqQCgR+Q
-        C7/fT27EkCDUE8Hg3btfDvT3q5yB/sePvz4t1IAyLhQK1AK3VtL0NT+yC6C3SidNkdLK4r8JVBPXDBIx
-        ioHKpFOplZUVsaygWZV3Zw2JGE2MRiI9PVdo4iuXL4fDYbixo3Z0IdEm2WrY29ur0iKJmGT0ut0strr6
-        eoNBf/Vqj1gNoX/x4vdAIPCdEsbHx5k6DHXBIiARv22hpyCHh+9ZLOYmJdCHrs7OjVMX+sytmzcbjUbU
-        g+0HxREek+/bt720498z/d8DP/AhHo8LFoGqHBcXFxf7+m45nU6+IBaLYcFOlHw+n9PhYDtQAKyff/ap
-        8EGDRExVw4TfaCc3z2IyUllEm7CzviidOKyiTjVIxLXEO+Ia4eTkL18S37/ZmhCLAAAAAElFTkSuQmCC
-</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>716, 6</value>
+    <value>688, 6</value>
   </data>
   <data name="playlistPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только пресеты, ограниченные плейлистом
+    <value>Щелкните для показа только пресетов, ограниченных плейлистом
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
-  </data>
-  <data name="userPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAABBhJREFUWEftlt9Lm1cYx4cmJvF9jU1tI9pOm8EKmxZWJtVejtYhbjdT1sFir1bo
-        Lrq74o04ElEiikVYWTD/wEJvw0ZvFInEi0mIhIgihpAQEoIhOEQSRHGfLmf+iL4576BYBv2SCxPPeT7P
-        Oef59cHRO9J78KXpfwIuFvey2ez6+nokElmNRDY2Nvi6t7d3eHgoVuiWXvD+/n4ul1teXn7y5IfOjg67
-        /XprS8udzg6+LgWD4FkgluqTLjBG0+m01/vrzZs36ustRqOhtraGD3/UWyx44JmYSCaTpVJJbNAhOZhr
-        5KwvX/5y1WYzGo015wTeam0YHh5OpVIHBwdim0xy8O7u7sLCwo3WlgupZRkMhiuNjV6vN7+9LbbJJAdz
-        joGBb8xms4BoqM5ovH3749XVVZ0XLgHzugRUs91uMNQKgrYURRkdHdnWd2gJeGdnZ2pyUlUVYbuqOHRX
-        1+ebm5tic1VJwJlM5vHjIYtFcs9lEefXmpq4IT0hJgEnk4n+/j6TqU7Ylonw9vl8lBSxX1sScCIef/Dg
-        C1OdXrCqKGNjbh5I7NeW9MTJr7/qN5lMwrBMgF0uV6FQEPu1JQFTOn58+pTyJAzL1KCqsy9ekPpiv7Yk
-        YEz4fHO8nDAsE2UkEAjoSWUJmPikJtxqb6c2CdvaYs1HDkcsFtPTrCRgREbRgvTcNlk35HSyXuysKjm4
-        WCyurPzpuNVepVYjo8Fgt9vn5+f15BKSgxFV0Dc3Z7NdoREJzllRUInn4efPOa7OoUAXmJemH09NTV6/
-        1kROV1RtvKGmOp3fx+Nx/S25GhjfMfTXv8qk036//15XV2OjVWEeMJstFgv509b2ocv1M1QumfUkApJ6
-        cDGYI0JKJBKLi4tut2t0ZCQcDnPhhUKeHuD3//bTs2ffPXo0NOScmZnhX7lcllCgbkSj0fGxsUmPJxQK
-        pVJJPNC6+QvAOE7BevXK39/Xx92qqmptUDs+/eT16z+oJxyFBTjB5TNqUR1pnfulEn+TwXc6O61kfYNK
-        Jx0cGPg9EKCdXxhulWB8jEWj3w4OUgroDW+GK9pOTQ1P29raMj09zYiZz+ePRzv84Ova2prb5Wputh9H
-        AOFmNpuartp4+7VYDLPl9cc6A8bc1tZW78OHZG0ZeVqkE0HU093NaLe0tMSEixgxQd69+5mi1J+PefAE
-        w5e9vZg99rWsM2B8p+0TL+egQvxOt4fBURwOcruNCZBA40eNHW+2YNDjmcC4wPyjM2D8un+/BytiU1Vh
-        Ucu/CmGwp/texWRyAuYqlkMhRgid5vQLg5gNBoOnb/sEzPszPOtvRP9J5MXs7CwpKmAV4InxcV6OkvvW
-        RTy43e7TsX0CJjGymQyJEQ6vvPUPZinjFBkBqwiuy9R78KXpHYGPjv4GjLZM3tx6dkEAAAAASUVORK5C
-        YII=
-</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>686, 6</value>
+    <value>658, 6</value>
   </data>
   <data name="userPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только пресеты пользователя
+    <value>Щелкните для показа только пресетов пользователя
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
-  </data>
-  <data name="customizedPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAABG5JREFUWEftl19IW1ccx4fmj83fxkS7TPtvnVHHqm4P1bF2bambo7UhKJ1SLVbW
-        PSms0IGwktE9BGGi+FAGkz4liEXBl71IHnxbHwZiECFBDBKRiCjBEEQpiv0k55LdxTrM9da97MslXO49
-        93x+53d+53tO3tv/j/Q/+MQkgXd3d1Op5Nra2oraisfjm4nEzs6OAGWVBkPldSDg7+5+2NnRoe71oLPz
-        Z683EolsbW0JpFAazKPx8fH3z5QaDKdOFakserRaLffb2xmbQAqlwRsbG48f/2A0GgrejbRaTVVVZTgc
-        FkihNJip7enpYbSiUTpGi8V6bDESnU5XWFCg0RRWfHRpfm5OIIVywVD7+vomJyf/OLZevBi5cP6cprBQ
-        gOf+HWyxmAOBQDKZfH1sMcSay59oNegIYJI8Nja2vb0tXh9HVHJdbQ1zd9JgytjtvksKi/T6SlfFyYFT
-        qdTi4qLP56utudzQUB+NRqUXGb1DMGKm19fXFyKRYHCKRSs9zUhNMA5IVWKT0egiv9zzRDwXEs2EVAMz
-        uHh8ZWJiwuNx11+50tx8ZzQQWFlZPujSQuqA9/b2KKX+fp/Dbsd0dTptUZG+2GZ7+vQnhp4zViF1wNQR
-        jlFa4mDx0IkQ68hebHv5coycS+1kUgfMsFpbWxirQGbFQmpq+joWi0ntZFIHzAZQXVXJEAUvK6zj3Nmz
-        OStYSB3wXChUXl6GLQueXHZ78czMjNROplyw0Wj87fnzhYUF8nOY0oeKzU15yczPz1/68CLeKGBZEYnT
-        6QyFQlI7mXLBep3us0/r7ty+fbe5+a1Xa0vL948eBaem5GCi+arxll6vE7ysKO/PG+rxL6mdTBK4t7eX
-        4wdNiZHKBE8vBy82TRZJe1tbziIhASMjv3PSYFIFEpF5i9k0ODCQ41lCaTCf/fLsGW7+tjn6W3REcN80
-        NVFKW6mU+F6IIGKxpa6uB2aTSavViuhNJiPpwaLxFqmdTGkw5sIkNTbeKnE4bIerxGH3eDwHqULUIwyv
-        1/txdfWZ0tJKl+vHJ09Ics4ZL6s0GLHGmafZ2dm/Dhc1sry8LO+IgZItZopkEj3inm2YlpFwmHueMNxE
-        IsFWkfxnPUpgBSICYuVQjC0zUBYC/oV3Sq8zog1pGBoc9Ljdfr9/aWkpG7dCcGZSYw+7ujjUMfFms+nm
-        zRvT09M8ZHxEQCZIz6tXf3IWwBuMBgOld+9ea3bKFYLpmqPZaatVlDHVxK5QXlbW1vZtv8/HHjUw8GtH
-        x/2LF87jo8JY+CWC4aEhYqIHheDV1dXvurtZXZl6l4SBYM4mo5Ha5pf7HBPlCZsmmaAHhWDK9erVL3Ra
-        rdTl0UQcnDvFyV4hmOXnclXI7eIoIuUfOJ2sHXpQAqZ08X0Wa37YjGynrdQgtakETFkGg0EqS+osH6X/
-        MPj9uI0SMJ+Njo5i2sxZvhfhDg8Pp5JJJWD8iIPOjevX6+pq872+vHYNz8FGlICZIVwCr6A+8xXmhb8y
-        WUrAKmh//w1bB9mjsWW/yAAAAABJRU5ErkJggg==
-</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>656, 6</value>
+    <value>628, 6</value>
   </data>
   <data name="customizedPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только настроенные пресеты
+    <value>Щелкните для показа только настроенных пресетов
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
-  </data>
-  <data name="predefinedPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAAAxBJREFUWEftl0tLG1EYhkvMdWwuEy8tVKgbbRcKtS0W6p3SC96oui4arCjUXUPT
-        H6C4KO6KgliUSn+BJAuDIi5EUoIlKEpJKIagiFlERBRR7BNn1EQnupm0C/PyEYZvzrzPmTMfOd+5dfyf
-        lAH/M91Y8OHhYSwWC4fDweBv1YUnzvhDkXAoDj46Otrc3Pw+Pv761cuKiufpCJzxhwLrHHxwcOBbWCgo
-        uGcyGfV6XToCZ/yhwDoH7+3tjY19s1osGo1Gq9Ua9HqT0chQVQI3PHHGHwqsc/Du7u7IyIjFfJvbRqOh
-        urqqpeWtWlFTU40nzvhDgaUM5ndycnJNPXk8HovFfD1YFG3z8/PSPVXk8/nsopgBZ8AZsArKgDPgUzCb
-        l3dqamtrK6pSzExPW63xDfcaMDtoe/u7zy6XWuHo6MAzJXh0dFTavOKNgEGfLQhqBW5SI4A/lCQw7Yjb
-        7c6xi1ptFiPSIZzxh5LU+tCAsWM7HB35eXmizSbarFeEIAg6nU7202i4JnNhzKWw4Yw/lKRmD7ECkUjY
-        7/fPzlwlr9c7PDQkmEwyVqPhenjoK3l5hJLwxBn/s3VGMlgS00kUy7K9vb2+vh4MBpeXlwOBwE+fr7+v
-        7wKYDPmlpcDKykooFKKHBUALLbucSmacKgmcqP39fZAet7u7q6uutras7FFpSUlh4f3sbEGfsNRckyFf
-        WlryrLy8vv6N0/lxbm52Y2Pj7HMqKiWYiQ8M9Ofm5giCyWAw8C0pTm2WcvWR5yZj6IuZx907+YODX3CQ
-        vZSUEhwKBh8+KKYXl71PBJdXpF1lhaWAxJgLEyJTXFTEB5K9lJQSzGnnRV2dxWyW3OOvIgj8Bz198rjT
-        4ejp6ZbifWdnVWWl3S7yoow7OQmYeIokNSx7KSklmLL6tbjocrna2lobGxqamhrh/ZiYoMqYE59QErW6
-        urpK89zb+6G5uYmRba2tn5zORb+fU5rspaSUYMRxIxqNRiKRtbU/TJ9vtrOzk3jik0TFUsb8vTMhRkbC
-        YZ7i2cuVnKirwGnVTQMfH/8FKgZ+ymaAsMcAAAAASUVORK5CYII=
-</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>626, 6</value>
+    <value>598, 6</value>
   </data>
   <data name="predefinedPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только стандартные пресеты
+    <value>Щелкните для показа только стандартных пресетов
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
-  <data name="tickedOnlyPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
-  </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>596, 6</value>
+    <value>568, 6</value>
   </data>
   <data name="tickedOnlyPictureBox.ToolTip" xml:space="preserve">
-    <value>Щелкните, чтобы видеть только авто-применяемые пресеты
+    <value>Щелкните для показа только авто-применяемых пресетов
 Щелкните, удерживая клавишу Ctrl, чтобы добавить этот фильтр к существующим или отключить его
 
 Пресеты должны соответствовать ВСЕМ выбранным фильтрам ОДНОВРЕМЕННО</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>552, 4</value>
+    <value>524, 4</value>
   </data>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Открыть быстрые настройки</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>507, 4</value>
+    <value>480, 4</value>
   </data>
   <data name="clearSearchButton.ToolTip" xml:space="preserve">
     <value>Очистить текст поиска</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>467, 23</value>
+    <value>440, 23</value>
   </data>
   <data name="searchTextBox.ToolTip" xml:space="preserve">
     <value>Введите часть имени пресета или просто несколько слов из имени пресета, чтобы отфильтровать список</value>
   </data>
   <data name="filtersPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1165, 31</value>
-  </data>
-  <data name="autoApplyPresetsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>11, 6, 11, 0</value>
+    <value>1169, 31</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1151, 48</value>
+    <value>1153, 48</value>
   </data>
   <data name="autoApplyPresetsLabel.Text" xml:space="preserve">
     <value>Выберите пресет, чтобы изменить его или применить к выбранным трекам. ~Отметьте пресеты, чтобы они автоматически применялись при редактировании/обновлении тегов или при добавлении треков в библиотеку. ~Щелкните здесь, чтобы увидеть только отмеченные пресеты. ~Отмечено для автоматического применения: %%TICKED-PRESETS%%~Пресеты, использующие псевдо-тег &lt;ВСЕ ТЕГИ&gt;, не могут быть отмечены для автоматического применения, и им не могут быть назначены комбинации клавиш~Автоматическое применение пресетов отключено в настройках плагина. </value>
@@ -1080,20 +880,63 @@
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
-  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 84</value>
+  <data name="gotoNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1086, 2</value>
+  </data>
+  <data name="gotoNextPresetButton.ToolTip" xml:space="preserve">
+    <value>Перейти к следующему пресету в цепочке применения</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1113, 2</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.ToolTip" xml:space="preserve">
+    <value>Показывать только пресеты из цепочки применения пресетов/показывать все пресеты</value>
+  </data>
+  <data name="clearNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1140, 2</value>
+  </data>
+  <data name="clearNextPresetButton.ToolTip" xml:space="preserve">
+    <value>Очистить поле поиска следующего применяемого пресета</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>743, 56</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 15</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.Text" xml:space="preserve">
+    <value>Скрытый</value>
+  </data>
+  <data name="hiddenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>722, 55</value>
+  </data>
+  <data name="nextPresetComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 2</value>
+  </data>
+  <data name="nextPresetComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>780, 23</value>
+  </data>
+  <data name="nextPresetComboBox.ToolTip" xml:space="preserve">
+    <value>Введите часть имени пресета или просто несколько слов из имени пресета, чтобы отфильтровать список
+Нажмите клавишу "Вправо", находясь в конце поля, чтобы выбрать пункт выпадающего списка под курсором</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 15</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически применять следующий пресет</value>
   </data>
   <data name="preserveTagValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>756, 2</value>
+    <value>758, 2</value>
   </data>
   <data name="preserveTagValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 23</value>
+    <value>401, 23</value>
   </data>
   <data name="preserveTagValuesTextBox.ToolTip" xml:space="preserve">
     <value>Указанные значения тегов никогда не будут изменяться, независимо от того в каких тегах они встречаются. Разделяйте значения тегов ;;</value>
   </data>
   <data name="labelPreserveTagValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>587, 3</value>
+    <value>589, 3</value>
   </data>
   <data name="labelPreserveTagValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 21</value>
@@ -1105,10 +948,10 @@
     <value>Никогда не изменять эти значения тегов (разделенные ;;), независимо от того, в каких тегах они встречаются</value>
   </data>
   <data name="buttonSelectPreservedTags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>558, 1</value>
+    <value>560, 1</value>
   </data>
   <data name="processPreserveTagsTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 23</value>
+    <value>402, 23</value>
   </data>
   <data name="processPreserveTagsTextBox.ToolTip" xml:space="preserve">
     <value>Обрабатывать только указанные теги (если указаны, иначе - все) ИЛИ всегда пропускать указанные. Разделяйте названия тегов ;
@@ -1125,16 +968,16 @@
 Щелчок по флажкам при нажатой клавише Ctrl в левой части предварительного просмотра добавит/удалит тег, указанный в строке, к списку/из списка обрабатываемых/исключенных тегов</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1161, 27</value>
+    <value>1165, 27</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 29</value>
+    <value>681, 29</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>476, 23</value>
+    <value>478, 23</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>584, 28</value>
+    <value>586, 28</value>
   </data>
   <data name="customText4Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 25</value>
@@ -1146,7 +989,7 @@
     <value>99, 29</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 23</value>
+    <value>477, 23</value>
   </data>
   <data name="customText3Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 25</value>
@@ -1155,13 +998,13 @@
     <value>&lt;Свой текст 3&gt;</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>679, 2</value>
+    <value>681, 2</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>476, 23</value>
+    <value>478, 23</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>584, 1</value>
+    <value>586, 1</value>
   </data>
   <data name="customText2Label.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 25</value>
@@ -1173,7 +1016,7 @@
     <value>99, 2</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 23</value>
+    <value>477, 23</value>
   </data>
   <data name="customTextLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 25</value>
@@ -1182,16 +1025,16 @@
     <value>&lt;Свой текст 1&gt;</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1161, 54</value>
+    <value>1165, 54</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>847, 30</value>
+    <value>849, 29</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>310, 23</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>794, 28</value>
+    <value>796, 28</value>
   </data>
   <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 25</value>
@@ -1200,16 +1043,16 @@
     <value>&lt;Тег 6&gt;</value>
   </data>
   <data name="pictureTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>778, 33</value>
+    <value>780, 33</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 30</value>
+    <value>461, 29</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>309, 23</value>
   </data>
   <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>407, 28</value>
+    <value>408, 28</value>
   </data>
   <data name="labelTag5.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 25</value>
@@ -1218,13 +1061,13 @@
     <value>&lt;Тег 5&gt;</value>
   </data>
   <data name="pictureTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>391, 33</value>
+    <value>392, 33</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 30</value>
+    <value>73, 29</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>309, 23</value>
   </data>
   <data name="labelTag4.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 25</value>
@@ -1233,13 +1076,13 @@
     <value>&lt;Тег 4&gt;</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>847, 3</value>
+    <value>849, 2</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>310, 23</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>794, 1</value>
+    <value>796, 1</value>
   </data>
   <data name="labelTag3.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 25</value>
@@ -1248,16 +1091,16 @@
     <value>&lt;Тег 3&gt;</value>
   </data>
   <data name="pictureTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>778, 6</value>
+    <value>780, 6</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>460, 3</value>
+    <value>461, 2</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>309, 23</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>407, 1</value>
+    <value>408, 1</value>
   </data>
   <data name="labelTag2.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 25</value>
@@ -1266,13 +1109,13 @@
     <value>&lt;Тег 2&gt;</value>
   </data>
   <data name="pictureTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>391, 6</value>
+    <value>392, 6</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 3</value>
+    <value>73, 2</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 23</value>
+    <value>309, 23</value>
   </data>
   <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 25</value>
@@ -1284,10 +1127,10 @@
     <value>Этот пресет использует псевдо-тег &lt;ВСЕ ТЕГИ&gt;. БУДЬТЕ ОСТОРОЖНЫ!</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1161, 54</value>
+    <value>1165, 54</value>
   </data>
   <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1034, 34</value>
+    <value>1038, 56</value>
   </data>
   <data name="userPresetLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>124, 15</value>
@@ -1296,10 +1139,10 @@
     <value>Пресет пользователя</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1018, 34</value>
+    <value>1022, 56</value>
   </data>
   <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>855, 34</value>
+    <value>859, 56</value>
   </data>
   <data name="customizedPresetLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 15</value>
@@ -1308,22 +1151,22 @@
     <value>Настроен пользователем</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>839, 34</value>
+    <value>843, 56</value>
   </data>
   <data name="favoriteCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>608, 34</value>
+    <value>608, 56</value>
   </data>
   <data name="favoriteCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 15</value>
+    <value>83, 15</value>
   </data>
   <data name="favoriteCheckBoxLabel.Text" xml:space="preserve">
-    <value>♥ ЛЮБИМЫЙ ПРЕСЕТ</value>
+    <value>♥ ЛЮБИМЫЙ</value>
   </data>
   <data name="favoriteCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>587, 33</value>
+    <value>587, 55</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 34</value>
+    <value>358, 56</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 15</value>
@@ -1332,7 +1175,7 @@
     <value>Применить к проигрываемому треку</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 33</value>
+    <value>332, 55</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>283, 15</value>
@@ -1354,19 +1197,19 @@
 Потребуется заново назначить комбинацию клавиш, если изменится название пресета</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1136, 5</value>
+    <value>1140, 27</value>
   </data>
   <data name="clearIdButton.ToolTip" xml:space="preserve">
     <value>Удалить назначение ID-а функции виртуальных тегов пресету</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>991, 5</value>
+    <value>995, 27</value>
   </data>
   <data name="idTextBox.ToolTip" xml:space="preserve">
     <value>Разрешены только латинские буквы, цифры и символы - : _ .</value>
   </data>
   <data name="idLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 9</value>
+    <value>804, 31</value>
   </data>
   <data name="idLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>177, 15</value>
@@ -1375,10 +1218,10 @@
     <value>ID функции виртуальных тегов</value>
   </data>
   <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 5</value>
+    <value>430, 27</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>362, 23</value>
+    <value>366, 23</value>
   </data>
   <data name="conditionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>394, 15</value>
@@ -1387,10 +1230,10 @@
     <value>Автоматически применять пресет, только если трек есть в плейлисте </value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1118, 58</value>
+    <value>1122, 58</value>
   </data>
   <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1138, 58</value>
+    <value>1142, 58</value>
   </data>
   <data name="descriptionGroupBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 15</value>
@@ -1399,19 +1242,22 @@
     <value>  Описание пресета  </value>
   </data>
   <data name="descriptionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1150, 81</value>
+    <value>1154, 81</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 86</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1165, 277</value>
+    <value>1169, 299</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1131, 88</value>
+    <value>1135, 66</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1151, 108</value>
+    <value>1155, 86</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1165, 385</value>
+    <value>1169, 385</value>
   </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
@@ -1510,7 +1356,7 @@
     <value>Нечетные/четные треки</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1151, 96</value>
+    <value>1155, 97</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 43</value>
@@ -1523,6 +1369,18 @@
   </data>
   <data name="buttonOK.ToolTip" xml:space="preserve">
     <value>Применить пресет к выбранным трекам</value>
+  </data>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>185, 16</value>
+  </data>
+  <data name="buttonClose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 23</value>
+  </data>
+  <data name="buttonClose.Text" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="buttonClose.ToolTip" xml:space="preserve">
+    <value>Есть несохраненные изменения</value>
   </data>
   <data name="buttonSaveClose.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 23</value>
@@ -1545,7 +1403,7 @@
     <value> настройка и применение </value>
   </data>
   <data name="settingsProcessingGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>794, 3</value>
+    <value>798, 3</value>
   </data>
   <data name="settingsProcessingGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>363, 75</value>
@@ -1676,9 +1534,9 @@
     <value>778, 75</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1165, 185</value>
+    <value>1169, 186</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1165, 573</value>
+    <value>1169, 574</value>
   </data>
 </root>

@@ -77,7 +77,7 @@ namespace MusicBeePlugin
             playsPerDayTagListCustom = namesComboBoxes["playsPerDayTagList"];
 
 
-            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
+            ReplaceButtonBitmap(buttonSettings, Gear);
 
             toolTip1.SetToolTip(autoRateAtStartUpCheckBox, MsgThresholdsDescription);
             toolTip1.SetToolTip(autoRateAtStartUpCheckBoxLabel, MsgThresholdsDescription);
@@ -338,7 +338,6 @@ namespace MusicBeePlugin
             int autoRating;
             var playsPerDay = GetPlaysPerDay(currentFile);
 
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (playsPerDay == -1) //-V3024
                 autoRating = SavedSettings.defaultRating;
             else
@@ -558,7 +557,6 @@ namespace MusicBeePlugin
 
                 var playsPerDay = GetPlaysPerDay(currentFile);
 
-                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (playsPerDay != -1) //-V3024
                 {
                     NumberOfFiles++;
@@ -622,7 +620,6 @@ namespace MusicBeePlugin
 
                 SetStatusBarText(AutoRateSbText + AutoRateSbTextCalculatingThresholds + (fileCounter + 1) + "/" + files.Length, false);
 
-                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (playsPerDay != -1) //-V3024
                 {
                     NumberOfFiles++;

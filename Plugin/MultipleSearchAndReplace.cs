@@ -34,7 +34,7 @@ namespace MusicBeePlugin
 
 
         private List<Row> rows = new List<Row>();
-        BindingSource source = new BindingSource();
+        private BindingSource source = new BindingSource();
 
         private MetaDataType sourceTagId;
         private FilePropertyType sourcePropId;
@@ -77,9 +77,9 @@ namespace MusicBeePlugin
 
             buttonLabels[buttonDeleteSaved] = string.Empty;
             buttonDeleteSaved.Text = string.Empty;
-            buttonDeleteSaved.Image = ReplaceBitmap(buttonDeleteSaved.Image, ClearField);
+            ReplaceButtonBitmap(buttonDeleteSaved, ClearField);
 
-            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
+            ReplaceButtonBitmap(buttonSettings, Gear);
 
 
             FillListByTagNames(destinationTagListCustom.Items, false, false, false);
@@ -111,8 +111,8 @@ namespace MusicBeePlugin
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
-                FalseValue = Plugin.ColumnUncheckedState,
-                TrueValue = Plugin.ColumnCheckedState,
+                FalseValue = ColumnUncheckedState,
+                TrueValue = ColumnCheckedState,
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
@@ -455,29 +455,29 @@ namespace MusicBeePlugin
                         var template3 = template[2];
                         var template4 = template[3];
 
-                        if (template1 == Plugin.ColumnCheckedState && template2 == Plugin.ColumnCheckedState) //Regex/case-sensitive
+                        if (template1 == ColumnCheckedState && template2 == ColumnCheckedState) //Regex/case-sensitive
                         {
                             newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, false, out _);
                         }
-                        else if (template1 == Plugin.ColumnCheckedState && template2 == Plugin.ColumnUncheckedState) //Regex/case-insensitive
+                        else if (template1 == ColumnCheckedState && template2 == ColumnUncheckedState) //Regex/case-insensitive
                         {
                             newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, true, out _);
                         }
-                        else if (template1 == Plugin.ColumnCheckedState && template2 == string.Empty) //Regex/case-preserving
+                        else if (template1 == ColumnCheckedState && template2 == string.Empty) //Regex/case-preserving
                         {
                             throw new Exception(@"Unsupported parameter combination: ""Use regexes"" and ""Preserve case""!");
                         }
-                        else if (template1 == Plugin.ColumnUncheckedState && template2 == Plugin.ColumnCheckedState) //Case-sensitive
+                        else if (template1 == ColumnUncheckedState && template2 == ColumnCheckedState) //Case-sensitive
                         {
                             template3 = Regex.Escape(template3);
                             newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, false, out _);
                         }
-                        else if (template1 == Plugin.ColumnUncheckedState && template2 == Plugin.ColumnUncheckedState) //Case-insensitive
+                        else if (template1 == ColumnUncheckedState && template2 == ColumnUncheckedState) //Case-insensitive
                         {
                             template3 = Regex.Escape(template3);
                             newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, true, out _);
                         }
-                        else //if (template1 == Plugin.ColumnUncheckedState && template2 == string.Empty) //Case-preserving
+                        else //if (template1 == ColumnUncheckedState && template2 == string.Empty) //Case-preserving
                         {
                             template3 = Regex.Escape(template3);
                             newDestinationTagValue1 = Replace(currentFile, newDestinationTagValue2, template3, template4, null, out _);
@@ -496,9 +496,9 @@ namespace MusicBeePlugin
                 if (swappedTags.destinationNormalizedTagValue == newDestinationTagValue1 && stripNotChangedLines)
                     continue;
                 else if (swappedTags.destinationNormalizedTagValue == newDestinationTagValue1)
-                    isChecked = Plugin.ColumnUncheckedState;
+                    isChecked = ColumnUncheckedState;
                 else
-                    isChecked = Plugin.ColumnCheckedState;
+                    isChecked = ColumnCheckedState;
 
 
                 Row row = new Row
@@ -543,7 +543,7 @@ namespace MusicBeePlugin
 
                 var isChecked = tags[i][0];
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                 {
                     var currentFile = tags[i][4];
                     var newTag = tags[i][3];
@@ -609,9 +609,9 @@ namespace MusicBeePlugin
                     continue;
 
                 if (state)
-                    rows[0].Checked = Plugin.ColumnUncheckedState;
+                    rows[0].Checked = ColumnUncheckedState;
                 else
-                    rows[0].Checked = Plugin.ColumnCheckedState;
+                    rows[0].Checked = ColumnCheckedState;
             }
 
             int firstRow = previewTable.FirstDisplayedCell.RowIndex;
@@ -630,10 +630,10 @@ namespace MusicBeePlugin
             {
                 var isChecked = previewTable.Rows[e.RowIndex].Cells[0].Value as string;
 
-                if (isChecked == Plugin.ColumnCheckedState)
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
-                else if (isChecked == Plugin.ColumnUncheckedState)
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnCheckedState;
+                if (isChecked == ColumnCheckedState)
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = ColumnUncheckedState;
+                else if (isChecked == ColumnUncheckedState)
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = ColumnCheckedState;
 
                 previewTableFormatRow(previewTable, e.RowIndex);
             }
@@ -645,38 +645,38 @@ namespace MusicBeePlugin
             {
                 var isCheckedRegex = templateTable.Rows[e.RowIndex].Cells[0].Value as string;
 
-                if (isCheckedRegex == Plugin.ColumnCheckedState)
+                if (isCheckedRegex == ColumnCheckedState)
                 {
-                    templateTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
+                    templateTable.Rows[e.RowIndex].Cells[0].Value = ColumnUncheckedState;
                 }
-                else //if (isCheckedRegex == Plugin.ColumnUncheckedState)
+                else //if (isCheckedRegex == ColumnUncheckedState)
                 {
-                    templateTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnCheckedState;
+                    templateTable.Rows[e.RowIndex].Cells[0].Value = ColumnCheckedState;
 
                     var isCheckedStateCasing = templateTable.Rows[e.RowIndex].Cells[1].Value as string;
                     if (isCheckedStateCasing == string.Empty)
-                        templateTable.Rows[e.RowIndex].Cells[1].Value = Plugin.ColumnUncheckedState;
+                        templateTable.Rows[e.RowIndex].Cells[1].Value = ColumnUncheckedState;
                 }
             }
             else if (e.ColumnIndex == 1)
             {
                 var isCheckedStateCasing = templateTable.Rows[e.RowIndex].Cells[1].Value as string;
 
-                if (isCheckedStateCasing == Plugin.ColumnCheckedState)
+                if (isCheckedStateCasing == ColumnCheckedState)
                 {
                     templateTable.Rows[e.RowIndex].Cells[1].Value = string.Empty;
 
                     var isCheckedRegex = templateTable.Rows[e.RowIndex].Cells[0].Value as string;
-                    if (isCheckedRegex == Plugin.ColumnCheckedState)
-                        templateTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
+                    if (isCheckedRegex == ColumnCheckedState)
+                        templateTable.Rows[e.RowIndex].Cells[0].Value = ColumnUncheckedState;
                 }
                 else if (isCheckedStateCasing == string.Empty)
                 {
-                    templateTable.Rows[e.RowIndex].Cells[1].Value = Plugin.ColumnUncheckedState;
+                    templateTable.Rows[e.RowIndex].Cells[1].Value = ColumnUncheckedState;
                 }
-                else //if (isCheckedStateCasing == Plugin.ColumnUncheckedState)
+                else //if (isCheckedStateCasing == ColumnUncheckedState)
                 {
-                    templateTable.Rows[e.RowIndex].Cells[1].Value = Plugin.ColumnCheckedState;
+                    templateTable.Rows[e.RowIndex].Cells[1].Value = ColumnCheckedState;
                 }
             }
         }
@@ -755,7 +755,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != Plugin.ColumnCheckedState)
+            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != ColumnCheckedState)
             {
                 for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {
@@ -877,7 +877,7 @@ namespace MusicBeePlugin
             for (var i = 0; i < templateTable.RowCount; i++)
             {
                 query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value,
-                    templateTable.Rows[i].Cells[0].Value as string == Plugin.ColumnCheckedState, templateTable.Rows[i].Cells[1].Value as string == Plugin.ColumnCheckedState) + "|";
+                    templateTable.Rows[i].Cells[0].Value as string == ColumnCheckedState, templateTable.Rows[i].Cells[1].Value as string == ColumnCheckedState) + "|";
             }
 
             query = query.Remove(query.Length - 1);
@@ -962,8 +962,8 @@ namespace MusicBeePlugin
         {
             templateTable.Rows.Add();
             templateTable.Rows[templateTable.Rows.Count - 1].Cells[4].Value = templateTable.Rows.Count.ToString("D8");
-            templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = Plugin.ColumnUncheckedState;
-            templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = Plugin.ColumnUncheckedState;
+            templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnUncheckedState;
+            templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnUncheckedState;
             templateTable.Rows[templateTable.Rows.Count - 1].Selected = true;
 
 
@@ -1064,29 +1064,29 @@ namespace MusicBeePlugin
                 {
                     pair = query.Substring(2).Split('/');
 
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = Plugin.ColumnCheckedState;
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = Plugin.ColumnCheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnCheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnCheckedState;
                 }
                 else if (query.Length > 0 && query[0] == '*') //Case-insensitive/regexes
                 {
                     pair = query.Substring(1).Split('/');
 
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = Plugin.ColumnCheckedState;
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = Plugin.ColumnUncheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnCheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnUncheckedState;
                 }
                 else if (query.Length > 0 && query[0] == '#') //Case-sensitive
                 {
                     pair = query.Substring(1).Split('/');
 
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = Plugin.ColumnUncheckedState;
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = Plugin.ColumnCheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnUncheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnCheckedState;
                 }
                 else //Case-insensitive
                 {
                     pair = query.Split('/');
 
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = Plugin.ColumnUncheckedState;
-                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = Plugin.ColumnUncheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnUncheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnUncheckedState;
                 }
 
                 pair[0] = pair[0].Replace(@"\#", "#").Replace(@"\L", "/").Replace(@"\V", "|").Replace(@"\X", "*").Replace(@"\\", @"\");

@@ -97,9 +97,9 @@ namespace MusicBeePlugin
 
 
 
-    public class DataGridViewBoundColumns
+    internal class DataGridViewBoundColumns
     {
-        internal List<object> Columns { get; set; }
+        public List<object> Columns { get; set; }
 
         public DataGridViewBoundColumns()
         {
@@ -110,40 +110,40 @@ namespace MusicBeePlugin
         {
             Columns = new List<object>();
             for (int i = 0; i < columnCount; i++)
-                Columns.Add(null);
+                Columns.Add(new object());
         }
 
-        internal DataGridViewBoundColumns CreateColumns(int columnCount)
+        public DataGridViewBoundColumns CreateColumns(int columnCount)
         {
             Columns = new List<object>();
-            this.AddColumns(columnCount);
+            AddColumns(columnCount);
             return this;
         }
 
-        internal DataGridViewBoundColumns AddColumns(int columnCount)
+        public DataGridViewBoundColumns AddColumns(int columnCount)
         {
             for (int i = 0; i < columnCount; i++)
-                Columns.Add(null);
+                Columns.Add(new object());
 
             return this;
         }
 
-        internal DataGridViewBoundColumns AddColumns(IEnumerable<object> columns)
+        public DataGridViewBoundColumns AddColumns(IEnumerable<object> columns)
         {
             Columns.AddRange(columns);
             return this;
         }
     }
 
-    public class DataGridViewBoundColumnList<T> : DataGridViewBoundList<T>
+    internal class DataGridViewBoundColumnList<T> : DataGridViewBoundList<T>
         where T : DataGridViewBoundColumns, new()
     {
-        public DataGridViewBoundColumnList(List<string> columnNames = null) : base("Columns", columnNames)
+        public DataGridViewBoundColumnList(List<string> columnNames) : base("Columns", columnNames)
         {
             //Nothing new...
         }
 
-        internal void Sort(Plugin.DataGridViewBoundColumnsComparer comparer)
+        public void Sort(Plugin.DataGridViewBoundColumnsComparer comparer)
         {
             Sort((x, y) => comparer.Compare(x, y));
         }
@@ -158,7 +158,7 @@ namespace MusicBeePlugin
         internal DataGridViewBoundColumnList<T> CreateRows(int columnCount, int rowCount)
         {
             for (int i = 0; i < rowCount; i++)
-                base.Add(new T().CreateColumns(columnCount) as T);
+                base.Add(new T().CreateColumns(columnCount) as T);//-------
 
             return this;
         }
@@ -166,22 +166,22 @@ namespace MusicBeePlugin
         internal DataGridViewBoundColumnList<T> AddRows(int columnCount, int rowCount)
         {
             for (int i = 0; i < rowCount; i++)
-                base.Add(new T().AddColumns(columnCount) as T);
+                base.Add(new T().AddColumns(columnCount) as T);//-------
 
             return this;
         }
 
         internal DataGridViewBoundColumnList<T> AddRow(IEnumerable<object> tags)
         {
-            base.Add(new T().AddColumns(tags) as T);
+            base.Add(new T().AddColumns(tags) as T);//-------
 
             return this;
         }
     }
 
-    public class DataGridViewBoundList<T> : List<T>, ITypedList
+    internal class DataGridViewBoundList<T> : List<T>, ITypedList
     {
-        internal List<string> ColumnNames;
+        public List<string> ColumnNames;
         private string listPropertyName;
 
         public DataGridViewBoundList(string listPropertyName, List<string> columnNames)
@@ -189,36 +189,34 @@ namespace MusicBeePlugin
             if (listPropertyName == null)
                 throw new Exception("List property name must not be null!");
 
-            //if (columnNames != null && columnNames.Count == 0)
-            //    throw new Exception("Column names count must be positive number!");
+            if (columnNames != null && columnNames.Count == 0)
+                throw new Exception("Column names count must be positive number!");
 
             this.listPropertyName = listPropertyName;
 
             if (columnNames != null)
                 this.ColumnNames = columnNames;
-            else
-                this.ColumnNames = new List<string>();
         }
 
         public PropertyDescriptorCollection GetItemProperties(PropertyDescriptor[] listAccessors)
         {
             var origProps = TypeDescriptor.GetProperties(typeof(T));
             List<PropertyDescriptor> newProps = new List<PropertyDescriptor>();
-            PropertyDescriptor listProp = null;
+            PropertyDescriptor doThisLast = null;
             Type propType = typeof(object);
 
             foreach (PropertyDescriptor prop in origProps)
             {
-                if (prop.Name == listPropertyName)
-                    listProp = prop;
+                if (prop.Name == listPropertyName) //-------------
+                    doThisLast = prop;
                 else
                     newProps.Add(prop);
             }
 
-            if (listProp != null)
+            if (doThisLast != null)
             {
                 for (int i = 0; i < ColumnNames.Count; i++)
-                    newProps.Add(new ListItemDescriptor(listProp, ColumnNames[i], i, propType));
+                    newProps.Add(new ListItemDescriptor(doThisLast, ColumnNames[i], i, propType));
             }
 
             return new PropertyDescriptorCollection(newProps.ToArray());
@@ -226,7 +224,7 @@ namespace MusicBeePlugin
 
         public string GetListName(PropertyDescriptor[] listAccessors)
         {
-            return listPropertyName;
+            return "";
         }
     }
 
@@ -238,7 +236,7 @@ namespace MusicBeePlugin
         private readonly Type type;
         private readonly int index;
 
-        public ListItemDescriptor(PropertyDescriptor tail, string name, int index, Type type) : base(name == null ? index.ToString() : name, nix)
+        public ListItemDescriptor(PropertyDescriptor tail, string name, int index, Type type) : base(name == null ? index.ToString() : name, nix) //-------
         {
             this.tail = tail;
             this.type = type;

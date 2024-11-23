@@ -126,7 +126,7 @@
     <value>4, 84</value>
   </data>
   <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 0, 5, 5</value>
+    <value>4, 0, 4, 4</value>
   </data>
   <data name="splitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
@@ -138,6 +138,286 @@
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="gotoNextPresetButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="gotoNextPresetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="gotoNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>896, 2</value>
+  </data>
+  <data name="gotoNextPresetButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 4, 3</value>
+  </data>
+  <data name="gotoNextPresetButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="gotoNextPresetButton.TabIndex" type="System.Int32, mscorlib">
+    <value>170</value>
+  </data>
+  <data name="gotoNextPresetButton.Text" xml:space="preserve">
+    <value>☛</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>36, 9</value>
+  </metadata>
+  <data name="gotoNextPresetButton.ToolTip" xml:space="preserve">
+    <value>Go to next presets from the preset execution chain</value>
+  </data>
+  <data name="&gt;&gt;gotoNextPresetButton.Name" xml:space="preserve">
+    <value>gotoNextPresetButton</value>
+  </data>
+  <data name="&gt;&gt;gotoNextPresetButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gotoNextPresetButton.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;gotoNextPresetButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>923, 2</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 4, 3</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.TabIndex" type="System.Int32, mscorlib">
+    <value>169</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.ToolTip" xml:space="preserve">
+    <value>Show only presets from the preset execution chain/Show all presets</value>
+  </data>
+  <data name="&gt;&gt;showOnlyChainedPresetsButton.Name" xml:space="preserve">
+    <value>showOnlyChainedPresetsButton</value>
+  </data>
+  <data name="&gt;&gt;showOnlyChainedPresetsButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;showOnlyChainedPresetsButton.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;showOnlyChainedPresetsButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="clearNextPresetButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="clearNextPresetButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="clearNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>950, 2</value>
+  </data>
+  <data name="clearNextPresetButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 3, 6, 3</value>
+  </data>
+  <data name="clearNextPresetButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="clearNextPresetButton.TabIndex" type="System.Int32, mscorlib">
+    <value>168</value>
+  </data>
+  <data name="clearNextPresetButton.Text" xml:space="preserve">
+    <value>❌</value>
+  </data>
+  <data name="clearNextPresetButton.ToolTip" xml:space="preserve">
+    <value>Clear search next executed preset field</value>
+  </data>
+  <data name="&gt;&gt;clearNextPresetButton.Name" xml:space="preserve">
+    <value>clearNextPresetButton</value>
+  </data>
+  <data name="&gt;&gt;clearNextPresetButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clearNextPresetButton.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;clearNextPresetButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>622, 56</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 0, 0</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 15</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>167</value>
+  </data>
+  <data name="hiddenCheckBoxLabel.Text" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBoxLabel.Name" xml:space="preserve">
+    <value>hiddenCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBoxLabel.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="hiddenCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="hiddenCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="hiddenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>601, 55</value>
+  </data>
+  <data name="hiddenCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 3, 4, 3</value>
+  </data>
+  <data name="hiddenCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="hiddenCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>166</value>
+  </data>
+  <data name="hiddenCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBox.Name" xml:space="preserve">
+    <value>hiddenCheckBox</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="nextPresetComboBox.AccessibleName" xml:space="preserve">
+    <value>filtered</value>
+  </data>
+  <data name="nextPresetComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="nextPresetComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>305, 2</value>
+  </data>
+  <data name="nextPresetComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 6, 3</value>
+  </data>
+  <data name="nextPresetComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>585, 23</value>
+  </data>
+  <data name="nextPresetComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>165</value>
+  </data>
+  <data name="nextPresetComboBox.ToolTip" xml:space="preserve">
+    <value>Type part of the preset name or just some words from the preset name to filter the list
+Hit "Right" key to select the drop-down item under cursor</value>
+  </data>
+  <data name="&gt;&gt;nextPresetComboBox.Name" xml:space="preserve">
+    <value>nextPresetComboBox</value>
+  </data>
+  <data name="&gt;&gt;nextPresetComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nextPresetComboBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;nextPresetComboBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 6</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 0, 0</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>269, 15</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>164</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto-execute next preset on this preset execution</value>
+  </data>
+  <data name="nextPresetCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Автоматически применять следующий пресет при применении этого пресета</value>
+  </data>
+  <data name="&gt;&gt;nextPresetCheckBoxLabel.Name" xml:space="preserve">
+    <value>nextPresetCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;nextPresetCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nextPresetCheckBoxLabel.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;nextPresetCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="nextPresetCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nextPresetCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="nextPresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 6</value>
+  </data>
+  <data name="nextPresetCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
+  <data name="nextPresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="nextPresetCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>163</value>
+  </data>
+  <data name="nextPresetCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;nextPresetCheckBox.Name" xml:space="preserve">
+    <value>nextPresetCheckBox</value>
+  </data>
+  <data name="&gt;&gt;nextPresetCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nextPresetCheckBox.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;nextPresetCheckBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="tableLayoutPanel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -148,20 +428,17 @@
     <value>Left, Right</value>
   </data>
   <data name="preserveTagValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>634, 2</value>
+    <value>636, 2</value>
   </data>
   <data name="preserveTagValuesTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="preserveTagValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>331, 23</value>
+    <value>333, 23</value>
   </data>
   <data name="preserveTagValuesTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>36, 9</value>
-  </metadata>
   <data name="preserveTagValuesTextBox.ToolTip" xml:space="preserve">
     <value>Any tag value, which equals to one of typed in this field values, won't be changed. Separate tag values by ;;</value>
   </data>
@@ -187,7 +464,7 @@
     <value>NoControl</value>
   </data>
   <data name="labelPreserveTagValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>520, 3</value>
+    <value>522, 3</value>
   </data>
   <data name="labelPreserveTagValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 0, 3</value>
@@ -229,7 +506,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSelectPreservedTags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 1</value>
+    <value>493, 1</value>
   </data>
   <data name="buttonSelectPreservedTags.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -268,7 +545,7 @@
     <value>4, 1, 4, 1</value>
   </data>
   <data name="processPreserveTagsTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 23</value>
+    <value>335, 23</value>
   </data>
   <data name="processPreserveTagsTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -332,7 +609,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 163</value>
+    <value>3, 185</value>
   </data>
   <data name="tableLayoutPanel3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 1</value>
@@ -341,7 +618,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>971, 27</value>
+    <value>975, 27</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -356,7 +633,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>8</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="preserveTagValuesTextBox" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelPreserveTagValues" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="buttonSelectPreservedTags" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="processPreserveTagsTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonProcessPreserveTags" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,150,Percent,50,AutoSize,0,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -371,13 +648,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 29</value>
+    <value>592, 29</value>
   </data>
   <data name="customText4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 23</value>
+    <value>377, 23</value>
   </data>
   <data name="customText4Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -404,7 +681,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 28</value>
+    <value>491, 28</value>
   </data>
   <data name="customText4Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
@@ -443,7 +720,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 23</value>
+    <value>376, 23</value>
   </data>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -503,13 +780,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>590, 2</value>
+    <value>592, 2</value>
   </data>
   <data name="customText2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 23</value>
+    <value>377, 23</value>
   </data>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -536,7 +813,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 1</value>
+    <value>491, 1</value>
   </data>
   <data name="customText2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
@@ -575,7 +852,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 23</value>
+    <value>376, 23</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -632,7 +909,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>7</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 109</value>
+    <value>3, 131</value>
   </data>
   <data name="tableLayoutPanel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -641,7 +918,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>971, 54</value>
+    <value>975, 54</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -656,7 +933,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>9</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="customText4Box" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText4Label" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText3Label" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customText2Box" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText2Label" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customTextLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,50,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -671,7 +948,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>720, 30</value>
+    <value>724, 30</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -704,7 +981,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>666, 28</value>
+    <value>670, 28</value>
   </data>
   <data name="labelTag6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -740,7 +1017,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>650, 33</value>
+    <value>654, 33</value>
   </data>
   <data name="pictureTag6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -770,13 +1047,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>397, 30</value>
+    <value>399, 30</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 23</value>
+    <value>245, 23</value>
   </data>
   <data name="parameterTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -803,7 +1080,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 28</value>
+    <value>345, 28</value>
   </data>
   <data name="labelTag5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -839,7 +1116,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 33</value>
+    <value>329, 33</value>
   </data>
   <data name="pictureTag5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -875,7 +1152,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 23</value>
+    <value>245, 23</value>
   </data>
   <data name="parameterTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -968,7 +1245,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>720, 3</value>
+    <value>724, 3</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -1001,7 +1278,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>666, 1</value>
+    <value>670, 1</value>
   </data>
   <data name="labelTag3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -1037,7 +1314,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>650, 6</value>
+    <value>654, 6</value>
   </data>
   <data name="pictureTag3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1067,13 +1344,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>397, 3</value>
+    <value>399, 3</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 23</value>
+    <value>245, 23</value>
   </data>
   <data name="parameterTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1100,7 +1377,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 1</value>
+    <value>345, 1</value>
   </data>
   <data name="labelTag2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -1136,7 +1413,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>327, 6</value>
+    <value>329, 6</value>
   </data>
   <data name="pictureTag2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1172,7 +1449,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 23</value>
+    <value>245, 23</value>
   </data>
   <data name="parameterTagList.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1265,7 +1542,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>17</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 53</value>
+    <value>3, 75</value>
   </data>
   <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1274,7 +1551,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>971, 54</value>
+    <value>975, 54</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1289,7 +1566,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>10</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="parameterTag6List" Row="1" RowSpan="1" Column="8" ColumnSpan="1" /&gt;&lt;Control Name="labelTag6" Row="1" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag6" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag5List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="labelTag5" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag5" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag4List" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelTag4" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag4" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag3List" Row="0" RowSpan="1" Column="8" ColumnSpan="1" /&gt;&lt;Control Name="labelTag3" Row="0" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag3" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag2List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="labelTag2" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag2" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="parameterTagList" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelTag" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,33,33334,AutoSize,0,AutoSize,0,Percent,33,33334,AutoSize,0,AutoSize,0,Percent,33,33332" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -1304,7 +1581,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>878, 34</value>
+    <value>882, 56</value>
   </data>
   <data name="userPresetLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 6, 0</value>
@@ -1328,7 +1605,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;userPresetLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>11</value>
   </data>
   <data name="userPresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1337,7 +1614,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>862, 34</value>
+    <value>866, 56</value>
   </data>
   <data name="userPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 3, 4, 3</value>
@@ -1361,7 +1638,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;userPresetPictureBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>12</value>
   </data>
   <data name="customizedPresetLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1373,7 +1650,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>714, 34</value>
+    <value>718, 56</value>
   </data>
   <data name="customizedPresetLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1397,7 +1674,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;customizedPresetLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>13</value>
   </data>
   <data name="customizedPresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1406,7 +1683,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>698, 34</value>
+    <value>702, 56</value>
   </data>
   <data name="customizedPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1430,7 +1707,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;customizedPresetPictureBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>14</value>
   </data>
   <data name="favoriteCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1439,19 +1716,19 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="favoriteCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>521, 34</value>
+    <value>498, 56</value>
   </data>
   <data name="favoriteCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
   </data>
   <data name="favoriteCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>109, 15</value>
+    <value>68, 15</value>
   </data>
   <data name="favoriteCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="favoriteCheckBoxLabel.Text" xml:space="preserve">
-    <value>♥ FAVORITE PRESET</value>
+    <value>♥ FAVORITE</value>
   </data>
   <data name="&gt;&gt;favoriteCheckBoxLabel.Name" xml:space="preserve">
     <value>favoriteCheckBoxLabel</value>
@@ -1463,7 +1740,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;favoriteCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>15</value>
   </data>
   <data name="favoriteCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1472,7 +1749,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="favoriteCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>500, 33</value>
+    <value>477, 55</value>
   </data>
   <data name="favoriteCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 3, 4, 3</value>
@@ -1496,7 +1773,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;favoriteCheckBox.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>16</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1505,7 +1782,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>314, 34</value>
+    <value>314, 56</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1532,7 +1809,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;applyToPlayingTrackCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>17</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1541,7 +1818,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 33</value>
+    <value>288, 55</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 3, 4, 3</value>
@@ -1568,7 +1845,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;applyToPlayingTrackCheckBox.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>18</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1577,7 +1854,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 34</value>
+    <value>32, 56</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1608,7 +1885,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>19</value>
   </data>
   <data name="assignHotkeyCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1617,7 +1894,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>NoControl</value>
   </data>
   <data name="assignHotkeyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 33</value>
+    <value>8, 55</value>
   </data>
   <data name="assignHotkeyCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1647,7 +1924,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBox.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>20</value>
   </data>
   <data name="clearIdButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1656,7 +1933,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>946, 5</value>
+    <value>950, 27</value>
   </data>
   <data name="clearIdButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 6, 3</value>
@@ -1683,13 +1960,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;clearIdButton.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>21</value>
   </data>
   <data name="idTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>801, 5</value>
+    <value>805, 27</value>
   </data>
   <data name="idTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1713,7 +1990,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;idTextBox.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>22</value>
   </data>
   <data name="idLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1725,7 +2002,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="idLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>624, 9</value>
+    <value>628, 31</value>
   </data>
   <data name="idLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>20, 0, 0, 0</value>
@@ -1749,19 +2026,19 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;idLabel.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>23</value>
   </data>
   <data name="playlistComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 5</value>
+    <value>338, 27</value>
   </data>
   <data name="playlistComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 23</value>
+    <value>266, 23</value>
   </data>
   <data name="playlistComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1776,7 +2053,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;playlistComboBox.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>24</value>
   </data>
   <data name="conditionCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1785,7 +2062,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="conditionCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 9</value>
+    <value>32, 31</value>
   </data>
   <data name="conditionCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1809,7 +2086,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>25</value>
   </data>
   <data name="conditionCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1818,7 +2095,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="conditionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 9</value>
+    <value>8, 31</value>
   </data>
   <data name="conditionCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1842,7 +2119,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionCheckBox.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>26</value>
   </data>
   <data name="descriptionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1869,7 +2146,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>Vertical</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>929, 56</value>
+    <value>933, 56</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1899,7 +2176,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>949, 56</value>
+    <value>953, 56</value>
   </data>
   <data name="textBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1924,6 +2201,9 @@ You will need to reassign hotkey if the preset name is changed</value>
   </data>
   <data name="descriptionGroupBoxLabel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="descriptionGroupBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="descriptionGroupBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, -1</value>
@@ -1950,7 +2230,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>1</value>
   </data>
   <data name="descriptionGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 191</value>
+    <value>7, 213</value>
   </data>
   <data name="descriptionGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1959,7 +2239,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>6, 0, 6, 7</value>
   </data>
   <data name="descriptionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>961, 79</value>
+    <value>965, 79</value>
   </data>
   <data name="descriptionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1974,16 +2254,16 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;descriptionGroupBox.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>27</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 108</value>
+    <value>0, 88</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 277</value>
+    <value>979, 297</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2022,7 +2302,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>True</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>941, 88</value>
+    <value>945, 68</value>
   </data>
   <data name="presetList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2049,7 +2329,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>961, 108</value>
+    <value>965, 88</value>
   </data>
   <data name="listBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2079,7 +2359,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 385</value>
+    <value>979, 385</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -2406,7 +2686,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>961, 101</value>
+    <value>965, 96</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2478,10 +2758,49 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>989, 663</value>
+    <value>987, 661</value>
   </data>
   <data name="filtersPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="hiddenPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="hiddenPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="hiddenPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>714, 6</value>
+  </data>
+  <data name="hiddenPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
+  <data name="hiddenPictureBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 19</value>
+  </data>
+  <data name="hiddenPictureBox.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
+    <value>Zoom</value>
+  </data>
+  <data name="hiddenPictureBox.TabIndex" type="System.Int32, mscorlib">
+    <value>139</value>
+  </data>
+  <data name="hiddenPictureBox.ToolTip" xml:space="preserve">
+    <value>Click to show hidden presets either
+Ctrl+click to add/remove this filter to/from existing ones
+
+Presets must meet ALL checked filters SIMULTANEOUSLY</value>
+  </data>
+  <data name="&gt;&gt;hiddenPictureBox.Name" xml:space="preserve">
+    <value>hiddenPictureBox</value>
+  </data>
+  <data name="&gt;&gt;hiddenPictureBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hiddenPictureBox.Parent" xml:space="preserve">
+    <value>filtersPanel</value>
+  </data>
+  <data name="&gt;&gt;hiddenPictureBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="filterComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2510,8 +2829,11 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="filterComboBox.Items7" xml:space="preserve">
     <value>Hotkey assigned</value>
   </data>
+  <data name="filterComboBox.Items8" xml:space="preserve">
+    <value>Hidden</value>
+  </data>
   <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>781, 4</value>
+    <value>786, 4</value>
   </data>
   <data name="filterComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 6, 3</value>
@@ -2538,36 +2860,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;filterComboBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="uncheckAllFiltersPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAAA0ZJREFUWEftl99L21AUx8dcW83U1qcZVzc7+zut+xtk7mlS9uKQYcH9NRPLSkHp
-        8LmUhA1lVPTBYgktLaXF/2C+iNSHlVIoZaEg3Te9acw0qTWNHQO/HMrN5Z7zyb09uffcR+1/pAfw0HQF
-        brVatVrt7Ozs9B6EsAgOhARTguv1+s7O1/eh0NulJcMtFArF43EgJJgSfHFx8Wl9fXJi3GI2G24IGw6H
-        K5WKBFOCz8/PP66ujo5aTCYTRY1N2axTU7ZBzWalKAoBEfbDygoWXIKpgqmxsUgkkstmC4UCfrNZHpbP
-        5/F4qzCMjJfcc7lYLIZp9AW2Wid3d78LgoBcQCfHccVisVqtXl5eSkM1hAG1arVUKrEsC0e4t1rC/n4K
-        AfsF7+3tNptN9ESjX2iaZhgmk8kgLXuwRWqtxvN8MMDQ9HRkcxPuCHJncKPR+MZxMzSN1Bi1WNwuJ6/N
-        lqlejweD4QI2m0w2mw094JOT8kIwiEBPRkYQzON28bwKm1DxvxIqBuM3wDDlckkPWBB+y5PAHCS2x40e
-        JbtLzfq8ElX5ikgUHWBBuYBdtgVtmU0GIIF9Xq/qwiC79IDRSUIr2QBgcpgi+iF8MIzfp0qFu34wpMH2
-        HhwcHB4eMn6/FhUaCAypsh1zLx2OuR5UaFAwpGC7CVs2LSpkABhCUOxfqVTqxawdvMcdoTFrt6dSP1S3
-        tv8ZjKDKpQZXtntcagVVTC4Cez5Dw9CQ2OLeYmhyESp2RLI3EYxz/hVOMBgaXTb2luv7mn6wFjV9dPSr
-        o3Q63YOtE9ylSvuwkkpSCULj+PjY6ZzvsPFp/bWn6gOLh0QPKvFCA8PAdjmdN9l4+zuDO8fiyesF8VjU
-        ohLdZMMlGAiUy2Wd5zHHsTjPxTJRm0p0jU0KgUQioQdMSp9IZJOefub3eXtQiWQ2jg24bGx8hrue0gd/
-        D1IDnSybRL3Ym0pE2KgMk8kEHOF+t+RCeRuLRVGqol4U69V8DoZweLxVGEbGwxGPeOPt7a1+y9tOQU91
-        CvqBZbM9vbWgl68wZrPJcJsYHw+vralfYXCjwr1qefndm8VFww1ht7e21C9tSASkBlbj9PSn4YawCC7v
-        /9AVeMh6AA9J7fYf3xelcBWJgwsAAAAASUVORK5CYII=
-</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>737, 6</value>
+    <value>742, 6</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2594,38 +2896,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;uncheckAllFiltersPictureBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="hotkeyPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="hotkeyPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAAA7pJREFUWEftlt1L01EYx8Ntbm4L21a+pJHrH+jFUDJ8w8gQ7ELxhUBMsgsxMVBU
-        CGWIf4DXUhiJeJ8IkmwIIoTdhAwmY7tQRBFFJiIOMeyz/Q4jf26/l0V545dzsXPO83y/e57fOc95rp1d
-        Eq6EteNXHGKiH2kKR6PR3d3dSGT/5ORELOlEmsJ7e3sfJyampr7s7++LJZ1IR5gMB4PB2trnL+vrw+GQ
-        WNWJdISPj499Pm9Ozq38vNylpSXSLjb0IB1hvu7AQL/NarXZrMPDH0i72NAD3cLkeW1traTksclkyjSZ
-        npaVkfY0jrduYfL8bX7e6XAYDBkMl8vp9XpZFNuaoVt4Z2fnfW+v1ZqVEQc/+vv6SL7Y1gx9wqQ0EAg8
-        fHCfPEvC/CgufkTy9WZbn/DR0dHs7Ncb2dkGSTYjlm2H48bc3JzebJ8TxpmCsLm5ubGxnnT4/auv29uz
-        sixCNg6mbzo6/H6/zDgxIIRW9s/OCRPQ+Pj4287O5uamxoaGi6Ou7kVebo7JaBSacTBlkS2ZsTSgghBa
-        yIVMHPKIV1d/1tRUO50OTo3FbJaNzExUzqlKYJEtmTEDEqgghFYpYg5IJBIhaU1NjXa7XRaZXuAOCRFD
-        CK3s9CU5XOQkHA6PjIy4XC7iEDQ6gSPuHo8HKlmSJSQRBjx2W1tb09PTbneRxWLm6GoHxrjcc7tnZmYg
-        SfVuJhcGp6enFOHl5eWysid8KqNRkzhmGFNHccQdEkF3ASmFAV/l4OCAitHe1ma321Q/OQbX7Xbu21og
-        gKNySVESlsBphKi7q4tDLRRSAIN33d1UMdkBTgp1YcCn6u3pybKcqxsXgQFlHGPhpgh1YTJGEKXxd1Ao
-        pAAGpaUlGuu2unA0eszD53LG3kFlxF5Jp8Pn9WrpSdSFefIGBwfoNwR9HCaTkTvDkJ04zIYGB7W8kurC
-        NBjcKJoNiTp2Tc3mgtv5Q0NDvMS0XUwTyUj0JMI5NVSESdri4iJthkRNoNyrZzU1iz7fRgzrCwsLFRXl
-        dpuNLQwwu+ly4aKabRVhigDtHE2d0WCQAh0bGw2FQoeHh5wgwH0lPo9nJD8/Two93gEOq3aAKsJoVFaU
-        U4yIqbqqkq52e3tbVgWZspgIHeOqykocxXYKKAmTrpWV7+6iu3cKC8dGR0PBYKp69EfonsLCAir8j5UV
-        5WwrCVOAJic/vWptTRroRUihc/daW1o+T04q1y+ViAmCu6FaeBOQQscFx/QjhkWCmGuGcPvLR+If4Ur4
-        v+GShM/OfgN2qfNxBI6QuAAAAABJRU5ErkJggg==
-</value>
   </data>
   <data name="hotkeyPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>695, 6</value>
+    <value>685, 6</value>
   </data>
   <data name="hotkeyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2655,48 +2935,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;hotkeyPictureBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="functionIdPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="functionIdPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        +HrxXyM+O/sbD02llAoUHMcAAAAASUVORK5CYII=
-</value>
   </data>
   <data name="functionIdPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>665, 6</value>
+    <value>655, 6</value>
   </data>
   <data name="functionIdPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2726,39 +2974,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;functionIdPictureBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="playlistPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="playlistPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAABBZJREFUWEftlt9Lm1cYx4fGJBpNzDajaXJhqlsH22htS0zXmiJqV2pvqpSFrqP/
-        worDhQVGFIWw4S471n9gvZIRSBCDXsqoBCUoBkkISlBCQolIMIjiPutJXzhhFXam2U2/HA6vz6t+3+fX
-        93neO/mf8I64ZpCIj4+Pi8ViJpNeW1tLp9M8Y6m8O2tIxDDF5udveDx2e0dvr3tubq5YfIX96OioVCrx
-        9pUq9vf3Dw8PBYuARJzJZL644TEaDTpdPbfbfR2/sUM5Ozs7PT39oxKCweCvz57lcruCRUAiJsL4Cmtd
-        XR13u82WSCSwZ7Pb9+8Pt1osJlOTwmk2mVwuV3JjQ7AIVHmcJs4Vjw2G69euCY9TqZTX26dvaOCD1GCz
-        2eLxZcEi8A859nh6O9rbyXE0GiU92Hd3d0dHR/hjqxLet1o/uXRJ+KBBIq5Udbq6qimNra2t1dXVl0pY
-        Xn5JzIQPGiTiWqKa+ODgoFDIZ7PZfD7Pc8V6DpCIadbNzc2xsbE7d4aePv02mUxiqbw7a0jEOOrzfWVu
-        aTYajdwPH45ub29jJ8e0OGW5pIQ/l5bw4bQcr6+vOxwXdDodDcBtt9upMuxU9cgIVd1mtbYqnNdV/XE6
-        nRIsAhLxZjL5UXd3w+t+5e666OJLsZ97H+dzuZmZnzvabRazmV/9KRTK5XLYSQHKZW1FuVTQ3Gy6iHIl
-        365c6PjOzs7CwsIvMzOx2DzPh+Uydho6HP6D75icmFA4U5OTz5//JnzQIBEDFKNcLtNI3NpMZDod/Lfp
-        VCqdOp0AZLDSRdwa8XlADnW5THij0QjBiUQipBa/K+/OGhIxaQiFQra2NnNLS9uHH0xNTYnE4D1Chnoj
-        L2rAH8RAsAhIxDRPd1fXm3bSuVydohRh9fu/93q9DC6Fw6gdefBAaJEGiRgBcTodmoBceCMgyNbg4EBT
-        UyPfpAAEAF1KJFYFi4BETFKfPPnGbG5pbDRyP3rkw4Id4qGhQXYJvb5B4Rj0evwRy4wGiZhiRqQCgR+Q
-        C7/fT27EkCDUE8Hg3btfDvT3q5yB/sePvz4t1IAyLhQK1AK3VtL0NT+yC6C3SidNkdLK4r8JVBPXDBIx
-        ioHKpFOplZUVsaygWZV3Zw2JGE2MRiI9PVdo4iuXL4fDYbixo3Z0IdEm2WrY29ur0iKJmGT0ut0strr6
-        eoNBf/Vqj1gNoX/x4vdAIPCdEsbHx5k6DHXBIiARv22hpyCHh+9ZLOYmJdCHrs7OjVMX+sytmzcbjUbU
-        g+0HxREek+/bt720498z/d8DP/AhHo8LFoGqHBcXFxf7+m45nU6+IBaLYcFOlHw+n9PhYDtQAKyff/ap
-        8EGDRExVw4TfaCc3z2IyUllEm7CzviidOKyiTjVIxLXEO+Ia4eTkL18S37/ZmhCLAAAAAElFTkSuQmCC
-</value>
   </data>
   <data name="playlistPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 6</value>
+    <value>625, 6</value>
   </data>
   <data name="playlistPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2788,40 +3013,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;playlistPictureBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="userPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="userPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAABBhJREFUWEftlt9Lm1cYx4cmJvF9jU1tI9pOm8EKmxZWJtVejtYhbjdT1sFir1bo
-        Lrq74o04ElEiikVYWTD/wEJvw0ZvFInEi0mIhIgihpAQEoIhOEQSRHGfLmf+iL4576BYBv2SCxPPeT7P
-        Oef59cHRO9J78KXpfwIuFvey2ez6+nokElmNRDY2Nvi6t7d3eHgoVuiWXvD+/n4ul1teXn7y5IfOjg67
-        /XprS8udzg6+LgWD4FkgluqTLjBG0+m01/vrzZs36ustRqOhtraGD3/UWyx44JmYSCaTpVJJbNAhOZhr
-        5KwvX/5y1WYzGo015wTeam0YHh5OpVIHBwdim0xy8O7u7sLCwo3WlgupZRkMhiuNjV6vN7+9LbbJJAdz
-        joGBb8xms4BoqM5ovH3749XVVZ0XLgHzugRUs91uMNQKgrYURRkdHdnWd2gJeGdnZ2pyUlUVYbuqOHRX
-        1+ebm5tic1VJwJlM5vHjIYtFcs9lEefXmpq4IT0hJgEnk4n+/j6TqU7Ylonw9vl8lBSxX1sScCIef/Dg
-        C1OdXrCqKGNjbh5I7NeW9MTJr7/qN5lMwrBMgF0uV6FQEPu1JQFTOn58+pTyJAzL1KCqsy9ekPpiv7Yk
-        YEz4fHO8nDAsE2UkEAjoSWUJmPikJtxqb6c2CdvaYs1HDkcsFtPTrCRgREbRgvTcNlk35HSyXuysKjm4
-        WCyurPzpuNVepVYjo8Fgt9vn5+f15BKSgxFV0Dc3Z7NdoREJzllRUInn4efPOa7OoUAXmJemH09NTV6/
-        1kROV1RtvKGmOp3fx+Nx/S25GhjfMfTXv8qk036//15XV2OjVWEeMJstFgv509b2ocv1M1QumfUkApJ6
-        cDGYI0JKJBKLi4tut2t0ZCQcDnPhhUKeHuD3//bTs2ffPXo0NOScmZnhX7lcllCgbkSj0fGxsUmPJxQK
-        pVJJPNC6+QvAOE7BevXK39/Xx92qqmptUDs+/eT16z+oJxyFBTjB5TNqUR1pnfulEn+TwXc6O61kfYNK
-        Jx0cGPg9EKCdXxhulWB8jEWj3w4OUgroDW+GK9pOTQ1P29raMj09zYiZz+ePRzv84Ova2prb5Wputh9H
-        AOFmNpuartp4+7VYDLPl9cc6A8bc1tZW78OHZG0ZeVqkE0HU093NaLe0tMSEixgxQd69+5mi1J+PefAE
-        w5e9vZg99rWsM2B8p+0TL+egQvxOt4fBURwOcruNCZBA40eNHW+2YNDjmcC4wPyjM2D8un+/BytiU1Vh
-        Ucu/CmGwp/texWRyAuYqlkMhRgid5vQLg5gNBoOnb/sEzPszPOtvRP9J5MXs7CwpKmAV4InxcV6OkvvW
-        RTy43e7TsX0CJjGymQyJEQ6vvPUPZinjFBkBqwiuy9R78KXpHYGPjv4GjLZM3tx6dkEAAAAASUVORK5C
-        YII=
-</value>
   </data>
   <data name="userPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>605, 6</value>
+    <value>595, 6</value>
   </data>
   <data name="userPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2851,41 +3052,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;userPictureBox.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="customizedPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="customizedPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAABG5JREFUWEftl19IW1ccx4fmj83fxkS7TPtvnVHHqm4P1bF2bambo7UhKJ1SLVbW
-        PSms0IGwktE9BGGi+FAGkz4liEXBl71IHnxbHwZiECFBDBKRiCjBEEQpiv0k55LdxTrM9da97MslXO49
-        93x+53d+53tO3tv/j/Q/+MQkgXd3d1Op5Nra2oraisfjm4nEzs6OAGWVBkPldSDg7+5+2NnRoe71oLPz
-        Z683EolsbW0JpFAazKPx8fH3z5QaDKdOFakserRaLffb2xmbQAqlwRsbG48f/2A0GgrejbRaTVVVZTgc
-        FkihNJip7enpYbSiUTpGi8V6bDESnU5XWFCg0RRWfHRpfm5OIIVywVD7+vomJyf/OLZevBi5cP6cprBQ
-        gOf+HWyxmAOBQDKZfH1sMcSay59oNegIYJI8Nja2vb0tXh9HVHJdbQ1zd9JgytjtvksKi/T6SlfFyYFT
-        qdTi4qLP56utudzQUB+NRqUXGb1DMGKm19fXFyKRYHCKRSs9zUhNMA5IVWKT0egiv9zzRDwXEs2EVAMz
-        uHh8ZWJiwuNx11+50tx8ZzQQWFlZPujSQuqA9/b2KKX+fp/Dbsd0dTptUZG+2GZ7+vQnhp4zViF1wNQR
-        jlFa4mDx0IkQ68hebHv5coycS+1kUgfMsFpbWxirQGbFQmpq+joWi0ntZFIHzAZQXVXJEAUvK6zj3Nmz
-        OStYSB3wXChUXl6GLQueXHZ78czMjNROplyw0Wj87fnzhYUF8nOY0oeKzU15yczPz1/68CLeKGBZEYnT
-        6QyFQlI7mXLBep3us0/r7ty+fbe5+a1Xa0vL948eBaem5GCi+arxll6vE7ysKO/PG+rxL6mdTBK4t7eX
-        4wdNiZHKBE8vBy82TRZJe1tbziIhASMjv3PSYFIFEpF5i9k0ODCQ41lCaTCf/fLsGW7+tjn6W3REcN80
-        NVFKW6mU+F6IIGKxpa6uB2aTSavViuhNJiPpwaLxFqmdTGkw5sIkNTbeKnE4bIerxGH3eDwHqULUIwyv
-        1/txdfWZ0tJKl+vHJ09Ics4ZL6s0GLHGmafZ2dm/Dhc1sry8LO+IgZItZopkEj3inm2YlpFwmHueMNxE
-        IsFWkfxnPUpgBSICYuVQjC0zUBYC/oV3Sq8zog1pGBoc9Ljdfr9/aWkpG7dCcGZSYw+7ujjUMfFms+nm
-        zRvT09M8ZHxEQCZIz6tXf3IWwBuMBgOld+9ea3bKFYLpmqPZaatVlDHVxK5QXlbW1vZtv8/HHjUw8GtH
-        x/2LF87jo8JY+CWC4aEhYqIHheDV1dXvurtZXZl6l4SBYM4mo5Ha5pf7HBPlCZsmmaAHhWDK9erVL3Ra
-        rdTl0UQcnDvFyV4hmOXnclXI7eIoIuUfOJ2sHXpQAqZ08X0Wa37YjGynrdQgtakETFkGg0EqS+osH6X/
-        MPj9uI0SMJ+Njo5i2sxZvhfhDg8Pp5JJJWD8iIPOjevX6+pq872+vHYNz8FGlICZIVwCr6A+8xXmhb8y
-        WUrAKmh//w1bB9mjsWW/yAAAAABJRU5ErkJggg==
-</value>
   </data>
   <data name="customizedPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>575, 6</value>
+    <value>565, 6</value>
   </data>
   <data name="customizedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2915,35 +3091,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;customizedPictureBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="predefinedPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="predefinedPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACD
-        ygAAg8oBMY5BBAAAAxBJREFUWEftl0tLG1EYhkvMdWwuEy8tVKgbbRcKtS0W6p3SC96oui4arCjUXUPT
-        H6C4KO6KgliUSn+BJAuDIi5EUoIlKEpJKIagiFlERBRR7BNn1EQnupm0C/PyEYZvzrzPmTMfOd+5dfyf
-        lAH/M91Y8OHhYSwWC4fDweBv1YUnzvhDkXAoDj46Otrc3Pw+Pv761cuKiufpCJzxhwLrHHxwcOBbWCgo
-        uGcyGfV6XToCZ/yhwDoH7+3tjY19s1osGo1Gq9Ua9HqT0chQVQI3PHHGHwqsc/Du7u7IyIjFfJvbRqOh
-        urqqpeWtWlFTU40nzvhDgaUM5ndycnJNPXk8HovFfD1YFG3z8/PSPVXk8/nsopgBZ8AZsArKgDPgUzCb
-        l3dqamtrK6pSzExPW63xDfcaMDtoe/u7zy6XWuHo6MAzJXh0dFTavOKNgEGfLQhqBW5SI4A/lCQw7Yjb
-        7c6xi1ptFiPSIZzxh5LU+tCAsWM7HB35eXmizSbarFeEIAg6nU7202i4JnNhzKWw4Yw/lKRmD7ECkUjY
-        7/fPzlwlr9c7PDQkmEwyVqPhenjoK3l5hJLwxBn/s3VGMlgS00kUy7K9vb2+vh4MBpeXlwOBwE+fr7+v
-        7wKYDPmlpcDKykooFKKHBUALLbucSmacKgmcqP39fZAet7u7q6uutras7FFpSUlh4f3sbEGfsNRckyFf
-        WlryrLy8vv6N0/lxbm52Y2Pj7HMqKiWYiQ8M9Ofm5giCyWAw8C0pTm2WcvWR5yZj6IuZx907+YODX3CQ
-        vZSUEhwKBh8+KKYXl71PBJdXpF1lhaWAxJgLEyJTXFTEB5K9lJQSzGnnRV2dxWyW3OOvIgj8Bz198rjT
-        4ejp6ZbifWdnVWWl3S7yoow7OQmYeIokNSx7KSklmLL6tbjocrna2lobGxqamhrh/ZiYoMqYE59QErW6
-        urpK89zb+6G5uYmRba2tn5zORb+fU5rspaSUYMRxIxqNRiKRtbU/TJ9vtrOzk3jik0TFUsb8vTMhRkbC
-        YZ7i2cuVnKirwGnVTQMfH/8FKgZ+ymaAsMcAAAAASUVORK5CYII=
-</value>
   </data>
   <data name="predefinedPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>545, 6</value>
+    <value>535, 6</value>
   </data>
   <data name="predefinedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2973,45 +3130,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;predefinedPictureBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="tickedOnlyPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="tickedOnlyPictureBox.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
   </data>
   <data name="tickedOnlyPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>515, 6</value>
+    <value>505, 6</value>
   </data>
   <data name="tickedOnlyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3041,7 +3169,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;tickedOnlyPictureBox.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="buttonSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3050,7 +3178,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>471, 4</value>
+    <value>461, 4</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3074,7 +3202,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;buttonSettings.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="clearSearchButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3083,7 +3211,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 4</value>
+    <value>419, 4</value>
   </data>
   <data name="clearSearchButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -3110,7 +3238,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;clearSearchButton.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="searchTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -3122,13 +3250,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>4, 3, 4, 3</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 23</value>
+    <value>379, 23</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="searchTextBox.ToolTip" xml:space="preserve">
-    <value>Enter part of the preset name or just some words from the preset name to filter the list</value>
+    <value>Type part of the preset name or just some words from the preset name to filter the list</value>
   </data>
   <data name="&gt;&gt;searchTextBox.Name" xml:space="preserve">
     <value>searchTextBox</value>
@@ -3140,7 +3268,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;searchTextBox.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="searchPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3170,16 +3298,16 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>filtersPanel</value>
   </data>
   <data name="&gt;&gt;searchPictureBox.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="filtersPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 52</value>
+    <value>4, 52</value>
   </data>
   <data name="filtersPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 0, 5, 0</value>
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="filtersPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>974, 32</value>
+    <value>979, 32</value>
   </data>
   <data name="filtersPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3206,13 +3334,13 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="autoApplyPresetsLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 6</value>
+    <value>12, 6</value>
   </data>
   <data name="autoApplyPresetsLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>11, 6, 12, 0</value>
+    <value>12, 6, 12, 0</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>961, 48</value>
+    <value>964, 48</value>
   </data>
   <data name="autoApplyPresetsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3243,18 +3371,6 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Advanced Search &amp; Replace</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
-    <value>dirtyErrorProvider</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PresetGuid.Name" xml:space="preserve">
     <value>PresetGuid</value>
@@ -3370,11 +3486,137 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
   <data name="&gt;&gt;OddEven.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
+    <value>dirtyErrorProvider</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn2</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn3</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn4</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn5</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn6</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn7</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn8</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn9.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn9</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn10.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn10</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn11.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn11</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn12.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn12</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn13.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn13</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn14.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn14</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn15.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn15</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn16.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn16</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn17.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn17</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn18.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn18</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn19.Name" xml:space="preserve">
+    <value>dataGridViewTextBoxColumn19</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewTextBoxColumn19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AdvancedSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.1.9016.33583, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.1.9024.28941, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4134,7 +4376,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>4</value>
   </data>
   <data name="settingsProcessingGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>693, 3</value>
+    <value>697, 3</value>
   </data>
   <data name="settingsProcessingGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -4592,7 +4834,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>0, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 189</value>
+    <value>979, 186</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4625,7 +4867,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>170</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 577</value>
+    <value>979, 574</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>385</value>
@@ -4647,5 +4889,224 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.HeaderText" xml:space="preserve">
+    <value>Preset GUID</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn1.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.HeaderText" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn2.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.HeaderText" xml:space="preserve">
+    <value>Track</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn3.ToolTipText" xml:space="preserve">
+    <value>Track representation</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.HeaderText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.ToolTipText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn4.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.HeaderText" xml:space="preserve">
+    <value>Orig. tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.ToolTipText" xml:space="preserve">
+    <value>Original tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn5.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.ToolTipText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn6.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.HeaderText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.ToolTipText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn7.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.HeaderText" xml:space="preserve">
+    <value>Orig. tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.ToolTipText" xml:space="preserve">
+    <value>Original tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn8.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn9.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn9.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn9.ToolTipText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn9.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn10.HeaderText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn10.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn10.ToolTipText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn10.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn11.HeaderText" xml:space="preserve">
+    <value>Orig. tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn11.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn11.ToolTipText" xml:space="preserve">
+    <value>Original tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn11.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn12.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn12.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn12.ToolTipText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn12.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn13.HeaderText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn13.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn13.ToolTipText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn13.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn14.HeaderText" xml:space="preserve">
+    <value>Orig. tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn14.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn14.ToolTipText" xml:space="preserve">
+    <value>Original tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn14.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn15.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn15.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn15.ToolTipText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn15.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn16.HeaderText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn16.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn16.ToolTipText" xml:space="preserve">
+    <value>Tag name</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn16.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn17.HeaderText" xml:space="preserve">
+    <value>Orig. tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn17.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn17.ToolTipText" xml:space="preserve">
+    <value>Original tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn17.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn18.HeaderText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn18.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn18.ToolTipText" xml:space="preserve">
+    <value>New tag value</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn18.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn19.HeaderText" xml:space="preserve">
+    <value>·/·</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn19.MinimumWidth" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn19.ToolTipText" xml:space="preserve">
+    <value>Odd/even tracks</value>
+  </data>
+  <data name="dataGridViewTextBoxColumn19.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
 </root>

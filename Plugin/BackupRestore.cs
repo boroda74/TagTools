@@ -342,7 +342,7 @@ namespace MusicBeePlugin
                     if (trackNeedsToBeBackedUp)
                     {
                         incrementalBackup.tracks.Add(trackId, tagsForIncrementalBackup);
-                        TempTracksNeededToBeBackedUp.Add(trackId, false);
+                        TempTracksNeededToBeBackedUp.Add(trackId);
                     }
                 }
 
@@ -598,13 +598,9 @@ namespace MusicBeePlugin
 
         internal void saveBackupAsync(object parameters)
         {
-            // ReSharper disable once PossibleNullReferenceException
             var backupName = (parameters as object[])[0] as string;
-            // ReSharper disable once PossibleNullReferenceException
             var statusBarText = (parameters as object[])[1] as string;
-            // ReSharper disable once PossibleNullReferenceException
             var isAutoCreated = (bool)(parameters as object[])[2];
-            // ReSharper disable once PossibleNullReferenceException
             var createEmptyBackup = (bool)(parameters as object[])[3];
 
             try

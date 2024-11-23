@@ -51,6 +51,8 @@
             this.showHiddenCommandWindowsRadioButton = new System.Windows.Forms.RadioButton();
             this.highlightChangedTagsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.scrollPreviewToEndCheckBoxLabel = new System.Windows.Forms.Label();
+            this.scrollPreviewToEndCheckBox = new System.Windows.Forms.CheckBox();
             this.legendGroupBox = new System.Windows.Forms.GroupBox();
             this.preservedTagValuesLegendTextBox = new System.Windows.Forms.TextBox();
             this.preservedTagsLegendTextBox = new System.Windows.Forms.TextBox();
@@ -218,6 +220,8 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.scrollPreviewToEndCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.scrollPreviewToEndCheckBox);
             this.groupBox2.Controls.Add(this.legendGroupBox);
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButtonLabel);
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButton);
@@ -240,6 +244,20 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Tag = "#QuickSettings@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
+            // 
+            // scrollPreviewToEndCheckBoxLabel
+            // 
+            resources.ApplyResources(this.scrollPreviewToEndCheckBoxLabel, "scrollPreviewToEndCheckBoxLabel");
+            this.scrollPreviewToEndCheckBoxLabel.Name = "scrollPreviewToEndCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.scrollPreviewToEndCheckBoxLabel, resources.GetString("scrollPreviewToEndCheckBoxLabel.ToolTip"));
+            this.scrollPreviewToEndCheckBoxLabel.Click += new System.EventHandler(this.scrollPreviewToEndCheckBoxLabel_Click);
+            // 
+            // scrollPreviewToEndCheckBox
+            // 
+            resources.ApplyResources(this.scrollPreviewToEndCheckBox, "scrollPreviewToEndCheckBox");
+            this.scrollPreviewToEndCheckBox.Name = "scrollPreviewToEndCheckBox";
+            this.scrollPreviewToEndCheckBox.Tag = "#scrollPreviewToEndCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.scrollPreviewToEndCheckBox, resources.GetString("scrollPreviewToEndCheckBox.ToolTip"));
             // 
             // legendGroupBox
             // 
@@ -640,5 +658,7 @@
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button saveLastSkippedButton;
         private System.Windows.Forms.Label versionLabel;
+        private System.Windows.Forms.Label scrollPreviewToEndCheckBoxLabel;
+        private System.Windows.Forms.CheckBox scrollPreviewToEndCheckBox;
     }
 }

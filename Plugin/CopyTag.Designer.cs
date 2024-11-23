@@ -47,6 +47,14 @@
             this.appendCheckBox = new System.Windows.Forms.CheckBox();
             this.buttonPreview = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupposedDestinationTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupposedDestinationTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalDestinationTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalDestinationTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewDestinationTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewDestinationTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.smartOperationCheckBox = new System.Windows.Forms.CheckBox();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.onlyIfDestinationEmptyCheckBox = new System.Windows.Forms.CheckBox();
@@ -73,14 +81,6 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SupposedDestinationTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SupposedDestinationTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalDestinationTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalDestinationTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewDestinationTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewDestinationTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.fieldsPanel.SuspendLayout();
@@ -151,7 +151,8 @@
             this.dirtyErrorProvider.SetIconAlignment(this.appendCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("appendCheckBox.IconAlignment"))));
             this.appendCheckBox.Name = "appendCheckBox";
             this.appendCheckBox.Tag = "#appendCheckBoxLabel";
-            this.appendCheckBox.CheckedChanged += new System.EventHandler(this.appendCheckBox_CheckedChanged);
+            this.appendCheckBox.ThreeState = true;
+            this.appendCheckBox.CheckStateChanged += new System.EventHandler(this.appendCheckBox_CheckedChanged);
             // 
             // buttonPreview
             // 
@@ -188,6 +189,69 @@
             this.previewTable.Tag = "#CopyTag&CopyTag@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             // 
+            // File
+            // 
+            this.File.DataPropertyName = "File";
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
+            // 
+            // Track
+            // 
+            this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Track.FillWeight = 200F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            // 
+            // SupposedDestinationTagValue
+            // 
+            this.SupposedDestinationTagValue.DataPropertyName = "SupposedDestinationTagValue";
+            this.SupposedDestinationTagValue.FillWeight = 1F;
+            resources.ApplyResources(this.SupposedDestinationTagValue, "SupposedDestinationTagValue");
+            this.SupposedDestinationTagValue.Name = "SupposedDestinationTagValue";
+            // 
+            // SupposedDestinationTagValueNormalized
+            // 
+            this.SupposedDestinationTagValueNormalized.DataPropertyName = "SupposedDestinationTagValueNormalized";
+            this.SupposedDestinationTagValueNormalized.FillWeight = 1F;
+            resources.ApplyResources(this.SupposedDestinationTagValueNormalized, "SupposedDestinationTagValueNormalized");
+            this.SupposedDestinationTagValueNormalized.Name = "SupposedDestinationTagValueNormalized";
+            // 
+            // OriginalDestinationTagValue
+            // 
+            this.OriginalDestinationTagValue.DataPropertyName = "OriginalDestinationTagValue";
+            this.OriginalDestinationTagValue.FillWeight = 1F;
+            resources.ApplyResources(this.OriginalDestinationTagValue, "OriginalDestinationTagValue");
+            this.OriginalDestinationTagValue.Name = "OriginalDestinationTagValue";
+            // 
+            // OriginalDestinationTagValueNormalized
+            // 
+            this.OriginalDestinationTagValueNormalized.DataPropertyName = "OriginalDestinationTagValueNormalized";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalDestinationTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle2;
+            resources.ApplyResources(this.OriginalDestinationTagValueNormalized, "OriginalDestinationTagValueNormalized");
+            this.OriginalDestinationTagValueNormalized.Name = "OriginalDestinationTagValueNormalized";
+            // 
+            // NewDestinationTagValue
+            // 
+            this.NewDestinationTagValue.DataPropertyName = "NewDestinationTagValue";
+            this.NewDestinationTagValue.FillWeight = 1F;
+            resources.ApplyResources(this.NewDestinationTagValue, "NewDestinationTagValue");
+            this.NewDestinationTagValue.Name = "NewDestinationTagValue";
+            // 
+            // NewDestinationTagValueNormalized
+            // 
+            this.NewDestinationTagValueNormalized.DataPropertyName = "NewDestinationTagValueNormalized";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewDestinationTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.NewDestinationTagValueNormalized, "NewDestinationTagValueNormalized");
+            this.NewDestinationTagValueNormalized.Name = "NewDestinationTagValueNormalized";
+            // 
             // smartOperationCheckBox
             // 
             resources.ApplyResources(this.smartOperationCheckBox, "smartOperationCheckBox");
@@ -216,7 +280,8 @@
             this.dirtyErrorProvider.SetIconAlignment(this.addCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("addCheckBox.IconAlignment"))));
             this.addCheckBox.Name = "addCheckBox";
             this.addCheckBox.Tag = "#addCheckBoxLabel";
-            this.addCheckBox.CheckedChanged += new System.EventHandler(this.addCheckBox_CheckedChanged);
+            this.addCheckBox.ThreeState = true;
+            this.addCheckBox.CheckStateChanged += new System.EventHandler(this.addCheckBox_CheckedChanged);
             // 
             // fileNameLabel
             // 
@@ -309,6 +374,7 @@
             // 
             resources.ApplyResources(this.appendCheckBoxLabel, "appendCheckBoxLabel");
             this.appendCheckBoxLabel.Name = "appendCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.appendCheckBoxLabel, resources.GetString("appendCheckBoxLabel.ToolTip"));
             this.appendCheckBoxLabel.Click += new System.EventHandler(this.appendCheckBoxLabel_Click);
             // 
             // addCheckBoxLabel
@@ -316,6 +382,7 @@
             resources.ApplyResources(this.addCheckBoxLabel, "addCheckBoxLabel");
             this.addCheckBoxLabel.Name = "addCheckBoxLabel";
             this.addCheckBoxLabel.Tag = "#fieldsPanel";
+            this.toolTip1.SetToolTip(this.addCheckBoxLabel, resources.GetString("addCheckBoxLabel.ToolTip"));
             this.addCheckBoxLabel.Click += new System.EventHandler(this.addCheckBoxLabel_Click);
             // 
             // fieldsPanel
@@ -380,69 +447,6 @@
             this.dataGridViewTextBoxColumn8.FillWeight = 25F;
             resources.ApplyResources(this.dataGridViewTextBoxColumn8, "dataGridViewTextBoxColumn8");
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            // 
-            // File
-            // 
-            this.File.DataPropertyName = "File";
-            this.File.FillWeight = 1F;
-            resources.ApplyResources(this.File, "File");
-            this.File.Name = "File";
-            // 
-            // Track
-            // 
-            this.Track.DataPropertyName = "Track";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Track.FillWeight = 200F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            // 
-            // SupposedDestinationTagValue
-            // 
-            this.SupposedDestinationTagValue.DataPropertyName = "SupposedDestinationTagValue";
-            this.SupposedDestinationTagValue.FillWeight = 1F;
-            resources.ApplyResources(this.SupposedDestinationTagValue, "SupposedDestinationTagValue");
-            this.SupposedDestinationTagValue.Name = "SupposedDestinationTagValue";
-            // 
-            // SupposedDestinationTagValueNormalized
-            // 
-            this.SupposedDestinationTagValueNormalized.DataPropertyName = "SupposedDestinationTagValueNormalized";
-            this.SupposedDestinationTagValueNormalized.FillWeight = 1F;
-            resources.ApplyResources(this.SupposedDestinationTagValueNormalized, "SupposedDestinationTagValueNormalized");
-            this.SupposedDestinationTagValueNormalized.Name = "SupposedDestinationTagValueNormalized";
-            // 
-            // OriginalDestinationTagValue
-            // 
-            this.OriginalDestinationTagValue.DataPropertyName = "OriginalDestinationTagValue";
-            this.OriginalDestinationTagValue.FillWeight = 1F;
-            resources.ApplyResources(this.OriginalDestinationTagValue, "OriginalDestinationTagValue");
-            this.OriginalDestinationTagValue.Name = "OriginalDestinationTagValue";
-            // 
-            // OriginalDestinationTagValueNormalized
-            // 
-            this.OriginalDestinationTagValueNormalized.DataPropertyName = "OriginalDestinationTagValueNormalized";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OriginalDestinationTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.OriginalDestinationTagValueNormalized, "OriginalDestinationTagValueNormalized");
-            this.OriginalDestinationTagValueNormalized.Name = "OriginalDestinationTagValueNormalized";
-            // 
-            // NewDestinationTagValue
-            // 
-            this.NewDestinationTagValue.DataPropertyName = "NewDestinationTagValue";
-            this.NewDestinationTagValue.FillWeight = 1F;
-            resources.ApplyResources(this.NewDestinationTagValue, "NewDestinationTagValue");
-            this.NewDestinationTagValue.Name = "NewDestinationTagValue";
-            // 
-            // NewDestinationTagValueNormalized
-            // 
-            this.NewDestinationTagValueNormalized.DataPropertyName = "NewDestinationTagValueNormalized";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewDestinationTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.NewDestinationTagValueNormalized, "NewDestinationTagValueNormalized");
-            this.NewDestinationTagValueNormalized.Name = "NewDestinationTagValueNormalized";
             // 
             // CopyTag
             // 

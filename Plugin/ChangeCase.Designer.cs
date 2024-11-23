@@ -34,9 +34,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChangeCase));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
             this.forSelectedTracksLabel = new System.Windows.Forms.Label();
@@ -51,6 +54,12 @@
             this.sentenceSeparatorsBox = new System.Windows.Forms.ComboBox();
             this.buttonPreview = new System.Windows.Forms.Button();
             this.previewTable = new System.Windows.Forms.DataGridView();
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonReapply = new System.Windows.Forms.Button();
             this.exceptionWordsCheckBox = new System.Windows.Forms.CheckBox();
             this.exceptionCharsCheckBox = new System.Windows.Forms.CheckBox();
@@ -83,13 +92,21 @@
             this.exceptionCharPairsCheckBox = new System.Windows.Forms.CheckBox();
             this.ignoreSingleLetterExceptedWordsCheckBoxLabel = new System.Windows.Forms.Label();
             this.ignoreSingleLetterExceptedWordsCheckBox = new System.Windows.Forms.CheckBox();
+            this.buttonDeletePreset = new System.Windows.Forms.Button();
+            this.buttonPlayPreset = new System.Windows.Forms.Button();
+            this.buttonRecordPreset = new System.Windows.Forms.Button();
+            this.buttonStopRecordingPreset = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonHelp = new System.Windows.Forms.Button();
+            this.presetBox = new System.Windows.Forms.ComboBox();
+            this.buttonDescription = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTagValueNormalized = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.fieldsPanel.SuspendLayout();
@@ -176,6 +193,7 @@
             this.exceptionCharsBox.Name = "exceptionCharsBox";
             this.exceptionCharsBox.Tag = "#buttonAsrExceptWordsAfterSymbols@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.exceptionCharsBox, resources.GetString("exceptionCharsBox.ToolTip"));
+            this.exceptionCharsBox.SelectedIndexChanged += new System.EventHandler(this.exceptionCharsBox_SelectedIndexChanged);
             this.exceptionCharsBox.Leave += new System.EventHandler(this.exceptionCharsBox_Leave);
             // 
             // sentenceSeparatorsBox
@@ -187,6 +205,7 @@
             this.sentenceSeparatorsBox.Name = "sentenceSeparatorsBox";
             this.sentenceSeparatorsBox.Tag = "#buttonAsrSentenceSeparators@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.sentenceSeparatorsBox, resources.GetString("sentenceSeparatorsBox.ToolTip"));
+            this.sentenceSeparatorsBox.SelectedIndexChanged += new System.EventHandler(this.sentenceSeparatorsBox_SelectedIndexChanged);
             this.sentenceSeparatorsBox.Leave += new System.EventHandler(this.sentenceSeparatorsBox_Leave);
             // 
             // buttonPreview
@@ -220,6 +239,57 @@
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.previewTable.Tag = "#ChangeCase&ChangeCase@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
+            // 
+            // File
+            // 
+            this.File.DataPropertyName = "File";
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
+            // 
+            // Track
+            // 
+            this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle37;
+            this.Track.FillWeight = 200F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            this.Track.ReadOnly = true;
+            // 
+            // OriginalTagValue
+            // 
+            this.OriginalTagValue.DataPropertyName = "OriginalTagValue";
+            this.OriginalTagValue.FillWeight = 1F;
+            resources.ApplyResources(this.OriginalTagValue, "OriginalTagValue");
+            this.OriginalTagValue.Name = "OriginalTagValue";
+            // 
+            // OriginalTagValueNormalized
+            // 
+            this.OriginalTagValueNormalized.DataPropertyName = "OriginalTagValueNormalized";
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle38;
+            resources.ApplyResources(this.OriginalTagValueNormalized, "OriginalTagValueNormalized");
+            this.OriginalTagValueNormalized.Name = "OriginalTagValueNormalized";
+            this.OriginalTagValueNormalized.ReadOnly = true;
+            // 
+            // NewTagValue
+            // 
+            this.NewTagValue.DataPropertyName = "NewTagValue";
+            this.NewTagValue.FillWeight = 1F;
+            resources.ApplyResources(this.NewTagValue, "NewTagValue");
+            this.NewTagValue.Name = "NewTagValue";
+            // 
+            // NewTagValueNormalized
+            // 
+            this.NewTagValueNormalized.DataPropertyName = "NewTagValueNormalized";
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle39;
+            resources.ApplyResources(this.NewTagValueNormalized, "NewTagValueNormalized");
+            this.NewTagValueNormalized.Name = "NewTagValueNormalized";
             // 
             // buttonReapply
             // 
@@ -280,6 +350,7 @@
             this.exceptionWordsBox.Name = "exceptionWordsBox";
             this.exceptionWordsBox.Tag = "#removeExceptionButton@pinned-to-parent-x";
             this.toolTip1.SetToolTip(this.exceptionWordsBox, resources.GetString("exceptionWordsBox.ToolTip"));
+            this.exceptionWordsBox.SelectedIndexChanged += new System.EventHandler(this.exceptionWordsBox_SelectedIndexChanged);
             this.exceptionWordsBox.Leave += new System.EventHandler(this.exceptionWordsBox_Leave);
             // 
             // alwaysCapitalize1stWordCheckBox
@@ -406,7 +477,6 @@
             this.fieldsPanel.Controls.Add(this.buttonAsrSentenceSeparators);
             this.fieldsPanel.Controls.Add(this.sentenceSeparatorsBox);
             this.fieldsPanel.Controls.Add(this.buttonAsrExceptWordsBetweenSymbols);
-            this.fieldsPanel.Controls.Add(this.tableLayoutPanel1);
             this.fieldsPanel.Controls.Add(this.buttonAsrExceptWordsAfterSymbols);
             this.fieldsPanel.Controls.Add(this.exceptionCharsBox);
             this.fieldsPanel.Controls.Add(this.removeExceptionButton);
@@ -417,6 +487,7 @@
             this.fieldsPanel.Controls.Add(this.buttonPreview);
             this.fieldsPanel.Controls.Add(this.buttonSettings);
             this.fieldsPanel.Controls.Add(this.buttonReapply);
+            this.fieldsPanel.Controls.Add(this.tableLayoutPanel1);
             this.fieldsPanel.Name = "fieldsPanel";
             this.fieldsPanel.Tag = "#ChangeCase";
             // 
@@ -442,6 +513,7 @@
             this.closingExceptionCharsBox.Name = "closingExceptionCharsBox";
             this.closingExceptionCharsBox.Tag = "";
             this.toolTip1.SetToolTip(this.closingExceptionCharsBox, resources.GetString("closingExceptionCharsBox.ToolTip"));
+            this.closingExceptionCharsBox.SelectedIndexChanged += new System.EventHandler(this.closingExceptionCharsBox_SelectedIndexChanged);
             this.closingExceptionCharsBox.Leave += new System.EventHandler(this.closingExceptionCharsBox_Leave);
             // 
             // openingExceptionCharsBox
@@ -450,6 +522,7 @@
             this.openingExceptionCharsBox.Name = "openingExceptionCharsBox";
             this.openingExceptionCharsBox.Tag = "";
             this.toolTip1.SetToolTip(this.openingExceptionCharsBox, resources.GetString("openingExceptionCharsBox.ToolTip"));
+            this.openingExceptionCharsBox.SelectedIndexChanged += new System.EventHandler(this.openingExceptionCharsBox_SelectedIndexChanged);
             this.openingExceptionCharsBox.Leave += new System.EventHandler(this.openingExceptionCharsBox_Leave);
             // 
             // exceptionCharPairsCheckBoxLabel
@@ -482,72 +555,148 @@
             this.ignoreSingleLetterExceptedWordsCheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.ignoreSingleLetterExceptedWordsCheckBox, resources.GetString("ignoreSingleLetterExceptedWordsCheckBox.ToolTip"));
             // 
+            // buttonDeletePreset
+            // 
+            resources.ApplyResources(this.buttonDeletePreset, "buttonDeletePreset");
+            this.buttonDeletePreset.Name = "buttonDeletePreset";
+            this.buttonDeletePreset.Tag = "#buttonPlayPreset@square-button@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonDeletePreset, resources.GetString("buttonDeletePreset.ToolTip"));
+            this.buttonDeletePreset.UseVisualStyleBackColor = true;
+            this.buttonDeletePreset.Click += new System.EventHandler(this.buttonDeletePreset_Click);
+            // 
+            // buttonPlayPreset
+            // 
+            resources.ApplyResources(this.buttonPlayPreset, "buttonPlayPreset");
+            this.buttonPlayPreset.Name = "buttonPlayPreset";
+            this.buttonPlayPreset.Tag = "#buttonRecordPreset@square-button@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonPlayPreset, resources.GetString("buttonPlayPreset.ToolTip"));
+            this.buttonPlayPreset.UseVisualStyleBackColor = true;
+            this.buttonPlayPreset.Click += new System.EventHandler(this.buttonPlayPreset_Click);
+            // 
+            // buttonRecordPreset
+            // 
+            resources.ApplyResources(this.buttonRecordPreset, "buttonRecordPreset");
+            this.buttonRecordPreset.Name = "buttonRecordPreset";
+            this.buttonRecordPreset.Tag = "#buttonStopRecordingPreset@square-button@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonRecordPreset, resources.GetString("buttonRecordPreset.ToolTip"));
+            this.buttonRecordPreset.UseVisualStyleBackColor = true;
+            this.buttonRecordPreset.Click += new System.EventHandler(this.buttonRecordPreset_Click);
+            // 
+            // buttonStopRecordingPreset
+            // 
+            resources.ApplyResources(this.buttonStopRecordingPreset, "buttonStopRecordingPreset");
+            this.buttonStopRecordingPreset.Name = "buttonStopRecordingPreset";
+            this.buttonStopRecordingPreset.Tag = "#ChangeCase@square-button@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonStopRecordingPreset, resources.GetString("buttonStopRecordingPreset.ToolTip"));
+            this.buttonStopRecordingPreset.UseVisualStyleBackColor = true;
+            this.buttonStopRecordingPreset.Click += new System.EventHandler(this.buttonStopRecordingPreset_Click);
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            this.label2.Tag = "#buttonHelp@pinned-to-parent-x";
+            // 
+            // buttonHelp
+            // 
+            resources.ApplyResources(this.buttonHelp, "buttonHelp");
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Tag = "#presetBox@square-button@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonHelp, resources.GetString("buttonHelp.ToolTip"));
+            this.buttonHelp.UseVisualStyleBackColor = true;
+            this.buttonHelp.Click += new System.EventHandler(this.buttonHelp_Click);
+            // 
+            // presetBox
+            // 
+            resources.ApplyResources(this.presetBox, "presetBox");
+            this.presetBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.presetBox.FormattingEnabled = true;
+            this.presetBox.Name = "presetBox";
+            this.presetBox.Tag = "#buttonDescription";
+            this.presetBox.SelectedIndexChanged += new System.EventHandler(this.presetBox_SelectedIndexChanged);
+            // 
+            // buttonDescription
+            // 
+            resources.ApplyResources(this.buttonDescription, "buttonDescription");
+            this.buttonDescription.Name = "buttonDescription";
+            this.buttonDescription.Tag = "#buttonDeletePreset@non-defaultable";
+            this.buttonDescription.UseVisualStyleBackColor = true;
+            this.buttonDescription.Click += new System.EventHandler(this.buttonDescription_Click);
+            // 
             // toolTip1
             // 
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 1500;
             this.toolTip1.ReshowDelay = 100;
             // 
-            // File
+            // dataGridViewTextBoxColumn1
             // 
-            this.File.DataPropertyName = "File";
-            this.File.FillWeight = 1F;
-            resources.ApplyResources(this.File, "File");
-            this.File.Name = "File";
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "File";
+            this.dataGridViewTextBoxColumn1.FillWeight = 1F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
-            // Track
+            // dataGridViewTextBoxColumn2
             // 
-            this.Track.DataPropertyName = "Track";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Track.FillWeight = 200F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            this.Track.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Track";
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle40;
+            this.dataGridViewTextBoxColumn2.FillWeight = 200F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // OriginalTagValue
+            // dataGridViewTextBoxColumn3
             // 
-            this.OriginalTagValue.DataPropertyName = "OriginalTagValue";
-            this.OriginalTagValue.FillWeight = 1F;
-            resources.ApplyResources(this.OriginalTagValue, "OriginalTagValue");
-            this.OriginalTagValue.Name = "OriginalTagValue";
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "OriginalTagValue";
+            this.dataGridViewTextBoxColumn3.FillWeight = 1F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // OriginalTagValueNormalized
+            // dataGridViewTextBoxColumn4
             // 
-            this.OriginalTagValueNormalized.DataPropertyName = "OriginalTagValueNormalized";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OriginalTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle2;
-            resources.ApplyResources(this.OriginalTagValueNormalized, "OriginalTagValueNormalized");
-            this.OriginalTagValueNormalized.Name = "OriginalTagValueNormalized";
-            this.OriginalTagValueNormalized.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "OriginalTagValueNormalized";
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle41;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
-            // NewTagValue
+            // dataGridViewTextBoxColumn5
             // 
-            this.NewTagValue.DataPropertyName = "NewTagValue";
-            this.NewTagValue.FillWeight = 1F;
-            resources.ApplyResources(this.NewTagValue, "NewTagValue");
-            this.NewTagValue.Name = "NewTagValue";
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "NewTagValue";
+            this.dataGridViewTextBoxColumn5.FillWeight = 1F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn5, "dataGridViewTextBoxColumn5");
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // NewTagValueNormalized
+            // dataGridViewTextBoxColumn6
             // 
-            this.NewTagValueNormalized.DataPropertyName = "NewTagValueNormalized";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewTagValueNormalized.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.NewTagValueNormalized, "NewTagValueNormalized");
-            this.NewTagValueNormalized.Name = "NewTagValueNormalized";
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "NewTagValueNormalized";
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle42;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn6, "dataGridViewTextBoxColumn6");
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
             // ChangeCase
             // 
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.ignoreSingleLetterExceptedWordsCheckBoxLabel);
-            this.Controls.Add(this.ignoreSingleLetterExceptedWordsCheckBox);
+            this.Controls.Add(this.buttonStopRecordingPreset);
+            this.Controls.Add(this.buttonRecordPreset);
+            this.Controls.Add(this.buttonPlayPreset);
+            this.Controls.Add(this.buttonDeletePreset);
+            this.Controls.Add(this.buttonDescription);
+            this.Controls.Add(this.presetBox);
+            this.Controls.Add(this.buttonHelp);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.previewTable);
             this.Controls.Add(this.fieldsPanel);
+            this.Controls.Add(this.ignoreSingleLetterExceptedWordsCheckBoxLabel);
+            this.Controls.Add(this.ignoreSingleLetterExceptedWordsCheckBox);
             this.Controls.Add(this.alwaysCapitalizeLastWordCheckBoxLabel);
             this.Controls.Add(this.alwaysCapitalizeLastWordCheckBox);
             this.Controls.Add(this.alwaysCapitalize1stWordCheckBoxLabel);
@@ -642,5 +791,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OriginalTagValueNormalized;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTagValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn NewTagValueNormalized;
+        private System.Windows.Forms.Button buttonHelp;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonDeletePreset;
+        private System.Windows.Forms.Button buttonDescription;
+        private System.Windows.Forms.ComboBox presetBox;
+        private System.Windows.Forms.Button buttonRecordPreset;
+        private System.Windows.Forms.Button buttonPlayPreset;
+        private System.Windows.Forms.Button buttonStopRecordingPreset;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }

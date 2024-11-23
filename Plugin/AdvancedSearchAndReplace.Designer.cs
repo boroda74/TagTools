@@ -36,6 +36,9 @@ namespace MusicBeePlugin
                 checkedState?.Dispose();
                 uncheckedState?.Dispose();
 
+                filterPresetChain?.Dispose();
+                filterPresetChainDimmed?.Dispose();
+
                 tagNameFont?.Dispose();
             }
         }
@@ -66,9 +69,33 @@ namespace MusicBeePlugin
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.gotoNextPresetButton = new System.Windows.Forms.Button();
+            this.showOnlyChainedPresetsButton = new System.Windows.Forms.Button();
+            this.clearNextPresetButton = new System.Windows.Forms.Button();
+            this.hiddenCheckBoxLabel = new System.Windows.Forms.Label();
+            this.hiddenCheckBox = new System.Windows.Forms.CheckBox();
+            this.nextPresetComboBox = new System.Windows.Forms.ComboBox();
+            this.nextPresetCheckBoxLabel = new System.Windows.Forms.Label();
+            this.nextPresetCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.preserveTagValuesTextBox = new System.Windows.Forms.TextBox();
             this.labelPreserveTagValues = new System.Windows.Forms.Label();
@@ -127,6 +154,25 @@ namespace MusicBeePlugin
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.previewTable = new System.Windows.Forms.DataGridView();
+            this.PresetGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TagName5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OddEven = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.settingsProcessingGroupBox = new System.Windows.Forms.GroupBox();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonPreview = new System.Windows.Forms.Button();
@@ -148,6 +194,7 @@ namespace MusicBeePlugin
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.filterComboBox = new System.Windows.Forms.ComboBox();
             this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.clearSearchButton = new System.Windows.Forms.Button();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.uncheckAllFiltersPictureBox = new System.Windows.Forms.PictureBox();
             this.hotkeyPictureBox = new System.Windows.Forms.PictureBox();
@@ -157,30 +204,30 @@ namespace MusicBeePlugin
             this.customizedPictureBox = new System.Windows.Forms.PictureBox();
             this.predefinedPictureBox = new System.Windows.Forms.PictureBox();
             this.tickedOnlyPictureBox = new System.Windows.Forms.PictureBox();
-            this.clearSearchButton = new System.Windows.Forms.Button();
+            this.hiddenPictureBox = new System.Windows.Forms.PictureBox();
             this.autoApplyPresetsLabel = new System.Windows.Forms.Label();
-            this.searchPictureBox = new System.Windows.Forms.PictureBox();
             this.filtersPanel = new System.Windows.Forms.Panel();
+            this.searchPictureBox = new System.Windows.Forms.PictureBox();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.PresetGuid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TagName5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTag5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OddEven = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             //MusicBee
             this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
@@ -262,8 +309,9 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hiddenPictureBox)).BeginInit();
             this.filtersPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -295,6 +343,14 @@ namespace MusicBeePlugin
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Controls.Add(this.gotoNextPresetButton);
+            this.panel1.Controls.Add(this.showOnlyChainedPresetsButton);
+            this.panel1.Controls.Add(this.clearNextPresetButton);
+            this.panel1.Controls.Add(this.hiddenCheckBoxLabel);
+            this.panel1.Controls.Add(this.hiddenCheckBox);
+            this.panel1.Controls.Add(this.nextPresetComboBox);
+            this.panel1.Controls.Add(this.nextPresetCheckBoxLabel);
+            this.panel1.Controls.Add(this.nextPresetCheckBox);
             this.panel1.Controls.Add(this.tableLayoutPanel3);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
@@ -317,6 +373,70 @@ namespace MusicBeePlugin
             this.panel1.Controls.Add(this.descriptionGroupBox);
             this.panel1.Name = "panel1";
             this.panel1.Tag = "";
+            // 
+            // gotoNextPresetButton
+            // 
+            resources.ApplyResources(this.gotoNextPresetButton, "gotoNextPresetButton");
+            this.gotoNextPresetButton.Name = "gotoNextPresetButton";
+            this.gotoNextPresetButton.Tag = "#showOnlyChainedPresetsButton@non-defaultable@square-control";
+            this.toolTip1.SetToolTip(this.gotoNextPresetButton, resources.GetString("gotoNextPresetButton.ToolTip"));
+            this.gotoNextPresetButton.Click += new System.EventHandler(this.gotoNextPresetButton_Click);
+            // 
+            // showOnlyChainedPresetsButton
+            // 
+            resources.ApplyResources(this.showOnlyChainedPresetsButton, "showOnlyChainedPresetsButton");
+            this.showOnlyChainedPresetsButton.Name = "showOnlyChainedPresetsButton";
+            this.showOnlyChainedPresetsButton.Tag = "#clearNextPresetButton@non-defaultable@square-control";
+            this.toolTip1.SetToolTip(this.showOnlyChainedPresetsButton, resources.GetString("showOnlyChainedPresetsButton.ToolTip"));
+            this.showOnlyChainedPresetsButton.Click += new System.EventHandler(this.showOnlyChainedPresetsButton_Click);
+            // 
+            // clearNextPresetButton
+            // 
+            resources.ApplyResources(this.clearNextPresetButton, "clearNextPresetButton");
+            this.clearNextPresetButton.Name = "clearNextPresetButton";
+            this.clearNextPresetButton.Tag = "@pinned-to-parent-x@non-defaultable@square-control";
+            this.toolTip1.SetToolTip(this.clearNextPresetButton, resources.GetString("clearNextPresetButton.ToolTip"));
+            this.clearNextPresetButton.Click += new System.EventHandler(this.clearNextPresetButton_Click);
+            // 
+            // hiddenCheckBoxLabel
+            // 
+            resources.ApplyResources(this.hiddenCheckBoxLabel, "hiddenCheckBoxLabel");
+            this.hiddenCheckBoxLabel.Name = "hiddenCheckBoxLabel";
+            this.hiddenCheckBoxLabel.Tag = "";
+            this.hiddenCheckBoxLabel.Click += new System.EventHandler(this.hiddenCheckBoxLabel_Click);
+            // 
+            // hiddenCheckBox
+            // 
+            resources.ApplyResources(this.hiddenCheckBox, "hiddenCheckBox");
+            this.hiddenCheckBox.Name = "hiddenCheckBox";
+            this.hiddenCheckBox.Tag = "#hiddenCheckBoxLabel";
+            this.hiddenCheckBox.CheckedChanged += new System.EventHandler(this.hiddenCheckBox_CheckedChanged);
+            // 
+            // nextPresetComboBox
+            // 
+            resources.ApplyResources(this.nextPresetComboBox, "nextPresetComboBox");
+            this.nextPresetComboBox.DropDownWidth = 250;
+            this.nextPresetComboBox.FormattingEnabled = true;
+            this.nextPresetComboBox.Name = "nextPresetComboBox";
+            this.nextPresetComboBox.Sorted = true;
+            this.nextPresetComboBox.Tag = "#gotoNextPresetButton";
+            this.toolTip1.SetToolTip(this.nextPresetComboBox, resources.GetString("nextPresetComboBox.ToolTip"));
+            this.nextPresetComboBox.TextChanged += new System.EventHandler(this.nextPresetComboBox_TextChanged);
+            // 
+            // nextPresetCheckBoxLabel
+            // 
+            resources.ApplyResources(this.nextPresetCheckBoxLabel, "nextPresetCheckBoxLabel");
+            this.nextPresetCheckBoxLabel.Name = "nextPresetCheckBoxLabel";
+            this.nextPresetCheckBoxLabel.Tag = "#nextPresetComboBox";
+            this.toolTip1.SetToolTip(this.nextPresetCheckBoxLabel, resources.GetString("nextPresetCheckBoxLabel.ToolTip"));
+            this.nextPresetCheckBoxLabel.Click += new System.EventHandler(this.nextPresetCheckBoxLabel_Click);
+            // 
+            // nextPresetCheckBox
+            // 
+            resources.ApplyResources(this.nextPresetCheckBox, "nextPresetCheckBox");
+            this.nextPresetCheckBox.Name = "nextPresetCheckBox";
+            this.nextPresetCheckBox.Tag = "#nextPresetCheckBoxLabel";
+            this.nextPresetCheckBox.CheckedChanged += new System.EventHandler(this.nextPresetCheckBox_CheckedChanged);
             // 
             // tableLayoutPanel3
             // 
@@ -603,7 +723,7 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.favoriteCheckBoxLabel, "favoriteCheckBoxLabel");
             this.favoriteCheckBoxLabel.Name = "favoriteCheckBoxLabel";
-            this.favoriteCheckBoxLabel.Tag = "";
+            this.favoriteCheckBoxLabel.Tag = "#hiddenCheckBox";
             this.favoriteCheckBoxLabel.Click += new System.EventHandler(this.favoriteCheckBoxLabel_Click);
             // 
             // favoriteCheckBox
@@ -727,6 +847,7 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.presetList, "presetList");
             this.presetList.Name = "presetList";
+            this.presetList.Sorted = true;
             this.presetList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.presetList_ItemCheck);
             this.presetList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.presetList_MouseClick);
             this.presetList.SelectedIndexChanged += new System.EventHandler(this.presetList_SelectedIndexChanged);
@@ -749,6 +870,7 @@ namespace MusicBeePlugin
             this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.previewTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PresetGuid,
             this.File,
@@ -779,6 +901,203 @@ namespace MusicBeePlugin
             this.previewTable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PreviewTable_MouseDown);
             this.previewTable.MouseLeave += new System.EventHandler(this.PreviewTable_MouseLeave);
             this.previewTable.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PreviewTable_MouseUp);
+            // 
+            // PresetGuid
+            // 
+            this.PresetGuid.DataPropertyName = "PresetGuid";
+            this.PresetGuid.FillWeight = 1F;
+            resources.ApplyResources(this.PresetGuid, "PresetGuid");
+            this.PresetGuid.Name = "PresetGuid";
+            // 
+            // File
+            // 
+            this.File.DataPropertyName = "File";
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
+            // 
+            // Track
+            // 
+            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Track.FillWeight = 59.54461F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            // 
+            // TagName1
+            // 
+            this.TagName1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TagName1.DataPropertyName = "TagName1";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.TagName1.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName1, "TagName1");
+            this.TagName1.Name = "TagName1";
+            // 
+            // OriginalTag1
+            // 
+            this.OriginalTag1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OriginalTag1.DataPropertyName = "OriginalTag1";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.OriginalTag1.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag1, "OriginalTag1");
+            this.OriginalTag1.Name = "OriginalTag1";
+            // 
+            // NewTag1
+            // 
+            this.NewTag1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTag1.DataPropertyName = "NewTag1";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag1.DefaultCellStyle = dataGridViewCellStyle4;
+            this.NewTag1.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag1, "NewTag1");
+            this.NewTag1.Name = "NewTag1";
+            // 
+            // TagName2
+            // 
+            this.TagName2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TagName2.DataPropertyName = "TagName2";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName2.DefaultCellStyle = dataGridViewCellStyle5;
+            this.TagName2.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName2, "TagName2");
+            this.TagName2.Name = "TagName2";
+            // 
+            // OriginalTag2
+            // 
+            this.OriginalTag2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OriginalTag2.DataPropertyName = "OriginalTag2";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag2.DefaultCellStyle = dataGridViewCellStyle6;
+            this.OriginalTag2.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag2, "OriginalTag2");
+            this.OriginalTag2.Name = "OriginalTag2";
+            // 
+            // NewTag2
+            // 
+            this.NewTag2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTag2.DataPropertyName = "NewTag2";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag2.DefaultCellStyle = dataGridViewCellStyle7;
+            this.NewTag2.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag2, "NewTag2");
+            this.NewTag2.Name = "NewTag2";
+            // 
+            // TagName3
+            // 
+            this.TagName3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TagName3.DataPropertyName = "TagName3";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName3.DefaultCellStyle = dataGridViewCellStyle8;
+            this.TagName3.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName3, "TagName3");
+            this.TagName3.Name = "TagName3";
+            // 
+            // OriginalTag3
+            // 
+            this.OriginalTag3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OriginalTag3.DataPropertyName = "OriginalTag3";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag3.DefaultCellStyle = dataGridViewCellStyle9;
+            this.OriginalTag3.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag3, "OriginalTag3");
+            this.OriginalTag3.Name = "OriginalTag3";
+            // 
+            // NewTag3
+            // 
+            this.NewTag3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTag3.DataPropertyName = "NewTag3";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag3.DefaultCellStyle = dataGridViewCellStyle10;
+            this.NewTag3.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag3, "NewTag3");
+            this.NewTag3.Name = "NewTag3";
+            // 
+            // TagName4
+            // 
+            this.TagName4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TagName4.DataPropertyName = "TagName4";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName4.DefaultCellStyle = dataGridViewCellStyle11;
+            this.TagName4.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName4, "TagName4");
+            this.TagName4.Name = "TagName4";
+            // 
+            // OriginalTag4
+            // 
+            this.OriginalTag4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OriginalTag4.DataPropertyName = "OriginalTag4";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag4.DefaultCellStyle = dataGridViewCellStyle12;
+            this.OriginalTag4.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag4, "OriginalTag4");
+            this.OriginalTag4.Name = "OriginalTag4";
+            // 
+            // NewTag4
+            // 
+            this.NewTag4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTag4.DataPropertyName = "NewTag4";
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag4.DefaultCellStyle = dataGridViewCellStyle13;
+            this.NewTag4.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag4, "NewTag4");
+            this.NewTag4.Name = "NewTag4";
+            // 
+            // TagName5
+            // 
+            this.TagName5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.TagName5.DataPropertyName = "TagName5";
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.TagName5.DefaultCellStyle = dataGridViewCellStyle14;
+            this.TagName5.FillWeight = 24.52376F;
+            resources.ApplyResources(this.TagName5, "TagName5");
+            this.TagName5.Name = "TagName5";
+            // 
+            // OriginalTag5
+            // 
+            this.OriginalTag5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OriginalTag5.DataPropertyName = "OriginalTag5";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTag5.DefaultCellStyle = dataGridViewCellStyle15;
+            this.OriginalTag5.FillWeight = 24.52376F;
+            resources.ApplyResources(this.OriginalTag5, "OriginalTag5");
+            this.OriginalTag5.Name = "OriginalTag5";
+            // 
+            // NewTag5
+            // 
+            this.NewTag5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTag5.DataPropertyName = "NewTag5";
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTag5.DefaultCellStyle = dataGridViewCellStyle16;
+            this.NewTag5.FillWeight = 24.52376F;
+            resources.ApplyResources(this.NewTag5, "NewTag5");
+            this.NewTag5.Name = "NewTag5";
+            // 
+            // OddEven
+            // 
+            this.OddEven.DataPropertyName = "OddEven";
+            this.OddEven.FillWeight = 1.455394F;
+            resources.ApplyResources(this.OddEven, "OddEven");
+            this.OddEven.Name = "OddEven";
             // 
             // settingsProcessingGroupBox
             // 
@@ -956,7 +1275,8 @@ namespace MusicBeePlugin
             resources.GetString("filterComboBox.Items4"),
             resources.GetString("filterComboBox.Items5"),
             resources.GetString("filterComboBox.Items6"),
-            resources.GetString("filterComboBox.Items7")});
+            resources.GetString("filterComboBox.Items7"),
+            resources.GetString("filterComboBox.Items8")});
             this.filterComboBox.Name = "filterComboBox";
             this.filterComboBox.Tag = "#filtersPanel";
             this.toolTip1.SetToolTip(this.filterComboBox, resources.GetString("filterComboBox.ToolTip"));
@@ -970,6 +1290,14 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.searchTextBox, resources.GetString("searchTextBox.ToolTip"));
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
+            // clearSearchButton
+            // 
+            resources.ApplyResources(this.clearSearchButton, "clearSearchButton");
+            this.clearSearchButton.Name = "clearSearchButton";
+            this.clearSearchButton.Tag = "@non-defaultable@square-control";
+            this.toolTip1.SetToolTip(this.clearSearchButton, resources.GetString("clearSearchButton.ToolTip"));
+            this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
+            // 
             // buttonSettings
             // 
             resources.ApplyResources(this.buttonSettings, "buttonSettings");
@@ -982,6 +1310,7 @@ namespace MusicBeePlugin
             // uncheckAllFiltersPictureBox
             // 
             resources.ApplyResources(this.uncheckAllFiltersPictureBox, "uncheckAllFiltersPictureBox");
+            this.uncheckAllFiltersPictureBox.Image = global::MusicBeePlugin.Properties.Resources.uncheck_all_preset_filters;
             this.uncheckAllFiltersPictureBox.Name = "uncheckAllFiltersPictureBox";
             this.uncheckAllFiltersPictureBox.TabStop = false;
             this.uncheckAllFiltersPictureBox.Tag = "@square-control";
@@ -991,6 +1320,7 @@ namespace MusicBeePlugin
             // hotkeyPictureBox
             // 
             resources.ApplyResources(this.hotkeyPictureBox, "hotkeyPictureBox");
+            this.hotkeyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.hotkey_presets;
             this.hotkeyPictureBox.Name = "hotkeyPictureBox";
             this.hotkeyPictureBox.TabStop = false;
             this.hotkeyPictureBox.Tag = "@square-control";
@@ -1000,6 +1330,7 @@ namespace MusicBeePlugin
             // functionIdPictureBox
             // 
             resources.ApplyResources(this.functionIdPictureBox, "functionIdPictureBox");
+            this.functionIdPictureBox.Image = global::MusicBeePlugin.Properties.Resources.function_id_presets;
             this.functionIdPictureBox.Name = "functionIdPictureBox";
             this.functionIdPictureBox.TabStop = false;
             this.functionIdPictureBox.Tag = "@square-control";
@@ -1009,6 +1340,7 @@ namespace MusicBeePlugin
             // playlistPictureBox
             // 
             resources.ApplyResources(this.playlistPictureBox, "playlistPictureBox");
+            this.playlistPictureBox.Image = global::MusicBeePlugin.Properties.Resources.playlist_presets;
             this.playlistPictureBox.Name = "playlistPictureBox";
             this.playlistPictureBox.TabStop = false;
             this.playlistPictureBox.Tag = "@square-control";
@@ -1018,6 +1350,7 @@ namespace MusicBeePlugin
             // userPictureBox
             // 
             resources.ApplyResources(this.userPictureBox, "userPictureBox");
+            this.userPictureBox.Image = global::MusicBeePlugin.Properties.Resources.user_presets;
             this.userPictureBox.Name = "userPictureBox";
             this.userPictureBox.TabStop = false;
             this.userPictureBox.Tag = "@square-control";
@@ -1027,6 +1360,7 @@ namespace MusicBeePlugin
             // customizedPictureBox
             // 
             resources.ApplyResources(this.customizedPictureBox, "customizedPictureBox");
+            this.customizedPictureBox.Image = global::MusicBeePlugin.Properties.Resources.customized_presets;
             this.customizedPictureBox.Name = "customizedPictureBox";
             this.customizedPictureBox.TabStop = false;
             this.customizedPictureBox.Tag = "@square-control";
@@ -1036,6 +1370,7 @@ namespace MusicBeePlugin
             // predefinedPictureBox
             // 
             resources.ApplyResources(this.predefinedPictureBox, "predefinedPictureBox");
+            this.predefinedPictureBox.Image = global::MusicBeePlugin.Properties.Resources.predefined_presets;
             this.predefinedPictureBox.Name = "predefinedPictureBox";
             this.predefinedPictureBox.TabStop = false;
             this.predefinedPictureBox.Tag = "@square-control";
@@ -1045,19 +1380,22 @@ namespace MusicBeePlugin
             // tickedOnlyPictureBox
             // 
             resources.ApplyResources(this.tickedOnlyPictureBox, "tickedOnlyPictureBox");
+            this.tickedOnlyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.auto_applied_presets;
             this.tickedOnlyPictureBox.Name = "tickedOnlyPictureBox";
             this.tickedOnlyPictureBox.TabStop = false;
             this.tickedOnlyPictureBox.Tag = "@square-control";
             this.toolTip1.SetToolTip(this.tickedOnlyPictureBox, resources.GetString("tickedOnlyPictureBox.ToolTip"));
             this.tickedOnlyPictureBox.Click += new System.EventHandler(this.tickedOnlyPictureBox_Click);
             // 
-            // clearSearchButton
+            // hiddenPictureBox
             // 
-            resources.ApplyResources(this.clearSearchButton, "clearSearchButton");
-            this.clearSearchButton.Name = "clearSearchButton";
-            this.clearSearchButton.Tag = "@non-defaultable@square-control";
-            this.toolTip1.SetToolTip(this.clearSearchButton, resources.GetString("clearSearchButton.ToolTip"));
-            this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
+            resources.ApplyResources(this.hiddenPictureBox, "hiddenPictureBox");
+            this.hiddenPictureBox.Image = global::MusicBeePlugin.Properties.Resources.hidden_presets;
+            this.hiddenPictureBox.Name = "hiddenPictureBox";
+            this.hiddenPictureBox.TabStop = false;
+            this.hiddenPictureBox.Tag = "@square-control";
+            this.toolTip1.SetToolTip(this.hiddenPictureBox, resources.GetString("hiddenPictureBox.ToolTip"));
+            this.hiddenPictureBox.Click += new System.EventHandler(this.hiddenPictureBox_Click);
             // 
             // autoApplyPresetsLabel
             // 
@@ -1067,17 +1405,10 @@ namespace MusicBeePlugin
             this.autoApplyPresetsLabel.Tag = "#AdvancedSearchAndReplace&filtersPanel";
             this.autoApplyPresetsLabel.Click += new System.EventHandler(this.label5_Click);
             // 
-            // searchPictureBox
-            // 
-            this.searchPictureBox.Image = global::MusicBeePlugin.Properties.Resources.search;
-            resources.ApplyResources(this.searchPictureBox, "searchPictureBox");
-            this.searchPictureBox.Name = "searchPictureBox";
-            this.searchPictureBox.TabStop = false;
-            this.searchPictureBox.Tag = "#searchTextBox@square-control";
-            // 
             // filtersPanel
             // 
             resources.ApplyResources(this.filtersPanel, "filtersPanel");
+            this.filtersPanel.Controls.Add(this.hiddenPictureBox);
             this.filtersPanel.Controls.Add(this.filterComboBox);
             this.filtersPanel.Controls.Add(this.uncheckAllFiltersPictureBox);
             this.filtersPanel.Controls.Add(this.hotkeyPictureBox);
@@ -1094,6 +1425,14 @@ namespace MusicBeePlugin
             this.filtersPanel.Name = "filtersPanel";
             this.filtersPanel.Tag = "#AdvancedSearchAndReplace&splitContainer1";
             // 
+            // searchPictureBox
+            // 
+            this.searchPictureBox.Image = global::MusicBeePlugin.Properties.Resources.search;
+            resources.ApplyResources(this.searchPictureBox, "searchPictureBox");
+            this.searchPictureBox.Name = "searchPictureBox";
+            this.searchPictureBox.TabStop = false;
+            this.searchPictureBox.Tag = "#searchTextBox@square-control";
+            // 
             // dirtyErrorProvider
             // 
             this.dirtyErrorProvider.BlinkRate = 1000;
@@ -1101,202 +1440,202 @@ namespace MusicBeePlugin
             this.dirtyErrorProvider.ContainerControl = this;
             resources.ApplyResources(this.dirtyErrorProvider, "dirtyErrorProvider");
             // 
-            // PresetGuid
+            // dataGridViewTextBoxColumn1
             // 
-            this.PresetGuid.DataPropertyName = "PresetGuid";
-            this.PresetGuid.FillWeight = 1F;
-            resources.ApplyResources(this.PresetGuid, "PresetGuid");
-            this.PresetGuid.Name = "PresetGuid";
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "PresetGuid";
+            this.dataGridViewTextBoxColumn1.FillWeight = 1F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn1, "dataGridViewTextBoxColumn1");
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
-            // File
+            // dataGridViewTextBoxColumn2
             // 
-            this.File.DataPropertyName = "File";
-            this.File.FillWeight = 1F;
-            resources.ApplyResources(this.File, "File");
-            this.File.Name = "File";
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "File";
+            this.dataGridViewTextBoxColumn2.FillWeight = 1F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn2, "dataGridViewTextBoxColumn2");
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // Track
+            // dataGridViewTextBoxColumn3
             // 
-            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Track.DataPropertyName = "Track";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Track.FillWeight = 60F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Track";
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle17;
+            this.dataGridViewTextBoxColumn3.FillWeight = 60F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn3, "dataGridViewTextBoxColumn3");
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             // 
-            // TagName1
+            // dataGridViewTextBoxColumn4
             // 
-            this.TagName1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TagName1.DataPropertyName = "TagName1";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.TagName1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.TagName1.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName1, "TagName1");
-            this.TagName1.Name = "TagName1";
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "TagName1";
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle18;
+            this.dataGridViewTextBoxColumn4.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn4, "dataGridViewTextBoxColumn4");
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // OriginalTag1
+            // dataGridViewTextBoxColumn5
             // 
-            this.OriginalTag1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OriginalTag1.DataPropertyName = "OriginalTag1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OriginalTag1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.OriginalTag1.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag1, "OriginalTag1");
-            this.OriginalTag1.Name = "OriginalTag1";
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "OriginalTag1";
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle19;
+            this.dataGridViewTextBoxColumn5.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn5, "dataGridViewTextBoxColumn5");
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
-            // NewTag1
+            // dataGridViewTextBoxColumn6
             // 
-            this.NewTag1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewTag1.DataPropertyName = "NewTag1";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewTag1.DefaultCellStyle = dataGridViewCellStyle4;
-            this.NewTag1.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag1, "NewTag1");
-            this.NewTag1.Name = "NewTag1";
+            this.dataGridViewTextBoxColumn6.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "NewTag1";
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle20;
+            this.dataGridViewTextBoxColumn6.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn6, "dataGridViewTextBoxColumn6");
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             // 
-            // TagName2
+            // dataGridViewTextBoxColumn7
             // 
-            this.TagName2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TagName2.DataPropertyName = "TagName2";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.TagName2.DefaultCellStyle = dataGridViewCellStyle5;
-            this.TagName2.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName2, "TagName2");
-            this.TagName2.Name = "TagName2";
+            this.dataGridViewTextBoxColumn7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "TagName2";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle21;
+            this.dataGridViewTextBoxColumn7.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn7, "dataGridViewTextBoxColumn7");
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
-            // OriginalTag2
+            // dataGridViewTextBoxColumn8
             // 
-            this.OriginalTag2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OriginalTag2.DataPropertyName = "OriginalTag2";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OriginalTag2.DefaultCellStyle = dataGridViewCellStyle6;
-            this.OriginalTag2.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag2, "OriginalTag2");
-            this.OriginalTag2.Name = "OriginalTag2";
+            this.dataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "OriginalTag2";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle22;
+            this.dataGridViewTextBoxColumn8.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn8, "dataGridViewTextBoxColumn8");
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             // 
-            // NewTag2
+            // dataGridViewTextBoxColumn9
             // 
-            this.NewTag2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewTag2.DataPropertyName = "NewTag2";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewTag2.DefaultCellStyle = dataGridViewCellStyle7;
-            this.NewTag2.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag2, "NewTag2");
-            this.NewTag2.Name = "NewTag2";
+            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "NewTag2";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle23;
+            this.dataGridViewTextBoxColumn9.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn9, "dataGridViewTextBoxColumn9");
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
-            // TagName3
+            // dataGridViewTextBoxColumn10
             // 
-            this.TagName3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TagName3.DataPropertyName = "TagName3";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.TagName3.DefaultCellStyle = dataGridViewCellStyle8;
-            this.TagName3.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName3, "TagName3");
-            this.TagName3.Name = "TagName3";
+            this.dataGridViewTextBoxColumn10.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "TagName3";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle24;
+            this.dataGridViewTextBoxColumn10.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn10, "dataGridViewTextBoxColumn10");
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             // 
-            // OriginalTag3
+            // dataGridViewTextBoxColumn11
             // 
-            this.OriginalTag3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OriginalTag3.DataPropertyName = "OriginalTag3";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OriginalTag3.DefaultCellStyle = dataGridViewCellStyle9;
-            this.OriginalTag3.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag3, "OriginalTag3");
-            this.OriginalTag3.Name = "OriginalTag3";
+            this.dataGridViewTextBoxColumn11.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "OriginalTag3";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn11.DefaultCellStyle = dataGridViewCellStyle25;
+            this.dataGridViewTextBoxColumn11.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn11, "dataGridViewTextBoxColumn11");
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             // 
-            // NewTag3
+            // dataGridViewTextBoxColumn12
             // 
-            this.NewTag3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewTag3.DataPropertyName = "NewTag3";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewTag3.DefaultCellStyle = dataGridViewCellStyle10;
-            this.NewTag3.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag3, "NewTag3");
-            this.NewTag3.Name = "NewTag3";
+            this.dataGridViewTextBoxColumn12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "NewTag3";
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn12.DefaultCellStyle = dataGridViewCellStyle26;
+            this.dataGridViewTextBoxColumn12.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn12, "dataGridViewTextBoxColumn12");
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
             // 
-            // TagName4
+            // dataGridViewTextBoxColumn13
             // 
-            this.TagName4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TagName4.DataPropertyName = "TagName4";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.TagName4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.TagName4.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName4, "TagName4");
-            this.TagName4.Name = "TagName4";
+            this.dataGridViewTextBoxColumn13.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "TagName4";
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn13.DefaultCellStyle = dataGridViewCellStyle27;
+            this.dataGridViewTextBoxColumn13.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn13, "dataGridViewTextBoxColumn13");
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             // 
-            // OriginalTag4
+            // dataGridViewTextBoxColumn14
             // 
-            this.OriginalTag4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OriginalTag4.DataPropertyName = "OriginalTag4";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OriginalTag4.DefaultCellStyle = dataGridViewCellStyle12;
-            this.OriginalTag4.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag4, "OriginalTag4");
-            this.OriginalTag4.Name = "OriginalTag4";
+            this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "OriginalTag4";
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn14.DefaultCellStyle = dataGridViewCellStyle28;
+            this.dataGridViewTextBoxColumn14.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn14, "dataGridViewTextBoxColumn14");
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             // 
-            // NewTag4
+            // dataGridViewTextBoxColumn15
             // 
-            this.NewTag4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewTag4.DataPropertyName = "NewTag4";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewTag4.DefaultCellStyle = dataGridViewCellStyle13;
-            this.NewTag4.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag4, "NewTag4");
-            this.NewTag4.Name = "NewTag4";
+            this.dataGridViewTextBoxColumn15.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "NewTag4";
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn15.DefaultCellStyle = dataGridViewCellStyle29;
+            this.dataGridViewTextBoxColumn15.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn15, "dataGridViewTextBoxColumn15");
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             // 
-            // TagName5
+            // dataGridViewTextBoxColumn16
             // 
-            this.TagName5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.TagName5.DataPropertyName = "TagName5";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.TagName5.DefaultCellStyle = dataGridViewCellStyle14;
-            this.TagName5.FillWeight = 24.52376F;
-            resources.ApplyResources(this.TagName5, "TagName5");
-            this.TagName5.Name = "TagName5";
+            this.dataGridViewTextBoxColumn16.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "TagName5";
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn16.DefaultCellStyle = dataGridViewCellStyle30;
+            this.dataGridViewTextBoxColumn16.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn16, "dataGridViewTextBoxColumn16");
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             // 
-            // OriginalTag5
+            // dataGridViewTextBoxColumn17
             // 
-            this.OriginalTag5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OriginalTag5.DataPropertyName = "OriginalTag5";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OriginalTag5.DefaultCellStyle = dataGridViewCellStyle15;
-            this.OriginalTag5.FillWeight = 24.52376F;
-            resources.ApplyResources(this.OriginalTag5, "OriginalTag5");
-            this.OriginalTag5.Name = "OriginalTag5";
+            this.dataGridViewTextBoxColumn17.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "OriginalTag5";
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn17.DefaultCellStyle = dataGridViewCellStyle31;
+            this.dataGridViewTextBoxColumn17.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn17, "dataGridViewTextBoxColumn17");
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             // 
-            // NewTag5
+            // dataGridViewTextBoxColumn18
             // 
-            this.NewTag5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewTag5.DataPropertyName = "NewTag5";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewTag5.DefaultCellStyle = dataGridViewCellStyle16;
-            this.NewTag5.FillWeight = 24.52376F;
-            resources.ApplyResources(this.NewTag5, "NewTag5");
-            this.NewTag5.Name = "NewTag5";
+            this.dataGridViewTextBoxColumn18.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "NewTag5";
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewTextBoxColumn18.DefaultCellStyle = dataGridViewCellStyle32;
+            this.dataGridViewTextBoxColumn18.FillWeight = 24.52376F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn18, "dataGridViewTextBoxColumn18");
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             // 
-            // OddEven
+            // dataGridViewTextBoxColumn19
             // 
-            this.OddEven.DataPropertyName = "OddEven";
-            this.OddEven.FillWeight = 1F;
-            resources.ApplyResources(this.OddEven, "OddEven");
-            this.OddEven.Name = "OddEven";
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "OddEven";
+            this.dataGridViewTextBoxColumn19.FillWeight = 1F;
+            resources.ApplyResources(this.dataGridViewTextBoxColumn19, "dataGridViewTextBoxColumn19");
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             // 
             // AdvancedSearchAndReplace
             // 
@@ -1350,9 +1689,10 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hiddenPictureBox)).EndInit();
             this.filtersPanel.ResumeLayout(false);
             this.filtersPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
 
@@ -1475,5 +1815,33 @@ namespace MusicBeePlugin
         private DataGridViewTextBoxColumn OriginalTag5;
         private DataGridViewTextBoxColumn NewTag5;
         private DataGridViewTextBoxColumn OddEven;
+        private ComboBox nextPresetComboBox;
+        private Label nextPresetCheckBoxLabel;
+        private CheckBox nextPresetCheckBox;
+        private Label hiddenCheckBoxLabel;
+        private CheckBox hiddenCheckBox;
+        private PictureBox hiddenPictureBox;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private Button showOnlyChainedPresetsButton;
+        private Button clearNextPresetButton;
+        private Button gotoNextPresetButton;
     }
 }

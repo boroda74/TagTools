@@ -106,10 +106,13 @@ namespace MusicBeePlugin
             showCARCheckBox.Checked = !SavedSettings.dontShowCAR;
             showCTCheckBox.Checked = !SavedSettings.dontShowCT;
             showShowHiddenWindowsCheckBox.Checked = !SavedSettings.dontShowShowHiddenWindows;
+            showCustomSortingForColumnBrowserCheckBox.Checked = !SavedSettings.dontShowCustomSortingForColumnBrowser;
 
             showBackupRestoreCheckBox.Checked = !SavedSettings.dontShowBackupRestore;
 
             minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
+
+            scrollPreviewToEndCheckBox.Checked = SavedSettings.scrollPreviewToEnd;
 
             useSkinColorsCheckBox.Checked = !SavedSettings.dontUseSkinColors;
             useMusicBeeFontCheckBox.Checked = SavedSettings.useMusicBeeFont;
@@ -151,6 +154,8 @@ namespace MusicBeePlugin
             unitKBox.Text = SavedSettings.unitK;
             unitMBox.Text = SavedSettings.unitM;
             unitGBox.Text = SavedSettings.unitG;
+
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void saveSettings()
@@ -186,10 +191,13 @@ namespace MusicBeePlugin
             SavedSettings.dontShowCAR = !showCARCheckBox.Checked;
             SavedSettings.dontShowCT = !showCTCheckBox.Checked;
             SavedSettings.dontShowShowHiddenWindows = !showShowHiddenWindowsCheckBox.Checked;
+            SavedSettings.dontShowCustomSortingForColumnBrowser = !showCustomSortingForColumnBrowserCheckBox.Checked;
 
             SavedSettings.dontShowBackupRestore = !showBackupRestoreCheckBox.Checked;
 
             SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
+
+            SavedSettings.scrollPreviewToEnd = scrollPreviewToEndCheckBox.Checked;
 
             SavedSettings.dontUseSkinColors = !useSkinColorsCheckBox.Checked;
 
@@ -398,6 +406,11 @@ namespace MusicBeePlugin
             showHiddenCommandWindowsRadioButton.Checked = true;
         }
 
+        private void scrollPreviewToEndCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            scrollPreviewToEndCheckBox.Checked = !scrollPreviewToEndCheckBox.Checked;
+        }
+
         private void playCompletedSoundCheckBoxLabel_Click(object sender, EventArgs e)
         {
             playCompletedSoundCheckBox.Checked = !playCompletedSoundCheckBox.Checked;
@@ -441,6 +454,11 @@ namespace MusicBeePlugin
         private void allowAsrLrPresetAutoExecutionCheckBoxLabel_Click(object sender, EventArgs e)
         {
             allowAsrLrPresetAutoExecutionCheckBox.Checked = !allowAsrLrPresetAutoExecutionCheckBox.Checked;
+        }
+
+        private void showCustomSortingForColumnBrowserCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            showCustomSortingForColumnBrowserCheckBox.Checked = !showCustomSortingForColumnBrowserCheckBox.Checked;
         }
     }
 }

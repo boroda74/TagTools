@@ -124,12 +124,6 @@
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
-  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 5</value>
-  </data>
-  <data name="buttonClose.Text" xml:space="preserve">
-    <value>Закрыть</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1094, 361</value>
   </data>
@@ -148,11 +142,17 @@
   <data name="addCheckBoxLabel.Text" xml:space="preserve">
     <value>Добавить тег источника в начало тега получателя, разделяя их символами:</value>
   </data>
+  <data name="addCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Добавить текст в конец скопированного тега:</value>
+  </data>
   <data name="appendCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>417, 15</value>
   </data>
   <data name="appendCheckBoxLabel.Text" xml:space="preserve">
     <value>Добавить тег источника в конец тега получателя, разделяя их символами:</value>
+  </data>
+  <data name="appendCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Добавить текст в начало скопированного тега:</value>
   </data>
   <data name="onlyIfSourceNotEmptyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>343, 63</value>
@@ -245,6 +245,12 @@
   </data>
   <data name="fileNameLabel.Text" xml:space="preserve">
     <value>Имя файла:</value>
+  </data>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>348, 5</value>
+  </data>
+  <data name="buttonClose.Text" xml:space="preserve">
+    <value>Закрыть</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>240, 5</value>

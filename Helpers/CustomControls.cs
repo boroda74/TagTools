@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 using ExtensionMethods;
@@ -14,6 +15,7 @@ namespace MusicBeePlugin
     partial class Plugin
     {
         internal const int ThumbMoveRepeatInterval = 200; //Milliseconds //---
+        internal const int DontCreateVScrollBar = -2;
     }
 
     internal static class ControlsTools
@@ -43,18 +45,19 @@ namespace MusicBeePlugin
             return children;
         }
 
-        internal static void DrawCheckBox(Graphics graphics, Rectangle checkBoxBounds, int borderWidth, Color backColor, Color borderColor, Color checkMarkColor, bool state)
+        internal static void DrawCheckBox(Graphics graphics, float dpiScaling, Rectangle checkBoxBounds, int borderWidth, Color backColor, Color borderColor, Color checkMarkColor, bool state)
         {
-            Point pt = new Point(checkBoxBounds.Left + 2, checkBoxBounds.Top + 4);
+            Point pt = new Point(checkBoxBounds.Left + (int)Math.Round(2 * dpiScaling), checkBoxBounds.Top + (int)Math.Round(4 * dpiScaling));
 
-            const int Inflate = 4;
+            int inflateOffset = (int)Math.Round(4 * dpiScaling);
 
-            checkBoxBounds.Inflate(-Inflate, -Inflate);
-            checkBoxBounds.Offset(0, -1);
+            checkBoxBounds.Inflate(-inflateOffset, -inflateOffset);
+            checkBoxBounds.Offset(0, -(int)Math.Round(dpiScaling));
 
-            Rectangle checkMarkBounds = new Rectangle(checkBoxBounds.Left + 1, checkBoxBounds.Top - 2, checkBoxBounds.Width + 5, checkBoxBounds.Height + 5);
-            checkMarkBounds.Inflate(-borderWidth - 1, -borderWidth - 1);
-            checkMarkBounds.Offset(-4, 0);
+            Rectangle checkMarkBounds = new Rectangle(checkBoxBounds.Left + (int)Math.Round(dpiScaling), checkBoxBounds.Top - (int)Math.Round(2 * dpiScaling), 
+                checkBoxBounds.Width + (int)Math.Round(4 * dpiScaling), checkBoxBounds.Height + (int)Math.Round(4 * dpiScaling));
+            checkMarkBounds.Inflate(-borderWidth - (int)Math.Round(dpiScaling), -borderWidth - (int)Math.Round(dpiScaling));
+            checkMarkBounds.Offset((int)Math.Round(-3 * dpiScaling), (int)Math.Round(dpiScaling));
 
             if (backColor != Plugin.NoColor)
                 graphics.FillRectangle(new SolidBrush(backColor), checkBoxBounds);
@@ -71,7 +74,7 @@ namespace MusicBeePlugin
             graphics.DrawRectangle(new Pen(borderColor, borderWidth), checkBoxBounds);
         }
 
-        internal static void DrawCheckBox(Graphics graphics, Rectangle checkBoxBounds, bool state)
+        internal static void DrawCheckBox(Graphics graphics, float dpiScaling, Rectangle checkBoxBounds, bool state)
         {
             var p = new Point();
             var s = CheckBoxRenderer.GetGlyphSize(graphics,
@@ -103,13 +106,16 @@ namespace MusicBeePlugin
         {
             if (sender is Control control)
             {
-                control.Parent.Size = control.Size;
+                if (control.Parent != null) //Not disposed
+                {
+                    control.Parent.Size = control.Size;
 
-                var controlRectangle = new Rectangle(1, 1, control.Width - 2, control.Height - 2);
-                var controlRegion = new Region(controlRectangle);
-                control.Region = controlRegion;
+                    var controlRectangle = new Rectangle(1, 1, control.Width - 2, control.Height - 2);
+                    var controlRegion = new Region(controlRectangle);
+                    control.Region = controlRegion;
 
-                control.Refresh();
+                    control.Refresh();
+                }
             }
         }
 
@@ -153,6 +159,8 @@ namespace MusicBeePlugin
         internal readonly Control control;
         private bool ignoreControl_LocationChanged = false;
 
+        internal bool ignoreControl_VisibleChanged = false;
+
         internal ControlBorder(Control control, Color borderColor, Color borderColorDisabled, Color borderColorActive) :
             this(control)
         {
@@ -161,13 +169,17 @@ namespace MusicBeePlugin
             this.borderColor = borderColor;
         }
 
-        internal ControlBorder(Control control)
+        internal ControlBorder(Control control, PluginWindowTemplate ownerForm = null)
         {
             if (Plugin.SavedSettings.dontUseSkinColors)
                 return;
 
 
-            var form = control.FindForm() as PluginWindowTemplate;
+            var form = ownerForm;
+
+            if (form == null)
+                form = control.FindForm() as PluginWindowTemplate;
+
             form.controlBorders.AddUnique(this); //-V3149
 
             this.control = control;
@@ -187,13 +199,19 @@ namespace MusicBeePlugin
             TabStop = control.TabStop;
 
             var parent = control.Parent;
-            var index = parent.Controls.IndexOf(control);
-
+            var index = 0;
             TableLayoutPanelCellPosition cellPosition = default;
-            if (parent is TableLayoutPanel panel)
-                cellPosition = panel.GetCellPosition(control);
 
-            parent.Controls.RemoveAt(index);
+            if (parent != null)
+            {
+                index = parent.Controls.IndexOf(control);
+
+                if (parent is TableLayoutPanel panel)
+                    cellPosition = panel.GetCellPosition(control);
+
+                parent.Controls.RemoveAt(index);
+            }
+
             Controls.Add(control);
 
 
@@ -205,13 +223,16 @@ namespace MusicBeePlugin
             control.LocationChanged += ControlsTools.BorderedControl_LocationChanged;
             control.SizeChanged += ControlsTools.BorderedControl_Resize;
 
-            parent.Controls.Add(this);
-            parent.Controls.SetChildIndex(this, index);
-            if (parent is TableLayoutPanel layoutPanel)
-                layoutPanel.SetCellPosition(this, cellPosition);
+            if (parent != null)
+            {
+                parent.Controls.Add(this);
+                parent.Controls.SetChildIndex(this, index);
+                if (parent is TableLayoutPanel layoutPanel)
+                    layoutPanel.SetCellPosition(this, cellPosition);
+            }
 
 
-            if (control is TextBox textBox && textBox.Multiline)
+            if (control is TextBox textBox && textBox.Multiline || control.Parent is CustomComboBox)
                 control.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             else
                 control.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
@@ -282,16 +303,25 @@ namespace MusicBeePlugin
         private TextBox textBox;
         private Button button;
         private CustomListBox listBox;
+
+        public bool recordMode;
+
+        private CustomListBox specialStateListBox = null;
+        private string defaultSpecialState = null;
+        private int specialStateCharCount;
+
         private int lastSelectedIndex = -1;
 
         private bool textBoxReadOnly;
 
         private bool ignoreEnabledChanged = false;
-        private bool enabled;
+        private bool enabled = true;
+        private bool droppedDown = false;
 
+        private TableLayoutPanel dropDownPanel;
         private ToolStripDropDown dropDown;
-        private static readonly TimeSpan DropDownAutoCloseThreshold = TimeSpan.FromMilliseconds(250);
-        private DateTime dropDownClosedTime = DateTime.UtcNow - DropDownAutoCloseThreshold;
+        private bool enableFiltering;
+
         private int initialDropDownWidth = 250;
         private int initialDropDownHeight = 100;
 
@@ -343,53 +373,268 @@ namespace MusicBeePlugin
 
         private TableLayoutPanel getDropDown(int customScrollBarInitialWidth)
         {
-            var tableLayoutPanel = new TableLayoutPanel();
+            var dropDownPanel = new TableLayoutPanel();
 
-            tableLayoutPanel.Font = Font;
-            tableLayoutPanel.Margin = new Padding(0, 0, 0, 0);
-            tableLayoutPanel.Padding = new Padding(0, 0, 0, 0);
-            tableLayoutPanel.AutoSize = true;
-            tableLayoutPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            dropDownPanel.Font = Font;
+            dropDownPanel.Margin = Padding.Empty;
+            dropDownPanel.Padding = Padding.Empty;
+            dropDownPanel.AutoSize = true;
+            dropDownPanel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            dropDownPanel.TabStop = false;
 
-            var columnStyle0 = new ColumnStyle(SizeType.Percent, 100f);
-            var columnStyle1 = new ColumnStyle(SizeType.Absolute, customScrollBarInitialWidth);
+            var columnStyle0 = new ColumnStyle(SizeType.Absolute, 0);
+            var columnStyle1 = new ColumnStyle(SizeType.Absolute, initialDropDownWidth - customScrollBarInitialWidth);
+            var columnStyle2 = new ColumnStyle(SizeType.Absolute, customScrollBarInitialWidth);
 
-            tableLayoutPanel.ColumnStyles.Add(columnStyle0);
-            tableLayoutPanel.ColumnStyles.Add(columnStyle1);
+            dropDownPanel.ColumnStyles.Add(columnStyle0);
+            dropDownPanel.ColumnStyles.Add(columnStyle1);
+            dropDownPanel.ColumnStyles.Add(columnStyle2);
 
             var rowStyle0 = new RowStyle(SizeType.AutoSize, 100f);
             var rowStyle1 = new RowStyle(SizeType.Absolute, 0f);
 
-            tableLayoutPanel.RowStyles.Add(rowStyle0);
-            tableLayoutPanel.RowStyles.Add(rowStyle1);
+            dropDownPanel.RowStyles.Add(rowStyle0);
+            dropDownPanel.RowStyles.Add(rowStyle1);
 
 
-            listBox = new CustomListBox(customScrollBarInitialWidth - (int)Math.Round((ownerForm.dpiScaling - 1) * 8), scaledPx, false,
-                Plugin.ScrollBarBackColor, Plugin.ScrollBarBackColor, Plugin.ScrollBarBackColor);
+            listBox = new CustomListBox(customScrollBarInitialWidth, scaledPx, false);
 
             listBox.Font = Font;
             listBox.MultiColumn = false;
             listBox.IntegralHeight = false;
-            listBox.Margin = new Padding(0, 0, 0, 0);
-            listBox.Dock = DockStyle.Fill;
+            listBox.Margin = Padding.Empty;
+            listBox.Anchor = AnchorStyles.Top | AnchorStyles.Left;
             listBox.TabStop = false;
             listBox.Tag = this;
 
             listBox.SelectedIndex = -1;
             lastSelectedIndex = -1;
 
-            tableLayoutPanel.Controls.Add(listBox, 0, 0);
-
+            dropDownPanel.Controls.Add(listBox, 1, 0);
             ownerForm.skinControl(listBox, Plugin.SbBorderWidth);
 
-            return tableLayoutPanel;
+            listBox.SetBorderColors(listBox.BackColor, listBox.BackColor, listBox.BackColor);
+
+            return dropDownPanel;
         }
 
-        internal CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned,
+        internal string[] GetSpecialStateItems()
+        {
+            SortedDictionary<int, string> items = new SortedDictionary<int, string>();
+
+            if (specialStateListBox == null)
+            {
+                for (int i = 0; i < comboBox.Items.Count; i++)
+                {
+                    int specialStateIndex = GetItemSpecialStateIndex(i);
+                    if (specialStateIndex != -1)
+                        items.Add(specialStateIndex, GetSpecialStateItem(i));
+                }
+            }
+            else
+            {
+                for (int i = 0; i < specialStateListBox.Items.Count; i++)
+                {
+                    int specialStateIndex = GetItemSpecialStateIndex(i);
+                    if (specialStateIndex != -1)
+                        items.Add(specialStateIndex, GetSpecialStateItem(i));
+                }
+            }
+
+            string[] specialStateItems = new string[items.Count];
+            items.Values.CopyTo(specialStateItems, 0);
+
+            return specialStateItems;
+        }
+
+        internal bool IsDefaultSpecialStateItem(int index)
+        {
+            if (specialStateListBox == null && comboBox != null)
+            {
+                if ((comboBox.Items[index] as string).Substring(0, GetSpecialStateCharCount(true)) == GetDefaultSpecialState())
+                    return true;
+                else
+                    return false;
+            }
+            else if (specialStateListBox != null)
+            {
+                if (specialStateListBox.Items[index] as string == GetDefaultSpecialState())
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        internal string GetSpecialStateItem(int index)
+        {
+            if (specialStateListBox == null)
+                return comboBox.Items[index].ToString().Substring(GetSpecialStateCharCount(true));
+            else
+                return listBox.Items[index].ToString();
+        }
+
+        internal int GetItemSpecialStateIndex(int index)
+        {
+            string specialStateValue = null;
+
+            if (specialStateListBox == null)
+                specialStateValue = comboBox.Items[index].ToString().Substring(0, GetSpecialStateCharCount(true));
+            else
+                specialStateValue = specialStateListBox.Items[index].ToString();
+
+            if (int.TryParse(specialStateValue.Trim(' '), out int specialStateIndex))
+                return specialStateIndex;
+
+            return -1;
+        }
+
+        internal string GetItemSpecialState(int index)
+        {
+            if (specialStateListBox == null)
+                return comboBox.Items[index].ToString().Substring(0, GetSpecialStateCharCount(false));
+            else
+                return specialStateListBox.Items[index].ToString();
+        }
+
+        internal string GetItemNextSpecialState(int index)
+        {
+            if (SpecialState >= MaxSpecialState)
+            {
+                return GetItemSpecialState(index);
+            }
+            else
+            {
+                SpecialState++;
+                return GetCurrentSpecialState();
+            }
+        }
+
+        internal string GetCurrentSpecialState()
+        {
+            if (specialStateListBox == null)
+                return SpecialState.ToString("D" + specialStateCharCount) + ' ';
+            else
+                return SpecialState.ToString("D" + specialStateCharCount);
+        }
+
+        internal int GetSpecialStateCharCount(bool includeServiceSpace)
+        {
+            if (specialStateListBox == null || includeServiceSpace)
+                return specialStateCharCount + 1;
+            else
+                return specialStateCharCount;
+        }
+
+        internal string GetDefaultSpecialState()
+        {
+            return defaultSpecialState;
+        }
+
+        internal ListControl CreateSpecialStateColumn(string defaultValue, int columnCharCount)
+        {
+            specialStateCharCount = defaultValue.Length;
+            defaultSpecialState = string.Empty;
+            for (int i = defaultValue.Length; i < columnCharCount; i++)
+            {
+                specialStateCharCount++;
+                defaultSpecialState = ' ' + defaultSpecialState;
+            }
+
+            defaultSpecialState += defaultValue;
+
+            if (listBox == null)
+            {
+                defaultSpecialState += ' ';
+
+                for (int i = 0; i < comboBox.Items.Count; i++)
+                {
+                    string text = comboBox.Items[i] as string;
+
+                    if (text.Length < GetSpecialStateCharCount(true) || text[GetSpecialStateCharCount(true) - 1] != ' ')
+                        comboBox.Items[i] = defaultSpecialState + text;
+                }
+
+                comboBox.Tag = this;
+
+                return comboBox; //For the caller to be able to set event handlers
+            }
+            else
+            {
+                var additionalColumnWidth = (TextRenderer.MeasureText(ownerForm.CreateGraphics(), " " + defaultSpecialState, this.Font)).Width;
+
+                dropDownPanel.ColumnStyles[0].Width = additionalColumnWidth;
+
+                specialStateListBox = new CustomListBox(0, scaledPx, false);
+
+                specialStateListBox.Font = Font;
+                specialStateListBox.MultiColumn = false;
+                specialStateListBox.IntegralHeight = false;
+                specialStateListBox.Margin = Padding.Empty;
+                specialStateListBox.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                specialStateListBox.TabStop = false;
+                specialStateListBox.Tag = this;
+
+
+                specialStateListBox.MinimumSize = new Size(additionalColumnWidth, 2);
+                specialStateListBox.MaximumSize = new Size(additionalColumnWidth, listBox.MaximumSize.Height);
+
+
+                listBox_ItemsChanged(null, null);
+
+                for (int i = 0; i < listBox.Items.Count; i++)
+                {
+                    string text = listBox.Items[i] as string;
+
+                    if (text.Length >= GetSpecialStateCharCount(true) && text[GetSpecialStateCharCount(true) - 1] == ' ')
+                    {
+                        listBox.Items[i] = text.Substring(GetSpecialStateCharCount(true));
+                        specialStateListBox.Items[i] = text.Substring(0, GetSpecialStateCharCount(true));
+                    }
+                    else
+                    {
+                        specialStateListBox.Items[i] = GetDefaultSpecialState();
+                    }
+                }
+
+
+                specialStateListBox.AdjustAdditionalListHeight(initialDropDownHeight);
+
+                specialStateListBox.SelectedIndex = listBox.SelectedIndex;
+
+                specialStateListBox.GotFocus += changeTextBoxBackground;
+                specialStateListBox.LostFocus += changeTextBoxBackground;
+                specialStateListBox.MouseMove += listBox_MouseMove;
+                specialStateListBox.SelectedIndexChanged += additionalListBox_SelectedIndexChanged;
+
+
+                dropDownPanel.Controls.Add(specialStateListBox, 0, 0);
+                ownerForm.skinControl(specialStateListBox, Plugin.DontCreateVScrollBar);
+
+                specialStateListBox.SetBorderColors(specialStateListBox.BackColor, specialStateListBox.BackColor, specialStateListBox.BackColor);
+
+                specialStateListBox.Tag = this;
+
+                return specialStateListBox; //For the caller to be able to set event handlers
+            }
+        }
+
+        internal int GetSpecialStateColumnWidth()
+        {
+            if (specialStateListBox == null)
+                return 0;
+            else
+                return specialStateListBox.Width;
+        }
+
+        internal CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned, 
             Color? borderColor = null, Color? borderColorDisabled = null, Color? borderColorActive = null)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);
+            //SetStyle(ControlStyles.DoubleBuffer, true);
 
             this.ownerForm = ownerForm;
 
@@ -397,8 +642,21 @@ namespace MusicBeePlugin
 
             if (skinned)
             {
+                if (borderColorDisabled != null)
+                    this.borderColorDisabled = (Color)borderColorDisabled;
+
+                if (borderColorActive != null)
+                    this.borderColorActive = (Color)borderColorActive;
+
+                if (borderColor != null)
+                    this.borderColor = (Color)borderColor;
+
                 this.comboBox = null;
-                initSkinned(comboBox, toolTip);
+
+                if (comboBox.AccessibleName == "filtered")
+                    initSkinned(comboBox, toolTip, true);
+                else
+                    initSkinned(comboBox, toolTip, false);
             }
             else
             {
@@ -409,26 +667,21 @@ namespace MusicBeePlugin
             EnabledChanged += OnEnabledChanged;
             VisibleChanged += OnVisibleChanged;
 
-            if (borderColorDisabled != null)
-                this.borderColorDisabled = (Color)borderColorDisabled;
-
-            if (borderColorActive != null)
-                this.borderColorActive = (Color)borderColorActive;
-
-            if (borderColor != null)
-                this.borderColor = (Color)borderColor;
-
+            this.SpecialState = -1;
             this.Visible = comboBox.Visible;
             this.Enabled = comboBox.Enabled;
+            this.Sorted = comboBox.Sorted;
         }
-
 
         private void init(ComboBox comboBox, ToolTip toolTip)
         {
             this.scaledPx = ownerForm.scaledPx;
+            this.enableFiltering = false;
+
             this.textBox = null;
             this.button = null;
             this.listBox = null;
+            this.dropDownPanel = null;
             this.dropDown = null;
             this.initialDropDownWidth = comboBox.DropDownWidth;
 
@@ -442,7 +695,7 @@ namespace MusicBeePlugin
 
             this.Font = comboBox.Font;
             this.Margin = comboBox.Margin;
-            this.Padding = new Padding(0, 0, 0, 0);
+            this.Padding = Padding.Empty;
 
             this.Anchor = comboBox.Anchor;
             this.TabIndex = comboBox.TabIndex;
@@ -462,11 +715,13 @@ namespace MusicBeePlugin
             this.comboBox.Font = this.Font;
 
             this.comboBox.Location = new Point(0, 0);
-            this.comboBox.Margin = new Padding(0, 0, 0, 0);
+            this.comboBox.Margin = Padding.Empty;
             this.comboBox.Size = new Size(comboBox.Width, comboBox.Height);
             this.comboBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 
             this.Size = new Size(this.comboBox.Width, this.comboBox.Height + 1);
+
+            this.comboBox.DropDownClosed += OnDropDownClosed;
 
             this.Controls.Add(this.comboBox);
 
@@ -474,7 +729,7 @@ namespace MusicBeePlugin
             CopyComboBoxEventHandlers(comboBox, this.comboBox);
 
 
-            SizeChanged += customComboBox_SizeChanged;
+            this.SizeChanged += customComboBox_SizeChanged;
             customComboBox_SizeChanged(this, null);
 
             this.DropDownStyle = comboBox.DropDownStyle;
@@ -497,9 +752,10 @@ namespace MusicBeePlugin
             ownerForm.namesComboBoxes.AddReplace(Name, this);
         }
 
-        private void initSkinned(ComboBox comboBox, ToolTip toolTip)
+        private void initSkinned(ComboBox comboBox, ToolTip toolTip, bool enableFiltering)
         {
             this.scaledPx = ownerForm.scaledPx;
+            this.enableFiltering = enableFiltering;
 
             downArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
             disabledDownArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DisabledDownArrowComboBoxImage);
@@ -514,7 +770,7 @@ namespace MusicBeePlugin
 
             this.initialDropDownHeight = comboBox.DropDownHeight + 3 * scaledPx;
             if (comboBox.DropDownHeight == 106)
-                this.initialDropDownHeight = comboBox.ItemHeight * 20 + 3 * scaledPx;
+                this.initialDropDownHeight = comboBox.ItemHeight * 22 + 3 * scaledPx;
 
             var parent = comboBox.Parent;
             var index = parent.Controls.IndexOf(comboBox);
@@ -528,7 +784,7 @@ namespace MusicBeePlugin
             this.ForeColor = Plugin.InputControlForeColor;
             this.BackColor = Plugin.InputControlBackColor;
             this.Margin = comboBox.Margin;
-            this.Padding = new Padding(0, 0, 0, 0);
+            this.Padding = Padding.Empty;
             this.Anchor = comboBox.Anchor;
             this.TabIndex = comboBox.TabIndex;
             this.TabStop = comboBox.TabStop;
@@ -545,8 +801,8 @@ namespace MusicBeePlugin
 
             this.textBox.Font = this.Font;
             this.textBox.Location = new Point(0, 0);
-            this.textBox.Margin = new Padding(0, 0, 0, 0);
-            this.textBox.Size = new Size(comboBox.Width - customScrollBarInitialWidth - 1, this.textBox.Height);
+            this.textBox.Margin = Padding.Empty;
+            this.textBox.Size = new Size(comboBox.Width - customScrollBarInitialWidth + scaledPx, this.textBox.Height);
             this.textBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             this.textBox.TabStop = false;
 
@@ -560,15 +816,12 @@ namespace MusicBeePlugin
 
             this.Size = new Size(comboBox.Width, this.textBox.Height);
 
+
             this.button = new Button();
             this.button.Font = this.Font;
-
-            this.button.Margin = new Padding(0, 0, 0, 0);
-
-            this.button.Location = new Point(comboBox.Width - customScrollBarInitialWidth - 2, 0);
-            this.button.Size = new Size(customScrollBarInitialWidth + 2, this.textBox.Height);
-
-
+            this.button.Margin = Padding.Empty;
+            this.button.Location = new Point(comboBox.Width - customScrollBarInitialWidth, 0);
+            this.button.Size = new Size(customScrollBarInitialWidth, this.textBox.Height);
             this.button.Anchor = AnchorStyles.Right | AnchorStyles.Top;
             this.button.Text = string.Empty;
             this.button.ImageAlign = ContentAlignment.MiddleCenter;
@@ -576,18 +829,17 @@ namespace MusicBeePlugin
             this.button.Image = downArrowComboBoxImage;
             this.button.TabStop = false;
 
-            //button.Click += Button_Click;//---
-            this.button.GotFocus += button_Click;
+            this.button.Click += button_Click;//---
+            //this.button.GotFocus += button_Click;
 
 
-            this.Controls.Add(button);
             this.Controls.Add(textBox);
+            this.Controls.Add(button);
+
+            ownerForm.skinControl(this.textBox);
+            ownerForm.skinControl(this.button);
 
             ownerForm.nonDefaultingButtons.Add(this.button);
-
-
-            ownerForm.skinControl(this.button);
-            ownerForm.skinControl(this.textBox);
 
 
             var textBoxRectangle = new Rectangle(1, 1, this.textBox.Width - 2, this.textBox.Height - 2);
@@ -595,27 +847,40 @@ namespace MusicBeePlugin
             this.textBox.Region = textBoxRegion;
 
 
-            var dropDownControl = getDropDown(customScrollBarInitialWidth);
-            var controlHost = new ToolStripControlHost(dropDownControl);
-            controlHost.Font = Font;
-            controlHost.AutoSize = true;
-            controlHost.Padding = new Padding(0, 0, 0, 0);
-            controlHost.Margin = new Padding(0, 0, 0, 0);
+            this.dropDownPanel = getDropDown(customScrollBarInitialWidth);
+            var border = new ControlBorder(this.dropDownPanel, ownerForm);
+
+            if (enableFiltering)
+            {
+                this.dropDown = null;
+
+                this.dropDownPanel.Parent.Visible = false;
+
+                ownerForm.Controls.Add(dropDownPanel.Parent);
+                ownerForm.Controls.SetChildIndex(dropDownPanel.Parent, 0);
+            }
+            else
+            {
+                var controlHost = new ToolStripControlHost(dropDownPanel);
+                controlHost.Font = Font;
+                controlHost.AutoSize = true;
+                controlHost.Padding = Padding.Empty;
+                controlHost.Margin = Padding.Empty;
 
 
-            this.dropDown = new ToolStripDropDown();
-            this.dropDown.Font = this.Font;
-            this.dropDown.BackColor = this.textBox.BackColor;
-            this.dropDown.ForeColor = this.textBox.ForeColor;
-            this.dropDown.Padding = new Padding(0, 0, 0, 0);
-            this.dropDown.Margin = new Padding(0, 0, 0, 0);
-            this.dropDown.AutoSize = true;
-            this.dropDown.DropShadowEnabled = true;
-            this.dropDown.Items.Add(controlHost);
+                this.dropDown = new ToolStripDropDown();
+                this.dropDown.Font = this.Font;
+                this.dropDown.BackColor = this.textBox.BackColor;
+                this.dropDown.ForeColor = this.textBox.ForeColor;
+                this.dropDown.Padding = Padding.Empty;
+                this.dropDown.Margin = Padding.Empty;
+                this.dropDown.AutoSize = true;
+                this.dropDown.DropShadowEnabled = true;
+                this.dropDown.Items.Add(controlHost);
 
-            this.dropDown.Tag = this;
 
-            this.dropDown.Closed += DropDown_Closed;
+                this.dropDown.Tag = this;
+            }
 
 
             foreach (var item in comboBox.Items)
@@ -624,10 +889,11 @@ namespace MusicBeePlugin
             this.listBox.GotFocus += changeTextBoxBackground;
             this.listBox.LostFocus += changeTextBoxBackground;
             this.listBox.MouseMove += listBox_MouseMove;
-            this.listBox.Click += ListBox_ItemChosen;
+            this.listBox.Click += listBox_ItemChosen;
             this.listBox.ItemsChanged += listBox_ItemsChanged;
+            this.listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
 
-            this.listBox.AdjustHeight(dropDownWidth, this.initialDropDownHeight);
+            this.listBox.AdjustHeight(dropDownWidth, this.initialDropDownHeight, 0);
 
 
             CopyComboBoxEventHandlers(comboBox, this);
@@ -643,6 +909,7 @@ namespace MusicBeePlugin
             var allControlsIndex = ownerForm.allControls.IndexOf(comboBox);
             ownerForm.allControls.RemoveAt(allControlsIndex);
             ownerForm.allControls.Insert(allControlsIndex, this);
+             
 
             parent.Controls.RemoveAt(index);
             comboBox.Dispose();
@@ -656,27 +923,24 @@ namespace MusicBeePlugin
             this.Location = location;
 
             ownerForm.namesComboBoxes.AddReplace(Name, this);
-        }
-
-        private void customComboBox_GotFocus(object sender, EventArgs e)
-        {
-            textBox.Focus();
+            ownerForm.SizeChanged += ownerForm_SizeChanged;
         }
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (disposing)
             {
-                Parent?.Dispose(); //ControlBorder
-
                 textBox?.Dispose();
                 button?.Dispose();
                 listBox?.Dispose();
+                specialStateListBox?.Dispose();
+                dropDownPanel?.Dispose();
                 dropDown?.Dispose();
+
                 comboBox?.Dispose();
             }
+
+            base.Dispose(disposing);
         }
 
         ~CustomComboBox()
@@ -684,6 +948,69 @@ namespace MusicBeePlugin
             Dispose(false);
         }
 
+        public override void Refresh()
+        {
+            if (textBox != null && (textBox.Text != cue || string.IsNullOrEmpty(cue)))
+                textBox.Text = listBox.SelectedItem?.ToString();
+
+            base.Refresh();
+        }
+
+        internal string GetToolTip(ToolTip toolTip)
+        {
+            if (textBox != null)
+                return toolTip.GetToolTip(textBox);
+            else
+                return toolTip.GetToolTip(comboBox);
+        }
+
+        internal void SetToolTip(ToolTip toolTip, string text)
+        {
+            if (textBox != null)
+                toolTip.SetToolTip(textBox, text);
+            else
+                toolTip.SetToolTip(comboBox, text);
+        }
+
+        internal bool IsFiltered()
+        {
+            return enableFiltering;
+        }
+
+        internal void ShowDropDownContent()
+        {
+            if (listBox != null)
+                listBox.Visible = true;
+            else
+                ; //comboBox.DroppedDown = true; //-----
+        }
+
+        internal void HideDropDownContent()
+        {
+            if (listBox != null)
+                listBox.Visible = false;
+            else
+                ; // comboBox.DroppedDown = false; //-----
+        }
+
+        internal object DataSource
+        {
+            get
+            {
+                if (listBox == null)
+                    return comboBox.DataSource;
+                else
+                    return listBox.DataSource;
+            }
+
+            set
+            {
+                if (listBox == null)
+                    comboBox.DataSource = value;
+                else
+                    listBox.DataSource = value;
+            }
+        }
 
         internal int IndexOfText(string text)
         {
@@ -699,22 +1026,174 @@ namespace MusicBeePlugin
             return -1;
         }
 
+        internal void CopyTo(object[] array, int index)
+        {
+            if (listBox != null)
+            {
+                if (specialStateListBox == null)
+                {
+                    listBox.Items.CopyTo(array, index);
+                }
+                else
+                {
+                    for (int i = index; i < listBox.Items.Count; i++)
+                    {
+                        string itemText = listBox.Items[i] as string;
+                        string itemState = specialStateListBox.Items[i] as string;
+                        array[i] = itemState + " " + itemText;
+                    }
+                }
+            }
+            else
+            {
+                comboBox.Items.CopyTo(array, index);
+            }
+        }
+
+        internal void Add(object item)
+        {
+            if (listBox != null)
+            {
+                if (specialStateListBox == null)
+                {
+                    listBox.Items.Add(item);
+                }
+                else
+                {
+                    string state = GetDefaultSpecialState();
+                    string text = item as string;
+                    if (text.Length >= GetSpecialStateCharCount(true) && text[GetSpecialStateCharCount(true) - 1] == ' ')
+                    {
+                        state = text.Substring(0, GetSpecialStateCharCount(true) - 1);
+                        text = text.Substring(GetSpecialStateCharCount(true));
+                    }
+
+                    listBox.Items.Add(text);
+                    specialStateListBox.Items.Add(state);
+                }
+
+                listBox_ItemsChanged(null, null);
+            }
+            else
+            {
+                comboBox.Items.Add(item);
+            }
+
+            ItemsChangedSpecialMode();
+        }
+
         internal void AddRange(object[] items)
         {
             if (listBox != null)
-                listBox.Items.AddRange(items);
+            {
+                if (specialStateListBox == null)
+                {
+                    listBox.Items.AddRange(items);
+                }
+                else
+                {
+                    for (int i = 0; i < items.Length; i++)
+                    {
+                        string state = GetDefaultSpecialState();
+                        string text = items[i] as string;
+                        if (text.Length >= GetSpecialStateCharCount(true) && text[GetSpecialStateCharCount(true) - 1] == ' ')
+                        {
+                            state = text.Substring(0, GetSpecialStateCharCount(true) - 1);
+                            text = text.Substring(GetSpecialStateCharCount(true));
+                        }
+
+                        listBox.Items.Add(text);
+                        specialStateListBox.Items.Add(state);
+                    }
+                }
+
+                listBox_ItemsChanged(null, null);
+            }
             else
+            {
                 comboBox.Items.AddRange(items);
+            }
+
+            ItemsChangedSpecialMode();
+        }
+
+        internal void AddRange(IList<object> items)
+        {
+            if (listBox != null)
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    string state = GetDefaultSpecialState();
+                    string text = items[i] as string;
+                    if (text.Length >= GetSpecialStateCharCount(true) && text[GetSpecialStateCharCount(true) - 1] == ' ')
+                    {
+                        state = text.Substring(0, GetSpecialStateCharCount(true) - 1);
+                        text = text.Substring(GetSpecialStateCharCount(true));
+                    }
+
+                    listBox.Items.Add(text);
+                    specialStateListBox.Items.Add(state);
+                }
+
+                listBox_ItemsChanged(null, null);
+            }
+            else
+            {
+                foreach (object item in items)
+                    comboBox.Items.Add(item);
+            }
+
+            ItemsChangedSpecialMode();
+        }
+
+        internal bool IsFocused()
+        {
+            if (listBox == null)
+                return comboBox.Focused || comboBox.DroppedDown;
+            else
+                return listBox.Focused || button.Focused || specialStateListBox?.Focused == true || droppedDown;
+        }
+
+        internal void RemoveAt(int index)
+        {
+            Items.RemoveAt(index);
+
+            if (specialStateListBox != null)
+                specialStateListBox.Items.RemoveAt(index);
+        }
+
+        internal void Insert(int index, object item, string specialState = null)
+        {
+            if (defaultSpecialState == null)
+            {
+                Items.Insert(index, item);
+            }
+            else if (specialStateListBox == null)
+            {
+                Items.Insert(index, specialState + item);
+            }
+            else
+            {
+                Items.Insert(index, item);
+                specialStateListBox.Items.Insert(index, specialState);
+            }
         }
 
         internal void ItemsClear()
         {
             if (listBox != null)
+            {
                 listBox.Items.Clear();
+                listBox_ItemsChanged(null, null);
+            }
             else
+            {
                 comboBox.Items.Clear();
+            }
 
             SelectedIndex = -1;
+
+            ItemsChangedSpecialMode();
         }
 
         internal IList Items
@@ -736,16 +1215,46 @@ namespace MusicBeePlugin
                 return comboBox.GetItemText(item);
         }
 
-        internal bool MustKeyEventsBeHandled
+        internal bool StandardKeyPressHandling
         {
             get
             {
-                if (textBox != null && ReadOnly && button.IsEnabled())
-                    return true;
-                else
+                if (enabled && DropDownStyle == ComboBoxStyle.DropDownList)
                     return false;
+                else
+                    return true;
             }
         }
+
+        //Returns: false - process space & key right; null - process space
+        internal bool? StandardKeyDownHandling
+        {
+            get
+            {
+                if (enabled && DropDownStyle == ComboBoxStyle.DropDownList && !DroppedDown)
+                    return false;
+                else if (enabled && DropDownStyle == ComboBoxStyle.DropDown && DroppedDown 
+                    && ((SelectionStart == Text.Length && SelectionLength == 0) || (SelectionStart == 0 && SelectionLength == Text.Length))
+                )
+                    return false;
+                else if (enabled && DropDownStyle == ComboBoxStyle.DropDown && DroppedDown 
+                    && (SelectionStart == 0 && SelectionLength == 0)
+                )
+                    return null;
+                else
+                    return true;
+            }
+        }
+
+        internal int SpecialState //Currently only for enumerating in additional column
+        {
+            get; set;
+        }
+
+        internal int MaxSpecialState //Currently only for enumerating in additional column
+        {
+            get; set;
+        } = 5;
 
         internal bool Sorted
         {
@@ -839,7 +1348,7 @@ namespace MusicBeePlugin
                 var oldSelectedIndex = comboBox.SelectedIndex;
                 var oldSelectedItem = comboBox.SelectedItem;
 
-                if (!forceDropDownListText || index >= 0)
+                if (!forceDropDownListText)//----- || index >= 0)
                 {
                     comboBox.SetCue(cue);
                     comboBox.Text = value;
@@ -1132,17 +1641,58 @@ namespace MusicBeePlugin
 
             if (textBox != null)
             {
-                customComboBox_SizeChanged_ForButton();
-
                 textBox.ReadOnly = ReadOnly || !enabled;
                 button.Enable(enabled);
 
+                setButtonColors();
                 SetTextBoxColors(enabled);
             }
             else
             {
                 comboBox.Enable(enabled);
             }
+        }
+
+        internal bool DroppedDown
+        {
+            get
+            {
+                if (textBox == null)
+                    droppedDown = comboBox.DroppedDown;
+
+                return droppedDown;
+            }
+
+            set
+            {
+                if (droppedDown != value)
+                {
+                    if (textBox != null)
+                    {
+                        button_Click(null, null);
+                    }
+                    else //if (textBox == null)
+                    {
+                        string text = comboBox.Text;
+                        droppedDown = value;
+                        comboBox.DroppedDown = value;
+
+                        if (comboBox.DropDownStyle == ComboBoxStyle.DropDown && comboBox.Text != text)
+                            comboBox.Text = text;
+                    }
+                }
+            }
+        }
+
+        private void OnDropDownClosed(object sender, EventArgs e)
+        {
+            if (DropDownStyle == ComboBoxStyle.DropDown && SelectionLength == 0)
+            {
+                SelectionStart = 0;
+                SelectionLength = Text.Length;
+            }
+
+            Events[EVENT_DROPDOWNCLOSED]?.DynamicInvoke(this, null);
         }
 
         internal ComboBoxStyle DropDownStyle
@@ -1174,6 +1724,8 @@ namespace MusicBeePlugin
         {
             if (destControl is CustomComboBox customComboBox)
             {
+                refComboBox.CopyEventHandlersTo(customComboBox.textBox, "Leave", false);
+                refComboBox.CopyEventHandlersTo(customComboBox.listBox, "Leave", false);
                 refComboBox.CopyEventHandlersTo(customComboBox.textBox, "TextChanged", false);
                 refComboBox.CopyEventHandlersTo(destControl, "SelectedIndexChanged", false);
                 refComboBox.CopyEventHandlersTo(destControl, "SelectedItemChanged", false);
@@ -1183,6 +1735,7 @@ namespace MusicBeePlugin
             }
             else
             {
+                refComboBox.CopyEventHandlersTo(destControl, "Leave", false);
                 refComboBox.CopyEventHandlersTo(destControl, "TextChanged", false);
                 refComboBox.CopyEventHandlersTo(destControl, "SelectedIndexChanged", false);
                 refComboBox.CopyEventHandlersTo(destControl, "SelectedItemChanged", false);
@@ -1192,19 +1745,208 @@ namespace MusicBeePlugin
             }
         }
 
-        private void controlBorder_Paint(object sender, PaintEventArgs e)
+        private void setButtonColors()
         {
-            ControlsTools.DrawBorder(this, borderColor, borderColorActive, borderColorDisabled);
-        }
-
-        private void customComboBox_SizeChanged_ForButton()
-        {
-            ownerForm.setSkinnedControlColors(button, null);
+            ownerForm.setSkinnedControlColors(button, enabled);
 
             if (this.IsEnabled())
                 button.Image = downArrowComboBoxImage;
             else
                 button.Image = disabledDownArrowComboBoxImage;
+        }
+
+        private void controlBorder_Paint(object sender, PaintEventArgs e)
+        {
+            ControlsTools.DrawBorder(this, borderColor, borderColorActive, borderColorDisabled);
+        }
+
+        private void changeTextBoxBackground(object sender, EventArgs e)
+        {
+            SetTextBoxColors(null);
+        }
+
+        internal bool OpenCustomDropDown()
+        {
+            if (textBox != null)
+            {
+                DroppedDown = true;
+                return true;
+            }
+
+            return false;
+        }
+
+        internal void SelectCurrentDropDownItem()
+        {
+            if (textBox != null)
+            {
+                listBox_ItemChosen(null, null);
+            }
+            else
+            {
+                comboBox.SelectedItem = comboBox.Items[comboBox.SelectedIndex];
+                DroppedDown = false;
+                Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
+            }
+        }
+
+        internal void ItemsChangedSpecialMode() //If items are changed using enum mode. Must be called manually
+        {
+            if (specialStateListBox != null && specialStateListBox.Items.Count < listBox.Items.Count)
+                for (int i = specialStateListBox.Items.Count; i < listBox.Items.Count; i++)
+                    specialStateListBox.Items.Add(defaultSpecialState);
+            else if (specialStateListBox != null && specialStateListBox.Items.Count > listBox.Items.Count)
+                for (int i = listBox.Items.Count; i < specialStateListBox.Items.Count; i++)
+                    specialStateListBox.Items.Remove(listBox.Items.Count);
+
+
+            if (specialStateListBox != null)
+            {
+                for (int i = 0; i < specialStateListBox.Items.Count; i++)
+                {
+                    if (specialStateListBox.Items[i] == null || string.IsNullOrWhiteSpace(specialStateListBox.Items[i].ToString()))
+                        specialStateListBox.Items[i] = defaultSpecialState;
+                }
+            }
+            else if (defaultSpecialState != null)
+            {
+                for (int i = 0; i < comboBox.Items.Count; i++)
+                {
+                    if (comboBox.Items[i] == null || comboBox.Items[i].ToString().Length < defaultSpecialState.Length)
+                        comboBox.Items[i] = defaultSpecialState + comboBox.Items[i];
+                    else if (comboBox.Items[i].ToString()[defaultSpecialState.Length - 1] != ' ')
+                        comboBox.Items[i] = defaultSpecialState + comboBox.Items[i];
+                }
+            }
+        }
+
+        private void drawCustomDropDown()
+        {
+            var dropDownWidth = Width;
+            if (dropDownWidth < initialDropDownWidth)
+                dropDownWidth = initialDropDownWidth;
+
+            if (listBox.GetItemsHeight() > initialDropDownHeight)
+                listBox.AdjustWidth(dropDownWidth, true, GetSpecialStateColumnWidth());
+            else
+                listBox.AdjustWidth(dropDownWidth, false, GetSpecialStateColumnWidth());
+
+            listBox.AdjustHeight(dropDownWidth, initialDropDownHeight, GetSpecialStateColumnWidth());
+            specialStateListBox?.AdjustAdditionalListHeight(initialDropDownHeight);
+
+
+            dropDownPanel.ColumnStyles[1].Width = listBox.Width;
+
+            var index = IndexOfText(textBox.Text);
+            if ((listBox.SelectedItem == null || listBox.SelectedItem.ToString() != textBox.Text) && index >= 0)
+                listBox.SelectedItem = textBox.Text;
+
+            var textBoxScreenFormLocation = textBox.PointToScreen(textBox.Location);
+            if (enableFiltering) //Filtered list
+                textBoxScreenFormLocation = ownerForm.PointToClient(textBoxScreenFormLocation);
+
+            //try to position drop down below textbox
+            var ptBottomScreen = new Point(textBoxScreenFormLocation.X, textBoxScreenFormLocation.Y + textBox.Height);
+
+            //determine if it will fit on the screen below the textbox
+            var dropdownBoundsDown = new Rectangle(ptBottomScreen, dropDownPanel.Size);
+
+            bool openDropDownUp = false;
+            bool openDropDownLeft = false;
+
+            if (enableFiltering) //Filtered list
+            {
+                if (dropdownBoundsDown.Bottom > ownerForm.Height)
+                    //show below
+                    openDropDownUp = true;
+
+                if (dropdownBoundsDown.Right > ownerForm.Width)
+                    //show to the left
+                    openDropDownLeft = true;
+
+
+                if (!openDropDownUp && textBoxScreenFormLocation.Y + listBox.Height > ownerForm.Height)
+                {
+                    listBox.Height = textBoxScreenFormLocation.Y - ownerForm.Height - 10; //-10: small vertical adjustment
+                    dropDownPanel.RowStyles[0].Height = listBox.Height;
+                }
+                else if (openDropDownUp && textBoxScreenFormLocation.Y - listBox.Height < 0)
+                {
+                    listBox.Height = textBoxScreenFormLocation.Y - 10; //-10: small vertical adjustment
+                    dropDownPanel.RowStyles[0].Height = listBox.Height;
+                }
+
+                ControlsTools.BorderedControl_Resize(dropDownPanel, null);
+
+                if (!openDropDownUp && !openDropDownLeft)
+                    dropDownPanel.Location = new Point(textBoxScreenFormLocation.X, textBoxScreenFormLocation.Y + textBox.Height);
+                else if (openDropDownUp && !openDropDownLeft)
+                    dropDownPanel.Location = new Point(textBoxScreenFormLocation.X, textBoxScreenFormLocation.Y - dropDownPanel.Height);
+                else if (!openDropDownUp && openDropDownLeft)
+                    dropDownPanel.Location = new Point(textBoxScreenFormLocation.X - dropDownPanel.Width + textBox.Width, textBoxScreenFormLocation.Y + textBox.Height);
+                else //if (openDropDownUp && openDropDownLeft)
+                    dropDownPanel.Location = new Point(textBoxScreenFormLocation.X - dropDownPanel.Width + textBox.Width, textBoxScreenFormLocation.Y - dropDownPanel.Height);
+
+                dropDownPanel.Parent.Show();
+            }
+            else
+            {
+                if (dropdownBoundsDown.Bottom > Screen.GetWorkingArea(dropdownBoundsDown).Bottom)
+                    //show below
+                    openDropDownUp = true;
+
+                if (dropdownBoundsDown.Right > Screen.GetWorkingArea(dropdownBoundsDown).Right)
+                    //show to the left
+                    openDropDownLeft = true;
+
+
+                if (!openDropDownUp && !openDropDownLeft)
+                    dropDown.Show(ptBottomScreen, ToolStripDropDownDirection.BelowRight);
+                else if (openDropDownUp && !openDropDownLeft)
+                    dropDown.Show(textBoxScreenFormLocation, ToolStripDropDownDirection.AboveRight);
+                else if (!openDropDownUp && openDropDownLeft)
+                    dropDown.Show(ptBottomScreen, ToolStripDropDownDirection.BelowLeft);
+                else //if (openDropDownUp && openDropDownLeft)
+                    dropDown.Show(textBoxScreenFormLocation, ToolStripDropDownDirection.AboveLeft);
+            }
+        }
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            if (!droppedDown)
+            {
+                if (!enabled)
+                    return;
+
+
+                textBox.Focus();
+
+                drawCustomDropDown();
+
+                if (sender == null) //"DroppedDown" property changed
+                    textBox.Focus();
+                else
+                    listBox.Focus();
+
+                droppedDown = true;
+            }
+            else
+            {
+                SpecialState = -1;
+
+                if (enableFiltering)
+                    //dropDownPanel.Hide();
+                    dropDownPanel.Parent.Hide();
+                else
+                    dropDown.Close();
+
+                if (sender != null)
+                    textBox.Focus();
+
+                droppedDown = false;
+
+                Events[EVENT_DROPDOWNCLOSED]?.DynamicInvoke(this, null);
+            }
         }
 
         private void customComboBox_SizeChanged(object sender, EventArgs e)
@@ -1218,8 +1960,6 @@ namespace MusicBeePlugin
             }
             else
             {
-                customComboBox_SizeChanged_ForButton();
-
                 var textBoxRectangle = new Rectangle(1, 1, textBox.Width - 2, textBox.Height - 2);
                 var textBoxRegion = new Region(textBoxRectangle);
                 textBox.Region = textBoxRegion;
@@ -1232,106 +1972,62 @@ namespace MusicBeePlugin
             if (dropDownWidth < initialDropDownWidth)
                 dropDownWidth = initialDropDownWidth;
 
-            listBox.AdjustHeight(dropDownWidth, initialDropDownHeight);
+            listBox.AdjustHeight(dropDownWidth, initialDropDownHeight, GetSpecialStateColumnWidth());
+            specialStateListBox?.AdjustAdditionalListHeight(initialDropDownHeight);
 
             PluginWindowTemplate.UpdateCustomScrollBars(listBox);
         }
 
-        internal bool SelectCurrentDropDownItem()
-        {
-            if (textBox != null)
-            {
-                ListBox_ItemChosen(null, null);
-                return true;
-            }
-
-            return false;
-        }
-
-        internal void ListBox_ItemChosen(object sender, EventArgs e)
+        private void customComboBox_GotFocus(object sender, EventArgs e)
         {
             textBox.Focus();
-            dropDown.Close();
+        }
+
+        private void listBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (specialStateListBox != null)
+                specialStateListBox.SelectedIndex = listBox.SelectedIndex;
+        }
+
+        private void additionalListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listBox.SelectedIndex = specialStateListBox.SelectedIndex;
+        }
+
+        internal void listBox_ItemChosen(object sender, EventArgs e)
+        {
+            if (recordMode && GetSpecialStateItem(listBox.SelectedIndex) == GetDefaultSpecialState())
+            {
+                System.Media.SystemSounds.Beep.Play();
+                return;
+            }
+
+            if (SelectedIndex == listBox.SelectedIndex)
+                lastSelectedIndex = -2;
 
             SelectedIndex = listBox.SelectedIndex;
+            DroppedDown = false;
+            textBox.Focus();
         }
 
         private void listBox_MouseMove(object sender, MouseEventArgs e)
         {
-            var index = listBox.IndexFromPoint(e.X, e.Y);
+            var currentListBox = sender as CustomListBox;
+            var index = currentListBox.IndexFromPoint(e.X, e.Y);
 
-            if (index >= 0)
+            if (index >= 0 && index < listBox.Items.Count)
+            {
                 listBox.SelectedIndex = index;
-        }
 
-        private void changeTextBoxBackground(object sender, EventArgs e)
-        {
-            SetTextBoxColors(null);
-        }
-
-        private void DropDown_Closed(object sender, EventArgs e)
-        {
-            dropDownClosedTime = DateTime.UtcNow;
-
-            Events[EVENT_DROPDOWNCLOSED]?.DynamicInvoke(this, null);
-        }
-
-        internal bool OpenDropDown()
-        {
-            if (textBox != null)
-            {
-                button_Click(null, null);
-                return true;
+                if (specialStateListBox != null)
+                    specialStateListBox.SelectedIndex = index;
             }
-
-            return false;
         }
 
-        private void button_Click(object sender, EventArgs e)
+        private void ownerForm_SizeChanged(object sender, EventArgs e)
         {
-            if (!button.IsEnabled())
-                return;
-
-
-            if (DateTime.UtcNow - dropDownClosedTime > DropDownAutoCloseThreshold)
-            {
-                var dropDownWidth = Width;
-                if (dropDownWidth < initialDropDownWidth)
-                    dropDownWidth = initialDropDownWidth;
-
-                if (listBox.GetItemsHeight() > initialDropDownHeight)
-                    listBox.AdjustWidth(dropDownWidth, true);
-                else
-                    listBox.AdjustWidth(dropDownWidth, false);
-
-                listBox.AdjustHeight(dropDownWidth, initialDropDownHeight);
-
-                var index = IndexOfText(textBox.Text);
-                if ((listBox.SelectedItem == null || listBox.SelectedItem.ToString() != textBox.Text) && index >= 0)
-                    listBox.SelectedItem = textBox.Text;
-
-                var textBoxScreenLocation = textBox.PointToScreen(textBox.Location);
-
-                //try to position _dropDown below textbox
-                var pt = textBoxScreenLocation;
-                pt.Offset(0, textBox.Height);
-
-                //determine if it will fit on the screen below the textbox
-                var dropdownBounds = new Rectangle(pt, listBox.Size);
-
-                if (dropdownBounds.Bottom <= Screen.GetWorkingArea(dropdownBounds).Bottom)
-                    //show below
-                    dropDown.Show(pt, ToolStripDropDownDirection.BelowRight);
-                else
-                    //show above
-                    dropDown.Show(textBoxScreenLocation, ToolStripDropDownDirection.AboveRight);
-
-                listBox.Focus();
-            }
-            else
-            {
-                textBox.Focus();
-            }
+            if (enableFiltering && droppedDown)
+                drawCustomDropDown();
         }
     }
 
@@ -1346,8 +2042,7 @@ namespace MusicBeePlugin
         internal CustomTextBox(Color borderColor, Color borderColorDisabled, Color borderColorActive)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
-            //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);
+            //SetStyle(ControlStyles.DoubleBuffer, true);
 
             this.borderColorDisabled = borderColorDisabled;
             this.borderColorActive = borderColorActive;
@@ -1422,14 +2117,14 @@ namespace MusicBeePlugin
 
     internal class CustomListBox : ListBox
     {
-        private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
-        private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
-        private readonly Color borderColor = Plugin.ScrollBarBorderColor;
+        private Color borderColorDisabled = Plugin.ScrollBarBorderColor;
+        private Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
+        private Color borderColor = Plugin.ScrollBarBorderColor;
 
-        private readonly int scaledPx = -10000;
-        private readonly int customScrollBarInitialWidth;
+        private int scaledPx = -10000;
+        private int customScrollBarInitialWidth;
 
-        private readonly bool dontUseSkinColors;
+        private bool dontUseSkinColors;
 
         internal CustomHScrollBar hScrollBar;
         internal CustomVScrollBar vScrollBar;
@@ -1443,7 +2138,6 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             SetStyle(ControlStyles.ResizeRedraw, true);
-            //SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
 
             //TODO: Add any initialization after the InitForm call
@@ -1464,6 +2158,13 @@ namespace MusicBeePlugin
             this.borderColor = borderColor;
         }
 
+        internal void SetBorderColors(Color borderColor, Color borderColorDisabled, Color borderColorActive)
+        {
+            this.borderColorDisabled = borderColorDisabled;
+            this.borderColorActive = borderColorActive;
+            this.borderColor = borderColor;
+        }
+
         public new int GetItemHeight(int index)
         {
             return ItemHeight;
@@ -1478,10 +2179,10 @@ namespace MusicBeePlugin
 
         internal int GetItemsHeight()
         {
-            return ItemHeight * Items.Count;
+            return ItemHeight * Items.Count + 3 * scaledPx;
         }
 
-        internal void AdjustHeight(int dropDownWidth, int initialDropDownHeight)
+        internal void AdjustHeight(int dropDownWidth, int initialDropDownHeight, int additionalColumnWidth)
         {
             if (scaledPx > 0)
             {
@@ -1490,15 +2191,14 @@ namespace MusicBeePlugin
 
                 if (itemsHeight > initialDropDownHeight)
                 {
-                    // ReSharper disable once PossibleNullReferenceException
-                    // ReSharper disable once CompareOfFloatsByEqualityOperator
-                    if ((Parent as TableLayoutPanel).ColumnStyles[1].Width != vScrollBar.Width) //-V3024
-                        // ReSharper disable once PossibleNullReferenceException
-                        (Parent as TableLayoutPanel).ColumnStyles[1].Width = vScrollBar.Width;
+                    if ((Parent as TableLayoutPanel).ColumnStyles[2].Width != vScrollBar.Width) //-V3024
+                        (Parent as TableLayoutPanel).ColumnStyles[2].Width = vScrollBar.Width;
 
                     if (MaximumSize.Height != initialDropDownHeight)
-                    {
                         MaximumSize = new Size(MaximumSize.Width, initialDropDownHeight);
+
+                    if (Height != initialDropDownHeight)
+                    {
                         Height = initialDropDownHeight;
                         vScrollBar.ResetMetricsSize(initialDropDownHeight);
                     }
@@ -1507,10 +2207,8 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    // ReSharper disable once PossibleNullReferenceException
-                    if ((Parent as TableLayoutPanel).ColumnStyles[1].Width != 0) //-V3024
-                        // ReSharper disable once PossibleNullReferenceException
-                        (Parent as TableLayoutPanel).ColumnStyles[1].Width = 0;
+                    if ((Parent as TableLayoutPanel).ColumnStyles[2].Width != 0) //-V3024
+                        (Parent as TableLayoutPanel).ColumnStyles[2].Width = 0;
 
                     if (MaximumSize.Height != itemsHeight)
                         MaximumSize = new Size(MaximumSize.Width, itemsHeight);
@@ -1522,21 +2220,46 @@ namespace MusicBeePlugin
                 }
 
                 vScrollBar.Visible = scrollBarVisible;
-                AdjustWidth(dropDownWidth, scrollBarVisible);
+                AdjustWidth(dropDownWidth, scrollBarVisible, additionalColumnWidth);
             }
         }
 
-        internal void AdjustWidth(int dropDownWidth, bool scrollBarVisible)
+        internal void AdjustAdditionalListHeight(int initialDropDownHeight)
+        {
+            if (scaledPx > 0)
+            {
+                var itemsHeight = GetItemsHeight();
+
+                if (itemsHeight > initialDropDownHeight)
+                {
+                    if (MaximumSize.Height != initialDropDownHeight)
+                        MaximumSize = new Size(MaximumSize.Width, initialDropDownHeight);
+
+                    if (Height != initialDropDownHeight)
+                        Height = initialDropDownHeight;
+                }
+                else
+                {
+                    if (MaximumSize.Height != itemsHeight)
+                        MaximumSize = new Size(MaximumSize.Width, itemsHeight);
+
+                    if (Height != itemsHeight)
+                        Height = itemsHeight;
+                }
+            }
+        }
+
+        internal void AdjustWidth(int dropDownWidth, bool scrollBarVisible, int additionalColumnWidth)
         {
             if (scrollBarVisible)
             {
-                MinimumSize = new Size(dropDownWidth - customScrollBarInitialWidth, 2);
-                MaximumSize = new Size(dropDownWidth - customScrollBarInitialWidth, MaximumSize.Height);
+                MinimumSize = new Size(dropDownWidth - customScrollBarInitialWidth - additionalColumnWidth, 2);
+                MaximumSize = new Size(dropDownWidth - customScrollBarInitialWidth - additionalColumnWidth, MaximumSize.Height);
             }
             else
             {
-                MinimumSize = new Size(dropDownWidth, 2);
-                MaximumSize = new Size(dropDownWidth, MaximumSize.Height);
+                MinimumSize = new Size(dropDownWidth - additionalColumnWidth, 2);
+                MaximumSize = new Size(dropDownWidth - additionalColumnWidth, MaximumSize.Height);
             }
 
 
@@ -1738,7 +2461,7 @@ namespace MusicBeePlugin
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             if (!dontUseSkinColors) //Skinned list box
-                PluginWindowTemplate.ListBox_DrawItem(this, e);
+                (this.FindForm() as PluginWindowTemplate).listBox_DrawItem(this, e);
             else //Not skinned list box. Call the original OnDrawItem, using original colors
                 base.OnDrawItem(e);
         }
@@ -1867,6 +2590,9 @@ namespace MusicBeePlugin
         private Brush scrollBarThumbAndSpansBackBrush;
         private Brush scrollBarThumbAndSpansBorderBrush;
 
+        private int upArrowImageHeight;
+        private int upArrowImageWidth;
+
         private int largeChange = 50;
         private int smallChange = 5;
         private int minimum;
@@ -1939,7 +2665,7 @@ namespace MusicBeePlugin
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);
+            //SetStyle(ControlStyles.DoubleBuffer, true);
 
 
             scrollBarBackColor = Plugin.ScrollBarBackColor;
@@ -1957,6 +2683,9 @@ namespace MusicBeePlugin
             ThumbTopImage = Plugin.CopyBitmap(Plugin.ThumbTopImage);
             ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleVerticalImage);
             ThumbBottomImage = Plugin.CopyBitmap(Plugin.ThumbBottomImage);
+
+            upArrowImageHeight = UpArrowImage.Height; //-V3080
+            upArrowImageWidth = UpArrowImage.Width;
 
             this.smallChange = smallChange;
 
@@ -2005,7 +2734,7 @@ namespace MusicBeePlugin
                 ResetMetricsSize(ScrolledControl.Height);
                 AdjustReservedSpace(0);
 
-                Margin = new Padding(0, 0, 0, 0);
+                Margin = Padding.Empty;
 
                 ScrolledControl.Controls.Add(this);
 
@@ -2051,7 +2780,7 @@ namespace MusicBeePlugin
                 tableLayoutPanel.ColumnStyles[position.Column + 1].Width = Width;
                 tableLayoutPanel.RowStyles[position.Row + 1].Height = 0;
 
-                Margin = new Padding(0, 0, 0, 0);
+                Margin = Padding.Empty;
                 Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
                 tableLayoutPanel.Controls.Add(this, position.Column + 1, position.Row); //At 2nd column, 1st row
@@ -2073,8 +2802,8 @@ namespace MusicBeePlugin
             var (nRealRange, nPixelRange, nTrackHeight, nThumbHeight, fThumbHeight) = GetMetrics();
 
 
-            MinimumSize = new Size(UpArrowImage.Width + 2 * sbBorderWidth,
-                2 * (UpArrowImage.Height + upImageAdditionalTopHeight
+            MinimumSize = new Size(upArrowImageWidth + 2 * sbBorderWidth,
+                2 * (upArrowImageHeight + upImageAdditionalTopHeight
                 + upImageAdditionalBottomHeight + sbBorderWidth) + 4 * scaledPx);
 
 
@@ -2188,7 +2917,7 @@ namespace MusicBeePlugin
 
         internal (int, int, int, int, float) GetMetrics()
         {
-            var nTrackHeight = Height - 2 * (UpArrowImage.Height
+            var nTrackHeight = Height - 2 * (upArrowImageHeight
                                              + upImageAdditionalTopHeight + upImageAdditionalBottomHeight)
                                       - 2 * sbBorderWidth; //-1 scaled px of top scroll bar border & +1 of bottom scroll bar border
             var fThumbHeight = (float)largeChange / (maximum - minimum) * nTrackHeight;
@@ -2541,7 +3270,7 @@ namespace MusicBeePlugin
             var (nRealRange, nPixelRange, nTrackHeight, nThumbHeight, fThumbHeight) = GetMetrics();
 
             var nTop = thumbTop;
-            nTop += UpArrowImage.Height + upImageAdditionalTopHeight + upImageAdditionalBottomHeight
+            nTop += upArrowImageHeight + upImageAdditionalTopHeight + upImageAdditionalBottomHeight
                 + sbBorderWidth; //+1 scaled px to top shift below due to top border
 
 
@@ -2549,12 +3278,12 @@ namespace MusicBeePlugin
                 new Size(initialWidth - 2 * sbBorderWidth, nThumbHeight));
 
             var uparrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, sbBorderWidth),
-                new Size(initialWidth - 2 * sbBorderWidth, (UpArrowImage.Height
+                new Size(initialWidth - 2 * sbBorderWidth, (upArrowImageHeight
                 + upImageAdditionalTopHeight + upImageAdditionalBottomHeight)));
 
-            var downarrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, UpArrowImage.Height
+            var downarrowRect = new Rectangle(new Point(sbBorderWidth + offsetX, upArrowImageHeight
                 + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nTrackHeight),
-                new Size(initialWidth - 2 * sbBorderWidth, UpArrowImage.Height
+                new Size(initialWidth - 2 * sbBorderWidth, upArrowImageHeight
                 + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
 
             upArrowDown = false;
@@ -2578,12 +3307,12 @@ namespace MusicBeePlugin
             }
             else if (thumbRect.Top > ptPoint.Y && thumbRect.Left < ptPoint.X && thumbRect.Left + thumbRect.Width > ptPoint.X)
             {
-                float fScrollDistance = Height - 2 * (UpArrowImage.Height
+                float fScrollDistance = Height - 2 * (upArrowImageHeight
                     + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth);
 
                 var fScrollPerc = 0.0f;
                 if (fScrollDistance != 0) //-V3024
-                    fScrollPerc = ((float)ptPoint.Y - (UpArrowImage.Height
+                    fScrollPerc = ((float)ptPoint.Y - (upArrowImageHeight
                         + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth)) / fScrollDistance;
 
                 if (fScrollPerc < 0)
@@ -2601,12 +3330,12 @@ namespace MusicBeePlugin
             }
             else if (thumbRect.Top + thumbRect.Height < ptPoint.Y && thumbRect.Left < ptPoint.X && thumbRect.Left + thumbRect.Width > ptPoint.X)
             {
-                float fScrollDistance = Height - 2 * (UpArrowImage.Height
+                float fScrollDistance = Height - 2 * (upArrowImageHeight
                     + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth);
 
                 var fScrollPerc = 0.0f;
                 if (fScrollDistance != 0) //-V3024
-                    fScrollPerc = 1f - ((float)Height - 2 * (UpArrowImage.Height
+                    fScrollPerc = 1f - ((float)Height - 2 * (upArrowImageHeight
                         + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth) - ptPoint.Y) / fScrollDistance;
 
                 if (fScrollPerc > 1)
@@ -2645,7 +3374,7 @@ namespace MusicBeePlugin
             {
                 if (nPixelRange > 0)
                 {
-                    var nNewThumbTop = y - (UpArrowImage.Height
+                    var nNewThumbTop = y - (upArrowImageHeight
                                             + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nSpot);
 
                     if (nNewThumbTop < 0)
@@ -2653,7 +3382,7 @@ namespace MusicBeePlugin
                     else if (nNewThumbTop > nPixelRange)
                         thumbTop = nPixelRange;
                     else
-                        thumbTop = y - (UpArrowImage.Height
+                        thumbTop = y - (upArrowImageHeight
                             + upImageAdditionalTopHeight + upImageAdditionalBottomHeight + sbBorderWidth + nSpot);
 
                     //figure out value
@@ -2722,6 +3451,9 @@ namespace MusicBeePlugin
         private Brush narrowScrollBarBackBrush;
         private Brush scrollBarThumbAndSpansBackBrush;
         private Brush scrollBarThumbAndSpansBorderBrush;
+
+        private int leftArrowImageHeight;
+        private int leftArrowImageWidth;
 
         private int largeChange = 50;
         private int smallChange = 20;
@@ -2793,7 +3525,7 @@ namespace MusicBeePlugin
 
             SetStyle(ControlStyles.ResizeRedraw, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);
+            //SetStyle(ControlStyles.DoubleBuffer, true);
 
 
             scrollBarBackColor = Plugin.ScrollBarBackColor;
@@ -2811,6 +3543,9 @@ namespace MusicBeePlugin
             ThumbLeftImage = Plugin.CopyBitmap(Plugin.ThumbLeftImage);
             ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleHorizontalImage);
             ThumbRightImage = Plugin.CopyBitmap(Plugin.ThumbRightImage);
+
+            leftArrowImageHeight = LeftArrowImage.Height; //-V3080
+            leftArrowImageWidth = LeftArrowImage.Width;
 
             GetExternalMetrics = getScrollBarMetrics;
             ScrolledControl = scrolledControl;
@@ -2848,7 +3583,7 @@ namespace MusicBeePlugin
                 ResetMetricsSize(ScrolledControl.Width);
                 AdjustReservedSpace(0);
 
-                Margin = new Padding(0, 0, 0, 0);
+                Margin = Padding.Empty;
 
                 ScrolledControl.Controls.Add(this);
 
@@ -2886,7 +3621,7 @@ namespace MusicBeePlugin
                 tableLayoutPanel.ColumnStyles[position.Column + 1].Width = 0;
                 tableLayoutPanel.RowStyles[position.Row + 1].Height = Height;
 
-                Margin = new Padding(0, 0, 0, 0);
+                Margin = Padding.Empty;
                 Anchor = AnchorStyles.Top | AnchorStyles.Left;
 
                 tableLayoutPanel.Controls.Add(this, position.Column, position.Row + 1); //At 1st column, 2nd row
@@ -2908,8 +3643,8 @@ namespace MusicBeePlugin
             var (nRealRange, nPixelRange, nTrackWidth, nThumbWidth, fThumbWidth) = GetMetrics();
 
 
-            MinimumSize = new Size(2 * (LeftArrowImage.Height + leftImageAdditionalLeftWidth
-                + leftImageAdditionalRightWidth + sbBorderWidth) + 4 * scaledPx, LeftArrowImage.Height + 2 * sbBorderWidth);
+            MinimumSize = new Size(2 * (leftArrowImageHeight + leftImageAdditionalLeftWidth
+                + leftImageAdditionalRightWidth + sbBorderWidth) + 4 * scaledPx, leftArrowImageHeight + 2 * sbBorderWidth);
 
 
             var fValuePerc = ((float)value - minimum) / (maximum - minimum);
@@ -3023,7 +3758,7 @@ namespace MusicBeePlugin
 
         internal (int, int, int, int, float) GetMetrics()
         {
-            var nTrackWidth = Width - 2 * (LeftArrowImage.Width
+            var nTrackWidth = Width - 2 * (leftArrowImageWidth
                                            + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth)
                                     - 2 * sbBorderWidth; //-1 scaled px of left scroll bar border & +1 of right scroll bar border
             var fThumbWidth = (float)largeChange / (maximum - minimum) * nTrackWidth;
@@ -3373,19 +4108,19 @@ namespace MusicBeePlugin
             var (nRealRange, nPixelRange, nTrackWidth, nThumbWidth, fThumbWidth) = GetMetrics();
 
             var nLeft = thumbLeft;
-            nLeft += LeftArrowImage.Width + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth
+            nLeft += leftArrowImageWidth + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth
                 + sbBorderWidth; //+1 scaled px to left shift below due to left border
 
 
             var thumbRect = new Rectangle(new Point(nLeft, sbBorderWidth + offsetY),
                 new Size(nThumbWidth, initialHeight - 2 * sbBorderWidth));
             var leftarrowRect = new Rectangle(new Point(sbBorderWidth, sbBorderWidth + offsetY),
-                new Size(LeftArrowImage.Width + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth,
+                new Size(leftArrowImageWidth + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth,
                 initialHeight - 2 * sbBorderWidth));
-            var rightarrowRect = new Rectangle(new Point(LeftArrowImage.Width
+            var rightarrowRect = new Rectangle(new Point(leftArrowImageWidth
                                                          + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth + nTrackWidth,
                 sbBorderWidth + offsetY),
-                new Size(LeftArrowImage.Width + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth,
+                new Size(leftArrowImageWidth + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth,
                 initialHeight - 2 * sbBorderWidth));
 
             if (thumbRect.Contains(ptPoint))
@@ -3406,12 +4141,12 @@ namespace MusicBeePlugin
             }
             else if (thumbRect.Left > ptPoint.X && thumbRect.Top < ptPoint.Y && thumbRect.Top + thumbRect.Height > ptPoint.Y)
             {
-                float fScrollDistance = Width - 2 * (LeftArrowImage.Width
+                float fScrollDistance = Width - 2 * (leftArrowImageWidth
                     + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth);
 
                 var fScrollPerc = 0.0f;
                 if (fScrollDistance != 0) //-V3024
-                    fScrollPerc = ((float)ptPoint.X - (LeftArrowImage.Width
+                    fScrollPerc = ((float)ptPoint.X - (leftArrowImageWidth
                         + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth)) / fScrollDistance;
 
                 if (fScrollPerc < 0)
@@ -3429,12 +4164,12 @@ namespace MusicBeePlugin
             }
             else if (thumbRect.Left + thumbRect.Width < ptPoint.X && thumbRect.Top < ptPoint.Y && thumbRect.Top + thumbRect.Height > ptPoint.Y)
             {
-                float fScrollDistance = Width - 2 * (LeftArrowImage.Width
+                float fScrollDistance = Width - 2 * (leftArrowImageWidth
                     + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth);
 
                 var fScrollPerc = 0.0f;
                 if (fScrollDistance != 0) //-V3024
-                    fScrollPerc = 1f - ((float)Width - 2 * (LeftArrowImage.Width
+                    fScrollPerc = 1f - ((float)Width - 2 * (leftArrowImageWidth
                         + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth) - ptPoint.X) / fScrollDistance;
 
                 if (fScrollPerc > 1)
@@ -3473,7 +4208,7 @@ namespace MusicBeePlugin
             {
                 if (nPixelRange > 0)
                 {
-                    var nNewThumbLeft = x - (LeftArrowImage.Width
+                    var nNewThumbLeft = x - (leftArrowImageWidth
                                              + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth + nSpot);
 
                     if (nNewThumbLeft < 0)
@@ -3481,7 +4216,7 @@ namespace MusicBeePlugin
                     else if (nNewThumbLeft > nPixelRange)
                         thumbLeft = nPixelRange;
                     else
-                        thumbLeft = x - (LeftArrowImage.Width
+                        thumbLeft = x - (leftArrowImageWidth
                             + leftImageAdditionalLeftWidth + leftImageAdditionalRightWidth + sbBorderWidth + nSpot);
 
                     //figure out value

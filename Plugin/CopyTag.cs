@@ -37,7 +37,7 @@ namespace MusicBeePlugin
 
 
         private List<Row> rows = new List<Row>();
-        BindingSource source = new BindingSource();
+        private BindingSource source = new BindingSource();
 
         private MetaDataType sourceTagId;
         private FilePropertyType sourcePropId;
@@ -48,8 +48,8 @@ namespace MusicBeePlugin
         private bool onlyIfDestinationEmpty;
         private bool onlyIfSourceNotEmpty;
         private bool smartOperation;
-        private bool appendSource;
-        private bool addSource;
+        private bool? appendSource;
+        private bool? addSource;
         private string appendedText;
         private string addedText;
 
@@ -57,6 +57,12 @@ namespace MusicBeePlugin
         private readonly List<string[]> tags = new List<string[]>();
         private string[] fileTags;
         private List<bool> processedRowList = new List<bool>(); //Indices of processed tracks
+
+        string appendCheckBoxLabel1;
+        string appendCheckBoxLabel2;
+
+        string addCheckBoxLabel1;
+        string addCheckBoxLabel2;
 
         public CopyTag(Plugin plugin) : base(plugin)
         {
@@ -73,10 +79,20 @@ namespace MusicBeePlugin
             appendedTextBoxCustom = namesComboBoxes["appendedTextBox"];
             addedTextBoxCustom = namesComboBoxes["addedTextBox"];
 
+            appendCheckBoxLabel1 = appendCheckBoxLabel.Text;
+            appendCheckBoxLabel2 = toolTip1.GetToolTip(appendCheckBoxLabel);
+            toolTip1.SetToolTip(appendCheckBoxLabel, string.Empty);
+
+            addCheckBoxLabel1 = addCheckBoxLabel.Text;
+            addCheckBoxLabel2 = toolTip1.GetToolTip(addCheckBoxLabel);
+            toolTip1.SetToolTip(addCheckBoxLabel, string.Empty);
+
+
+
 
             fileNameLabel.Enable(false);
 
-            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
+            ReplaceButtonBitmap(buttonSettings, Gear);
 
             FillListByTagNames(destinationTagListCustom.Items);
             destinationTagListCustom.Text = SavedSettings.copyDestinationTagName;
@@ -86,8 +102,8 @@ namespace MusicBeePlugin
             onlyIfDestinationEmptyCheckBox.Checked = SavedSettings.onlyIfDestinationIsEmpty;
             onlyIfSourceNotEmptyCheckBox.Checked = SavedSettings.onlyIfSourceNotEmpty;
             smartOperationCheckBox.Checked = SavedSettings.smartOperation;
-            appendCheckBox.Checked = SavedSettings.appendSource;
-            addCheckBox.Checked = SavedSettings.addSource;
+            appendCheckBox.CheckState = GetCheckState(SavedSettings.appendSource);
+            addCheckBox.CheckState = GetCheckState(SavedSettings.addSource);
 
             fileNameTextBoxCustom.Text = SavedSettings.customText[0] as string;
             fileNameTextBoxCustom.AddRange(SavedSettings.customText);
@@ -96,7 +112,7 @@ namespace MusicBeePlugin
             addedTextBoxCustom.Text = SavedSettings.addedText[0] as string;
             addedTextBoxCustom.AddRange(SavedSettings.addedText);
 
-            appendedTextBoxCustom.Enable(appendCheckBox.Checked);
+            appendedTextBoxCustom.Enable(appendCheckBox.CheckState != CheckState.Unchecked);
 
 
             var headerCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
@@ -109,8 +125,8 @@ namespace MusicBeePlugin
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
-                FalseValue = Plugin.ColumnUncheckedState,
-                TrueValue = Plugin.ColumnCheckedState,
+                FalseValue = ColumnUncheckedState,
+                TrueValue = ColumnCheckedState,
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
@@ -289,8 +305,8 @@ namespace MusicBeePlugin
             smartOperation = smartOperationCheckBox.Checked;
             onlyIfDestinationEmpty = onlyIfDestinationEmptyCheckBox.Checked;
             onlyIfSourceNotEmpty = onlyIfSourceNotEmptyCheckBox.Checked;
-            appendSource = appendCheckBox.Checked;
-            addSource = addCheckBox.Checked;
+            appendSource = GetNullableBoolFromCheckState(appendCheckBox.CheckState);
+            addSource = GetNullableBoolFromCheckState(addCheckBox.CheckState);
             appendedText = appendedTextBoxCustom.Text;
             addedText = addedTextBoxCustom.Text;
 
@@ -437,8 +453,33 @@ namespace MusicBeePlugin
 
                 var track = GetTrackRepresentation(currentFile);
 
-                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
-                    smartOperation, appendSource, appendedText, addSource, addedText);
+                SwappedTags swappedTags;
+
+                if (appendSource == null && addSource == false)
+                {
+                    swappedTags = SwapTags(sourceTagValue, string.Empty, sourceTagId, destinationTagId,
+                        smartOperation, true, appendedText, false, addedText);
+                }
+                else if (appendSource == false && addSource == null)
+                {
+                    swappedTags = SwapTags(sourceTagValue, string.Empty, sourceTagId, destinationTagId,
+                    smartOperation, false, appendedText, true, addedText);
+                }
+                else if (appendSource == true && addSource == false)
+                {
+                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
+                    smartOperation, true, appendedText, false, addedText);
+                }
+                else if (appendSource == false && addSource == true)
+                {
+                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
+                    smartOperation, false, appendedText, true, addedText);
+                }
+                else //if (appendSource == false && addSource == false)
+                {
+                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
+                    smartOperation, false, appendedText, false, addedText);
+                }
 
                 string isChecked;
                 if (swappedTags.destinationNormalizedTagValue == swappedTags.newDestinationNormalizedTagValue && stripNotChangedLines)
@@ -448,13 +489,13 @@ namespace MusicBeePlugin
                 else if (onlyIfSourceNotEmpty && string.IsNullOrEmpty(swappedTags.sourceNormalizedTagValue) && stripNotChangedLines)
                     continue;
                 else if (swappedTags.destinationNormalizedTagValue == swappedTags.newDestinationNormalizedTagValue)
-                    isChecked = Plugin.ColumnUncheckedState;
+                    isChecked = ColumnUncheckedState;
                 else if (onlyIfDestinationEmpty && !string.IsNullOrEmpty(swappedTags.destinationNormalizedTagValue))
-                    isChecked = Plugin.ColumnUncheckedState;
+                    isChecked = ColumnUncheckedState;
                 else if (onlyIfSourceNotEmpty && string.IsNullOrEmpty(swappedTags.sourceNormalizedTagValue))
-                    isChecked = Plugin.ColumnUncheckedState;
+                    isChecked = ColumnUncheckedState;
                 else
-                    isChecked = Plugin.ColumnCheckedState;
+                    isChecked = ColumnCheckedState;
 
 
                 Row row = new Row
@@ -466,8 +507,8 @@ namespace MusicBeePlugin
                     SupposedDestinationTagValueNormalized = swappedTags.newDestinationNormalizedTagValue,
                     OriginalDestinationTagValue = destinationTagValue,
                     OriginalDestinationTagValueNormalized = swappedTags.destinationNormalizedTagValue,
-                    NewDestinationTagValue = isChecked == Plugin.ColumnCheckedState ? swappedTags.newDestinationTagValue : destinationTagValue,
-                    NewDestinationTagValueNormalized = isChecked == Plugin.ColumnCheckedState ? swappedTags.newDestinationNormalizedTagValue : swappedTags.destinationNormalizedTagValue,
+                    NewDestinationTagValue = isChecked == ColumnCheckedState ? swappedTags.newDestinationTagValue : destinationTagValue,
+                    NewDestinationTagValueNormalized = isChecked == ColumnCheckedState ? swappedTags.newDestinationNormalizedTagValue : swappedTags.destinationNormalizedTagValue,
                 };
 
                 rows.Add(row);
@@ -503,7 +544,7 @@ namespace MusicBeePlugin
 
                 var isChecked = tags[i][0];
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                 {
                     var currentFile = tags[i][1];
                     var newTag = tags[i][2];
@@ -538,8 +579,8 @@ namespace MusicBeePlugin
             SavedSettings.onlyIfDestinationIsEmpty = onlyIfDestinationEmptyCheckBox.Checked;
             SavedSettings.onlyIfSourceNotEmpty = onlyIfSourceNotEmptyCheckBox.Checked;
             SavedSettings.smartOperation = smartOperationCheckBox.Checked;
-            SavedSettings.appendSource = appendCheckBox.Checked;
-            SavedSettings.addSource = addCheckBox.Checked;
+            SavedSettings.appendSource = GetNullableBoolFromCheckState(appendCheckBox.CheckState);
+            SavedSettings.addSource = GetNullableBoolFromCheckState(addCheckBox.CheckState);
             fileNameTextBoxCustom.Items.CopyTo(SavedSettings.customText, 0);
             appendedTextBoxCustom.Items.CopyTo(SavedSettings.appendedText, 0);
             addedTextBoxCustom.Items.CopyTo(SavedSettings.addedText, 0);
@@ -578,10 +619,15 @@ namespace MusicBeePlugin
 
         private void appendCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            appendedTextBoxCustom.Enable(appendCheckBox.Checked);
+            appendedTextBoxCustom.Enable(appendCheckBox.CheckState != CheckState.Unchecked);
 
-            if (appendCheckBox.Checked)
-                addCheckBox.Checked = false;
+            if (appendCheckBox.CheckState != CheckState.Unchecked)
+                addCheckBox.CheckState = CheckState.Unchecked;
+
+            if (appendCheckBox.CheckState == CheckState.Indeterminate)
+                appendCheckBoxLabel.Text = appendCheckBoxLabel2;
+            else
+                appendCheckBoxLabel.Text = appendCheckBoxLabel1;
         }
 
         private void appendCheckBoxLabel_Click(object sender, EventArgs e)
@@ -589,15 +635,20 @@ namespace MusicBeePlugin
             if (!appendCheckBox.IsEnabled())
                 return;
 
-            appendCheckBox.Checked = !appendCheckBox.Checked;
+            appendCheckBox.CheckState = GetNextCheckState(appendCheckBox.CheckState);
         }
 
         private void addCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            addedTextBoxCustom.Enable(addCheckBox.Checked);
+            addedTextBoxCustom.Enable(addCheckBox.CheckState != CheckState.Unchecked);
 
-            if (addCheckBox.Checked)
-                appendCheckBox.Checked = false;
+            if (addCheckBox.CheckState != CheckState.Unchecked)
+                appendCheckBox.CheckState = CheckState.Unchecked;
+
+            if (addCheckBox.CheckState == CheckState.Indeterminate)
+                addCheckBoxLabel.Text = addCheckBoxLabel2;
+            else
+                addCheckBoxLabel.Text = addCheckBoxLabel1;
         }
 
         private void addCheckBoxLabel_Click(object sender, EventArgs e)
@@ -605,7 +656,7 @@ namespace MusicBeePlugin
             if (!addCheckBox.IsEnabled())
                 return;
 
-            addCheckBox.Checked = !addCheckBox.Checked;
+            addCheckBox.CheckState = GetNextCheckState(addCheckBox.CheckState);
         }
 
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
@@ -669,9 +720,9 @@ namespace MusicBeePlugin
                     continue;
 
                 if (state)
-                    rows[0].Checked = Plugin.ColumnUncheckedState;
+                    rows[0].Checked = ColumnUncheckedState;
                 else
-                    rows[0].Checked = Plugin.ColumnCheckedState;
+                    rows[0].Checked = ColumnCheckedState;
             }
 
             int firstRow = previewTable.FirstDisplayedCell.RowIndex;
@@ -693,9 +744,9 @@ namespace MusicBeePlugin
 
                 var isChecked = previewTable.Rows[e.RowIndex].Cells[0].Value as string;
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                 {
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = ColumnUncheckedState;
 
                     newTagValue = previewTable.Rows[e.RowIndex].Cells[5].Value as string;
                     newTagTValue = previewTable.Rows[e.RowIndex].Cells[6].Value as string;
@@ -703,9 +754,9 @@ namespace MusicBeePlugin
                     previewTable.Rows[e.RowIndex].Cells[7].Value = newTagValue;
                     previewTable.Rows[e.RowIndex].Cells[8].Value = newTagTValue;
                 }
-                else if (isChecked == Plugin.ColumnUncheckedState)
+                else if (isChecked == ColumnUncheckedState)
                 {
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnCheckedState;
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = ColumnCheckedState;
 
                     newTagValue = previewTable.Rows[e.RowIndex].Cells[3].Value as string;
                     newTagTValue = previewTable.Rows[e.RowIndex].Cells[4].Value as string;
@@ -735,9 +786,9 @@ namespace MusicBeePlugin
             onlyIfSourceNotEmptyCheckBox.Enable(enable);
 
             addCheckBox.Enable(enable);
-            addedTextBoxCustom.Enable(enable && addCheckBox.Checked);
+            addedTextBoxCustom.Enable(enable && addCheckBox.CheckState != CheckState.Unchecked);
             appendCheckBox.Enable(enable);
-            appendedTextBoxCustom.Enable(enable && appendCheckBox.Checked);
+            appendedTextBoxCustom.Enable(enable && appendCheckBox.CheckState != CheckState.Unchecked);
         }
 
         internal override void enableQueryingButtons()
@@ -784,7 +835,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != Plugin.ColumnCheckedState)
+            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != ColumnCheckedState)
             {
                 for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {

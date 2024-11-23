@@ -4,4 +4,4 @@
 
 ***
 
-Copyright © boroda 2012-2024. Help version 9.1.240910
+Copyright © boroda 2012-2024. Help version 9.2.240921

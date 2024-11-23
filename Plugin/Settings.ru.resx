@@ -136,6 +136,12 @@
   <data name="versionLabel.Text" xml:space="preserve">
     <value>Версия: </value>
   </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 422</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>958, 110</value>
+  </data>
   <data name="playTickedAsrPresetSoundCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>449, 15</value>
   </data>
@@ -167,7 +173,7 @@
     <value> Звуки </value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>878, 110</value>
+    <value>957, 110</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>339, 15</value>
@@ -206,13 +212,22 @@
     <value>Сохранять дату последнего пропуска трека...</value>
   </data>
   <data name="highlightChangedTagsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>640, 21</value>
+    <value>651, 21</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 269</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>947, 142</value>
+    <value>958, 148</value>
+  </data>
+  <data name="scrollPreviewToEndCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>475, 15</value>
+  </data>
+  <data name="scrollPreviewToEndCheckBoxLabel.Text" xml:space="preserve">
+    <value>Прокручивать таблицы предварительного просмотра в конец (некоторые команды)</value>
   </data>
   <data name="legendGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>640, 39</value>
+    <value>651, 39</value>
   </data>
   <data name="legendGroupBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 93</value>
@@ -245,7 +260,7 @@
     <value> Цвета предварительного просмотра </value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>661, 21</value>
+    <value>672, 21</value>
   </data>
   <data name="highlightChangedTagsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 15</value>
@@ -272,13 +287,13 @@
     <value>Минимизировать окна плагина, вместо того чтобы скрывать их</value>
   </data>
   <data name="customFontButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 39</value>
+    <value>621, 39</value>
   </data>
   <data name="customFontTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>428, 39</value>
   </data>
   <data name="customFontTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 23</value>
+    <value>187, 23</value>
   </data>
   <data name="useCustomFontCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>254, 42</value>
@@ -310,11 +325,20 @@
   <data name="label8.Text" xml:space="preserve">
     <value> Оформление </value>
   </data>
+  <data name="showShowHiddenWindowsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>410, 84</value>
+  </data>
   <data name="contextMenuCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>410, 63</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>947, 258</value>
+    <value>958, 258</value>
+  </data>
+  <data name="showCustomSortingForColumnBrowserCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>344, 15</value>
+  </data>
+  <data name="showCustomSortingForColumnBrowserCheckBoxLabel.Text" xml:space="preserve">
+    <value>Включить команду "Своя сортировка для браузера колонок"</value>
   </data>
   <data name="contextMenuCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>431, 63</value>
@@ -348,6 +372,9 @@
   </data>
   <data name="allowAsrLrPresetAutoExecutionCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>410, 21</value>
+  </data>
+  <data name="showShowHiddenWindowsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>431, 84</value>
   </data>
   <data name="showShowHiddenWindowsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>481, 15</value>
@@ -423,7 +450,7 @@
     <value> Выберите команды</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>878, 90</value>
+    <value>957, 90</value>
   </data>
   <data name="includePreservedTagValuesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>769, 15</value>
@@ -461,9 +488,6 @@
   <data name="label5.Text" xml:space="preserve">
     <value>**  Требуется заново открыть окна плагина, чтобы новые настройки вступили в силу</value>
   </data>
-  <data name="buttonsPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 624</value>
-  </data>
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>994, 35</value>
   </data>
@@ -483,10 +507,10 @@
     <value>Обработка</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>996, 663</value>
+    <value>994, 664</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>1010, 700</value>
+    <value>1010, 703</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Настройки</value>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -31,13 +32,57 @@ namespace MusicBeePlugin
             public string NewTagValueNormalized { get; set; }
         }
 
+        public class ChangeCaseStep
+        {
+            public int rule;
 
+            public bool? exceptionWordsState;
+            public int exceptionWordsIndex;
+            public int exceptionCharsIndex;
+            public int exceptionCharPair1Index;
+            public int exceptionCharPair2Index;
+            public int sentenceSeparatorsIndex;
+            public bool alwaysCapitalize1stWord;
+            public bool alwaysCapitalizeLastWord;
+            public bool ignoreSingleLetterExceptedWords;
+        }
+
+        public class ChangeCasePreset
+        {
+            public bool predefined;
+            public string name;
+            public string description;
+            public List<ChangeCaseStep> steps;
+        }
+
+        private bool recordMode;
+        private ChangeCasePreset recordedPreset;
+        private ChangeCaseStep currentStep;
+
+        private CustomComboBox presetBoxCustom;
         private CustomComboBox sourceTagListCustom;
         private CustomComboBox exceptionWordsBoxCustom;
         private CustomComboBox exceptionCharsBoxCustom;
         private CustomComboBox openingExceptionCharsBoxCustom;
         private CustomComboBox closingExceptionCharsBoxCustom;
         private CustomComboBox sentenceSeparatorsBoxCustom;
+
+        private CustomListBox exceptionWordsEnumList;
+        private ComboBox exceptionWordsEnumComboBox;
+
+        private CustomListBox exceptionCharsEnumList;
+        private ComboBox exceptionCharsEnumComboBox;
+
+        private CustomListBox openingExceptionCharsEnumList;
+        private ComboBox openingExceptionCharsEnumComboBox;
+
+        private CustomListBox closingExceptionCharsEnumList;
+        private ComboBox closingExceptionCharsEnumComboBox;
+
+        private CustomListBox sentenceSeparatorsEnumList;
+        private ComboBox sentenceSeparatorsEnumComboBox;
+
+        private bool ignoreComboBoxSelectedIndexChanged = false;
 
         private bool closingExceptionCharsBoxLeaving;
 
@@ -47,7 +92,7 @@ namespace MusicBeePlugin
 
 
         private List<Row> rows = new List<Row>();
-        BindingSource source = new BindingSource();
+        private BindingSource source = new BindingSource();
 
         private string[] files = Array.Empty<string>();
         private readonly List<string[]> tags = new List<string[]>();
@@ -65,8 +110,25 @@ namespace MusicBeePlugin
         private bool? alwaysCapitalizeLastWord;
         private bool ignoreSingleLetterExceptedWords;
 
+        private string sentenceCaseText;//****************
+        private string lowerCaseText;
+        private string upperCaseText;
+        private string titleCaseText;
+        private string toggleCaseText;
+
+
         private string changeOnlyWordsText;
         private string exceptForWordsText;
+
+        private string exceptionCharsText;
+        private string exceptionCharPairsText;
+        private string sentenceSeparatorsText;
+
+        private string alwaysCapitalize1stWordText;
+        private string alwaysCapitalizeLastWordText;
+        private string ignoreSingleLetterExceptedWordsText;
+
+        private string helpMessage;
 
         public ChangeCase(Plugin plugin) : base(plugin)
         {
@@ -76,6 +138,8 @@ namespace MusicBeePlugin
         internal protected override void initializeForm()
         {
             base.initializeForm();
+
+            presetBoxCustom = namesComboBoxes["presetBox"];
 
             sourceTagListCustom = namesComboBoxes["sourceTagList"];
 
@@ -95,16 +159,51 @@ namespace MusicBeePlugin
             sentenceSeparatorsBoxCustom.Leave += sentenceSeparatorsBox_Leave;
 
 
+            buttonLabels[buttonDeletePreset] = string.Empty;
+            buttonDeletePreset.Text = string.Empty;
+            ReplaceButtonBitmap(buttonDeletePreset, ClearField);
+
+            buttonLabels[buttonPlayPreset] = string.Empty;
+            buttonPlayPreset.Text = string.Empty;
+            ReplaceButtonBitmap(buttonPlayPreset, Play);
+
+            buttonLabels[buttonRecordPreset] = string.Empty;
+            buttonRecordPreset.Text = string.Empty;
+            ReplaceButtonBitmap(buttonRecordPreset, Record);
+
+            buttonLabels[buttonStopRecordingPreset] = string.Empty;
+            buttonStopRecordingPreset.Text = string.Empty;
+            ReplaceButtonBitmap(buttonStopRecordingPreset, Stop);
+
             buttonLabels[removeExceptionButton] = string.Empty;
             removeExceptionButton.Text = string.Empty;
-            removeExceptionButton.Image = ReplaceBitmap(removeExceptionButton.Image, ClearField);
+            ReplaceButtonBitmap(removeExceptionButton, ClearField);
 
-            buttonSettings.Image = ReplaceBitmap(buttonSettings.Image, Gear);
+            ReplaceButtonBitmap(buttonSettings, Gear);
+
+
+            sentenceCaseText = sentenceCaseRadioButtonLabel.Text;
+            lowerCaseText = lowerCaseRadioButtonLabel.Text;
+            upperCaseText = upperCaseRadioButtonLabel.Text;
+            titleCaseText = titleCaseRadioButtonLabel.Text;
+            toggleCaseText = toggleCaseRadioButtonLabel.Text;
 
 
             changeOnlyWordsText = toolTip1.GetToolTip(exceptionWordsCheckBoxLabel);
             exceptForWordsText = exceptionWordsCheckBoxLabel.Text;
             toolTip1.SetToolTip(exceptionWordsCheckBoxLabel, toolTip1.GetToolTip(exceptionWordsCheckBox));
+
+            exceptionCharsText = exceptionCharsCheckBoxLabel.Text;
+            exceptionCharPairsText = exceptionCharPairsCheckBoxLabel.Text;
+            sentenceSeparatorsText = sentenceSeparatorsCheckBoxLabel.Text;
+
+            alwaysCapitalize1stWordText = alwaysCapitalize1stWordCheckBoxLabel.Text;
+            alwaysCapitalizeLastWordText = alwaysCapitalizeLastWordCheckBoxLabel.Text;
+            ignoreSingleLetterExceptedWordsText = ignoreSingleLetterExceptedWordsCheckBoxLabel.Text;
+
+
+            helpMessage = toolTip1.GetToolTip(buttonHelp);
+            toolTip1.SetToolTip(buttonHelp, string.Empty);
 
 
             FillListByTagNames(sourceTagListCustom.Items);
@@ -112,23 +211,176 @@ namespace MusicBeePlugin
 
             setChangeCaseOptionsRadioButtons(SavedSettings.changeCaseFlag);
 
+
+            string toolTip = exceptionWordsBoxCustom.GetToolTip(toolTip1);
+            if (useSkinColors)
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$4");
+            else
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$3");
+
+            exceptionWordsBoxCustom.SetToolTip(toolTip1, toolTip);
+
+
+            toolTip = exceptionCharsBoxCustom.GetToolTip(toolTip1);
+            if (useSkinColors)
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*)\r\n(.*)", "$1$3");
+            else
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*)\r\n(.*)", "$1$2");
+
+            exceptionCharsBoxCustom.SetToolTip(toolTip1, toolTip);
+
+
+            toolTip = openingExceptionCharsBoxCustom.GetToolTip(toolTip1);
+            if (useSkinColors)
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$3$4$6");
+            else
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$3$4$5");
+
+            openingExceptionCharsBoxCustom.SetToolTip(toolTip1, toolTip);
+
+
+            toolTip = closingExceptionCharsBoxCustom.GetToolTip(toolTip1);
+            if (useSkinColors)
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$3$4$6");
+            else
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$3$4$5");
+
+            closingExceptionCharsBoxCustom.SetToolTip(toolTip1, toolTip);
+
+
+            toolTip = sentenceSeparatorsBoxCustom.GetToolTip(toolTip1);
+            if (useSkinColors)
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*)\r\n(.*)", "$1$3");
+            else
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*)\r\n(.*)", "$1$2");
+
+            sentenceSeparatorsBoxCustom.SetToolTip(toolTip1, toolTip);
+
+
+
+            var list1 = exceptionWordsBoxCustom.CreateSpecialStateColumn("#", 1);
+            exceptionWordsBoxCustom.MaxSpecialState = 5; //-----
+
             exceptionWordsCheckBox.CheckState = GetCheckState(SavedSettings.useExceptionWords);
             exceptionWordsBoxCustom.AddRange(SavedSettings.exceptedWords);
-            exceptionWordsBoxCustom.Text = SavedSettings.exceptedWords[0] as string;
+
+            if (list1 is CustomListBox)
+            {
+                exceptionWordsEnumList = list1 as CustomListBox;
+                exceptionWordsEnumList.Click += enumList_Click;
+            }
+            else if (list1 is ComboBox)
+            {
+                exceptionWordsEnumComboBox = list1 as ComboBox;
+                exceptionWordsEnumComboBox.DropDownClosed += enumComboBox_DropDownClosed;
+            }
+
+            string text = SavedSettings.exceptedWords[0] as string;
+            if (text.Length >= exceptionWordsBoxCustom.GetSpecialStateCharCount(true) && text[exceptionWordsBoxCustom.GetSpecialStateCharCount(true) - 1] == ' ')
+                text = addSubstituteComboBoxSpecialState(text, string.Empty, exceptionWordsBoxCustom.GetSpecialStateCharCount(true));
+
+            exceptionWordsBoxCustom.Text = text;
+
+
+
+            var list2 = exceptionCharsBoxCustom.CreateSpecialStateColumn("#", 1);
+            exceptionCharsBoxCustom.MaxSpecialState = 5; //-----
 
             exceptionCharsCheckBox.Checked = SavedSettings.useExceptionChars;
             exceptionCharsBoxCustom.AddRange(SavedSettings.exceptionChars);
-            exceptionCharsBoxCustom.Text = SavedSettings.exceptionChars[0] as string;
+
+            if (list2 is CustomListBox)
+            {
+                exceptionCharsEnumList = list2 as CustomListBox;
+                exceptionCharsEnumList.Click += enumList_Click;
+            }
+            else if (list2 is ComboBox)
+            {
+                exceptionCharsEnumComboBox = list2 as ComboBox;
+                exceptionCharsEnumComboBox.DropDownClosed += enumComboBox_DropDownClosed;
+            }
+
+            text = (SavedSettings.exceptionChars[0] as string) + " ";
+            if (text.Length >= exceptionCharsBoxCustom.GetSpecialStateCharCount(true) && text[exceptionCharsBoxCustom.GetSpecialStateCharCount(true) - 1] == ' ')
+                text = addSubstituteComboBoxSpecialState(text, string.Empty, exceptionCharsBoxCustom.GetSpecialStateCharCount(true));
+
+            exceptionCharsBoxCustom.Text = text;
+
+
+
+            var list3 = openingExceptionCharsBoxCustom.CreateSpecialStateColumn("#", 1);
+            openingExceptionCharsBoxCustom.MaxSpecialState = 5; //-----
 
             exceptionCharPairsCheckBox.Checked = SavedSettings.useExceptionCharPairs;
             openingExceptionCharsBoxCustom.AddRange(SavedSettings.openingExceptionChars);
-            openingExceptionCharsBoxCustom.Text = SavedSettings.openingExceptionChars[0] as string;
+
+            if (list3 is CustomListBox)
+            {
+                openingExceptionCharsEnumList = list3 as CustomListBox;
+                openingExceptionCharsEnumList.Click += enumList_Click;
+            }
+            else if (list3 is ComboBox)
+            {
+                openingExceptionCharsEnumComboBox = list3 as ComboBox;
+                openingExceptionCharsEnumComboBox.DropDownClosed += enumComboBox_DropDownClosed;
+            }
+
+            text = (SavedSettings.openingExceptionChars[0] as string) + " ";
+            if (text.Length >= openingExceptionCharsBoxCustom.GetSpecialStateCharCount(true) && text[openingExceptionCharsBoxCustom.GetSpecialStateCharCount(true) - 1] == ' ')
+                text = addSubstituteComboBoxSpecialState(text, string.Empty, openingExceptionCharsBoxCustom.GetSpecialStateCharCount(true));
+
+            openingExceptionCharsBoxCustom.Text = text;
+
+
+
+            var list4 = closingExceptionCharsBoxCustom.CreateSpecialStateColumn("#", 1);
+            closingExceptionCharsBoxCustom.MaxSpecialState = 5; //-----
+
             closingExceptionCharsBoxCustom.AddRange(SavedSettings.closingExceptionChars);
-            closingExceptionCharsBoxCustom.Text = SavedSettings.closingExceptionChars[0] as string;
+
+            if (list4 is CustomListBox)
+            {
+                closingExceptionCharsEnumList = list4 as CustomListBox;
+                closingExceptionCharsEnumList.Click += enumList_Click;
+            }
+            else if (list4 is ComboBox)
+            {
+                closingExceptionCharsEnumComboBox = list4 as ComboBox;
+                closingExceptionCharsEnumComboBox.DropDownClosed += enumComboBox_DropDownClosed;
+            }
+
+            text = (SavedSettings.closingExceptionChars[0] as string) + " ";
+            if (text.Length >= closingExceptionCharsBoxCustom.GetSpecialStateCharCount(true) && text[closingExceptionCharsBoxCustom.GetSpecialStateCharCount(true) - 1] == ' ')
+                text = addSubstituteComboBoxSpecialState(text, string.Empty, closingExceptionCharsBoxCustom.GetSpecialStateCharCount(true));
+
+            closingExceptionCharsBoxCustom.Text = text;
+
+
+
+            var list5 = sentenceSeparatorsBoxCustom.CreateSpecialStateColumn("#", 1);
+            sentenceSeparatorsBoxCustom.MaxSpecialState = 5; //-----
 
             sentenceSeparatorsCheckBox.Checked = SavedSettings.useSentenceSeparators;
             sentenceSeparatorsBoxCustom.AddRange(SavedSettings.sentenceSeparators);
-            sentenceSeparatorsBoxCustom.Text = SavedSettings.sentenceSeparators[0] as string;
+
+            if (list5 is CustomListBox)
+            {
+                sentenceSeparatorsEnumList = list5 as CustomListBox;
+                sentenceSeparatorsEnumList.Click += enumList_Click;
+            }
+            else if (list5 is ComboBox)
+            {
+                sentenceSeparatorsEnumComboBox = list5 as ComboBox;
+                sentenceSeparatorsEnumComboBox.DropDownClosed += enumComboBox_DropDownClosed;
+            }
+
+            text = (SavedSettings.sentenceSeparators[0] as string) + " ";
+            if (text.Length >= sentenceSeparatorsBoxCustom.GetSpecialStateCharCount(true) && text[sentenceSeparatorsBoxCustom.GetSpecialStateCharCount(true) - 1] == ' ')
+                text = addSubstituteComboBoxSpecialState(text, string.Empty, sentenceSeparatorsBoxCustom.GetSpecialStateCharCount(true));
+
+            sentenceSeparatorsBoxCustom.Text = text;
+
+
 
             alwaysCapitalize1stWordCheckBox.CheckState = GetCheckState(SavedSettings.alwaysCapitalize1stWord);
             alwaysCapitalizeLastWordCheckBox.CheckState = GetCheckState(SavedSettings.alwaysCapitalizeLastWord);
@@ -152,8 +404,8 @@ namespace MusicBeePlugin
             {
                 HeaderCell = cbHeader,
                 ThreeState = true,
-                FalseValue = Plugin.ColumnUncheckedState,
-                TrueValue = Plugin.ColumnCheckedState,
+                FalseValue = ColumnUncheckedState,
+                TrueValue = ColumnCheckedState,
                 IndeterminateValue = string.Empty,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
@@ -182,6 +434,154 @@ namespace MusicBeePlugin
             enableQueryingOrUpdatingButtons();
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
+        }
+
+        private string addSubstituteListBoxSpecialState(string itemText, string state, int specialStateCharCount)
+        {
+            return itemText;
+        }
+
+        private void enumList_Click(object sender, EventArgs e)
+        {
+            CustomListBox enumList = sender as CustomListBox;
+            CustomComboBox customComboBox = (sender as ListControl).Tag as CustomComboBox;
+
+            if (recordMode)
+                return;
+
+
+            if (ModifierKeys == Keys.Shift)
+            {
+                customComboBox.SpecialState = -1;
+
+                for (int i = 0; i < enumList.Items.Count; i++)
+                    enumList.Items[i] = customComboBox.GetDefaultSpecialState();
+
+                return;
+            }
+            else if (customComboBox.SpecialState != -1 && !customComboBox.IsDefaultSpecialStateItem(enumList.SelectedIndex))
+            {
+                return;
+            }
+
+
+            if (customComboBox.SpecialState == -1)
+            {
+                for (int i = 0; i < enumList.Items.Count; i++)
+                    enumList.Items[i] = customComboBox.GetDefaultSpecialState();
+
+                customComboBox.SpecialState = 1;
+                enumList.Items[enumList.SelectedIndex] = customComboBox.GetCurrentSpecialState();
+            }
+            else if (customComboBox.IsDefaultSpecialStateItem(enumList.SelectedIndex))
+            {
+                customComboBox.SpecialState++;
+                enumList.Items[enumList.SelectedIndex] = customComboBox.GetCurrentSpecialState();
+            }
+        }
+
+        private string addSubstituteComboBoxSpecialState(string itemText, string state, int specialStateCharCount)
+        {
+            itemText = itemText ?? string.Empty;
+
+            if (string.IsNullOrWhiteSpace(itemText))
+                itemText = state;
+            else
+                itemText = state + itemText.Substring(specialStateCharCount);
+
+            return itemText;
+        }
+
+        private void enumComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            ComboBox enumComboBox = sender as ComboBox;
+            CustomComboBox customComboBox = (sender as ListControl).Tag as CustomComboBox;
+
+            if (recordMode && customComboBox.GetSpecialStateItem(customComboBox.SelectedIndex) == customComboBox.GetDefaultSpecialState())
+            {
+                ignoreComboBoxSelectedIndexChanged = true;
+                enumComboBox.DroppedDown = true;
+                System.Media.SystemSounds.Beep.Play();
+                return;
+            }
+            else if (recordMode)
+            {
+                ignoreComboBoxSelectedIndexChanged = false;
+            }
+
+
+            if (ignoreComboBoxSelectedIndexChanged || enumComboBox.SelectedIndex == -1)
+            {
+                ignoreComboBoxSelectedIndexChanged = false;
+                return;
+            }
+
+            string currentText = customComboBox.Text;
+            if (currentText.Length >= customComboBox.GetSpecialStateCharCount(true)
+                && currentText[customComboBox.GetSpecialStateCharCount(true) - 1] == ' ')
+
+                currentText = addSubstituteComboBoxSpecialState(customComboBox.Text, string.Empty, customComboBox.GetSpecialStateCharCount(true));
+
+
+            string itemText = customComboBox.GetSpecialStateItem(enumComboBox.SelectedIndex);
+            itemText = Regex.Replace(itemText.Trim(' '), @"\s{2,}", " ");
+
+            if (ModifierKeys != Keys.Control) //Let's process only ctrl-clicks and shift-clicks here for native combo box
+            {
+                customComboBox.SpecialState = -1;
+
+                ignoreComboBoxSelectedIndexChanged = true;
+
+                if (ModifierKeys == Keys.Shift)
+                {
+                    for (int i = 0; i < enumComboBox.Items.Count; i++)
+                        enumComboBox.Items[i] = addSubstituteComboBoxSpecialState(enumComboBox.Items[i] as string,
+                            customComboBox.GetDefaultSpecialState(), customComboBox.GetSpecialStateCharCount(true));
+
+                    customComboBox.SetText(currentText, true);
+
+                    ignoreComboBoxSelectedIndexChanged = false;
+
+                    return;
+                }
+
+                CustomComboBoxLeave(customComboBox, itemText, addSubstituteComboBoxSpecialState, customComboBox.GetDefaultSpecialState());
+
+                customComboBox.SetText(itemText, true);
+
+                ignoreComboBoxSelectedIndexChanged = false;
+
+                return;
+            }
+
+            ignoreComboBoxSelectedIndexChanged = true;
+
+            int enumComboBoxSelectedIndex = enumComboBox.SelectedIndex;
+
+            enumComboBox.DroppedDown = true;
+
+            if (customComboBox.SpecialState == -1)
+            {
+                customComboBox.SpecialState = 1;
+
+                for (int i = 0; i < enumComboBox.Items.Count; i++)
+                {
+                    if (i == enumComboBoxSelectedIndex)
+                        enumComboBox.Items[i] = customComboBox.GetCurrentSpecialState() + itemText;
+                    else
+                        enumComboBox.Items[i] = addSubstituteComboBoxSpecialState(enumComboBox.Items[i] as string, 
+                            customComboBox.GetDefaultSpecialState(), customComboBox.GetSpecialStateCharCount(true));
+                }
+            }
+            else
+            {
+                if (customComboBox.IsDefaultSpecialStateItem(enumComboBoxSelectedIndex))
+                    enumComboBox.Items[enumComboBoxSelectedIndex] = customComboBox.GetItemNextSpecialState(enumComboBoxSelectedIndex) + itemText;
+            }
+
+            customComboBox.SetText(currentText, true);
+
+            ignoreComboBoxSelectedIndexChanged = false;
         }
 
         private void setChangeCaseOptionsRadioButtons(int pos)
@@ -879,9 +1279,9 @@ namespace MusicBeePlugin
                 if (sourceTagValue == newTagValue && stripNotChangedLines)
                     continue;
                 else if (sourceTagValue == newTagValue)
-                    isChecked = Plugin.ColumnUncheckedState;
+                    isChecked = ColumnUncheckedState;
                 else
-                    isChecked = Plugin.ColumnCheckedState;
+                    isChecked = ColumnCheckedState;
 
 
                 Row row = new Row
@@ -942,7 +1342,7 @@ namespace MusicBeePlugin
 
             for (var i = 0; i < rows.Count; i++)
             {
-                if (rows[i].Checked == Plugin.ColumnCheckedState)
+                if (rows[i].Checked == ColumnCheckedState)
                 {
                     var newTagValue = changeCase(rows[i].NewTagValue, changeCaseFlag, exceptedWords, useWhiteList, exceptionChars,
                         openingExceptionChars, closingExceptionChars, sentenceSeparators, alwaysCapitalize1stWord, alwaysCapitalizeLastWord, ignoreSingleLetterExceptedWords);
@@ -978,7 +1378,7 @@ namespace MusicBeePlugin
 
                 var isChecked = tags[i][0];
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                 {
                     var currentFile = tags[i][1];
                     var newTagValue = tags[i][2];
@@ -1011,7 +1411,7 @@ namespace MusicBeePlugin
             SavedSettings.changeCaseFlag = getChangeCaseOptionsRadioButtons();
 
             SavedSettings.useExceptionWords = GetNullableBoolFromCheckState(exceptionWordsCheckBox.CheckState);
-            exceptionWordsBoxCustom.Items.CopyTo(SavedSettings.exceptedWords, 0);
+            exceptionWordsBoxCustom.CopyTo(SavedSettings.exceptedWords, 0);
 
             SavedSettings.useExceptionChars = exceptionCharsCheckBox.Checked;
             exceptionCharsBoxCustom.Items.CopyTo(SavedSettings.exceptionChars, 0);
@@ -1041,6 +1441,9 @@ namespace MusicBeePlugin
         private void buttonPreview_Click(object sender, EventArgs e)
         {
             ignoreClosingForm = clickOnPreviewButton(prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
+
+            if (recordMode)
+                buttonPreview.Enable(false);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -1050,6 +1453,9 @@ namespace MusicBeePlugin
 
         private void buttonReapply_Click(object sender, EventArgs e)
         {
+            if (recordMode)
+                saveStep();
+
             reapplyRules();
         }
 
@@ -1139,9 +1545,9 @@ namespace MusicBeePlugin
                     continue;
 
                 if (state)
-                    rows[0].Checked = Plugin.ColumnUncheckedState;
+                    rows[0].Checked = ColumnUncheckedState;
                 else
-                    rows[0].Checked = Plugin.ColumnCheckedState;
+                    rows[0].Checked = ColumnCheckedState;
             }
 
             int firstRow = previewTable.FirstDisplayedCell.RowIndex;
@@ -1159,7 +1565,7 @@ namespace MusicBeePlugin
             if (SavedSettings.dontHighlightChangedTags)
                 return;
 
-            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != Plugin.ColumnCheckedState)
+            if (dataGridView.Rows[rowIndex].Cells[0].Value as string != ColumnCheckedState)
             {
                 for (var columnIndex = 1; columnIndex < dataGridView.ColumnCount; columnIndex++)
                 {
@@ -1195,9 +1601,9 @@ namespace MusicBeePlugin
 
                 var isChecked = previewTable.Rows[e.RowIndex].Cells[0].Value as string;
 
-                if (isChecked == Plugin.ColumnCheckedState)
+                if (isChecked == ColumnCheckedState)
                 {
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnUncheckedState;
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = ColumnUncheckedState;
 
                     sourceTagValue = previewTable.Rows[e.RowIndex].Cells[3].Value as string;
                     var sourceTagTValue = previewTable.Rows[e.RowIndex].Cells[4].Value as string;
@@ -1205,7 +1611,7 @@ namespace MusicBeePlugin
                     previewTable.Rows[e.RowIndex].Cells[5].Value = sourceTagValue;
                     previewTable.Rows[e.RowIndex].Cells[6].Value = sourceTagTValue;
                 }
-                else if (isChecked == Plugin.ColumnUncheckedState)
+                else if (isChecked == ColumnUncheckedState)
                 {
                     changeCaseFlag = getChangeCaseOptionsRadioButtons();
 
@@ -1231,7 +1637,7 @@ namespace MusicBeePlugin
                     if (sentenceSeparatorsCheckBox.IsEnabled() && sentenceSeparatorsCheckBox.Checked)
                         sentenceSeparators = sentenceSeparatorsBoxCustom.Text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    previewTable.Rows[e.RowIndex].Cells[0].Value = Plugin.ColumnCheckedState;
+                    previewTable.Rows[e.RowIndex].Cells[0].Value = ColumnCheckedState;
 
                     sourceTagValue = previewTable.Rows[e.RowIndex].Cells[3].Value as string;
 
@@ -1249,6 +1655,9 @@ namespace MusicBeePlugin
 
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
+            buttonPlayPreset.Enable(enable && !previewIsGenerated);
+            buttonRecordPreset.Enable(enable && !previewIsGenerated);
+
             sourceTagListCustom.Enable(enable);
 
 
@@ -1295,7 +1704,8 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !backgroundTaskIsStopping && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags));
+            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !recordMode && !backgroundTaskIsStopping 
+                && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags));
             buttonPreview.Enable(true);
             buttonReapply.Enable(previewIsGenerated && !backgroundTaskIsWorking());
         }
@@ -1307,22 +1717,162 @@ namespace MusicBeePlugin
             buttonReapply.Enable(false);
         }
 
+        private void exceptionWordsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (recordMode)
+            {
+                if (ignoreComboBoxSelectedIndexChanged)
+                    return;
+
+                currentStep.exceptionWordsIndex = exceptionWordsBoxCustom.GetItemSpecialStateIndex(exceptionWordsBoxCustom.SelectedIndex);
+            }
+
+            if (exceptionWordsEnumComboBox == null)
+                CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteListBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState());
+            else
+                CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState());
+        }
+
         private void exceptionWordsBox_Leave(object sender, EventArgs e)
         {
             exceptionWordsBoxCustom.Text = Regex.Replace(exceptionWordsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
-            CustomComboBoxLeave(exceptionWordsBoxCustom);
+
+
+            if (exceptionWordsEnumComboBox == null && !exceptionWordsBoxCustom.IsFocused())
+                CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteListBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState());
+            else if (exceptionWordsEnumComboBox != null)
+                CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState());
+        }
+
+        private void exceptionCharsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (recordMode)
+            {
+                if (ignoreComboBoxSelectedIndexChanged)
+                    return;
+
+                currentStep.exceptionCharsIndex = exceptionCharsBoxCustom.GetItemSpecialStateIndex(exceptionCharsBoxCustom.SelectedIndex);
+            }
+
+            if (exceptionCharsEnumComboBox == null)
+                CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState());
+            else
+                CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState());
         }
 
         private void exceptionCharsBox_Leave(object sender, EventArgs e)
         {
             exceptionCharsBoxCustom.Text = Regex.Replace(exceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
-            CustomComboBoxLeave(exceptionCharsBoxCustom);
+
+
+            if (exceptionCharsEnumComboBox == null && !exceptionCharsBoxCustom.IsFocused())
+                CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState());
+            else if (exceptionCharsEnumComboBox != null)
+                CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState());
+        }
+
+        private void openingExceptionCharsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (recordMode)
+            {
+                if (ignoreComboBoxSelectedIndexChanged)
+                    return;
+
+                currentStep.exceptionCharPair1Index = openingExceptionCharsBoxCustom.GetItemSpecialStateIndex(openingExceptionCharsBoxCustom.SelectedIndex);
+            }
+
+            if (openingExceptionCharsEnumComboBox == null)
+                CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState());
+            else
+                CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState());
+        }
+
+        private void openingExceptionCharsBox_Leave(object sender, EventArgs e)
+        {
+            openingExceptionCharsBoxCustom.Text = Regex.Replace(openingExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
+
+            if (ActiveControl != closingExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
+            {
+                closingExceptionCharsBoxCustom.Focus();
+                closingExceptionCharsBoxCustom.SelectionStart = closingExceptionCharsBoxCustom.Text.Length + 1;
+                closingExceptionCharsBoxCustom.SelectionLength = 0;
+            }
+
+            if (openingExceptionCharsEnumComboBox == null && !openingExceptionCharsBoxCustom.IsFocused())
+                CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState());
+            else if (openingExceptionCharsEnumComboBox != null)
+                CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState());
+        }
+
+        private void closingExceptionCharsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (recordMode)
+            {
+                if (ignoreComboBoxSelectedIndexChanged)
+                    return;
+
+                currentStep.exceptionCharPair2Index = closingExceptionCharsBoxCustom.GetItemSpecialStateIndex(closingExceptionCharsBoxCustom.SelectedIndex);
+            }
+
+            if (closingExceptionCharsEnumComboBox == null)
+                CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState());
+            else
+                CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState());
+        }
+
+        private void closingExceptionCharsBox_Leave(object sender, EventArgs e)
+        {
+            if (closingExceptionCharsBoxLeaving)
+                return;
+
+
+            closingExceptionCharsBoxCustom.Text = Regex.Replace(closingExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
+
+            if (ActiveControl != openingExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
+            {
+                closingExceptionCharsBoxLeaving = true;
+
+                MessageBox.Show(MbForm, MsgCsTheNumberOfOpeningExceptionCharactersMustBe,
+                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                closingExceptionCharsBoxLeaving = false;
+
+                closingExceptionCharsBoxCustom.Focus();
+                closingExceptionCharsBoxCustom.SelectionStart = closingExceptionCharsBoxCustom.Text.Length + 1;
+                closingExceptionCharsBoxCustom.SelectionLength = 0;
+            }
+
+            if (closingExceptionCharsEnumComboBox == null && !closingExceptionCharsBoxCustom.IsFocused())
+                CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState());
+            else if (closingExceptionCharsEnumComboBox != null)
+                CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState());
+        }
+
+        private void sentenceSeparatorsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (recordMode)
+            {
+                if (ignoreComboBoxSelectedIndexChanged)
+                    return;
+
+                currentStep.sentenceSeparatorsIndex = sentenceSeparatorsBoxCustom.GetItemSpecialStateIndex(sentenceSeparatorsBoxCustom.SelectedIndex);
+            }
+
+            if (sentenceSeparatorsEnumComboBox == null)
+                CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteListBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState());
+            else
+                CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteComboBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState());
         }
 
         private void sentenceSeparatorsBox_Leave(object sender, EventArgs e)
         {
             sentenceSeparatorsBoxCustom.Text = Regex.Replace(sentenceSeparatorsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
-            CustomComboBoxLeave(sentenceSeparatorsBoxCustom);
+
+
+            if (sentenceSeparatorsEnumComboBox == null && !sentenceSeparatorsBoxCustom.IsFocused())
+                CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteListBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState());
+            else if (sentenceSeparatorsEnumComboBox != null)
+                CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteComboBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState());
         }
 
         internal static string[] GetCharsInString(string text)
@@ -1361,45 +1911,6 @@ namespace MusicBeePlugin
                 return false;
 
             return true;
-        }
-
-        private void openingExceptionCharsBox_Leave(object sender, EventArgs e)
-        {
-            openingExceptionCharsBoxCustom.Text = Regex.Replace(openingExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
-
-            if (ActiveControl != closingExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
-            {
-                closingExceptionCharsBoxCustom.Focus();
-                closingExceptionCharsBoxCustom.SelectionStart = closingExceptionCharsBoxCustom.Text.Length + 1;
-                closingExceptionCharsBoxCustom.SelectionLength = 0;
-            }
-
-            CustomComboBoxLeave(openingExceptionCharsBoxCustom);
-        }
-
-        private void closingExceptionCharsBox_Leave(object sender, EventArgs e)
-        {
-            if (closingExceptionCharsBoxLeaving)
-                return;
-
-
-            closingExceptionCharsBoxCustom.Text = Regex.Replace(closingExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
-
-            if (ActiveControl != openingExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
-            {
-                closingExceptionCharsBoxLeaving = true;
-
-                MessageBox.Show(MbForm, MsgCsTheNumberOfOpeningExceptionCharactersMustBe,
-                    string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                closingExceptionCharsBoxLeaving = false;
-
-                closingExceptionCharsBoxCustom.Focus();
-                closingExceptionCharsBoxCustom.SelectionStart = closingExceptionCharsBoxCustom.Text.Length + 1;
-                closingExceptionCharsBoxCustom.SelectionLength = 0;
-            }
-
-            CustomComboBoxLeave(closingExceptionCharsBoxCustom);
         }
 
         private void casingRuleRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -1546,6 +2057,69 @@ namespace MusicBeePlugin
             {
                 saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[4].Width, previewTable.Columns[6].Width);
             }
+        }
+
+        private void buttonHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this, helpMessage);
+        }
+
+        private void buttonDescription_Click(object sender, EventArgs e)//************
+        {
+            if (presetBox.SelectedItem != null)
+                MessageBox.Show(this, (presetBox.SelectedItem as ChangeCasePreset).description);
+        }
+
+        private void buttonDeletePreset_Click(object sender, EventArgs e)
+        {
+            presetBox.Items.Remove(presetBox.SelectedItem);
+        }
+
+        private void buttonPlayPreset_Click(object sender, EventArgs e)//************
+        {
+
+        }
+
+        private void saveStep()
+        {
+            currentStep.rule = getChangeCaseOptionsRadioButtons();
+            currentStep.exceptionWordsState = GetNullableBoolFromCheckState(exceptionWordsCheckBox.CheckState);
+            currentStep.alwaysCapitalize1stWord = alwaysCapitalize1stWordCheckBox.Checked;
+            currentStep.alwaysCapitalizeLastWord = alwaysCapitalizeLastWordCheckBox.Checked;
+            currentStep.ignoreSingleLetterExceptedWords = ignoreSingleLetterExceptedWordsCheckBox.Checked;
+
+            recordedPreset.steps.Add(currentStep);
+            currentStep = new ChangeCaseStep();
+        }
+
+        private void buttonRecordPreset_Click(object sender, EventArgs e)
+        {
+            buttonOK.Enable(false);
+
+            presetBox.Enable(false);
+            buttonDeletePreset.Enable(false);
+            buttonPlayPreset.Enable(false);
+            buttonRecordPreset.Enable(false);
+            buttonStopRecordingPreset.Enable(true);
+
+            recordMode = true;
+            recordedPreset = new ChangeCasePreset();
+            currentStep = new ChangeCaseStep();
+        }
+
+        private void buttonStopRecordingPreset_Click(object sender, EventArgs e)
+        {
+            currentStep = null;
+
+            //************ open naming dialog
+        }
+
+        private void presetBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((presetBox.SelectedItem as ChangeCasePreset)?.predefined == true)
+                buttonDeletePreset.Enable(false);
+            else
+                buttonDeletePreset.Enable(true);
         }
     }
 }

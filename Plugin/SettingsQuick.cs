@@ -93,6 +93,8 @@ namespace MusicBeePlugin
 
             minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
 
+            scrollPreviewToEndCheckBox.Checked = SavedSettings.scrollPreviewToEnd;
+
             useSkinColorsCheckBox.Checked = !SavedSettings.dontUseSkinColors;
             useMusicBeeFontCheckBox.Checked = SavedSettings.useMusicBeeFont;
 
@@ -129,6 +131,8 @@ namespace MusicBeePlugin
             playStartedSoundCheckBox.Checked = SavedSettings.playStartedSound;
             playStoppedSoundCheckBox.Checked = SavedSettings.playCanceledSound;
             playTickedAsrPresetSoundCheckBox.Checked = !SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound;
+
+            button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
         private void saveSettings()
@@ -153,6 +157,8 @@ namespace MusicBeePlugin
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
 
             SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
+
+            SavedSettings.scrollPreviewToEnd = scrollPreviewToEndCheckBox.Checked;
 
             SavedSettings.dontUseSkinColors = !useSkinColorsCheckBox.Checked;
             SavedSettings.useMusicBeeFont = useMusicBeeFontCheckBox.Checked;
@@ -292,6 +298,11 @@ namespace MusicBeePlugin
         private void showHiddenCommandWindowsRadioButtonLabel_Click(object sender, EventArgs e)
         {
             showHiddenCommandWindowsRadioButton.Checked = true;
+        }
+
+        private void scrollPreviewToEndCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            scrollPreviewToEndCheckBox.Checked = !scrollPreviewToEndCheckBox.Checked;
         }
 
         private void playCompletedSoundCheckBoxLabel_Click(object sender, EventArgs e)

@@ -144,7 +144,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             this.SetStyle(ControlStyles.DoubleBuffer, true);
-            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);//***********************
 
             TagToolsPlugin = plugin;
             useSkinColors = !SavedSettings.dontUseSkinColors;
@@ -191,9 +191,13 @@ namespace MusicBeePlugin
                 e.ItemHeight = (sender as ListBox).Font.Height;
         }
 
-        internal static void ListBox_DrawItem(object sender, DrawItemEventArgs e)
+        internal void listBox_DrawItem(object sender, DrawItemEventArgs e)
         {
             var listBox = sender as ListBox;
+
+            if (e.Index >= listBox.Items.Count)
+                return;
+
 
             e.DrawBackground();
 
@@ -240,7 +244,7 @@ namespace MusicBeePlugin
             //    ControlsTools.DrawCheckBox(e.Graphics, checkBoxBounds, 1, NoColor, textColor, textColor, state);
 
             if (checkBoxSize > 0) //Variant #2
-                ControlsTools.DrawCheckBox(e.Graphics, checkBoxBounds, 1, InputControlBackColor, textColor, textColor, state);
+                ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, 1, InputControlBackColor, textColor, textColor, state);
 
             //if (checkBoxSize > 0) //Variant #3
             //    ControlsTools.DrawCheckBox(e.Graphics, checkBoxBounds, state);
@@ -323,7 +327,7 @@ namespace MusicBeePlugin
                 button_LostFocus(sender, e);
         }
 
-        internal protected void button_GotFocus(object sender, EventArgs e)
+        internal void button_GotFocus(object sender, EventArgs e)
         {
             var button = sender as Button;
             var acceptButton = AcceptButton as Button;
@@ -349,7 +353,7 @@ namespace MusicBeePlugin
                 else if (acceptButton != null && acceptButton.IsEnabled() && !artificiallyFocusedAcceptButton) //It's non-defaultable button & accept button enabled
                 {
                     artificiallyFocusedAcceptButton = true;
-                    acceptButton.Focus();
+                    acceptButton.Focus(); //Last selected control will be re-selected later (see code above)
                 }
                 else //It's non-defaultable button & accept button disabled, let's activate last active control
                 {
@@ -371,25 +375,43 @@ namespace MusicBeePlugin
                 setSkinnedControlColors(sender as Button, null);
         }
 
+        internal protected Color getButtonBorderColor(bool mouseOver, bool enabled, bool acceptButton) //-----
+        {
+            Color borderColor;
+
+            if (enabled && acceptButton && !mouseOver)
+                borderColor = ButtonFocusedBorderColor;
+            else if (enabled && mouseOver && ButtonMouseOverBackColor != InputPanelBackColor)
+                borderColor = ButtonMouseOverBackColor;
+            else if (enabled && mouseOver)
+                borderColor = ButtonFocusedBorderColor;
+            else
+                borderColor = ButtonBorderColor;
+
+            return borderColor;
+        }
+
         internal protected void button_MouseEnter(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            if (useSkinColors && !(button.Parent is CustomComboBox) && button.IsEnabled())
-                button.FlatAppearance.BorderColor = ButtonMouseOverBackColor;
-            else if (useSkinColors && !(button.Parent is CustomComboBox))
-                button.FlatAppearance.BorderColor = ButtonBorderColor;
 
+            if (!useSkinColors || button.FlatStyle != FlatStyle.Flat || button.Parent is CustomComboBox)
+                return;
+
+
+            button.FlatAppearance.BorderColor = getButtonBorderColor(true, button.IsEnabled(), button == button.FindForm().AcceptButton);
             button.Refresh();
         }
 
         internal protected void button_MouseLeave(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            if (useSkinColors && button.IsEnabled() && button == button.FindForm().AcceptButton)
-                button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
-            else if (useSkinColors && !(button.Parent is CustomComboBox))
-                button.FlatAppearance.BorderColor = ButtonBorderColor;
 
+            if (!useSkinColors || button.FlatStyle != FlatStyle.Flat || button.Parent is CustomComboBox)
+                return;
+
+
+            button.FlatAppearance.BorderColor = getButtonBorderColor(false, button.IsEnabled(), button == button.FindForm().AcceptButton);
             button.Refresh();
         }
 
@@ -403,7 +425,11 @@ namespace MusicBeePlugin
 
         internal protected void button_Paint(object sender, PaintEventArgs e)
         {
-            var button = sender as Button;
+            Button button = sender as Button;
+
+            if (!useSkinColors || button.FlatStyle != FlatStyle.Flat || button.Parent is CustomComboBox)
+                return;
+
 
             var text = buttonLabels[button];
 
@@ -413,20 +439,12 @@ namespace MusicBeePlugin
             //Render the text onto the button.
             if (isMouseOverControl(sender as Control))
             {
-                if (useSkinColors && !(button.Parent is CustomComboBox) && button.IsEnabled())
-                    button.FlatAppearance.BorderColor = ButtonMouseOverBackColor;
-                else if (useSkinColors && !(button.Parent is CustomComboBox))
-                    button.FlatAppearance.BorderColor = ButtonBorderColor;
-
+                button.FlatAppearance.BorderColor = getButtonBorderColor(true, button.IsEnabled(), button == button.FindForm().AcceptButton);
                 TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, ButtonMouseOverForeColor, flags);
             }
             else
             {
-                if (useSkinColors && button.IsEnabled() && button == button.FindForm().AcceptButton)
-                    button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
-                else if (useSkinColors && !(button.Parent is CustomComboBox))
-                    button.FlatAppearance.BorderColor = ButtonBorderColor;
-
+                button.FlatAppearance.BorderColor = getButtonBorderColor(false, button.IsEnabled(), button == button.FindForm().AcceptButton);
                 TextRenderer.DrawText(e.Graphics, text, button.Font, e.ClipRectangle, button.ForeColor, flags);
             }
         }
@@ -440,7 +458,7 @@ namespace MusicBeePlugin
             {
                 buttonLabels.AddReplace(button, text);
 
-                if (useSkinColors)
+                if (useSkinColors && button.FlatStyle == FlatStyle.Flat) //button.FlatStyle == FlatStyle.Flat: not using native Windows buttons, see skinControl()
                 {
                     button.Text = string.Empty;
                     button.Invalidate();
@@ -703,7 +721,6 @@ namespace MusicBeePlugin
         internal static Size GetControlSize(Control control)
         {
             if (control.GetType().IsSubclassOf(typeof(Form)) || control is Form)
-                // ReSharper disable once PossibleNullReferenceException
                 return (control as Form).ClientSize;
             else
                 return control.Size;
@@ -2445,8 +2462,10 @@ namespace MusicBeePlugin
                 {
                     source.ResetBindings(resetBindingsMetadataChanged);
 
-                    if (selectLastRow)
+                    if (selectLastRow && SavedSettings.scrollPreviewToEnd)
                         dataGridView.CurrentCell = dataGridView[0, dataGridView.RowCount - 1];
+                    else if (!SavedSettings.scrollPreviewToEnd)
+                        dataGridView.CurrentCell = dataGridView[0, 0];
 
                     if (form.useSkinColors)
                         UpdateCustomScrollBars(dataGridView, 1, rowsCount);
@@ -2475,7 +2494,7 @@ namespace MusicBeePlugin
                     dataGridViewFormatChangedTags(dataGridView, j);
 
 
-            if (dataGridView.RowCount > 0 && (itsLastRowRange || (dataGridView.RowCount & 0x1f) == 0))
+            if (SavedSettings.scrollPreviewToEnd && dataGridView.RowCount > 0 && (itsLastRowRange || (dataGridView.RowCount & 0x1f) == 0))
                 dataGridView.FirstDisplayedCell = dataGridView.CurrentCell;
 
             if (form.useSkinColors)
@@ -2494,6 +2513,10 @@ namespace MusicBeePlugin
             {
                 customComboBox = listBox.Tag as CustomComboBox;
             }
+            else if (lastSelectedControl?.Parent is CustomComboBox)
+            {
+                customComboBox = lastSelectedControl.Parent as CustomComboBox;
+            }
             else if (sender is Control control)
             {
                 var focusedControl = FindFocusedControl(control);
@@ -2508,9 +2531,6 @@ namespace MusicBeePlugin
                 return null;
             }
 
-            if (customComboBox?.MustKeyEventsBeHandled != true)
-                return null;
-
             return customComboBox;
         }
 
@@ -2518,7 +2538,7 @@ namespace MusicBeePlugin
         {
             var customComboBox = getKeyEventCustomComboBox(sender);
 
-            if (customComboBox == null)
+            if (customComboBox == null || customComboBox.StandardKeyPressHandling)
                 return;
 
 
@@ -2528,11 +2548,13 @@ namespace MusicBeePlugin
 
             for (var searchedIndex = 0; searchedIndex < 2; searchedIndex++)
             {
-                foreach (string tagName in customComboBox.Items)
+                foreach (object item in customComboBox.Items)
                 {
-                    if (tagName.Length > searchedIndex && tagName[searchedIndex].ToString().ToLower() == searchedLetter)
+                    string itemName = item == null ? string.Empty : item.ToString();
+
+                    if (itemName.Length > searchedIndex && itemName[searchedIndex].ToString().ToLower() == searchedLetter)
                     {
-                        customComboBox.SelectedItem = tagName;
+                        customComboBox.SelectedItem = item;
                         e.Handled = true;
                         return;
                     }
@@ -2549,20 +2571,42 @@ namespace MusicBeePlugin
             if (customComboBox == null)
                 return;
 
+            var standardKeyDownHandling = customComboBox.StandardKeyDownHandling;
+            if (standardKeyDownHandling != true)
+            {
+                if (e.KeyCode == Keys.Space && customComboBox.SelectedIndex > -1)
+                {
+                    e.SuppressKeyPress = true;
+                    customComboBox.SelectCurrentDropDownItem();
+                }
+                else if (e.KeyCode == Keys.Right && standardKeyDownHandling == false && customComboBox.Items.Count > 0)
+                {
+                    if (customComboBox.SelectedIndex == -1)
+                        customComboBox.SelectedIndex = 0;
 
-            if (e.KeyCode == Keys.Space)
-            {
-                e.SuppressKeyPress = true;
-                customComboBox.ListBox_ItemChosen(null, null);
+                    e.SuppressKeyPress = true;
+                    customComboBox.SelectCurrentDropDownItem();
+
+                    customComboBox.SelectionStart = 0;
+                    customComboBox.SelectionLength = customComboBox.Text.Length;
+                }
             }
-            else if (e.KeyCode == Keys.Enter && form != null)
+
+            if (e.KeyCode == Keys.Escape)
             {
                 e.SuppressKeyPress = true;
-                form.AcceptButton.PerformClick();
+
+                customComboBox.SelectedItem = null;
+
+                if (customComboBox.DropDownStyle == ComboBoxStyle.DropDown)
+                    customComboBox.Text = string.Empty;
+
+                customComboBox.DroppedDown = false;
             }
             else if (e.KeyCode == Keys.Up && e.Modifiers == Keys.Alt)
             {
-                e.SuppressKeyPress = customComboBox.SelectCurrentDropDownItem();
+                e.SuppressKeyPress = true;
+                customComboBox.SelectCurrentDropDownItem();
             }
             else if (e.KeyCode == Keys.Up && customComboBox.SelectedIndex > 0)
             {
@@ -2581,7 +2625,7 @@ namespace MusicBeePlugin
             }
             else if (e.KeyCode == Keys.Down && e.Modifiers == Keys.Alt)
             {
-                e.SuppressKeyPress = customComboBox.OpenDropDown();
+                e.SuppressKeyPress = customComboBox.OpenCustomDropDown();
             }
             else if (e.KeyCode == Keys.Down && customComboBox.SelectedIndex < customComboBox.Items.Count - 1)
             {
@@ -2643,9 +2687,13 @@ namespace MusicBeePlugin
         //Returns: enabled fore & back colors, disabled fore & back colors
         internal void setSkinnedControlColors(Control control, bool? enable) //-----
         {
+            if (control == null)
+                return;
+
+
             if (useSkinColors)
             {
-                if (control is Button button) //button != null always if it is Button
+                if (control is Button button && (!UseNativeButtonPaint || button.Parent is CustomComboBox)) //button != null always if it is Button
                 {
                     var acceptButton = AcceptButton as Button;
 
@@ -2661,7 +2709,9 @@ namespace MusicBeePlugin
                     {
                         button.ForeColor = controlHighlightForeColor;
                         button.BackColor = controlHighlightBackColor;
-                        button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+
+                        if (button.FlatStyle == FlatStyle.Flat)
+                            button.FlatAppearance.BorderColor = getButtonBorderColor(isMouseOverControl(button), button.IsEnabled(), button == button.FindForm().AcceptButton);
                     }
                     //else if (((control.IsEnabled() && state == null) || enable == true) && button.Focused) //It's done on button's OnPaint function
                     //{
@@ -2681,19 +2731,25 @@ namespace MusicBeePlugin
                     {
                         button.ForeColor = buttonForeColor;
                         button.BackColor = buttonBackColor;
-                        button.FlatAppearance.BorderColor = ButtonBorderColor;
+
+                        if (button.FlatStyle == FlatStyle.Flat)
+                            button.FlatAppearance.BorderColor = getButtonBorderColor(isMouseOverControl(button), button.IsEnabled(), button == button.FindForm().AcceptButton);
                     }
 
 
                     //Combo box disabled button
                     else if (button.Parent is CustomComboBox)
                     {
-                        button.ForeColor = buttonForeColor;
-                        button.BackColor = NarrowScrollBarBackColor;
-                        button.FlatAppearance.BorderColor = ScrollBarBorderColor;//---
+                        button.ForeColor = InputControlDeepDimmedForeColor;
+                        button.BackColor = InputControlDeepDimmedBackColor;
+                        //button.FlatAppearance.BorderColor = InputControlDeepDimmedBackColor;//-----
 
                         //button.ForeColor = buttonForeColor;
-                        //button.BackColor = InputPanelBackColor; //---
+                        //button.BackColor = NarrowScrollBarBackColor;
+                        button.FlatAppearance.BorderColor = ScrollBarBorderColor;//-----
+
+                        //button.ForeColor = buttonForeColor;
+                        //button.BackColor = InputPanelBackColor; //-----
                         //button.FlatAppearance.BorderColor = ButtonBorderColor;
                     }
                     //Generic disabled button
@@ -2702,7 +2758,9 @@ namespace MusicBeePlugin
 
                         button.ForeColor = buttonDisabledForeColor;
                         button.BackColor = buttonDisabledBackColor;
-                        button.FlatAppearance.BorderColor = ButtonBorderColor;
+
+                        if (button.FlatStyle == FlatStyle.Flat)
+                            button.FlatAppearance.BorderColor = getButtonBorderColor(isMouseOverControl(button), button.IsEnabled(), button == button.FindForm().AcceptButton);
                     }
                 }
                 else if (control is CheckBox)
@@ -2746,7 +2804,7 @@ namespace MusicBeePlugin
                 {
                     customComboBox.SetTextBoxColors(enable);
                 }
-                else if (control is ComboBox comboBox && comboBox.DropDownStyle == ComboBoxStyle.Simple) //-------------- Make owner drawing selected items !!!
+                else if (control is ComboBox comboBox && comboBox.DropDownStyle == ComboBoxStyle.Simple) //----- Make owner drawing selected items !!!
                 {
                     if ((control.IsEnabled() && enable == null) || enable == true)
                     {
@@ -2890,6 +2948,7 @@ namespace MusicBeePlugin
                 button.GotFocus += button_GotFocus;
                 button.LostFocus += button_LostFocus;
 
+                var stringTag = control.Tag as string;
 
                 if (!useSkinColors)
                 {
@@ -2898,10 +2957,10 @@ namespace MusicBeePlugin
                 }
                 else if (UseNativeButtonPaint && !(button.Parent is CustomComboBox))
                 {
-                    setSkinnedControlColors(button, null);
-
                     button.FlatStyle = FlatStyle.Standard;
                     buttonLabels.AddReplace(button, button.Text);
+
+                    //setSkinnedControlColors(button, null); //-----
                 }
                 else
                 {
@@ -2962,8 +3021,9 @@ namespace MusicBeePlugin
                         customComboBox.comboBox.FlatStyle = FlatStyle.System;
 
                         //For rendering high contrast cue banners. Works with DropDownLists only.
-                        customComboBox.comboBox.DrawItem += comboBox_DrawItem;
                         customComboBox.comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+                        customComboBox.comboBox.DrawItem += comboBox_DrawItem;
+                        customComboBox.comboBox.KeyDown += CustomComboBox_KeyDown;
                     }
                     else
                     {
@@ -3100,8 +3160,8 @@ namespace MusicBeePlugin
 
                 if (!(control is CustomCheckedListBox))
                 {
-                    listBox.DrawMode = DrawMode.OwnerDrawVariable;
-                    listBox.DrawItem += ListBox_DrawItem;
+                    listBox.DrawMode = DrawMode.OwnerDrawFixed;
+                    listBox.DrawItem += listBox_DrawItem;
                 }
 
                 if (!(listBox is CustomListBox) && !(listBox is CustomCheckedListBox))
@@ -3118,37 +3178,40 @@ namespace MusicBeePlugin
                 }
 
 
-                if (listBox.MultiColumn)
+                if (borderWidth != -2)
                 {
-                    var customHScrollBar = new CustomHScrollBar(this, listBox, GetListBoxScrollBarMetrics);
-                    customHScrollBar.CreateBrushes();
+                    if (listBox.MultiColumn)
+                    {
+                        var customHScrollBar = new CustomHScrollBar(this, listBox, GetListBoxScrollBarMetrics);
+                        customHScrollBar.CreateBrushes();
 
-                    customHScrollBar.Scroll += listBoxCustomHScrollBar_Scroll;
-                    customHScrollBar.ValueChanged += listBoxCustomHScrollBar_ValueChanged;
+                        customHScrollBar.Scroll += listBoxCustomHScrollBar_Scroll;
+                        customHScrollBar.ValueChanged += listBoxCustomHScrollBar_ValueChanged;
 
-                    listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
-                    listBox.MouseWheel += listBox_MouseWheel;
+                        listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
+                        listBox.MouseWheel += listBox_MouseWheel;
 
-                    if (listBox is CustomListBox || listBox is CustomCheckedListBox)
-                        listBox.SizeChanged += customScrollBarCustomListBox_SizeChanged;
+                        if (listBox is CustomListBox || listBox is CustomCheckedListBox)
+                            listBox.SizeChanged += customScrollBarCustomListBox_SizeChanged;
+                        else
+                            listBox.SizeChanged += customScrollBarListBox_SizeChanged;
+                    }
                     else
-                        listBox.SizeChanged += customScrollBarListBox_SizeChanged;
-                }
-                else
-                {
-                    var customVScrollBar = new CustomVScrollBar(this, listBox, listBox.ItemHeight, GetListBoxScrollBarMetrics, borderWidth);
-                    customVScrollBar.CreateBrushes();
+                    {
+                        var customVScrollBar = new CustomVScrollBar(this, listBox, listBox.ItemHeight, GetListBoxScrollBarMetrics, borderWidth);
+                        customVScrollBar.CreateBrushes();
 
-                    customVScrollBar.Scroll += listBoxCustomVScrollBar_Scroll;
-                    customVScrollBar.ValueChanged += listBoxCustomVScrollBar_ValueChanged;
+                        customVScrollBar.Scroll += listBoxCustomVScrollBar_Scroll;
+                        customVScrollBar.ValueChanged += listBoxCustomVScrollBar_ValueChanged;
 
-                    listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
-                    listBox.MouseWheel += listBox_MouseWheel;
+                        listBox.SelectedIndexChanged += listBox_SelectedIndexChanged;
+                        listBox.MouseWheel += listBox_MouseWheel;
 
-                    if (listBox is CustomListBox || listBox is CustomCheckedListBox)
-                        listBox.SizeChanged += customScrollBarCustomListBox_SizeChanged;
-                    else
-                        listBox.SizeChanged += customScrollBarListBox_SizeChanged;
+                        if (listBox is CustomListBox || listBox is CustomCheckedListBox)
+                            listBox.SizeChanged += customScrollBarCustomListBox_SizeChanged;
+                        else
+                            listBox.SizeChanged += customScrollBarListBox_SizeChanged;
+                    }
                 }
             }
             else if (control is DataGridView dataGridView)

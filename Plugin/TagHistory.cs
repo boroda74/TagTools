@@ -13,7 +13,7 @@ namespace MusicBeePlugin
     public partial class TagHistory : PluginWindowTemplate
     {
         //Columns: backup #
-        public class Row : DataGridViewBoundColumns
+        internal class Row : DataGridViewBoundColumns
         {
             public object LibraryTag;
 
@@ -786,7 +786,7 @@ namespace MusicBeePlugin
 
             previewTable.DataSource = null;
             for (int i = 0; i < rows.Length; i++)
-                rows[i].Clear();
+                rows[i]?.Clear();
 
             previewTable.RowCount = 1;
 

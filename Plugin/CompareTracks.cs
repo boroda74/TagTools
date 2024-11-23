@@ -20,8 +20,8 @@ namespace MusicBeePlugin
         private int defaultColumnWidth;
 
 
-        private DataGridViewBoundColumnList<DataGridViewBoundColumns> rows = new DataGridViewBoundColumnList<DataGridViewBoundColumns>();
-        BindingSource source = new BindingSource();
+        private DataGridViewBoundColumnList<DataGridViewBoundColumns> rows;
+        private BindingSource source = new BindingSource();
 
         private readonly string[] trackUrls;
 
@@ -202,7 +202,7 @@ namespace MusicBeePlugin
 
 
             previewTable.DataSource = null;
-            rows.Clear();
+            rows = null;
 
             previewTable.RowCount = 1;
 
