@@ -2149,18 +2149,18 @@ namespace MusicBeePlugin
                 {
                     exceptionWordsCheckBox.CheckState = GetCheckState(step.exceptionWordsState);
                     if (!exceptionWordsBoxCustom.SelectItemBySpecialStateIndex(step.exceptionWordsIndex))
-                        return;
+                        goto exit;
                 }
 
 
                 if (!setComboBoxItem(exceptionCharsCheckBox, exceptionCharsBoxCustom, step.exceptionCharsIndex))
-                    return;
+                    goto exit;
                 if (!setComboBoxItem(exceptionCharPairsCheckBox, openingExceptionCharsBoxCustom, step.exceptionCharPair1Index))
-                    return;
+                    goto exit;
                 if (!setComboBoxItem(exceptionCharPairsCheckBox, closingExceptionCharsBoxCustom, step.exceptionCharPair2Index))
-                    return;
+                    goto exit;
                 if (!setComboBoxItem(sentenceSeparatorsCheckBox, sentenceSeparatorsBoxCustom, step.sentenceSeparatorsIndex))
-                    return;
+                    goto exit;
 
 
                 if (i == 0)
@@ -2169,6 +2169,7 @@ namespace MusicBeePlugin
                     reapplyRules();
             }
 
+        exit:
             Enable(true, null, null);
         }
 
