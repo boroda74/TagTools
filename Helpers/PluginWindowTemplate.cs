@@ -2490,9 +2490,14 @@ namespace MusicBeePlugin
             DataGridViewFormatChangedTags dataGridViewFormatChangedTags = null)
         {
             if (dataGridViewFormatChangedTags != null)
-                for (int j = dataGridView.RowCount - rowCountToFormat; j < dataGridView.RowCount; j++)
-                    dataGridViewFormatChangedTags(dataGridView, j);
-
+            {
+                if (dataGridView.RowCount - rowCountToFormat >= 0)
+                    for (int j = dataGridView.RowCount - rowCountToFormat; j < dataGridView.RowCount; j++)
+                        dataGridViewFormatChangedTags(dataGridView, j);
+                else
+                    for (int j = 0; j < dataGridView.RowCount; j++)
+                        dataGridViewFormatChangedTags(dataGridView, j);
+            }
 
             if (SavedSettings.scrollPreviewToEnd && dataGridView.RowCount > 0 && (itsLastRowRange || (dataGridView.RowCount & 0x1f) == 0))
                 dataGridView.FirstDisplayedCell = dataGridView.CurrentCell;

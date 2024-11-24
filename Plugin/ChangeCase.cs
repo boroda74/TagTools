@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 using ExtensionMethods;
 
 using static MusicBeePlugin.Plugin;
+using static MusicBeePlugin.AdvancedSearchAndReplace;
 
 namespace MusicBeePlugin
 {
@@ -47,12 +47,44 @@ namespace MusicBeePlugin
             public bool ignoreSingleLetterExceptedWords;
         }
 
-        public class ChangeCasePreset
+        public class ChangeCasePreset : IComparable
         {
             public bool predefined;
-            public string name;
-            public string description;
+            public SerializableDictionary<string, string> names;
+            public SerializableDictionary<string, string> descriptions;
+
             public List<ChangeCaseStep> steps;
+
+            public ChangeCasePreset()
+            {
+                names = new SerializableDictionary<string, string>();
+                descriptions = new SerializableDictionary<string, string>();
+                steps = new List<ChangeCaseStep>();
+            }
+
+            public int CompareTo(object referencePreset)
+            {
+                if (referencePreset == null)
+                    referencePreset = string.Empty;
+
+                return (this.predefined.ToString() + this.getName()).CompareTo((referencePreset as ChangeCasePreset).predefined.ToString() 
+                    + referencePreset.ToString());
+            }
+
+            public override string ToString()
+            {
+                return getName() + (!predefined ? " " : string.Empty);
+            }
+
+            public string getName()
+            {
+                return GetDictValue(names, Language);
+            }
+
+            public string getDescription()
+            {
+                return GetDictValue(descriptions, Language);
+            }
         }
 
         private bool recordMode;
@@ -2064,10 +2096,10 @@ namespace MusicBeePlugin
             MessageBox.Show(this, helpMessage);
         }
 
-        private void buttonDescription_Click(object sender, EventArgs e)//************
+        private void buttonDescription_Click(object sender, EventArgs e)
         {
             if (presetBox.SelectedItem != null)
-                MessageBox.Show(this, (presetBox.SelectedItem as ChangeCasePreset).description);
+                MessageBox.Show(this, (presetBox.SelectedItem as ChangeCasePreset).getDescription());
         }
 
         private void buttonDeletePreset_Click(object sender, EventArgs e)
@@ -2111,7 +2143,26 @@ namespace MusicBeePlugin
         {
             currentStep = null;
 
-            //************ open naming dialog
+            bool nameDefined;
+            using (var tagToolsForm = new ChangeCasePresetNaming(TagToolsPlugin))
+                nameDefined = tagToolsForm.editPreset(recordedPreset);
+
+            if (nameDefined && !string.IsNullOrEmpty(GetDictValue(recordedPreset.names, Language)))//*************
+            {
+                presetBoxCustom.Add(recordedPreset);
+                presetBoxCustom.SelectedItem = recordedPreset;
+            }
+
+            recordedPreset = null;
+            recordMode = false;
+
+            buttonOK.Enable(false);
+
+            presetBox.Enable(true);
+            buttonDeletePreset.Enable(true);
+            buttonPlayPreset.Enable(true);
+            buttonRecordPreset.Enable(true);
+            buttonStopRecordingPreset.Enable(false);
         }
 
         private void presetBox_SelectedIndexChanged(object sender, EventArgs e)

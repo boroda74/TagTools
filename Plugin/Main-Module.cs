@@ -586,7 +586,9 @@ namespace MusicBeePlugin
 
             public ReportPreset[] reportPresets;
 
-            public List<CustomSortingForColumnBrowser.CustomSortingSet> customSortingSets;//****************
+            public List<ChangeCase.ChangeCasePreset> changeCasePresets;//*********************
+
+            public List<CustomSortingForColumnBrowser.CustomSortingSet> customSortingSets;
 
             public string unitK;
             public string unitM;

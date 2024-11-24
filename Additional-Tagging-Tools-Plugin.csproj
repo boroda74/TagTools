@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <AssemblyVersion>9.2.9093.31053</AssemblyVersion>
+    <AssemblyVersion>9.2.9094.14646</AssemblyVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -222,6 +222,12 @@
     </Compile>
     <Compile Include="Plugin\CustomSortingForColumnBrowser.Designer.cs">
       <DependentUpon>CustomSortingForColumnBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugin\ChangeCasePresetNaming.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\ChangeCasePresetNaming.Designer.cs">
+      <DependentUpon>ChangeCasePresetNaming.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugin\PasteTagsFromClipboard.cs" />
     <Compile Include="Helpers\CustomControls.cs" />
@@ -427,6 +433,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\CustomSortingForColumnBrowser.ru.resx">
       <DependentUpon>CustomSortingForColumnBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ChangeCasePresetNaming.resx">
+      <DependentUpon>ChangeCasePresetNaming.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\ChangeCasePresetNaming.ru.resx">
+      <DependentUpon>ChangeCasePresetNaming.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\LibraryReports.ru.resx">
       <DependentUpon>LibraryReports.cs</DependentUpon>
