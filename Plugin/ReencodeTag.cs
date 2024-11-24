@@ -68,8 +68,8 @@ namespace MusicBeePlugin
 
             for (var i = 1; i < encodings.Length; i++)
             {
-                initialEncodingListCustom.Items.Add(encodings[i].Name);
-                usedEncodingListCustom.Items.Add(encodings[i].Name);
+                initialEncodingListCustom.Add(encodings[i].Name);
+                usedEncodingListCustom.Add(encodings[i].Name);
             }
 
             initialEncodingListCustom.Text = SavedSettings.initialEncodingName;

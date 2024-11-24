@@ -453,27 +453,27 @@ namespace MusicBeePlugin
             //Initialization
             var formats = ExportedFormats.Split('|');
             for (var i = 0; i < formats.Length; i += 2)
-                formatComboBoxCustom.Items.Add(formats[i]);
+                formatComboBoxCustom.Add(formats[i]);
 
             smartOperationCheckBox.Checked = SavedSettings.smartOperation;
 
             foreach (var fname in LrFunctionNames)
-                functionComboBoxCustom.Items.Add(fname);
+                functionComboBoxCustom.Add(fname);
 
             FillListByTagNames(sourceTagListCustom.Items, true, true, false);
             FillListByPropNames(sourceTagListCustom.Items);
-            sourceTagListCustom.Items.Add(SequenceNumberName);
+            sourceTagListCustom.Add(SequenceNumberName);
 
             FillListByTagNames(parameter2ComboBoxCustom.Items, true, false, false);
             FillListByPropNames(parameter2ComboBoxCustom.Items);
             parameter2ComboBoxCustom.SelectedIndex = 0;
 
-            conditionListCustom.Items.Add(ListItemConditionIs);
-            conditionListCustom.Items.Add(ListItemConditionIsNot);
-            conditionListCustom.Items.Add(ListItemConditionIsGreater);
-            conditionListCustom.Items.Add(ListItemConditionIsGreaterOrEqual);
-            conditionListCustom.Items.Add(ListItemConditionIsLess);
-            conditionListCustom.Items.Add(ListItemConditionIsLessOrEqual);
+            conditionListCustom.Add(ListItemConditionIs);
+            conditionListCustom.Add(ListItemConditionIsNot);
+            conditionListCustom.Add(ListItemConditionIsGreater);
+            conditionListCustom.Add(ListItemConditionIsGreaterOrEqual);
+            conditionListCustom.Add(ListItemConditionIsLess);
+            conditionListCustom.Add(ListItemConditionIsLessOrEqual);
 
 
             presetNameTextBox.SetCue(CtlLrPresetAutoName);
@@ -4940,11 +4940,11 @@ namespace MusicBeePlugin
             column.HeaderCell.Tag = uniqueId;
 
 
-            conditionFieldListCustom.Items.Add(fullFieldName);
+            conditionFieldListCustom.Add(fullFieldName);
             if (conditionFieldListCustom.SelectedIndex == -1)
                 conditionFieldListCustom.SelectedIndex = 0;
 
-            comparedFieldListCustom.Items.Add(fullFieldName);
+            comparedFieldListCustom.Add(fullFieldName);
 
             conditionCheckBox.Enable(true);
             conditionCheckBox_CheckedChanged(null, null);
@@ -4999,7 +4999,7 @@ namespace MusicBeePlugin
                 precisionDigits.Add(precisionDigitsComboBoxCustom.Items[0] as string);
                 appendTexts.Add(string.Empty);
 
-                sourceFieldComboBoxCustom.Items.Add(fullFieldName);
+                sourceFieldComboBoxCustom.Add(fullFieldName);
                 if (sourceFieldComboBoxCustom.SelectedIndex == -1)
                     sourceFieldComboBoxCustom.SelectedIndex = 0;
             }
@@ -5171,7 +5171,7 @@ namespace MusicBeePlugin
                 precisionDigits.RemoveAt(index); //-V3057
                 appendTexts.RemoveAt(index); //-V3057
 
-                sourceFieldComboBoxCustom.Items.RemoveAt(index);
+                sourceFieldComboBoxCustom.RemoveAt(index);
                 if (sourceFieldComboBoxCustom.SelectedIndex == -1 && sourceFieldComboBoxCustom.Items.Count > 0)
                     sourceFieldComboBoxCustom.SelectedIndex = 0;
                 else if (sourceFieldComboBoxCustom.SelectedIndex == -1)
@@ -5179,7 +5179,7 @@ namespace MusicBeePlugin
             }
 
 
-            conditionFieldListCustom.Items.Remove(fullFieldName);
+            conditionFieldListCustom.Remove(fullFieldName);
             if (conditionFieldListCustom.SelectedIndex == -1 && conditionFieldListCustom.Items.Count > 0)
                 conditionFieldListCustom.SelectedIndex = 0;
 
@@ -5187,7 +5187,7 @@ namespace MusicBeePlugin
             if (comparedFieldListCustom.Text == comparedFieldListCustom.SelectedItem as string)
                 comparedFieldListCustom.Text = string.Empty;
 
-            comparedFieldListCustom.Items.Remove(fullFieldName);
+            comparedFieldListCustom.Remove(fullFieldName);
 
             if (conditionFieldListCustom.Items.Count == 0)
             {

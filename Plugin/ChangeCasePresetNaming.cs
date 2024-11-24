@@ -34,12 +34,8 @@ namespace MusicBeePlugin
         internal protected override void initializeForm()
         {
             base.initializeForm();
-            Enable(false, null, null);
-
 
             languagesCustom = namesComboBoxes["languages"];
-
-
             currentLanguage = null;
 
             var englishIsAvailable = false;
@@ -47,7 +43,7 @@ namespace MusicBeePlugin
 
             foreach (var language in preset.names.Keys)
             {
-                languagesCustom.Items.Add(language);
+                languagesCustom.Add(language);
 
                 if (language == Language)
                     nativeLanguageIsAvailable = true;
@@ -57,10 +53,10 @@ namespace MusicBeePlugin
             }
 
             if (!nativeLanguageIsAvailable)
-                languagesCustom.Items.Add(Language);
+                languagesCustom.Add(Language);
 
             if (!englishIsAvailable)
-                languagesCustom.Items.Add("en");
+                languagesCustom.Add("en");
 
             if (nativeLanguageIsAvailable)
                 currentLanguage = Language;

@@ -110,8 +110,8 @@ namespace MusicBeePlugin
 
 
             FillListByTagNames(autoRatingTagListCustom.Items, false, false, false, false, false, false, true);
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Rating));
-            autoRatingTagListCustom.Items.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.RatingAlbum));
+            autoRatingTagListCustom.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Rating));
+            autoRatingTagListCustom.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.RatingAlbum));
             autoRatingTagListCustom.Text = GetTagName(SavedSettings.autoRateTagId);
 
 

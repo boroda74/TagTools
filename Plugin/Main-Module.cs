@@ -2276,7 +2276,7 @@ namespace MusicBeePlugin
             else
             {
                 if (comboBox.Items.Contains(comboBoxText))
-                    comboBox.Items.Remove(comboBoxText);
+                    comboBox.Remove(comboBoxText);
                 else
                     comboBox.Items.RemoveAt(comboBox.Items.Count - 1);
             }

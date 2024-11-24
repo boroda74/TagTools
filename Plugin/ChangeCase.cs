@@ -68,7 +68,7 @@ namespace MusicBeePlugin
                     referencePreset = string.Empty;
 
                 return (this.predefined.ToString() + this.getName()).CompareTo((referencePreset as ChangeCasePreset).predefined.ToString() 
-                    + referencePreset.ToString());
+                    + (referencePreset as ChangeCasePreset).getName());
             }
 
             public override string ToString()
@@ -1473,9 +1473,6 @@ namespace MusicBeePlugin
         private void buttonPreview_Click(object sender, EventArgs e)
         {
             ignoreClosingForm = clickOnPreviewButton(prepareBackgroundPreview, previewChanges, buttonPreview, buttonOK, buttonClose);
-
-            if (recordMode)
-                buttonPreview.Enable(false);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -1738,7 +1735,7 @@ namespace MusicBeePlugin
         {
             buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !recordMode && !backgroundTaskIsStopping 
                 && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags));
-            buttonPreview.Enable(true);
+            buttonPreview.Enable(true && !recordMode);
             buttonReapply.Enable(previewIsGenerated && !backgroundTaskIsWorking());
         }
 
@@ -1996,8 +1993,8 @@ namespace MusicBeePlugin
             {
                 if (exceptionWordsBoxCustom.Items[i].ToString() == exceptionWordsBoxCustom.Text)
                 {
-                    exceptionWordsBoxCustom.Items.Remove(exceptionWordsBoxCustom.Text);
-                    exceptionWordsBoxCustom.Items.Add(string.Empty);
+                    exceptionWordsBoxCustom.Remove(exceptionWordsBoxCustom.Text);
+                    exceptionWordsBoxCustom.Add(string.Empty);
 
                     exceptionWordsBoxCustom.Text = string.Empty;
 
@@ -2098,18 +2095,81 @@ namespace MusicBeePlugin
 
         private void buttonDescription_Click(object sender, EventArgs e)
         {
-            if (presetBox.SelectedItem != null)
-                MessageBox.Show(this, (presetBox.SelectedItem as ChangeCasePreset).getDescription());
+            if (presetBoxCustom.SelectedIndex != -1 && presetBoxCustom.SelectedItem != null)
+                MessageBox.Show(this, (presetBoxCustom.SelectedItem as ChangeCasePreset).getDescription());
         }
 
         private void buttonDeletePreset_Click(object sender, EventArgs e)
         {
-            presetBox.Items.Remove(presetBox.SelectedItem);
+            if (presetBoxCustom.SelectedIndex >= 0)
+                presetBoxCustom.RemoveAt(presetBoxCustom.SelectedIndex);
         }
 
-        private void buttonPlayPreset_Click(object sender, EventArgs e)//************
+        private bool setComboBoxItem(CheckBox checkBox, CustomComboBox comboBox, int index)
         {
+            if (index == -1)
+            {
+                checkBox.Checked = false;
+                return true;
+            }
+            else if (!comboBox.SelectItemBySpecialStateIndex(index))
+            {
+                return false;
+            }
+            else
+            {
+                exceptionCharsCheckBox.Checked = true;
+                return true;
+            }
+        }
 
+        private void buttonPlayPreset_Click(object sender, EventArgs e)
+        {
+            if (presetBoxCustom.SelectedIndex == -1)
+                return;
+
+            Enable(false, null, null);
+
+            recordedPreset = presetBoxCustom.SelectedItem as ChangeCasePreset;
+            for (int i = 0; i < recordedPreset.steps.Count; i++)
+            {
+                ChangeCaseStep step = recordedPreset.steps[i];
+
+                setChangeCaseOptionsRadioButtons(step.rule);
+                exceptionWordsCheckBox.CheckState = GetCheckState(step.exceptionWordsState);
+                alwaysCapitalize1stWordCheckBox.Checked = step.alwaysCapitalize1stWord;
+                alwaysCapitalizeLastWordCheckBox.Checked = step.alwaysCapitalizeLastWord;
+                ignoreSingleLetterExceptedWordsCheckBox.Checked = step.ignoreSingleLetterExceptedWords;
+
+                if (step.exceptionWordsState == false)
+                {
+                    exceptionWordsCheckBox.CheckState = CheckState.Unchecked;
+                }
+                else
+                {
+                    exceptionWordsCheckBox.CheckState = GetCheckState(step.exceptionWordsState);
+                    if (!exceptionWordsBoxCustom.SelectItemBySpecialStateIndex(step.exceptionWordsIndex))
+                        return;
+                }
+
+
+                if (!setComboBoxItem(exceptionCharsCheckBox, exceptionCharsBoxCustom, step.exceptionCharsIndex))
+                    return;
+                if (!setComboBoxItem(exceptionCharPairsCheckBox, openingExceptionCharsBoxCustom, step.exceptionCharPair1Index))
+                    return;
+                if (!setComboBoxItem(exceptionCharPairsCheckBox, closingExceptionCharsBoxCustom, step.exceptionCharPair2Index))
+                    return;
+                if (!setComboBoxItem(sentenceSeparatorsCheckBox, sentenceSeparatorsBoxCustom, step.sentenceSeparatorsIndex))
+                    return;
+
+
+                if (i == 0)
+                    buttonPreview_Click(null, null);
+                else
+                    reapplyRules();
+            }
+
+            Enable(true, null, null);
         }
 
         private void saveStep()
@@ -2128,7 +2188,7 @@ namespace MusicBeePlugin
         {
             buttonOK.Enable(false);
 
-            presetBox.Enable(false);
+            presetBoxCustom.Enable(false);
             buttonDeletePreset.Enable(false);
             buttonPlayPreset.Enable(false);
             buttonRecordPreset.Enable(false);
@@ -2158,7 +2218,7 @@ namespace MusicBeePlugin
 
             buttonOK.Enable(false);
 
-            presetBox.Enable(true);
+            presetBoxCustom.Enable(true);
             buttonDeletePreset.Enable(true);
             buttonPlayPreset.Enable(true);
             buttonRecordPreset.Enable(true);
@@ -2167,7 +2227,7 @@ namespace MusicBeePlugin
 
         private void presetBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((presetBox.SelectedItem as ChangeCasePreset)?.predefined == true)
+            if ((presetBoxCustom.SelectedItem as ChangeCasePreset)?.predefined == true)
                 buttonDeletePreset.Enable(false);
             else
                 buttonDeletePreset.Enable(true);

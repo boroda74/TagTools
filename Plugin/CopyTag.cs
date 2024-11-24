@@ -674,8 +674,8 @@ namespace MusicBeePlugin
             if (destinationTagListCustom.Text == MbApiInterface.Setting_GetFieldName(MetaDataType.HasLyrics))
             {
                 sourceTagListCustom.ItemsClear();
-                sourceTagListCustom.Items.Add("<Null>");
-                sourceTagListCustom.Items.Add("<+>");
+                sourceTagListCustom.Add("<Null>");
+                sourceTagListCustom.Add("<+>");
 
                 sourceTagListCustom.SelectedIndex = 0;
             }
@@ -688,9 +688,9 @@ namespace MusicBeePlugin
                 FillListByTagNames(sourceTagListCustom.Items, true);
                 FillListByPropNames(sourceTagListCustom.Items);
                 //sourceTagListCustom.Items.Add(MusicBeePlugin.emptyValueTagName);
-                sourceTagListCustom.Items.Add(ClipboardTagName);
-                sourceTagListCustom.Items.Add(TextFileTagName);
-                sourceTagListCustom.Items.Add(SequenceNumberName);
+                sourceTagListCustom.Add(ClipboardTagName);
+                sourceTagListCustom.Add(TextFileTagName);
+                sourceTagListCustom.Add(SequenceNumberName);
 
                 try
                 {

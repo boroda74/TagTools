@@ -26,9 +26,9 @@ namespace MusicBeePlugin
 
 
             var sampleDateTime = new DateTime(2022, 12, 31, 14, 30, 15);
-            lastSkippedDateFormatTagListCustom.Items.Add(sampleDateTime.ToString("d"));
-            lastSkippedDateFormatTagListCustom.Items.Add(sampleDateTime.ToString("g"));
-            lastSkippedDateFormatTagListCustom.Items.Add(sampleDateTime.ToString("G"));
+            lastSkippedDateFormatTagListCustom.Add(sampleDateTime.ToString("d"));
+            lastSkippedDateFormatTagListCustom.Add(sampleDateTime.ToString("g"));
+            lastSkippedDateFormatTagListCustom.Add(sampleDateTime.ToString("G"));
             lastSkippedDateFormatTagListCustom.SelectedIndex = SavedSettings.lastSkippedDateFormat;
 
             FillListByTagNames(lastSkippedTagListCustom.Items);

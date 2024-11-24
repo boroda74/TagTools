@@ -172,7 +172,7 @@ namespace MusicBeePlugin
             }
 
             for (var i = 0; i < trackUrls.Length; i++)
-                trackListComboBoxCustom.Items.Add(GetTrackRepresentation(trackUrls[i]));
+                trackListComboBoxCustom.Add(GetTrackRepresentation(trackUrls[i]));
 
             trackIndex = 0;
             trackListComboBoxCustom.SelectedIndex = 0;

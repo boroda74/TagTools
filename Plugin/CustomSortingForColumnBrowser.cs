@@ -84,7 +84,7 @@ namespace MusicBeePlugin
 
             foreach (string tag in sourceTags)
             {
-                sourceTagComboBoxCustom.Items.Add(new CustomSortingTag { mark = false, tagName = tag });
+                sourceTagComboBoxCustom.Add(new CustomSortingTag { mark = false, tagName = tag });
 
                 if (tag == DisplayedArtistName)
                     DisplayArtistIndex = sourceTagComboBoxCustom.Items.Count - 1;
@@ -96,7 +96,7 @@ namespace MusicBeePlugin
 
             foreach (string tag in tags)
             {
-                tagComboBoxCustom.Items.Add(new CustomSortingTag { mark = false, tagName = tag });
+                tagComboBoxCustom.Add(new CustomSortingTag { mark = false, tagName = tag });
 
                 if (tag == GetTagName(MetaDataType.Custom1))
                     Custom1Index = tagComboBoxCustom.Items.Count - 1;

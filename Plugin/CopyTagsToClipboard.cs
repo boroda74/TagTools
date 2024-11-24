@@ -54,16 +54,16 @@ namespace MusicBeePlugin
 
             if (!returnSelectedTags)
             {
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[0].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[1].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[2].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[3].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[4].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[5].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[6].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[7].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[8].setName);
-                tagSetComboBoxCustom.Items.Add(SavedSettings.copyTagsTagSets[9].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[0].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[1].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[2].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[3].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[4].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[5].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[6].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[7].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[8].setName);
+                tagSetComboBoxCustom.Add(SavedSettings.copyTagsTagSets[9].setName);
 
                 prepareAvailableTags(true, true, true);
                 tagSetComboBox_SelectedIndexChanged(null, null);

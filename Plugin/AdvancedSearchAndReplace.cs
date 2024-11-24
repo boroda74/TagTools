@@ -475,7 +475,7 @@ namespace MusicBeePlugin
                 //if (mbApiInterface.Playlist_GetType(playlist) == MusicBeePlugin.PlaylistFormat.Auto)
                 {
                     var newPlaylist = new Playlist(playlist);
-                    playlistComboBoxCustom.Items.Add(newPlaylist);
+                    playlistComboBoxCustom.Add(newPlaylist);
                 }
 
                 playlist = MbApiInterface.Playlist_QueryGetNextPlaylist();
@@ -3797,6 +3797,9 @@ namespace MusicBeePlugin
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+            if (presetList.SelectedIndex == -1)
+                return;
+
             var result = MessageBox.Show(this, MsgDeletePresetConfirmation, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.No)
@@ -3904,6 +3907,9 @@ namespace MusicBeePlugin
 
         private void initPreset()
         {
+            if (presetList.SelectedIndex == -1)
+                return;
+
             PresetsInteractiveWorkingCopy.TryGetValue((presetList.SelectedItem as Preset).guid, out selectedPreset);
             backedUpPreset = new Preset(selectedPreset);
 
@@ -4538,7 +4544,7 @@ namespace MusicBeePlugin
 
 
             var selectedPresetGuid = Guid.Empty;
-            if (presetList.SelectedItem != null)
+            if (presetList.SelectedIndex != -1 && presetList.SelectedItem != null)
                 selectedPresetGuid = (presetList.SelectedItem as Preset).guid;
 
 
@@ -4717,7 +4723,7 @@ namespace MusicBeePlugin
 
             if (selectedPreset == null)
                 presetList.SelectedIndex = -1;
-            else if ((presetList.SelectedItem as Preset)?.guid != selectedPresetGuid)
+            else if (presetList.SelectedIndex == -1 || (presetList.SelectedItem as Preset)?.guid != selectedPresetGuid)
                 presetList.SelectedItem = selectedPreset;
 
             ProcessPresetChanges = false;
@@ -4747,7 +4753,7 @@ namespace MusicBeePlugin
 
 
             var selectedPresetGuid = Guid.Empty;
-            if (presetList.SelectedItem != null)
+            if (presetList.SelectedIndex != -1 && presetList.SelectedItem != null)
                 selectedPresetGuid = (presetList.SelectedItem as Preset).guid;
 
 
@@ -6427,7 +6433,8 @@ namespace MusicBeePlugin
 
             if (nextPresetCheckBox.Checked)
             {
-                selectedPreset.nextPresetGuid = nextPresetComboBoxCustom.SelectedItem == null ? Guid.Empty : (nextPresetComboBoxCustom.SelectedItem as Preset).guid;
+                selectedPreset.nextPresetGuid = nextPresetComboBoxCustom.SelectedIndex == -1 || nextPresetComboBoxCustom.SelectedItem == null 
+                    ? Guid.Empty : (nextPresetComboBoxCustom.SelectedItem as Preset).guid;
                 nextPresetComboBoxCustom.Focus();
             }
             else
@@ -6498,7 +6505,9 @@ namespace MusicBeePlugin
 
             if (oldNextPresetComboBoxCustomSelectedItem != null && RemoveSubstrings(oldNextPresetComboBoxCustomSelectedItem.ToString()) == RemoveSubstrings(text))
                 nextPresetComboBoxCustom.SelectedItem = oldNextPresetComboBoxCustomSelectedItem;
-            else if (nextPresetComboBoxCustom.SelectedItem == null || RemoveSubstrings(nextPresetComboBoxCustom.SelectedItem.ToString()) != RemoveSubstrings(text))
+            else if (nextPresetComboBoxCustom.SelectedIndex == -1 || nextPresetComboBoxCustom.SelectedItem == null 
+                || RemoveSubstrings(nextPresetComboBoxCustom.SelectedItem.ToString()) != RemoveSubstrings(text))
+                
                 nextPresetComboBoxCustom.SelectedItem = null;
         }
 
@@ -6567,7 +6576,7 @@ namespace MusicBeePlugin
             if (selectedPreset.nextPresetGuid != Guid.Empty)
                 PresetsInteractiveWorkingCopy.TryGetValue(selectedPreset.nextPresetGuid, out oldNextPreset);
 
-            if (nextPresetComboBoxCustom.SelectedItem != null)
+            if (nextPresetComboBoxCustom.SelectedIndex != -1 && nextPresetComboBoxCustom.SelectedItem != null)
             {
                 selectedPreset.nextPresetGuid = (nextPresetComboBoxCustom.SelectedItem as Preset).guid;
                 (nextPresetComboBoxCustom.SelectedItem as Preset).refreshReferredCount();

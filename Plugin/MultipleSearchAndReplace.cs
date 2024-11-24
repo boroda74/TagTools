@@ -129,11 +129,11 @@ namespace MusicBeePlugin
             customMSR = null;
 
             loadComboBoxCustom.Sorted = false;
-            loadComboBoxCustom.Items.Add(CtlNewAsrPreset);
+            loadComboBoxCustom.Add(CtlNewAsrPreset);
             foreach (var preset in Presets)
             {
                 if (preset.Value.isMSRPreset)
-                    loadComboBoxCustom.Items.Add(preset.Value);
+                    loadComboBoxCustom.Add(preset.Value);
             }
             loadComboBoxCustom.SelectedIndex = 0;
 
@@ -932,12 +932,12 @@ namespace MusicBeePlugin
             if (loadComboBoxCustom.SelectedIndex > 0)
             {
                 var index = loadComboBoxCustom.SelectedIndex;
-                loadComboBoxCustom.Items.RemoveAt(index);
-                loadComboBoxCustom.Items.Insert(index, customMSR);
+                loadComboBoxCustom.RemoveAt(index);
+                loadComboBoxCustom.Insert(index, customMSR);
             }
             else
             {
-                loadComboBoxCustom.Items.Add(customMSR);
+                loadComboBoxCustom.Add(customMSR);
             }
 
             loadComboBoxCustom.SelectedItem = customMSR;
@@ -1025,7 +1025,7 @@ namespace MusicBeePlugin
 
         private void loadComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (loadComboBoxCustom.SelectedIndex == 0)
+            if (loadComboBoxCustom.SelectedIndex == -1)
             {
                 customMSR = null;
                 templateNameTextBox.Text = CtlMSR;
@@ -1157,7 +1157,7 @@ namespace MusicBeePlugin
             System.IO.File.Delete(Path.Combine(PresetsPath, customMSR.getSafeFileName() + AsrPresetExtension));
 
             Presets.Remove(customMSR.guid);
-            loadComboBoxCustom.Items.Remove(customMSR);
+            loadComboBoxCustom.Remove(customMSR);
 
             loadComboBoxCustom.SelectedIndex = 0;
             buttonDeleteSaved.Enable(false);

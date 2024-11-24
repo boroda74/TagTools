@@ -141,7 +141,7 @@ namespace MusicBeePlugin
 
             foreach (var language in preset.names.Keys)
             {
-                languagesCustom.Items.Add(language);
+                languagesCustom.Add(language);
 
                 if (language == Language)
                     nativeLanguageIsAvailable = true;
@@ -151,10 +151,10 @@ namespace MusicBeePlugin
             }
 
             if (!nativeLanguageIsAvailable)
-                languagesCustom.Items.Add(Language);
+                languagesCustom.Add(Language);
 
             if (!englishIsAvailable)
-                languagesCustom.Items.Add("en");
+                languagesCustom.Add("en");
 
             if (nativeLanguageIsAvailable)
                 currentLanguage = Language;
@@ -382,7 +382,7 @@ namespace MusicBeePlugin
                     tagTypeList.SelectedIndex = 0;
 
                 if (tagTypeList.Items.Count == 4)
-                    tagTypeList.Items.RemoveAt(3);
+                    tagTypeList.RemoveAt(3);
 
                 tagTypeLabel.Enable(false);
                 tagTypeList.Enable(false);
@@ -392,7 +392,7 @@ namespace MusicBeePlugin
                 if (prevTagType == TagType.WritableAllowAllTags)
                 {
                     if (tagTypeList.Items.Count == 3)
-                        tagTypeList.Items.Add(WritableAllTagsLocalizedItem);
+                        tagTypeList.Add(WritableAllTagsLocalizedItem);
                 }
                 else
                 {
@@ -400,7 +400,7 @@ namespace MusicBeePlugin
                         tagTypeList.SelectedIndex = 2;
 
                     if (tagTypeList.Items.Count == 4)
-                        tagTypeList.Items.RemoveAt(3);
+                        tagTypeList.RemoveAt(3);
                 }
 
                 tagTypeLabel.Enable(true);
@@ -418,33 +418,33 @@ namespace MusicBeePlugin
 
             //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTagTypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
-                tagList.Items.Add("<" + ParameterTagName + " 1>");
+                tagList.Add("<" + ParameterTagName + " 1>");
 
             //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag2TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
-                tagList.Items.Add("<" + ParameterTagName + " 2>");
+                tagList.Add("<" + ParameterTagName + " 2>");
 
             //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag3TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
-                tagList.Items.Add("<" + ParameterTagName + " 3>");
+                tagList.Add("<" + ParameterTagName + " 3>");
 
             //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag4TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
-                tagList.Items.Add("<" + ParameterTagName + " 4>");
+                tagList.Add("<" + ParameterTagName + " 4>");
 
             //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag5TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
-                tagList.Items.Add("<" + ParameterTagName + " 5>");
+                tagList.Add("<" + ParameterTagName + " 5>");
 
             //Let's add <Tag #> if either filled tag list is for search or <Tag #> is writable
             if (parameterTag6TypeListCustom.SelectedIndex >= (int)TagType.Writable - searchFlag)
-                tagList.Items.Add("<" + ParameterTagName + " 6>");
+                tagList.Add("<" + ParameterTagName + " 6>");
 
 
-            tagList.Items.Add("<" + TempTagName + " 1>");
-            tagList.Items.Add("<" + TempTagName + " 2>");
-            tagList.Items.Add("<" + TempTagName + " 3>");
-            tagList.Items.Add("<" + TempTagName + " 4>");
+            tagList.Add("<" + TempTagName + " 1>");
+            tagList.Add("<" + TempTagName + " 2>");
+            tagList.Add("<" + TempTagName + " 3>");
+            tagList.Add("<" + TempTagName + " 4>");
 
             if (isSearchTag) //It's read-only operation
             {
@@ -456,7 +456,7 @@ namespace MusicBeePlugin
                 FillListByTagNames(tagList.Items);
             }
 
-            tagList.Items.Add(ClipboardTagName);
+            tagList.Add(ClipboardTagName);
 
 
             if (tagList.Items.Contains(tagName))
