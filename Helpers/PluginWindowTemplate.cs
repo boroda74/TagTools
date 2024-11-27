@@ -4251,7 +4251,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void serializedOperation()
+        protected void serializedOperation()
         {
             var taskWasStarted = false;
 
@@ -4274,11 +4274,18 @@ namespace MusicBeePlugin
                         System.Media.SystemSounds.Exclamation.Play();
 
                     backgroundThread = Thread.CurrentThread;
-                    backgroundThread.Priority = ThreadPriority.BelowNormal;
+
+                    if (InvokeRequired)
+                        backgroundThread.Priority = ThreadPriority.BelowNormal;
 
 
                     if (clickedButton != EmptyButton)
-                        Invoke(taskStarted);
+                    {
+                        if (InvokeRequired)
+                            Invoke(taskStarted);
+                        else
+                            taskStarted();
+                    }
 
                     taskWasStarted = true;
                     job();

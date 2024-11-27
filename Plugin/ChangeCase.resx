@@ -1954,13 +1954,13 @@ Indeterminate state: change the case only of the entered words.</value>
     <value>4, 0, 4, 0</value>
   </data>
   <data name="sentenceCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 15</value>
+    <value>84, 15</value>
   </data>
   <data name="sentenceCaseRadioButtonLabel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="sentenceCaseRadioButtonLabel.Text" xml:space="preserve">
-    <value>Sentence case</value>
+    <value>Sentence case.</value>
   </data>
   <data name="&gt;&gt;sentenceCaseRadioButtonLabel.Name" xml:space="preserve">
     <value>sentenceCaseRadioButtonLabel</value>
@@ -2074,7 +2074,7 @@ Indeterminate state: change the case only of the entered words.</value>
     <value>ChangeCase</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.2.9094.12665, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.2.9096.41501, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

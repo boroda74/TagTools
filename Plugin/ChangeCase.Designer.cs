@@ -552,7 +552,6 @@
             resources.ApplyResources(this.ignoreSingleLetterExceptedWordsCheckBox, "ignoreSingleLetterExceptedWordsCheckBox");
             this.ignoreSingleLetterExceptedWordsCheckBox.Name = "ignoreSingleLetterExceptedWordsCheckBox";
             this.ignoreSingleLetterExceptedWordsCheckBox.Tag = "#ignoreSingleLetterExceptedWordsCheckBoxLabel";
-            this.ignoreSingleLetterExceptedWordsCheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.ignoreSingleLetterExceptedWordsCheckBox, resources.GetString("ignoreSingleLetterExceptedWordsCheckBox.ToolTip"));
             // 
             // buttonDeletePreset

@@ -279,6 +279,7 @@ namespace MusicBeePlugin
         internal const int MaximumNumberOfAsrHotkeys = 20;
         internal const int MaximumNumberOfLrHotkeys = 20;
         internal const int PredefinedReportPresetCount = 5;
+        internal const int PredefinedChangeCasePresetCount = 2;
 
         internal static readonly char LocalizedDecimalPoint = (0.5).ToString()[1];
         internal static Bitmap MissingArtwork;
@@ -341,7 +342,7 @@ namespace MusicBeePlugin
         internal static string BackupDefaultPrefix = "Tag Backup ";
         internal static BackupIndex BackupIndex;
 
-        internal const int StatusBarTextUpdateInterval = 0x1f; //Must be the power of 2
+        internal const int StatusBarTextUpdateInterval = 0x1f; //Must be the power of 2 - 1
 
         internal static List<Preset> AsrAutoAppliedPresets = new List<Preset>();
         internal const string AsrPresetsDirectory = "ASR Presets";
@@ -952,6 +953,7 @@ namespace MusicBeePlugin
         internal static string MsgActualPercent;
 
         internal static string MsgCsTheNumberOfOpeningExceptionCharactersMustBe;
+        internal static string MsgCsCantFindEnumeratedItem;
 
         internal static string MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow;
         internal static string MsgLrDoYouWantToCloseTheWindowWithoutSavingChanges;
@@ -2247,31 +2249,39 @@ namespace MusicBeePlugin
 
             if (addSubstituteSpecialPrefix != null)
             {
-                int reserveIndex = -1;
-                int index = - 1;
-
-                for (int i = comboBox.Items.Count - 1; i >= 0; i--)
+                if (comboBox.SelectedIndex != -1)
                 {
-                    if (comboBox.GetItemSpecialState(i) == comboBox.GetDefaultSpecialState() && reserveIndex == -1)
-                        reserveIndex = i;
-
-                    string itemText = comboBox.Items[i].ToString();
-                    string normalizedItemText = addSubstituteSpecialPrefix(comboBox.Items[i].ToString(), string.Empty, comboBox.GetSpecialStateCharCount(true));
-
-                    if (normalizedItemText == comboBoxText)
-                    {
-                        defaultAdditionalColumnValue = comboBox.GetItemSpecialState(i);
-                        index = i;
-                        break;
-                    }
+                    defaultAdditionalColumnValue = comboBox.GetItemSpecialState(comboBox.SelectedIndex);
+                    comboBox.RemoveAt(comboBox.SelectedIndex);
                 }
-
-                if (index != -1)
-                    comboBox.RemoveAt(index);
-                else if (reserveIndex != -1)
-                    comboBox.RemoveAt(reserveIndex);
                 else
-                    comboBox.RemoveAt(index);
+                {
+                    int reserveIndex = -1;
+                    int index = -1;
+
+                    for (int i = comboBox.Items.Count - 1; i >= 0; i--)
+                    {
+                        if (comboBox.GetItemSpecialState(i) == comboBox.GetDefaultSpecialState() && reserveIndex == -1)
+                            reserveIndex = i;
+
+                        string itemText = comboBox.Items[i].ToString();
+                        string normalizedItemText = addSubstituteSpecialPrefix(comboBox.Items[i].ToString(), string.Empty, comboBox.GetSpecialStateCharCount(true));
+
+                        if (normalizedItemText == comboBoxText)
+                        {
+                            defaultAdditionalColumnValue = comboBox.GetItemSpecialState(i);
+                            index = i;
+                            break;
+                        }
+                    }
+
+                    if (index != -1)
+                        comboBox.RemoveAt(index);
+                    else if (reserveIndex != -1)
+                        comboBox.RemoveAt(reserveIndex);
+                    else
+                        comboBox.RemoveAt(index);
+                }
             }
             else
             {
@@ -2285,22 +2295,22 @@ namespace MusicBeePlugin
             comboBox.Text = comboBoxText;
         }
 
-        internal static void ComboBoxLeave(ComboBox comboBox, string newValue = null)
-        {
-            var comboBoxText = (newValue ?? comboBox.Text);
+        //internal static void ComboBoxLeave(ComboBox comboBox, string newValue = null)
+        //{
+        //    var comboBoxText = (newValue ?? comboBox.Text);
 
-            if (string.IsNullOrWhiteSpace(comboBoxText))
-                return;
+        //    if (string.IsNullOrWhiteSpace(comboBoxText))
+        //        return;
 
-            if (comboBox.Items.Contains(comboBoxText))
-                comboBox.Items.Remove(comboBoxText);
-            else
-                comboBox.Items.RemoveAt(9);
+        //    if (comboBox.Items.Contains(comboBoxText))
+        //        comboBox.Items.Remove(comboBoxText);
+        //    else
+        //        comboBox.Items.RemoveAt(9);
 
-            comboBox.Items.Insert(0, comboBoxText);
+        //    comboBox.Items.Insert(0, comboBoxText);
 
-            comboBox.Text = comboBoxText;
-        }
+        //    comboBox.Text = comboBoxText;
+        //}
 
         //internal static void SetIReportPreset1stInListBoxByGuid(ListBox listBox, ReportPreset preset)
         //{
@@ -3149,9 +3159,7 @@ namespace MusicBeePlugin
             }
 
             if (updatePercentage == 0 || update || fileCounter0Based == 0 || (fileCounter0Based & StatusBarTextUpdateInterval) == 0)
-            {
                 SetStatusBarText(GenerateStatusBarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
-            }
         }
 
         private static void RegularUiRefresh(object state)
@@ -3982,6 +3990,7 @@ namespace MusicBeePlugin
             MsgIncorrectPresetName = "Incorrect preset name or duplicated preset names.";
 
             MsgCsTheNumberOfOpeningExceptionCharactersMustBe = "The number of opening exception characters must be the same as the number of closing exception characters!";
+            MsgCsCantFindEnumeratedItem = "Can't find enumerated item #%%ITEM-NUMBER%% in the combo box \"%%COMBO-BOX-NAME%%\"%%OPENING-CLOSING%%!";
 
             MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow = "There are unsaved changes. Do you want to save changes before closing the window?";
             MsgLrDoYouWantToCloseTheWindowWithoutSavingChanges = "You can’t save presets now. Would you like to discard any changes when closing the LR window?";
@@ -4273,13 +4282,14 @@ namespace MusicBeePlugin
             if (SavedSettings.windowsSettings == null)
                 SavedSettings.windowsSettings = new List<WindowSettingsType>();
 
-            if (SavedSettings.exceptedWords == null || SavedSettings.exceptedWords.Length < 10)
+            if (SavedSettings.exceptedWords == null || SavedSettings.exceptedWords.Length < 10
+                || (SavedSettings.exceptedWords[0] as string).Length < 2 || (SavedSettings.exceptedWords[0] as string)[1] != ' ')
             {
                 SavedSettings.exceptedWords = new object[10];
-                SavedSettings.exceptedWords[0] = "the a an and or not";
-                SavedSettings.exceptedWords[1] = "a al an and as at but by de for in la le mix nor of on or remix the to vs. y ze feat.";
-                SavedSettings.exceptedWords[2] = "U2 UB40";
-                SavedSettings.exceptedWords[3] = string.Empty;
+                SavedSettings.exceptedWords[0] = "1 a an and at in of or the";
+                SavedSettings.exceptedWords[1] = "2 *RN U2 UB40";
+                SavedSettings.exceptedWords[2] = "3 allegretto";
+                SavedSettings.exceptedWords[3] = "# a al an and as at but by de for in la le mix nor of on or remix the to vs. y ze feat.";
                 SavedSettings.exceptedWords[4] = string.Empty;
                 SavedSettings.exceptedWords[5] = string.Empty;
                 SavedSettings.exceptedWords[6] = string.Empty;
@@ -4292,10 +4302,11 @@ namespace MusicBeePlugin
                 SavedSettings.exceptionWordsAsr = "a al an and as at but by de for in la le mix nor of on or remix the to vs. y ze feat.";
 
 
-            if (SavedSettings.exceptionChars == null || SavedSettings.exceptionChars.Length < 10)
+            if (SavedSettings.exceptionChars == null || SavedSettings.exceptionChars.Length < 10
+                || (SavedSettings.exceptionChars[0] as string).Length < 2 || (SavedSettings.exceptionChars[0] as string)[1] != ' ')
             {
                 SavedSettings.exceptionChars = new object[10];
-                SavedSettings.exceptionChars[0] = "\" ' ( [ { /";
+                SavedSettings.exceptionChars[0] = "# \" ' ( [ { /";
                 SavedSettings.exceptionChars[1] = string.Empty;
                 SavedSettings.exceptionChars[2] = string.Empty;
                 SavedSettings.exceptionChars[3] = string.Empty;
@@ -4312,10 +4323,12 @@ namespace MusicBeePlugin
 
 
             if (SavedSettings.openingExceptionChars == null || SavedSettings.closingExceptionChars == null
-                || SavedSettings.openingExceptionChars.Length < 10 || SavedSettings.closingExceptionChars.Length < 10)
+                || SavedSettings.openingExceptionChars.Length < 10 || SavedSettings.closingExceptionChars.Length < 10
+                || (SavedSettings.openingExceptionChars[0] as string).Length < 2 || (SavedSettings.openingExceptionChars[0] as string)[1] != ' ' 
+                || (SavedSettings.closingExceptionChars[0] as string).Length < 2 || (SavedSettings.closingExceptionChars[0] as string)[1] != ' ')
             {
                 SavedSettings.openingExceptionChars = new object[10];
-                SavedSettings.openingExceptionChars[0] = "( [ {";
+                SavedSettings.openingExceptionChars[0] = "1 ( [ {";
                 SavedSettings.openingExceptionChars[1] = string.Empty;
                 SavedSettings.openingExceptionChars[2] = string.Empty;
                 SavedSettings.openingExceptionChars[3] = string.Empty;
@@ -4327,7 +4340,7 @@ namespace MusicBeePlugin
                 SavedSettings.openingExceptionChars[9] = string.Empty;
 
                 SavedSettings.closingExceptionChars = new object[10];
-                SavedSettings.closingExceptionChars[0] = ") ] }";
+                SavedSettings.closingExceptionChars[0] = "1 ) ] }";
                 SavedSettings.closingExceptionChars[1] = string.Empty;
                 SavedSettings.closingExceptionChars[2] = string.Empty;
                 SavedSettings.closingExceptionChars[3] = string.Empty;
@@ -4346,11 +4359,12 @@ namespace MusicBeePlugin
             }
 
 
-            if (SavedSettings.sentenceSeparators == null || SavedSettings.sentenceSeparators.Length < 10)
+            if (SavedSettings.sentenceSeparators == null || SavedSettings.sentenceSeparators.Length < 10 
+                || (SavedSettings.sentenceSeparators[0] as string).Length < 2 || (SavedSettings.sentenceSeparators[0] as string)[1] != ' ')
             {
                 SavedSettings.sentenceSeparators = new object[10];
-                SavedSettings.sentenceSeparators[0] = ".";
-                SavedSettings.sentenceSeparators[1] = string.Empty;
+                SavedSettings.sentenceSeparators[0] = "1 :,-";
+                SavedSettings.sentenceSeparators[1] = "2 .";
                 SavedSettings.sentenceSeparators[2] = string.Empty;
                 SavedSettings.sentenceSeparators[3] = string.Empty;
                 SavedSettings.sentenceSeparators[4] = string.Empty;
@@ -4701,6 +4715,7 @@ namespace MusicBeePlugin
                 MsgIncorrectPresetName = "Некорректное название пресета или пресет с таким названием уже существует.";
 
                 MsgCsTheNumberOfOpeningExceptionCharactersMustBe = "Число открывающих символов исключения должно быть таким же как и число закрывающих символов!";
+                MsgCsCantFindEnumeratedItem = "Невозможно найти пункт списка \"%%COMBO-BOX-NAME%%\"%%OPENING-CLOSING%% с номером #%%ITEM-NUMBER%%!";
 
                 MsgLrDoYouWantToSaveChangesBeforeClosingTheWindow = "Есть несохраненные изменения. Сохранить изменения, прежде чем закрыть окно?";
                 MsgLrDoYouWantToCloseTheWindowWithoutSavingChanges = "Сейчас вы не можете сохранить пресеты. Отменить все изменения при закрытии окна \"Отчетов по библиотеке\"?";
@@ -4962,10 +4977,199 @@ namespace MusicBeePlugin
                 SavedSettings.autoBackupPrefix = "Tag Auto-Backup ";
 
 
+            if (SavedSettings.changeCasePresets == null)
+                SavedSettings.changeCasePresets = new List<ChangeCase.ChangeCasePreset>();
+
+            //Let's remove all predefined Change Case presets and recreate them from scratch (except for allowed user customizations)
+            var existingCsPredefinedPresets = new List<ChangeCase.ChangeCasePreset>();//***********
+
+            var existingPredefinedCsPresetCount = 0;
+            for (var i = 0; i < SavedSettings.changeCasePresets.Count; i++)
+            {
+                if (SavedSettings.changeCasePresets[i].predefined)
+                {
+                    existingCsPredefinedPresets.Add(SavedSettings.changeCasePresets[i]);
+                    existingPredefinedCsPresetCount++;
+                }
+            }
+
+            if (existingPredefinedCsPresetCount != PredefinedChangeCasePresetCount)
+            {
+                foreach (var preset in existingCsPredefinedPresets)
+                    SavedSettings.changeCasePresets.Remove(preset);
+
+
+
+                var predefinedPreset = new ChangeCase.ChangeCasePreset();
+                predefinedPreset.predefined = true;
+
+                predefinedPreset.names.Add("en", "Sentence case.");
+                predefinedPreset.names.Add("ru", "Как в предложениях.");
+
+                predefinedPreset.descriptions.Add("en", "General words will became Sentence case. The words form item #1 of \"Except for words\" list will become uppercase. \r\n" +
+                    "You can use special pseudo-word \"*RN\" in this list item to uppercase Roman numerals (e.g., III, VI, X). \r\n" +
+                    "Characters from item #1 of \"Symbols to treat as sentence separators\" list are characters after which the words will become capitalized. \r\n" +
+                    "A dot, followed by a space, is always treated as a sentence separator.");
+
+                predefinedPreset.descriptions.Add("ru", "Пресет делает регистр Как в предложениях. Слова из пункта #1 из списка \"Кроме слов\" станут строчными. Вы можете \r\n" +
+                    "использовать специальное псевдо-слово \"*RN\" в пункте #1 из списка \"Кроме слов\" для перевода римских цифр (например, III, VI, X) в верхний \r\n" +
+                    "регистр. Символы из пункта #1 из списка \"Символы, которые считать разделителями предложений\" — это список символов, которые начинают новое предложение. \r\n" +
+                    "Слова после этих символов будут начинаться с прописных букв. Точка с последующим пробелом всегда считается началом нового предложения.");
+
+
+                var step = new ChangeCase.ChangeCaseStep();
+                step.rule = 1; //UPPERCASE
+                step.alwaysCapitalize1stWord = false;
+                step.alwaysCapitalizeLastWord = false;
+                step.ignoreSingleLetterExceptedWords = false;
+                step.exceptionWordsState = false;
+                step.exceptionWordsIndex = -1;
+                step.exceptionCharsIndex = -1;
+                step.exceptionCharPair1Index = -1;
+                step.exceptionCharPair2Index = -1;
+                step.sentenceSeparatorsIndex = -1;
+
+                predefinedPreset.steps.Add(step);
+
+
+                step = new ChangeCase.ChangeCaseStep();
+                step.rule = 0; //lowercase
+                step.alwaysCapitalize1stWord = false;
+                step.alwaysCapitalizeLastWord = false;
+                step.ignoreSingleLetterExceptedWords = true;
+                step.exceptionWordsState = true;
+                step.exceptionWordsIndex = 1;
+                step.exceptionCharsIndex = -1;
+                step.exceptionCharPair1Index = -1;
+                step.exceptionCharPair2Index = -1;
+                step.sentenceSeparatorsIndex = -1;
+
+                predefinedPreset.steps.Add(step);
+
+
+                step = new ChangeCase.ChangeCaseStep();
+                step.rule = -1; //Sentence case
+                step.alwaysCapitalize1stWord = true;
+                step.alwaysCapitalizeLastWord = false;
+                step.ignoreSingleLetterExceptedWords = true;
+                step.exceptionWordsState = true;
+                step.exceptionWordsIndex = 1;
+                step.exceptionCharsIndex = -1;
+                step.exceptionCharPair1Index = -1;
+                step.exceptionCharPair2Index = -1;
+                step.sentenceSeparatorsIndex = 2;
+
+                predefinedPreset.steps.Add(step);
+
+                SavedSettings.changeCasePresets.Add(predefinedPreset);
+
+
+                predefinedPreset = new ChangeCase.ChangeCasePreset();
+                predefinedPreset.predefined = true;
+
+                predefinedPreset.names.Add("en", "Title Case");
+                predefinedPreset.names.Add("ru", "Начинать С Прописных");
+
+                predefinedPreset.descriptions.Add("en", "General words will became Title Cased. The words from item #1 of \"Except for words\" list will become lowercase (always except \r\n" +
+                    "for the first word and except for the last words if not lowercase by other parameters). The words from item #2 of \"Except for words\" list will become uppercase. \r\n" +
+                    "This rule overrides all other rules. The words from item #3 of \"Except for words\" list will become lowercase between characters from items #1 of opening and closing \r\n" +
+                    "\"Except for words between symbols\" lists. You can use special pseudo-word \"*RN\" in the items #1, #2 and #3 of \"Except for words\" list to include \r\n" +
+                    "Roman numerals (e.g,. III, VI, X) in the corresponding item. The characters from item #1 of \"Symbols to treat as sentence separators\" list are characters \r\n" +
+                    "after which the words will become capitalized (switching off all exceptions, e.g. words to lowercase, besides the words to uppercase). The first word of \r\n" +
+                    "a sentence will always be capitalized (besides the words to uppercase).");
+
+                predefinedPreset.descriptions.Add("ru", "Пресет начинает регистр строки С Прописных. Слова из пункта #1 из списка \"Кроме слов\" становятся строчными (всегда кроме первого \r\n" +
+                    "слова и кроме последнего слова, если иное не указано другими параметрами). Слова из пункта #2 из списка \"Кроме слов\" становятся прописными. Это правило имеет приоритет \r\n" +
+                    "надо всеми другими правилами. Слова из пункта #3 из списка \"Кроме слов\" становятся строчными между между символами из пунктов #1 из открывающего и закрывающего списков \r\n" +
+                    "\"Кроме слов между символами\". Вы можете использовать специальное псевдо-слово \"*RN\" в пунктах #1, #2 и #3 списка \"Кроме слов\" для включения римских \r\n" +
+                    "цифр (например, III, VI, X) в соответствующий пункт. Символы из пункта #1 списка \"Символы, которые считать разделителями предложений\" — это список символов, которые \r\n" +
+                    "начинают новое предложение, отключая все остальные правила, кроме слов приводимых в верхний регистр. Слова после этих символов будут начинаться с прописных букв. \r\n" +
+                    "Первое слово всегда будет начинаться с прописной буквы (кроме слов приводимых в верхний регистр).");
+
+
+                step = new ChangeCase.ChangeCaseStep();//**********
+                step.rule = 0; //lowercase
+                step.alwaysCapitalize1stWord = false;
+                step.alwaysCapitalizeLastWord = false;
+                step.ignoreSingleLetterExceptedWords = false;
+                step.exceptionWordsState = false;
+                step.exceptionWordsIndex = -1;
+                step.exceptionCharsIndex = -1;
+                step.exceptionCharPair1Index = -1;
+                step.exceptionCharPair2Index = -1;
+                step.sentenceSeparatorsIndex = -1;
+
+                predefinedPreset.steps.Add(step);
+
+
+                step = new ChangeCase.ChangeCaseStep();
+                step.rule = 2; //Title Case
+                step.alwaysCapitalize1stWord = true;
+                step.alwaysCapitalizeLastWord = true;
+                step.ignoreSingleLetterExceptedWords = true;
+                step.exceptionWordsState = false;
+                step.exceptionWordsIndex = -1;
+                step.exceptionCharsIndex = -1;
+                step.exceptionCharPair1Index = -1;
+                step.exceptionCharPair2Index = -1;
+                step.sentenceSeparatorsIndex = 1;
+
+                predefinedPreset.steps.Add(step);
+
+
+                step = new ChangeCase.ChangeCaseStep();
+                step.rule = 0; //lowercase
+                step.alwaysCapitalize1stWord = null;
+                step.alwaysCapitalizeLastWord = null;
+                step.ignoreSingleLetterExceptedWords = true;
+                step.exceptionWordsState = null;
+                step.exceptionWordsIndex = 1;
+                step.exceptionCharsIndex = -1;
+                step.exceptionCharPair1Index = -1;
+                step.exceptionCharPair2Index = -1;
+                step.sentenceSeparatorsIndex = -1;
+
+                predefinedPreset.steps.Add(step);
+
+
+                step = new ChangeCase.ChangeCaseStep();
+                step.rule = 0; //lowercase
+                step.alwaysCapitalize1stWord = false;
+                step.alwaysCapitalizeLastWord = false;
+                step.ignoreSingleLetterExceptedWords = true;
+                step.exceptionWordsState = null;
+                step.exceptionWordsIndex = 3;
+                step.exceptionCharsIndex = -1;
+                step.exceptionCharPair1Index = 1;
+                step.exceptionCharPair2Index = 1;
+                step.sentenceSeparatorsIndex = -1;
+
+                predefinedPreset.steps.Add(step);
+
+
+                step = new ChangeCase.ChangeCaseStep();
+                step.rule = 1; //UPPERCASE
+                step.alwaysCapitalize1stWord = null;
+                step.alwaysCapitalizeLastWord = null;
+                step.ignoreSingleLetterExceptedWords = false;
+                step.exceptionWordsState = null;
+                step.exceptionWordsIndex = 2;
+                step.exceptionCharsIndex = -1;
+                step.exceptionCharPair1Index = -1;
+                step.exceptionCharPair2Index = -1;
+                step.sentenceSeparatorsIndex = -1;
+
+                predefinedPreset.steps.Add(step);
+
+                SavedSettings.changeCasePresets.Add(predefinedPreset);
+            }
+
+
             if (SavedSettings.reportPresets == null)
                 SavedSettings.reportPresets = Array.Empty<ReportPreset>();
 
-            //Let's remove all predefined presets and recreate them from scratch (except for allowed user customizations)
+
+            //Let's remove all predefined report presets and recreate them from scratch (except for allowed user customizations)
             var existingPredefinedPresets = new SortedDictionary<Guid, ReportPreset>(); //<permanentGuid, ReportPreset>
 
             var existingPredefinedPresetCount = 0;

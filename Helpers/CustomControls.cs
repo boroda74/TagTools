@@ -754,6 +754,7 @@ namespace MusicBeePlugin
             this.Size = new Size(this.comboBox.Width, this.comboBox.Height + 1);
 
             this.comboBox.DropDownClosed += OnDropDownClosed;
+            this.comboBox.Sorted = comboBox.Sorted;
 
             this.Controls.Add(this.comboBox);
 
@@ -937,6 +938,7 @@ namespace MusicBeePlugin
             customComboBox_SizeChanged(this, null);
 
             this.DropDownStyle = comboBox.DropDownStyle;
+            this.listBox.Sorted = comboBox.Sorted;
 
             var allControlsIndex = ownerForm.allControls.IndexOf(comboBox);
             ownerForm.allControls.RemoveAt(allControlsIndex);
@@ -984,10 +986,10 @@ namespace MusicBeePlugin
         {
             if (textBox != null && (textBox.Text != cue || string.IsNullOrEmpty(cue)))
             {
-                if (listBox.SelectedIndex == -1)
+                if (listBox.SelectedIndex == -1 || listBox.Items[listBox.SelectedIndex] == null)
                     Text = string.Empty;
                 else
-                    Text = listBox.SelectedItem.ToString();
+                    Text = listBox.Items[listBox.SelectedIndex].ToString();
             }
 
             base.Refresh();
@@ -1089,6 +1091,8 @@ namespace MusicBeePlugin
 
         internal void Add(object item)
         {
+            setItemsChangedProcessed = true;
+
             if (listBox != null)
             {
                 if (specialStateListBox == null)
@@ -1117,10 +1121,14 @@ namespace MusicBeePlugin
             }
 
             ItemsChangedSpecialMode();
+
+            setItemsChangedProcessed = false;
         }
 
         internal void AddRange(object[] items)
         {
+            setItemsChangedProcessed = true;
+
             if (listBox != null)
             {
                 if (specialStateListBox == null)
@@ -1152,10 +1160,14 @@ namespace MusicBeePlugin
             }
 
             ItemsChangedSpecialMode();
+
+            setItemsChangedProcessed = false;
         }
 
         internal void AddRange(IList<object> items)
         {
+            setItemsChangedProcessed = true;
+
             if (listBox != null)
             {
                 for (int i = 0; i < items.Count; i++)
@@ -1181,6 +1193,8 @@ namespace MusicBeePlugin
             }
 
             ItemsChangedSpecialMode();
+
+            setItemsChangedProcessed = false;
         }
 
         internal void RemoveAt(int index)
@@ -1394,7 +1408,7 @@ namespace MusicBeePlugin
                 var oldSelectedIndex = listBox.SelectedIndex;
                 object oldSelectedItem = null;
                 if (listBox.SelectedIndex >= 0)
-                    oldSelectedItem = listBox.SelectedItem;
+                    oldSelectedItem = listBox.Items[listBox.SelectedIndex];
 
                 listBox.SelectedIndex = index;
                 lastSelectedIndex = index;
@@ -1412,7 +1426,7 @@ namespace MusicBeePlugin
                 if (oldSelectedIndex != listBox.SelectedIndex)
                     Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
-                if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.SelectedItem || oldSelectedItem != null)
+                if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
                     Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
             }
             else//if (comboBox != null)
@@ -1421,7 +1435,7 @@ namespace MusicBeePlugin
                 var oldSelectedIndex = comboBox.SelectedIndex;
                 object oldSelectedItem = null;
                 if (comboBox.SelectedIndex >= 0)
-                    oldSelectedItem = comboBox.SelectedItem;
+                    oldSelectedItem = comboBox.Items[comboBox.SelectedIndex];
 
                 if (!forceDropDownListText)//----- || index >= 0)
                 {
@@ -1448,7 +1462,7 @@ namespace MusicBeePlugin
                 if (oldSelectedIndex != comboBox.SelectedIndex)
                     Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
-                if (comboBox.SelectedIndex != -1 && oldSelectedItem != comboBox.SelectedItem || oldSelectedItem != null)
+                if (comboBox.SelectedIndex != -1 && oldSelectedItem != comboBox.Items[comboBox.SelectedIndex] || oldSelectedItem != null)
                     Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
             }
         }
@@ -1488,7 +1502,7 @@ namespace MusicBeePlugin
                 {
                     object oldSelectedItem = null;
                     if (listBox.SelectedIndex >= 0)
-                        oldSelectedItem = listBox.SelectedItem;
+                        oldSelectedItem = listBox.Items[listBox.SelectedIndex];
 
                     listBox.SelectedIndex = value;
                     lastSelectedIndex = value;
@@ -1500,14 +1514,14 @@ namespace MusicBeePlugin
 
                     Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
-                    if(listBox.SelectedIndex != -1 && oldSelectedItem != listBox.SelectedItem || oldSelectedItem != null)
+                    if(listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
                 }
                 else if (listBox == null && comboBox.SelectedIndex != value)
                 {
                     object oldSelectedItem = null;
                     if (comboBox.SelectedIndex != -1)
-                        oldSelectedItem = comboBox.SelectedItem;
+                        oldSelectedItem = comboBox.Items[comboBox.SelectedIndex];
 
                     comboBox.SelectedIndex = value;
 
@@ -1518,7 +1532,7 @@ namespace MusicBeePlugin
 
                     Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
-                    if (comboBox.SelectedIndex != -1 && oldSelectedItem != comboBox.SelectedItem || oldSelectedItem != null)
+                    if (comboBox.SelectedIndex != -1 && oldSelectedItem != comboBox.Items[comboBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
                 }
             }
@@ -1529,56 +1543,60 @@ namespace MusicBeePlugin
             get
             {
                 if (listBox != null && listBox.SelectedIndex != -1)
-                    return listBox.SelectedItem;
+                    return listBox.Items[listBox.SelectedIndex];
                 else if (listBox != null)
                     return null;
                 else if (comboBox.SelectedIndex != -1)
-                    return comboBox.SelectedItem;
+                    return comboBox.Items[comboBox.SelectedIndex];
                 else
                     return null;
             }
 
             set
             {
-                if (listBox != null && (listBox.SelectedIndex != -1 && listBox.SelectedItem != value || value != null))
+                if (listBox != null && (listBox.SelectedIndex != -1 && listBox.Items[listBox.SelectedIndex] != value || value != null))
                 {
                     var oldSelectedIndex = listBox.SelectedIndex;
                     object oldSelectedItem = null;
                     if (listBox.SelectedIndex != -1)
-                        oldSelectedItem = listBox.SelectedItem;
+                        oldSelectedItem = listBox.Items[listBox.SelectedIndex];
 
-                    listBox.SelectedItem = value;
+                    int index = listBox.Items.IndexOf(value);
+                    listBox.SelectedIndex = index;
+
                     lastSelectedIndex = listBox.SelectedIndex;
 
-                    if (listBox.SelectedItem != null)
-                        Text = listBox.SelectedItem.ToString();
+                    if (listBox.SelectedIndex != -1 && listBox.Items[listBox.SelectedIndex] != null)
+                        Text = listBox.Items[listBox.SelectedIndex].ToString();
                     else if (DropDownStyle == ComboBoxStyle.DropDownList)
                         Text = string.Empty;
 
                     if (oldSelectedIndex != listBox.SelectedIndex)
                         Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
-                    if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.SelectedItem || oldSelectedItem != null)
+                    if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
                 }
-                else if (listBox == null && (comboBox.SelectedIndex != -1 && comboBox.SelectedItem != value || value != null))
+                else if (listBox == null && (comboBox.SelectedIndex != -1 && comboBox.Items[comboBox.SelectedIndex] != value || value != null))
                 {
                     var oldSelectedIndex = comboBox.SelectedIndex;
                     object oldSelectedItem = null;
                     if (comboBox.SelectedIndex != -1)
-                        oldSelectedItem = comboBox.SelectedItem;
+                        oldSelectedItem = comboBox.Items[comboBox.SelectedIndex];
 
-                    comboBox.SelectedItem = value;
+                    int index = comboBox.Items.IndexOf(value);
+                    comboBox.SelectedIndex = index;
 
-                    if (comboBox.SelectedItem != null)
-                        Text = comboBox.SelectedItem.ToString();
+
+                    if (comboBox.Items[comboBox.SelectedIndex] != null)
+                        Text = comboBox.Items[comboBox.SelectedIndex].ToString();
                     else if (DropDownStyle == ComboBoxStyle.DropDownList)
                         Text = string.Empty;
 
                     if (oldSelectedIndex != comboBox.SelectedIndex)
                         Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
-                    if (comboBox.SelectedIndex != -1 && oldSelectedItem != comboBox.SelectedItem || oldSelectedItem != null)
+                    if (comboBox.SelectedIndex != -1 && oldSelectedItem != comboBox.Items[comboBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
                 }
             }
@@ -1926,9 +1944,17 @@ namespace MusicBeePlugin
 
             dropDownPanel.ColumnStyles[1].Width = listBox.Width;
 
-            var index = IndexOfText(textBox.Text);
-            if ((listBox.SelectedIndex != -1 && listBox.SelectedItem != null || listBox.SelectedItem.ToString() != textBox.Text) && index >= 0)
-                listBox.SelectedItem = textBox.Text;
+            string text = textBox.Text;
+
+            int index = listBox.SelectedIndex;
+            if (listBox.SelectedIndex == -1)
+            {
+                index = IndexOfText(textBox.Text);
+                if (index >= 0)
+                    listBox.SelectedIndex = index;
+                else if (listBox.Items.Count > 0)
+                    listBox.SelectedIndex = 0;
+            }
 
             var textBoxScreenFormLocation = textBox.PointToScreen(textBox.Location);
             if (enableFiltering) //Filtered list
@@ -1998,6 +2024,9 @@ namespace MusicBeePlugin
                 else //if (openDropDownUp && openDropDownLeft)
                     dropDown.Show(textBoxScreenFormLocation, ToolStripDropDownDirection.AboveLeft);
             }
+
+            textBox.Text = text;
+            listBox.SelectedIndex = index;
         }
 
         private void button_Click(object sender, EventArgs e)
@@ -2009,7 +2038,6 @@ namespace MusicBeePlugin
 
 
                 textBox.Focus();
-
                 drawCustomDropDown();
 
                 if (sender == null) //"DroppedDown" property changed
@@ -2072,10 +2100,10 @@ namespace MusicBeePlugin
             listBox.AdjustHeight(dropDownWidth, initialDropDownHeight, GetSpecialStateColumnWidth());
             specialStateListBox?.AdjustAdditionalListHeight(initialDropDownHeight);
 
-            if (listBox.SelectedIndex == -1 || listBox.SelectedItem == null)
+            if (listBox.SelectedIndex == -1 || listBox.Items[listBox.SelectedIndex] == null)
                 Text = string.Empty;
             else
-                Text = listBox.SelectedItem.ToString();
+                Text = listBox.Items[listBox.SelectedIndex].ToString();
 
             PluginWindowTemplate.UpdateCustomScrollBars(listBox);
         }

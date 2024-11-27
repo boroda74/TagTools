@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonPreview.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>418, 5</value>
@@ -124,8 +128,21 @@
   <data name="buttonPreview.Text" xml:space="preserve">
     <value>Просмотр</value>
   </data>
+  <data name="buttonPreview.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1334, 361</value>
+  </data>
+  <data name="buttonStopRecordingPreset.Error" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonStopRecordingPreset.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonStopRecordingPreset.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonStopRecordingPreset.Location" type="System.Drawing.Point, System.Drawing">
     <value>1305, 5</value>
@@ -133,11 +150,29 @@
   <data name="buttonStopRecordingPreset.ToolTip" xml:space="preserve">
     <value>Остановить запись</value>
   </data>
+  <data name="buttonRecordPreset.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonRecordPreset.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonRecordPreset.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="buttonRecordPreset.Location" type="System.Drawing.Point, System.Drawing">
     <value>1276, 5</value>
   </data>
   <data name="buttonRecordPreset.ToolTip" xml:space="preserve">
     <value>Записать пресет</value>
+  </data>
+  <data name="buttonPlayPreset.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonPlayPreset.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonPlayPreset.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonPlayPreset.Location" type="System.Drawing.Point, System.Drawing">
     <value>1247, 5</value>
@@ -145,11 +180,29 @@
   <data name="buttonPlayPreset.ToolTip" xml:space="preserve">
     <value>Воспроизвести пресет</value>
   </data>
+  <data name="buttonDeletePreset.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonDeletePreset.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonDeletePreset.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="buttonDeletePreset.Location" type="System.Drawing.Point, System.Drawing">
     <value>1218, 5</value>
   </data>
   <data name="buttonDeletePreset.ToolTip" xml:space="preserve">
     <value>Удалить пресет</value>
+  </data>
+  <data name="buttonDescription.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonDescription.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonDescription.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonDescription.Location" type="System.Drawing.Point, System.Drawing">
     <value>1112, 5</value>
@@ -157,11 +210,35 @@
   <data name="buttonDescription.Text" xml:space="preserve">
     <value>Описание</value>
   </data>
+  <data name="buttonDescription.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="presetBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="presetBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="presetBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="presetBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>85, 5</value>
   </data>
   <data name="presetBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>1021, 23</value>
+  </data>
+  <data name="presetBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonHelp.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonHelp.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonHelp.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonHelp.Location" type="System.Drawing.Point, System.Drawing">
     <value>56, 5</value>
@@ -171,17 +248,50 @@
 
 Вы можете записать свой собственный пресет. Сначала пронумеруйте исключенные слова/символы, затем нажмите кнопку "Записать пресет". Выберите правило изменения регистра и при необходимости выберите пронумерованные исключенные слова/символы из ВЫПАДАЮЩЕГО СПИСКА. Нажмите кнопку "Просмотр". При необходимости измените правило изменения регистра и/или выберите новые, или те же исключенные слова/символы из ВЫПАДАЮЩЕГО СПИСКА. Нажмите кнопку "Изменить новый тег". Повторите этот шаг столько раз, сколько необходимо. Затем нажмите кнопку "Остановить запись". Задайте имя пресета.</value>
   </data>
+  <data name="label2.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label2.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="label2.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 15</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Пресет</value>
   </data>
+  <data name="label2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="Track.HeaderText" xml:space="preserve">
     <value>Трек</value>
   </data>
+  <data name="previewTable.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="previewTable.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="previewTable.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>1322, 163</value>
+  </data>
+  <data name="previewTable.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonAsrSentenceSeparators.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonAsrSentenceSeparators.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonAsrSentenceSeparators.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonAsrSentenceSeparators.Location" type="System.Drawing.Point, System.Drawing">
     <value>634, 113</value>
@@ -194,11 +304,29 @@
 для Дополнительного поиска и замены
 </value>
   </data>
+  <data name="sentenceSeparatorsBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sentenceSeparatorsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="sentenceSeparatorsBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="sentenceSeparatorsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>622, 23</value>
   </data>
   <data name="sentenceSeparatorsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonAsrExceptWordsBetweenSymbols.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonAsrExceptWordsBetweenSymbols.Location" type="System.Drawing.Point, System.Drawing">
     <value>634, 86</value>
@@ -210,6 +338,15 @@
     <value>Установить списки символов как значение по умолчанию 
 для Дополнительного поиска и замены</value>
   </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonAsrExceptWordsAfterSymbols.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="buttonAsrExceptWordsAfterSymbols.Location" type="System.Drawing.Point, System.Drawing">
     <value>634, 59</value>
   </data>
@@ -220,17 +357,44 @@
     <value>Установить список символов как значение по умолчанию 
 для Дополнительного поиска и замены</value>
   </data>
+  <data name="exceptionCharsBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="exceptionCharsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exceptionCharsBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="exceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>622, 23</value>
   </data>
   <data name="exceptionCharsBox.ToolTip" xml:space="preserve">
     <value>Символы в этом списке должны быть разделены пробелами</value>
   </data>
+  <data name="removeExceptionButton.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="removeExceptionButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="removeExceptionButton.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="removeExceptionButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>634, 32</value>
   </data>
   <data name="removeExceptionButton.ToolTip" xml:space="preserve">
     <value>Удалить введенный список исключений из истории (если есть точное совпадение)</value>
+  </data>
+  <data name="exceptionWordsBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="exceptionWordsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exceptionWordsBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="exceptionWordsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>622, 23</value>
@@ -240,6 +404,15 @@
 Для римских цифр можно использовать специальное псевдо-слово "*RN"
 Удерживая клавишу Ctrl, щелкните элементы списка, чтобы пронумеровать их. Удерживая клавишу Shift, щелкните, чтобы сбросить нумерацию
 Щелкните столбец с номерами элементов списка, чтобы пронумеровать элементы. Удерживая клавишу Shift, щелкните, чтобы сбросить нумерацию</value>
+  </data>
+  <data name="buttonAsrExceptedWords.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonAsrExceptedWords.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonAsrExceptedWords.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonAsrExceptedWords.Location" type="System.Drawing.Point, System.Drawing">
     <value>601, 14</value>
@@ -251,11 +424,29 @@
     <value>Установить список исключенных слов как значение по умолчанию 
 для Дополнительного поиска и замены</value>
   </data>
+  <data name="buttonOK.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonOK.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonOK.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>526, 5</value>
   </data>
   <data name="buttonOK.Text" xml:space="preserve">
     <value>Применить</value>
+  </data>
+  <data name="buttonOK.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonSettings.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonSettings.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
     <value>177, 5</value>
@@ -263,12 +454,30 @@
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Открыть быстрые настройки</value>
   </data>
+  <data name="buttonReapply.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonReapply.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonReapply.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="buttonReapply.Text" xml:space="preserve">
     <value>Изменить новый тег</value>
   </data>
   <data name="buttonReapply.ToolTip" xml:space="preserve">
     <value>Эта команда применит новые правила изменения регистра (в том числе исключения) 
 к уже сгенерированному, но еще не записанному новому значению тега, не сохраняя что-либо в теги</value>
+  </data>
+  <data name="closingExceptionCharsBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="closingExceptionCharsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="closingExceptionCharsBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="closingExceptionCharsBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>313, 1</value>
@@ -282,6 +491,15 @@
 Порядок символов в левом и правом списках важен
 Они представляют собой пары в соответствии с их позицией в списке</value>
   </data>
+  <data name="openingExceptionCharsBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="openingExceptionCharsBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="openingExceptionCharsBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="openingExceptionCharsBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 23</value>
   </data>
@@ -291,14 +509,47 @@
 Порядок символов в левом и правом списках важен
 Они представляют собой пары в соответствии с их позицией в списке</value>
   </data>
+  <data name="tableLayoutPanel1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tableLayoutPanel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="tableLayoutPanel1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>622, 25</value>
+  </data>
+  <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fieldsPanel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="fieldsPanel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="fieldsPanel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="fieldsPanel.Location" type="System.Drawing.Point, System.Drawing">
     <value>594, 27</value>
   </data>
   <data name="fieldsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>740, 141</value>
+  </data>
+  <data name="fieldsPanel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="ignoreSingleLetterExceptedWordsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>932, 172</value>
@@ -314,6 +565,15 @@
 или слова, которым предшествует точка и за которыми следует точка, чтобы не изменять регистр аббревиатур (например, 
 "A.K.A.", даже если список исключенных слов содержит артикль "a")</value>
   </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="ignoreSingleLetterExceptedWordsCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="ignoreSingleLetterExceptedWordsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>904, 172</value>
   </data>
@@ -321,6 +581,15 @@
     <value>Игнорировать исключенные слова, состоящие из одной буквы за которыми следует точка, за которой НЕ следует пробел, 
 или слова, которым предшествует точка и за которыми следует точка, чтобы не изменять регистр аббревиатур (например, 
 "A.K.A.", даже если список исключенных слов содержит артикль "a")</value>
+  </data>
+  <data name="alwaysCapitalizeLastWordCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="alwaysCapitalizeLastWordCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="alwaysCapitalizeLastWordCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="alwaysCapitalizeLastWordCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>575, 172</value>
@@ -335,6 +604,15 @@
     <value>Последнее слово не будет изменено после или между символами исключения
 Промежуточное состояние: Всегда начинать с заглавной буквы последнее слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)</value>
   </data>
+  <data name="alwaysCapitalizeLastWordCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="alwaysCapitalizeLastWordCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="alwaysCapitalizeLastWordCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="alwaysCapitalizeLastWordCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>547, 172</value>
   </data>
@@ -342,6 +620,15 @@
     <value>Последнее слово не будет изменено после или между символами исключения
 Промежуточное состояние: Всегда начинать с заглавной буквы последнее слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)
 </value>
+  </data>
+  <data name="alwaysCapitalize1stWordCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="alwaysCapitalize1stWordCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="alwaysCapitalize1stWordCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="alwaysCapitalize1stWordCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 172</value>
@@ -355,16 +642,33 @@
   <data name="alwaysCapitalize1stWordCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Промежуточное состояние: Всегда начинать с заглавной буквы первое слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)</value>
   </data>
+  <data name="alwaysCapitalize1stWordCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="alwaysCapitalize1stWordCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="alwaysCapitalize1stWordCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="alwaysCapitalize1stWordCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 172</value>
   </data>
   <data name="alwaysCapitalize1stWordCheckBox.ToolTip" xml:space="preserve">
     <value>Промежуточное состояние: Всегда начинать с заглавной буквы первое слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)</value>
   </data>
+  <data name="sentenceSeparatorsCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sentenceSeparatorsCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="sentenceSeparatorsCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="sentenceSeparatorsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 145</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="sentenceSeparatorsCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 30, 0</value>
   </data>
@@ -378,8 +682,26 @@
     <value>Символы (с пробелом(ами) или без после них), которые следует использовать в качестве разделителей предложений
 Точка, ЗА КОТОРОЙ СЛЕДУЕТ ПРОБЕЛ(Ы), всегда означает конец предложения</value>
   </data>
+  <data name="sentenceSeparatorsCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sentenceSeparatorsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="sentenceSeparatorsCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="sentenceSeparatorsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 145</value>
+  </data>
+  <data name="exceptionCharPairsCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="exceptionCharPairsCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exceptionCharPairsCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="exceptionCharPairsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 118</value>
@@ -393,11 +715,29 @@
   <data name="exceptionCharPairsCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Эта опция запретит любые изменения слов находящихся между указанными парами символов</value>
   </data>
+  <data name="exceptionCharPairsCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="exceptionCharPairsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exceptionCharPairsCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="exceptionCharPairsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 118</value>
   </data>
   <data name="exceptionCharPairsCheckBox.ToolTip" xml:space="preserve">
     <value>Эта опция запретит любые изменения слов находящихся между указанными парами символов</value>
+  </data>
+  <data name="exceptionCharsCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="exceptionCharsCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exceptionCharsCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="exceptionCharsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 91</value>
@@ -411,23 +751,50 @@
   <data name="exceptionCharsCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Эта опция запретит любые изменения слов следующих после указанных символов</value>
   </data>
+  <data name="exceptionCharsCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="exceptionCharsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exceptionCharsCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="exceptionCharsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 91</value>
   </data>
   <data name="exceptionCharsCheckBox.ToolTip" xml:space="preserve">
     <value>Эта опция запретит любые изменения слов следующих после указанных символов</value>
   </data>
+  <data name="exceptionWordsCheckBoxLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="exceptionWordsCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exceptionWordsCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="exceptionWordsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>237, 64</value>
   </data>
   <data name="exceptionWordsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 15</value>
+    <value>75, 15</value>
   </data>
   <data name="exceptionWordsCheckBoxLabel.Text" xml:space="preserve">
-    <value>Кроме слов</value>
+    <value>Кроме слов:</value>
   </data>
   <data name="exceptionWordsCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Только в словах</value>
+    <value>Только в словах:</value>
+  </data>
+  <data name="exceptionWordsCheckBox.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="exceptionWordsCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="exceptionWordsCheckBox.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="exceptionWordsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 64</value>
@@ -438,11 +805,44 @@
 
 Промежуточное состояние: изменить регистр только введенных слов.</value>
   </data>
+  <data name="toggleCaseRadioButtonLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="toggleCaseRadioButtonLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="toggleCaseRadioButtonLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="toggleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 15</value>
   </data>
   <data name="toggleCaseRadioButtonLabel.Text" xml:space="preserve">
     <value>иЗМЕНИТЬ рЕГИСТР</value>
+  </data>
+  <data name="toggleCaseRadioButtonLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="toggleCaseRadioButton.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="toggleCaseRadioButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="toggleCaseRadioButton.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="toggleCaseRadioButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="titleCaseRadioButtonLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="titleCaseRadioButtonLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="titleCaseRadioButtonLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="titleCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 15</value>
@@ -450,11 +850,59 @@
   <data name="titleCaseRadioButtonLabel.Text" xml:space="preserve">
     <value>Начинать С Прописных</value>
   </data>
+  <data name="titleCaseRadioButtonLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="titleCaseRadioButton.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="titleCaseRadioButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="titleCaseRadioButton.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="titleCaseRadioButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="upperCaseRadioButtonLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="upperCaseRadioButtonLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="upperCaseRadioButtonLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="upperCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 15</value>
   </data>
   <data name="upperCaseRadioButtonLabel.Text" xml:space="preserve">
     <value>ВСЕ ПРОПИСНЫЕ</value>
+  </data>
+  <data name="upperCaseRadioButtonLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="upperCaseRadioButton.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="upperCaseRadioButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="upperCaseRadioButton.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="upperCaseRadioButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lowerCaseRadioButtonLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lowerCaseRadioButtonLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lowerCaseRadioButtonLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="lowerCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>82, 15</value>
@@ -462,11 +910,59 @@
   <data name="lowerCaseRadioButtonLabel.Text" xml:space="preserve">
     <value>все строчные</value>
   </data>
+  <data name="lowerCaseRadioButtonLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lowerCaseRadioButton.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lowerCaseRadioButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="lowerCaseRadioButton.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lowerCaseRadioButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sentenceCaseRadioButtonLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sentenceCaseRadioButtonLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="sentenceCaseRadioButtonLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="sentenceCaseRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 15</value>
   </data>
   <data name="sentenceCaseRadioButtonLabel.Text" xml:space="preserve">
     <value>Как в предложениях.</value>
+  </data>
+  <data name="sentenceCaseRadioButtonLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sentenceCaseRadioButton.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sentenceCaseRadioButton.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="sentenceCaseRadioButton.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="sentenceCaseRadioButton.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="forSelectedTracksLabel.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="forSelectedTracksLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="forSelectedTracksLabel.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="forSelectedTracksLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>356, 38</value>
@@ -477,11 +973,35 @@
   <data name="forSelectedTracksLabel.Text" xml:space="preserve">
     <value>у выбранных треков</value>
   </data>
+  <data name="forSelectedTracksLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sourceTagList.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="sourceTagList.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="sourceTagList.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="sourceTagList.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 34</value>
   </data>
   <data name="sourceTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
+  </data>
+  <data name="sourceTagList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label1.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="label1.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 15</value>
@@ -489,11 +1009,17 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Изменить регистр тега</value>
   </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1350, 400</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Изменение регистра</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1097,10 +1623,22 @@
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
+  <data name="buttonClose.Error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonClose.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleRight</value>
+  </data>
+  <data name="buttonClose.IconPadding" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
     <value>634, 5</value>
   </data>
   <data name="buttonClose.Text" xml:space="preserve">
     <value>Закрыть</value>
+  </data>
+  <data name="buttonClose.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>
