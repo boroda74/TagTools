@@ -68,6 +68,7 @@ namespace MusicBeePlugin
         private string lastSelectedFolder;
         private int numberOfBackups;
         private int trackIndex = -1; //= trackListComboBoxCustom.SelectedIndex
+        private bool ignoreComboBoxSelectedIndexChanged = false;
 
         private List<Backup> originalCachedBackups = new List<Backup>();
         private List<string> originalCachedBackupFilenames = new List<string>();
@@ -1638,6 +1639,11 @@ namespace MusicBeePlugin
 
         private void searchFolderComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (ignoreComboBoxSelectedIndexChanged)
+                return;
+
+            ignoreComboBoxSelectedIndexChanged = true;
+
             if (searchFolderComboBoxCustom.Text != lastSelectedFolder)
             {
                 if (string.IsNullOrEmpty(searchFolderComboBoxCustom.Text))
@@ -1653,6 +1659,8 @@ namespace MusicBeePlugin
                         resetPreviewData(false);
                 }
             }
+
+            ignoreComboBoxSelectedIndexChanged = false;
         }
 
         private void numberOfBackupsNumericUpDown_ValueChanged(object sender, EventArgs e)

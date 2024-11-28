@@ -1,4 +1,4 @@
-# ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN
+4# ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN
 
 ## Additional Tagging \& Reporting Tools plugin
 
@@ -34,4 +34,4 @@ Extract content of the downloaded archive to a temporary folder of your choice. 
 
 ***
 
-Copyright © boroda 2012-2024. Help version 9.2.240921
+Copyright © boroda 2012-2024. Help version 9.2.241128

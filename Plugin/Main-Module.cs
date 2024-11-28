@@ -4363,7 +4363,7 @@ namespace MusicBeePlugin
                 || (SavedSettings.sentenceSeparators[0] as string).Length < 2 || (SavedSettings.sentenceSeparators[0] as string)[1] != ' ')
             {
                 SavedSettings.sentenceSeparators = new object[10];
-                SavedSettings.sentenceSeparators[0] = "1 :,-";
+                SavedSettings.sentenceSeparators[0] = "1 : , -";
                 SavedSettings.sentenceSeparators[1] = "2 .";
                 SavedSettings.sentenceSeparators[2] = string.Empty;
                 SavedSettings.sentenceSeparators[3] = string.Empty;

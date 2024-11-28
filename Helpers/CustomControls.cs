@@ -1238,6 +1238,8 @@ namespace MusicBeePlugin
 
         internal void Insert(int index, object item, string specialState = null)
         {
+            setItemsChangedProcessed = true;
+
             if (defaultSpecialState == null)
             {
                 Items.Insert(index, item);
@@ -1251,10 +1253,19 @@ namespace MusicBeePlugin
                 Items.Insert(index, item);
                 specialStateListBox.Items.Insert(index, specialState);
             }
+
+            if (listBox != null)
+                listBox_ItemsChanged(null, null);
+
+            ItemsChangedSpecialMode();
+
+            setItemsChangedProcessed = false;
         }
 
         internal void ItemsClear()
         {
+            setItemsChangedProcessed = true;
+
             if (listBox != null)
             {
                 listBox.Items.Clear();
@@ -1271,6 +1282,8 @@ namespace MusicBeePlugin
             SelectedIndex = -1;
 
             ItemsChangedSpecialMode();
+
+            setItemsChangedProcessed = false;
         }
 
         internal IList Items

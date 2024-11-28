@@ -29,6 +29,7 @@ Changes letter case of a tag according to rather sophisticated rules for selecte
 
 * Excluded words *remain unchanged*, **not** become *lowercase*\!
 * You can make two or more steps by changing casing rules (and exeptions) and clicking "Reapply rules to new tag" button without saving changes to tags.
+* • "Change Case" supports presets for multistep case changing. There are two predefined presets, "Sentence case" and "Title Case", which are identical by functionality to corresponding VT functions. Click "Description" button for details. Also, you can record your own presets if needed.
 
 ### Re-encode Tag/Re-encode Tags
 
@@ -148,6 +149,12 @@ To define date type of custom tag, open MusicBee menu\Edit\Preferences\Tags (1)\
 
 [See here screenshot of this setting](LASTSKIPPEDDATETIME.md)
 
+### Custom Sorting for Column Browser
+
+It inserts a different number of invisible zero-width spaces at the beginning of tags for arbitrary sorting. Of course, it can be used not only for column browser, but it seems that MusicBee native custom sorting can be used in all other places.
+
+[See here screenshot of this command](CUSTOMSORTINGCOLUMNBROWSER.md)
+
 ***
 
-Copyright © boroda 2012-2024. Help version 9.2.240921
+Copyright © boroda 2012-2024. Help version 9.2.241128
