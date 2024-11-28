@@ -1151,8 +1151,8 @@ namespace MusicBeePlugin
         }
 
         //Returns: true - if filteredList changed
-        internal static bool FilterList<T>(System.Collections.IList filteredList, ICollection<T> fullItemCollection, T excludedItem, T currentItem, 
-            ExcludeItemDelegate<T> includeItem,string text, string[] excludedChars) where T : class
+        internal static bool FilterList<T>(System.Collections.IList filteredList, ICollection<T> fullItemCollection, T excludedItem, T currentItem,
+            ExcludeItemDelegate<T> includeItem, string text, string[] excludedChars) where T : class
         {
             if (excludedChars == null)
                 excludedChars = Array.Empty<string>();
@@ -2238,8 +2238,8 @@ namespace MusicBeePlugin
         internal delegate string AddSubstituteSpecialPrefix(string itemText, string state, int specialStateCharCount);
 
         //newText must be used only inside DropDownClosed event handlers, when comboBox.Text property is not set yet
-        internal static void CustomComboBoxLeave(CustomComboBox comboBox, string newText = null, 
-            AddSubstituteSpecialPrefix addSubstituteSpecialPrefix = null, 
+        internal static void CustomComboBoxLeave(CustomComboBox comboBox, string newText = null,
+            AddSubstituteSpecialPrefix addSubstituteSpecialPrefix = null,
             string defaultAdditionalColumnValue = "")
         {
             var comboBoxText = (newText ?? comboBox.Text);
@@ -3687,7 +3687,7 @@ namespace MusicBeePlugin
             DefaultArtwork = MissingArtwork;
             ArtworkTotals = Resources.multiple_artworks_accent;
 
-            ExcludedCainChars = new string[] { " ", "", ""};
+            ExcludedCainChars = new string[] { " ", "", "" };
             #endregion
 
             #region English localization
@@ -4037,7 +4037,7 @@ namespace MusicBeePlugin
             MsgNoPresetsDeleted = "No presets were deleted. ";
             MsgPresetsWereDeleted = " preset{;s;s} {was;were;were} deleted.";
 
-            MsgAsrPresetChainWontBeExecutedInInteractiveMode = "Preset chain won't be executed in interactive mode! " 
+            MsgAsrPresetChainWontBeExecutedInInteractiveMode = "Preset chain won't be executed in interactive mode! "
                 + "You can go to the next preset in preset chain by clicking button \"☛\". Do you want to disable this warning?";
 
             MsgLrReferredPresetNotFound = "PRESET NOT FOUND!";
@@ -4324,7 +4324,7 @@ namespace MusicBeePlugin
 
             if (SavedSettings.openingExceptionChars == null || SavedSettings.closingExceptionChars == null
                 || SavedSettings.openingExceptionChars.Length < 10 || SavedSettings.closingExceptionChars.Length < 10
-                || (SavedSettings.openingExceptionChars[0] as string).Length < 2 || (SavedSettings.openingExceptionChars[0] as string)[1] != ' ' 
+                || (SavedSettings.openingExceptionChars[0] as string).Length < 2 || (SavedSettings.openingExceptionChars[0] as string)[1] != ' '
                 || (SavedSettings.closingExceptionChars[0] as string).Length < 2 || (SavedSettings.closingExceptionChars[0] as string)[1] != ' ')
             {
                 SavedSettings.openingExceptionChars = new object[10];
@@ -4359,7 +4359,7 @@ namespace MusicBeePlugin
             }
 
 
-            if (SavedSettings.sentenceSeparators == null || SavedSettings.sentenceSeparators.Length < 10 
+            if (SavedSettings.sentenceSeparators == null || SavedSettings.sentenceSeparators.Length < 10
                 || (SavedSettings.sentenceSeparators[0] as string).Length < 2 || (SavedSettings.sentenceSeparators[0] as string)[1] != ' ')
             {
                 SavedSettings.sentenceSeparators = new object[10];
@@ -6739,7 +6739,7 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsSubmenu, CompareTracksName, CompareTracksDescription, compareTracksEventHandler);
             if (!SavedSettings.dontShowAutoRate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);
             if (!SavedSettings.dontShowCAR) AddMenuItem(TagToolsSubmenu, CarName, CarDescription, carEventHandler);
-            if (!SavedSettings.dontShowCustomSortingForColumnBrowser) 
+            if (!SavedSettings.dontShowCustomSortingForColumnBrowser)
                 AddMenuItem(TagToolsSubmenu, CustomSortingForColumnBrowserName, CustomSortingForColumnBrowserDescription, customSortingEventHandler);
 
 

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 using ExtensionMethods;
@@ -54,7 +53,7 @@ namespace MusicBeePlugin
             checkBoxBounds.Inflate(-inflateOffset, -inflateOffset);
             checkBoxBounds.Offset(0, -(int)Math.Round(dpiScaling));
 
-            Rectangle checkMarkBounds = new Rectangle(checkBoxBounds.Left + (int)Math.Round(dpiScaling), checkBoxBounds.Top - (int)Math.Round(2 * dpiScaling), 
+            Rectangle checkMarkBounds = new Rectangle(checkBoxBounds.Left + (int)Math.Round(dpiScaling), checkBoxBounds.Top - (int)Math.Round(2 * dpiScaling),
                 checkBoxBounds.Width + (int)Math.Round(4 * dpiScaling), checkBoxBounds.Height + (int)Math.Round(4 * dpiScaling));
             checkMarkBounds.Inflate(-borderWidth - (int)Math.Round(dpiScaling), -borderWidth - (int)Math.Round(dpiScaling));
             checkMarkBounds.Offset((int)Math.Round(-3 * dpiScaling), (int)Math.Round(dpiScaling));
@@ -662,7 +661,7 @@ namespace MusicBeePlugin
                 return specialStateListBox.Width;
         }
 
-        internal CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned, 
+        internal CustomComboBox(PluginWindowTemplate ownerForm, ComboBox comboBox, bool skinned,
             Color? borderColor = null, Color? borderColorDisabled = null, Color? borderColorActive = null)
         {
             SetStyle(ControlStyles.ResizeRedraw, true);
@@ -943,7 +942,7 @@ namespace MusicBeePlugin
             var allControlsIndex = ownerForm.allControls.IndexOf(comboBox);
             ownerForm.allControls.RemoveAt(allControlsIndex);
             ownerForm.allControls.Insert(allControlsIndex, this);
-             
+
 
             parent.Controls.RemoveAt(index);
             comboBox.Dispose();
@@ -1331,11 +1330,11 @@ namespace MusicBeePlugin
             {
                 if (enabled && DropDownStyle == ComboBoxStyle.DropDownList && !DroppedDown)
                     return false;
-                else if (enabled && DropDownStyle == ComboBoxStyle.DropDown && DroppedDown 
+                else if (enabled && DropDownStyle == ComboBoxStyle.DropDown && DroppedDown
                     && ((SelectionStart == Text.Length && SelectionLength == 0) || (SelectionStart == 0 && SelectionLength == Text.Length))
                 )
                     return false;
-                else if (enabled && DropDownStyle == ComboBoxStyle.DropDown && DroppedDown 
+                else if (enabled && DropDownStyle == ComboBoxStyle.DropDown && DroppedDown
                     && (SelectionStart == 0 && SelectionLength == 0)
                 )
                     return null;
@@ -1527,7 +1526,7 @@ namespace MusicBeePlugin
 
                     Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
-                    if(listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
+                    if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
                 }
                 else if (listBox == null && comboBox.SelectedIndex != value)

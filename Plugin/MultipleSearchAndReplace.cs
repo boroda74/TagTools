@@ -1040,7 +1040,7 @@ namespace MusicBeePlugin
             }
 
             buttonDeleteSaved.Enable(true);
-            autoApplyCheckBox.Checked = SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid);
+            autoApplyCheckBox.Checked = SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid); //-V3080
 
             //ignoreTemplateNameTextBoxTextChanged = true;
             templateNameTextBox.Text = customMSR.getName();

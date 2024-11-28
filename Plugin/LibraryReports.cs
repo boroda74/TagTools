@@ -2281,7 +2281,7 @@ namespace MusicBeePlugin
             rows = new DataGridViewBoundColumnList<Row>(columnNames);
 
             Invoke(new Action(() => { source.DataSource = rows; source.ResetBindings(false); }));
-            
+
 
             groupings.Clear();
             groupingsDict.Clear();
@@ -3357,7 +3357,8 @@ namespace MusicBeePlugin
             }
             else if (interactive)
             {
-                Invoke(new Action(() => {
+                Invoke(new Action(() =>
+                {
                     previewTable.DataSource = source;
                     formatTrackColumns();
                 }));
@@ -3565,7 +3566,8 @@ namespace MusicBeePlugin
             }
             else //if (interactive) //!interactive & !filterResults is prohibited (because only groupings never saved to tags, so it's senseless)
             {
-                Invoke(new Action(() => {
+                Invoke(new Action(() =>
+                {
                     previewTable.DataSource = source;
                     formatTrackColumns();
                 }));
@@ -6428,7 +6430,7 @@ namespace MusicBeePlugin
                 if (!selectedPreset.useAnotherPresetAsSource)
                     selectedPreset.anotherPresetAsSource = default;
                 else if (useAnotherPresetAsSourceComboBoxCustom.SelectedIndex != -1)
-                    selectedPreset.anotherPresetAsSource = (ReportPresetReference)useAnotherPresetAsSourceComboBoxCustom.SelectedItem;
+                    selectedPreset.anotherPresetAsSource = (ReportPresetReference)useAnotherPresetAsSourceComboBoxCustom.SelectedItem; //-V3148
 
                 selectedPreset.autoApply = presetList.GetItemChecked(presetList.SelectedIndex);
 

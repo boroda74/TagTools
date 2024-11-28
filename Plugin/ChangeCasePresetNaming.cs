@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Windows.Forms;
 
 using ExtensionMethods;
 
-using MusicBeePlugin.Properties;
-
+using static MusicBeePlugin.AdvancedSearchAndReplace;
 using static MusicBeePlugin.ChangeCase;
 using static MusicBeePlugin.Plugin;
-using static MusicBeePlugin.AdvancedSearchAndReplace;
 
 namespace MusicBeePlugin
 {

@@ -5,9 +5,8 @@ using System.Windows.Forms;
 
 using ExtensionMethods;
 
-using static MusicBeePlugin.Plugin;
 using static MusicBeePlugin.AdvancedSearchAndReplace;
-using System.Threading;//***********
+using static MusicBeePlugin.Plugin;
 
 namespace MusicBeePlugin
 {
@@ -572,7 +571,7 @@ namespace MusicBeePlugin
                     if (i == enumComboBoxSelectedIndex)
                         enumComboBox.Items[i] = customComboBox.GetCurrentSpecialState() + itemText;
                     else
-                        enumComboBox.Items[i] = addSubstituteComboBoxSpecialState(enumComboBox.Items[i] as string, 
+                        enumComboBox.Items[i] = addSubstituteComboBoxSpecialState(enumComboBox.Items[i] as string,
                             customComboBox.GetDefaultSpecialState(), customComboBox.GetSpecialStateCharCount(true));
                 }
             }
@@ -1725,7 +1724,7 @@ namespace MusicBeePlugin
 
         internal override void enableQueryingOrUpdatingButtons()
         {
-            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !recordMode && !backgroundTaskIsStopping 
+            buttonOK.Enable((previewIsGenerated || SavedSettings.allowCommandExecutionWithoutPreview) && !recordMode && !backgroundTaskIsStopping
                 && (!backgroundTaskIsWorking() || backgroundTaskIsUpdatingTags));
             buttonPreview.Enable(true && !recordMode);
             buttonReapply.Enable(previewIsGenerated && !backgroundTaskIsWorking());
@@ -1776,7 +1775,7 @@ namespace MusicBeePlugin
             if (recordMode)
                 currentStep.exceptionCharsIndex = exceptionCharsBoxCustom.GetItemSpecialStateIndex(exceptionCharsBoxCustom.SelectedIndex);
 
-            
+
             ignoreComboBoxSelectedIndexChanged = true;
 
             if (exceptionCharsEnumComboBox == null)
@@ -2165,7 +2164,7 @@ namespace MusicBeePlugin
             var sentenceSeparatorsBoxCustomSelectedIndex = sentenceSeparatorsBoxCustom.SelectedIndex;
 
             recordedPreset = presetBoxCustom.SelectedItem as ChangeCasePreset;
-            for (int i = 0; i < recordedPreset.steps.Count; i++)
+            for (int i = 0; i < recordedPreset.steps.Count; i++) //-V3080
             {
                 ChangeCaseStep step = recordedPreset.steps[i];
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 using ExtensionMethods;
 
@@ -154,7 +153,7 @@ namespace MusicBeePlugin
             tagList.Items.Clear();
 
 
-            MetaDataType tagId = GetTagId((sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).tagName);
+            MetaDataType tagId = GetTagId((sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).tagName); //-V3080
 
             MbApiInterface.Library_QueryFilesEx("domain=Library", out var files);
 
@@ -179,8 +178,8 @@ namespace MusicBeePlugin
 
         private void buttonOverwrite_Click(object sender, EventArgs e)
         {
-            MetaDataType tagId1 = GetTagId((sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).tagName);
-            MetaDataType tagId2 = GetTagId((tagComboBoxCustom.SelectedItem as CustomSortingTag).tagName);
+            MetaDataType tagId1 = GetTagId((sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).tagName); //-V3080
+            MetaDataType tagId2 = GetTagId((tagComboBoxCustom.SelectedItem as CustomSortingTag).tagName); //-V3080
 
             MbApiInterface.Library_QueryFilesEx("domain=Library", out var files);
 
@@ -210,7 +209,7 @@ namespace MusicBeePlugin
             tagList.Items.Clear();
 
 
-            MetaDataType tagId = GetTagId((tagComboBoxCustom.SelectedItem as CustomSortingTag).tagName);
+            MetaDataType tagId = GetTagId((tagComboBoxCustom.SelectedItem as CustomSortingTag).tagName); //-V3080
 
             MbApiInterface.Library_QueryFilesEx("domain=Library", out var files);
 
@@ -234,7 +233,7 @@ namespace MusicBeePlugin
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            MetaDataType tagId = GetTagId((tagComboBoxCustom.SelectedItem as CustomSortingTag).tagName);
+            MetaDataType tagId = GetTagId((tagComboBoxCustom.SelectedItem as CustomSortingTag).tagName); //-V3080
 
             MbApiInterface.Library_QueryFilesEx("domain=Library", out var files);
 
@@ -413,16 +412,16 @@ namespace MusicBeePlugin
 
             if (autoCopyCheckBox.Checked)
             {
-                for (int i = SavedSettings.customSortingSets.Count - 1; i >=0; i--)
+                for (int i = SavedSettings.customSortingSets.Count - 1; i >= 0; i--)
                 {
-                    if (SavedSettings.customSortingSets[i].sourceTag.tagName == (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).tagName)
+                    if (SavedSettings.customSortingSets[i].sourceTag.tagName == (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).tagName) //-V3080
                         SavedSettings.customSortingSets.RemoveAt(i);
-                    else if (SavedSettings.customSortingSets[i].tag.tagName == (tagComboBoxCustom.SelectedItem as CustomSortingTag).tagName)
+                    else if (SavedSettings.customSortingSets[i].tag.tagName == (tagComboBoxCustom.SelectedItem as CustomSortingTag).tagName) //-V3080
                         SavedSettings.customSortingSets.RemoveAt(i);
                 }
 
-                (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).mark = true;
-                (tagComboBoxCustom.SelectedItem as CustomSortingTag).mark = true;
+                (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).mark = true; //-V3080
+                (tagComboBoxCustom.SelectedItem as CustomSortingTag).mark = true; //-V3080
 
                 var newSet = new CustomSortingSet
                 {
@@ -430,19 +429,19 @@ namespace MusicBeePlugin
                     tag = tagComboBoxCustom.SelectedItem as CustomSortingTag
                 };
 
-                (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).parent = newSet;
-                (tagComboBoxCustom.SelectedItem as CustomSortingTag).parent = newSet;
+                (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).parent = newSet; //-V3080
+                (tagComboBoxCustom.SelectedItem as CustomSortingTag).parent = newSet; //-V3080
 
                 SavedSettings.customSortingSets.Add(newSet);
             }
             else
             {
-                var currentSet = (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).parent;
+                var currentSet = (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).parent; //-V3080
 
-                (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).mark = false;
-                (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).parent = null;
-                (tagComboBoxCustom.SelectedItem as CustomSortingTag).mark = false;
-                (tagComboBoxCustom.SelectedItem as CustomSortingTag).parent = null;
+                (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).mark = false; //-V3080
+                (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).parent = null; //-V3080
+                (tagComboBoxCustom.SelectedItem as CustomSortingTag).mark = false; //-V3080
+                (tagComboBoxCustom.SelectedItem as CustomSortingTag).parent = null; //-V3080
 
                 SavedSettings.customSortingSets.Remove(currentSet);
             }
@@ -455,9 +454,9 @@ namespace MusicBeePlugin
         {
             ignoreAutoCopyCheckBoxChanged = true;
 
-            if ((sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).mark)
+            if ((sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).mark) //-V3080
             {
-                tagComboBoxCustom.SelectedItem = (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).parent.tag;
+                tagComboBoxCustom.SelectedItem = (sourceTagComboBoxCustom.SelectedItem as CustomSortingTag).parent.tag; //-V3080
                 autoCopyCheckBox.Checked = true;
             }
             else
@@ -472,9 +471,9 @@ namespace MusicBeePlugin
         {
             ignoreAutoCopyCheckBoxChanged = true;
 
-            if ((tagComboBoxCustom.SelectedItem as CustomSortingTag).mark)
+            if ((tagComboBoxCustom.SelectedItem as CustomSortingTag).mark) //-V3080
             {
-                if ((tagComboBoxCustom.SelectedItem as CustomSortingTag).parent.sourceTag == sourceTagComboBoxCustom.SelectedItem)
+                if ((tagComboBoxCustom.SelectedItem as CustomSortingTag).parent.sourceTag == sourceTagComboBoxCustom.SelectedItem) //-V3080
                 {
                     autoCopyCheckBox.Checked = true;
                     ignoreAutoCopyCheckBoxChanged = false;

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using ExtensionMethods;
 
 using static MusicBeePlugin.Plugin;
-using MusicBeePlugin.Properties;
 
 namespace MusicBeePlugin
 {
