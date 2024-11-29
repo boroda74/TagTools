@@ -29,7 +29,7 @@ Changes letter case of a tag according to rather sophisticated rules for selecte
 
 * Excluded words *remain unchanged*, **not** become *lowercase*\!
 * You can make two or more steps by changing casing rules (and exeptions) and clicking "Reapply rules to new tag" button without saving changes to tags.
-* • "Change Case" supports presets for multistep case changing. There are two predefined presets, "Sentence case" and "Title Case", which are identical by functionality to corresponding VT functions. Click "Description" button for details. Also, you can record your own presets if needed.
+* "Change Case" supports presets for multistep case changing. There are two predefined presets, "Sentence case" and "Title Case", which are identical by functionality to corresponding VT functions. Click "Description" button for details. Also, you can record your own presets if needed.
 
 ### Re-encode Tag/Re-encode Tags
 

@@ -1566,7 +1566,7 @@ namespace MusicBeePlugin
 
             set
             {
-                if (listBox != null && (listBox.SelectedIndex != -1 && listBox.Items[listBox.SelectedIndex] != value || value != null))
+                if (listBox != null && (listBox.SelectedIndex != -1 && listBox.Items[listBox.SelectedIndex] != value && value != null))
                 {
                     var oldSelectedIndex = listBox.SelectedIndex;
                     object oldSelectedItem = null;
@@ -1589,7 +1589,7 @@ namespace MusicBeePlugin
                     if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
                 }
-                else if (listBox == null && (comboBox.SelectedIndex != -1 && comboBox.Items[comboBox.SelectedIndex] != value || value != null))
+                else if (listBox == null && (comboBox.SelectedIndex != -1 && comboBox.Items[comboBox.SelectedIndex] != value && value != null))
                 {
                     var oldSelectedIndex = comboBox.SelectedIndex;
                     object oldSelectedItem = null;
