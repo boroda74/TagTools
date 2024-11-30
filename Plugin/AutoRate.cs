@@ -291,6 +291,7 @@ namespace MusicBeePlugin
                 return;
             }
 
+            ignoreClosingForm = false;
 
             if (calculateActualSumOfPercentageOnCalculatingThresholds)
                 MbForm.Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
