@@ -1239,16 +1239,32 @@ namespace MusicBeePlugin
         {
             decimal fullPercentageSum = sumOfPercentages();
 
-            perCent05UpDown.Value = Math.Round(perCent05UpDown.Value * 100 / fullPercentageSum);
-            perCent1UpDown.Value = Math.Round(perCent1UpDown.Value * 100 / fullPercentageSum);
-            perCent15UpDown.Value = Math.Round(perCent15UpDown.Value * 100 / fullPercentageSum);
-            perCent2UpDown.Value = Math.Round(perCent2UpDown.Value * 100 / fullPercentageSum);
-            perCent25UpDown.Value = Math.Round(perCent25UpDown.Value * 100 / fullPercentageSum);
-            perCent3UpDown.Value = Math.Round(perCent3UpDown.Value * 100 / fullPercentageSum);
-            perCent35UpDown.Value = Math.Round(perCent35UpDown.Value * 100 / fullPercentageSum);
-            perCent4UpDown.Value = Math.Round(perCent4UpDown.Value * 100 / fullPercentageSum);
-            perCent45UpDown.Value = Math.Round(perCent45UpDown.Value * 100 / fullPercentageSum);
-            perCent5UpDown.Value = Math.Round(perCent5UpDown.Value * 100 / fullPercentageSum);
+            if (fullPercentageSum == 0)
+            {
+                perCent05UpDown.Value = 0;
+                perCent1UpDown.Value = 0;
+                perCent15UpDown.Value = 0;
+                perCent2UpDown.Value = 0;
+                perCent25UpDown.Value = 0;
+                perCent3UpDown.Value = 0;
+                perCent35UpDown.Value = 0;
+                perCent4UpDown.Value = 0;
+                perCent45UpDown.Value = 0;
+                perCent5UpDown.Value = 0;
+            }
+            else
+            {
+                perCent05UpDown.Value = Math.Round(perCent05UpDown.Value * 100 / fullPercentageSum);
+                perCent1UpDown.Value = Math.Round(perCent1UpDown.Value * 100 / fullPercentageSum);
+                perCent15UpDown.Value = Math.Round(perCent15UpDown.Value * 100 / fullPercentageSum);
+                perCent2UpDown.Value = Math.Round(perCent2UpDown.Value * 100 / fullPercentageSum);
+                perCent25UpDown.Value = Math.Round(perCent25UpDown.Value * 100 / fullPercentageSum);
+                perCent3UpDown.Value = Math.Round(perCent3UpDown.Value * 100 / fullPercentageSum);
+                perCent35UpDown.Value = Math.Round(perCent35UpDown.Value * 100 / fullPercentageSum);
+                perCent4UpDown.Value = Math.Round(perCent4UpDown.Value * 100 / fullPercentageSum);
+                perCent45UpDown.Value = Math.Round(perCent45UpDown.Value * 100 / fullPercentageSum);
+                perCent5UpDown.Value = Math.Round(perCent5UpDown.Value * 100 / fullPercentageSum);
+            }
 
             fullPercentageSum = sumOfPercentages();
             if (fullPercentageSum != 100)
