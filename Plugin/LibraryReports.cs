@@ -1156,24 +1156,6 @@ namespace MusicBeePlugin
             public Guid permanentGuid = Guid.NewGuid(); //permanentGuid is reset on preset copying in UI
 
 
-            private bool senselessReferringPresetsInChain;//*****************
-            private bool brokenReferringPresetsInChain;//****************
-
-            internal void setSenselessBrokenReferringPresetsInChain(bool senselessReferringPresetsInChain, bool brokenReferringPresetsInChain)//************
-            {
-                if (this.senselessReferringPresetsInChain != senselessReferringPresetsInChain || this.brokenReferringPresetsInChain != brokenReferringPresetsInChain)
-                    guid = Guid.NewGuid();
-
-                this.senselessReferringPresetsInChain = senselessReferringPresetsInChain;
-                this.brokenReferringPresetsInChain = brokenReferringPresetsInChain;
-            }
-
-            internal (bool, bool) getSenselessBrokenReferringPresetsInChain()//*****************
-            {
-                return (senselessReferringPresetsInChain, brokenReferringPresetsInChain);
-            }
-
-
             public bool hotkeyAssigned;
             public bool applyToSelectedTracks = true;
             public int hotkeySlot = -1; //0..MusicBeePlugin.MaximumNumberOfLrHotkeys - 1
@@ -6438,11 +6420,6 @@ namespace MusicBeePlugin
 
                 savedDestinationTagsNames.CopyTo(selectedPreset.destinationTags, 0);
 
-
-                //selectedPreset.operations = new int[sourceFieldComboBoxCustom.Items.Count];//***************
-                //selectedPreset.mulDivFactors = new string[sourceFieldComboBoxCustom.Items.Count];
-                //selectedPreset.precisionDigits = new string[sourceFieldComboBoxCustom.Items.Count];
-                //selectedPreset.appendTexts = new string[sourceFieldComboBoxCustom.Items.Count];
 
                 selectedPreset.operations = new int[operations.Count];
                 operations.CopyTo(selectedPreset.operations);

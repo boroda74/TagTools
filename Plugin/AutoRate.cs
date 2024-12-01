@@ -283,7 +283,7 @@ namespace MusicBeePlugin
 
 
             if (calculateActualSumOfPercentageOnCalculatingThresholds && InvokeRequired)
-                Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
+                MbForm.Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
             else if (calculateActualSumOfPercentageOnCalculatingThresholds)
                 fillThresholdsPercentagesUi();
         }
@@ -453,7 +453,7 @@ namespace MusicBeePlugin
             {
                 if (checkStoppingStatus())
                 {
-                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
+                    MbForm.Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
                 }
 
@@ -468,7 +468,7 @@ namespace MusicBeePlugin
             RefreshPanels(true);
             SetResultingSbText();
 
-            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+            MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
         private static double GetPlaysPerDay(string currentFile)
@@ -537,12 +537,12 @@ namespace MusicBeePlugin
                 if (checkStoppingCollectingStatisticsStatus())
                 {
                     backgroundTaskIsStoppedOrCancelled = true;
-                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
                 }
 
                 if ((fileCounter & 0x1f) == 0)
-                    Invoke(new Action(() => { labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower() + " (" + (100 * (fileCounter + 1) / files.Length) + "%)"; }));
+                    MbForm.Invoke(new Action(() => { labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower() + " (" + (100 * (fileCounter + 1) / files.Length) + "%)"; }));
 
 
                 var currentFile = files[fileCounter];
@@ -566,7 +566,7 @@ namespace MusicBeePlugin
 
 
 
-            Invoke(new Action(() =>
+            MbForm.Invoke(new Action(() =>
             {
                 maxPlaysPerDayBox.Text = ConvertDoubleToString(maxPlaysPerDay);
                 avgPlaysPerDayBox.Text = ConvertDoubleToString(avgPlaysPerDay);
@@ -602,7 +602,7 @@ namespace MusicBeePlugin
                 if (checkStoppingStatus())
                 {
                     backgroundTaskIsStoppedOrCancelled = true;
-                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
                 }
 
@@ -655,7 +655,7 @@ namespace MusicBeePlugin
                 if (checkStoppingStatus())
                 {
                     backgroundTaskIsStoppedOrCancelled = true;
-                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
                 }
 
@@ -825,7 +825,7 @@ namespace MusicBeePlugin
             if (calculateActualSumOfPercentageOnCalculatingThresholds)
                 calculateActualSumOfPercentages();
 
-            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+            MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
         private bool checkSettings()

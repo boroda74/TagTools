@@ -404,7 +404,7 @@ namespace MusicBeePlugin
             autoCopyCheckBox.Checked = !autoCopyCheckBox.Checked;
         }
 
-        private void autoCopyCheckBox_CheckedChanged(object sender, EventArgs e)//*******************
+        private void autoCopyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (ignoreAutoCopyCheckBoxChanged)
                 return;

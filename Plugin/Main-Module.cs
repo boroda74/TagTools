@@ -587,7 +587,7 @@ namespace MusicBeePlugin
 
             public ReportPreset[] reportPresets;
 
-            public List<ChangeCase.ChangeCasePreset> changeCasePresets;//*********************
+            public List<ChangeCase.ChangeCasePreset> changeCasePresets;
 
             public List<CustomSortingForColumnBrowser.CustomSortingSet> customSortingSets;
 
@@ -4981,7 +4981,7 @@ namespace MusicBeePlugin
                 SavedSettings.changeCasePresets = new List<ChangeCase.ChangeCasePreset>();
 
             //Let's remove all predefined Change Case presets and recreate them from scratch (except for allowed user customizations)
-            var existingCsPredefinedPresets = new List<ChangeCase.ChangeCasePreset>();//***********
+            var existingCsPredefinedPresets = new List<ChangeCase.ChangeCasePreset>();
 
             var existingPredefinedCsPresetCount = 0;
             for (var i = 0; i < SavedSettings.changeCasePresets.Count; i++)
@@ -5087,7 +5087,7 @@ namespace MusicBeePlugin
                     "Первое слово всегда будет начинаться с прописной буквы (кроме слов приводимых в верхний регистр).");
 
 
-                step = new ChangeCase.ChangeCaseStep();//**********
+                step = new ChangeCase.ChangeCaseStep();
                 step.rule = 0; //lowercase
                 step.alwaysCapitalize1stWord = false;
                 step.alwaysCapitalizeLastWord = false;
@@ -5903,9 +5903,7 @@ namespace MusicBeePlugin
             button.Image?.Dispose();
 
             button.Image = new Bitmap(newBitmap);
-            button.Refresh(); //***
-            //button.Invalidate();
-            //Application.DoEvents();
+            button.Refresh();
         }
 
         internal static Bitmap ReplaceBitmap(Image oldImage, Bitmap newBitmap)

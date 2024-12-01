@@ -136,6 +136,7 @@ namespace MusicBeePlugin
 
         public PluginWindowTemplate()
         {
+            taskStarted = taskStartedMethod;
             //Some operations won't create visual forms of commands. Only they use this constructor. Let's skip component initialization in this case.
         }
 
@@ -144,10 +145,11 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             this.SetStyle(ControlStyles.DoubleBuffer, true);
-            this.SetStyle(ControlStyles.ResizeRedraw, true);//***********************
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
 
             TagToolsPlugin = plugin;
             useSkinColors = !SavedSettings.dontUseSkinColors;
+            taskStarted = taskStartedMethod;
         }
 
         internal bool backgroundTaskIsWorking()
@@ -3659,8 +3661,6 @@ namespace MusicBeePlugin
                     else
                         enableQueryingButtons();
                 }
-
-                taskStarted = taskStartedMethod;
 
                 TagToolsPlugin.fillTagNames();
             }

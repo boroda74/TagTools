@@ -274,7 +274,7 @@ namespace MusicBeePlugin
 
 
 
-            var list1 = exceptionWordsBoxCustom.CreateSpecialStateColumn("#", 1);//**************** enumerate all lists in default settings!!!
+            var list1 = exceptionWordsBoxCustom.CreateSpecialStateColumn("#", 1);
             exceptionWordsBoxCustom.MaxSpecialState = 5; //-----
 
             exceptionWordsCheckBox.CheckState = GetCheckState(SavedSettings.useExceptionWords);
@@ -1737,7 +1737,7 @@ namespace MusicBeePlugin
             buttonReapply.Enable(false);
         }
 
-        private void exceptionWordsBox_SelectedIndexChanged(object sender, EventArgs e)//***********
+        private void exceptionWordsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ignoreComboBoxSelectedIndexChanged)
                 return;
@@ -2305,7 +2305,7 @@ namespace MusicBeePlugin
             using (var tagToolsForm = new ChangeCasePresetNaming(TagToolsPlugin))
                 nameDefined = tagToolsForm.editPreset(recordedPreset);
 
-            if (nameDefined && !string.IsNullOrEmpty(GetDictValue(recordedPreset.names, Language)))//*************
+            if (nameDefined && !string.IsNullOrEmpty(GetDictValue(recordedPreset.names, Language)))
             {
                 presetBoxCustom.Add(recordedPreset);
                 presetBoxCustom.SelectedItem = recordedPreset;
