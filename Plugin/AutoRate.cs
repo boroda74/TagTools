@@ -199,8 +199,6 @@ namespace MusicBeePlugin
 
         private void calculateActualSumOfPercentages()
         {
-            ignoreClosingForm = true;
-
             actualSumOfPercentages = -1;
 
             if (SavedSettings.actualPerCent5 != -1)
@@ -284,17 +282,10 @@ namespace MusicBeePlugin
             }
 
 
-            if (checkStoppingStatus())
-            {
-                backgroundTaskIsStoppedOrCancelled = true;
-                MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
-                return;
-            }
-
-            ignoreClosingForm = false;
-
-            if (calculateActualSumOfPercentageOnCalculatingThresholds)
-                MbForm.Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
+            if (calculateActualSumOfPercentageOnCalculatingThresholds && InvokeRequired)
+                Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
+            else if (calculateActualSumOfPercentageOnCalculatingThresholds)
+                fillThresholdsPercentagesUi();
         }
 
         private static double RoundPlaysPerDay(double value)
@@ -462,7 +453,7 @@ namespace MusicBeePlugin
             {
                 if (checkStoppingStatus())
                 {
-                    MbForm.Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
+                    Invoke(new Action(() => { stopButtonClickedMethod(applyingChangesStopped); }));
                     return;
                 }
 
@@ -477,7 +468,7 @@ namespace MusicBeePlugin
             RefreshPanels(true);
             SetResultingSbText();
 
-            MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
         private static double GetPlaysPerDay(string currentFile)
@@ -546,12 +537,12 @@ namespace MusicBeePlugin
                 if (checkStoppingCollectingStatisticsStatus())
                 {
                     backgroundTaskIsStoppedOrCancelled = true;
-                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
                 }
 
                 if ((fileCounter & 0x1f) == 0)
-                    MbForm.Invoke(new Action(() => { labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower() + " (" + (100 * (fileCounter + 1) / files.Length) + "%)"; }));
+                    Invoke(new Action(() => { labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower() + " (" + (100 * (fileCounter + 1) / files.Length) + "%)"; }));
 
 
                 var currentFile = files[fileCounter];
@@ -575,7 +566,7 @@ namespace MusicBeePlugin
 
 
 
-            MbForm.Invoke(new Action(() =>
+            Invoke(new Action(() =>
             {
                 maxPlaysPerDayBox.Text = ConvertDoubleToString(maxPlaysPerDay);
                 avgPlaysPerDayBox.Text = ConvertDoubleToString(avgPlaysPerDay);
@@ -611,7 +602,7 @@ namespace MusicBeePlugin
                 if (checkStoppingStatus())
                 {
                     backgroundTaskIsStoppedOrCancelled = true;
-                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
                 }
 
@@ -664,7 +655,7 @@ namespace MusicBeePlugin
                 if (checkStoppingStatus())
                 {
                     backgroundTaskIsStoppedOrCancelled = true;
-                    MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+                    Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
                     return;
                 }
 
@@ -834,7 +825,7 @@ namespace MusicBeePlugin
             if (calculateActualSumOfPercentageOnCalculatingThresholds)
                 calculateActualSumOfPercentages();
 
-            MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
+            Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
 
         private bool checkSettings()
