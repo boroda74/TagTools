@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 using ExtensionMethods;
@@ -10,17 +11,23 @@ namespace MusicBeePlugin
     partial class LibraryReports
     {
         #region Finding related presets
-        private static bool ExcludePresetFromChain(ReportPreset selected, ReportPreset current)
+        private static ReportPreset GetNextItem(ReportPreset current)
         {
-            if (selected == current)
-                return false;
+            if (current.useAnotherPresetAsSource)
+                return current.anotherPresetAsSource.findPreset();
+            else
+                return null;
+        }
 
-            ReportPreset next = current.anotherPresetAsSource.findPreset();
+        private static bool AddSkipItem(IList list, ReportPreset value)
+        {
+            if (!list.Contains(value))
+            {
+                list.Add(value);
+                return true;
+            }
 
-            if (next != null)
-                return ExcludePresetFromChain(selected, next);
-
-            return true;
+            return false;
         }
 
         //ON CHAGING SELECTED PRESET:
@@ -33,7 +40,7 @@ namespace MusicBeePlugin
             ReportPreset referredPreset = referredReference.findPreset();
             List<object> filteringPresetList = new List<object>();
 
-            if (FilterList(filteringPresetList, currentPresets, selectedPreset, referredPreset, ExcludePresetFromChain, string.Empty, ExcludedCainChars))
+            if (BuildItemChain(currentPresets, filteringPresetList, selectedPreset, AddSkipItem, GetNextItem))
             {
                 for (int i = 0; i < filteringPresetList.Count; i++)
                     filteringPresetList[i] = new ReportPresetReference(filteringPresetList[i] as ReportPreset);

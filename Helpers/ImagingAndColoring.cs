@@ -241,7 +241,9 @@ namespace MusicBeePlugin
             var bl = 0D;
 
             if (Math.Abs(s) < tolerance)
+            {
                 r = g = bl = b;
+            }
             else
             {
                 //the argb wheel consists of 6 sectors. Figure out which sector
@@ -300,8 +302,10 @@ namespace MusicBeePlugin
                     Math.Max(0, Math.Min(255, Convert.ToInt32(double.Parse($"{bl * 250D:0.00}")))));
         }
 
-        internal static Color GetHighlightColor(Color highlightColor, Color sampleColor, Color backColor, float highlightWeight = 0.80f) //---
+        internal static Color GetHighlightColor(Color highlightColor, Color foreColor, Color backColor, float highlightWeight = 0.50f) //---
         {
+            var sampleColor = GetWeightedColor(foreColor, backColor);
+
             var highlightHue = highlightColor.GetHue();
             var highlightSat = highlightColor.GetSaturation();
             var highlightBr = highlightColor.GetBrightness();
@@ -312,23 +316,9 @@ namespace MusicBeePlugin
 
             var backBr = backColor.GetBrightness();
 
-            var resultHue = (highlightHue * highlightWeight * highlightSat * highlightBr + sampleHue * (1 - highlightWeight) * sampleSat * sampleBr)
-                            / (highlightWeight * highlightSat * highlightBr + (1 - highlightWeight) * sampleSat * sampleBr);
-            var resultSat = highlightSat * 0.3f + sampleSat * 0.7f;
-            var resultBr = highlightBr * highlightWeight + sampleBr * (1 - highlightWeight);
-
-            if (Math.Abs(resultBr - backBr) < 0.3)
-            {
-                if (backBr > 0.5f)
-                    resultBr = 0.5f - resultBr;
-                else
-                    resultBr = 0.5f + resultBr;
-
-                if (resultBr > 1)
-                    resultBr = 1;
-                else if (resultBr < 0)
-                    resultBr = 0;
-            }
+            var resultHue = (highlightHue * highlightWeight + sampleHue * (1 - highlightWeight));
+            var resultSat = highlightSat * highlightWeight + sampleSat * (1 - highlightWeight);
+            var resultBr = sampleBr;
 
             var resultColor = HsbToRgb(resultHue, resultSat, resultBr);
 
@@ -340,6 +330,10 @@ namespace MusicBeePlugin
             var resultR = (int)Math.Round(sampleColor1.R * sampleColor1Weight + sampleColor2.R * (1 - sampleColor1Weight));
             var resultG = (int)Math.Round(sampleColor1.G * sampleColor1Weight + sampleColor2.G * (1 - sampleColor1Weight));
             var resultB = (int)Math.Round(sampleColor1.B * sampleColor1Weight + sampleColor2.B * (1 - sampleColor1Weight));
+
+            resultR = resultR < 0 ? 0 : resultR;
+            resultG = resultG < 0 ? 0 : resultG;
+            resultB = resultB < 0 ? 0 : resultB;
 
             resultR = resultR > 255 ? 255 : resultR;
             resultG = resultG > 255 ? 255 : resultG;

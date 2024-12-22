@@ -4275,12 +4275,13 @@ namespace MusicBeePlugin
                                 LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;
                                 LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = false;
 
-                                //queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw may be nulled. Check this! //***
-                                //Let's remember grouping tag value, which must be changed soon (it's now TagsChanging notification, let's process these
-                                //tags on TagsChanged notification)
+                                //queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw may be nulled. Check this! 
+                                //Let's remember grouping tag value, which must be changed soon (it's now TagsChanging notification, let's process
+                                //these tags on TagsChanged notification)
                                 LibraryReportsCommandForFunctionIds.executePreset(
                                     new string[] { changingFile },
-                                    false, true, null, false, false, queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw, true);
+                                    false, true, null, false, false,
+                                    queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw, true);
                             }
                         }
                     }
@@ -5208,7 +5209,7 @@ namespace MusicBeePlugin
             }
 
 
-            //if (previewTable.ColumnCount == 0) //-----
+            //if (previewTable.ColumnCount == 0) //--- Actually not needed because changing preset definition is disabled, when preview is generated
             //    clickOnPreviewButton(prepareBackgroundPreview, previewReport, buttonPreview, buttonExport, buttonClose);
 
             if (!presetIsLoading)
@@ -7237,7 +7238,7 @@ namespace MusicBeePlugin
             if (presetListLastSelectedIndex == presetList.SelectedIndex)
                 return;
 
-            if (previewIsGenerated)//-----
+            if (previewIsGenerated)
                 clickOnPreviewButton(prepareBackgroundPreview, previewReport, buttonPreview, buttonOK, buttonClose);
 
             selectedPreset = presetList.SelectedItem as ReportPreset;
@@ -8673,8 +8674,8 @@ namespace MusicBeePlugin
             string trimmedSeqNum = seqNum.Substring(seqNum.Length - 2);
             string unformattedText = trimmedSeqNum + "." + albumArtist + " ◆ " + album + " ◆ " + title;
 
-            int criticalLength = (int)Math.Round(85 / fontScaling);//-----
-            int maxLength = (int)Math.Round(82 / fontScaling);//-----
+            int criticalLength = (int)Math.Round(85 / fontScaling);
+            int maxLength = (int)Math.Round(82 / fontScaling);
             int maxAlbumArtistLength = (int)Math.Round(20 / fontScaling);
             int maxAlbumLength = (int)Math.Round(25 / fontScaling);
 

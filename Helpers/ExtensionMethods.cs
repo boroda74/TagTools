@@ -417,7 +417,7 @@ namespace ExtensionMethods
                 if (numericUpDown.ReadOnly != state)
                 {
                     numericUpDown.ReadOnly = state;
-                    (numericUpDown.FindForm() as PluginWindowTemplate).recolorOnReadOnlyChanged(numericUpDown, null);
+                    (numericUpDown.FindForm() as PluginWindowTemplate).recolorControl(numericUpDown, null);
 
                     if (state)
                     {
@@ -514,7 +514,7 @@ namespace ExtensionMethods
 
             if (control is TextBox || control is NumericUpDown)
             {
-                control.Enabled = enable; //----- ReadOnly? But carefully!!!
+                control.Enabled = enable;
                 form.textBoxNamesEnableStatuses.AddReplace(control.Name, enable);
                 form.setSkinnedControlColors(control, enable);
                 return;

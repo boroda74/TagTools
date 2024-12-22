@@ -95,7 +95,6 @@ namespace MusicBeePlugin
             this.hiddenCheckBox = new System.Windows.Forms.CheckBox();
             this.nextPresetComboBox = new System.Windows.Forms.ComboBox();
             this.nextPresetCheckBoxLabel = new System.Windows.Forms.Label();
-            this.nextPresetCheckBox = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.preserveTagValuesTextBox = new System.Windows.Forms.TextBox();
             this.labelPreserveTagValues = new System.Windows.Forms.Label();
@@ -350,7 +349,6 @@ namespace MusicBeePlugin
             this.panel1.Controls.Add(this.hiddenCheckBox);
             this.panel1.Controls.Add(this.nextPresetComboBox);
             this.panel1.Controls.Add(this.nextPresetCheckBoxLabel);
-            this.panel1.Controls.Add(this.nextPresetCheckBox);
             this.panel1.Controls.Add(this.tableLayoutPanel3);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
@@ -429,14 +427,6 @@ namespace MusicBeePlugin
             this.nextPresetCheckBoxLabel.Name = "nextPresetCheckBoxLabel";
             this.nextPresetCheckBoxLabel.Tag = "#nextPresetComboBox";
             this.toolTip1.SetToolTip(this.nextPresetCheckBoxLabel, resources.GetString("nextPresetCheckBoxLabel.ToolTip"));
-            this.nextPresetCheckBoxLabel.Click += new System.EventHandler(this.nextPresetCheckBoxLabel_Click);
-            // 
-            // nextPresetCheckBox
-            // 
-            resources.ApplyResources(this.nextPresetCheckBox, "nextPresetCheckBox");
-            this.nextPresetCheckBox.Name = "nextPresetCheckBox";
-            this.nextPresetCheckBox.Tag = "#nextPresetCheckBoxLabel";
-            this.nextPresetCheckBox.CheckedChanged += new System.EventHandler(this.nextPresetCheckBox_CheckedChanged);
             // 
             // tableLayoutPanel3
             // 
@@ -829,6 +819,7 @@ namespace MusicBeePlugin
             // descriptionBox
             // 
             resources.ApplyResources(this.descriptionBox, "descriptionBox");
+            this.descriptionBox.ForeColor = System.Drawing.SystemColors.GrayText;
             this.descriptionBox.Name = "descriptionBox";
             this.descriptionBox.ReadOnly = true;
             // 
@@ -870,7 +861,6 @@ namespace MusicBeePlugin
             this.previewTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.previewTable.BackgroundColor = System.Drawing.SystemColors.Window;
             this.previewTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.previewTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.previewTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PresetGuid,
             this.File,
@@ -1817,7 +1807,6 @@ namespace MusicBeePlugin
         private DataGridViewTextBoxColumn OddEven;
         private ComboBox nextPresetComboBox;
         private Label nextPresetCheckBoxLabel;
-        private CheckBox nextPresetCheckBox;
         private Label hiddenCheckBoxLabel;
         private CheckBox hiddenCheckBox;
         private PictureBox hiddenPictureBox;

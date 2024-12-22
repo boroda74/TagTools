@@ -1028,7 +1028,7 @@
     <value>1165, 54</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>849, 29</value>
+    <value>849, 30</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
     <value>310, 23</value>
@@ -1046,7 +1046,7 @@
     <value>780, 33</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 29</value>
+    <value>461, 30</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 23</value>
@@ -1064,7 +1064,7 @@
     <value>392, 33</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 29</value>
+    <value>73, 30</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 23</value>
@@ -1076,7 +1076,7 @@
     <value>&lt;Тег 4&gt;</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>849, 2</value>
+    <value>849, 3</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
     <value>310, 23</value>
@@ -1094,7 +1094,7 @@
     <value>780, 6</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 2</value>
+    <value>461, 3</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 23</value>
@@ -1112,7 +1112,7 @@
     <value>392, 6</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 2</value>
+    <value>73, 3</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
     <value>309, 23</value>

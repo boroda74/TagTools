@@ -1,11 +1,10 @@
-﻿
+﻿using System;
+using System.ComponentModel;
+using System.Reflection;
+using System.Windows.Forms;
+
 namespace ExtensionMethods
 {
-    using System;
-    using System.ComponentModel;
-    using System.Reflection;
-    using System.Windows.Forms;
-
     internal static class EventHandlersToolkit
     {
         internal static void CopyEventHandlersTo(this Control src, Control dest, string eventName, bool deleteSrcHandlers)

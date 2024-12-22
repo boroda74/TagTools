@@ -1150,9 +1150,30 @@ namespace MusicBeePlugin
             return text;
         }
 
+        internal static bool FuzzySearch(string text, string search)
+        {
+            var searchStrings = search.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var searchString in searchStrings)
+            {
+                if (!Regex.IsMatch(text, Regex.Escape(searchString), RegexOptions.IgnoreCase))
+                    return false;
+            }
+
+            return true;
+        }
+
+        internal static bool FuzzySearchRemoveSubstrings(string text, string search, string[] excludedSubstrings = null)
+        {
+            text = RemoveSubstrings(text, excludedSubstrings);
+            search = RemoveSubstrings(search, excludedSubstrings);
+
+            return FuzzySearch(text, search);
+        }
+
         //Returns: true - if filteredList changed
         internal static bool FilterList<T>(System.Collections.IList filteredList, ICollection<T> fullItemCollection, T excludedItem, T currentItem,
-            ExcludeItemDelegate<T> includeItem, string text, string[] excludedChars) where T : class
+            ExcludeItemDelegate<T> excludeItemDelegate, string text, string[] excludedChars) where T : class
         {
             if (excludedChars == null)
                 excludedChars = Array.Empty<string>();
@@ -1162,8 +1183,6 @@ namespace MusicBeePlugin
 
             if (currentItem != null && text == RemoveSubstrings(currentItem.ToString(), excludedChars))
                 text = string.Empty; //Won't search text
-            else
-                text = RemoveSubstrings(text, excludedChars);
 
 
             List<object> filteredListBackup = new List<object>();
@@ -1182,7 +1201,7 @@ namespace MusicBeePlugin
 
             foreach (var item in fullItemCollection)
             {
-                if (includeItem == null || includeItem(excludedItem, item))
+                if (excludeItemDelegate == null || excludeItemDelegate(excludedItem, item))
                 {
                     var filteringCriteriaAreMeet = true;
 
@@ -1274,7 +1293,7 @@ namespace MusicBeePlugin
             if (useCustomTrackIdTag && SavedSettings.useCustomTrackIdTag && SavedSettings.customTrackIdTag > 0)
                 return GetFileTag(currentFile, (MetaDataType)SavedSettings.customTrackIdTag);
             else
-                return MbApiInterface.Library_GetDevicePersistentId(currentFile, (DeviceIdType)0) ?? "-1";
+                return MbApiInterface.Library_GetDevicePersistentId(currentFile, 0) ?? "-1";
         }
 
         internal static int GetPersistentTrackIdInt(string currentFile, bool useCustomTrackIdTag = false)
@@ -2239,60 +2258,79 @@ namespace MusicBeePlugin
 
         //newText must be used only inside DropDownClosed event handlers, when comboBox.Text property is not set yet
         internal static void CustomComboBoxLeave(CustomComboBox comboBox, string newText = null,
-            AddSubstituteSpecialPrefix addSubstituteSpecialPrefix = null,
-            string defaultAdditionalColumnValue = "")
+            AddSubstituteSpecialPrefix addSubstituteSpecialPrefix = null, string defaultAdditionalColumnValue = null, 
+            int selectedIndex = -2)
         {
             var comboBoxText = (newText ?? comboBox.Text);
 
             if (string.IsNullOrWhiteSpace(comboBoxText) || comboBox.Items.Count == 0)
                 return;
 
+            if (selectedIndex == -1)
+                return;
+
+            if (selectedIndex == -2)
+                selectedIndex = comboBox.SelectedIndex;
+
             if (addSubstituteSpecialPrefix != null)
             {
-                if (comboBox.SelectedIndex != -1)
-                {
-                    defaultAdditionalColumnValue = comboBox.GetItemSpecialState(comboBox.SelectedIndex);
-                    comboBox.RemoveAt(comboBox.SelectedIndex);
-                }
-                else
-                {
-                    int reserveIndex = -1;
-                    int index = -1;
+                string itemText = comboBox.Items[selectedIndex].ToString();
+                string normalizedItemText = addSubstituteSpecialPrefix(comboBox.Items[selectedIndex].ToString(),
+                    string.Empty, comboBox.GetSpecialStateCharCount(true));
 
-                    for (int i = comboBox.Items.Count - 1; i >= 0; i--)
+                //Nothing changed. Won't move current item to top.
+                if (normalizedItemText == comboBoxText)
+                    return;
+
+                //Let's preserve current special state, insert current string to the top of list, and remove the last string
+                //with DEFAULT special from the list
+                defaultAdditionalColumnValue = comboBox.GetItemSpecialState(selectedIndex);
+
+                //1st iteration: let's try to find last string containing the SAME text and having DEFAULT special state
+                int lastDefaultSpecialState = -1;
+                for (int i = comboBox.Items.Count - 1; i >= 0; i--)
+                {
+                    if (comboBox.GetItemSpecialState(i) == comboBox.GetDefaultSpecialState() 
+                        || comboBox.GetItemSpecialState(i) == defaultAdditionalColumnValue)
                     {
-                        if (comboBox.GetItemSpecialState(i) == comboBox.GetDefaultSpecialState() && reserveIndex == -1)
-                            reserveIndex = i;
+                        itemText = comboBox.Items[i].ToString();
+                        normalizedItemText = addSubstituteSpecialPrefix(comboBox.Items[i].ToString(), 
+                            string.Empty, comboBox.GetSpecialStateCharCount(true));
 
-                        string itemText = comboBox.Items[i].ToString();
-                        string normalizedItemText = addSubstituteSpecialPrefix(comboBox.Items[i].ToString(), string.Empty, comboBox.GetSpecialStateCharCount(true));
-
-                        if (normalizedItemText == comboBoxText)
+                        if (normalizedItemText == newText)
                         {
-                            defaultAdditionalColumnValue = comboBox.GetItemSpecialState(i);
-                            index = i;
+                            lastDefaultSpecialState = i;
                             break;
                         }
                     }
-
-                    if (index != -1)
-                        comboBox.RemoveAt(index);
-                    else if (reserveIndex != -1)
-                        comboBox.RemoveAt(reserveIndex);
-                    else
-                        comboBox.RemoveAt(index);
                 }
+
+                if (lastDefaultSpecialState == -1)
+                {
+                    //2nd iteration: now let's find the just the last string with default special state
+                    for (int i = comboBox.Items.Count - 1; i >= 0; i--)
+                    {
+                        if (comboBox.GetItemSpecialState(i) == comboBox.GetDefaultSpecialState())
+                        {
+                            lastDefaultSpecialState = i;
+                            break;
+                        }
+                    }
+                }
+
+                comboBox.RemoveAt(lastDefaultSpecialState);
+                comboBox.SetItemSpecialState(selectedIndex, -1);
             }
             else
             {
                 if (comboBox.Items.Contains(comboBoxText))
                     comboBox.Remove(comboBoxText);
                 else
-                    comboBox.Items.RemoveAt(comboBox.Items.Count - 1);
+                    comboBox.RemoveAt(comboBox.Items.Count - 1);
             }
 
             comboBox.Insert(0, comboBoxText, defaultAdditionalColumnValue);
-            comboBox.Text = comboBoxText;
+            comboBox.SelectedIndex = 0;
         }
 
         //internal static void ComboBoxLeave(ComboBox comboBox, string newValue = null)
@@ -4264,7 +4302,7 @@ namespace MusicBeePlugin
             }
             catch (Exception ex)
             {
-                if (ex.InnerException.HResult != -2146232000) //----- "Root element is missing"
+                if (ex.InnerException.HResult != -2146232000) // "Root element is missing"
                     MessageBox.Show(MbForm, ex.Message, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -5597,9 +5635,6 @@ namespace MusicBeePlugin
         {
             var unicode = Encoding.UTF8;
 
-            if (File.Exists(PluginSettingsFilePath + ".new-format")) //----- Remove later!!!
-                File.Delete(PluginSettingsFilePath + ".new-format");
-
             var stream = File.Open(PluginSettingsFilePath, FileMode.Create, FileAccess.Write, FileShare.None);
             var file = new StreamWriter(stream, unicode);
 
@@ -5787,7 +5822,7 @@ namespace MusicBeePlugin
                             addPluginMenuItems();
                         }));
                     }
-                    catch (ObjectDisposedException) //MusicBee is closing before plugin has been initialized //-----
+                    catch (ObjectDisposedException) //MusicBee is closing before plugin has been initialized
                     {
                         return;
                     }
@@ -6255,15 +6290,14 @@ namespace MusicBeePlugin
 
 
 
-            var sampleColor = SystemColors.Highlight;
-            DimmedHighlight = GetHighlightColor(sampleColor, AccentColor, FormBackColor);
+            DimmedHighlight = GetHighlightColor(SystemColors.Highlight, AccentColor, InputControlDimmedBackColor);
 
 
             //Setting default & making themed colors
             HighlightColor = Color.Red;
             UntickedColor = AccentColor;
 
-            TickedColor = GetHighlightColor(HighlightColor, sampleColor, FormBackColor, 0.5f);
+            TickedColor = GetHighlightColor(HighlightColor, SystemColors.Highlight, FormBackColor, 0.5f);
 
             ListBoxHighlightForeColor = GetHighlightColor(HighlightColor, ButtonMouseOverForeColor, InputControlBackColor, 0.5f);
             ListBoxHighlightSelectedForeColor = GetHighlightColor(HighlightColor, ButtonMouseOverForeColor, InputControlBackColor, 0.5f);
@@ -6295,19 +6329,6 @@ namespace MusicBeePlugin
                 int scrollBarImagesWidth = ControlsTools.GetCustomScrollBarInitialWidth(DpiScaling, 0); //Second arg. must be: SbBorderWidth /= scaledPx //-----
                 int comboBoxDownArrowSize = (int)Math.Round(DpiScaling * ScrollBarWidth) + 2 * (int)Math.Round(DpiScaling * SbBorderWidth);
 
-
-                //DisabledDownArrowComboBoxImage?.Dispose();//-----
-                //if (GetAverageBrightness(ButtonBackColor) >= 0.5)
-                //    DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.Black,
-                //        Resources.down_arrow_combobox_b, comboBoxDownArrowSize, comboBoxDownArrowSize);
-                //else
-                //    DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.White,
-                //        Resources.down_arrow_combobox_b, comboBoxDownArrowSize, comboBoxDownArrowSize);
-
-
-                //DownArrowComboBoxImage?.Dispose();//-----
-                //DownArrowComboBoxImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor,
-                //    Resources.down_arrow_combobox_b, comboBoxDownArrowSize, comboBoxDownArrowSize);
 
                 DisabledDownArrowComboBoxImage?.Dispose();
                 if (GetAverageBrightness(ButtonBackColor) >= 0.5)

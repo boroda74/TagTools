@@ -145,7 +145,7 @@
     <value>NoControl</value>
   </data>
   <data name="gotoNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>896, 2</value>
+    <value>894, 2</value>
   </data>
   <data name="gotoNextPresetButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="showOnlyChainedPresetsButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>923, 2</value>
+    <value>921, 2</value>
   </data>
   <data name="showOnlyChainedPresetsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -220,7 +220,7 @@
     <value>NoControl</value>
   </data>
   <data name="clearNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>950, 2</value>
+    <value>948, 2</value>
   </data>
   <data name="clearNextPresetButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 6, 3</value>
@@ -328,7 +328,7 @@
     <value>4, 3, 6, 3</value>
   </data>
   <data name="nextPresetComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>585, 23</value>
+    <value>583, 23</value>
   </data>
   <data name="nextPresetComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>165</value>
@@ -385,39 +385,6 @@ Hit "Right" key to select the drop-down item under cursor</value>
   <data name="&gt;&gt;nextPresetCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="nextPresetCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="nextPresetCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="nextPresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 6</value>
-  </data>
-  <data name="nextPresetCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 3, 4, 3</value>
-  </data>
-  <data name="nextPresetCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="nextPresetCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>163</value>
-  </data>
-  <data name="nextPresetCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;nextPresetCheckBox.Name" xml:space="preserve">
-    <value>nextPresetCheckBox</value>
-  </data>
-  <data name="&gt;&gt;nextPresetCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nextPresetCheckBox.Parent" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;nextPresetCheckBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="tableLayoutPanel3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -428,13 +395,13 @@ Hit "Right" key to select the drop-down item under cursor</value>
     <value>Left, Right</value>
   </data>
   <data name="preserveTagValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>636, 2</value>
+    <value>635, 2</value>
   </data>
   <data name="preserveTagValuesTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="preserveTagValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 23</value>
+    <value>332, 23</value>
   </data>
   <data name="preserveTagValuesTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -464,7 +431,7 @@ Hit "Right" key to select the drop-down item under cursor</value>
     <value>NoControl</value>
   </data>
   <data name="labelPreserveTagValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>522, 3</value>
+    <value>521, 3</value>
   </data>
   <data name="labelPreserveTagValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 0, 3</value>
@@ -506,7 +473,7 @@ Hit "Right" key to select the drop-down item under cursor</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSelectPreservedTags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>493, 1</value>
+    <value>492, 1</value>
   </data>
   <data name="buttonSelectPreservedTags.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -545,7 +512,7 @@ Hit "Right" key to select the drop-down item under cursor</value>
     <value>4, 1, 4, 1</value>
   </data>
   <data name="processPreserveTagsTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 23</value>
+    <value>334, 23</value>
   </data>
   <data name="processPreserveTagsTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -618,7 +585,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 27</value>
+    <value>973, 27</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -633,7 +600,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="preserveTagValuesTextBox" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="labelPreserveTagValues" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="buttonSelectPreservedTags" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="processPreserveTagsTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="buttonProcessPreserveTags" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,150,Percent,50,AutoSize,0,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -648,13 +615,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>592, 29</value>
+    <value>591, 29</value>
   </data>
   <data name="customText4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 23</value>
+    <value>376, 23</value>
   </data>
   <data name="customText4Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -681,7 +648,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 28</value>
+    <value>490, 28</value>
   </data>
   <data name="customText4Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
@@ -720,7 +687,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 23</value>
+    <value>375, 23</value>
   </data>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -780,13 +747,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>592, 2</value>
+    <value>591, 2</value>
   </data>
   <data name="customText2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 23</value>
+    <value>376, 23</value>
   </data>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -813,7 +780,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>491, 1</value>
+    <value>490, 1</value>
   </data>
   <data name="customText2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
@@ -852,7 +819,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 23</value>
+    <value>375, 23</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -918,7 +885,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 54</value>
+    <value>973, 54</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -933,7 +900,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="customText4Box" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText4Label" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customText3Box" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customText3Label" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="customText2Box" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="customText2Label" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="customTextBox" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="customTextLabel" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,Percent,50,AutoSize,0,Percent,50" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -948,7 +915,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>724, 30</value>
+    <value>722, 30</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -981,7 +948,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>670, 28</value>
+    <value>668, 28</value>
   </data>
   <data name="labelTag6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -1017,7 +984,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 33</value>
+    <value>652, 33</value>
   </data>
   <data name="pictureTag6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1047,13 +1014,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 30</value>
+    <value>398, 30</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 23</value>
+    <value>244, 23</value>
   </data>
   <data name="parameterTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -1080,7 +1047,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 28</value>
+    <value>344, 28</value>
   </data>
   <data name="labelTag5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -1116,7 +1083,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 33</value>
+    <value>328, 33</value>
   </data>
   <data name="pictureTag5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1152,7 +1119,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 23</value>
+    <value>244, 23</value>
   </data>
   <data name="parameterTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1245,7 +1212,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>724, 3</value>
+    <value>722, 3</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -1278,7 +1245,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>670, 1</value>
+    <value>668, 1</value>
   </data>
   <data name="labelTag3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -1314,7 +1281,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>654, 6</value>
+    <value>652, 6</value>
   </data>
   <data name="pictureTag3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1344,13 +1311,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 3</value>
+    <value>398, 3</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 23</value>
+    <value>244, 23</value>
   </data>
   <data name="parameterTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1377,7 +1344,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 1</value>
+    <value>344, 1</value>
   </data>
   <data name="labelTag2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 0, 1</value>
@@ -1413,7 +1380,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="pictureTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>329, 6</value>
+    <value>328, 6</value>
   </data>
   <data name="pictureTag2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1449,7 +1416,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 23</value>
+    <value>244, 23</value>
   </data>
   <data name="parameterTagList.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1551,7 +1518,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>975, 54</value>
+    <value>973, 54</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1566,7 +1533,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="parameterTag6List" Row="1" RowSpan="1" Column="8" ColumnSpan="1" /&gt;&lt;Control Name="labelTag6" Row="1" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag6" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag5List" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="labelTag5" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag5" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag4List" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelTag4" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag4" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag3List" Row="0" RowSpan="1" Column="8" ColumnSpan="1" /&gt;&lt;Control Name="labelTag3" Row="0" RowSpan="1" Column="7" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag3" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="parameterTag2List" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="labelTag2" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag2" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="parameterTagList" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="labelTag" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="pictureTag" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="AutoSize,0,AutoSize,0,Percent,33,33334,AutoSize,0,AutoSize,0,Percent,33,33334,AutoSize,0,AutoSize,0,Percent,33,33332" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -1581,7 +1548,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>882, 56</value>
+    <value>880, 56</value>
   </data>
   <data name="userPresetLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 6, 0</value>
@@ -1605,7 +1572,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;userPresetLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="userPresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1614,7 +1581,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>866, 56</value>
+    <value>864, 56</value>
   </data>
   <data name="userPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 3, 4, 3</value>
@@ -1638,7 +1605,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;userPresetPictureBox.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="customizedPresetLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1650,7 +1617,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>718, 56</value>
+    <value>716, 56</value>
   </data>
   <data name="customizedPresetLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1674,7 +1641,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;customizedPresetLabel.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="customizedPresetPictureBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1683,7 +1650,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>702, 56</value>
+    <value>700, 56</value>
   </data>
   <data name="customizedPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1707,7 +1674,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;customizedPresetPictureBox.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="favoriteCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1740,7 +1707,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;favoriteCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="favoriteCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1773,7 +1740,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;favoriteCheckBox.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="applyToPlayingTrackCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1809,7 +1776,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;applyToPlayingTrackCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="applyToPlayingTrackCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1845,7 +1812,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;applyToPlayingTrackCheckBox.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="assignHotkeyCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1885,7 +1852,7 @@ You will need to reassign hotkey if the preset name is changed
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>18</value>
   </data>
   <data name="assignHotkeyCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1924,7 +1891,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;assignHotkeyCheckBox.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>19</value>
   </data>
   <data name="clearIdButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -1933,7 +1900,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>950, 27</value>
+    <value>948, 27</value>
   </data>
   <data name="clearIdButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 6, 3</value>
@@ -1960,13 +1927,13 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;clearIdButton.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>20</value>
   </data>
   <data name="idTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>805, 27</value>
+    <value>803, 27</value>
   </data>
   <data name="idTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1990,7 +1957,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;idTextBox.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>21</value>
   </data>
   <data name="idLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2002,7 +1969,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="idLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>628, 31</value>
+    <value>626, 31</value>
   </data>
   <data name="idLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>20, 0, 0, 0</value>
@@ -2026,7 +1993,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;idLabel.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>22</value>
   </data>
   <data name="playlistComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2038,7 +2005,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>4, 3, 4, 3</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>266, 23</value>
+    <value>264, 23</value>
   </data>
   <data name="playlistComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2053,7 +2020,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;playlistComboBox.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>23</value>
   </data>
   <data name="conditionCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2086,7 +2053,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>24</value>
   </data>
   <data name="conditionCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2119,7 +2086,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;conditionCheckBox.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>25</value>
   </data>
   <data name="descriptionGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -2127,8 +2094,8 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="textBoxTableLayoutPanel.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="descriptionBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="descriptionBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="descriptionBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -2146,7 +2113,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>Vertical</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>933, 56</value>
+    <value>931, 56</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2176,7 +2143,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>953, 56</value>
+    <value>951, 56</value>
   </data>
   <data name="textBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2239,7 +2206,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>6, 0, 6, 7</value>
   </data>
   <data name="descriptionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>965, 79</value>
+    <value>963, 79</value>
   </data>
   <data name="descriptionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -2254,7 +2221,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>panel1</value>
   </data>
   <data name="&gt;&gt;descriptionGroupBox.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>26</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 88</value>
@@ -2263,7 +2230,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 297</value>
+    <value>977, 297</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2302,7 +2269,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>True</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>945, 68</value>
+    <value>943, 68</value>
   </data>
   <data name="presetList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2329,7 +2296,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>965, 88</value>
+    <value>963, 88</value>
   </data>
   <data name="listBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2359,7 +2326,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>2</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 385</value>
+    <value>977, 385</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -2686,7 +2653,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>965, 96</value>
+    <value>963, 94</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2770,7 +2737,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="hiddenPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>714, 6</value>
+    <value>712, 6</value>
   </data>
   <data name="hiddenPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2833,7 +2800,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>Hidden</value>
   </data>
   <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>786, 4</value>
+    <value>784, 4</value>
   </data>
   <data name="filterComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 6, 3</value>
@@ -2869,7 +2836,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>742, 6</value>
+    <value>740, 6</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2905,7 +2872,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>685, 6</value>
+    <value>683, 6</value>
   </data>
   <data name="hotkeyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2944,7 +2911,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>655, 6</value>
+    <value>653, 6</value>
   </data>
   <data name="functionIdPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2983,7 +2950,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>625, 6</value>
+    <value>623, 6</value>
   </data>
   <data name="playlistPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3022,7 +2989,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>595, 6</value>
+    <value>593, 6</value>
   </data>
   <data name="userPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3061,7 +3028,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>565, 6</value>
+    <value>563, 6</value>
   </data>
   <data name="customizedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3100,7 +3067,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>535, 6</value>
+    <value>533, 6</value>
   </data>
   <data name="predefinedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3139,7 +3106,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>505, 6</value>
+    <value>503, 6</value>
   </data>
   <data name="tickedOnlyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3178,7 +3145,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>461, 4</value>
+    <value>459, 4</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -3211,7 +3178,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 4</value>
+    <value>417, 4</value>
   </data>
   <data name="clearSearchButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -3250,7 +3217,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>4, 3, 4, 3</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>379, 23</value>
+    <value>377, 23</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3307,7 +3274,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>4, 0, 4, 0</value>
   </data>
   <data name="filtersPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 32</value>
+    <value>977, 32</value>
   </data>
   <data name="filtersPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3340,7 +3307,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>12, 6, 12, 0</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>964, 48</value>
+    <value>962, 48</value>
   </data>
   <data name="autoApplyPresetsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3616,7 +3583,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>AdvancedSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.1.9024.28941, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.2.9119.37437, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4376,7 +4343,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>4</value>
   </data>
   <data name="settingsProcessingGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>697, 3</value>
+    <value>695, 3</value>
   </data>
   <data name="settingsProcessingGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -4834,7 +4801,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>0, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 186</value>
+    <value>977, 184</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4867,7 +4834,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>170</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>979, 574</value>
+    <value>977, 572</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>385</value>

@@ -158,7 +158,7 @@ namespace MusicBeePlugin
         internal DataGridViewBoundColumnList<T> CreateRows(int columnCount, int rowCount)
         {
             for (int i = 0; i < rowCount; i++)
-                base.Add(new T().CreateColumns(columnCount) as T);//-------
+                base.Add(new T().CreateColumns(columnCount) as T);
 
             return this;
         }
@@ -166,14 +166,14 @@ namespace MusicBeePlugin
         internal DataGridViewBoundColumnList<T> AddRows(int columnCount, int rowCount)
         {
             for (int i = 0; i < rowCount; i++)
-                base.Add(new T().AddColumns(columnCount) as T);//-------
+                base.Add(new T().AddColumns(columnCount) as T);
 
             return this;
         }
 
         internal DataGridViewBoundColumnList<T> AddRow(IEnumerable<object> tags)
         {
-            base.Add(new T().AddColumns(tags) as T);//-------
+            base.Add(new T().AddColumns(tags) as T);
 
             return this;
         }
@@ -207,7 +207,7 @@ namespace MusicBeePlugin
 
             foreach (PropertyDescriptor prop in origProps)
             {
-                if (prop.Name == listPropertyName) //-------------
+                if (prop.Name == listPropertyName)
                     doThisLast = prop;
                 else
                     newProps.Add(prop);
@@ -236,7 +236,7 @@ namespace MusicBeePlugin
         private readonly Type type;
         private readonly int index;
 
-        public ListItemDescriptor(PropertyDescriptor tail, string name, int index, Type type) : base(name == null ? index.ToString() : name, nix) //-------
+        public ListItemDescriptor(PropertyDescriptor tail, string name, int index, Type type) : base(name == null ? index.ToString() : name, nix)
         {
             this.tail = tail;
             this.type = type;

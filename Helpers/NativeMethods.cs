@@ -19,7 +19,7 @@ internal static class NativeMethods
     internal const int SB_THUMBTRACK = 5;
 
     internal const int WM_HSCROLL = 0x114;
-    internal const int WM_VSCROLL = 0x115; //---
+    internal const int WM_VSCROLL = 0x115;
     internal const int WM_SCROLL = 276; // Horizontal scroll
     //internal const int WM_VSCROLL = 277; // Vertical scroll
 

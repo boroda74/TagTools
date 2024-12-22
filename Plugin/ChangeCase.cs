@@ -95,7 +95,7 @@ namespace MusicBeePlugin
 
         private bool recordMode;
         private ChangeCasePreset recordedPreset;
-        private ChangeCaseStep currentStep;
+        private ChangeCaseStep currentStep;//***
 
         private CustomComboBox presetBoxCustom;
         private CustomComboBox sourceTagListCustom;
@@ -107,22 +107,26 @@ namespace MusicBeePlugin
 
         private CustomListBox exceptionWordsEnumList;
         private ComboBox exceptionWordsEnumComboBox;
+        private int exceptionWordsLastSelectedIndex;
 
         private CustomListBox exceptionCharsEnumList;
         private ComboBox exceptionCharsEnumComboBox;
+        private int exceptionCharsLastSelectedIndex;
 
         private CustomListBox openingExceptionCharsEnumList;
         private ComboBox openingExceptionCharsEnumComboBox;
+        private int openingExceptionCharsLastSelectedIndex;
 
         private CustomListBox closingExceptionCharsEnumList;
         private ComboBox closingExceptionCharsEnumComboBox;
+        private int closingExceptionCharsLastSelectedIndex;
 
         private CustomListBox sentenceSeparatorsEnumList;
         private ComboBox sentenceSeparatorsEnumComboBox;
-
-        private bool ignoreComboBoxSelectedIndexChanged = false;
+        private int sentenceSeparatorsLastSelectedIndex;
 
         private bool closingExceptionCharsBoxLeaving;
+        private bool ignoreComboBoxSelectedIndexChanged;
 
         private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
         private readonly DataGridViewCellStyle changedCellStyle = new DataGridViewCellStyle(ChangedCellStyle);
@@ -215,7 +219,7 @@ namespace MusicBeePlugin
             toolTip1.SetToolTip(exceptionWordsCheckBoxLabel, toolTip1.GetToolTip(exceptionWordsCheckBox));
 
             exceptionCharsText = exceptionCharsCheckBoxLabel.Text.TrimEnd(':');
-            exceptionCharPairsText = exceptionCharPairsCheckBoxLabel.Text.TrimEnd(':');
+            exceptionCharPairsText = exceptionCharPairsCheckBoxLabel.Text.TrimEnd(':');//***
             sentenceSeparatorsText = sentenceSeparatorsCheckBoxLabel.Text.TrimEnd(':');
 
             helpMessage = toolTip1.GetToolTip(buttonHelp);
@@ -275,7 +279,7 @@ namespace MusicBeePlugin
 
 
             var list1 = exceptionWordsBoxCustom.CreateSpecialStateColumn("#", 1);
-            exceptionWordsBoxCustom.MaxSpecialState = 5; //-----
+            exceptionWordsBoxCustom.MaxSpecialState = 5; //---
 
             exceptionWordsCheckBox.CheckState = GetCheckState(SavedSettings.useExceptionWords);
             exceptionWordsBoxCustom.AddRange(SavedSettings.exceptedWords);
@@ -296,7 +300,7 @@ namespace MusicBeePlugin
 
 
             var list2 = exceptionCharsBoxCustom.CreateSpecialStateColumn("#", 1);
-            exceptionCharsBoxCustom.MaxSpecialState = 5; //-----
+            exceptionCharsBoxCustom.MaxSpecialState = 5; //---
 
             exceptionCharsCheckBox.Checked = SavedSettings.useExceptionChars;
             exceptionCharsBoxCustom.AddRange(SavedSettings.exceptionChars);
@@ -317,7 +321,7 @@ namespace MusicBeePlugin
 
 
             var list3 = openingExceptionCharsBoxCustom.CreateSpecialStateColumn("#", 1);
-            openingExceptionCharsBoxCustom.MaxSpecialState = 5; //-----
+            openingExceptionCharsBoxCustom.MaxSpecialState = 5; //---
 
             exceptionCharPairsCheckBox.Checked = SavedSettings.useExceptionCharPairs;
             openingExceptionCharsBoxCustom.AddRange(SavedSettings.openingExceptionChars);
@@ -338,7 +342,7 @@ namespace MusicBeePlugin
 
 
             var list4 = closingExceptionCharsBoxCustom.CreateSpecialStateColumn("#", 1);
-            closingExceptionCharsBoxCustom.MaxSpecialState = 5; //-----
+            closingExceptionCharsBoxCustom.MaxSpecialState = 5; //---
 
             closingExceptionCharsBoxCustom.AddRange(SavedSettings.closingExceptionChars);
 
@@ -358,7 +362,7 @@ namespace MusicBeePlugin
 
 
             var list5 = sentenceSeparatorsBoxCustom.CreateSpecialStateColumn("#", 1);
-            sentenceSeparatorsBoxCustom.MaxSpecialState = 5; //-----
+            sentenceSeparatorsBoxCustom.MaxSpecialState = 5; //---
 
             sentenceSeparatorsCheckBox.Checked = SavedSettings.useSentenceSeparators;
             sentenceSeparatorsBoxCustom.AddRange(SavedSettings.sentenceSeparators);
@@ -503,7 +507,7 @@ namespace MusicBeePlugin
             {
                 ignoreComboBoxSelectedIndexChanged = true;
                 enumComboBox.DroppedDown = true;
-                System.Media.SystemSounds.Beep.Play();
+                System.Media.SystemSounds.Beep.Play();//***
                 return;
             }
             else if (recordMode)
@@ -546,8 +550,6 @@ namespace MusicBeePlugin
 
                     return;
                 }
-
-                CustomComboBoxLeave(customComboBox, itemText, addSubstituteComboBoxSpecialState, customComboBox.GetDefaultSpecialState());
 
                 customComboBox.SetText(itemText, true);
 
@@ -671,7 +673,7 @@ namespace MusicBeePlugin
             previewTable.AllowUserToResizeColumns = true;
             previewTable.AllowUserToResizeRows = true;
             foreach (DataGridViewColumn column in previewTable.Columns)
-                column.SortMode = DataGridViewColumnSortMode.Automatic;//----- Programmatic!!!
+                column.SortMode = DataGridViewColumnSortMode.Automatic;//----- Allow users to sort preview tables???
 
             previewTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             autoSizeTableRows(previewTable, 2);
@@ -1737,34 +1739,26 @@ namespace MusicBeePlugin
             buttonReapply.Enable(false);
         }
 
-        private void exceptionWordsBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void exceptionWordsBox_SelectedIndexChanged(object sender, EventArgs e)//***
         {
             if (ignoreComboBoxSelectedIndexChanged)
                 return;
 
+
             if (recordMode)
                 currentStep.exceptionWordsIndex = exceptionWordsBoxCustom.GetItemSpecialStateIndex(exceptionWordsBoxCustom.SelectedIndex);
 
-
-            ignoreComboBoxSelectedIndexChanged = true;
-
-            if (exceptionWordsEnumComboBox == null)
-                CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteListBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState());
-            else
-                CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState());
-
-            ignoreComboBoxSelectedIndexChanged = false;
+            exceptionWordsLastSelectedIndex = exceptionWordsBoxCustom.SelectedIndex;
         }
 
         private void exceptionWordsBox_Leave(object sender, EventArgs e)
         {
             exceptionWordsBoxCustom.Text = Regex.Replace(exceptionWordsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
-
             if (exceptionWordsEnumComboBox == null && !exceptionWordsBoxCustom.IsFocused())
                 CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteListBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState());
             else if (exceptionWordsEnumComboBox != null)
-                CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState());
+                CustomComboBoxLeave(exceptionWordsBoxCustom, exceptionWordsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionWordsBoxCustom.GetDefaultSpecialState(), exceptionWordsLastSelectedIndex);
         }
 
         private void exceptionCharsBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1772,29 +1766,21 @@ namespace MusicBeePlugin
             if (ignoreComboBoxSelectedIndexChanged)
                 return;
 
+
             if (recordMode)
                 currentStep.exceptionCharsIndex = exceptionCharsBoxCustom.GetItemSpecialStateIndex(exceptionCharsBoxCustom.SelectedIndex);
 
-
-            ignoreComboBoxSelectedIndexChanged = true;
-
-            if (exceptionCharsEnumComboBox == null)
-                CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState());
-            else
-                CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState());
-
-            ignoreComboBoxSelectedIndexChanged = false;
+            exceptionCharsLastSelectedIndex = exceptionCharsBoxCustom.SelectedIndex;
         }
 
         private void exceptionCharsBox_Leave(object sender, EventArgs e)
         {
             exceptionCharsBoxCustom.Text = Regex.Replace(exceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
-
             if (exceptionCharsEnumComboBox == null && !exceptionCharsBoxCustom.IsFocused())
                 CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState());
             else if (exceptionCharsEnumComboBox != null)
-                CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState());
+                CustomComboBoxLeave(exceptionCharsBoxCustom, exceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, exceptionCharsBoxCustom.GetDefaultSpecialState(), exceptionCharsLastSelectedIndex);
         }
 
         private void openingExceptionCharsBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1802,18 +1788,11 @@ namespace MusicBeePlugin
             if (ignoreComboBoxSelectedIndexChanged)
                 return;
 
+
             if (recordMode)
                 currentStep.exceptionCharPair1Index = openingExceptionCharsBoxCustom.GetItemSpecialStateIndex(openingExceptionCharsBoxCustom.SelectedIndex);
 
-
-            ignoreComboBoxSelectedIndexChanged = true;
-
-            if (openingExceptionCharsEnumComboBox == null)
-                CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState());
-            else
-                CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState());
-
-            ignoreComboBoxSelectedIndexChanged = false;
+            openingExceptionCharsLastSelectedIndex = openingExceptionCharsBoxCustom.SelectedIndex;
         }
 
         private void openingExceptionCharsBox_Leave(object sender, EventArgs e)
@@ -1830,7 +1809,7 @@ namespace MusicBeePlugin
             if (openingExceptionCharsEnumComboBox == null && !openingExceptionCharsBoxCustom.IsFocused())
                 CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState());
             else if (openingExceptionCharsEnumComboBox != null)
-                CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState());
+                CustomComboBoxLeave(openingExceptionCharsBoxCustom, openingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, openingExceptionCharsBoxCustom.GetDefaultSpecialState(), openingExceptionCharsLastSelectedIndex);
         }
 
         private void closingExceptionCharsBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1838,26 +1817,15 @@ namespace MusicBeePlugin
             if (ignoreComboBoxSelectedIndexChanged)
                 return;
 
+
             if (recordMode)
                 currentStep.exceptionCharPair2Index = closingExceptionCharsBoxCustom.GetItemSpecialStateIndex(closingExceptionCharsBoxCustom.SelectedIndex);
 
-
-            ignoreComboBoxSelectedIndexChanged = true;
-
-            if (closingExceptionCharsEnumComboBox == null)
-                CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState());
-            else
-                CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState());
-
-            ignoreComboBoxSelectedIndexChanged = false;
+            closingExceptionCharsLastSelectedIndex = closingExceptionCharsBoxCustom.SelectedIndex;
         }
 
         private void closingExceptionCharsBox_Leave(object sender, EventArgs e)
         {
-            if (closingExceptionCharsBoxLeaving)
-                return;
-
-
             closingExceptionCharsBoxCustom.Text = Regex.Replace(closingExceptionCharsBoxCustom.Text.Trim(' '), @"\s{2,}", " ");
 
             if (ActiveControl != openingExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
@@ -1877,7 +1845,7 @@ namespace MusicBeePlugin
             if (closingExceptionCharsEnumComboBox == null && !closingExceptionCharsBoxCustom.IsFocused())
                 CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteListBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState());
             else if (closingExceptionCharsEnumComboBox != null)
-                CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState());
+                CustomComboBoxLeave(closingExceptionCharsBoxCustom, closingExceptionCharsBoxCustom.Text, addSubstituteComboBoxSpecialState, closingExceptionCharsBoxCustom.GetDefaultSpecialState(), closingExceptionCharsLastSelectedIndex);
         }
 
         private void sentenceSeparatorsBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -1885,18 +1853,11 @@ namespace MusicBeePlugin
             if (ignoreComboBoxSelectedIndexChanged)
                 return;
 
+
             if (recordMode)
                 currentStep.sentenceSeparatorsIndex = sentenceSeparatorsBoxCustom.GetItemSpecialStateIndex(sentenceSeparatorsBoxCustom.SelectedIndex);
 
-
-            ignoreComboBoxSelectedIndexChanged = true;
-
-            if (sentenceSeparatorsEnumComboBox == null)
-                CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteListBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState());
-            else
-                CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteComboBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState());
-
-            ignoreComboBoxSelectedIndexChanged = false;
+            sentenceSeparatorsLastSelectedIndex = sentenceSeparatorsBoxCustom.SelectedIndex;
         }
 
         private void sentenceSeparatorsBox_Leave(object sender, EventArgs e)
@@ -1907,7 +1868,7 @@ namespace MusicBeePlugin
             if (sentenceSeparatorsEnumComboBox == null && !sentenceSeparatorsBoxCustom.IsFocused())
                 CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteListBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState());
             else if (sentenceSeparatorsEnumComboBox != null)
-                CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteComboBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState());
+                CustomComboBoxLeave(sentenceSeparatorsBoxCustom, sentenceSeparatorsBoxCustom.Text, addSubstituteComboBoxSpecialState, sentenceSeparatorsBoxCustom.GetDefaultSpecialState(), sentenceSeparatorsLastSelectedIndex);
         }
 
         internal static string[] GetCharsInString(string text)
@@ -2184,7 +2145,7 @@ namespace MusicBeePlugin
                     if (!exceptionWordsBoxCustom.SelectItemBySpecialStateIndex(step.exceptionWordsIndex))
                     {
                         if (exceptionWordsCheckBox.CheckState == CheckState.Checked)
-                            MessageBox.Show(this, MsgCsCantFindEnumeratedItem.Replace("%%ITEM-NUMBER%%", step.exceptionWordsIndex.ToString())
+                            MessageBox.Show(this, MsgCsCantFindEnumeratedItem.Replace("%%ITEM-NUMBER%%", step.exceptionWordsIndex.ToString())//***
                                 .Replace("%%COMBO-BOX-NAME%%", exceptForWordsText.TrimEnd(':')).Replace("%%OPENING-CLOSING%%", string.Empty),
                                 string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         else
@@ -2270,7 +2231,7 @@ namespace MusicBeePlugin
             Enable(true, null, null);
         }
 
-        private void saveStep()
+        private void saveStep()//***
         {
             currentStep.rule = getChangeCaseOptionsRadioButtons();
             currentStep.exceptionWordsState = GetNullableBoolFromCheckState(exceptionWordsCheckBox.CheckState);

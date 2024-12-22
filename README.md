@@ -1,5 +1,3 @@
-4# ADDITIONAL TAGGING & REPORTING TOOLS PLUGIN
-
 ## Additional Tagging \& Reporting Tools plugin
 
 Plugin requires MusicBee version **3.5** or higher.

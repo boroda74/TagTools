@@ -223,7 +223,7 @@ namespace MusicBeePlugin
                 Rectangle rimage = new Rectangle(recBounds.X + nLeftMargin, recBounds.Y + 1, img.Width, img.Height);
 
                 // adjust rectangles
-                float nAdj = (float)(nLeftMargin + img.Width + nRightMargin);
+                float nAdj = nLeftMargin + img.Width + nRightMargin;
 
                 rimage.Y += (recBounds.Height - img.Height) / 2;
                 tabTextArea.X += nAdj;

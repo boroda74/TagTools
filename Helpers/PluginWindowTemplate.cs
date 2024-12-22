@@ -312,9 +312,10 @@ namespace MusicBeePlugin
             e.DrawFocusRectangle();
         }
 
-        internal void recolorOnReadOnlyChanged(object sender, EventArgs e)
+        internal void recolorControl(object sender, EventArgs e)
         {
             setSkinnedControlColors(sender as Control, null);
+            (sender as Control).Refresh();
         }
 
         internal protected void button_EnabledChanged(object sender, EventArgs e)
@@ -377,7 +378,7 @@ namespace MusicBeePlugin
                 setSkinnedControlColors(sender as Button, null);
         }
 
-        internal protected Color getButtonBorderColor(bool mouseOver, bool enabled, bool acceptButton) //-----
+        internal protected Color getButtonBorderColor(bool mouseOver, bool enabled, bool acceptButton)
         {
             Color borderColor;
 
@@ -2692,7 +2693,7 @@ namespace MusicBeePlugin
         }
 
         //Returns: enabled fore & back colors, disabled fore & back colors
-        internal void setSkinnedControlColors(Control control, bool? enable) //-----
+        internal void setSkinnedControlColors(Control control, bool? enable) //---
         {
             if (control == null)
                 return;
@@ -2718,7 +2719,8 @@ namespace MusicBeePlugin
                         button.BackColor = controlHighlightBackColor;
 
                         if (button.FlatStyle == FlatStyle.Flat)
-                            button.FlatAppearance.BorderColor = getButtonBorderColor(isMouseOverControl(button), button.IsEnabled(), button == button.FindForm().AcceptButton);
+                            button.FlatAppearance.BorderColor
+                                = getButtonBorderColor(isMouseOverControl(button), button.IsEnabled(), button == button.FindForm().AcceptButton);
                     }
                     //else if (((control.IsEnabled() && state == null) || enable == true) && button.Focused) //It's done on button's OnPaint function
                     //{
@@ -2749,14 +2751,14 @@ namespace MusicBeePlugin
                     {
                         button.ForeColor = InputControlDeepDimmedForeColor;
                         button.BackColor = InputControlDeepDimmedBackColor;
-                        //button.FlatAppearance.BorderColor = InputControlDeepDimmedBackColor;//-----
+                        //button.FlatAppearance.BorderColor = InputControlDeepDimmedBackColor;//----
 
                         //button.ForeColor = buttonForeColor;
                         //button.BackColor = NarrowScrollBarBackColor;
-                        button.FlatAppearance.BorderColor = ScrollBarBorderColor;//-----
+                        button.FlatAppearance.BorderColor = ScrollBarBorderColor;//----
 
                         //button.ForeColor = buttonForeColor;
-                        //button.BackColor = InputPanelBackColor; //-----
+                        //button.BackColor = InputPanelBackColor; //----
                         //button.FlatAppearance.BorderColor = ButtonBorderColor;
                     }
                     //Generic disabled button
@@ -2851,17 +2853,23 @@ namespace MusicBeePlugin
                 {
                     if (((control.IsEnabled() && enable == null) || enable == true) && !textBox.ReadOnly)
                     {
-                        control.ForeColor = InputControlForeColor;
+                        if (control.ForeColor != DimmedHighlight)
+                            control.ForeColor = InputControlForeColor;
+
                         control.BackColor = InputControlBackColor;
                     }
                     else if ((control.IsEnabled() && enable == null) || enable == true) //Enabled, but readonly
                     {
-                        control.ForeColor = AccentColor;
+                        if (control.ForeColor != DimmedHighlight)
+                            control.ForeColor = AccentColor;
+
                         control.BackColor = InputControlDimmedBackColor;
                     }
                     else //Disabled
                     {
-                        control.ForeColor = InputControlDeepDimmedForeColor;
+                        if (control.ForeColor != DimmedHighlight)
+                            control.ForeColor = InputControlDeepDimmedForeColor;
+
                         control.BackColor = InputControlDeepDimmedBackColor; //---
                     }
                 }
@@ -3091,7 +3099,7 @@ namespace MusicBeePlugin
             else if (control is TextBox textBox)
             {
                 textBox.BorderStyle = BorderStyle.FixedSingle;
-                textBox.ReadOnlyChanged += recolorOnReadOnlyChanged;
+                textBox.ReadOnlyChanged += recolorControl;
 
                 if (textBox.Multiline)
                 {

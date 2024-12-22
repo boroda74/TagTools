@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <AssemblyVersion>9.2.9101.8580</AssemblyVersion>
+    <AssemblyVersion>9.2.9122.4560</AssemblyVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -195,11 +195,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\BuildingObjectChains.cs" />
     <Compile Include="Helpers\FlatTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Helpers\PropertiesToolkit.cs" />
-    <Compile Include="Helpers\LibraryReports Preset Filtering.cs">
+    <Compile Include="Helpers\LibraryReportsPresetFiltering.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Plugin\AdvancedSearchAndReplace.cs">

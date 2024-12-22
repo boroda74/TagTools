@@ -1025,7 +1025,7 @@ namespace MusicBeePlugin
 
         private void loadComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (loadComboBoxCustom.SelectedIndex == -1)
+            if (loadComboBoxCustom.SelectedIndex == 0)
             {
                 customMSR = null;
                 templateNameTextBox.Text = CtlMSR;
