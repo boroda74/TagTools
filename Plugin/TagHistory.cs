@@ -932,13 +932,6 @@ namespace MusicBeePlugin
                 {
                     SetStatusBarTextForFileOperations(TagHistorySbText, true, 0, 1, TagToolsPlugin.CustomFunc_Name(trackUrls[trackIndex - 1]));
 
-                    if (checkStoppingStatus())
-                    {
-                        Invoke(new Action(() => { stopButtonClickedMethod(prepareBackgroundPreview); }));
-                        return;
-                    }
-
-
                     fillTableInternalReuseCache(backupIndex, trackIndex);
 
                     updateCustomScrollBars(previewTable, 0, -1);

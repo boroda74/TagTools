@@ -1051,7 +1051,7 @@ namespace MusicBeePlugin
             LrReportFormat fileFormatIndex
             )
         {
-            if (existingPredefinedPresets.TryGetValue(presetPermanentGuid, out var libraryReportsPreset))
+            if (existingPredefinedPresets.TryGetValue(presetPermanentGuid, out var libraryReportsPreset) && libraryReportsPreset != null)
             {
                 libraryReportsPreset.groupings = groupings;
                 libraryReportsPreset.functions = functions;
@@ -1279,7 +1279,9 @@ namespace MusicBeePlugin
                 int refCount = 0;
 
                 foreach (var preset in PresetsInteractiveWorkingCopy.Values)
-                    if (PresetsInteractiveWorkingCopy.TryGetValue(preset.anotherPresetAsSource.permanentGuid, out var next) && next.guid == guid)
+                    if (PresetsInteractiveWorkingCopy.TryGetValue(preset.anotherPresetAsSource.permanentGuid, out var next) && next != null 
+                        && next.guid == guid)
+                        
                         refCount++;
 
                 return refCount;
@@ -1295,7 +1297,9 @@ namespace MusicBeePlugin
                             currentRemark += "";
 
 
-                if (PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.anotherPresetAsSource.permanentGuid, out var nextPreset))
+                if (PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.anotherPresetAsSource.permanentGuid, out var nextPreset) 
+                    && nextPreset != null)
+                    
                     return getNextPresetChars(nextPreset, currentRemark + "  ");
                 else
                     return currentRemark;
@@ -4441,9 +4445,12 @@ namespace MusicBeePlugin
                         {
                             if (PresetsProcessedByFunctionCacheUpdate.AddUnique(idPreset.Value.guid))
                             {
-                                var removeGroupings = ChangingGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, out var queriedChangingGroupingTagsRawWorkingCopy);
-                                ChangingActualGroupingTagsWorkingCopy.TryGetValue(idPreset.Value.guid, out var queriedChangingActualGroupingTagsWorkingCopy);
-                                ChangingActualGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, out var queriedChangingActualGroupingTagsRawWorkingCopy);
+                                var removeGroupings = ChangingGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                    out var queriedChangingGroupingTagsRawWorkingCopy);
+                                ChangingActualGroupingTagsWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                    out var queriedChangingActualGroupingTagsWorkingCopy);
+                                ChangingActualGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                    out var queriedChangingActualGroupingTagsRawWorkingCopy);
 
 
                                 LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;

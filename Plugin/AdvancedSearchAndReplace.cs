@@ -879,7 +879,7 @@ namespace MusicBeePlugin
                 referredCount = 0;
 
                 foreach (var preset in PresetsInteractiveWorkingCopy.Values)
-                    if (PresetsInteractiveWorkingCopy.TryGetValue(preset.nextPresetGuid, out var nextPreset) && nextPreset.guid == guid)
+                    if (PresetsInteractiveWorkingCopy.TryGetValue(preset.nextPresetGuid, out var nextPreset) && nextPreset != null && nextPreset.guid == guid)
                         referredCount++;
             }
 
@@ -890,7 +890,7 @@ namespace MusicBeePlugin
                         currentRemark += "";
 
 
-                if (PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.nextPresetGuid, out var nextPreset))
+                if (PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.nextPresetGuid, out var nextPreset) && nextPreset != null)
                     return getNextPresetChars(nextPreset, currentRemark + "  ");
                 else
                     return currentRemark;
@@ -1979,7 +1979,7 @@ namespace MusicBeePlugin
 
                         if (preset.guid.ToString() != "ff8d53d9-526b-4b40-bbf0-848b6b892f70")
                         {
-                            if (Presets.TryGetValue(preset.guid, out var existingPreset))
+                            if (Presets.TryGetValue(preset.guid, out var existingPreset) && existingPreset != null)
                             {
                                 if (preset.modifiedUtc >= existingPreset.modifiedUtc)
                                 {
@@ -2739,7 +2739,7 @@ namespace MusicBeePlugin
             {
                 ReplaceTags(currentFile, preset);
 
-                if (Presets.TryGetValue(preset.nextPresetGuid, out var nextPreset))
+                if (Presets.TryGetValue(preset.nextPresetGuid, out var nextPreset) && nextPreset != null)
                     ApplyPresetIfConditionSatisfied(currentFile, nextPreset);
             }
 
@@ -4710,7 +4710,7 @@ namespace MusicBeePlugin
 
                 int filteredPresetsCount = filteredPresets.Count;
                 for (int i = 0; i < filteredPresetsCount; i++)
-                    if (PresetsInteractiveWorkingCopy.TryGetValue(filteredPresets[i].nextPresetGuid, out var nextPreset))
+                    if (PresetsInteractiveWorkingCopy.TryGetValue(filteredPresets[i].nextPresetGuid, out var nextPreset) && nextPreset != null)
                         newPresetsAreAdded |= filteredPresets.AddUnique(nextPreset);
             }
             while (newPresetsAreAdded);
@@ -6212,7 +6212,7 @@ namespace MusicBeePlugin
 
             if (current != null && current.nextPresetGuid != Guid.Empty)
             {
-                if (PresetsInteractiveWorkingCopy.TryGetValue(current.nextPresetGuid, out var next))
+                if (PresetsInteractiveWorkingCopy.TryGetValue(current.nextPresetGuid, out var next) && next != null)
                     return BuidChainFromPreset(current, next);
                 else
                     return false;
@@ -6223,7 +6223,7 @@ namespace MusicBeePlugin
 
         private static Preset GetNextItem(Preset current)
         {
-            if (PresetsInteractiveWorkingCopy.TryGetValue(current.nextPresetGuid, out var next))
+            if (PresetsInteractiveWorkingCopy.TryGetValue(current.nextPresetGuid, out var next) && next != null)
                 return next;
             else
                 return null;
@@ -6444,7 +6444,7 @@ namespace MusicBeePlugin
 
             if (current != null && current.nextPresetGuid != Guid.Empty)
             {
-                if (PresetsInteractiveWorkingCopy.TryGetValue(current.nextPresetGuid, out var next))
+                if (PresetsInteractiveWorkingCopy.TryGetValue(current.nextPresetGuid, out var next) && next != null)
                     return ExcludePresetFromChain(selected, next);
                 else
                     return true;
@@ -6529,7 +6529,7 @@ namespace MusicBeePlugin
             if (nextPresetComboBoxCustom.Text != text)
                 nextPresetComboBoxCustom.Text = text;
 
-            if (oldNextPresetComboBoxCustomSelectionStart > text.Length)
+            if (oldNextPresetComboBoxCustomSelectionStart > text.Length) //-V3125
                 nextPresetComboBoxCustom.SelectionStart = text.Length;
             else
                 nextPresetComboBoxCustom.SelectionStart = oldNextPresetComboBoxCustomSelectionStart;

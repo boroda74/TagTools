@@ -95,7 +95,7 @@ namespace MusicBeePlugin
 
         private bool recordMode;
         private ChangeCasePreset recordedPreset;
-        private ChangeCaseStep currentStep;//***
+        private ChangeCaseStep currentStep;
 
         private CustomComboBox presetBoxCustom;
         private CustomComboBox sourceTagListCustom;
@@ -219,7 +219,7 @@ namespace MusicBeePlugin
             toolTip1.SetToolTip(exceptionWordsCheckBoxLabel, toolTip1.GetToolTip(exceptionWordsCheckBox));
 
             exceptionCharsText = exceptionCharsCheckBoxLabel.Text.TrimEnd(':');
-            exceptionCharPairsText = exceptionCharPairsCheckBoxLabel.Text.TrimEnd(':');//***
+            exceptionCharPairsText = exceptionCharPairsCheckBoxLabel.Text.TrimEnd(':');
             sentenceSeparatorsText = sentenceSeparatorsCheckBoxLabel.Text.TrimEnd(':');
 
             helpMessage = toolTip1.GetToolTip(buttonHelp);
@@ -507,7 +507,7 @@ namespace MusicBeePlugin
             {
                 ignoreComboBoxSelectedIndexChanged = true;
                 enumComboBox.DroppedDown = true;
-                System.Media.SystemSounds.Beep.Play();//***
+                System.Media.SystemSounds.Beep.Play();
                 return;
             }
             else if (recordMode)
@@ -977,12 +977,7 @@ namespace MusicBeePlugin
                 }
                 else //Not the end of word
                 {
-                    if (string.IsNullOrEmpty(currentWord) && !IsCharASymbol(currentChar)) //Beginning of new word
-                        currentWord += currentChar;
-                    else if (string.IsNullOrEmpty(currentWord)) //Several repeating symbols between words
-                        newString += currentChar;
-                    else //Letter or symbol in the middle of the word
-                        currentWord += currentChar;
+                    currentWord += currentChar;
                 }
 
 
@@ -1739,7 +1734,7 @@ namespace MusicBeePlugin
             buttonReapply.Enable(false);
         }
 
-        private void exceptionWordsBox_SelectedIndexChanged(object sender, EventArgs e)//***
+        private void exceptionWordsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ignoreComboBoxSelectedIndexChanged)
                 return;
@@ -2145,7 +2140,7 @@ namespace MusicBeePlugin
                     if (!exceptionWordsBoxCustom.SelectItemBySpecialStateIndex(step.exceptionWordsIndex))
                     {
                         if (exceptionWordsCheckBox.CheckState == CheckState.Checked)
-                            MessageBox.Show(this, MsgCsCantFindEnumeratedItem.Replace("%%ITEM-NUMBER%%", step.exceptionWordsIndex.ToString())//***
+                            MessageBox.Show(this, MsgCsCantFindEnumeratedItem.Replace("%%ITEM-NUMBER%%", step.exceptionWordsIndex.ToString())
                                 .Replace("%%COMBO-BOX-NAME%%", exceptForWordsText.TrimEnd(':')).Replace("%%OPENING-CLOSING%%", string.Empty),
                                 string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         else
@@ -2231,7 +2226,7 @@ namespace MusicBeePlugin
             Enable(true, null, null);
         }
 
-        private void saveStep()//***
+        private void saveStep()
         {
             currentStep.rule = getChangeCaseOptionsRadioButtons();
             currentStep.exceptionWordsState = GetNullableBoolFromCheckState(exceptionWordsCheckBox.CheckState);

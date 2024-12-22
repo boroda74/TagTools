@@ -1691,11 +1691,11 @@ namespace MusicBeePlugin
 
                     if (defaultSpecialState != null)
                     {
-                        state = comboBox.Items[comboBox.SelectedIndex].ToString();
+                        state = comboBox.Items[comboBox.SelectedIndex].ToString(); //-V3095
                         state = state.Substring(GetSpecialStateCharCount(true));
                     }
 
-                    if (comboBox.Items[comboBox.SelectedIndex] != null)
+                    if (comboBox.SelectedIndex != -1 && comboBox.Items[comboBox.SelectedIndex] != null)
                         Text = state + value;
                     else if (DropDownStyle == ComboBoxStyle.DropDownList)
                         Text = string.Empty;
@@ -2203,12 +2203,12 @@ namespace MusicBeePlugin
 
             if (DropDownStyle == ComboBoxStyle.DropDownList)
             {
-                if (DropDownStyle == ComboBoxStyle.DropDownList && listBox.SelectedIndex == -1)
+                if (listBox.SelectedIndex == -1)
                     Text = string.Empty;
                 else if (DropDownStyle == ComboBoxStyle.DropDownList && listBox.Items[listBox.SelectedIndex] == null)
                     Text = string.Empty;
                 else
-                    Text = listBox.Items[listBox.SelectedIndex].ToString();
+                    Text = listBox.Items[listBox.SelectedIndex].ToString(); //-V3125
             }
             else if (listBox.SelectedIndex >= 0)
             {
