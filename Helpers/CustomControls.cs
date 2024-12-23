@@ -1602,13 +1602,20 @@ namespace MusicBeePlugin
                 {
                     if (comboBox.SelectedIndex != -1)
                     {
-                        string text = comboBox.Items[comboBox.SelectedIndex].ToString();
-                        if (defaultSpecialState != null && text.Length > GetSpecialStateCharCount(true))
-                            text = text.Substring(GetSpecialStateCharCount(true));
-                        else if (defaultSpecialState != null)
-                            text = string.Empty;
+                        if (defaultSpecialState == null)
+                        {
+                            return comboBox.Items[comboBox.SelectedIndex];
+                        }
+                        else
+                        {
+                            string text = comboBox.Items[comboBox.SelectedIndex].ToString();
+                            if (defaultSpecialState != null && text.Length > GetSpecialStateCharCount(true))
+                                text = text.Substring(GetSpecialStateCharCount(true));
+                            else if (defaultSpecialState != null)
+                                text = string.Empty;
 
-                        return text;
+                            return text;
+                        }
                     }
                     else
                     {

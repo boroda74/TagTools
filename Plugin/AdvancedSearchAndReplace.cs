@@ -3641,8 +3641,11 @@ namespace MusicBeePlugin
             var countedPresetFilenames = new SortedDictionary<string, int>();
             foreach (var preset in PresetsInteractiveWorkingCopy.Values)
             {
-                var presetFilename = getCountedPresetFilename(countedPresetFilenames, preset.getSafeFileName());
-                savedPresetPaths.Add(preset.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)));
+                if (preset != null)
+                {
+                    var presetFilename = getCountedPresetFilename(countedPresetFilenames, preset.getSafeFileName());
+                    savedPresetPaths.Add(preset.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)));
+                }
             }
 
             if (MSR != null)
@@ -3663,9 +3666,12 @@ namespace MusicBeePlugin
             Presets = new SortedDictionary<Guid, Preset>();
             foreach (var preset in PresetsInteractiveWorkingCopy.Values)
             {
-                preset.changed = false;
-                var presetCopy = new Preset(preset);
-                Presets.Add(presetCopy.guid, presetCopy);
+                if (preset != null)
+                {
+                    preset.changed = false;
+                    var presetCopy = new Preset(preset);
+                    Presets.Add(presetCopy.guid, presetCopy);
+                }
             }
 
             AsrPresetsWithHotkeysCount = asrPresetsWithHotkeysCount;
@@ -3709,7 +3715,8 @@ namespace MusicBeePlugin
             buttonClose.Image = Resources.transparent_15;
             toolTip1.SetToolTip(buttonClose, string.Empty);
 
-            backedUpPreset = new Preset(selectedPreset);
+            if (selectedPreset != null)
+                backedUpPreset = new Preset(selectedPreset);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
