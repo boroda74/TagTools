@@ -6246,8 +6246,6 @@ namespace MusicBeePlugin
         private bool checkAutoAppliedPresetChain(Preset referencePreset)
         {
             List<object> nextPresetList = new List<object>();
-            foreach (var preset in nextPresetComboBoxCustom.Items)
-                nextPresetList.Add(preset);
 
             if (BuildItemChain(PresetsInteractiveWorkingCopy.Values, nextPresetList, referencePreset, AddSkipItem, GetNextItem))
             {
