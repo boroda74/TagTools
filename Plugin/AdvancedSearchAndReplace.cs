@@ -3641,11 +3641,8 @@ namespace MusicBeePlugin
             var countedPresetFilenames = new SortedDictionary<string, int>();
             foreach (var preset in PresetsInteractiveWorkingCopy.Values)
             {
-                if (preset != null)
-                {
-                    var presetFilename = getCountedPresetFilename(countedPresetFilenames, preset.getSafeFileName());
-                    savedPresetPaths.Add(preset.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)));
-                }
+                var presetFilename = getCountedPresetFilename(countedPresetFilenames, preset.getSafeFileName());
+                savedPresetPaths.Add(preset.savePreset(Path.Combine(PresetsPath, presetFilename + AsrPresetExtension)));
             }
 
             if (MSR != null)
@@ -3666,12 +3663,9 @@ namespace MusicBeePlugin
             Presets = new SortedDictionary<Guid, Preset>();
             foreach (var preset in PresetsInteractiveWorkingCopy.Values)
             {
-                if (preset != null)
-                {
-                    preset.changed = false;
-                    var presetCopy = new Preset(preset);
-                    Presets.Add(presetCopy.guid, presetCopy);
-                }
+                preset.changed = false;
+                var presetCopy = new Preset(preset);
+                Presets.Add(presetCopy.guid, presetCopy);
             }
 
             AsrPresetsWithHotkeysCount = asrPresetsWithHotkeysCount;
@@ -4734,7 +4728,8 @@ namespace MusicBeePlugin
             else if (presetList.SelectedIndex == -1 || (presetList.SelectedItem as Preset)?.guid != selectedPresetGuid)
                 presetList.SelectedItem = selectedPreset;
 
-            PresetsInteractiveWorkingCopy.AddReplace(selectedPresetGuid, selectedPreset);
+            if (selectedPreset != null)
+                PresetsInteractiveWorkingCopy.AddReplace(selectedPresetGuid, selectedPreset);
 
             ProcessPresetChanges = false;
 
@@ -4763,7 +4758,7 @@ namespace MusicBeePlugin
 
 
             var selectedPresetGuid = Guid.Empty;
-            if (presetList.SelectedIndex != -1 && presetList.SelectedItem != null)
+            if (presetList.SelectedItem != null)
                 selectedPresetGuid = (presetList.SelectedItem as Preset).guid;
 
 
