@@ -969,9 +969,6 @@
   <data name="customText2CheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;guidBox.Name" xml:space="preserve">
     <value>guidBox</value>
   </data>

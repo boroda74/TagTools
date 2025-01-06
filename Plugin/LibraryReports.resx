@@ -637,9 +637,6 @@ Unchecking this may only be relevant in the case of using multiple item splitter
   <data name="buttonDeletePreset.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="assignHotkeyCheckBoxLabel.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="labelRemark.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -2957,9 +2954,6 @@ Retrieved presets can be chained</value>
   <data name="TextColumn.HeaderText" xml:space="preserve">
     <value>Tag</value>
   </data>
-  <data name="autoApplyPresetsLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="panel1.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
@@ -3800,9 +3794,6 @@ You will need to reassign hotkey if the preset name is changed</value>
   <data name="precisionDigitsComboBox.Items1" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="mulDivFactorComboBox.Error" xml:space="preserve">
     <value />
   </data>
@@ -4092,9 +4083,6 @@ You will need to reassign hotkey if the preset name is changed
   <data name="resizeArtworkCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="autoApplyPresetsLabel.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="operationComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 23</value>
   </data>
@@ -4147,9 +4135,6 @@ You will need to reassign hotkey if the preset name is changed
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="appendTextBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="labelFunction.ToolTip" xml:space="preserve">
     <value />
@@ -4246,9 +4231,6 @@ You will need to reassign hotkey if the preset name is changed
   </data>
   <data name="smartOperationCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 8, 0</value>
-  </data>
-  <data name="appendLabel.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="tabPage2.Text" xml:space="preserve">
     <value>Column definitions</value>
@@ -4571,9 +4553,6 @@ You will be able to export the generated report to a file as usual</value>
   <data name="digitsLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="assignHotkeyCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="expressionLabel.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
@@ -4633,9 +4612,6 @@ You will be able to export the generated report to a file as usual</value>
   </data>
   <data name="presetList.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </data>
-  <data name="appendTextBox.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="useAnotherPresetAsSourceCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>

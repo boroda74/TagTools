@@ -1862,27 +1862,53 @@ namespace MusicBeePlugin
                         return CtlAsrSyntaxError;
                     }
 
-                    if (pair[0].Length > 0 && pair[0][0] == '#')
+                    if (pair[0].Length > 0 && pair[0][0] == '#') //Case-sensitive
                     {
-                        if (pair[0].Length > 1 && pair[0][1] == '*')
+                        if (pair[0].Length > 1 && pair[0][1] == '*') //Regex
                         {
                             pair[0] = pair[0].Substring(2);
-                            pair[0] = pair[0].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#").Replace(@"\X", @"*");
-                            pair[1] = pair[1].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#").Replace(@"\X", @"*").Replace(@"\T", @"$");
+                            pair[0] = pair[0].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#")
+                                .Replace(@"\?", "?").Replace(@"\X", @"*");
+                            pair[1] = pair[1].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#")
+                                .Replace(@"\X", @"*").Replace(@"\T", @"$");
                             parameter0 = Replace(currentFile, parameter0, pair[0], pair[1], false, out _);
                         }
                         else
                         {
                             pair[0] = pair[0].Substring(1);
-                            pair[0] = pair[0].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#").Replace(@"\X", @"*");
-                            pair[1] = pair[1].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#").Replace(@"\X", @"*").Replace(@"\T", @"$");
+                            pair[0] = pair[0].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#")
+                                .Replace(@"\?", "?").Replace(@"\X", @"*");
+                            pair[1] = pair[1].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#")
+                                .Replace(@"\?", "?").Replace(@"\X", @"*").Replace(@"\T", @"$");
                             pair[0] = Regex.Escape(pair[0]);
                             parameter0 = Replace(currentFile, parameter0, pair[0], pair[1], false, out _);
                         }
                     }
-                    else
+                    else if (pair[0].Length > 0 && pair[0][0] == '?') //Case-preserving
                     {
-                        if (pair[0].Length > 0 && pair[0][0] == '*')
+                        if (pair[0].Length > 1 && pair[0][1] == '*') //Regex
+                        {
+                            pair[0] = pair[0].Substring(2);
+                            pair[0] = pair[0].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#")
+                                .Replace(@"\?", "?").Replace(@"\X", @"*");
+                            pair[1] = pair[1].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#")
+                                .Replace(@"\X", @"*").Replace(@"\T", @"$");
+                            parameter0 = Replace(currentFile, parameter0, pair[0], pair[1], null, out _);
+                        }
+                        else
+                        {
+                            pair[0] = pair[0].Substring(1);
+                            pair[0] = pair[0].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#")
+                                .Replace(@"\?", "?").Replace(@"\X", @"*");
+                            pair[1] = pair[1].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#")
+                                .Replace(@"\?", "?").Replace(@"\X", @"*").Replace(@"\T", @"$");
+                            pair[0] = Regex.Escape(pair[0]);
+                            parameter0 = Replace(currentFile, parameter0, pair[0], pair[1], null, out _);
+                        }
+                    }
+                    else //Case-insensitive
+                    {
+                        if (pair[0].Length > 0 && pair[0][0] == '*') //Regex
                         {
                             pair[0] = pair[0].Substring(1);
                             pair[0] = pair[0].Replace(@"\\", @"\").Replace(@"\L", @"/").Replace(@"\V", @"|").Replace(@"\#", @"#").Replace(@"\X", @"*");
@@ -2235,7 +2261,8 @@ namespace MusicBeePlugin
         }
 
         //ignoreCase == null: case-preserving replacements
-        internal static string Replace(string currentFile, string value, string searchedPattern, string replacedPattern, bool? ignoreCase, out bool isMatch)
+        internal static string Replace(string currentFile, string value, string searchedPattern, string replacedPattern, 
+            bool? ignoreCase, out bool isMatch)
         {
             isMatch = false;
             if (string.IsNullOrEmpty(searchedPattern))
@@ -2267,7 +2294,7 @@ namespace MusicBeePlugin
                 {
                     value = Regex.Replace(value, searchedPattern, replacedPattern, RegexOptions.None);
                 }
-                else if (ignoreCase == null) //ase-preserving replacements
+                else if (ignoreCase == null) //Case-preserving replacements
                 {
                     var matches = Regex.Matches(value, searchedPattern, RegexOptions.IgnoreCase);
 

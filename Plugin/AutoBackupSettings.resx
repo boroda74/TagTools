@@ -165,9 +165,6 @@
   <data name="autoBackupFolderTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>446, 23</value>
   </data>
-  <data name="autoBackupNumericUpDown.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="numberOfFilesNumericUpDown.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
@@ -336,9 +333,6 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   </data>
   <data name="buttonBrowse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
-  </data>
-  <data name="autoBackupPeriodLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="&gt;&gt;autoDeleteManyCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
@@ -701,9 +695,6 @@ Sometimes guessing current library name may work incorrectly.</value>
   <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="autoBackupPrefixLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="dontSkipAutoBackupsIfPlayCountsChangedLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
@@ -747,9 +738,6 @@ Sometimes guessing current library name may work incorrectly.
   </data>
   <data name="backupArtworksCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>WARNING! Both manual &amp; automatic backups depend on this option.</value>
-  </data>
-  <data name="autoDeleteOldLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="autoBackupFolderLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -869,9 +857,6 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   </data>
   <data name="&gt;&gt;dontSkipAutoBackupsIfPlayCountsChangedLabel.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="autoDeleteManyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 15</value>
@@ -1005,17 +990,11 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   <data name="dontTryToGuessLibraryNameCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="autoBackupPrefixTextBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;buttonBrowse.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="autoBackupFolderLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="autoBackupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -1043,9 +1022,6 @@ Make sure that this custom tag is stored in the file tag, not in the MusicBee da
   </data>
   <data name="autoBackupNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 23</value>
-  </data>
-  <data name="autoBackupFolderTextBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="buttonClose.ToolTip" xml:space="preserve">
     <value />

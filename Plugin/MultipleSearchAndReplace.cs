@@ -664,13 +664,13 @@ namespace MusicBeePlugin
 
                 if (isCheckedStateCasing == ColumnCheckedState)
                 {
-                    templateTable.Rows[e.RowIndex].Cells[1].Value = string.Empty;
+                    templateTable.Rows[e.RowIndex].Cells[1].Value = ColumnIndeterminateState;
 
                     var isCheckedRegex = templateTable.Rows[e.RowIndex].Cells[0].Value as string;
                     if (isCheckedRegex == ColumnCheckedState)
                         templateTable.Rows[e.RowIndex].Cells[0].Value = ColumnUncheckedState;
                 }
-                else if (isCheckedStateCasing == string.Empty)
+                else if (isCheckedStateCasing == ColumnIndeterminateState)
                 {
                     templateTable.Rows[e.RowIndex].Cells[1].Value = ColumnUncheckedState;
                 }
@@ -783,26 +783,34 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static string EncodeSearchReplaceTemplate(string searchTemplate, string replaceTemplate, bool useRegexes, bool caseSensitive)
+        internal static string EncodeSearchReplaceTemplate(string searchTemplate, string replaceTemplate, bool useRegexes, bool? caseSensitive)
         {
-            searchTemplate = searchTemplate.Replace(@"\", @"\\").Replace(@"#", @"\#").Replace("/", @"\L").Replace("|", @"\V").Replace(@"*", @"\X");
-            replaceTemplate = replaceTemplate.Replace(@"\", @"\\").Replace(@"#", @"\#").Replace("/", @"\L").Replace("|", @"\V").Replace(@"*", @"\X").Replace(@"$", @"\T");
+            searchTemplate = searchTemplate.Replace(@"\", @"\\").Replace(@"#", @"\#").Replace("?", @"\?").Replace("/", @"\L").Replace("|", @"\V").Replace(@"*", @"\X");
+            replaceTemplate = replaceTemplate.Replace(@"\", @"\\").Replace(@"#", @"\#").Replace("?", @"\?").Replace("/", @"\L").Replace("|", @"\V").Replace(@"*", @"\X").Replace(@"$", @"\T");
 
             string query;
 
-            if (caseSensitive && useRegexes)
+            if (caseSensitive == true && useRegexes)
             {
                 query = "#*" + searchTemplate + "/" + replaceTemplate;
             }
-            else if (!caseSensitive && useRegexes)
+            else if (caseSensitive == null && useRegexes)
+            {
+                query = "?*" + searchTemplate + "/" + replaceTemplate;
+            }
+            else if (caseSensitive == false && useRegexes)
             {
                 query = "*" + searchTemplate + "/" + replaceTemplate;
             }
-            else if (caseSensitive && !useRegexes)
+            else if (caseSensitive == true && !useRegexes)
             {
                 query = "#" + searchTemplate + "/" + replaceTemplate;
             }
-            else //if (!caseSensitive && !useRegexes)
+            else if (caseSensitive == null && !useRegexes)
+            {
+                query = "?" + searchTemplate + "/" + replaceTemplate;
+            }
+            else //if (caseSensitive == false && !useRegexes)
             {
                 query = searchTemplate + "/" + replaceTemplate;
             }
@@ -845,9 +853,7 @@ namespace MusicBeePlugin
                 }
 
                 if (!presetExists)
-                {
                     customMSR = new Preset(MSR, false, false);
-                }
             }
 
             if (!presetExists)
@@ -876,8 +882,21 @@ namespace MusicBeePlugin
             var query = string.Empty;
             for (var i = 0; i < templateTable.RowCount; i++)
             {
-                query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value,
-                    templateTable.Rows[i].Cells[0].Value as string == ColumnCheckedState, templateTable.Rows[i].Cells[1].Value as string == ColumnCheckedState) + "|";
+                if (templateTable.Rows[i].Cells[1].Value as string == ColumnCheckedState)
+                {
+                    query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value,
+                        templateTable.Rows[i].Cells[0].Value as string == ColumnCheckedState, true) + "|";
+                }
+                else if (templateTable.Rows[i].Cells[1].Value as string == ColumnUncheckedState)
+                {
+                    query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value,
+                        templateTable.Rows[i].Cells[0].Value as string == ColumnCheckedState, false) + "|";
+                }
+                else if (templateTable.Rows[i].Cells[1].Value as string == ColumnIndeterminateState)
+                {
+                    query += EncodeSearchReplaceTemplate(string.Empty + templateTable.Rows[i].Cells[2].Value, string.Empty + templateTable.Rows[i].Cells[3].Value,
+                        templateTable.Rows[i].Cells[0].Value as string == ColumnCheckedState, null) + "|";
+                }
             }
 
             query = query.Remove(query.Length - 1);
@@ -895,9 +914,7 @@ namespace MusicBeePlugin
             customMSR.names.Clear();
 
             foreach (var name in names)
-            {
                 customMSR.names.Add(name, templateNameTextBox.Text);
-            }
 
             var sourceTagIdInt = (int)GetTagId(sourceTagListCustom.Text);
             var sourcePropIdInt = (int)GetPropId(sourceTagListCustom.Text);
@@ -1034,11 +1051,8 @@ namespace MusicBeePlugin
                 autoApplyCheckBox.Checked = false;
                 return;
             }
-            else
-            {
-                customMSR = (Preset)loadComboBoxCustom.SelectedItem;
-            }
 
+            customMSR = (Preset)loadComboBoxCustom.SelectedItem;
             buttonDeleteSaved.Enable(true);
             autoApplyCheckBox.Checked = SavedSettings.autoAppliedAsrPresetGuids.Contains(customMSR.guid); //-V3080
 
@@ -1067,6 +1081,13 @@ namespace MusicBeePlugin
                     templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnCheckedState;
                     templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnCheckedState;
                 }
+                else if (query.Length > 1 && query[0] == '?' && query[1] == '*') //Case-preserving/regexes
+                {
+                    pair = query.Substring(2).Split('/');
+
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnCheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnIndeterminateState;
+                }
                 else if (query.Length > 0 && query[0] == '*') //Case-insensitive/regexes
                 {
                     pair = query.Substring(1).Split('/');
@@ -1081,6 +1102,13 @@ namespace MusicBeePlugin
                     templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnUncheckedState;
                     templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnCheckedState;
                 }
+                else if (query.Length > 0 && query[0] == '?') //Case-preserving
+                {
+                    pair = query.Substring(1).Split('/');
+
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[0].Value = ColumnUncheckedState;
+                    templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnIndeterminateState;
+                }
                 else //Case-insensitive
                 {
                     pair = query.Split('/');
@@ -1089,8 +1117,8 @@ namespace MusicBeePlugin
                     templateTable.Rows[templateTable.Rows.Count - 1].Cells[1].Value = ColumnUncheckedState;
                 }
 
-                pair[0] = pair[0].Replace(@"\#", "#").Replace(@"\L", "/").Replace(@"\V", "|").Replace(@"\X", "*").Replace(@"\\", @"\");
-                pair[1] = pair[1].Replace(@"\#", "#").Replace(@"\L", "/").Replace(@"\V", "|").Replace(@"\X", "*").Replace(@"\\", @"\").Replace(@"\T", @"$");
+                pair[0] = pair[0].Replace(@"\#", "#").Replace(@"\?", "?").Replace(@"\L", "/").Replace(@"\V", "|").Replace(@"\X", "*").Replace(@"\\", @"\");
+                pair[1] = pair[1].Replace(@"\#", "#").Replace(@"\?", "?").Replace(@"\L", "/").Replace(@"\V", "|").Replace(@"\X", "*").Replace(@"\\", @"\").Replace(@"\T", @"$");
 
                 templateTable.Rows[templateTable.Rows.Count - 1].Cells[2].Value = pair[0];
                 templateTable.Rows[templateTable.Rows.Count - 1].Cells[3].Value = pair[1];
@@ -1258,6 +1286,16 @@ namespace MusicBeePlugin
                     0,
                     previewTable.Columns[2].Width, previewTable.Columns[3].Width, previewTable.Columns[4].Width);
             }
+        }
+
+        private void templateTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
+        private void previewTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

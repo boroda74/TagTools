@@ -118,41 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>582, 9</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>796, 511</value>
   </data>
-  <data name="buttonOK.Text" xml:space="preserve">
-    <value>Сохранить</value>
+  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
+    <value>812, 5000</value>
   </data>
-  <data name="buttonOK.ToolTip" xml:space="preserve">
-    <value>Обновить текущую сортировку</value>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>812, 550</value>
   </data>
-  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>690, 9</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Своя сортировка для браузера колонок</value>
   </data>
-  <data name="buttonClose.Text" xml:space="preserve">
-    <value>Закрыть</value>
+  <data name="autoCopyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>345, 59</value>
   </data>
-  <data name="buttonClose.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tagComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>404, 84</value>
-  </data>
-  <data name="tagComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>386, 23</value>
-  </data>
-  <data name="tagComboBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonCopyLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 59</value>
-  </data>
-  <data name="buttonCopyLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 15</value>
-  </data>
-  <data name="buttonCopyLabel.Text" xml:space="preserve">
-    <value>Скопировать реальный тег в свой тег:</value>
+  <data name="autoCopyCheckBox.ToolTip" xml:space="preserve">
+    <value>Автоматически копировать при изменении реального тега, сохраняя позицию сортировки в браузере колонок (создать правило для этой пары тегов)</value>
   </data>
   <data name="autoCopyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>367, 59</value>
@@ -166,17 +148,38 @@
   <data name="autoCopyCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Автоматически копировать при изменении реального тега, сохраняя позицию сортировки в браузере колонок (создать правило для этой пары тегов)</value>
   </data>
-  <data name="autoCopyCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>345, 59</value>
+  <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
+    <value>690, 9</value>
   </data>
-  <data name="buttonOverwrite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>641, 55</value>
+  <data name="buttonClose.Text" xml:space="preserve">
+    <value>Закрыть</value>
   </data>
-  <data name="buttonOverwrite.Text" xml:space="preserve">
-    <value>Записать</value>
+  <data name="buttonClose.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="buttonOverwrite.ToolTip" xml:space="preserve">
-    <value>Перезаписать левый тег, игнорируя текущие значения</value>
+  <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 55</value>
+  </data>
+  <data name="buttonCopy.Text" xml:space="preserve">
+    <value>Копировать</value>
+  </data>
+  <data name="buttonCopy.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonCopyLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 59</value>
+  </data>
+  <data name="buttonCopyLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 15</value>
+  </data>
+  <data name="buttonCopyLabel.Text" xml:space="preserve">
+    <value>Скопировать реальный тег в свой тег:</value>
+  </data>
+  <data name="buttonDown.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="buttonDownMore.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="buttonLoad.Location" type="System.Drawing.Point, System.Drawing">
     <value>474, 9</value>
@@ -187,16 +190,28 @@
   <data name="buttonLoad.ToolTip" xml:space="preserve">
     <value>Считать текущую сортировку левого тега</value>
   </data>
-  <data name="buttonDownMore.ToolTip" xml:space="preserve">
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>582, 9</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="buttonOK.ToolTip" xml:space="preserve">
+    <value>Обновить текущую сортировку</value>
+  </data>
+  <data name="buttonOverwrite.Location" type="System.Drawing.Point, System.Drawing">
+    <value>641, 55</value>
+  </data>
+  <data name="buttonOverwrite.Text" xml:space="preserve">
+    <value>Записать</value>
+  </data>
+  <data name="buttonOverwrite.ToolTip" xml:space="preserve">
+    <value>Перезаписать левый тег, игнорируя текущие значения</value>
+  </data>
+  <data name="buttonUp.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="buttonUpMore.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonDown.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="buttonUp.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="controlsPanel.Size" type="System.Drawing.Size, System.Drawing">
@@ -214,10 +229,13 @@
   <data name="infoLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="tagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>764, 337</value>
+  <data name="sourceTagComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 84</value>
   </data>
-  <data name="tagList.ToolTip" xml:space="preserve">
+  <data name="sourceTagComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>386, 23</value>
+  </data>
+  <data name="sourceTagComboBox.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
@@ -229,37 +247,19 @@
   <data name="tableLayoutPanel1.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="sourceTagComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 84</value>
+  <data name="tagComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>404, 84</value>
   </data>
-  <data name="sourceTagComboBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tagComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>386, 23</value>
   </data>
-  <data name="sourceTagComboBox.ToolTip" xml:space="preserve">
+  <data name="tagComboBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 55</value>
+  <data name="tagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>764, 337</value>
   </data>
-  <data name="buttonCopy.Text" xml:space="preserve">
-    <value>Копировать</value>
-  </data>
-  <data name="buttonCopy.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>796, 511</value>
-  </data>
-  <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>812, 5000</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>812, 550</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Своя сортировка для браузера колонок</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
+  <data name="tagList.ToolTip" xml:space="preserve">
     <value />
   </data>
 </root>

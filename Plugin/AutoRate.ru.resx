@@ -1421,9 +1421,6 @@
 эту опцию потому, что "число воспроизведений в день во время существования в библиотеке" меняется 
 каждый день и установка авто-рейтингов должна происходить каждый день для каждого трека. </value>
   </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="autoRateOnTrackPropertiesCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
@@ -1439,17 +1436,11 @@
   <data name="autoRateOnTrackPropertiesCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autoRateOnTrackPropertiesCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="autoRateOnTrackPropertiesCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
   <data name="autoRateOnTrackPropertiesCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="autoRateOnTrackPropertiesCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Error" xml:space="preserve">
     <value />
@@ -1487,9 +1478,6 @@
   <data name="notifyWhenAutoRatingCompletedCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="autoRateAtStartUpCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
@@ -1502,9 +1490,6 @@
   <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически установить рейтинги при запуске</value>
   </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="autoRateAtStartUpCheckBox.Error" xml:space="preserve">
     <value />
   </data>
@@ -1513,9 +1498,6 @@
   </data>
   <data name="autoRateAtStartUpCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBox.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="buttonSaveSettings.Error" xml:space="preserve">
     <value />
@@ -1654,9 +1636,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Автоматически установить рейтинги</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

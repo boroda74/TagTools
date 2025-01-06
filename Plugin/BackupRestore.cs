@@ -66,7 +66,8 @@ namespace MusicBeePlugin
             }
 
             if (!SavedSettings.dontShowBackupRestore && SavedSettings.autoBackupInterval != 0)
-                PeriodicAutoBackupTimer = new System.Threading.Timer(RegularAutoBackup, null, new TimeSpan(0, 0, (int)SavedSettings.autoBackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autoBackupInterval * 60));
+                PeriodicAutoBackupTimer = new System.Threading.Timer(RegularAutoBackup, null, 
+                    new TimeSpan(0, 0, (int)SavedSettings.autoBackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autoBackupInterval * 60));
         }
 
         internal static string BrGetCurrentLibraryName()

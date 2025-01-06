@@ -99,11 +99,12 @@ namespace MusicBeePlugin
 
         internal static ToolStripMenuItem OpenedFormsSubmenu;
 
-        internal static string EnabledState = "+";
-        internal static string DisabledState = "-";
+        internal const string EnabledState = "+";
+        internal const string DisabledState = "-";
 
-        internal static string ColumnCheckedState = "T";
-        internal static string ColumnUncheckedState = "F";
+        internal const string ColumnCheckedState = "T";
+        internal const string ColumnUncheckedState = "F";
+        internal const string ColumnIndeterminateState = "I";
 
 
         //Skinning

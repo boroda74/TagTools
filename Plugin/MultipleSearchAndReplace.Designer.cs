@@ -34,16 +34,25 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultipleSearchAndReplace));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.templateTable = new System.Windows.Forms.DataGridView();
+            this.RegEx = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.CaseSensitive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.SearchFor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReplaceWith = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.previewTable = new System.Windows.Forms.DataGridView();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OriginalTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
@@ -79,15 +88,6 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OriginalTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTagValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RegEx = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.CaseSensitive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.SearchFor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReplaceWith = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             //MusicBee
             this.templateNameTextBox = ControlsTools.CreateMusicBeeTextBox();
@@ -143,6 +143,61 @@
             this.templateTable.RowHeadersVisible = false;
             this.templateTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.templateTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.templateTable_CellContentClick);
+            this.templateTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.templateTable_DataError);
+            // 
+            // RegEx
+            // 
+            this.RegEx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.RegEx.DefaultCellStyle = dataGridViewCellStyle1;
+            this.RegEx.FalseValue = "F";
+            this.RegEx.FillWeight = 1F;
+            resources.ApplyResources(this.RegEx, "RegEx");
+            this.RegEx.Name = "RegEx";
+            this.RegEx.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.RegEx.TrueValue = "T";
+            // 
+            // CaseSensitive
+            // 
+            this.CaseSensitive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CaseSensitive.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CaseSensitive.FalseValue = "F";
+            this.CaseSensitive.FillWeight = 1F;
+            resources.ApplyResources(this.CaseSensitive, "CaseSensitive");
+            this.CaseSensitive.IndeterminateValue = "I";
+            this.CaseSensitive.Name = "CaseSensitive";
+            this.CaseSensitive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.CaseSensitive.ThreeState = true;
+            this.CaseSensitive.TrueValue = "T";
+            // 
+            // SearchFor
+            // 
+            this.SearchFor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SearchFor.DefaultCellStyle = dataGridViewCellStyle3;
+            resources.ApplyResources(this.SearchFor, "SearchFor");
+            this.SearchFor.Name = "SearchFor";
+            this.SearchFor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // ReplaceWith
+            // 
+            this.ReplaceWith.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ReplaceWith.DefaultCellStyle = dataGridViewCellStyle4;
+            resources.ApplyResources(this.ReplaceWith, "ReplaceWith");
+            this.ReplaceWith.Name = "ReplaceWith";
+            this.ReplaceWith.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Position
+            // 
+            this.Position.FillWeight = 1F;
+            resources.ApplyResources(this.Position, "Position");
+            this.Position.Name = "Position";
+            this.Position.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Position.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // previewTable
             // 
@@ -162,6 +217,49 @@
             this.previewTable.Name = "previewTable";
             this.previewTable.RowHeadersVisible = false;
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
+            // 
+            // Track
+            // 
+            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Track.FillWeight = 40F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            this.Track.ReadOnly = true;
+            // 
+            // OriginalTagValue
+            // 
+            this.OriginalTagValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.OriginalTagValue.DataPropertyName = "OriginalTagValue";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OriginalTagValue.DefaultCellStyle = dataGridViewCellStyle6;
+            this.OriginalTagValue.FillWeight = 25F;
+            resources.ApplyResources(this.OriginalTagValue, "OriginalTagValue");
+            this.OriginalTagValue.Name = "OriginalTagValue";
+            this.OriginalTagValue.ReadOnly = true;
+            // 
+            // NewTagValue
+            // 
+            this.NewTagValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTagValue.DataPropertyName = "NewTagValue";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTagValue.DefaultCellStyle = dataGridViewCellStyle7;
+            this.NewTagValue.FillWeight = 25F;
+            resources.ApplyResources(this.NewTagValue, "NewTagValue");
+            this.NewTagValue.Name = "NewTagValue";
+            // 
+            // File
+            // 
+            this.File.DataPropertyName = "File";
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
             // 
             // dirtyErrorProvider
             // 
@@ -413,22 +511,18 @@
             // dataGridViewCheckBoxColumn1
             // 
             this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewCheckBoxColumn1.FalseValue = Plugin.ColumnUncheckedState;
             this.dataGridViewCheckBoxColumn1.FillWeight = 15F;
             resources.ApplyResources(this.dataGridViewCheckBoxColumn1, "dataGridViewCheckBoxColumn1");
             this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
             this.dataGridViewCheckBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCheckBoxColumn1.TrueValue = Plugin.ColumnCheckedState;
             // 
             // dataGridViewCheckBoxColumn2
             // 
             this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dataGridViewCheckBoxColumn2.FalseValue = Plugin.ColumnUncheckedState;
             this.dataGridViewCheckBoxColumn2.FillWeight = 15F;
             resources.ApplyResources(this.dataGridViewCheckBoxColumn2, "dataGridViewCheckBoxColumn2");
             this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
             this.dataGridViewCheckBoxColumn2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCheckBoxColumn2.TrueValue = Plugin.ColumnCheckedState;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -471,104 +565,6 @@
             // 
             resources.ApplyResources(this.dataGridViewTextBoxColumn7, "dataGridViewTextBoxColumn7");
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // Track
-            // 
-            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Track.DataPropertyName = "Track";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Track.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Track.FillWeight = 40F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            this.Track.ReadOnly = true;
-            // 
-            // OriginalTagValue
-            // 
-            this.OriginalTagValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.OriginalTagValue.DataPropertyName = "OriginalTagValue";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OriginalTagValue.DefaultCellStyle = dataGridViewCellStyle6;
-            this.OriginalTagValue.FillWeight = 25F;
-            resources.ApplyResources(this.OriginalTagValue, "OriginalTagValue");
-            this.OriginalTagValue.Name = "OriginalTagValue";
-            this.OriginalTagValue.ReadOnly = true;
-            // 
-            // NewTagValue
-            // 
-            this.NewTagValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewTagValue.DataPropertyName = "NewTagValue";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewTagValue.DefaultCellStyle = dataGridViewCellStyle7;
-            this.NewTagValue.FillWeight = 25F;
-            resources.ApplyResources(this.NewTagValue, "NewTagValue");
-            this.NewTagValue.Name = "NewTagValue";
-            // 
-            // File
-            // 
-            this.File.DataPropertyName = "File";
-            this.File.FillWeight = 1F;
-            resources.ApplyResources(this.File, "File");
-            this.File.Name = "File";
-            // 
-            // RegEx
-            // 
-            this.RegEx.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = Plugin.ColumnUncheckedState;
-            this.RegEx.DefaultCellStyle = dataGridViewCellStyle1;
-            this.RegEx.FalseValue = Plugin.ColumnUncheckedState;
-            this.RegEx.FillWeight = 1F;
-            resources.ApplyResources(this.RegEx, "RegEx");
-            this.RegEx.Name = "RegEx";
-            this.RegEx.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.RegEx.TrueValue = Plugin.ColumnCheckedState;
-            // 
-            // CaseSensitive
-            // 
-            this.CaseSensitive.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = Plugin.ColumnUncheckedState;
-            this.CaseSensitive.DefaultCellStyle = dataGridViewCellStyle2;
-            this.CaseSensitive.FalseValue = Plugin.ColumnUncheckedState;
-            this.CaseSensitive.FillWeight = 1F;
-            resources.ApplyResources(this.CaseSensitive, "CaseSensitive");
-            this.CaseSensitive.IndeterminateValue = "";
-            this.CaseSensitive.Name = "CaseSensitive";
-            this.CaseSensitive.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.CaseSensitive.ThreeState = true;
-            this.CaseSensitive.TrueValue = Plugin.ColumnCheckedState;
-            // 
-            // SearchFor
-            // 
-            this.SearchFor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SearchFor.DefaultCellStyle = dataGridViewCellStyle3;
-            resources.ApplyResources(this.SearchFor, "SearchFor");
-            this.SearchFor.Name = "SearchFor";
-            this.SearchFor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // ReplaceWith
-            // 
-            this.ReplaceWith.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ReplaceWith.DefaultCellStyle = dataGridViewCellStyle4;
-            resources.ApplyResources(this.ReplaceWith, "ReplaceWith");
-            this.ReplaceWith.Name = "ReplaceWith";
-            this.ReplaceWith.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Position
-            // 
-            this.Position.FillWeight = 1F;
-            resources.ApplyResources(this.Position, "Position");
-            this.Position.Name = "Position";
-            this.Position.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Position.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // MultipleSearchAndReplace
             // 

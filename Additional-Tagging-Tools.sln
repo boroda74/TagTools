@@ -33,5 +33,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D732ED16-2C5A-4F75-B855-C00357709EAF}
+		RESX_SaveFilesImmediatelyUponChange = False
+		RESX_SortFileContentOnSave = True
+		RESX_PrefixTranslations = True
+		RESX_ExcelExportMode = Text
+		RESX_PrefixFieldType = Value, TargetComment
 	EndGlobalSection
 EndGlobal

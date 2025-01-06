@@ -582,9 +582,6 @@
 или слова, которым предшествует точка и за которыми следует точка, чтобы не изменять регистр аббревиатур (например, 
 "A.K.A.", даже если список исключенных слов содержит артикль "a")</value>
   </data>
-  <data name="alwaysCapitalizeLastWordCheckBoxLabel.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="alwaysCapitalizeLastWordCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
@@ -604,9 +601,6 @@
     <value>Последнее слово не будет изменено после или между символами исключения
 Промежуточное состояние: Всегда начинать с заглавной буквы последнее слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)</value>
   </data>
-  <data name="alwaysCapitalizeLastWordCheckBox.Error" xml:space="preserve">
-    <value />
-  </data>
   <data name="alwaysCapitalizeLastWordCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
@@ -620,9 +614,6 @@
     <value>Последнее слово не будет изменено после или между символами исключения
 Промежуточное состояние: Всегда начинать с заглавной буквы последнее слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)
 </value>
-  </data>
-  <data name="alwaysCapitalize1stWordCheckBoxLabel.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="alwaysCapitalize1stWordCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -641,9 +632,6 @@
   </data>
   <data name="alwaysCapitalize1stWordCheckBoxLabel.ToolTip" xml:space="preserve">
     <value>Промежуточное состояние: Всегда начинать с заглавной буквы первое слово, кроме исключенных слов (для исключенных слов в ВЕРХНЕМ РЕГИСТРЕ)</value>
-  </data>
-  <data name="alwaysCapitalize1stWordCheckBox.Error" xml:space="preserve">
-    <value />
   </data>
   <data name="alwaysCapitalize1stWordCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
@@ -1017,9 +1005,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Изменение регистра</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

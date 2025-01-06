@@ -176,9 +176,6 @@
   <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -384,9 +381,6 @@
   <data name="&gt;&gt;customFontButton.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="allowAsrLrPresetAutoExecutionCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="&gt;&gt;includePreservedTagValuesCheckBox.Name" xml:space="preserve">
     <value>includePreservedTagValuesCheckBox</value>
   </data>
@@ -401,9 +395,6 @@
   </data>
   <data name="&gt;&gt;minimizePluginWindowsCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="allowAsrLrPresetAutoExecutionCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="allowCommandExecutionWithoutPreviewCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>26, 84</value>
@@ -1206,9 +1197,6 @@
   <data name="playStoppedSoundCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 63</value>
   </data>
-  <data name="allowCommandExecutionWithoutPreviewCheckBox.ToolTip" xml:space="preserve">
-    <value />
-  </data>
   <data name="includeNotChangedTagsCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -1433,9 +1421,6 @@
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
   </data>
   <data name="playStoppedSoundCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

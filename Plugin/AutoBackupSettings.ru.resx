@@ -159,7 +159,7 @@
     <value>298, 40</value>
   </data>
   <data name="autoBackupPeriodLabel.Text" xml:space="preserve">
-    <value>дней.</value>
+    <value>мин.</value>
   </data>
   <data name="autoDeleteOldCheckBox.ToolTip" xml:space="preserve">
     <value>Только автоматические архивы текущей библиотеки будут удаляться</value>
