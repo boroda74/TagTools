@@ -1545,10 +1545,21 @@ namespace MusicBeePlugin
                     lastSelectedIndex = value;
 
 
+                    string text = textBox.Text;
+
+                    if (value != -1)
+                        textBox.Text = listBox.Items[value].ToString();
+                    else if (DropDownStyle == ComboBoxStyle.DropDownList)
+                        textBox.Text = string.Empty;
+
+
                     Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
                     if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
+
+
+                    textBox.Text = text;
 
                     if (value != -1)
                         Text = listBox.Items[value].ToString();
@@ -1631,11 +1642,17 @@ namespace MusicBeePlugin
                     var oldSelectedIndex = listBox.SelectedIndex;
                     listBox.SelectedIndex = -1;
 
+                    string text = textBox.Text;
+
+                    textBox.Text = string.Empty;
+
                     if (oldSelectedIndex != listBox.SelectedIndex)
                         Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
                     if (oldSelectedIndex != listBox.SelectedIndex)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
+
+                    textBox.Text = text;
 
                     Text = string.Empty;
                 }
@@ -1665,11 +1682,22 @@ namespace MusicBeePlugin
                     lastSelectedIndex = listBox.SelectedIndex;
 
 
+                    string text = textBox.Text;
+
+                    if (listBox.SelectedIndex != -1 && listBox.Items[listBox.SelectedIndex] != null)
+                        textBox.Text = listBox.Items[listBox.SelectedIndex].ToString();
+                    else if (DropDownStyle == ComboBoxStyle.DropDownList)
+                        textBox.Text = string.Empty;
+
+
                     if (oldSelectedIndex != listBox.SelectedIndex)
                         Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
                     if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
+
+
+                    textBox.Text = text;
 
                     if (listBox.SelectedIndex != -1 && listBox.Items[listBox.SelectedIndex] != null)
                         Text = listBox.Items[listBox.SelectedIndex].ToString();
@@ -2249,7 +2277,7 @@ namespace MusicBeePlugin
                 return;
             }
 
-            if (SelectedIndex == listBox.SelectedIndex)
+            if (lastSelectedIndex == listBox.SelectedIndex)
                 lastSelectedIndex = -2;
 
             SelectedIndex = listBox.SelectedIndex;

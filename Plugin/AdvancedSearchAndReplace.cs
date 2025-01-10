@@ -725,8 +725,9 @@ namespace MusicBeePlugin
                     descriptions.Add(langDesc.Key, langDesc.Value);
                 }
 
-                foreach (var width in originalPreset.columnWeights)
-                    columnWeights.Add(width);
+                if (originalPreset.columnWeights != null)
+                    foreach (var width in originalPreset.columnWeights)
+                        columnWeights.Add(width);
 
                 condition = originalPreset.condition;
                 playlist = originalPreset.playlist;
