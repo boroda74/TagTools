@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Additional Tagging & Reporting Tools")]
-[assembly: AssemblyCopyright("Copyright © boroda 2012-2024")]
+[assembly: AssemblyCopyright("Copyright © boroda 2012-2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,8 +32,8 @@ using System.Runtime.InteropServices;
 //You can specify all the values, or you can default the Build and Revision Numbers 
 //by using the '*' as shown below:
 //[assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("9.2.9141.20798")]
-[assembly: AssemblyFileVersion("9.2.9141.20798")]
+[assembly: AssemblyVersion("9.2.9141.23503")]
+[assembly: AssemblyFileVersion("9.2.9141.23503")]
 [assembly: NeutralResourcesLanguage("en")]
 
-[assembly: AssemblyInformationalVersion("9.2.9141.20798")]
+[assembly: AssemblyInformationalVersion("9.2.9141.23503")]
