@@ -747,6 +747,9 @@
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
+  <data name="clearUseAnotherPresetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>652, 59</value>
+  </data>
   <data name="hidePreviewCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>514, 9</value>
   </data>
@@ -1021,22 +1024,22 @@
     <value>Формат</value>
   </data>
   <data name="useAnotherPresetAsSourceComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 59</value>
+    <value>312, 59</value>
   </data>
   <data name="useAnotherPresetAsSourceComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 23</value>
+    <value>334, 23</value>
   </data>
   <data name="useAnotherPresetAsSourceComboBox.ToolTip" xml:space="preserve">
     <value>Выберите пресет, использующий фильтрацию по условию
 Пресеты для получения списка треков могут быть организованы в цепочку</value>
   </data>
-  <data name="useAnotherPresetAsSourceCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>250, 15</value>
+  <data name="useAnotherPresetAsSourceLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>274, 15</value>
   </data>
-  <data name="useAnotherPresetAsSourceCheckBoxLabel.Text" xml:space="preserve">
-    <value>Получить список треков из другого пресета</value>
+  <data name="useAnotherPresetAsSourceLabel.Text" xml:space="preserve">
+    <value>Получить список треков из другого пресета        </value>
   </data>
-  <data name="useAnotherPresetAsSourceCheckBox.ToolTip" xml:space="preserve">
+  <data name="useAnotherPresetAsSourceLabel.ToolTip" xml:space="preserve">
     <value>Получение списка треков из другого пресета имеет смысл только, если этот пресет 
 использует фильтрацию по условию
 Пресеты для получения списка треков могут быть организованы в цепочку</value>

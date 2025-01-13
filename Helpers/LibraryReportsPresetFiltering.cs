@@ -38,16 +38,18 @@ namespace MusicBeePlugin
 
             var currentPresets = getReportPresetsArrayUI();
             ReportPreset referredPreset = referredReference.findPreset();
-            List<object> filteringPresetList = new List<object>();
+            List<object> presetChain = new List<object>();
 
-            if (BuildItemChain(currentPresets, filteringPresetList, selectedPreset, AddSkipItem, GetNextItem))
-            {
-                for (int i = 0; i < filteringPresetList.Count; i++)
-                    filteringPresetList[i] = new ReportPresetReference(filteringPresetList[i] as ReportPreset);
+            BuildItemChain(currentPresets, presetChain, selectedPreset, AddSkipItem, GetNextItem);
 
-                FillListByList(foundPresetRefs.Items, filteringPresetList);
-                foundPresetRefs.SelectedItem = referredReference;
-            }
+            List<ReportPresetReference> filteringPresetList = new List<ReportPresetReference>();
+
+            foreach (var preset in currentPresets)
+                if (preset.conditionIsChecked && !presetChain.Contains(preset))
+                    filteringPresetList.Add(new ReportPresetReference(preset));
+
+            FillListByList(foundPresetRefs.Items, filteringPresetList);
+            foundPresetRefs.SelectedItem = referredReference;
 
             foundPresetRefs.ShowDropDownContent();
         }

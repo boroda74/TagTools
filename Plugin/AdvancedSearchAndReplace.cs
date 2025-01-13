@@ -12,7 +12,6 @@ using System.Xml.Serialization;
 using ExtensionMethods;
 
 using MusicBeePlugin.Properties;
-
 using static MusicBeePlugin.Plugin;
 
 
@@ -3628,6 +3627,7 @@ namespace MusicBeePlugin
 
                     buttonClose.Image = warningWide;
                     toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
+                    buttonClose.Refresh();
                 }
                 else
                 {
@@ -6273,11 +6273,11 @@ namespace MusicBeePlugin
         //Returns: false if some preset in preset chain is already ticked for auto-applying, otherwise true
         private bool checkAutoAppliedPresetChain(Preset referencePreset)
         {
-            List<object> nextPresetList = new List<object>();
+            List<object> presetChain = new List<object>();
 
-            if (BuildItemChain(PresetsInteractiveWorkingCopy.Values, nextPresetList, referencePreset, AddSkipItem, GetNextItem))
+            if (BuildItemChain(PresetsInteractiveWorkingCopy.Values, presetChain, referencePreset, AddSkipItem, GetNextItem))
             {
-                foreach (Preset preset in nextPresetList)
+                foreach (Preset preset in presetChain)
                     if (autoAppliedAsrPresetGuids.ContainsKey(preset.guid))
                         return false;
             }
@@ -6308,7 +6308,7 @@ namespace MusicBeePlugin
                     return;
                 }
 
-                if (!checkAutoAppliedPresetChain(checkedChangedPreset))
+                if (ProcessPresetChanges && !checkAutoAppliedPresetChain(checkedChangedPreset))
                 {
                     e.NewValue = CheckState.Unchecked;
 
@@ -6322,23 +6322,24 @@ namespace MusicBeePlugin
 
 
                 autoAppliedPresetCount++;
-                autoAppliedAsrPresetGuids.Add(checkedChangedPreset.guid);
 
-                if (!SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound)
+                if (ProcessPresetChanges)
+                    autoAppliedAsrPresetGuids.Add(checkedChangedPreset.guid);
+
+                if (ProcessPresetChanges && !SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound)
                     System.Media.SystemSounds.Exclamation.Play();
             }
-            else
+            else if (ProcessPresetChanges)
             {
                 autoAppliedPresetCount--;
                 autoAppliedAsrPresetGuids.Remove(checkedChangedPreset.guid);
             }
 
 
+            showAutoApplyingWarningIfRequired();
+
             if (ProcessPresetChanges)
-            {
-                showAutoApplyingWarningIfRequired();
                 setPresetsChanged();
-            }
         }
 
         private void idTextBox_Leave(object sender, EventArgs e)
@@ -6584,7 +6585,6 @@ namespace MusicBeePlugin
             if (!ProcessPresetChanges)
                 return;
 
-
             Preset oldNextPreset = null;
             if (selectedPreset.nextPresetGuid != Guid.Empty)
                 PresetsInteractiveWorkingCopy.TryGetValue(selectedPreset.nextPresetGuid, out oldNextPreset);
@@ -6630,6 +6630,23 @@ namespace MusicBeePlugin
             showOnlyChainedPresetsButton.Enable(selectedPreset.referredCount > 0
                 || selectedPreset.nextPresetGuid != Guid.Empty
             );
+
+
+            if (nextPresetComboBoxCustom.SelectedIndex != -1 && autoAppliedAsrPresetGuids.ContainsKey(selectedPreset.guid) && !checkAutoAppliedPresetChain(selectedPreset))
+            {
+                int index = presetList.Items.IndexOf(selectedPreset);
+                if (index != -1)
+                {
+                    if (!SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound)
+                        System.Media.SystemSounds.Hand.Play();
+
+                    ignoreCheckedPresetEvent = false;
+                    presetList.SetItemChecked(index, false);
+                    ignoreCheckedPresetEvent = true;
+
+                    MessageBox.Show(this, MsgAsrWrongAutoExecutionChain, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
         }
 
         private void clearNextPresetButton_Click(object sender, EventArgs e)

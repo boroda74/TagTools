@@ -336,6 +336,8 @@ namespace MusicBeePlugin
             warningWide = ReplaceBitmap(null, WarningWide);
             warning = ReplaceBitmap(null, Warning);
 
+            useAnotherPresetAsSourceLabel.Left = totalsCheckBoxLabel.Left;
+
             //Setting control not standard properties
             //var heightField = presetList.GetType().GetField(
             //   "scaledListItemBordersHeight",
@@ -389,7 +391,7 @@ namespace MusicBeePlugin
             hidePreviewCheckBox.Checked = SavedSettings.hideLrPreview;
 
             //Clearing "source preset is missing" check box image
-            useAnotherPresetAsSourceCheckBox.Image = Resources.transparent_15;
+            useAnotherPresetAsSourceLabel.Image = Resources.transparent_15;
 
 
             //Saving buttonFilterResults tool tip & button label
@@ -1101,11 +1103,10 @@ namespace MusicBeePlugin
         {
             public Guid permanentGuid;
 
-            //public ReportPresetReference()
-            //{
-            //   name = null;
-            //   permanentGuid = Guid.NewGuid();
-            //}
+            public ReportPresetReference(bool placeholder)
+            {
+                permanentGuid = Guid.Empty;
+            }
 
             public ReportPresetReference(ReportPreset referencePreset)
             {
@@ -1144,7 +1145,7 @@ namespace MusicBeePlugin
 
         public class ReportPreset
         {
-            public bool autoApply;
+            public bool autoApply = false;
 
             public string name;
             public string autoName;
@@ -1156,7 +1157,7 @@ namespace MusicBeePlugin
             public Guid permanentGuid = Guid.NewGuid(); //permanentGuid is reset on preset copying in UI
 
 
-            public bool hotkeyAssigned;
+            public bool hotkeyAssigned = false;
             public bool applyToSelectedTracks = true;
             public int hotkeySlot = -1; //0..MusicBeePlugin.MaximumNumberOfLrHotkeys - 1
 
@@ -1174,8 +1175,8 @@ namespace MusicBeePlugin
             public string[] precisionDigits = Array.Empty<string>();
             public string[] appendTexts = Array.Empty<string>();
 
-            public bool useAnotherPresetAsSource;
-            public ReportPresetReference anotherPresetAsSource;
+            public bool useAnotherPresetAsSource = false;
+            public ReportPresetReference anotherPresetAsSource = new ReportPresetReference();
 
             public bool conditionIsChecked;
             public string conditionField;
@@ -1191,6 +1192,9 @@ namespace MusicBeePlugin
             public ReportPreset()
             {
                 initialGuid = guid;
+
+                if (!useAnotherPresetAsSource)
+                    anotherPresetAsSource = default;
             }
 
             public ReportPreset(string exportedTrackList) : this()
@@ -1297,7 +1301,7 @@ namespace MusicBeePlugin
                             currentRemark += "";
 
 
-                if (PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.anotherPresetAsSource.permanentGuid, out var nextPreset) 
+                if (referencePreset.useAnotherPresetAsSource && PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.anotherPresetAsSource.permanentGuid, out var nextPreset) 
                     && nextPreset != null)
                     
                     return getNextPresetChars(nextPreset, currentRemark + "  ");
@@ -2314,6 +2318,8 @@ namespace MusicBeePlugin
                 buttonClose.Image = Resources.transparent_15;
                 toolTip1.SetToolTip(buttonClose, string.Empty);
             }
+
+            buttonClose.Refresh();
         }
 
         private void setPresetChanged()
@@ -6259,8 +6265,9 @@ namespace MusicBeePlugin
 
             totalsCheckBox.Enable(enable && !previewIsGenerated);
 
-            useAnotherPresetAsSourceCheckBox.Enable(enable && !previewIsGenerated);
-            useAnotherPresetAsSourceComboBoxCustom.Enable(enable && useAnotherPresetAsSourceCheckBox.Checked && !previewIsGenerated);
+            useAnotherPresetAsSourceLabel.Enable(enable && !previewIsGenerated);
+            useAnotherPresetAsSourceComboBoxCustom.Enable(enable && !previewIsGenerated);
+            clearUseAnotherPresetButton.Enable(enable && !previewIsGenerated && useAnotherPresetAsSourceComboBoxCustom.SelectedIndex >= 0);
 
             conditionCheckBox.Enable(enable);
             conditionFieldListCustom.Enable(enable && conditionCheckBox.Checked);
@@ -6416,11 +6423,16 @@ namespace MusicBeePlugin
                 selectedPreset.conditionIsChecked = conditionCheckBox.Checked;
                 selectedPreset.totals = totalsCheckBox.Checked;
 
-                selectedPreset.useAnotherPresetAsSource = useAnotherPresetAsSourceCheckBox.Checked;
-                if (!selectedPreset.useAnotherPresetAsSource)
+                if (useAnotherPresetAsSourceComboBox.SelectedIndex == -1)
+                {
+                    selectedPreset.useAnotherPresetAsSource = false;
                     selectedPreset.anotherPresetAsSource = default;
-                else if (useAnotherPresetAsSourceComboBoxCustom.SelectedIndex != -1)
+                }
+                else
+                {
+                    selectedPreset.useAnotherPresetAsSource = true;
                     selectedPreset.anotherPresetAsSource = (ReportPresetReference)useAnotherPresetAsSourceComboBoxCustom.SelectedItem; //-V3148
+                }
 
                 selectedPreset.autoApply = presetList.GetItemChecked(presetList.SelectedIndex);
 
@@ -7274,9 +7286,7 @@ namespace MusicBeePlugin
 
             presetNameTextBox.Enable(false);
 
-            useAnotherPresetAsSourceCheckBox.Checked = false;
             useAnotherPresetAsSourceComboBoxCustom.ItemsClear();
-            useAnotherPresetAsSourceCheckBox_CheckedChanged(null, null);
 
             multipleItemsSplitterTrimCheckBox.Checked = false;
 
@@ -7446,9 +7456,7 @@ namespace MusicBeePlugin
                 assignHotkeyCheckBox.Enable(false);
 
 
-            useAnotherPresetAsSourceCheckBox.Checked = selectedPreset.useAnotherPresetAsSource;
             findFilteringPresetsUI(useAnotherPresetAsSourceComboBoxCustom, selectedPreset, selectedPreset.anotherPresetAsSource);
-            useAnotherPresetAsSourceCheckBox_CheckedChanged(null, null);
 
 
             totalsCheckBox.Checked = selectedPreset.totals;
@@ -8013,28 +8021,10 @@ namespace MusicBeePlugin
 
         private void useAnotherPresetAsSourceComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (presetIsLoading)
-                return;
-
-            updatePreset();
-            setPresetChanged();
-
-            useAnotherPresetAsSourceComboBoxCustom.Text = useAnotherPresetAsSourceComboBoxCustom.SelectedItem?.ToString();
-        }
-
-        private void useAnotherPresetAsSourceCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            useAnotherPresetAsSourceComboBoxCustom.Enable(useAnotherPresetAsSourceCheckBox.Checked);
-
-            if (useAnotherPresetAsSourceCheckBox.Checked && useAnotherPresetAsSourceComboBoxCustom.SelectedIndex == -1)
-            {
-                if (useAnotherPresetAsSourceComboBoxCustom.Items.Count > 0)
-                    useAnotherPresetAsSourceComboBoxCustom.SelectedIndex = 0;
-            }
-            else if (!useAnotherPresetAsSourceCheckBox.Checked)
-            {
-                useAnotherPresetAsSourceComboBoxCustom.SelectedIndex = -1;
-            }
+            if (useAnotherPresetAsSourceComboBox.SelectedIndex == -1)
+                clearUseAnotherPresetButton.Enable(false);
+            else
+                clearUseAnotherPresetButton.Enable(true);
 
             if (presetIsLoading)
                 return;
@@ -8042,15 +8032,13 @@ namespace MusicBeePlugin
             updatePreset();
             setPresetChanged();
 
-            useAnotherPresetAsSourceComboBoxCustom.Text = useAnotherPresetAsSourceComboBoxCustom.SelectedItem?.ToString();
+            useAnotherPresetAsSourceComboBoxCustom.Refresh();
+            presetList.Refresh();
         }
 
-        private void useAnotherPresetAsSourceCheckBoxLabel_Click(object sender, EventArgs e)
+        private void clearUseAnotherPresetButton_Click(object sender, EventArgs e)
         {
-            if (!useAnotherPresetAsSourceCheckBox.IsEnabled())
-                return;
-
-            useAnotherPresetAsSourceCheckBox.Checked = !useAnotherPresetAsSourceCheckBox.Checked;
+            useAnotherPresetAsSourceComboBox.SelectedIndex = -1;
         }
 
         private void previewTable_CellClick(object sender, DataGridViewCellEventArgs e)
