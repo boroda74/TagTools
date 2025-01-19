@@ -3741,7 +3741,7 @@ namespace MusicBeePlugin
 
             PluginHelpString = "Help...";
             PluginWebPageString = "Plugin Web Page..."; ;
-            PluginWebPageToolTip = "Open Plugin Web Page (to check/download the latest version)";
+            PluginWebPageToolTip = "Open plugin web page (to check/download the latest version)";
             PluginVersionString = "Version: ";
             PluginVersionToolTip = "Copy plugin version to clipboard";
 

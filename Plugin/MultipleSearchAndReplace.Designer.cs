@@ -90,6 +90,8 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             //MusicBee
+            this.templateNameTextBox.Dispose();
+
             this.templateNameTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee            
 

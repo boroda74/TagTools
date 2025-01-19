@@ -55,6 +55,8 @@ namespace MusicBeePlugin
             this.buttonCopy = new System.Windows.Forms.Button();
 
             //MusicBee
+            this.tagList.Dispose();
+
             this.tagList = new CustomListBox(Plugin.SavedSettings.dontUseSkinColors);
             //~MusicBee
 

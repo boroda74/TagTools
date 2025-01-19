@@ -50,6 +50,9 @@ namespace MusicBeePlugin
             this.infoLabel = new System.Windows.Forms.Label();
 
             //MusicBee
+            this.checkedSourceTagList.Dispose();
+            this.sourceTagList.Dispose();
+
             this.checkedSourceTagList = new CustomListBox(Plugin.SavedSettings.dontUseSkinColors);
             this.sourceTagList = new CustomListBox(Plugin.SavedSettings.dontUseSkinColors);
             //~MusicBee

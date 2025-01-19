@@ -1103,7 +1103,7 @@ namespace MusicBeePlugin
         {
             public Guid permanentGuid;
 
-            public ReportPresetReference(bool placeholder)
+            public ReportPresetReference(bool placeholder) //-V3117
             {
                 permanentGuid = Guid.Empty;
             }

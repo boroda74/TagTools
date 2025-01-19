@@ -134,6 +134,14 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
 
             //MusicBee
+            this.unitKBox.Dispose();
+            this.unitMBox.Dispose();
+            this.unitGBox.Dispose();
+            this.customFontTextBox.Dispose();
+            this.preservedTagValuesLegendTextBox.Dispose();
+            this.preservedTagsLegendTextBox.Dispose();
+            this.changedLegendTextBox.Dispose();
+
             this.unitKBox = ControlsTools.CreateMusicBeeTextBox();
             this.unitMBox = ControlsTools.CreateMusicBeeTextBox();
             this.unitGBox = ControlsTools.CreateMusicBeeTextBox();
@@ -143,7 +151,10 @@
             this.changedLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
 
             if (useSkinColors)
+            {
+                this.tabControl1.Dispose();
                 this.tabControl1 = new FlatTabControl();
+            }
             //~MusicBee
 
             this.groupBox3.SuspendLayout();

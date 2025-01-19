@@ -64,6 +64,9 @@
             this.emptyLabel = new System.Windows.Forms.Label();
 
             //MusicBee
+            this.autoBackupFolderTextBox.Dispose();
+            this.autoBackupPrefixTextBox.Dispose();
+
             this.autoBackupFolderTextBox = ControlsTools.CreateMusicBeeTextBox();
             this.autoBackupPrefixTextBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee

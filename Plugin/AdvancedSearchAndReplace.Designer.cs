@@ -229,6 +229,28 @@ namespace MusicBeePlugin
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             //MusicBee
+            this.presetList.Dispose();
+            this.searchTextBox.Dispose();
+            this.customTextBox.Dispose();
+            this.customText2Box.Dispose();
+            this.customText3Box.Dispose();
+            this.customText4Box.Dispose();
+            this.idTextBox.Dispose();
+            this.preserveTagValuesTextBox.Dispose();
+            this.processPreserveTagsTextBox.Dispose();
+            this.descriptionBox.Dispose();
+
+            this.customizedPresetPictureBox.Dispose();
+            this.userPresetPictureBox.Dispose();
+            this.tickedOnlyPictureBox.Dispose();
+            this.predefinedPictureBox.Dispose();
+            this.customizedPictureBox.Dispose();
+            this.userPictureBox.Dispose();
+            this.playlistPictureBox.Dispose();
+            this.functionIdPictureBox.Dispose();
+            this.hotkeyPictureBox.Dispose();
+            this.uncheckAllFiltersPictureBox.Dispose();
+
             this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
             this.searchTextBox = ControlsTools.CreateMusicBeeTextBox();
             this.customTextBox = ControlsTools.CreateMusicBeeTextBox();
@@ -249,7 +271,6 @@ namespace MusicBeePlugin
 
             this.userPresetPictureBox = new InterpolatedBox();
             ((InterpolatedBox)userPresetPictureBox).Interpolation = defaultInterpolationMode;
-
 
             this.tickedOnlyPictureBox = new InterpolatedBox();
             ((InterpolatedBox)tickedOnlyPictureBox).Interpolation = defaultInterpolationMode;

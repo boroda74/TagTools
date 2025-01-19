@@ -156,7 +156,16 @@ namespace MusicBeePlugin
 
             //MusicBee
             if (useSkinColors)
+            {
+                this.presetTabControl.Dispose();
                 this.presetTabControl = new FlatTabControl();
+            }
+
+            this.presetList.Dispose();
+            this.presetNameTextBox.Dispose();
+            this.appendTextBox.Dispose();
+            this.idTextBox.Dispose();
+            this.expressionTextBox.Dispose();
 
             this.presetList = new CustomCheckedListBox(Plugin.SavedSettings.dontUseSkinColors);
             this.presetNameTextBox = ControlsTools.CreateMusicBeeTextBox();

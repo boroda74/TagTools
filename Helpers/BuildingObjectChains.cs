@@ -51,7 +51,7 @@ namespace MusicBeePlugin
             T next = getNextItem(initial);
 
             if (next != null)
-                BuildItemChain(fullItemCollection, filteredList, next, addSkipItem, getNextItem);
+                BuildItemChainDown(fullItemCollection, filteredList, next, addSkipItem, getNextItem);
 
             return filteredList.Count > 0;
         }

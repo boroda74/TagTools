@@ -199,6 +199,23 @@
             this.textBoxTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 
             //MusicBee
+            this.nameBox.Dispose();
+            this.descriptionBox.Dispose();
+            this.customTextBox.Dispose();
+            this.customText2Box.Dispose();
+            this.customText3Box.Dispose();
+            this.customText4Box.Dispose();
+            this.searchedPatternBox.Dispose();
+            this.replacedPatternBox.Dispose();
+            this.searchedPattern2Box.Dispose();
+            this.replacedPattern2Box.Dispose();
+            this.searchedPattern3Box.Dispose();
+            this.replacedPattern3Box.Dispose();
+            this.searchedPattern4Box.Dispose();
+            this.replacedPattern4Box.Dispose();
+            this.searchedPattern5Box.Dispose();
+            this.replacedPattern5Box.Dispose();
+
             this.nameBox = ControlsTools.CreateMusicBeeTextBox();
             this.descriptionBox = ControlsTools.CreateMusicBeeTextBox();
             this.customTextBox = ControlsTools.CreateMusicBeeTextBox();

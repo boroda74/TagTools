@@ -94,6 +94,11 @@
             this.versionLabel = new System.Windows.Forms.Label();
 
             //MusicBee
+            this.customFontTextBox.Dispose();
+            this.preservedTagValuesLegendTextBox.Dispose();
+            this.preservedTagsLegendTextBox.Dispose();
+            this.changedLegendTextBox.Dispose();
+
             this.customFontTextBox = ControlsTools.CreateMusicBeeTextBox();
             this.preservedTagValuesLegendTextBox = ControlsTools.CreateMusicBeeTextBox();
             this.preservedTagsLegendTextBox = ControlsTools.CreateMusicBeeTextBox();

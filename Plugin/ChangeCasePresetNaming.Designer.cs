@@ -42,6 +42,9 @@
             this.textBoxTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 
             //MusicBee
+            this.nameBox.Dispose();
+            this.descriptionBox.Dispose();
+
             this.nameBox = ControlsTools.CreateMusicBeeTextBox();
             this.descriptionBox = ControlsTools.CreateMusicBeeTextBox();
             //~MusicBee
