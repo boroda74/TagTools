@@ -1545,8 +1545,6 @@ namespace MusicBeePlugin
                     lastSelectedIndex = value;
 
 
-                    string text = textBox.Text;
-
                     if (value != -1)
                         textBox.Text = listBox.Items[value].ToString();
                     else if (DropDownStyle == ComboBoxStyle.DropDownList)
@@ -1558,8 +1556,6 @@ namespace MusicBeePlugin
                     if (listBox.SelectedIndex != -1 && oldSelectedItem != listBox.Items[listBox.SelectedIndex] || oldSelectedItem != null)
                         Events[EVENT_SELECTEDITEMCHANGED]?.DynamicInvoke(this, null);
 
-
-                    textBox.Text = text;
 
                     if (value != -1)
                         Text = listBox.Items[value].ToString();
