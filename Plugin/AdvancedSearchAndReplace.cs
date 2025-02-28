@@ -2544,6 +2544,22 @@ namespace MusicBeePlugin
             }
 
 
+            SetTags.TryGetValue((int)ServiceMetaData.TempTag1, out var temp1);
+            SetTags.TryGetValue((int)ServiceMetaData.TempTag2, out var temp2);
+            SetTags.TryGetValue((int)ServiceMetaData.TempTag3, out var temp3);
+            SetTags.TryGetValue((int)ServiceMetaData.TempTag4, out var temp4);
+
+            temp1 = temp1 ?? string.Empty;
+            temp2 = temp2 ?? string.Empty;
+            temp3 = temp3 ?? string.Empty;
+            temp4 = temp4 ?? string.Empty;
+
+            replacedPattern = replacedPattern.Replace("<Temp 1>", temp1);
+            replacedPattern = replacedPattern.Replace("<Temp 2>", temp2);
+            replacedPattern = replacedPattern.Replace("<Temp 3>", temp3);
+            replacedPattern = replacedPattern.Replace("<Temp 4>", temp4);
+
+
             searchedTagValue = GetTag(currentFile, asrCommand, searchedTagId);
             originalReplacedTagValue = GetTag(currentFile, asrCommand, replacedTagId);
 
@@ -2597,8 +2613,10 @@ namespace MusicBeePlugin
 
             replacedTagValuePreserved = false;
 
+            replacedTagValue = Replace(currentFile, searchedTagValue, searchedPattern, replacedPattern, ignoreCase, out var isMatch);
 
-            replacedTagValue = Replace(currentFile, searchedTagValue, searchedPattern, replacedPattern, ignoreCase, out _);
+            if (!isMatch)
+                replacedTagValue = originalReplacedTagValue;
 
 
             if (add)
@@ -4748,8 +4766,13 @@ namespace MusicBeePlugin
             setCheckedPicturesStates();
 
 
+            ProcessPresetChanges = false;
+
             foreach (var preset in filteredPresets)
                 presetList.Items.Add(preset, autoAppliedAsrPresetGuids.ContainsKey(preset.guid));
+
+            ProcessPresetChanges = true;
+
 
             if (selectedPreset == null)
                 presetList.SelectedIndex = -1;
@@ -4759,6 +4782,7 @@ namespace MusicBeePlugin
             if (selectedPreset != null)
                 PresetsInteractiveWorkingCopy.AddReplace(selectedPresetGuid, selectedPreset);
 
+
             ProcessPresetChanges = false;
 
             presetListLastSelectedIndex = -1;
@@ -4767,8 +4791,9 @@ namespace MusicBeePlugin
 
             ProcessPresetChanges = true;
 
-            ignoreCheckedPresetEvent = true;
 
+            ignoreCheckedPresetEvent = true;
+            presetList.Refresh();
             updateCustomScrollBars(presetList);
         }
 
@@ -6112,7 +6137,10 @@ namespace MusicBeePlugin
                     var autoApply = autoAppliedAsrPresetGuids.ContainsKey(preset.guid);
                     if (!showTickedOnlyChecked || autoApply)
                     {
+                        ProcessPresetChanges = false;
                         presetList.Items.Add(preset, autoApply);
+                        ProcessPresetChanges = true;
+
                         if (autoApply)
                             autoAppliedPresetCount--;
                     }
@@ -6273,13 +6301,17 @@ namespace MusicBeePlugin
         //Returns: false if some preset in preset chain is already ticked for auto-applying, otherwise true
         private bool checkAutoAppliedPresetChain(Preset referencePreset)
         {
+            int autoAppliedPresetsInChain = 0;
             List<object> presetChain = new List<object>();
 
             if (BuildItemChain(PresetsInteractiveWorkingCopy.Values, presetChain, referencePreset, AddSkipItem, GetNextItem))
             {
                 foreach (Preset preset in presetChain)
                     if (autoAppliedAsrPresetGuids.ContainsKey(preset.guid))
-                        return false;
+                        autoAppliedPresetsInChain++;
+
+                if (autoAppliedPresetsInChain > 1)
+                    return false;
             }
 
             return true;
@@ -6431,6 +6463,7 @@ namespace MusicBeePlugin
 
             selectedPreset.favorite = favoriteCheckBox.Checked;
             selectedPreset.setCustomizationsFlag(this, backedUpPreset);
+            refreshPresetList(selectedPreset.guid, false, false);
         }
 
         private void favoriteCheckBoxLabel_Click(object sender, EventArgs e)

@@ -82,6 +82,15 @@ namespace MusicBeePlugin
         HtmlDocumentCdBooklet = 7,
         HtmlDocumentAlbumGrid = 8
     }
+
+    public enum AsrUpdateType
+    {
+        Ignore = 0,
+        PlayCountersChanged = (int)Plugin.NotificationType.PlayCountersChanged,
+        TagsChanged = (int)Plugin.NotificationType.TagsChanged,
+        ReplayGainChanged = (int)Plugin.NotificationType.ReplayGainChanged,
+        RatingChanged = (int)Plugin.NotificationType.RatingChanged
+    }
     #endregion
 
     #region Main module
@@ -311,6 +320,9 @@ namespace MusicBeePlugin
         internal static Dictionary<FilePropertyType, string> PropIdsNames = new Dictionary<FilePropertyType, string>();
 
         internal static readonly List<string> FilesUpdatedByPlugin = new List<string>();
+        internal static string LastUpdatedByPluginFile = null;
+        internal static readonly List<AsrUpdateType> LastUpdateTypes = new List<AsrUpdateType>();
+
         internal static readonly List<string> ChangedFiles = new List<string>();
 
         private static System.Threading.Timer PeriodicUiRefreshTimer;
@@ -2752,9 +2764,7 @@ namespace MusicBeePlugin
             if (ignoreFutureTagsChangedEvent)
             {
                 lock (FilesUpdatedByPlugin)
-                {
                     FilesUpdatedByPlugin.Add(sourceFileUrl);
-                }
             }
 
             result = MbApiInterface.Library_CommitTagsToFile(sourceFileUrl);
@@ -2918,6 +2928,8 @@ namespace MusicBeePlugin
             if (tagId == FilePathTagId)
                 return FilePathTagName;
 
+
+            //ASR
             if (tagId == AllTagsPseudoTagId)
             {
                 if (allTagsTagName == null)
@@ -2925,6 +2937,19 @@ namespace MusicBeePlugin
                 else
                     return allTagsTagName;
             }
+
+            if (tagId == (MetaDataType)ServiceMetaData.TempTag1)
+                return "Temp 1";
+
+            if (tagId == (MetaDataType)ServiceMetaData.TempTag2)
+                return "Temp 2";
+
+            if (tagId == (MetaDataType)ServiceMetaData.TempTag3)
+                return "Temp 3";
+
+            if (tagId == (MetaDataType)ServiceMetaData.TempTag4)
+                return "Temp 4";
+            //~ASR
 
 
             if (TagIdsNames.TryGetValue(tagId, out var tagName))
@@ -5737,7 +5762,7 @@ namespace MusicBeePlugin
             Uninstalled = true;
         }
 
-        private void autoApplyAsrUpdateLrCache(string newChangedFileUrl, string changingFile = null)
+        private void autoApplyAsrUpdateLrCache(AsrUpdateType asrUpdateType, string newChangedFileUrl, string changingFile = null)
         {
             if (!SavedSettings.dontShowAsr || !SavedSettings.dontShowLibraryReports)
             {
@@ -5745,20 +5770,25 @@ namespace MusicBeePlugin
 
                 if (newChangedFileUrl != null)
                 {
+                    if (newChangedFileUrl == LastUpdatedByPluginFile && !LastUpdateTypes.Contains(asrUpdateType))
+                    {
+                        LastUpdateTypes.Add(asrUpdateType);
+                    }
+                    else
+                    {
+                        LastUpdatedByPluginFile = null;
+                        LastUpdateTypes.Clear();
+                    }
+
+
                     lock (FilesUpdatedByPlugin)
                     {
-                        if (!FilesUpdatedByPlugin.RemoveExisting(newChangedFileUrl))
+                        if (LastUpdatedByPluginFile == null && !FilesUpdatedByPlugin.RemoveExisting(newChangedFileUrl))
                             autoApplyAsrUpdateLrCache = true;
                     }
 
-                    if (autoApplyAsrUpdateLrCache && !SavedSettings.dontShowAsr)
+                    if (autoApplyAsrUpdateLrCache && asrUpdateType != AsrUpdateType.Ignore && !SavedSettings.dontShowAsr)
                         AsrAutoApplyPresets(newChangedFileUrl);
-                }
-
-                if (changingFile != null)
-                {
-                    if (!FilesUpdatedByPlugin.Contains(changingFile))
-                        autoApplyAsrUpdateLrCache = true;
                 }
 
 
@@ -5877,7 +5907,7 @@ namespace MusicBeePlugin
                         }
                     }
 
-                    autoApplyAsrUpdateLrCache(sourceFileUrl); //-V5609
+                    autoApplyAsrUpdateLrCache(AsrUpdateType.PlayCountersChanged, sourceFileUrl); //-V5609
 
                     if (SavedSettings.autoRateOnTrackProperties)
                         AutoRate.AutoRateLive(sourceFileUrl); //-V5609
@@ -5888,11 +5918,11 @@ namespace MusicBeePlugin
 
                     break;
                 case NotificationType.TagsChanging:
-                    autoApplyAsrUpdateLrCache(null, sourceFileUrl);
+                    autoApplyAsrUpdateLrCache(AsrUpdateType.Ignore, null, sourceFileUrl);
 
                     break;
                 case NotificationType.FileRemovedFromLibrary:
-                    autoApplyAsrUpdateLrCache(sourceFileUrl); //-V5609
+                    autoApplyAsrUpdateLrCache(AsrUpdateType.Ignore, sourceFileUrl); //-V5609
 
                     break;
                 case NotificationType.FileRenamed:
@@ -5903,7 +5933,7 @@ namespace MusicBeePlugin
                 case NotificationType.TagsChanged:
                 case NotificationType.ReplayGainChanged:
                 case NotificationType.FileAddedToLibrary:
-                    autoApplyAsrUpdateLrCache(sourceFileUrl); //-V5609
+                    autoApplyAsrUpdateLrCache(AsrUpdateType.TagsChanged, sourceFileUrl); //-V5609
 
                     customSortingAutoCopy(sourceFileUrl);
 
@@ -5912,7 +5942,7 @@ namespace MusicBeePlugin
 
                     break;
                 case NotificationType.RatingChanged:
-                    autoApplyAsrUpdateLrCache(sourceFileUrl); //-V5609
+                    autoApplyAsrUpdateLrCache(AsrUpdateType.RatingChanged, sourceFileUrl); //-V5609
 
                     if (!SavedSettings.dontShowCAR)
                     {

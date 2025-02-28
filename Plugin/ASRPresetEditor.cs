@@ -197,12 +197,12 @@ namespace MusicBeePlugin
                 customText2CheckBox.Enable(false);
                 customText3CheckBox.Enable(false);
                 customText4CheckBox.Enable(false);
-
-                customTextBox.ReadOnly(!customTextCheckBox.Checked);
-                customText2Box.ReadOnly(!customText2CheckBox.Checked);
-                customText3Box.ReadOnly(!customText3CheckBox.Checked);
-                customText4Box.ReadOnly(!customText4CheckBox.Checked);
             }
+
+            customTextBox.Enable(customTextCheckBox.Checked);
+            customText2Box.Enable(customText2CheckBox.Checked);
+            customText3Box.Enable(customText3CheckBox.Checked);
+            customText4Box.Enable(customText4CheckBox.Checked);
 
             descriptionBox.TextChanged += descriptionBox_TextChanged;
 
