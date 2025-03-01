@@ -22,7 +22,7 @@ You can use special functions in substitution fields of "Advanced Search \& Repl
     To lowercase excepted words use <b><i>\@sc[[\@lc[[$1;;ignored_words]]]]</i></b>. 
 
 <b>\@eval[[virtual_tag_expression]]</b> : returns result of calculation of <b><i>virtual_tag_expression</i></b>, 
-    e.g. <b><i>\@eval[[$Sub(\<Play Count\>,,\<Skip Count\)>]]</i></b>. Commas, semicolons and square brackets must be doubled 
+    e.g. <b><i>\@eval[[$Sub(\<Play Count\>,,\<Skip Count\)>]]</i></b>. Quotes, commas, semicolons and square brackets must be doubled 
     in expression.
 
 <b>\@repunct[[string]]</b> : changes Unicode punctuation marks to ASCII analogs, e.g. « to <<
