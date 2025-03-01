@@ -40,7 +40,7 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
     sentence separator. You can omit any parameter except for the first one, using a single character <b>`</b> 
     <b><i>not</i></b> surrounded by spaces to pass empty parameter. You can <b><i>safely use</i></b> character <b>`</b> in its literal meaning 
     if it’s typed in the list <b><i>along with other characters</i></b> or using a single character <b>`</b> <b><i>surrounded</i></b> by spaces. 
-  
+
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of end parameters 
     simply by putting closing parenthesis earlier, e.g., <b><i>$SentenceCase(string)</i></b> 
     or <b><i>$SentenceCase(string,upper_case_words)</i></b>
@@ -60,7 +60,7 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
     any parameter except for the first one, using a single character <b>`</b> <b><i>not</i></b> surrounded by spaces to pass empty   
     parameter. You can <b><i>safely use</i></b> character <b>`</b> in its literal meaning if it’s typed in the list <b><i>along with other   
     characters</i></b> or using a single character <b>`</b> <b><i>surrounded</i></b> by spaces. 
-  
+
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of end parameters 
     simply by putting closing parenthesis earlier, e.g., <b><i>$TitleCase(string,lower_case_words,upper_case_words)</i></b>
 
@@ -107,4 +107,4 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
 
 ***
 
-Copyright © boroda 2012-2024. Help version 9.2.241128
+Copyright © boroda 2012-2025. Help version 9.2.250301
