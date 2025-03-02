@@ -4,7 +4,7 @@
 
 Public Domain.
 
-### ASR Custom presets
+### Optional Custom ASR Presets Pack
 
 [Some ASR user presets](https://www.mediafire.com/file/ikb8wlburvvwjc9/ASR-Custom-Presets.zip/file), that are not included in the plugin package, but may be useful.
 
