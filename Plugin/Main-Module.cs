@@ -3808,7 +3808,7 @@ namespace MusicBeePlugin
             CopyTagsToClipboardUsingMenuDescription = "Copy Tags to Clipboard Using Tag Set";
             MsrCommandDescription = TagToolsHotkeyDescription + "Multiple Search & Replace";
             ShowHiddenWindowsDescription = TagToolsHotkeyDescription + "Show hidden/restore minimized plugin windows";
-            CustomSortingForColumnBrowserDescription = "Custom Sorting for Column Browser";
+            CustomSortingForColumnBrowserDescription = TagToolsHotkeyDescription + "Custom Sorting for Column Browser";
 
             BackupTagsName = "Backup Tags for All Tracks...";
             RestoreTagsName = "Restore Tags for Selected Tracks...";
@@ -4579,7 +4579,7 @@ namespace MusicBeePlugin
                 CopyTagsToClipboardUsingMenuDescription = "Копировать теги в буфер обмена, используя набор";
                 MsrCommandDescription = TagToolsHotkeyDescription + "Множественный поиск и замена";
                 ShowHiddenWindowsDescription = TagToolsHotkeyDescription + "Показать скрытые окна плагина";
-                CustomSortingForColumnBrowserDescription = "Своя сортировка для браузера колонок";
+                CustomSortingForColumnBrowserDescription = TagToolsHotkeyDescription + "Своя сортировка для браузера колонок";
 
                 BackupTagsName = "Архивировать теги для всех треков...";
                 RestoreTagsName = "Восстановить теги для выбранных треков...";
