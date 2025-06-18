@@ -578,8 +578,8 @@ namespace MusicBeePlugin
             // 
             // buttonCalculate
             // 
-            this.dirtyErrorProvider.SetError(this.buttonCalculate, resources.GetString("buttonCalculate.Error"));
             resources.ApplyResources(this.buttonCalculate, "buttonCalculate");
+            this.dirtyErrorProvider.SetError(this.buttonCalculate, resources.GetString("buttonCalculate.Error"));
             this.buttonCalculate.Name = "buttonCalculate";
             this.buttonCalculate.Click += new System.EventHandler(this.buttonCalculate_Click);
             // 

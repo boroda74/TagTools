@@ -2527,6 +2527,9 @@ namespace MusicBeePlugin
             {
                 tagValue = GetFileTag(file, MetaDataType.Artwork);
 
+                if (string.IsNullOrEmpty(tagValue))
+                    tagValue = ResizedDefaultArtworkBase64;
+
                 if (CdBookletArtworkBase64 == null)
                 {
                     CdBookletArtworkBase64 = tagValue;
@@ -3416,6 +3419,9 @@ namespace MusicBeePlugin
                                 row.Columns.Add(functionResult);
                             }
 
+
+                            object[] rowArray = null;
+
                             if (artworkField != -1)
                             {
                                 Bitmap pic;
@@ -3430,10 +3436,17 @@ namespace MusicBeePlugin
 
                                 row.Columns[artworkField] = pic;
                                 row.artworkBase64 = groupingsRow[artworkField];
+
+                                rowArray = new object[row.Columns.Count + 1];
+                                row.Columns.CopyTo(rowArray);
+                                rowArray[row.Columns.Count] = row.artworkBase64;
+                            }
+                            else
+                            {
+                                rowArray = new object[row.Columns.Count];
+                                row.Columns.CopyTo(rowArray);
                             }
 
-                            object[] rowArray = new object[row.Columns.Count];
-                            row.Columns.CopyTo(rowArray);
 
                             composedSplitGroupingTagsReportRows.Add(composedSplitGroupingTags, rowArray);
                         }
@@ -3472,7 +3485,19 @@ namespace MusicBeePlugin
                         }
 
 
-                        rows.AddRow(splitGroupingsRows.Value);
+                        if (artworkField != -1)
+                        {
+                            object[] newRow = new object[splitGroupingsRows.Value.Length - 1];
+                            for (int l = 0; l < splitGroupingsRows.Value.Length - 2; l++)
+                                newRow[l] = splitGroupingsRows.Value[l];
+
+                            rows.AddRow(newRow);
+                            rows[rows.Count - 1].artworkBase64 = splitGroupingsRows.Value[splitGroupingsRows.Value.Length - 1].ToString();
+                        }
+                        else
+                        {
+                            rows.AddRow(splitGroupingsRows.Value);
+                        }
 
 
                         //Saving preset results, see check for functionId above
@@ -3603,6 +3628,9 @@ namespace MusicBeePlugin
 
                             row.Columns.AddRange(groupingsRow);
 
+
+                            object[] rowArray = null;
+
                             if (artworkField != -1)
                             {
                                 Bitmap pic;
@@ -3617,10 +3645,17 @@ namespace MusicBeePlugin
 
                                 row.Columns[artworkField] = pic;
                                 row.artworkBase64 = groupingsRow[artworkField];
+
+                                rowArray = new object[row.Columns.Count + 1];
+                                row.Columns.CopyTo(rowArray);
+                                rowArray[row.Columns.Count] = row.artworkBase64;
+                            }
+                            else
+                            {
+                                rowArray = new object[row.Columns.Count];
+                                row.Columns.CopyTo(rowArray);
                             }
 
-                            object[] rowArray = new object[row.Columns.Count];
-                            row.Columns.CopyTo(rowArray);
 
                             composedSplitGroupingTagsReportRows.Add(composedSplitGroupingTags, rowArray);
                         }
@@ -3650,7 +3685,19 @@ namespace MusicBeePlugin
                     }
 
 
-                    rows.AddRow(splitGroupingsRows.Value);
+                    if (artworkField != -1)
+                    {
+                        object[] newRow = new object[splitGroupingsRows.Value.Length - 1];
+                        for (int l = 0; l < splitGroupingsRows.Value.Length - 1; l++)
+                            newRow[l] = splitGroupingsRows.Value[l];
+
+                        rows.AddRow(newRow);
+                        rows[rows.Count - 1].artworkBase64 = splitGroupingsRows.Value[splitGroupingsRows.Value.Length - 1].ToString();
+                    }
+                    else
+                    {
+                        rows.AddRow(splitGroupingsRows.Value);
+                    }
 
 
                     SetStatusBarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, groupingIndex++, groupingsCount, appliedPreset.getName(), 0);
@@ -8157,9 +8204,11 @@ namespace MusicBeePlugin
 
         internal string getImageName(string base64)
         {
-            base64 = Regex.Replace(base64, @"\\", "_");
-            base64 = Regex.Replace(base64, @"/", "_");
-            base64 = Regex.Replace(base64, @"\:", "_");
+            //base64 = Regex.Replace(base64, @"\\", "_");
+            //base64 = Regex.Replace(base64, @"/", "_");
+            //base64 = Regex.Replace(base64, @"\:", "_");
+
+            base64 = base64.GetHashCode().ToString("X8");
 
             return base64;
         }

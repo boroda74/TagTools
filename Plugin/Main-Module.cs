@@ -313,11 +313,11 @@ namespace MusicBeePlugin
 
         private static string LastMessage = string.Empty;
 
-        internal static Dictionary<string, MetaDataType> TagNamesIds = new Dictionary<string, MetaDataType>();
-        internal static Dictionary<MetaDataType, string> TagIdsNames = new Dictionary<MetaDataType, string>();
+        internal static SortedDictionary<string, MetaDataType> TagNamesIds = new SortedDictionary<string, MetaDataType>();
+        internal static SortedDictionary<MetaDataType, string> TagIdsNames = new SortedDictionary<MetaDataType, string>();
 
         internal static SortedDictionary<string, FilePropertyType> PropNamesIds = new SortedDictionary<string, FilePropertyType>();
-        internal static Dictionary<FilePropertyType, string> PropIdsNames = new Dictionary<FilePropertyType, string>();
+        internal static SortedDictionary<FilePropertyType, string> PropIdsNames = new SortedDictionary<FilePropertyType, string>();
 
         internal static readonly List<string> FilesUpdatedByPlugin = new List<string>();
         internal static string LastUpdatedByPluginFile = null;
@@ -3087,6 +3087,17 @@ namespace MusicBeePlugin
                     list.Add(prefix + tagName);
                 }
             }
+
+
+            List<string> tagNames = new List<string>();
+            foreach (string item in list)
+                tagNames.Add(item);
+
+            tagNames.Sort();
+
+            list.Clear();
+            foreach (string item in tagNames)
+                list.Add(item);
         }
 
         internal static FilePropertyType GetPropId(string propName)
@@ -3122,6 +3133,17 @@ namespace MusicBeePlugin
 
             foreach (var propName in PropNamesIds.Keys)
                 list.Add(marker + propName);
+
+
+            List<string> tagProps = new List<string>();
+            foreach (string item in list)
+                tagProps.Add(item);
+
+            tagProps.Sort();
+
+            list.Clear();
+            foreach (string item in tagProps)
+                list.Add(item);
         }
 
         internal static void InitializeSbText()
@@ -4351,7 +4373,7 @@ namespace MusicBeePlugin
             {
                 SavedSettings.exceptedWords = new object[10];
                 SavedSettings.exceptedWords[0] = "1 a an and at in of or the";
-                SavedSettings.exceptedWords[1] = "2 *RN U2 UB40";
+                SavedSettings.exceptedWords[1] = "2 #RN U2 UB40";
                 SavedSettings.exceptedWords[2] = "3 allegretto";
                 SavedSettings.exceptedWords[3] = "# a al an and as at but by de for in la le mix nor of on or remix the to vs. y ze feat.";
                 SavedSettings.exceptedWords[4] = string.Empty;
@@ -5071,12 +5093,12 @@ namespace MusicBeePlugin
                 predefinedPreset.names.Add("ru", "Как в предложениях.");
 
                 predefinedPreset.descriptions.Add("en", "General words will became Sentence case. The words form item #1 of \"Except for words\" list will become uppercase. \r\n" +
-                    "You can use special pseudo-word \"*RN\" in this list item to uppercase Roman numerals (e.g., III, VI, X). \r\n" +
+                    "You can use special pseudo-word \"#RN\" in this list item to uppercase Roman numerals (e.g., III, VI, X). \r\n" +
                     "Characters from item #1 of \"Symbols to treat as sentence separators\" list are characters after which the words will become capitalized. \r\n" +
                     "A dot, followed by a space, is always treated as a sentence separator.");
 
                 predefinedPreset.descriptions.Add("ru", "Пресет делает регистр Как в предложениях. Слова из пункта #1 из списка \"Кроме слов\" станут строчными. Вы можете \r\n" +
-                    "использовать специальное псевдо-слово \"*RN\" в пункте #1 из списка \"Кроме слов\" для перевода римских цифр (например, III, VI, X) в верхний \r\n" +
+                    "использовать специальное псевдо-слово \"#RN\" в пункте #1 из списка \"Кроме слов\" для перевода римских цифр (например, III, VI, X) в верхний \r\n" +
                     "регистр. Символы из пункта #1 из списка \"Символы, которые считать разделителями предложений\" — это список символов, которые начинают новое предложение. \r\n" +
                     "Слова после этих символов будут начинаться с прописных букв. Точка с последующим пробелом всегда считается началом нового предложения.");
 
@@ -5137,7 +5159,7 @@ namespace MusicBeePlugin
                 predefinedPreset.descriptions.Add("en", "General words will became Title Cased. The words from item #1 of \"Except for words\" list will become lowercase (always except \r\n" +
                     "for the first word and except for the last words if not lowercase by other parameters). The words from item #2 of \"Except for words\" list will become uppercase. \r\n" +
                     "This rule overrides all other rules. The words from item #3 of \"Except for words\" list will become lowercase between characters from items #1 of opening and closing \r\n" +
-                    "\"Except for words between symbols\" lists. You can use special pseudo-word \"*RN\" in the items #1, #2 and #3 of \"Except for words\" list to include \r\n" +
+                    "\"Except for words between symbols\" lists. You can use special pseudo-word \"#RN\" in the items #1, #2 and #3 of \"Except for words\" list to include \r\n" +
                     "Roman numerals (e.g,. III, VI, X) in the corresponding item. The characters from item #1 of \"Symbols to treat as sentence separators\" list are characters \r\n" +
                     "after which the words will become capitalized (switching off all exceptions, e.g. words to lowercase, besides the words to uppercase). The first word of \r\n" +
                     "a sentence will always be capitalized (besides the words to uppercase).");
@@ -5145,7 +5167,7 @@ namespace MusicBeePlugin
                 predefinedPreset.descriptions.Add("ru", "Пресет начинает регистр строки С Прописных. Слова из пункта #1 из списка \"Кроме слов\" становятся строчными (всегда кроме первого \r\n" +
                     "слова и кроме последнего слова, если иное не указано другими параметрами). Слова из пункта #2 из списка \"Кроме слов\" становятся прописными. Это правило имеет приоритет \r\n" +
                     "надо всеми другими правилами. Слова из пункта #3 из списка \"Кроме слов\" становятся строчными между между символами из пунктов #1 из открывающего и закрывающего списков \r\n" +
-                    "\"Кроме слов между символами\". Вы можете использовать специальное псевдо-слово \"*RN\" в пунктах #1, #2 и #3 списка \"Кроме слов\" для включения римских \r\n" +
+                    "\"Кроме слов между символами\". Вы можете использовать специальное псевдо-слово \"#RN\" в пунктах #1, #2 и #3 списка \"Кроме слов\" для включения римских \r\n" +
                     "цифр (например, III, VI, X) в соответствующий пункт. Символы из пункта #1 списка \"Символы, которые считать разделителями предложений\" — это список символов, которые \r\n" +
                     "начинают новое предложение, отключая все остальные правила, кроме слов приводимых в верхний регистр. Слова после этих символов будут начинаться с прописных букв. \r\n" +
                     "Первое слово всегда будет начинаться с прописной буквы (кроме слов приводимых в верхний регистр).");
@@ -6617,7 +6639,7 @@ namespace MusicBeePlugin
             //DATAGRIDVIEW COLOR DEFINITIONS
             const float MinForeBrightnessDifference = 0.3f; //-----
             const float MinBackBrightnessDifference = 0.12f;
-            const float MinForeBackBrightnessDifference = 0.3f;
+            const float MinForeBackBrightnessDifference = 0.5f;
             const float InvertedAverageBrightnessContrast = 2f;
 
 
@@ -7040,6 +7062,19 @@ namespace MusicBeePlugin
                 return "LR is disabled!";
 
             return AutoCalculateReportPresetFunction(url, functionId) ?? "<null>"; //-V5609
+        }
+
+        public string CustomFunc_SortMultiValues(string multiValue, string separator)
+        {
+            if (string.IsNullOrWhiteSpace(multiValue))
+                return multiValue;
+
+
+            string[] values = multiValue.Split(new string[] { separator }, StringSplitOptions.None);
+            List<string> valueList = values.ToList();
+            valueList.Sort();
+            
+            return string.Join(separator, valueList);
         }
 
         public string CustomFunc_Random(string max_number)

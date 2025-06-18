@@ -1043,7 +1043,9 @@ You can record your own preset. First enumerate the excepted words/characters, t
   </data>
   <data name="exceptionWordsBox.ToolTip" xml:space="preserve">
     <value>Words in this field must be separated by spaces
-You can use the special pseudo-word "*RN" for Roman numerals
+You can use the special pseudo-word "#RN" for Roman numerals
+This exception list supports regex matching (but only for entire words, not for phrases)
+Regex must be preceded by * and included in curly brackets, e.g., *{CD[0-9]+} for matching CD1, CD312, CD55, etc.
 Ctrl-click list items to enumerate them. Shift-click to reset the enumeration
 Click list items number column to enumerate items. Shift-click to reset the enumeration</value>
   </data>

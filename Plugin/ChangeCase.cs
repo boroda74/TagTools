@@ -234,9 +234,9 @@ namespace MusicBeePlugin
 
             string toolTip = exceptionWordsBoxCustom.GetToolTip(toolTip1);
             if (useSkinColors)
-                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$4");
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$3$4$6");
             else
-                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$3");
+                toolTip = Regex.Replace(toolTip, @"^(.*\r\n)(.*\r\n)(.*\r\n)(.*\r\n)(.*)\r\n(.*)", "$1$2$3$4$5");
 
             exceptionWordsBoxCustom.SetToolTip(toolTip1, toolTip);
 
@@ -822,12 +822,19 @@ namespace MusicBeePlugin
 
             foreach (var currentItem in array)
             {
-                if (currentItem.ToLower() == "*rn") //Roman numerals
+                if (currentItem.ToUpper() == "#RN") //Roman numerals
                 {
                     item = Regex.Replace(item, @"([IiVvXxLl]{2,})", string.Empty); //Latin letters replacements
                     item = Regex.Replace(item, @"([ⅢⅣⅤⅥⅦⅧⅨⅩⅪⅫⅬⅭⅮⅯⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹⅺⅻⅼⅽⅾⅿↀↁↂↃↄↅↆↇↈ]+)", string.Empty); //Roman numerals replacements
 
                     if (string.IsNullOrEmpty(item))
+                        return true;
+                    else
+                        return false;
+                }
+                else if (currentItem.Length > 3 && currentItem[0] == '*' && currentItem[1] == '{' && currentItem[currentItem.Length - 1] == '}') //Regex match
+                {
+                    if (Regex.IsMatch(item, currentItem.Substring(2, currentItem.Length - 3)))
                         return true;
                     else
                         return false;
@@ -955,7 +962,7 @@ namespace MusicBeePlugin
                             newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true) + currentChar;
                         //Ignore changing case if the word is not contained in whitelist, otherwise proceed as usual
                         else if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList)
-                            newString = newString + currentWord + currentChar;
+                            newString = newString + currentWord + currentChar;                        
                         //Change case
                         else
                             newString = newString + ChangeSubstringCase(currentWord, changeCaseOption, isTheFirstWord) + currentChar;
@@ -966,6 +973,7 @@ namespace MusicBeePlugin
                             resetCharException = false;
                             wasCharException = false;
                         }
+
 
                         currentWord = string.Empty; //Beginning of new word
                         isTheFirstWord = false;

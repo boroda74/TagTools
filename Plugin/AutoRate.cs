@@ -16,6 +16,8 @@ namespace MusicBeePlugin
         private CustomComboBox playsPerDayTagListCustom;
 
 
+        bool formIsOpening;
+
         private string[] files = Array.Empty<string>();
 
         private static int NumberOfFiles;
@@ -79,6 +81,7 @@ namespace MusicBeePlugin
 
             ReplaceButtonBitmap(buttonSettings, Gear);
 
+
             toolTip1.SetToolTip(autoRateAtStartUpCheckBox, MsgThresholdsDescription);
             toolTip1.SetToolTip(autoRateAtStartUpCheckBoxLabel, MsgThresholdsDescription);
             toolTip1.SetToolTip(autoRateOnTrackPropertiesCheckBox, MsgThresholdsDescription);
@@ -117,6 +120,9 @@ namespace MusicBeePlugin
 
             FillListByTagNames(playsPerDayTagListCustom.Items, false, false, false, false, false, false, true);
             playsPerDayTagListCustom.Text = GetTagName(SavedSettings.playsPerDayTagId);
+
+
+            formIsOpening = true;
 
 
             storePlaysPerDayCheckBox.Checked = SavedSettings.storePlaysPerDay;
@@ -164,6 +170,22 @@ namespace MusicBeePlugin
             maxPlaysPerDayBox.Text = CtlAutoRateCalculating;
             avgPlaysPerDayBox.Text = CtlAutoRateCalculating;
             labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower();
+
+            
+            formIsOpening = false;
+
+            decimal fullPercentageSum = sumOfPercentages();
+
+            if (fullPercentageSum == 100)
+            {
+                calculateThresholdsAtStartUpCheckBox.Enable(true);
+                buttonCalculate.Enable(true);
+                buttonNormalizePercentages.Enable(false);
+            }
+            else
+            {
+                calculateThresholdsAtStartUpCheckBox.Enable(false);
+            }
 
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
@@ -589,7 +611,12 @@ namespace MusicBeePlugin
         {
             ignoreClosingForm = true;
 
-            buttonNormalizePercentages_Click(null, null);
+            decimal fullPercentageSum = sumOfPercentages();
+
+            if (fullPercentageSum != 100)
+                SavedSettings.threshold5 += (double)(100 - fullPercentageSum);
+
+            calculateActualSumOfPercentages();
 
             NumberOfFiles = 0;
             var playsPerDayStatistics = new SortedDictionary<double, int>();
@@ -905,7 +932,7 @@ namespace MusicBeePlugin
         {
             ignoreClosingForm = true;
             calculateActualSumOfPercentageOnCalculatingThresholds = true;
-            switchOperation(calculateThresholds, EmptyButton, buttonOK, EmptyButton, buttonClose, false, null);
+            switchOperation(calculateThresholds, buttonCalculate, buttonOK, buttonCalculate, buttonClose, false, null);
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -1034,6 +1061,14 @@ namespace MusicBeePlugin
 
         private void perCentN_ValueChanged(NumericUpDown perCent, CheckBox checkBox, Label perCentLabel, decimal actualPerCent)
         {
+            if (!formIsOpening)
+            {
+                calculateThresholdsAtStartUpCheckBox.Checked = false;
+                calculateThresholdsAtStartUpCheckBox.Enable(false);
+                buttonCalculate.Enable(false);
+                buttonNormalizePercentages.Enable(true);
+            }
+
             if (perCent.Value == 0)
                 checkBox.Checked = false;
             else
@@ -1162,8 +1197,28 @@ namespace MusicBeePlugin
         internal override void enableDisablePreviewOptionControls(bool enable, bool dontChangeDisabled = false)
         {
             foreach (var control in allControls)
+            {
                 if (control != buttonSettings && control != buttonClose)
                     control.Enable(enable);
+            }
+
+            if (enable)
+            {
+                decimal fullPercentageSum = sumOfPercentages();
+
+                if (fullPercentageSum == 100)
+                {
+                    calculateThresholdsAtStartUpCheckBox.Enable(true);
+                    buttonNormalizePercentages.Enable(false);
+                    buttonCalculate.Enable(true);
+                }
+                else
+                {
+                    calculateThresholdsAtStartUpCheckBox.Enable(false);
+                    buttonNormalizePercentages.Enable(true);
+                    buttonCalculate.Enable(false);
+                }
+            }
 
             checkBoxN_CheckedChanged(threshold5Box, checkBox5, perCent5UpDown, enable);
             checkBoxN_CheckedChanged(threshold45Box, checkBox45, perCent45UpDown, enable);
@@ -1261,6 +1316,14 @@ namespace MusicBeePlugin
             fullPercentageSum = sumOfPercentages();
             if (fullPercentageSum != 100)
                 perCent5UpDown.Value += 100 - fullPercentageSum;
+
+            fullPercentageSum = sumOfPercentages();
+            if (fullPercentageSum == 100)
+            {
+                buttonNormalizePercentages.Enable(false);
+                calculateThresholdsAtStartUpCheckBox.Enable(true);
+                buttonCalculate.Enable(true);
+            }
 
 
             SavedSettings.perCent5 = perCent5UpDown.Value;

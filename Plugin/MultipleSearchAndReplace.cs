@@ -1176,11 +1176,19 @@ namespace MusicBeePlugin
                 }
             }
 
+            string customMSRKey = null;
             foreach (var pair in IdsAsrPresets)
             {
                 if (pair.Value == customMSR)
-                    IdsAsrPresets.Remove(pair.Key);
+                {
+                    customMSRKey = pair.Key;
+                    break;
+                }
             }
+
+            if (customMSRKey != null)
+                IdsAsrPresets.Remove(customMSRKey);
+
 
             System.IO.File.Delete(Path.Combine(PresetsPath, customMSR.getSafeFileName() + AsrPresetExtension));
 
