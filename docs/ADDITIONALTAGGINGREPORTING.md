@@ -4,13 +4,13 @@
 
 ### Copy Tag
 
-Allows you to copy one tag to another for selected files. It’s possible to append one tag to the end of another tag or add one tag to the beginning of another tag, placing custom text between them. Also, it’s possible to use \<Null\pseudo tag as the source to append static text to the destination tag.
+Allows you to copy one tag to another for selected files. It’s possible to append one tag to the end of another tag or add one tag to the beginning of another tag, placing custom text between them. Also, it’s possible to use &lt;Null&gt; pseudo tag as the source to append static text to the destination tag.
 
 *Notes:*
 
 * "Smart copy" option is important only for working with multiple artists/composers (it will convert the list of artists/composers to ";" delimited string if destination tag doesn't support multiple values). Unchecking this option will preserve each byte of the source tag (including service invisible characters), but it may only be useful if you use the destination tag for temporary storage.
 
-- It is possible to copy a number of source pseudo tags (like \<Date Created\>, which indicates the file creation date) to, for example, custom tags.
+- It is possible to copy a number of source pseudo tags (like &lt;Date Created&gt;, which indicates the file creation date) to, for example, custom tags.
 
 ### Swap Tags
 
@@ -30,8 +30,8 @@ Changes letter case of a tag according to rather sophisticated rules for selecte
 * Excluded words *remain unchanged*, **not** become *lowercase*\!
 * You can make two or more steps by changing casing rules (and exeptions) and clicking "Reapply rules to new tag" button without saving changes to tags.
 * "Change Case" supports presets for multistep case changing. There are two predefined presets, "Sentence case" and "Title Case", which are identical by functionality to corresponding VT functions. Click "Description" button for details. Also, you can record your own presets if needed.
-* You can use special pseudo-word "#RN" in the excepted word list to remain unchanged Roman numerals (e.g., III, VI, X).
-* The exception word list supports regex matching (but only for entire words, not for phrases). Regex must be preceded by * and included in curly brackets, e.g., *{CD[0-9]+} for matching CD1, CD2, CD312, CD55, etc.
+* You can use special pseudo-word "***#RN***" in the excepted word list to remain unchanged Roman numerals (e.g., ***III, VI, X***).
+* The exception word list supports regex matching (but only for entire words, not for phrases). Regex must be preceded by * and included in curly brackets, e.g., ***{CD[0-9]+}*** for matching ***CD1***, ***CD2***, ***CD312***, ***CD55***, etc.
 
 ### Re-encode Tag/Re-encode Tags
 
@@ -55,17 +55,17 @@ Also, "Library Reports" allows to calculate aggregated functions of one or more 
 
 Also, see two predefined presets "LIBRARY TOTALS" and "LIBRARY AVERAGES" of "Library Reports" command as examples.
 
-"Library Reports" command supports multiple item splitters for grouping tags. For example, you can define splitter ";" for "Artist" or "Genre" tags to split multiple artists or genres. If several tags are split (i.e., several tags for one track may have several values) then *all combinations of split values for every tag* will be included in the LR report.
+"Library Reports" command supports multiple item splitters for grouping tags. For example, you can define splitter ";" for "Artist" or "Genre" tags to split multiple artists or genres. If several tags are split (i.e., several tags for one track may have several values) then *all combinations of split values for every tag of given track* will be included in the LR report.
 
 "Library Reports" supports virtual tag expressions (any expressions valid for virtual tags).
 [Read more about "Library Reports" virtual tag expressions](LREXPRESSIONS.md)
 
 "Library Reports" command adds a new virtual tag function:
 
-$LR(\<URL\>,function\_id)
+\$LR(&lt;URL&gt;,function\_id)
 
-To use this function open library reports window, create one or more presets, each with one or more aggregated functions and assign a function id (any string containing **a-z** chars, **numbers** and symbols **. : - \_** ) to the functions. You can write all aggregate function results to \<Null\pseudo-tag in this case (i.e. do not write them to any tags at all if you use these functions only for virtual tags). All $LR virtual tag functions are calculated, updated and displayed *dynamically*. Also, you can at the same time *assign an id* to the function **and** choose *to store function results in (custom) tag*. In this case, LR will use a stored tag as a persistent function result cache. If you change some tags or add new tracks to the library, this cache will *dynamically update*. However, **it’s highly recommended** first to fill this cache for all existing tracks/current tags in the current library to avoid UI slowdowns and freezes when using MusicBee regularly. You will be automatically prompted to execute all affected presets and fill the cache for the current library if you define such LR presets.
-"Library Reports" virtual tag functions allow you to collect and display some library statistics for currently displayed tracks in the main window. Either you can use virtual tags that use $LR functions in auto-playlist filter criteria. However, in this case it's **strongly recommended** to cache the results of the LR functions in tags.
+To use this function open library reports window, create one or more presets, each with one or more aggregated functions and assign a function id (any string containing **a-z** chars, **numbers** and symbols **. : - \_** ) to the functions. You can write all aggregate function results to &lt;Null\pseudo-tag in this case (i.e. do not write them to any tags at all if you use these functions only for virtual tags). All \$LR virtual tag functions are calculated, updated and displayed *dynamically*. Also, you can at the same time *assign an id* to the function **and** choose *to store function results in (custom) tag*. In this case, LR will use a stored tag as a persistent function result cache. If you change some tags or add new tracks to the library, this cache will *dynamically update*. However, **it’s highly recommended** first to fill this cache for all existing tracks/current tags in the current library to avoid UI slowdowns and freezes when using MusicBee regularly. You will be automatically prompted to execute all affected presets and fill the cache for the current library if you define such LR presets.
+"Library Reports" virtual tag functions allow you to collect and display some library statistics for currently displayed tracks in the main window. Either you can use virtual tags that use \$LR functions in auto-playlist filter criteria. However, in this case it's **strongly recommended** to cache the results of the LR functions in tags.
 
 *LR virtual tag functions may be even more useful if they are used in the grouping header of "Albums and Tracks" view.*
 
@@ -96,13 +96,13 @@ Another option is to calculate auto ratings defining the percentage of tracks of
 
 "Advanced Search \& Replace" command adds a new virtual tag function:
 
-$ASR(\<URL\>,preset\_id)
+\$ASR(&lt;URL&gt;,preset\_id)
 
-To use this function open ASR window, select preset and define preset id (any string containing a-z chars, numbers and symbols . : - \_ ). Then use function in virtual tags, file organization templates, etc., where preset\_id is the id entered in ASR window. ASR preset function will return the last value written to tag in the preset. To see the last written tag, click "Edit/Rename" button in the ASR window or double-click preset (if "Edit/Rename" button is disabled). *Most preset functions* will return exactly what *you expect*.
+To use this function open ASR window, select preset and define preset id (any string containing a-z chars, numbers and symbols ***. : - \_ )***. Then use function in virtual tags, file organization templates, etc., where *preset\_id* is the id entered in ASR window. ASR preset function will return the last value written to tag in the preset. To see the last written tag, click "Edit/Rename" button in the ASR window or double-click preset (if "Edit/Rename" button is disabled). *Most preset functions* will return exactly what *you expect*.
 
 *Notes:*
 
-* All $ASR virtual tag functions are calculated, updated and displayed dynamically.
+* All \$ASR virtual tag functions are calculated, updated and displayed dynamically.
 * You can use [special functions](ASRMSRSPECIALFUNCTIONS.md) in substitution fields of "Advanced Search \& Replace" command.
 
 **Make sure that you haven't accidentally checked some "Advanced Search \& Replace" presets for auto-execution.** You will see a warning message at the top of the ASR window if any presets are marked as auto-executed:
@@ -138,7 +138,7 @@ Pastes tags to selected files from clipboard.
 * It's possible to copy tags from one track and paste them to more than one track.
 * It's impossible to copy tags from several tracks and paste them to another number of tracks.
 * It's possible to copy tags in MusicBee and paste them to another application like Microsoft Excel or Notepad++.
-* Usually tags are pasted to tracks in the track display order, but you can also copy \<Full path w/o ext.\(full track path including filename **without** extension) or URL (full track path including filename **and** extension) pseudo-tags along with other tags to clipboard. Here, the plugin will prompt you to match tracks according to these tags or use the track displayed order as usual. It's not recommended to copy both these pseudo-tags to clipboard to avoid confusion, but just in case the URL pseudo-tag takes precedence. If you choose to match tracks by path, the number of tracks from which the tags have been copied may not be equal to the number of tracks to which the tags are pasted.
+* Usually tags are pasted to tracks in the track display order, but you can also copy &lt;Full path w/o ext.\(full track path including filename **without** extension) or URL (full track path including filename **and** extension) pseudo-tags along with other tags to clipboard. Here, the plugin will prompt you to match tracks according to these tags or use the track displayed order as usual. It's not recommended to copy both these pseudo-tags to clipboard to avoid confusion, but just in case the URL pseudo-tag takes precedence. If you choose to match tracks by path, the number of tracks from which the tags have been copied may not be equal to the number of tracks to which the tags are pasted.
 * If you paste tags from external application (e.g. from Microsoft Excel or Notepad++) make sure that *the first copied row* contains *tag names* (exactly as *the tags are named in MusicBee*).
 
 ### Last Skipped Date/Time
@@ -159,4 +159,4 @@ It inserts a different number of invisible zero-width spaces at the beginning of
 
 ***
 
-Copyright © boroda 2012-2025. Help version 9.2.250302
+Copyright © boroda 2012-2025. Help version 9.3.250618

@@ -14,4 +14,4 @@ Preset list showing auto-executed presets only:
 
 ***
 
-Copyright © boroda 2012-2025. Help version 9.2.250302
+Copyright © boroda 2012-2025. Help version 9.3.250618
