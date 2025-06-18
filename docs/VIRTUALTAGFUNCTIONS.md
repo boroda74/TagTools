@@ -33,7 +33,7 @@ e.g. $NumberOfDays(\<Year\>,\<Original Year\>) or $SubDateTime(\<Date Added\>,01
 <b>$SubDurationFromDateTime(datetime,duration)</b> : subtracts <b><i>duration</i></b> from <b><i>datetime</i></b>
 
 <b>$SentenceCase(string,upper_case_words,sentence_separators)</b> : <b><i>upper_case_words</i></b> will become uppercase. You can   
-    use special pseudo-word "<b>*RN</b>" in <b><i>upper_case_words</i></b> list to uppercase <i>Roman numerals</i> (e.g., <i>III</i>, <i>VI</i>, <i>X</i>). 
+    use special pseudo-word "<b>#RN</b>" in <b><i>upper_case_words</i></b> list to uppercase <i>Roman numerals</i> (e.g., <i>III</i>, <i>VI</i>, <i>X</i>). 
     <b><i>sentence_separators</i></b> is the list of characters, after which the words will become capitalized. Characters in 
     the <b><i>sentence_separators</i></b> list may be separated by spaces or not separated at all. For example, these two 
     character lists mean the same: "<b>. , -</b>" and "<b>.,-</b>". A dot, followed by a space, is always treated as a 

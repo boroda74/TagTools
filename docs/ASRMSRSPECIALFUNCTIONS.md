@@ -22,8 +22,8 @@ You can use special functions in substitution fields of "Advanced Search \& Repl
     To lowercase excepted words use <b><i>\@sc[[\@lc[[$1;;ignored_words]]]]</i></b>. 
 
 <b>\@eval[[virtual_tag_expression]]</b> : returns result of calculation of <b><i>virtual_tag_expression</i></b>, 
-    e.g. <b><i>\@eval[[$Sub(\<Play Count\>,,\<Skip Count\)>]]</i></b>. Quotes, commas, semicolons and square brackets must be doubled 
-    if they are part of expression (but not they are part of tag value to be set), e.g. <b><i>\@eval[[$If($IsNull(\<Album\>),,"""",,\<Album\>)]]</i></b>
+    e.g. <b><i>\@eval[[$Sub(\<Play Count\>,,\<Skip Count)\>]]</i></b>. Quotes and commas must be doubled 
+    if they are part of expression (but not if they are part of tag value to be set), e.g. <b><i>\@eval[[$If($IsNull(\<Album\>),,"""",,\<Album\>)]]</i></b>
     to set destination tag to empty value if album name is empty (instead of string "Unknown") or album name otherwise. 
     The <b><i>""""</i></b> is actually <b><i>""</i></b> (empty string) here because quotes are doubled. 
 
