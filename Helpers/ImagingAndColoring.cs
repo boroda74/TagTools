@@ -577,7 +577,7 @@ namespace MusicBeePlugin
 
         internal static Bitmap ScaleBitmap(Bitmap bitmap, int newWidth, int newHeight)
         {
-            var scaledBitmap = new Bitmap(newWidth, newHeight, bitmap.PixelFormat);
+            var scaledBitmap = MbForm.Invoke(new Func<Bitmap>(() => { return new Bitmap(newWidth, newHeight, bitmap.PixelFormat); })) as Bitmap;
             using (var gfx = Graphics.FromImage(scaledBitmap))
             {
                 gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;

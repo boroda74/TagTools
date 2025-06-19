@@ -22,7 +22,7 @@ namespace MusicBeePlugin
 
         internal class Row : DataGridViewBoundColumns
         {
-            internal string artworkBase64;
+            internal string artworkBase64Hash;
 
             public Row() : base()
             {
@@ -2368,7 +2368,7 @@ namespace MusicBeePlugin
                     ResizedDefaultArtworkBase64 = Convert.ToBase64String((byte[])tc.ConvertTo(pic2, typeof(byte[])));
 
                     lock (artworkCache)
-                        artworkCache.AddReplace(ResizedDefaultArtworkBase64, pic2);
+                        artworkCache.AddReplace(ResizedDefaultArtworkBase64.GetHashCode().ToString("X8"), pic2);
 
 
                     pic1 = CopyBitmap(ArtworkTotals);
@@ -2388,13 +2388,13 @@ namespace MusicBeePlugin
                     }
 
                     lock (artworkCache)
-                        artworkCache.AddReplace(ResizedArtworkTotalsId, pic2);
+                        artworkCache.AddReplace(ResizedArtworkTotalsId.GetHashCode().ToString("X8"), pic2);
                 }
             }
 
             internal static Bitmap DecodeResizeArtwork(string artworkBase64, SortedDictionary<string, Bitmap> artworkCache)
             {
-                if (artworkCache.TryGetValue(artworkBase64, out Bitmap pic))
+                if (artworkCache.TryGetValue(artworkBase64.GetHashCode().ToString("X8"), out Bitmap pic))
                     return pic;
 
 
@@ -2427,7 +2427,7 @@ namespace MusicBeePlugin
                 }
 
 
-                artworkCache.Add(artworkBase64, pic);
+                artworkCache.Add(artworkBase64.GetHashCode().ToString("X8"), pic);
 
                 return pic;
             }
@@ -2527,9 +2527,6 @@ namespace MusicBeePlugin
             {
                 tagValue = GetFileTag(file, MetaDataType.Artwork);
 
-                if (string.IsNullOrEmpty(tagValue))
-                    tagValue = ResizedDefaultArtworkBase64;
-
                 if (CdBookletArtworkBase64 == null)
                 {
                     CdBookletArtworkBase64 = tagValue;
@@ -2538,7 +2535,7 @@ namespace MusicBeePlugin
                 else if (CdBookletArtworkBase64 != tagValue)
                 {
                     CdBookletArtworkBase64 = string.Empty;
-                    CdBookletArtwork = resizedArtworkCache[ResizedDefaultArtworkBase64];
+                    CdBookletArtwork = resizedArtworkCache[ResizedDefaultArtworkBase64.GetHashCode().ToString("X8")];
                 }
                 else
                 {
@@ -3287,13 +3284,17 @@ namespace MusicBeePlugin
                         }
 
 
-                        var columnIndicesTagValues = attribs.getSplitValues(currentFile, tagValue);
-                        foreach (var columnIndexTag in columnIndicesTagValues)
-                            actualSplitGroupingTagsList[columnIndexTag.index].Add(columnIndexTag.value);
-
-
                         if (attribs.parameterName == ArtworkName)
+                        {
                             ResizedArtworkProvider.DecodeResizeArtwork(tagValue, resizedArtworkCache);
+                            actualSplitGroupingTagsList[h].Add(tagValue.GetHashCode().ToString("X8"));
+                        }
+                        else
+                        {
+                            var columnIndicesTagValues = attribs.getSplitValues(currentFile, tagValue);
+                            foreach (var columnIndexTag in columnIndicesTagValues)
+                                actualSplitGroupingTagsList[columnIndexTag.index].Add(columnIndexTag.value);
+                        }
                     }
 
 
@@ -3429,17 +3430,17 @@ namespace MusicBeePlugin
                                 lock (resizedArtworkCache)
                                 {
                                     if (groupingsRow[artworkField] == TotalsString)
-                                        pic = resizedArtworkCache[ResizedArtworkTotalsId];
+                                        pic = resizedArtworkCache[ResizedArtworkTotalsId.GetHashCode().ToString("X8")];
                                     else //if (!artworks.TryGetValue(artworkBase64, out pic))
                                         pic = resizedArtworkCache[groupingsRow[artworkField]];
                                 }
 
                                 row.Columns[artworkField] = pic;
-                                row.artworkBase64 = groupingsRow[artworkField];
+                                row.artworkBase64Hash = groupingsRow[artworkField];
 
                                 rowArray = new object[row.Columns.Count + 1];
                                 row.Columns.CopyTo(rowArray);
-                                rowArray[row.Columns.Count] = row.artworkBase64;
+                                rowArray[row.Columns.Count] = row.artworkBase64Hash;
                             }
                             else
                             {
@@ -3492,7 +3493,7 @@ namespace MusicBeePlugin
                                 newRow[l] = splitGroupingsRows.Value[l];
 
                             rows.AddRow(newRow);
-                            rows[rows.Count - 1].artworkBase64 = splitGroupingsRows.Value[splitGroupingsRows.Value.Length - 1].ToString();
+                            rows[rows.Count - 1].artworkBase64Hash = splitGroupingsRows.Value[splitGroupingsRows.Value.Length - 1].ToString();
                         }
                         else
                         {
@@ -3637,18 +3638,21 @@ namespace MusicBeePlugin
 
                                 lock (resizedArtworkCache)
                                 {
+                                    if (string.IsNullOrEmpty(groupingsRow[artworkField]))
+                                        groupingsRow[artworkField] = ResizedDefaultArtworkBase64;
+
                                     if (groupingsRow[artworkField] == TotalsString)
-                                        pic = resizedArtworkCache[ResizedArtworkTotalsId];
+                                        pic = resizedArtworkCache[ResizedArtworkTotalsId.GetHashCode().ToString("X8")];
                                     else //if (!artworks.TryGetValue(artworkBase64, out pic))
                                         pic = resizedArtworkCache[groupingsRow[artworkField]];
                                 }
 
                                 row.Columns[artworkField] = pic;
-                                row.artworkBase64 = groupingsRow[artworkField];
+                                row.artworkBase64Hash = groupingsRow[artworkField];
 
                                 rowArray = new object[row.Columns.Count + 1];
                                 row.Columns.CopyTo(rowArray);
-                                rowArray[row.Columns.Count] = row.artworkBase64;
+                                rowArray[row.Columns.Count] = row.artworkBase64Hash;
                             }
                             else
                             {
@@ -3692,7 +3696,7 @@ namespace MusicBeePlugin
                             newRow[l] = splitGroupingsRows.Value[l];
 
                         rows.AddRow(newRow);
-                        rows[rows.Count - 1].artworkBase64 = splitGroupingsRows.Value[splitGroupingsRows.Value.Length - 1].ToString();
+                        rows[rows.Count - 1].artworkBase64Hash = splitGroupingsRows.Value[splitGroupingsRows.Value.Length - 1].ToString();
                     }
                     else
                     {
@@ -5371,6 +5375,7 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
+            SetStatusBarText(SbLrResizingPreviewTable, false);
             previewTable.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
 
             previewTable.AllowUserToResizeColumns = true;
@@ -5404,7 +5409,8 @@ namespace MusicBeePlugin
 
             updateCustomScrollBars(previewTable);
 
-            SetResultingSbText();
+            SetStatusBarText(string.Empty, false);
+            //SetResultingSbText();
 
             if (closeFormOnStopping)
             {
@@ -5700,7 +5706,7 @@ namespace MusicBeePlugin
                             if (selectedPreset.fileFormatIndex == LrReportFormat.HtmlDocumentCdBooklet)
                             {
                                 Bitmap artwork = groupingsValues[artworkField] as Bitmap;
-                                string currentArtworkBase64 = rows[k].artworkBase64;
+                                string currentArtworkBase64 = rows[k].artworkBase64Hash;
 
                                 if (artworkBase64 == null)
                                     artworkBase64 = currentArtworkBase64;
@@ -5901,7 +5907,7 @@ namespace MusicBeePlugin
                             prevAlbum = row[albumField] as string; //-V3106
 
                             Bitmap currentArtwork = row[artworkField] as Bitmap;
-                            string currentArtworkBase64 = rows[k].artworkBase64;
+                            string currentArtworkBase64 = rows[k].artworkBase64Hash;
 
                             document.beginAlbumArtist(row[albumArtistField] as string, row.Length); //-V3106
                             document.beginAlbum(row[albumField] as string, currentArtwork, currentArtworkBase64, albumTrackCounts[i]); //-V3106
@@ -5912,7 +5918,7 @@ namespace MusicBeePlugin
                             prevAlbum = row[albumField] as string; //-V3106
 
                             Bitmap currentArtwork = row[artworkField] as Bitmap;
-                            string currentArtworkBase64 = rows[k].artworkBase64;
+                            string currentArtworkBase64 = rows[k].artworkBase64Hash;
 
                             document.beginAlbum(row[albumField] as string, currentArtwork, currentArtworkBase64, albumTrackCounts[i]); //-V3106
                         }
@@ -5929,7 +5935,7 @@ namespace MusicBeePlugin
                         string albumLabel = row[0] as string;
 
                         Bitmap currentArtwork = row[artworkField] as Bitmap;
-                        string currentArtworkBase64 = rows[k].artworkBase64;
+                        string currentArtworkBase64 = rows[k].artworkBase64Hash;
 
 
                         for (var l = 3; l < row.Length; l++) //groupingsValues: 1st value MUST BE album name, 2nd value MUST BE artwork
@@ -5949,7 +5955,7 @@ namespace MusicBeePlugin
                                 || selectedPreset.fileFormatIndex == LrReportFormat.HtmlTable)) //Export images
                             {
                                 Bitmap currentArtwork = row[artworkField] as Bitmap;
-                                string currentArtworkBase64 = rows[k].artworkBase64;
+                                string currentArtworkBase64 = rows[k].artworkBase64Hash;
 
                                 rowHeight = CdBookletArtwork.Height;
 
@@ -5960,7 +5966,7 @@ namespace MusicBeePlugin
                                 && selectedPreset.fileFormatIndex != LrReportFormat.HtmlTable) //Export image base64es
                             {
                                 Bitmap currentArtwork = row[artworkField] as Bitmap;
-                                string currentArtworkBase64 = rows[k].artworkBase64;
+                                string currentArtworkBase64 = rows[k].artworkBase64Hash;
 
                                 document.addCellToRow(currentArtworkBase64, attribs.getColumnName(true, true, true), ColumnsRightAlignment[l],
                                     l == albumArtistField, l == albumField);

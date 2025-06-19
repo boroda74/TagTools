@@ -749,6 +749,7 @@ namespace MusicBeePlugin
         private static string PluginHelpString;
         private static string PluginWebPageString;
         private static string PluginWebPageToolTip;
+        private static string PluginAboutString;
         private static string PluginVersionString;
         private static string PluginVersionToolTip;
 
@@ -933,6 +934,7 @@ namespace MusicBeePlugin
         internal static string SbLrEmptyTrackListToBeApplied;
         internal static string SbLrNot1TrackPassedToLrFunctionId;
         internal static string SbLrSenselessToSaveSpitGroupingsTo1File;
+        internal static string SbLrResizingPreviewTable;
 
         internal static string SbBackupRestoreCantDeleteBackupFile;
 
@@ -3749,6 +3751,12 @@ namespace MusicBeePlugin
             Process.Start(PluginWebPage);
         }
 
+        internal void aboutEventHandler(object sender, EventArgs e)
+        {
+            var tagToolsForm = new About(this);
+            PluginWindowTemplate.Display(tagToolsForm, true);
+        }
+
         internal void copyPluginVersionEventHandler(object sender, EventArgs e)
         {
             NativeMethods.CloseClipboard();
@@ -3787,8 +3795,9 @@ namespace MusicBeePlugin
             MsgUnsupportedMbVersion = "\"%%PLUGIN-NAME%%\" plugin requires MusicBee 3.5 or later!";
 
             PluginHelpString = "Help...";
-            PluginWebPageString = "Plugin Web Page..."; ;
+            PluginWebPageString = "Plugin Web Page...";
             PluginWebPageToolTip = "Open plugin web page (to check/download the latest version)";
+            PluginAboutString = "About...";
             PluginVersionString = "Version: ";
             PluginVersionToolTip = "Copy plugin version to clipboard";
 
@@ -4196,6 +4205,7 @@ namespace MusicBeePlugin
             SbLrEmptyTrackListToBeApplied = "Empty track list passed to LR preset execution!";
             SbLrNot1TrackPassedToLrFunctionId = "The number of tracks passed to $LR() function is not 1!";
             SbLrSenselessToSaveSpitGroupingsTo1File = "It's senseless to save spit groupings to 1 file!";
+            SbLrResizingPreviewTable = "Resizing preview table...";
 
             SbBackupRestoreCantDeleteBackupFile = "ERROR: Can't delete backup file!";
 
@@ -4558,8 +4568,9 @@ namespace MusicBeePlugin
                 MsgUnsupportedMbVersion = "Плагин \"%%PLUGIN-NAME%%\" для работы требует MusicBee 3.5 или более позднюю версию!";
 
                 PluginHelpString = "Справка...";
-                PluginWebPageString = "Веб-страница плагина..."; ;
+                PluginWebPageString = "Веб-страница плагина...";
                 PluginWebPageToolTip = "Открыть веб-страницу плагина (для проверки/загрузки последней версии)";
+                PluginAboutString = "О плагине...";
                 PluginVersionString = "Версия: ";
                 PluginVersionToolTip = "Скопировать версию плагина в буфер обмена";
 
@@ -4920,6 +4931,7 @@ namespace MusicBeePlugin
                 SbLrEmptyTrackListToBeApplied = "Пустой список треков передан пресету ОБ для применения!";
                 SbLrNot1TrackPassedToLrFunctionId = "Число треков, переданных функции $LR() не равно 1!";
                 SbLrSenselessToSaveSpitGroupingsTo1File = "Не имеет смысла записывать разделенные группировки в 1 файл!";
+                SbLrResizingPreviewTable = "Настройка ширины колонок таблицы предпросмотра...";
 
                 SbBackupRestoreCantDeleteBackupFile = "ОШИБКА: Невозможно удалить файл архива!";
 
@@ -6009,7 +6021,7 @@ namespace MusicBeePlugin
             if (newBitmap == null)
                 return null;
             else
-                return new Bitmap(newBitmap);
+                return MbForm.Invoke(new Func<Bitmap>(() => { return new Bitmap(newBitmap); })) as Bitmap;
         }
 
         internal static void DisposePluginBitmaps()
@@ -6856,6 +6868,8 @@ namespace MusicBeePlugin
             AddMenuItem(TagToolsSubmenu, "-", null, null);
             AddMenuItem(TagToolsSubmenu, PluginHelpString, null, helpEventHandler);
             AddMenuItem(TagToolsSubmenu, PluginWebPageString, null, webPageEventHandler).ToolTipText = PluginWebPageToolTip;
+            AddMenuItem(TagToolsSubmenu, "-", null, null);
+            AddMenuItem(TagToolsSubmenu, PluginAboutString, null, aboutEventHandler);
             AddMenuItem(TagToolsSubmenu, PluginVersion, null, copyPluginVersionEventHandler).ToolTipText = PluginVersionToolTip;
         }
 

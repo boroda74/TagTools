@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <AssemblyVersion>9.3.9300.25688</AssemblyVersion>
+    <AssemblyVersion>9.3.9301.28136</AssemblyVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>True</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>False</UpdateAssemblyVersion>
@@ -294,6 +294,12 @@
     <Compile Include="Plugin\SaveLastSkippedDate.Designer.cs">
       <DependentUpon>SaveLastSkippedDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Plugin\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plugin\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plugin\SettingsQuick.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -377,6 +383,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Helpers\FlatTabControl.resx">
       <DependentUpon>FlatTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\About.ru.resx">
+      <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\AdvancedSearchAndReplace.resx">
       <DependentUpon>AdvancedSearchAndReplace.cs</DependentUpon>
@@ -482,6 +491,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\SaveLastSkippedDate.ru.resx">
       <DependentUpon>SaveLastSkippedDate.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plugin\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugin\SettingsQuick.resx">
