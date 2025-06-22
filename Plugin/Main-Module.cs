@@ -7098,14 +7098,14 @@ namespace MusicBeePlugin
 
             var webPage = AddMenuItem(TagToolsSubmenu, PluginWebPageString, null, webPageEventHandler);
             //===webPage.Image = WebPageIcon; //-V3080
-            webPage.ToolTipText = PluginWebPageToolTip;
+            webPage.ToolTipText = PluginWebPageToolTip; //-V3080
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
             AddMenuItem(TagToolsSubmenu, PluginAboutString, null, aboutEventHandler);//===.Image = AboutIcon;
 
             var version = AddMenuItem(TagToolsSubmenu, PluginVersion, null, copyPluginVersionEventHandler);
             //===version.Image = VersionIcon; //-V3080
-            version.ToolTipText = PluginVersionToolTip;
+            version.ToolTipText = PluginVersionToolTip; //-V3080
         }
 
         internal void addPluginContextMenuItems() //Must be called AFTER InitLr() and InitAsr(), and BEFORE addPluginMenuItems()!
@@ -7352,8 +7352,19 @@ namespace MusicBeePlugin
             string value1, string separatorChar,
             string value2, string setSeparator)
         {
-            int shortDateInt = DateTime.Now.Year * 100 + DateTime.Now.Month;
-            string shortDate = DateTime.Now.Year.ToString("D4") + datePartsSeparatorChar + DateTime.Now.Month.ToString("D2");
+            int shortDateInt;
+            string shortDate;
+
+            if (DateTime.Now.Month == 1)
+            {
+                shortDateInt = (DateTime.Now.Year - 1) * 100 + 12;
+                shortDate = (DateTime.Now.Year - 1).ToString("D4") + datePartsSeparatorChar + "12";
+            }
+            else
+            {
+                shortDateInt = (DateTime.Now.Year - 1) * 100 + DateTime.Now.Month - 1;
+                shortDate = DateTime.Now.Year.ToString("D4") + datePartsSeparatorChar + (DateTime.Now.Month - 1).ToString("D2");
+            }
 
 
             if (string.IsNullOrEmpty(originalValue))
