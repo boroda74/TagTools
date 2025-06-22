@@ -16,6 +16,9 @@ namespace MusicBeePlugin
 {
     public partial class PluginWindowTemplate : Form
     {
+        internal Image WindowIcon;
+
+
         internal protected bool modal;
         internal protected bool fixedSize;
         internal protected FormWindowState windowState;
@@ -3832,12 +3835,12 @@ namespace MusicBeePlugin
 
                 if (!DontShowShowHiddenWindows && OpenedFormsSubmenu.DropDownItems.Count == 0)
                 {
-                    AddMenuItem(OpenedFormsSubmenu, ShowHiddenWindowsName, null, TagToolsPlugin.showHiddenEventHandler);
+                    AddMenuItem(OpenedFormsSubmenu, ShowHiddenWindowsName, null, TagToolsPlugin.showHiddenEventHandler).Image = ShowHiddenWindowsIcon;
                     AddMenuItem(OpenedFormsSubmenu, "-", null, null);
                 }
 
 
-                AddMenuItem(OpenedFormsSubmenu, newForm.Text, null, TagToolsPlugin.openWindowActivationEventHandler, true, newForm);
+                AddMenuItem(OpenedFormsSubmenu, newForm.Text, null, TagToolsPlugin.openWindowActivationEventHandler, true, newForm).Image = newForm.WindowIcon;
 
                 if (modalForm)
                     newForm.ShowDialog();

@@ -13,6 +13,8 @@ namespace MusicBeePlugin
         public About(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = AboutIcon;
         }
 
         internal protected override void initializeForm()

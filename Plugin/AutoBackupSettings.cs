@@ -20,6 +20,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = SettingsIcon;
+
             new ControlBorder(this.autoBackupFolderTextBox);
             new ControlBorder(this.autoBackupPrefixTextBox);
         }

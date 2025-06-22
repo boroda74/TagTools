@@ -42,6 +42,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.initialEncodingList = new System.Windows.Forms.ComboBox();
             this.previewTable = new System.Windows.Forms.DataGridView();
+            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewTrack = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usedEncodingList = new System.Windows.Forms.ComboBox();
             this.usedEncodingLabel = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,9 +57,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.previewSortTagsСheckBoxLabel = new System.Windows.Forms.Label();
             this.controlsPanel = new System.Windows.Forms.Panel();
-            this.File = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Track = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NewTrack = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.controlsPanel.SuspendLayout();
@@ -126,6 +126,35 @@
             this.previewTable.Tag = "#ReEncodeTags&ReEncodeTags@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             this.previewTable.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentDoubleClick);
+            // 
+            // File
+            // 
+            this.File.DataPropertyName = "File";
+            this.File.FillWeight = 1F;
+            resources.ApplyResources(this.File, "File");
+            this.File.Name = "File";
+            // 
+            // Track
+            // 
+            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Track.DataPropertyName = "Track";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Track.FillWeight = 50F;
+            resources.ApplyResources(this.Track, "Track");
+            this.Track.Name = "Track";
+            // 
+            // NewTrack
+            // 
+            this.NewTrack.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NewTrack.DataPropertyName = "NewTrack";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.NewTrack.DefaultCellStyle = dataGridViewCellStyle2;
+            this.NewTrack.FillWeight = 50F;
+            resources.ApplyResources(this.NewTrack, "NewTrack");
+            this.NewTrack.Name = "NewTrack";
             // 
             // usedEncodingList
             // 
@@ -217,35 +246,6 @@
             this.controlsPanel.Controls.Add(this.label2);
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Tag = "#ReEncodeTags&previewTable@pinned-to-parent-x";
-            // 
-            // File
-            // 
-            this.File.DataPropertyName = "File";
-            this.File.FillWeight = 1F;
-            resources.ApplyResources(this.File, "File");
-            this.File.Name = "File";
-            // 
-            // Track
-            // 
-            this.Track.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Track.DataPropertyName = "Track";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Track.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Track.FillWeight = 50F;
-            resources.ApplyResources(this.Track, "Track");
-            this.Track.Name = "Track";
-            // 
-            // NewTrack
-            // 
-            this.NewTrack.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NewTrack.DataPropertyName = "NewTrack";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.NewTrack.DefaultCellStyle = dataGridViewCellStyle2;
-            this.NewTrack.FillWeight = 50F;
-            resources.ApplyResources(this.NewTrack, "NewTrack");
-            this.NewTrack.Name = "NewTrack";
             // 
             // ReEncodeTags
             // 

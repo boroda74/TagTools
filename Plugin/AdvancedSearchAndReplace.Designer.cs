@@ -88,6 +88,8 @@ namespace MusicBeePlugin
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.runMonthlyCheckBoxLabel = new System.Windows.Forms.Label();
+            this.runMonthlyCheckBox = new System.Windows.Forms.CheckBox();
             this.gotoNextPresetButton = new System.Windows.Forms.Button();
             this.showOnlyChainedPresetsButton = new System.Windows.Forms.Button();
             this.clearNextPresetButton = new System.Windows.Forms.Button();
@@ -194,6 +196,8 @@ namespace MusicBeePlugin
             this.filterComboBox = new System.Windows.Forms.ComboBox();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.clearSearchButton = new System.Windows.Forms.Button();
+            this.runMonthlyPictureBox = new System.Windows.Forms.PictureBox();
+            this.hiddenPictureBox = new System.Windows.Forms.PictureBox();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.uncheckAllFiltersPictureBox = new System.Windows.Forms.PictureBox();
             this.hotkeyPictureBox = new System.Windows.Forms.PictureBox();
@@ -203,7 +207,6 @@ namespace MusicBeePlugin
             this.customizedPictureBox = new System.Windows.Forms.PictureBox();
             this.predefinedPictureBox = new System.Windows.Forms.PictureBox();
             this.tickedOnlyPictureBox = new System.Windows.Forms.PictureBox();
-            this.hiddenPictureBox = new System.Windows.Forms.PictureBox();
             this.autoApplyPresetsLabel = new System.Windows.Forms.Label();
             this.filtersPanel = new System.Windows.Forms.Panel();
             this.searchPictureBox = new System.Windows.Forms.PictureBox();
@@ -321,6 +324,8 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             this.settingsProcessingGroupBox.SuspendLayout();
             this.presetManagementGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.runMonthlyPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hiddenPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotkeyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).BeginInit();
@@ -329,7 +334,6 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hiddenPictureBox)).BeginInit();
             this.filtersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
@@ -363,20 +367,16 @@ namespace MusicBeePlugin
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.gotoNextPresetButton);
-            this.panel1.Controls.Add(this.showOnlyChainedPresetsButton);
-            this.panel1.Controls.Add(this.clearNextPresetButton);
-            this.panel1.Controls.Add(this.hiddenCheckBoxLabel);
-            this.panel1.Controls.Add(this.hiddenCheckBox);
-            this.panel1.Controls.Add(this.nextPresetComboBox);
-            this.panel1.Controls.Add(this.nextPresetCheckBoxLabel);
-            this.panel1.Controls.Add(this.tableLayoutPanel3);
-            this.panel1.Controls.Add(this.tableLayoutPanel2);
+            this.panel1.Controls.Add(this.descriptionGroupBox);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Controls.Add(this.userPresetLabel);
             this.panel1.Controls.Add(this.userPresetPictureBox);
             this.panel1.Controls.Add(this.customizedPresetLabel);
             this.panel1.Controls.Add(this.customizedPresetPictureBox);
+            this.panel1.Controls.Add(this.runMonthlyCheckBoxLabel);
+            this.panel1.Controls.Add(this.runMonthlyCheckBox);
+            this.panel1.Controls.Add(this.hiddenCheckBoxLabel);
+            this.panel1.Controls.Add(this.hiddenCheckBox);
             this.panel1.Controls.Add(this.favoriteCheckBoxLabel);
             this.panel1.Controls.Add(this.favoriteCheckBox);
             this.panel1.Controls.Add(this.applyToPlayingTrackCheckBoxLabel);
@@ -389,9 +389,33 @@ namespace MusicBeePlugin
             this.panel1.Controls.Add(this.playlistComboBox);
             this.panel1.Controls.Add(this.conditionCheckBoxLabel);
             this.panel1.Controls.Add(this.conditionCheckBox);
-            this.panel1.Controls.Add(this.descriptionGroupBox);
+            this.panel1.Controls.Add(this.clearNextPresetButton);
+            this.panel1.Controls.Add(this.showOnlyChainedPresetsButton);
+            this.panel1.Controls.Add(this.gotoNextPresetButton);
+            this.panel1.Controls.Add(this.nextPresetComboBox);
+            this.panel1.Controls.Add(this.nextPresetCheckBoxLabel);
+            this.panel1.Controls.Add(this.tableLayoutPanel3);
+            this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Name = "panel1";
             this.panel1.Tag = "";
+            // 
+            // runMonthlyCheckBoxLabel
+            // 
+            resources.ApplyResources(this.runMonthlyCheckBoxLabel, "runMonthlyCheckBoxLabel");
+            this.dirtyErrorProvider.SetIconAlignment(this.runMonthlyCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("runMonthlyCheckBoxLabel.IconAlignment"))));
+            this.runMonthlyCheckBoxLabel.Name = "runMonthlyCheckBoxLabel";
+            this.runMonthlyCheckBoxLabel.Tag = "";
+            this.toolTip1.SetToolTip(this.runMonthlyCheckBoxLabel, resources.GetString("runMonthlyCheckBoxLabel.ToolTip"));
+            this.runMonthlyCheckBoxLabel.Click += new System.EventHandler(this.runMonthlyCheckBoxLabel_Click);
+            // 
+            // runMonthlyCheckBox
+            // 
+            resources.ApplyResources(this.runMonthlyCheckBox, "runMonthlyCheckBox");
+            this.dirtyErrorProvider.SetIconAlignment(this.runMonthlyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("runMonthlyCheckBox.IconAlignment"))));
+            this.runMonthlyCheckBox.Name = "runMonthlyCheckBox";
+            this.runMonthlyCheckBox.Tag = "#runMonthlyCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.runMonthlyCheckBox, resources.GetString("runMonthlyCheckBox.ToolTip"));
+            this.runMonthlyCheckBox.CheckedChanged += new System.EventHandler(this.runMonthlyCheckBox_CheckedChanged);
             // 
             // gotoNextPresetButton
             // 
@@ -421,7 +445,7 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.hiddenCheckBoxLabel, "hiddenCheckBoxLabel");
             this.hiddenCheckBoxLabel.Name = "hiddenCheckBoxLabel";
-            this.hiddenCheckBoxLabel.Tag = "";
+            this.hiddenCheckBoxLabel.Tag = "#runMonthlyCheckBox";
             this.hiddenCheckBoxLabel.Click += new System.EventHandler(this.hiddenCheckBoxLabel_Click);
             // 
             // hiddenCheckBox
@@ -1287,7 +1311,8 @@ namespace MusicBeePlugin
             resources.GetString("filterComboBox.Items5"),
             resources.GetString("filterComboBox.Items6"),
             resources.GetString("filterComboBox.Items7"),
-            resources.GetString("filterComboBox.Items8")});
+            resources.GetString("filterComboBox.Items8"),
+            resources.GetString("filterComboBox.Items9")});
             this.filterComboBox.Name = "filterComboBox";
             this.filterComboBox.Tag = "#filtersPanel";
             this.toolTip1.SetToolTip(this.filterComboBox, resources.GetString("filterComboBox.ToolTip"));
@@ -1308,6 +1333,26 @@ namespace MusicBeePlugin
             this.clearSearchButton.Tag = "@non-defaultable@square-control";
             this.toolTip1.SetToolTip(this.clearSearchButton, resources.GetString("clearSearchButton.ToolTip"));
             this.clearSearchButton.Click += new System.EventHandler(this.clearSearchButton_Click);
+            // 
+            // runMonthlyPictureBox
+            // 
+            resources.ApplyResources(this.runMonthlyPictureBox, "runMonthlyPictureBox");
+            this.runMonthlyPictureBox.Image = global::MusicBeePlugin.Properties.Resources.run_monthly;
+            this.runMonthlyPictureBox.Name = "runMonthlyPictureBox";
+            this.runMonthlyPictureBox.TabStop = false;
+            this.runMonthlyPictureBox.Tag = "@square-control";
+            this.toolTip1.SetToolTip(this.runMonthlyPictureBox, resources.GetString("runMonthlyPictureBox.ToolTip"));
+            this.runMonthlyPictureBox.Click += new System.EventHandler(this.runMonthlyPictureBox_Click);
+            // 
+            // hiddenPictureBox
+            // 
+            resources.ApplyResources(this.hiddenPictureBox, "hiddenPictureBox");
+            this.hiddenPictureBox.Image = global::MusicBeePlugin.Properties.Resources.hidden_presets;
+            this.hiddenPictureBox.Name = "hiddenPictureBox";
+            this.hiddenPictureBox.TabStop = false;
+            this.hiddenPictureBox.Tag = "@square-control";
+            this.toolTip1.SetToolTip(this.hiddenPictureBox, resources.GetString("hiddenPictureBox.ToolTip"));
+            this.hiddenPictureBox.Click += new System.EventHandler(this.hiddenPictureBox_Click);
             // 
             // buttonSettings
             // 
@@ -1398,16 +1443,6 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.tickedOnlyPictureBox, resources.GetString("tickedOnlyPictureBox.ToolTip"));
             this.tickedOnlyPictureBox.Click += new System.EventHandler(this.tickedOnlyPictureBox_Click);
             // 
-            // hiddenPictureBox
-            // 
-            resources.ApplyResources(this.hiddenPictureBox, "hiddenPictureBox");
-            this.hiddenPictureBox.Image = global::MusicBeePlugin.Properties.Resources.hidden_presets;
-            this.hiddenPictureBox.Name = "hiddenPictureBox";
-            this.hiddenPictureBox.TabStop = false;
-            this.hiddenPictureBox.Tag = "@square-control";
-            this.toolTip1.SetToolTip(this.hiddenPictureBox, resources.GetString("hiddenPictureBox.ToolTip"));
-            this.hiddenPictureBox.Click += new System.EventHandler(this.hiddenPictureBox_Click);
-            // 
             // autoApplyPresetsLabel
             // 
             resources.ApplyResources(this.autoApplyPresetsLabel, "autoApplyPresetsLabel");
@@ -1419,6 +1454,7 @@ namespace MusicBeePlugin
             // filtersPanel
             // 
             resources.ApplyResources(this.filtersPanel, "filtersPanel");
+            this.filtersPanel.Controls.Add(this.runMonthlyPictureBox);
             this.filtersPanel.Controls.Add(this.hiddenPictureBox);
             this.filtersPanel.Controls.Add(this.filterComboBox);
             this.filtersPanel.Controls.Add(this.uncheckAllFiltersPictureBox);
@@ -1692,6 +1728,8 @@ namespace MusicBeePlugin
             this.settingsProcessingGroupBox.PerformLayout();
             this.presetManagementGroupBox.ResumeLayout(false);
             this.presetManagementGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.runMonthlyPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hiddenPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uncheckAllFiltersPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hotkeyPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.functionIdPictureBox)).EndInit();
@@ -1700,7 +1738,6 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.customizedPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.predefinedPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tickedOnlyPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.hiddenPictureBox)).EndInit();
             this.filtersPanel.ResumeLayout(false);
             this.filtersPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).EndInit();
@@ -1853,5 +1890,8 @@ namespace MusicBeePlugin
         private Button showOnlyChainedPresetsButton;
         private Button clearNextPresetButton;
         private Button gotoNextPresetButton;
+        private Label runMonthlyCheckBoxLabel;
+        private CheckBox runMonthlyCheckBox;
+        private PictureBox runMonthlyPictureBox;
     }
 }

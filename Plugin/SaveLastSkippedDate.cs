@@ -15,6 +15,8 @@ namespace MusicBeePlugin
         public SaveLastSkippedDate(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = LastSkippedIcon;
         }
 
         internal protected override void initializeForm()

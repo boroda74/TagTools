@@ -70,6 +70,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = SettingsIcon;
+
             new ControlBorder(this.customFontTextBox);
             new ControlBorder(this.preservedTagValuesLegendTextBox);
             new ControlBorder(this.preservedTagsLegendTextBox);

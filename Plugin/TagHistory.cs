@@ -84,6 +84,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = TagHistoryIcon;
+
             this.trackUrls = trackUrls;
             this.trackIds = trackIds;
         }

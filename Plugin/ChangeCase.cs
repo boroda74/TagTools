@@ -165,6 +165,8 @@ namespace MusicBeePlugin
         public ChangeCase(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = ChangeCaseIcon;
         }
 
         internal protected override void initializeForm()

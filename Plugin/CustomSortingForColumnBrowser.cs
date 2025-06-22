@@ -65,6 +65,8 @@ namespace MusicBeePlugin
         public CustomSortingForColumnBrowser(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = CscbIcon;
         }
 
         internal protected override void initializeForm()

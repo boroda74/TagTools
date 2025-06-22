@@ -45,6 +45,9 @@ namespace MusicBeePlugin
         public CompareTracks(Plugin plugin, string[] files) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = CompareTracksIcon;
+
             trackUrls = files;
         }
 

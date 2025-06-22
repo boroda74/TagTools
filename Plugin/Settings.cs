@@ -70,6 +70,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = SettingsIcon;
+
             new ControlBorder(this.unitKBox);
             new ControlBorder(this.unitMBox);
             new ControlBorder(this.unitGBox);

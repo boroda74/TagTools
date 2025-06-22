@@ -45,6 +45,8 @@ namespace MusicBeePlugin
         public ReEncodeTag(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = ReencodeTagIcon;
         }
 
         internal protected override void initializeForm()

@@ -31,6 +31,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = AutorateIcon;
+
             new ControlBorder(this.threshold05Box);
             new ControlBorder(this.threshold1Box);
             new ControlBorder(this.threshold15Box);

@@ -24,6 +24,8 @@ namespace MusicBeePlugin
             TagToolsPlugin = plugin;
 
             InitializeComponent();
+
+            WindowIcon = LrIcon;
         }
 
         internal protected override void initializeForm()

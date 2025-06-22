@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using System.Threading;
 
 using ExtensionMethods;
 
@@ -164,6 +165,7 @@ namespace MusicBeePlugin
 
         private bool showOnlyChainedPresets;
 
+        private bool showRunMonthlyChecked;
         private bool showTickedOnlyChecked;
         private bool showPredefinedChecked;
         private bool showCustomizedChecked;
@@ -189,6 +191,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = AsrIcon;
+
             new ControlBorder(this.searchTextBox);
             new ControlBorder(this.customTextBox);
             new ControlBorder(this.customText2Box);
@@ -203,6 +207,8 @@ namespace MusicBeePlugin
         internal protected override void initializeForm()
         {
             base.initializeForm();
+
+
             Enable(false, autoApplyPresetsLabel, presetList);
 
 
@@ -254,6 +260,7 @@ namespace MusicBeePlugin
             //Setting themed images
             searchPictureBox.Image = ReplaceBitmap(searchPictureBox.Image, Search);
 
+            runMonthlyPictureBox.Image = ReplaceBitmap(runMonthlyPictureBox.Image, RunMonthlyPresetsDimmed);
             tickedOnlyPictureBox.Image = ReplaceBitmap(tickedOnlyPictureBox.Image, AutoAppliedPresetsDimmed);
             predefinedPictureBox.Image = ReplaceBitmap(predefinedPictureBox.Image, PredefinedPresetsDimmed);
             customizedPictureBox.Image = ReplaceBitmap(customizedPictureBox.Image, CustomizedPresetsDimmed);
@@ -538,6 +545,9 @@ namespace MusicBeePlugin
 
             public DateTime modifiedUtc;
 
+            public bool autorunMonthly;
+            public DateTime lastRun;
+
             public bool favorite;
             public bool hidden;
 
@@ -641,6 +651,9 @@ namespace MusicBeePlugin
 
             public Preset()
             {
+                autorunMonthly = false;
+                lastRun = DateTime.MinValue;
+
                 modifiedUtc = DateTime.UtcNow;
                 favorite = false;
                 hidden = false;
@@ -668,6 +681,9 @@ namespace MusicBeePlugin
             {
                 if (fullCopy)
                 {
+                    autorunMonthly = originalPreset.autorunMonthly;
+                    lastRun = originalPreset.lastRun;
+
                     modifiedUtc = originalPreset.modifiedUtc;
                     favorite = originalPreset.favorite;
                     hidden = originalPreset.hidden;
@@ -903,7 +919,7 @@ namespace MusicBeePlugin
                 return (favorite ? "♥ " : string.Empty) + GetDictValue(names, Language) + (getCustomizationsFlag() ? " " : string.Empty)
                     + (userPreset ? " " : string.Empty)
                     + (condition ? " " : string.Empty) + (hidden ? " " : string.Empty) + (!string.IsNullOrEmpty(id) ? " " : string.Empty)
-                    + getNextPresetChars(this) + getHotkeyPostfix() + changedPostfix;
+                    + getNextPresetChars(this) + getHotkeyPostfix() + (autorunMonthly ? " " : string.Empty) + changedPostfix;
             }
 
             internal string getName(bool getEnglishName = false)
@@ -985,6 +1001,8 @@ namespace MusicBeePlugin
                     areFineCustomizationsMade = true;
                 else if (hidden != referencePreset.hidden)
                     areFineCustomizationsMade = true;
+                else if (autorunMonthly != referencePreset.autorunMonthly)
+                    areFineCustomizationsMade = true;
                 else if (nextPresetGuid != referencePreset.nextPresetGuid)
                     areFineCustomizationsMade = true;
 
@@ -1050,6 +1068,7 @@ namespace MusicBeePlugin
 
             internal void copyBasicCustomizationsFrom(Preset referencePreset)
             {
+                autorunMonthly = referencePreset.autorunMonthly;
                 favorite = referencePreset.favorite;
                 hotkeyAssigned = referencePreset.hotkeyAssigned;
                 id = referencePreset.id;
@@ -2068,109 +2087,208 @@ namespace MusicBeePlugin
             {
                 var preset = AsrPresetsWithHotkeys[i];
 
-                if (preset != null)
+                if (preset == null)
+                    return;
+
+
+                switch (i)
+                {
+                    case 0:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset1EventHandler);
+                        break;
+                    case 1:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset2EventHandler);
+                        break;
+                    case 2:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset3EventHandler);
+                        break;
+                    case 3:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset4EventHandler);
+                        break;
+                    case 4:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset5EventHandler);
+                        break;
+                    case 5:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset6EventHandler);
+                        break;
+                    case 6:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset7EventHandler);
+                        break;
+                    case 7:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset8EventHandler);
+                        break;
+                    case 8:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset9EventHandler);
+                        break;
+                    case 9:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset10EventHandler);
+                        break;
+                    case 10:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset11EventHandler);
+                        break;
+                    case 11:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset12EventHandler);
+                        break;
+                    case 12:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset13EventHandler);
+                        break;
+                    case 13:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset14EventHandler);
+                        break;
+                    case 14:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset15EventHandler);
+                        break;
+                    case 15:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset16EventHandler);
+                        break;
+                    case 16:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset17EventHandler);
+                        break;
+                    case 17:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset18EventHandler);
+                        break;
+                    case 18:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset19EventHandler);
+                        break;
+                    case 19:
+                        MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset20EventHandler);
+                        break;
+                    default:
+                        throw new Exception("Incorrect ASR hotkey slot: " + i + "!");
+                }
+
+                if (AsrPresetsMenuItem != null)
                 {
                     switch (i)
                     {
                         case 0:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset1EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 1:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset2EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 2:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset3EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 3:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset4EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 4:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset5EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 5:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset6EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 6:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset7EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 7:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset8EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 8:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset9EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 9:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset10EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 10:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset11EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 11:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset12EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 12:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset13EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 13:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset14EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 14:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset15EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 15:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset16EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 16:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset17EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 17:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset18EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 18:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset19EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         case 19:
-                            MbApiInterface.MB_RegisterCommand(preset.getHotkeyDescription(), plugin.AsrPreset20EventHandler);
-                            AsrPresetsMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);
-                            AsrPresetsContextMenuItem?.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        default:
+                            throw new Exception("Incorrect ASR hotkey slot: " + i + "!");
+                    }
+                }
+
+                if (AsrPresetsContextMenuItem != null)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 1:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 2:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 3:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 4:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 5:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 6:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 7:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 8:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 9:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 10:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 11:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 12:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 13:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 14:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 15:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 16:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 17:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 18:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);//===.Image = AsrPresetIcon;
+                            break;
+                        case 19:
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);//===.Image = AsrPresetIcon;
                             break;
                         default:
                             throw new Exception("Incorrect ASR hotkey slot: " + i + "!");
@@ -2793,7 +2911,9 @@ namespace MusicBeePlugin
 
         internal static void AsrAutoApplyPresets(string currentFile)
         {
-            if (!SavedSettings.allowAsrLrPresetAutoExecution)
+            if (SavedSettings.dontShowAsr)
+                return;
+            else if (!SavedSettings.allowAsrLrPresetAutoExecution)
                 return;
             else if (AsrAutoAppliedPresets.Count == 0)
                 return;
@@ -2820,6 +2940,47 @@ namespace MusicBeePlugin
                     SetStatusBarText(SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", Presets[appliedPresets.ElementAt(0).Key].getName()), true);
 
                 RefreshPanels(true);
+            }
+        }
+
+        internal static void AutorunPresetsMonthly()
+        {
+            if (SavedSettings.dontShowAsr)
+                return;
+
+
+            Thread.CurrentThread.Priority = ThreadPriority.Lowest;//===
+
+            MbApiInterface.Library_QueryFilesEx("domain=Library", out var files);
+            if (files == null || files.Length == 0)
+                return;
+
+            lock (AsrAutoAppliedPresets)
+            {
+                for (var i = 0; i < files.Length; i++)
+                {
+                    var currentFile = files[i];
+
+                    foreach (var preset in Presets.Values)
+                    {
+                        if (preset.autorunMonthly)
+                        {
+                            if (new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+                                - new DateTime(preset.lastRun.Year, preset.lastRun.Month, 1) > TimeSpan.Zero)
+                            {
+                                try
+                                {
+                                    if (ApplyPresetIfConditionSatisfied(currentFile, preset))
+                                        SetStatusBarText(SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
+                                }
+                                catch (Exception ex)
+                                {
+                                    SetStatusBarText("ASR preset \"" + preset.getName() + "\" monthly run failed: " + ex.Message, true);//===
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -4019,6 +4180,7 @@ namespace MusicBeePlugin
             applyToPlayingTrackCheckBox.Checked = selectedPreset.applyToPlayingTrack;
             favoriteCheckBox.Checked = selectedPreset.favorite;
             hiddenCheckBox.Checked = selectedPreset.hidden;
+            runMonthlyCheckBox.Checked = selectedPreset.autorunMonthly;
 
 
             nextPresetComboBoxCustom.Enable(true);
@@ -4469,6 +4631,7 @@ namespace MusicBeePlugin
             assignHotkeyCheckBox.Checked = false;
             applyToPlayingTrackCheckBox.Checked = false;
             favoriteCheckBox.Checked = false;
+            runMonthlyCheckBox.Checked = false;
 
 
             if (index < 0)
@@ -4721,6 +4884,7 @@ namespace MusicBeePlugin
                 showCustomizedChecked = false;
                 showPredefinedChecked = false;
                 showTickedOnlyChecked = false;
+                showRunMonthlyChecked = false;
             }
 
             bool showHiddenCheckedBackup = showHiddenChecked;
@@ -5062,6 +5226,7 @@ namespace MusicBeePlugin
             showHotkeyAssignedChecked = false;
             showHiddenChecked = false;
             showTickedOnlyChecked = false;
+            showRunMonthlyChecked = false;
 
             presetList.Items.Clear();
             ignoreCheckedPresetEvent = false;
@@ -6027,6 +6192,7 @@ namespace MusicBeePlugin
             playlistComboBoxCustom.Enable(conditionCheckBox.Checked);
             favoriteCheckBox.Enable(enable);
             hiddenCheckBox.Enable(enable);
+            runMonthlyCheckBox.Enable(enable);
             idTextBox.Enable(enable);
             clearIdButton.Enable(enable);
 
@@ -6111,6 +6277,8 @@ namespace MusicBeePlugin
             else if (showCustomizedChecked && !preset.getCustomizationsFlag())
                 filteringCriteriaAreMeet = false;
             else if (showPredefinedChecked && preset.userPreset)
+                filteringCriteriaAreMeet = false;
+            else if (showRunMonthlyChecked && !preset.autorunMonthly)
                 filteringCriteriaAreMeet = false;
 
 
@@ -6497,6 +6665,31 @@ namespace MusicBeePlugin
 
             hiddenCheckBox.Checked = !hiddenCheckBox.Checked;
             selectedPreset.setCustomizationsFlag(this, backedUpPreset);
+        }
+
+        private void runMonthlyCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!runMonthlyCheckBox.IsEnabled())
+                return;
+
+            runMonthlyCheckBox.Checked = !runMonthlyCheckBox.Checked;
+            selectedPreset.setCustomizationsFlag(this, backedUpPreset);
+        }
+
+        private void runMonthlyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ProcessPresetChanges)
+                return;
+
+            selectedPreset.autorunMonthly = runMonthlyCheckBox.Checked;
+            selectedPreset.setCustomizationsFlag(this, backedUpPreset);
+            filterPresetList();
+
+            if (presetList.SelectedItem == null)
+            {
+                presetListLastSelectedIndex = -3;
+                presetList_SelectedIndexChanged(null, null);
+            }
         }
 
         private static bool ExcludePresetFromChain(Preset selected, Preset current)
@@ -6923,6 +7116,17 @@ namespace MusicBeePlugin
                 tickedOnlyPictureBox.Image = ReplaceBitmap(tickedOnlyPictureBox.Image, AutoAppliedPresetsDimmed);
             }
 
+            if (showRunMonthlyChecked)
+            {
+                runMonthlyPictureBox.Image = ReplaceBitmap(runMonthlyPictureBox.Image, RunMonthlyPresetsAccent);
+                checkedCount++;
+                checkedFilter = 9;
+            }
+            else
+            {
+                runMonthlyPictureBox.Image = ReplaceBitmap(runMonthlyPictureBox.Image, RunMonthlyPresetsDimmed);
+            }
+
 
             IgnoreFilterComboBoxSelectedIndexChanged = true;
 
@@ -6999,6 +7203,10 @@ namespace MusicBeePlugin
                         showHiddenChecked = !showHiddenChecked;
 
                         break;
+                    case 9:
+                        showRunMonthlyChecked = !showRunMonthlyChecked;
+
+                        break;
                 }
             }
             else if (filterComboBoxCustom.SelectedIndex >= 0)
@@ -7011,6 +7219,7 @@ namespace MusicBeePlugin
                 showFunctionIdAssignedChecked = false;
                 showHotkeyAssignedChecked = false;
                 showHiddenChecked = false;
+                showRunMonthlyChecked = false;
 
                 switch (filterComboBoxCustom.SelectedIndex)
                 {
@@ -7046,6 +7255,10 @@ namespace MusicBeePlugin
                         showHiddenChecked = true;
 
                         break;
+                    case 9:
+                        showRunMonthlyChecked = true;
+
+                        break;
                 }
             }
 
@@ -7053,12 +7266,32 @@ namespace MusicBeePlugin
             filterPresetList();
         }
 
-        private void tickedOnlyPictureBox_Click(object sender, EventArgs e)
+        private void runMonthlyPictureBox_Click(object sender, EventArgs e)
+        {
+            showRunMonthlyChecked = !showRunMonthlyChecked;
+
+            if (showRunMonthlyChecked && ModifierKeys != Keys.Control)
+            {
+                showTickedOnlyChecked = false;
+                showPredefinedChecked = false;
+                showCustomizedChecked = false;
+                showUserChecked = false;
+                showPlaylistLimitedChecked = false;
+                showFunctionIdAssignedChecked = false;
+                showHotkeyAssignedChecked = false;
+                showHiddenChecked = false;
+            }
+
+            filterPresetList();
+        }
+
+        private void tickedOnlyPictureBox_Click(object sender, EventArgs e)//===
         {
             showTickedOnlyChecked = !showTickedOnlyChecked;
 
             if (showTickedOnlyChecked && ModifierKeys != Keys.Control)
             {
+                showRunMonthlyChecked = false;
                 showPredefinedChecked = false;
                 showCustomizedChecked = false;
                 showUserChecked = false;
@@ -7077,6 +7310,7 @@ namespace MusicBeePlugin
 
             if (showPredefinedChecked && ModifierKeys != Keys.Control)
             {
+                showRunMonthlyChecked = false;
                 showTickedOnlyChecked = false;
                 showCustomizedChecked = false;
                 showUserChecked = false;
@@ -7099,6 +7333,7 @@ namespace MusicBeePlugin
 
             if (showCustomizedChecked && ModifierKeys != Keys.Control)
             {
+                showRunMonthlyChecked = false;
                 showTickedOnlyChecked = false;
                 showPredefinedChecked = false;
                 showUserChecked = false;
@@ -7121,6 +7356,7 @@ namespace MusicBeePlugin
 
             if (showUserChecked && ModifierKeys != Keys.Control)
             {
+                showRunMonthlyChecked = false;
                 showTickedOnlyChecked = false;
                 showPredefinedChecked = false;
                 showCustomizedChecked = false;
@@ -7148,6 +7384,7 @@ namespace MusicBeePlugin
 
             if (showPlaylistLimitedChecked && ModifierKeys != Keys.Control)
             {
+                showRunMonthlyChecked = false;
                 showTickedOnlyChecked = false;
                 showPredefinedChecked = false;
                 showCustomizedChecked = false;
@@ -7166,6 +7403,7 @@ namespace MusicBeePlugin
 
             if (showFunctionIdAssignedChecked && ModifierKeys != Keys.Control)
             {
+                showRunMonthlyChecked = false;
                 showTickedOnlyChecked = false;
                 showPredefinedChecked = false;
                 showCustomizedChecked = false;
@@ -7184,6 +7422,7 @@ namespace MusicBeePlugin
 
             if (showHotkeyAssignedChecked && ModifierKeys != Keys.Control)
             {
+                showRunMonthlyChecked = false;
                 showTickedOnlyChecked = false;
                 showPredefinedChecked = false;
                 showCustomizedChecked = false;
@@ -7202,6 +7441,7 @@ namespace MusicBeePlugin
 
             if (showHiddenChecked && ModifierKeys != Keys.Control)
             {
+                showRunMonthlyChecked = false;
                 showTickedOnlyChecked = false;
                 showPredefinedChecked = false;
                 showCustomizedChecked = false;
@@ -7226,6 +7466,7 @@ namespace MusicBeePlugin
             showCustomizedChecked = false;
             showPredefinedChecked = false;
             showTickedOnlyChecked = false;
+            showRunMonthlyChecked = false;
 
             filterPresetList();
         }

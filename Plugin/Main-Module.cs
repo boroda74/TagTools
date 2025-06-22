@@ -243,7 +243,41 @@ namespace MusicBeePlugin
         internal static Bitmap ClearField;
         internal static Bitmap Gear;
 
-        internal static Bitmap AutoAppliedPresetsAccent;
+        internal static Bitmap AtrtIcon;
+        internal static Bitmap WindowsIcon;
+        internal static Bitmap ShowHiddenWindowsIcon;
+        internal static Bitmap TaggingReportingIcon;
+        internal static Bitmap CopyTagIcon;
+        internal static Bitmap SwapTagsIcon;
+        internal static Bitmap ChangeCaseIcon;
+        internal static Bitmap ReencodeTagIcon;
+        internal static Bitmap ReencodeTagsIcon;
+        internal static Bitmap AsrIcon;
+        internal static Bitmap AsrPresetIcon;
+        internal static Bitmap MsrIcon;
+        internal static Bitmap LrIcon;
+        internal static Bitmap LrPresetIcon;
+        internal static Bitmap CompareTracksIcon;
+        internal static Bitmap AutorateIcon;
+        internal static Bitmap CarIcon;
+        internal static Bitmap CscbIcon;
+        internal static Bitmap CopyTagsIcon;
+        internal static Bitmap CopyTagSetIcon;
+        internal static Bitmap PasteTagsIcon;
+        internal static Bitmap BackupRestoreIcon;
+        internal static Bitmap TagHistoryIcon;
+        internal static Bitmap SettingsIcon;
+        internal static Bitmap LastSkippedIcon;
+        internal static Bitmap HelpIcon;
+        internal static Bitmap WebPageIcon;
+        internal static Bitmap AboutIcon;
+        internal static Bitmap VersionIcon;
+
+
+        internal static Bitmap RunMonthlyPresetsAccent;
+        internal static Bitmap RunMonthlyPresetsDimmed;
+
+        internal static Bitmap AutoAppliedPresetsAccent;//===
         internal static Bitmap AutoAppliedPresetsDimmed;
 
         internal static Bitmap PredefinedPresetsAccent;
@@ -288,7 +322,7 @@ namespace MusicBeePlugin
 
         internal const int MaximumNumberOfAsrHotkeys = 20;
         internal const int MaximumNumberOfLrHotkeys = 20;
-        internal const int PredefinedReportPresetCount = 5;
+        internal const int PredefinedReportPresetCount = 6;
         internal const int PredefinedChangeCasePresetCount = 2;
 
         internal static readonly char LocalizedDecimalPoint = (0.5).ToString()[1];
@@ -878,6 +912,7 @@ namespace MusicBeePlugin
         internal static string CDBookletPresetName;
         internal static string AlbumsAndTracksPresetName;
         internal static string AlbumGridPresetName;
+        internal static string PlayCountStatisticsPresetName;
 
         internal static string EmptyPresetName;
 
@@ -3939,6 +3974,7 @@ namespace MusicBeePlugin
             CDBookletPresetName = "CD Booklet";
             AlbumsAndTracksPresetName = "Albums & Tracks";
             AlbumGridPresetName = "Album Grid (album list)";
+            PlayCountStatisticsPresetName = "Play & skip count statistics";
 
             EmptyPresetName = "<Empty preset>";
 
@@ -4705,6 +4741,7 @@ namespace MusicBeePlugin
                 CDBookletPresetName = "Буклет компакт-диска";
                 AlbumsAndTracksPresetName = "Альбомы и треки";
                 AlbumGridPresetName = "Сетка альбомов (список альбомов)";
+                PlayCountStatisticsPresetName = "Статистика проигрываний и пропусков";
 
                 EmptyPresetName = "<Пустой пресет>";
 
@@ -5294,23 +5331,23 @@ namespace MusicBeePlugin
 
 
             //Library Totals
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
 
             for (var f = 0; f < groupings.Length; f++)
                 groupings[f].columnIndices = new[] { f };
 
 
-            functions[0] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            functions[1] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            functions[2] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Year), null, null, false);
-            functions[3] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
-            functions[4] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, null, false);
-            functions[5] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), null, null, false);
-            functions[6] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size), null, null, false);
-            functions[7] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount), null, null, false);
-            functions[8] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount), null, null, false);
+            functions[0] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            functions[1] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
+            functions[2] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Year), null, null, false);
+            functions[3] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            functions[4] = new PresetColumnAttributes(LrFunctionType.Count, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, null, false);
+            functions[5] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), null, null, false);
+            functions[6] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size), null, null, false);
+            functions[7] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount), null, null, false);
+            functions[8] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount), null, null, false);
 
             for (var f = 0; f < functions.Length; f++)
                 functions[f].columnIndices = new[] { groupings.Length + f };
@@ -5334,33 +5371,33 @@ namespace MusicBeePlugin
             groupings = new PresetColumnAttributes[3];
             functions = new PresetColumnAttributes[10];
 
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
 
             for (var f = 0; f < groupings.Length; f++)
                 groupings[f].columnIndices = new[] { f };
 
 
-            functions[0] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty },
+            functions[0] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Artist), null, false);
-            functions[1] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty },
+            functions[1] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, false);
-            functions[2] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty },
+            functions[2] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, false);
-            functions[3] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty },
+            functions[3] = new PresetColumnAttributes(LrFunctionType.AverageCount, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), MbApiInterface.Setting_GetFieldName(MetaDataType.Year), null, false);
-            functions[4] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
+            functions[4] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Bitrate), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[5] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
+            functions[5] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName(MetaDataType.Rating), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[6] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
+            functions[6] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[7] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
+            functions[7] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Size), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[8] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
+            functions[8] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.PlayCount), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
-            functions[9] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty },
+            functions[9] = new PresetColumnAttributes(LrFunctionType.Average, new[] { string.Empty }, new[] { string.Empty },
                 MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.SkipCount), MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Url), null, false);
 
             for (var f = 0; f < functions.Length; f++)
@@ -5385,12 +5422,12 @@ namespace MusicBeePlugin
             groupings = new PresetColumnAttributes[6];
             functions = Array.Empty<PresetColumnAttributes>();
 
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, SequenceNumberName, null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
-            groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
-            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
-            groupings[5] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, new[] { string.Empty }, SequenceNumberName, null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
+            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
+            groupings[5] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName((MetaDataType)FilePropertyType.Duration), null, null, false);
 
             for (var f = 0; f < groupings.Length; f++)
                 groupings[f].columnIndices = new[] { f };
@@ -5414,11 +5451,11 @@ namespace MusicBeePlugin
             groupings = new PresetColumnAttributes[5];
             functions = Array.Empty<PresetColumnAttributes>();
 
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
-            groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackNo), null, null, false);
-            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
+            groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackNo), null, null, false);
+            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
 
             for (var f = 0; f < groupings.Length; f++)
                 groupings[f].columnIndices = new[] { f };
@@ -5442,9 +5479,9 @@ namespace MusicBeePlugin
             groupings = new PresetColumnAttributes[3];
             functions = Array.Empty<PresetColumnAttributes>();
 
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new string[] { null }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artwork), null, null, false);
 
             for (var f = 0; f < groupings.Length; f++)
                 groupings[f].columnIndices = new[] { f };
@@ -5460,6 +5497,84 @@ namespace MusicBeePlugin
             presetPermanentGuid = Guid.Parse("FA3D3B21-9B80-4C6C-AC67-1D8FC2A3CEBA");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumGridPresetName, existingPredefinedPresets,
                 groupings, functions, destinationTags, functionIds, false, LrReportFormat.HtmlDocumentAlbumGrid);
+
+            reportPresets[presetCounter++] = libraryReportsPreset;
+
+
+            //Play & skip count statistics //===
+            groupings = new PresetColumnAttributes[6];
+            functions = new PresetColumnAttributes[3];
+
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
+
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist), null, null, false);
+
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artist), null, null, false);
+
+            groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+
+            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
+
+
+            if (Language == "ru")
+            {
+                groupings[5] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+            else
+            {
+                groupings[5] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+
+
+            for (var f = 0; f < groupings.Length; f++)
+                    groupings[f].columnIndices = new[] { f };
+
+
+            if (Language == "ru")
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Проигрываний" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Пропусков" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Разница" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+            else
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Play Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Skip Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Difference" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+
+
+            for (var f = 0; f < functions.Length; f++)
+                functions[f].columnIndices = new[] { groupings.Length + f };
+
+
+            functionIds = new string[functions.Length];
+
+            destinationTags = new string[functions.Length];
+            for (var i = 0; i < destinationTags.Length; i++)
+                destinationTags[i] = NullTagName;
+
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("9C41E34B-5314-4448-8581-FCDAC3FF53D3");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, PlayCountStatisticsPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -5896,6 +6011,10 @@ namespace MusicBeePlugin
                     PeriodicUiRefreshTimer = new System.Threading.Timer(RegularUiRefresh, null, RefreshUI_Delay, RefreshUI_Delay);
 
 
+                    //Monthly ASR presets autorun
+                    new Thread(AutorunPresetsMonthly).Start();
+
+
                     //Auto rate at startup
                     AutoRate.AutoRateOnStartup(this);
 
@@ -6056,6 +6175,9 @@ namespace MusicBeePlugin
             Window?.Dispose();
 
             Gear?.Dispose();
+
+            RunMonthlyPresetsAccent?.Dispose();
+            RunMonthlyPresetsDimmed?.Dispose();
 
             AutoAppliedPresetsAccent?.Dispose();
             AutoAppliedPresetsDimmed?.Dispose();
@@ -6561,6 +6683,97 @@ namespace MusicBeePlugin
             }
 
 
+            //Menu icons
+            int menuIconSize = (int)Math.Round(16f * DpiScaling);
+
+            AtrtIcon?.Dispose();
+            AtrtIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.wrench, menuIconSize, menuIconSize);
+
+            WindowsIcon?.Dispose();
+            WindowsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.windows, menuIconSize, menuIconSize);
+
+            ShowHiddenWindowsIcon?.Dispose();
+            ShowHiddenWindowsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.show_hidden_windows, menuIconSize, menuIconSize);
+
+            TaggingReportingIcon?.Dispose();
+            TaggingReportingIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tagging_reporting, menuIconSize, menuIconSize);
+
+            CopyTagIcon?.Dispose();
+            CopyTagIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tags_copy, menuIconSize, menuIconSize);
+
+            SwapTagsIcon?.Dispose();
+            SwapTagsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.swap_tags, menuIconSize, menuIconSize);
+
+            ChangeCaseIcon?.Dispose();
+            ChangeCaseIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.change_case, menuIconSize, menuIconSize);
+
+            ReencodeTagIcon?.Dispose();
+            ReencodeTagIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.reencode_tag, menuIconSize, menuIconSize);
+
+            ReencodeTagsIcon?.Dispose();
+            ReencodeTagsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.reencode_tags, menuIconSize, menuIconSize);
+
+            AsrIcon?.Dispose();
+            AsrIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.asr, menuIconSize, menuIconSize);
+
+            AsrPresetIcon?.Dispose();
+            AsrPresetIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.asr_preset, menuIconSize, menuIconSize);
+
+            MsrIcon?.Dispose();
+            MsrIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.msr, menuIconSize, menuIconSize);
+
+            LrIcon?.Dispose();
+            LrIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.lr, menuIconSize, menuIconSize);
+
+            LrPresetIcon?.Dispose();
+            LrPresetIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.lr_preset, menuIconSize, menuIconSize);
+
+            CompareTracksIcon?.Dispose();
+            CompareTracksIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.compare_tracks, menuIconSize, menuIconSize);
+
+            AutorateIcon?.Dispose();
+            AutorateIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.autorate, menuIconSize, menuIconSize);
+
+            CarIcon?.Dispose();
+            CarIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.car, menuIconSize, menuIconSize);
+
+            CscbIcon?.Dispose();
+            CscbIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.cscb, menuIconSize, menuIconSize);
+
+            CopyTagsIcon?.Dispose();
+            CopyTagsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.copy, menuIconSize, menuIconSize);
+
+            CopyTagSetIcon?.Dispose();
+            CopyTagSetIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.copy_tag_set, menuIconSize, menuIconSize);
+
+            PasteTagsIcon?.Dispose();
+            PasteTagsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.paste, menuIconSize, menuIconSize);
+
+            BackupRestoreIcon?.Dispose();
+            BackupRestoreIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.backup_restore, menuIconSize, menuIconSize);
+
+            TagHistoryIcon?.Dispose();
+            TagHistoryIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tag_history, menuIconSize, menuIconSize);
+
+            SettingsIcon?.Dispose();
+            SettingsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.settings, menuIconSize, menuIconSize);
+
+            LastSkippedIcon?.Dispose();
+            LastSkippedIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.last_skipped, menuIconSize, menuIconSize);
+
+            HelpIcon?.Dispose();
+            HelpIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.help, menuIconSize, menuIconSize);
+
+            WebPageIcon?.Dispose();
+            WebPageIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.web_page, menuIconSize, menuIconSize);
+
+            AboutIcon?.Dispose();
+            AboutIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.about, menuIconSize, menuIconSize);
+
+            VersionIcon?.Dispose();
+            VersionIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.version, menuIconSize, menuIconSize);
+
+
             //ASR
             var markSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
@@ -6576,6 +6789,13 @@ namespace MusicBeePlugin
             Search?.Dispose();
             Search = GetSolidImageByBitmapMask(AccentColor, Resources.search, pictureSize, pictureSize);
 
+
+            RunMonthlyPresetsAccent?.Dispose();
+            RunMonthlyPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.run_monthly, pictureSize, pictureSize);
+
+            RunMonthlyPresetsDimmed?.Dispose();
+            RunMonthlyPresetsDimmed = GetSolidImageByBitmapMask(GetWeightedColor(AccentColor, FormBackColor, DeepDimmedWeight),
+                Resources.run_monthly, pictureSize, pictureSize);
 
             AutoAppliedPresetsAccent?.Dispose();
             AutoAppliedPresetsAccent = GetSolidImageByBitmapMask(AccentColor, Resources.auto_applied_presets, pictureSize, pictureSize);
@@ -6786,50 +7006,56 @@ namespace MusicBeePlugin
         {
             TagToolsSubmenu.DropDown.Items.Clear();
             TagToolsSubmenu.DropDown.ShowItemToolTips = true;
+            //=== TagToolsSubmenu.Image = AtrtIcon;
 
             OpenedFormsSubmenu = AddMenuItem(TagToolsSubmenu, OpenWindowsMenuSectionName, null, null);
+            //=== OpenedFormsSubmenu.Image = WindowsIcon;
             MbApiInterface.MB_RegisterCommand(ShowHiddenWindowsDescription, showHiddenEventHandler);
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
-            AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, false);
+            AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, false);//===.Image = TaggingReportingIcon;
 
-            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagName, CopyTagDescription, copyTagEventHandler);
-            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsName, SwapTagsDescription, swapTagsEventHandler);
-            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsSubmenu, ChangeCaseName, ChangeCaseDescription, changeCaseEventHandler);
+            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagName, CopyTagDescription, copyTagEventHandler);//=== .Image = CopyTagIcon;
+            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsName, SwapTagsDescription, swapTagsEventHandler);//===.Image = SwapTagsIcon;
+            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsSubmenu, ChangeCaseName, ChangeCaseDescription, changeCaseEventHandler);//===.Image = ChangeCaseIcon;
             if (!SavedSettings.dontShowReEncodeTag)
             {
-                AddMenuItem(TagToolsSubmenu, ReEncodeTagName, ReEncodeTagDescription, reencodeTagEventHandler);
-                AddMenuItem(TagToolsSubmenu, ReEncodeTagsName, ReEncodeTagsDescription, reencodeTagsEventHandler);
+                AddMenuItem(TagToolsSubmenu, ReEncodeTagName, ReEncodeTagDescription, reencodeTagEventHandler);//===.Image = ReencodeTagIcon;
+                AddMenuItem(TagToolsSubmenu, ReEncodeTagsName, ReEncodeTagsDescription, reencodeTagsEventHandler);//===.Image = ReencodeTagsIcon;
             }
             if (!SavedSettings.dontShowAsr)
             {
-                AddMenuItem(TagToolsSubmenu, AsrName, AsrDescription, asrEventHandler);
+                AddMenuItem(TagToolsSubmenu, AsrName, AsrDescription, asrEventHandler);//===.Image = AsrIcon;
                 if (AsrPresetsWithHotkeysCount > 0)
                 {
                     AsrPresetsMenuItem = AddMenuItem(TagToolsSubmenu, AsrName.Replace("...", string.Empty), null, null);
+                    ///=== AsrPresetsMenuItem.Image = AsrPresetIcon;
                     RegisterAsrPresetsHotkeysAndMenuItems(this);
                 }
-                AddMenuItem(TagToolsSubmenu, MsrName, MsrCommandDescription, multipleSearchReplaceEventHandler);
+                AddMenuItem(TagToolsSubmenu, MsrName, MsrCommandDescription, multipleSearchReplaceEventHandler);//===.Image = MsrIcon;
             }
             if (!SavedSettings.dontShowLibraryReports)
             {
-                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);
+                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);//===.Image = LrIcon;
                 if (LrPresetsWithHotkeysCount > 0)
                 {
                     LrPresetsMenuItem = AddMenuItem(TagToolsSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
+                    //===LrPresetsMenuItem.Image= LrPresetIcon;
                     RegisterLrPresetsHotkeysAndMenuItems(this);
                 }
             }
-            if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsSubmenu, CompareTracksName, CompareTracksDescription, compareTracksEventHandler);
-            if (!SavedSettings.dontShowAutoRate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);
-            if (!SavedSettings.dontShowCAR) AddMenuItem(TagToolsSubmenu, CarName, CarDescription, carEventHandler);
+            if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsSubmenu, CompareTracksName, CompareTracksDescription, compareTracksEventHandler);//===.Image = CompareTracksIcon;
+            if (!SavedSettings.dontShowAutoRate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);//===.Image = AutorateIcon;
+            if (!SavedSettings.dontShowCAR) AddMenuItem(TagToolsSubmenu, CarName, CarDescription, carEventHandler);//===.Image = CarIcon;
             if (!SavedSettings.dontShowCustomSortingForColumnBrowser)
-                AddMenuItem(TagToolsSubmenu, CustomSortingForColumnBrowserName, CustomSortingForColumnBrowserDescription, customSortingEventHandler);
+                AddMenuItem(TagToolsSubmenu, CustomSortingForColumnBrowserName, CustomSortingForColumnBrowserDescription, customSortingEventHandler);//===.Image = CscbIcon;
 
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
-            AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardName, CopyTagsToClipboardDescription, copyTagsToClipboardEventHandler);
+
+            AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardName, CopyTagsToClipboardDescription, copyTagsToClipboardEventHandler);//===.Image = CopyTagsIcon;
             CopyTagsToClipboardUsingMenuItem = AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardUsingMenuDescription, null, null);
+            //===CopyTagsToClipboardUsingMenuItem.Image = CopyTagSetIcon;
             addCopyTagsToClipboardUsingMenuItems();
 
             MbApiInterface.MB_RegisterCommand(TagToolsHotkeyDescription + CopyTagsToClipboardUsingMenuDescription + " [01]", copyTagsUsingTagSet1EventHandler);
@@ -6843,34 +7069,43 @@ namespace MusicBeePlugin
             MbApiInterface.MB_RegisterCommand(TagToolsHotkeyDescription + CopyTagsToClipboardUsingMenuDescription + " [09]", copyTagsUsingTagSet9EventHandler);
             MbApiInterface.MB_RegisterCommand(TagToolsHotkeyDescription + CopyTagsToClipboardUsingMenuDescription + " [10]", copyTagsUsingTagSet10EventHandler);
 
-            AddMenuItem(TagToolsSubmenu, PasteTagsFromClipboardName, PasteTagsFromClipboardDescription, pasteTagsFromClipboardEventHandler);
+            AddMenuItem(TagToolsSubmenu, PasteTagsFromClipboardName, PasteTagsFromClipboardDescription, pasteTagsFromClipboardEventHandler);//===.Image = PasteTagsIcon;
 
 
             if (!SavedSettings.dontShowBackupRestore)
             {
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
 
-                var backupRestoreSubenu = AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null);
-                AddMenuItem(backupRestoreSubenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler); //-V3080
-                AddMenuItem(backupRestoreSubenu, "-", null, null);
-                AddMenuItem(backupRestoreSubenu, BackupTagsName, BackupTagsDescription, backupTagsEventHandler);
-                AddMenuItem(backupRestoreSubenu, RestoreTagsName, RestoreTagsDescription, restoreTagsEventHandler);
-                AddMenuItem(backupRestoreSubenu, RestoreTagsForEntireLibraryName, RestoreTagsForEntireLibraryDescription, restoreTagsForEntireLibraryEventHandler);
-                AddMenuItem(backupRestoreSubenu, RenameMoveBackupName, RenameMoveBackupDescription, renameMoveBackupEventHandler);
-                AddMenuItem(backupRestoreSubenu, MoveBackupsName, MoveBackupsDescription, moveBackupsEventHandler);
-                AddMenuItem(backupRestoreSubenu, CreateNewBaselineName, CreateNewBaselineDescription, createNewBaselineEventHandler);
-                AddMenuItem(backupRestoreSubenu, createEmptyBaselineRestoreTagsForEntireLibraryName, createEmptyBaselineRestoreTagsForEntireLibraryDescription, createEmptyBaselineRestoreTagsForEntireLibraryEventHandler);
-                AddMenuItem(backupRestoreSubenu, DeleteBackupsName, DeleteBackupsDescription, deleteBackupsEventHandler);
-                AddMenuItem(backupRestoreSubenu, "-", null, null);
-                AddMenuItem(backupRestoreSubenu, AutoBackupSettingsName, AutoBackupSettingsDescription, autoBackupSettingsEventHandler);
+                var backupRestoreSubmenu = AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null);
+                //===backupRestoreSubmenu.Image = BackupRestoreIcon; //-V3080
+
+                AddMenuItem(backupRestoreSubmenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler);//===.Image = TagHistoryIcon; //-V3080
+                AddMenuItem(backupRestoreSubmenu, "-", null, null);
+                AddMenuItem(backupRestoreSubmenu, BackupTagsName, BackupTagsDescription, backupTagsEventHandler);
+                AddMenuItem(backupRestoreSubmenu, RestoreTagsName, RestoreTagsDescription, restoreTagsEventHandler);
+                AddMenuItem(backupRestoreSubmenu, RestoreTagsForEntireLibraryName, RestoreTagsForEntireLibraryDescription, restoreTagsForEntireLibraryEventHandler);
+                AddMenuItem(backupRestoreSubmenu, RenameMoveBackupName, RenameMoveBackupDescription, renameMoveBackupEventHandler);
+                AddMenuItem(backupRestoreSubmenu, MoveBackupsName, MoveBackupsDescription, moveBackupsEventHandler);
+                AddMenuItem(backupRestoreSubmenu, CreateNewBaselineName, CreateNewBaselineDescription, createNewBaselineEventHandler);
+                AddMenuItem(backupRestoreSubmenu, createEmptyBaselineRestoreTagsForEntireLibraryName, createEmptyBaselineRestoreTagsForEntireLibraryDescription, createEmptyBaselineRestoreTagsForEntireLibraryEventHandler);
+                AddMenuItem(backupRestoreSubmenu, DeleteBackupsName, DeleteBackupsDescription, deleteBackupsEventHandler);
+                AddMenuItem(backupRestoreSubmenu, "-", null, null);
+                AddMenuItem(backupRestoreSubmenu, AutoBackupSettingsName, AutoBackupSettingsDescription, autoBackupSettingsEventHandler);///===.Image = SettingsIcon;
             }
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
-            AddMenuItem(TagToolsSubmenu, PluginHelpString, null, helpEventHandler);
-            AddMenuItem(TagToolsSubmenu, PluginWebPageString, null, webPageEventHandler).ToolTipText = PluginWebPageToolTip;
+            AddMenuItem(TagToolsSubmenu, PluginHelpString, null, helpEventHandler);//===.Image = HelpIcon;
+
+            var webPage = AddMenuItem(TagToolsSubmenu, PluginWebPageString, null, webPageEventHandler);
+            //===webPage.Image = WebPageIcon; //-V3080
+            webPage.ToolTipText = PluginWebPageToolTip;
+
             AddMenuItem(TagToolsSubmenu, "-", null, null);
-            AddMenuItem(TagToolsSubmenu, PluginAboutString, null, aboutEventHandler);
-            AddMenuItem(TagToolsSubmenu, PluginVersion, null, copyPluginVersionEventHandler).ToolTipText = PluginVersionToolTip;
+            AddMenuItem(TagToolsSubmenu, PluginAboutString, null, aboutEventHandler);//===.Image = AboutIcon;
+
+            var version = AddMenuItem(TagToolsSubmenu, PluginVersion, null, copyPluginVersionEventHandler);
+            //===version.Image = VersionIcon; //-V3080
+            version.ToolTipText = PluginVersionToolTip;
         }
 
         internal void addPluginContextMenuItems() //Must be called AFTER InitLr() and InitAsr(), and BEFORE addPluginMenuItems()!
@@ -6879,38 +7114,48 @@ namespace MusicBeePlugin
                 return;
 
             TagToolsContextSubmenu.DropDown.Items.Clear();
+            //===TagToolsContextSubmenu.Image = AtrtIcon;
 
-            if (!SavedSettings.dontShowBackupRestore) AddMenuItem(TagToolsContextSubmenu, TagToolsMenuSectionName, null, null, false);
+            AddMenuItem(TagToolsContextSubmenu, TagToolsMenuSectionName, null, null, false);//===.Image = TaggingReportingIcon;
 
-            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagName, null, copyTagEventHandler);
-            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsName, null, swapTagsEventHandler);
-            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsContextSubmenu, ChangeCaseName, null, changeCaseEventHandler);
-            if (!SavedSettings.dontShowLibraryReports)
-            {
-                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);
-                if (LrPresetsWithHotkeysCount > 0)
-                    LrPresetsContextMenuItem = AddMenuItem(TagToolsContextSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
-            }
+            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagName, null, copyTagEventHandler);//===.Image = CopyTagIcon;
+            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsName, null, swapTagsEventHandler);//===.Image = SwapTagsIcon;
+            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsContextSubmenu, ChangeCaseName, null, changeCaseEventHandler);//===.Image = ChangeCaseIcon;
             if (!SavedSettings.dontShowAsr)
             {
-                AddMenuItem(TagToolsContextSubmenu, AsrName, null, asrEventHandler);
+                AddMenuItem(TagToolsContextSubmenu, AsrName, null, asrEventHandler);//===.Image = AsrIcon;
                 if (AsrPresetsWithHotkeysCount > 0)
+                {
                     AsrPresetsContextMenuItem = AddMenuItem(TagToolsContextSubmenu, AsrName.Replace("...", string.Empty), null, null);
+                    //===AsrPresetsContextMenuItem.Image = AsrPresetIcon;
+                }
 
-                AddMenuItem(TagToolsContextSubmenu, MsrName, null, multipleSearchReplaceEventHandler);
+                AddMenuItem(TagToolsContextSubmenu, MsrName, null, multipleSearchReplaceEventHandler);//===.Image = MsrIcon;
             }
-            if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsContextSubmenu, CompareTracksName, null, compareTracksEventHandler);
+            if (!SavedSettings.dontShowLibraryReports)
+            {
+                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);//===.Image = LrIcon;
+                if (LrPresetsWithHotkeysCount > 0)
+                {
+                    LrPresetsContextMenuItem = AddMenuItem(TagToolsContextSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
+                    //===LrPresetsContextMenuItem.Image = LrPresetIcon;
+                }
+            }
+            if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsContextSubmenu, CompareTracksName, null, compareTracksEventHandler);//===.Image = CompareTracksIcon;
             AddMenuItem(TagToolsContextSubmenu, "-", null, null);
-            AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardName, null, copyTagsToClipboardEventHandler);
+            AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardName, null, copyTagsToClipboardEventHandler);//===.Image = CopyTagsIcon;
+
             CopyTagsToClipboardUsingContextMenuItem = AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardUsingMenuDescription, null, null);
+            ///===CopyTagsToClipboardUsingContextMenuItem.Image = CopyTagSetIcon;
             addCopyTagsToClipboardUsingContextMenuItems();
-            AddMenuItem(TagToolsContextSubmenu, PasteTagsFromClipboardName, null, pasteTagsFromClipboardEventHandler);
+
+            AddMenuItem(TagToolsContextSubmenu, PasteTagsFromClipboardName, null, pasteTagsFromClipboardEventHandler);//===.Image = PasteTagsIcon;
 
             if (!SavedSettings.dontShowBackupRestore)
             {
                 AddMenuItem(TagToolsContextSubmenu, "-", null, null);
-                AddMenuItem(TagToolsContextSubmenu, BackupRestoreMenuSectionName, null, null, false);
-                AddMenuItem(TagToolsContextSubmenu, TagHistoryName, null, tagHistoryEventHandler);
+                AddMenuItem(TagToolsContextSubmenu, BackupRestoreMenuSectionName, null, null, false);//===.Image = BackupRestoreIcon;
+                AddMenuItem(TagToolsContextSubmenu, TagHistoryName, null, tagHistoryEventHandler);//===.Image = TagHistoryIcon;
             }
 
 
@@ -6924,16 +7169,16 @@ namespace MusicBeePlugin
         {
             CopyTagsToClipboardUsingMenuItem.DropDown.Items.Clear();
 
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[0].setName, null, copyTagsUsingTagSet1EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[1].setName, null, copyTagsUsingTagSet2EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[2].setName, null, copyTagsUsingTagSet3EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[3].setName, null, copyTagsUsingTagSet4EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[4].setName, null, copyTagsUsingTagSet5EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[5].setName, null, copyTagsUsingTagSet6EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[6].setName, null, copyTagsUsingTagSet7EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[7].setName, null, copyTagsUsingTagSet8EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[8].setName, null, copyTagsUsingTagSet9EventHandler);
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[9].setName, null, copyTagsUsingTagSet10EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[0].setName, null, copyTagsUsingTagSet1EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[1].setName, null, copyTagsUsingTagSet2EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[2].setName, null, copyTagsUsingTagSet3EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[3].setName, null, copyTagsUsingTagSet4EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[4].setName, null, copyTagsUsingTagSet5EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[5].setName, null, copyTagsUsingTagSet6EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[6].setName, null, copyTagsUsingTagSet7EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[7].setName, null, copyTagsUsingTagSet8EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[8].setName, null, copyTagsUsingTagSet9EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[9].setName, null, copyTagsUsingTagSet10EventHandler);//===.Image = CopyTagSetIcon;
         }
 
         internal void addCopyTagsToClipboardUsingContextMenuItems()
@@ -6942,16 +7187,16 @@ namespace MusicBeePlugin
             {
                 CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Clear();
 
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[0].setName, null, copyTagsUsingTagSet1EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[1].setName, null, copyTagsUsingTagSet2EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[2].setName, null, copyTagsUsingTagSet3EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[3].setName, null, copyTagsUsingTagSet4EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[4].setName, null, copyTagsUsingTagSet5EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[5].setName, null, copyTagsUsingTagSet6EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[6].setName, null, copyTagsUsingTagSet7EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[7].setName, null, copyTagsUsingTagSet8EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[8].setName, null, copyTagsUsingTagSet9EventHandler);
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[9].setName, null, copyTagsUsingTagSet10EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[0].setName, null, copyTagsUsingTagSet1EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[1].setName, null, copyTagsUsingTagSet2EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[2].setName, null, copyTagsUsingTagSet3EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[3].setName, null, copyTagsUsingTagSet4EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[4].setName, null, copyTagsUsingTagSet5EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[5].setName, null, copyTagsUsingTagSet6EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[6].setName, null, copyTagsUsingTagSet7EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[7].setName, null, copyTagsUsingTagSet8EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[8].setName, null, copyTagsUsingTagSet9EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[9].setName, null, copyTagsUsingTagSet10EventHandler);//===.Image = CopyTagSetIcon;
             }
         }
         #endregion
@@ -7020,6 +7265,11 @@ namespace MusicBeePlugin
                     "$CharN(hex_code,number_of_times)",
                     "$TagContainsAnyString(<URL>,field_name,strings)",
                     "$TagContainsAllStrings(<URL>,field_name,strings)",
+                    "$SortMultiValues(field_name,separator)",
+                    "$AddDatedValues(original_value,max_months,date_parts_separator_char,date_separator_char,value1,separator_char,value2,set_separator)",
+                    "$GetDatedValuesDateRange(original_value,date_separator_char,set_separator)",
+                    "$GetDatedValuesSum1(original_value,date_parts_separator_char,date_separator_char,separator_char,set_separator)",
+                    "$GetDatedValuesSum2(original_value,date_parts_separator_char,date_separator_char,separator_char,set_separator)",
                 };
             else
             {
@@ -7055,6 +7305,11 @@ namespace MusicBeePlugin
                     "$CharN(hex_code,number_of_times)",
                     "$TagContainsAnyString(<URL>,field_name,string1|string2|etc)",
                     "$TagContainsAllStrings(<URL>,field_name,string1|string2|etc)",
+                    "$SortMultiValues(multi_value_field_name,separator_string)",
+                    "$AddDatedValues(original_value,max_months,date_parts_separator_char,date_separator_char,value1,separator_char,value2,set_separator)",
+                    "$GetDatedValuesDateRange(original_value,date_separator_char,set_separator)",
+                    "$GetDatedValuesSum1(original_value,date_parts_separator_char,date_separator_char,separator_char,set_separator)",
+                    "$GetDatedValuesSum2(original_value,date_parts_separator_char,date_separator_char,separator_char,set_separator)",
                 };
             }
         }
@@ -7090,6 +7345,167 @@ namespace MusicBeePlugin
             
             return string.Join(separator, valueList);
         }
+
+
+        public string CustomFunc_AddDatedValues(string originalValue, string maxMonths,//===
+            string datePartsSeparatorChar, string dateSeparatorChar,
+            string value1, string separatorChar,
+            string value2, string setSeparator)
+        {
+            int shortDateInt = DateTime.Now.Year * 100 + DateTime.Now.Month;
+            string shortDate = DateTime.Now.Year.ToString("D4") + datePartsSeparatorChar + DateTime.Now.Month.ToString("D2");
+
+
+            if (string.IsNullOrEmpty(originalValue))
+                return shortDate + dateSeparatorChar + value1 + separatorChar + value2;
+
+
+            try
+            {
+                List<string> valueSets = originalValue.Split(new string[] { setSeparator }, StringSplitOptions.None).ToList();
+
+                int prevDateInt = int.Parse(valueSets[valueSets.Count - 1].Replace(datePartsSeparatorChar, string.Empty)
+                    .Split(new string[] { dateSeparatorChar }, StringSplitOptions.None)[0]);
+                int prevValue1 = 0;
+                int prevValue2 = 0;
+
+                string values = valueSets[valueSets.Count - 1].Split(new string[] { dateSeparatorChar }, StringSplitOptions.None)[1];
+                prevValue1 = int.Parse(values.Split(new string[] { separatorChar }, StringSplitOptions.None)[0]);
+                prevValue2 = int.Parse(values.Split(new string[] { separatorChar }, StringSplitOptions.None)[1]);
+
+
+                if (valueSets.Count > 1 && shortDateInt == prevDateInt)
+                {
+                    valueSets.RemoveAt(valueSets.Count - 1);
+                    valueSets.Add(shortDate + dateSeparatorChar + (int.Parse(value1) - prevValue1) + separatorChar + (int.Parse(value2) - prevValue2));
+                }
+                else if (shortDateInt == prevDateInt)
+                {
+                    valueSets.RemoveAt(valueSets.Count - 1);
+                    valueSets.Add(shortDate + dateSeparatorChar + value1 + separatorChar + value2);
+                }
+                else if (valueSets.Count > int.Parse(maxMonths) && shortDateInt == prevDateInt)
+                {
+                    valueSets.RemoveAt(valueSets.Count - 1);
+                    valueSets.Add(shortDate + dateSeparatorChar + (int.Parse(value1) - prevValue1) + separatorChar + (int.Parse(value2) - prevValue2));
+                }
+                else if (valueSets.Count > 1 && valueSets.Count > int.Parse(maxMonths))
+                {
+                    valueSets.RemoveAt(0);
+                    valueSets.Add(shortDate + dateSeparatorChar + (int.Parse(value1) - prevValue1) + separatorChar + (int.Parse(value2) - prevValue2));
+                }
+                else
+                {
+                    valueSets.Add(shortDate + dateSeparatorChar + (int.Parse(value1) - prevValue1) + separatorChar + (int.Parse(value2) - prevValue2));
+                }
+
+
+                return string.Join(setSeparator, valueSets);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string CustomFunc_GetDatedValuesDateRange(string originalValue, string dateSeparatorChar, string setSeparator)//===
+        {
+            try
+            {
+                string dates = string.Empty;
+                string[] valueSets = originalValue.Split(new string[] { setSeparator }, StringSplitOptions.None);
+
+                foreach (string set in valueSets)
+                {
+                    string date = set.Split(new string[] { dateSeparatorChar }, StringSplitOptions.None)[0];
+                    dates += date + "#";
+                }
+
+                return dates.TrimEnd('#');
+            }
+            catch (Exception ex)
+            {
+                return "???";
+                //return ex.Message;
+            }
+        }
+
+        public string CustomFunc_GetDatedValuesSum1(string originalValue,
+            string datePartsSeparatorChar, string dateSeparatorChar,
+            string separatorChar, string setSeparator)
+        {
+            try
+            {
+                string[] valueSets = originalValue.Split(new string[] { setSeparator }, StringSplitOptions.None);
+
+                int sum = 0;
+                foreach (string set in valueSets)
+                {
+                    sum += int.Parse(set.Split(new string[] { dateSeparatorChar }, StringSplitOptions.None)[1]
+                        .Split(new string[] { separatorChar }, StringSplitOptions.None)[0]);
+                }
+
+                return sum.ToString();
+            }
+            catch (Exception ex)
+            {
+                return "0";
+                //return ex.Message;
+            }
+        }
+
+        public string CustomFunc_GetDatedValuesSum2(string originalValue,
+            string datePartsSeparatorChar, string dateSeparatorChar,
+            string separatorChar, string setSeparator)
+        {
+            try
+            {
+                string[] valueSets = originalValue.Split(new string[] { setSeparator }, StringSplitOptions.None);
+
+                int sum = 0;
+                foreach (string set in valueSets)
+                {
+                    sum += int.Parse(set.Split(new string[] { dateSeparatorChar }, StringSplitOptions.None)[1]
+                        .Split(new string[] { separatorChar }, StringSplitOptions.None)[1]);
+                }
+
+                return sum.ToString();
+            }
+            catch (Exception ex)
+            {
+                return "0";
+                //return ex.Message;
+            }
+        }
+
+        public string CustomFunc_GetDatedValuesDiff(string originalValue,//===
+            string datePartsSeparatorChar, string dateSeparatorChar,
+            string separatorChar, string setSeparator)
+        {
+            try
+            {
+                string[] valueSets = originalValue.Split(new string[] { setSeparator }, StringSplitOptions.None);
+
+                int sum1 = 0;
+                int sum2 = 0;
+                foreach (string set in valueSets)
+                {
+                    sum1 += int.Parse(set.Split(new string[] { dateSeparatorChar }, StringSplitOptions.None)[1]
+                        .Split(new string[] { separatorChar }, StringSplitOptions.None)[0]);
+
+                    sum2 += int.Parse(set.Split(new string[] { dateSeparatorChar }, StringSplitOptions.None)[1]
+                        .Split(new string[] { separatorChar }, StringSplitOptions.None)[1]);
+                }
+
+                return (sum1 - sum2).ToString();
+            }
+            catch (Exception ex)
+            {
+                return "0";
+                //return ex.Message;
+            }
+        }
+
 
         public string CustomFunc_Random(string max_number)
         {

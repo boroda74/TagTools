@@ -78,7 +78,6 @@ namespace MusicBeePlugin
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Tag = "#controlsPanel&controlsPanel";
-            this.toolTip1.SetToolTip(this.buttonClose, resources.GetString("buttonClose.ToolTip"));
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // tagComboBox
@@ -88,7 +87,6 @@ namespace MusicBeePlugin
             this.tagComboBox.FormattingEnabled = true;
             this.tagComboBox.Name = "tagComboBox";
             this.tagComboBox.Tag = "";
-            this.toolTip1.SetToolTip(this.tagComboBox, resources.GetString("tagComboBox.ToolTip"));
             this.tagComboBox.SelectedIndexChanged += new System.EventHandler(this.tagComboBox_SelectedIndexChanged);
             // 
             // toolTip1
@@ -123,8 +121,8 @@ namespace MusicBeePlugin
             // 
             // buttonOverwrite
             // 
-            resources.ApplyResources(this.buttonOverwrite, "buttonOverwrite");
             this.buttonOverwrite.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.buttonOverwrite, "buttonOverwrite");
             this.buttonOverwrite.Name = "buttonOverwrite";
             this.buttonOverwrite.Tag = "";
             this.toolTip1.SetToolTip(this.buttonOverwrite, resources.GetString("buttonOverwrite.ToolTip"));
@@ -150,14 +148,12 @@ namespace MusicBeePlugin
             this.controlsPanel.Controls.Add(this.buttonOK);
             this.controlsPanel.Name = "controlsPanel";
             this.controlsPanel.Tag = "#CustomSortingForColumnBrowser&CustomSortingForColumnBrowser";
-            this.toolTip1.SetToolTip(this.controlsPanel, resources.GetString("controlsPanel.ToolTip"));
             // 
             // buttonDownMore
             // 
             resources.ApplyResources(this.buttonDownMore, "buttonDownMore");
             this.buttonDownMore.Name = "buttonDownMore";
             this.buttonDownMore.Tag = "&controlsPanel@non-defaultable@square-button";
-            this.toolTip1.SetToolTip(this.buttonDownMore, resources.GetString("buttonDownMore.ToolTip"));
             this.buttonDownMore.Click += new System.EventHandler(this.buttonDownMore_Click);
             // 
             // buttonUpMore
@@ -165,7 +161,6 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.buttonUpMore, "buttonUpMore");
             this.buttonUpMore.Name = "buttonUpMore";
             this.buttonUpMore.Tag = "#buttonUp&controlsPanel@non-defaultable@square-button@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.buttonUpMore, resources.GetString("buttonUpMore.ToolTip"));
             this.buttonUpMore.Click += new System.EventHandler(this.buttonUpMore_Click);
             // 
             // buttonDown
@@ -173,7 +168,6 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.buttonDown, "buttonDown");
             this.buttonDown.Name = "buttonDown";
             this.buttonDown.Tag = "#buttonDownMore&controlsPanel@non-defaultable@square-button";
-            this.toolTip1.SetToolTip(this.buttonDown, resources.GetString("buttonDown.ToolTip"));
             this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
             // 
             // buttonUp
@@ -181,7 +175,6 @@ namespace MusicBeePlugin
             resources.ApplyResources(this.buttonUp, "buttonUp");
             this.buttonUp.Name = "buttonUp";
             this.buttonUp.Tag = "#buttonDown&controlsPanel@non-defaultable@square-button@pinned-to-parent-x";
-            this.toolTip1.SetToolTip(this.buttonUp, resources.GetString("buttonUp.ToolTip"));
             this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
             // 
             // infoLabel
@@ -190,14 +183,12 @@ namespace MusicBeePlugin
             this.infoLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.infoLabel, resources.GetString("infoLabel.ToolTip"));
             // 
             // tagList
             // 
             resources.ApplyResources(this.tagList, "tagList");
             this.tagList.Name = "tagList";
             this.tagList.Sorted = true;
-            this.toolTip1.SetToolTip(this.tagList, resources.GetString("tagList.ToolTip"));
             // 
             // tableLayoutPanel1
             // 
@@ -205,7 +196,6 @@ namespace MusicBeePlugin
             this.tableLayoutPanel1.Controls.Add(this.tagList, 0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Tag = "#CustomSortingForColumnBrowser&controlsPanel";
-            this.toolTip1.SetToolTip(this.tableLayoutPanel1, resources.GetString("tableLayoutPanel1.ToolTip"));
             // 
             // sourceTagComboBox
             // 
@@ -214,16 +204,14 @@ namespace MusicBeePlugin
             this.sourceTagComboBox.FormattingEnabled = true;
             this.sourceTagComboBox.Name = "sourceTagComboBox";
             this.sourceTagComboBox.Tag = "";
-            this.toolTip1.SetToolTip(this.sourceTagComboBox, resources.GetString("sourceTagComboBox.ToolTip"));
             this.sourceTagComboBox.SelectedIndexChanged += new System.EventHandler(this.sourceTagComboBox_SelectedIndexChanged);
             // 
             // buttonCopy
             // 
-            resources.ApplyResources(this.buttonCopy, "buttonCopy");
             this.buttonCopy.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.buttonCopy, "buttonCopy");
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Tag = "#autoCopyCheckBox";
-            this.toolTip1.SetToolTip(this.buttonCopy, resources.GetString("buttonCopy.ToolTip"));
             this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Clicked);
             // 
             // CustomSortingForColumnBrowser
@@ -247,7 +235,6 @@ namespace MusicBeePlugin
             this.MinimizeBox = false;
             this.Name = "CustomSortingForColumnBrowser";
             this.Tag = "";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.controlsPanel.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

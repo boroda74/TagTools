@@ -21,6 +21,8 @@ namespace MusicBeePlugin
         public SwapTags(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = SwapTagsIcon;
         }
 
         internal protected override void initializeForm()

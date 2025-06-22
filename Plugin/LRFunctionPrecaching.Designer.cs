@@ -53,9 +53,9 @@
             // 
             // LrFunctionPrecaching
             // 
-            this.CancelButton = this.buttonClose;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonClose;
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.progressInfoLabel);
             this.DoubleBuffered = true;

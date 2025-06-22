@@ -57,6 +57,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = AsrIcon;
+
             new ControlBorder(this.nameBox);
             new ControlBorder(this.descriptionBox);
             new ControlBorder(this.customTextBox);
@@ -78,6 +80,7 @@ namespace MusicBeePlugin
         internal protected override void initializeForm()
         {
             base.initializeForm();
+
             Enable(false, null, null);
 
 

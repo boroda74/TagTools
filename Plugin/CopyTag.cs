@@ -67,6 +67,8 @@ namespace MusicBeePlugin
         public CopyTag(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = CopyTagIcon;
         }
 
         internal protected override void initializeForm()

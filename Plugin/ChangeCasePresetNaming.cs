@@ -22,6 +22,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = ChangeCaseIcon;
+
             new ControlBorder(this.nameBox);
             new ControlBorder(this.descriptionBox);
         }

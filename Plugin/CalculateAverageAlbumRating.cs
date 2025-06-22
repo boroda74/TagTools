@@ -19,6 +19,8 @@ namespace MusicBeePlugin
         public CalculateAverageAlbumRating(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = CarIcon;
         }
 
         internal protected override void initializeForm()

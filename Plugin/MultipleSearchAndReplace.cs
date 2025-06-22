@@ -60,6 +60,8 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowIcon = MsrIcon;
+
             new ControlBorder(this.templateNameTextBox);
         }
 

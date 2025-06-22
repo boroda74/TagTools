@@ -26,6 +26,8 @@ namespace MusicBeePlugin
         public CopyTagsToClipboard(Plugin plugin) : base(plugin)
         {
             InitializeComponent();
+
+            WindowIcon = CopyTagsIcon;
         }
 
         public CopyTagsToClipboard(Plugin plugin, string formTitle, string copyButtonName) : this(plugin)
