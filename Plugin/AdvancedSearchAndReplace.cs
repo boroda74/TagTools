@@ -6,13 +6,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using System.Threading;
 
 using ExtensionMethods;
 
 using MusicBeePlugin.Properties;
+
 using static MusicBeePlugin.Plugin;
 
 
@@ -1564,6 +1565,19 @@ namespace MusicBeePlugin
             }
         }
 
+        private class Sortmultivalues : Function
+        {
+            internal Sortmultivalues()
+            {
+                functionName = "sortmultivalues";
+            }
+
+            internal protected override string calculate(string currentFile, string parameter0, string parameter1 = null) //-V3065
+            {
+                return Plugin.SortMultiValues(parameter0, parameter1);
+            }
+        }
+
         private class Eval : Function
         {
             internal Eval()
@@ -2379,7 +2393,7 @@ namespace MusicBeePlugin
         }
 
         //ignoreCase == null: case-preserving replacements
-        internal static string Replace(string currentFile, string value, string searchedPattern, string replacedPattern, 
+        internal static string Replace(string currentFile, string value, string searchedPattern, string replacedPattern,
             bool? ignoreCase, out bool isMatch)
         {
             isMatch = false;

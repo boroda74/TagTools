@@ -2308,7 +2308,7 @@ namespace MusicBeePlugin
 
         //newText must be used only inside DropDownClosed event handlers, when comboBox.Text property is not set yet
         internal static void CustomComboBoxLeave(CustomComboBox comboBox, string newText = null,
-            AddSubstituteSpecialPrefix addSubstituteSpecialPrefix = null, string defaultAdditionalColumnValue = null, 
+            AddSubstituteSpecialPrefix addSubstituteSpecialPrefix = null, string defaultAdditionalColumnValue = null,
             int selectedIndex = -2)
         {
             var comboBoxText = (newText ?? comboBox.Text);
@@ -2340,11 +2340,11 @@ namespace MusicBeePlugin
                 int lastDefaultSpecialState = -1;
                 for (int i = comboBox.Items.Count - 1; i >= 0; i--)
                 {
-                    if (comboBox.GetItemSpecialState(i) == comboBox.GetDefaultSpecialState() 
+                    if (comboBox.GetItemSpecialState(i) == comboBox.GetDefaultSpecialState()
                         || comboBox.GetItemSpecialState(i) == defaultAdditionalColumnValue)
                     {
                         itemText = comboBox.Items[i].ToString();
-                        normalizedItemText = addSubstituteSpecialPrefix(comboBox.Items[i].ToString(), 
+                        normalizedItemText = addSubstituteSpecialPrefix(comboBox.Items[i].ToString(),
                             string.Empty, comboBox.GetSpecialStateCharCount(true));
 
                         if (normalizedItemText == newText)
@@ -5534,7 +5534,7 @@ namespace MusicBeePlugin
 
 
             for (var f = 0; f < groupings.Length; f++)
-                    groupings[f].columnIndices = new[] { f };
+                groupings[f].columnIndices = new[] { f };
 
 
             if (Language == "ru")
@@ -7266,10 +7266,6 @@ namespace MusicBeePlugin
                     "$TagContainsAnyString(<URL>,field_name,strings)",
                     "$TagContainsAllStrings(<URL>,field_name,strings)",
                     "$SortMultiValues(field_name,separator)",
-                    "$AddDatedValues(original_value,max_months,date_parts_separator_char,date_separator_char,value1,separator_char,value2,set_separator)",
-                    "$GetDatedValuesDateRange(original_value,date_separator_char,set_separator)",
-                    "$GetDatedValuesSum1(original_value,date_parts_separator_char,date_separator_char,separator_char,set_separator)",
-                    "$GetDatedValuesSum2(original_value,date_parts_separator_char,date_separator_char,separator_char,set_separator)",
                 };
             else
             {
@@ -7306,10 +7302,6 @@ namespace MusicBeePlugin
                     "$TagContainsAnyString(<URL>,field_name,string1|string2|etc)",
                     "$TagContainsAllStrings(<URL>,field_name,string1|string2|etc)",
                     "$SortMultiValues(multi_value_field_name,separator_string)",
-                    "$AddDatedValues(original_value,max_months,date_parts_separator_char,date_separator_char,value1,separator_char,value2,set_separator)",
-                    "$GetDatedValuesDateRange(original_value,date_separator_char,set_separator)",
-                    "$GetDatedValuesSum1(original_value,date_parts_separator_char,date_separator_char,separator_char,set_separator)",
-                    "$GetDatedValuesSum2(original_value,date_parts_separator_char,date_separator_char,separator_char,set_separator)",
                 };
             }
         }
@@ -7333,17 +7325,26 @@ namespace MusicBeePlugin
             return AutoCalculateReportPresetFunction(url, functionId) ?? "<null>"; //-V5609
         }
 
-        public string CustomFunc_SortMultiValues(string multiValue, string separator)
+
+        internal static string SortMultiValues(string multiValues, string separator)
         {
-            if (string.IsNullOrWhiteSpace(multiValue))
-                return multiValue;
+            if (string.IsNullOrWhiteSpace(multiValues))
+                return multiValues;
+
+            if (string.IsNullOrEmpty(separator))
+                return "$SortMultiValues(): separator character needed!";
 
 
-            string[] values = multiValue.Split(new string[] { separator }, StringSplitOptions.None);
+            string[] values = multiValues.Split(new string[] { separator }, StringSplitOptions.None);
             List<string> valueList = values.ToList();
             valueList.Sort();
-            
+
             return string.Join(separator, valueList);
+        }
+
+        public string CustomFunc_SortMultiValues(string multiValues, string separator)
+        {
+            return SortMultiValues(multiValues, separator);
         }
 
 

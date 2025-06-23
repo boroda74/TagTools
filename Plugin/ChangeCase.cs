@@ -964,7 +964,7 @@ namespace MusicBeePlugin
                             newString = newString + ChangeSubstringCase(currentWord, ChangeCaseOptions.TitleCase, true) + currentChar;
                         //Ignore changing case if the word is not contained in whitelist, otherwise proceed as usual
                         else if (!IsItemContainedInArray(currentWord, exceptedWords) && useWhiteList)
-                            newString = newString + currentWord + currentChar;                        
+                            newString = newString + currentWord + currentChar;
                         //Change case
                         else
                             newString = newString + ChangeSubstringCase(currentWord, changeCaseOption, isTheFirstWord) + currentChar;

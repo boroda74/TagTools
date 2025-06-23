@@ -741,7 +741,7 @@ namespace MusicBeePlugin
         public enum SkinElement
         {
             SkinSubPanel = 0,
-			SkinButton = 2,
+            SkinButton = 2,
             SkinInputControl = 7,
             SkinInputPanel = 10,
             SkinInputPanelLabel = 14,

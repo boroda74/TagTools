@@ -1305,9 +1305,9 @@ namespace MusicBeePlugin
                 int refCount = 0;
 
                 foreach (var preset in PresetsInteractiveWorkingCopy.Values)
-                    if (PresetsInteractiveWorkingCopy.TryGetValue(preset.anotherPresetAsSource.permanentGuid, out var next) && next != null 
+                    if (PresetsInteractiveWorkingCopy.TryGetValue(preset.anotherPresetAsSource.permanentGuid, out var next) && next != null
                         && next.guid == guid)
-                        
+
                         refCount++;
 
                 return refCount;
@@ -1323,9 +1323,9 @@ namespace MusicBeePlugin
                             currentRemark += "";
 
 
-                if (referencePreset.useAnotherPresetAsSource && PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.anotherPresetAsSource.permanentGuid, out var nextPreset) 
+                if (referencePreset.useAnotherPresetAsSource && PresetsInteractiveWorkingCopy.TryGetValue(referencePreset.anotherPresetAsSource.permanentGuid, out var nextPreset)
                     && nextPreset != null)
-                    
+
                     return getNextPresetChars(nextPreset, currentRemark + "  ");
                 else
                     return currentRemark;
@@ -1931,7 +1931,7 @@ namespace MusicBeePlugin
         }
 
         internal static string GetColumnName(string tagName, string tag2Name, LrFunctionType type, string splitter, bool trimValues,
-            string expression, string columnName,bool trimName, bool includeSplitterTrimInfo, bool includeExpression)
+            string expression, string columnName, bool trimName, bool includeSplitterTrimInfo, bool includeExpression)
         {
             if (!string.IsNullOrEmpty(columnName))
                 return columnName;
@@ -4533,11 +4533,11 @@ namespace MusicBeePlugin
                         {
                             if (PresetsProcessedByFunctionCacheUpdate.AddUnique(idPreset.Value.guid))
                             {
-                                var removeGroupings = ChangingGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                var removeGroupings = ChangingGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid,
                                     out var queriedChangingGroupingTagsRawWorkingCopy);
-                                ChangingActualGroupingTagsWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                ChangingActualGroupingTagsWorkingCopy.TryGetValue(idPreset.Value.guid,
                                     out var queriedChangingActualGroupingTagsWorkingCopy);
-                                ChangingActualGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid, 
+                                ChangingActualGroupingTagsRawWorkingCopy.TryGetValue(idPreset.Value.guid,
                                     out var queriedChangingActualGroupingTagsRawWorkingCopy);
 
 

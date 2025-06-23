@@ -8,4 +8,4 @@ These commands allow to (auto)backup tags of all tracks in your library and rest
 
 ***
 
-Copyright © boroda 2012-2025. Help version 9.3.250623
+Copyright © boroda 2012-2025. Help version 9.3.250618

@@ -173,7 +173,7 @@ namespace MusicBeePlugin
             avgPlaysPerDayBox.Text = CtlAutoRateCalculating;
             labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower();
 
-            
+
             formIsOpening = false;
 
             decimal fullPercentageSum = sumOfPercentages();
