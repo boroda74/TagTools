@@ -32,7 +32,7 @@ e.g. \$NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or \$SubDateTime(&lt;Dat
 
 <b>\$SubDurationFromDateTime(datetime,duration)</b> : subtracts <b><i>duration</i></b> from <b><i>datetime</i></b>
 
-<b>\$SentenceCase(string,upper_case_words,sentence_separators)</b> : <b><i>upper_case_words</i></b> will become uppercase. You can   
+<b>\$SentenceCase(string,upper_case_words,sentence_separators)</b> : <b><i>upper_case_words</i></b> will become uppercase. You can 
     use special pseudo-word "<b>#RN</b>" in <b><i>upper_case_words</i></b> list to uppercase <i>Roman numerals</i> (e.g., <b>III</b>, <b>VI</b>, <b>X</b>). 
     <b><i>sentence_separators</i></b> is the list of characters, after which the words will become capitalized. Characters in 
     the <b><i>sentence_separators</i></b> list may be separated by spaces or not separated at all. For example, these two 
@@ -41,31 +41,32 @@ e.g. \$NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or \$SubDateTime(&lt;Dat
     <b><i>not</i></b> surrounded by spaces to pass empty parameter. You can <b><i>safely use</i></b> character <b><i>\`</i></b> in its literal meaning 
     if it’s typed in the list <b><i>along with other characters</i></b> or using a single character <b>`</b> <b><i>surrounded</i></b> by spaces. Also, you can 
     omit any parameter(s) in the middle of the parameter list by simply typing two (or more, for more omitted parameters) 
-    commas in a row if you are using *Musicbee virtual tag editor*, e.g. ***\$SentenceCase(&lt;Titlegt;>,,:)***. *Musicbee virtual*
-    *tag editor* will auto-add empty quotes for you (i.e. ***\$SentenceCase&lt;Title&gt;,"",":")***), and this is acceptable
+    commas in a row if you are using <i>Musicbee virtual tag editor</i>, e.g. <b><i>\$SentenceCase(&lt;Titlegt;>,,:)</i></b>. <i>Musicbee virtual
+    tag</i> 
+    <i>editor</i> will auto-add empty quotes for you (i.e. <b><i>\$SentenceCase&lt;Title&gt;,"",":")</i></b>), and this is acceptable
 
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of end parameters 
     simply by putting closing parenthesis earlier, e.g., $SentenceCase(string) 
     or $SentenceCase(string,upper_case_words)
 
-*\$TitleCase(string,lower_case_words,upper_case_words,lower_case_words_between_brackets,sentence_separators)*: where 
-    ***lower_case_words*** is the list of words separated by spaces, which will become lowercase (***always except for       
-    the first word*** and ***except for the last words*** if not lowercase by ***other parameters***). ***upper_case_words*** will 
-    become uppercase. This rule *overrides all other rules*. ***lower_case_words_between_brackets*** is the list of words 
-    separated by spaces, which will become lowercase between round, square and curly brackets, i.e., "**( [ {**"   
-    and "**) ] }**"). You can use special pseudo-word "<b>III</b>, <b>VI</b>, <b>X</b>" in ***lower_case_words***, ***upper_case_words*** and   
-    ***lower_case_words_between_brackets*** lists to include **Roman numerals** (e.g., **III**, **VI**, **X**) in the corresponding list.   
-    ***sentence_separators***, is the list of characters after which the words will become capitalized (switching off   
-    all exceptions, e.g. ***lower_case_words***, besides the words from the ***upper_case_words***). ***The first word*** will   
-    ***always*** be capitalized (besides the words from the ***upper_case_words***). It’s recommended to enclose the last   
-    four lists into quotes (e.g., "**\& . -**"). Characters in all character lists may be separated by spaces or   
-    not separated at all. For example, these two character lists mean the same: "**. , -**" and "**.,-**". You can omit   
-    any parameter except for the first one, using a single character **\`**  ***not*** surrounded by spaces to pass empty   
-    parameter. You can ***safely use*** character **\`**   in its literal meaning if it’s typed in the list ***along with other   
-    characters*** or using a single character **\`** ***surrounded*** by spaces. Also, you can omit any parameter(s) in the 
+<b>\$TitleCase(string,lower_case_words,upper_case_words,lower_case_words_between_brackets,sentence_separators)</b>: where 
+    <b><i>lower_case_words</i></b> is the list of words separated by spaces, which will become lowercase (<b><i>always except for</i></b>
+    <b><i>the first word</i></b> and <b><i>except for the last words</i></b> if not lowercase by <b><i>other parameters</i></b>). <b><i>upper_case_words</i></b> will 
+    become uppercase. This rule <i>overrides all other rules</i>. <b><i>lower_case_words_between_brackets</i></b> is the list of words 
+    separated by spaces, which will become lowercase between round, square and curly brackets, i.e., "<b>( [ {</b>" 
+    and "<b>) ] }</b>"). You can use special pseudo-word "<b>III</b>, <b>VI</b>, <b>X</b>" in <b><i>lower_case_words</i></b>, <b><i>upper_case_words</i></b> and 
+    <b><i>lower_case_words_between_brackets</i></b> lists to include <i>Roman numerals</i> (e.g., <b>III</b>, <b>VI</b>, <b>X</b>) in the corresponding list. 
+    <b><i>sentence_separators</i></b>, is the list of characters after which the words will become capitalized (switching off 
+    all exceptions, e.g. <b><i>lower_case_words</i></b>, besides the words from the <b><i>upper_case_words</i></b>). <b><i>The first word</i></b> will 
+    <b><i>always</i></b> be capitalized (besides the words from the <b><i>upper_case_words</i></b>). It’s recommended to enclose the last 
+    four lists into quotes (e.g., "<b>\& . -</b>"). Characters in all character lists may be separated by spaces or 
+    not separated at all. For example, these two character lists mean the same: "<b>. , -</b>" and "<b>.,-</b>". You can omit 
+    any parameter except for the first one, using a single character <b>\`</b>  <b><i>not</i></b> surrounded by spaces to pass empty 
+    parameter. You can <b><i>safely use</i></b> character <b>\`</b> in its literal meaning if it’s typed in the list <b><i>along with other</i></b> 
+    <b><i>characters</i></b> or using a single character <b>\`</b> <b><i>surrounded</i></b> by spaces. Also, you can omit any parameter(s) in the 
     middle of the parameter list by simply typing two (or more, for more omitted parameters) commas in a row 
-    if you are using *Musicbee virtual tag editor*, e.g. ***\$TitleCase(&lt;Title&gt;,,,,:))***. *Musicbee virtual tag editor* will 
-    auto-add empty quotes for you (i.e. ***\$TitleCase(&lt;Title&gt;,,,,:)***), and this is acceptable
+    if you are using <i>Musicbee virtual tag editor</i>, e.g. <b><i>\$TitleCase(&lt;Title&gt;,,,,:)</i></b>). <i>Musicbee virtual tag editor</i> will 
+    auto-add empty quotes for you (i.e. <b><i>\$TitleCase(&lt;Title&gt;,,,,:)</i></b>), and this is acceptable
 
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any 
     number of the end parameters simply by putting closing parenthesis earlier, 
@@ -73,8 +74,8 @@ e.g. \$NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or \$SubDateTime(&lt;Dat
 
 <b>\$SortMultiValues(<multi_value_tag_name>,separator)</b> : alphabetically sorts multi-value tag containing 
     multiple items separated by special character (or special sequence of characters/special string), 
-    e.g. ***\$SortMultiValues(&lt;Displayed Artist&gt;,"; ")*** will return "**John Lennon; Paul McCartney**" for tag value 
-    "**Paul McCartney; John Lennon**". It's recommended to include required spaces around/after separator 
+    e.g. <b><i>\$SortMultiValues(&lt;Displayed Artist&gt;,"; ")</i></b> will return "<b>John Lennon; Paul McCartney</b>" for tag value 
+    "<b>Paul McCartney; John Lennon</b>". It's recommended to include required spaces around/after separator 
     character to preserve them in the result. (e.g. "<b>; </b>" or "<b> / </b>"). 
 
 <b>\$Sqrt(number)</b> : square root. May be useful for collecting some library statistics (in conjunction with 
