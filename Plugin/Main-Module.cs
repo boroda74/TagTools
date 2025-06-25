@@ -322,7 +322,7 @@ namespace MusicBeePlugin
 
         internal const int MaximumNumberOfAsrHotkeys = 20;
         internal const int MaximumNumberOfLrHotkeys = 20;
-        internal const int PredefinedReportPresetCount = 6;
+        internal const int PredefinedReportPresetCount = 10;
         internal const int PredefinedChangeCasePresetCount = 2;
 
         internal static readonly char LocalizedDecimalPoint = (0.5).ToString()[1];
@@ -912,7 +912,12 @@ namespace MusicBeePlugin
         internal static string CDBookletPresetName;
         internal static string AlbumsAndTracksPresetName;
         internal static string AlbumGridPresetName;
-        internal static string PlayCountStatisticsPresetName;
+
+        internal static string GenrePlayCountStatisticsPresetName;
+        internal static string AlbumArtstPlayCountStatisticsPresetName;
+        internal static string AlbumPlayCountStatisticsPresetName;
+        internal static string ArtistPlayCountStatisticsPresetName;
+        internal static string TrcakPlayCountStatisticsPresetName;
 
         internal static string EmptyPresetName;
 
@@ -3974,7 +3979,12 @@ namespace MusicBeePlugin
             CDBookletPresetName = "CD Booklet";
             AlbumsAndTracksPresetName = "Albums & Tracks";
             AlbumGridPresetName = "Album Grid (album list)";
-            PlayCountStatisticsPresetName = "Play & skip count statistics";
+
+            GenrePlayCountStatisticsPresetName = "Play & skip count statistics (Genres)";
+            AlbumArtstPlayCountStatisticsPresetName = "Play & skip count statistics (Album artists)";
+            AlbumPlayCountStatisticsPresetName = "Play & skip count statistics (Albums)";
+            ArtistPlayCountStatisticsPresetName = "Play & skip count statistics (Artists)";
+            TrcakPlayCountStatisticsPresetName = "Play & skip count statistics (Tracks)";
 
             EmptyPresetName = "<Empty preset>";
 
@@ -4741,7 +4751,12 @@ namespace MusicBeePlugin
                 CDBookletPresetName = "Буклет компакт-диска";
                 AlbumsAndTracksPresetName = "Альбомы и треки";
                 AlbumGridPresetName = "Сетка альбомов (список альбомов)";
-                PlayCountStatisticsPresetName = "Статистика проигрываний и пропусков";
+
+                GenrePlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Жанры)";
+                AlbumArtstPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Исполнители альбомов)";
+                AlbumPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Альбомы)";
+                ArtistPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Исполнители)";
+                TrcakPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Треки)";
 
                 EmptyPresetName = "<Пустой пресет>";
 
@@ -5501,34 +5516,21 @@ namespace MusicBeePlugin
             reportPresets[presetCounter++] = libraryReportsPreset;
 
 
-            //Play & skip count statistics //===
-            groupings = new PresetColumnAttributes[6];
+            //Play & skip count statistics (Genres) //===
+            groupings = new PresetColumnAttributes[2];
             functions = new PresetColumnAttributes[3];
 
             groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
-                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
-                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.AlbumArtist), null, null, false);
-
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
-                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artist), null, null, false);
-
-            groupings[3] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
-                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
-
-            groupings[4] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
-                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
-
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, ";", true);
 
             if (Language == "ru")
             {
-                groupings[5] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
                     new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
             }
             else
             {
-                groupings[5] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
                     new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
             }
 
@@ -5573,13 +5575,276 @@ namespace MusicBeePlugin
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("9C41E34B-5314-4448-8581-FCDAC3FF53D3");
-            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, PlayCountStatisticsPresetName, existingPredefinedPresets,
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, GenrePlayCountStatisticsPresetName, existingPredefinedPresets,
                 groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
 
+            //Play & skip count statistics (Album artists) //===
+            groupings = new PresetColumnAttributes[2];
+            functions = new PresetColumnAttributes[3];
+
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+
+            if (Language == "ru")
+            {
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+            else
+            {
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+
+
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
+
+
+            if (Language == "ru")
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Проигрываний" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Пропусков" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Разница" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+            else
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Play Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Skip Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Difference" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+
+
+            for (var f = 0; f < functions.Length; f++)
+                functions[f].columnIndices = new[] { groupings.Length + f };
+
+
+            functionIds = new string[functions.Length];
+
+            destinationTags = new string[functions.Length];
+            for (var i = 0; i < destinationTags.Length; i++)
+                destinationTags[i] = NullTagName;
+
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("1202391C-FE44-46EE-9BFE-4B0EE3309604");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumArtstPlayCountStatisticsPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+
+            reportPresets[presetCounter++] = libraryReportsPreset;
+
+
+            //Play & skip count statistics (Albums) //===
+            groupings = new PresetColumnAttributes[2];
+            functions = new PresetColumnAttributes[3];
+
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+
+            if (Language == "ru")
+            {
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+            else
+            {
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+
+
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
+
+
+            if (Language == "ru")
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Проигрываний" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Пропусков" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Разница" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+            else
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Play Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Skip Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Difference" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+
+
+            for (var f = 0; f < functions.Length; f++)
+                functions[f].columnIndices = new[] { groupings.Length + f };
+
+
+            functionIds = new string[functions.Length];
+
+            destinationTags = new string[functions.Length];
+            for (var i = 0; i < destinationTags.Length; i++)
+                destinationTags[i] = NullTagName;
+
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("57EA28DD-0B3A-4B84-8002-5AC97F347305");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumPlayCountStatisticsPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+
+            reportPresets[presetCounter++] = libraryReportsPreset;
+
+
+            //Play & skip count statistics (Artists) //===
+            groupings = new PresetColumnAttributes[2];
+            functions = new PresetColumnAttributes[3];
+
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artist), null, ";", true);
+
+            if (Language == "ru")
+            {
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+            else
+            {
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+
+
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
+
+
+            if (Language == "ru")
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Проигрываний" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Пропусков" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Разница" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+            else
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Play Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Skip Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Difference" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+
+
+            for (var f = 0; f < functions.Length; f++)
+                functions[f].columnIndices = new[] { groupings.Length + f };
+
+
+            functionIds = new string[functions.Length];
+
+            destinationTags = new string[functions.Length];
+            for (var i = 0; i < destinationTags.Length; i++)
+                destinationTags[i] = NullTagName;
+
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("D1A15F15-D601-4549-99E1-9AD58746EFC8");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, ArtistPlayCountStatisticsPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+
+            reportPresets[presetCounter++] = libraryReportsPreset;
+
+
+            //Play & skip count statistics (Tracks) //===
+            groupings = new PresetColumnAttributes[2];
+            functions = new PresetColumnAttributes[3];
+
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
+
+            if (Language == "ru")
+            {
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+            else
+            {
+                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+            }
+
+
+            for (var f = 0; f < groupings.Length; f++)
+                groupings[f].columnIndices = new[] { f };
+
+
+            if (Language == "ru")
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Проигрываний" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Пропусков" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Разница" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+            else
+            {
+                functions[0] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum1(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Play Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[1] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesSum2(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Skip Counts" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+
+                functions[2] = new PresetColumnAttributes(LrFunctionType.Sum, new[] { @"$GetDatedValuesDiff(""\@"",""."","":"",""@"",""%"")" },
+                    new[] { "Difference" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, null, false);
+            }
+
+
+            for (var f = 0; f < functions.Length; f++)
+                functions[f].columnIndices = new[] { groupings.Length + f };
+
+
+            functionIds = new string[functions.Length];
+
+            destinationTags = new string[functions.Length];
+            for (var i = 0; i < destinationTags.Length; i++)
+                destinationTags[i] = NullTagName;
+
+            //Let's copy allowed user customizations from existing predefined preset (if it exists)
+            presetPermanentGuid = Guid.Parse("AF1D4F53-6580-439C-B874-1D0C18EEE163");
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, TrcakPlayCountStatisticsPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+
+            reportPresets[presetCounter++] = libraryReportsPreset;
+
+
+
             SavedSettings.reportPresets = reportPresets;
+            
+
 
 
             //Let's reset invalid defaults for controls

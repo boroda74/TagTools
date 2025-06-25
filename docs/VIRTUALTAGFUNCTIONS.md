@@ -4,9 +4,9 @@ Plugin introduces several new virtual tag functions (they also can be used in va
 
 <b><i>Note:</i></b>
 
-Use these functions like native MusicBee functions (i.e. without any initial setup required by \$LR() and \$ASR() functions). 
+Use these functions like native MusicBee functions (i.e. without any initial setup required by $LR() and $ASR() functions). 
 Everywhere you can use either literals or MusicBee tags of appropriate types as function parameters, 
-e.g. \$NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or \$SubDateTime(&lt;Date Added&gt;,01/01/2000).
+e.g. $NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or $SubDateTime(&lt;Date Added&gt;,01/01/2000).
 
 <pre>
 <b>$Random(max_number)</b> : random integer number between <b>0</b> and <b><i>max_number</i></b> (including them)
@@ -42,9 +42,9 @@ e.g. \$NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or \$SubDateTime(&lt;Dat
     character <b><i>`</i></b> in its literal meaning if it’s typed in the list <b><i>along with other characters</i></b> or using a single 
     character <b>`</b> <b><i>surrounded</i></b> by spaces. Also, you can omit any parameter(s) in the middle of the parameter list 
     by simply typing two (or more, for more omitted parameters) commas in a row if you are using 
-    <i>Musicbee virtual tag editor</i>, e.g. <b><i>\$SentenceCase(&lt;Titlegt;>,,:)</i></b>. <i>Musicbee virtual
+    <i>Musicbee virtual tag editor</i>, e.g. <b><i>$SentenceCase(&lt;Titlegt;>,,:)</i></b>. <i>Musicbee virtual
     tag</i> 
-    <i>editor</i> will auto-add empty quotes for you (i.e. <b><i>\$SentenceCase&lt;Title&gt;,"",":")</i></b>), and this is acceptable
+    <i>editor</i> will auto-add empty quotes for you (i.e. <b><i>$SentenceCase&lt;Title&gt;,"",":")</i></b>), and this is acceptable
 
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of the 
     end parameters simply by putting closing parenthesis earlier, e.g., $SentenceCase(string) 
@@ -73,54 +73,54 @@ e.g. \$NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or \$SubDateTime(&lt;Dat
     number of the end parameters simply by putting closing parenthesis earlier, 
     e.g., $TitleCase(string,lower_case_words,upper_case_words)
 
-<b>\$SortMultiValues(<multi_value_tag_name>,separator)</b> : alphabetically sorts multi-value tag containing 
+<b>$SortMultiValues(<multi_value_tag_name>,separator)</b> : alphabetically sorts multi-value tag containing 
     multiple items separated by special character (or special sequence of characters/special string), 
-    e.g. <b><i>\$SortMultiValues(&lt;Displayed Artist&gt;,"; ")</i></b> will return "<b>John Lennon; Paul McCartney</b>" for tag value 
+    e.g. <b><i>$SortMultiValues(&lt;Displayed Artist&gt;,"; ")</i></b> will return "<b>John Lennon; Paul McCartney</b>" for tag value 
     "<b>Paul McCartney; John Lennon</b>". It's recommended to include required spaces around/after separator 
     character to preserve them in the result. (e.g. "<b>; </b>" or "<b> / </b>"). 
 
-<b>\$Sqrt(number)</b> : square root. May be useful for collecting some library statistics (in conjunction with 
+<b>$Sqrt(number)</b> : square root. May be useful for collecting some library statistics (in conjunction with 
     LR functions)
 
-<b>\$eq(number1,number2)</b> : compares two integer or fractional numbers, determines if <b><i>number1</i></b> is 
-    <b>eq</b>ual to <b><i>number2</i></b>, e.g. <b><i>\$eq(1.0,1)</i></b> returns "<b>T</b>"
+<b>$eq(number1,number2)</b> : compares two integer or fractional numbers, determines if <b><i>number1</i></b> is 
+    <b>eq</b>ual to <b><i>number2</i></b>, e.g. <b><i>$eq(1.0,1)</i></b> returns "<b>T</b>"
 
-<b>\$ne(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>n</b>ot <b>e</b>qual to <b><i>number2</i></b>, otherwise returns "<b>F</b>"
+<b>$ne(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>n</b>ot <b>e</b>qual to <b><i>number2</i></b>, otherwise returns "<b>F</b>"
 
-<b>\$gt(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>g</b>reater <b>t</b>han <b><i>number2</i></b>, otherwise returns "<b>F</b>"
+<b>$gt(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>g</b>reater <b>t</b>han <b><i>number2</i></b>, otherwise returns "<b>F</b>"
 
-<b>\$lt(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>l</b>ess <b>t</b>han to <b><i>number2</i></b>, otherwise returns "<b>F</b>"
+<b>$lt(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>l</b>ess <b>t</b>han to <b><i>number2</i></b>, otherwise returns "<b>F</b>"
 
-<b>\$ge(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>g</b>reater than or <b>e</b>qual to to <b><i>number2</i></b>, 
+<b>$ge(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>g</b>reater than or <b>e</b>qual to to <b><i>number2</i></b>, 
     otherwise returns "<b>F</b>"
 
-<b>\$le(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>l</b>ess than or <b>e</b>qual to <b><i>number2</i></b>, 
+<b>$le(number1,number2)</b> : returns "<b>T</b>" if <b><i>number1</i></b> is <b>l</b>ess than or <b>e</b>qual to <b><i>number2</i></b>, 
     otherwise returns "<b>F</b>"
 
-<b>\$Round(number,number_of_digits_after_decimal_point)</b> : <b><i>\$Round(4.28,1)</i></b> returns <b>4.3</b>, 
-    and <b><i>\$Round(5.2,0)</i></b> returns <b>5</b>
+<b>$Round(number,number_of_digits_after_decimal_point)</b> : <b><i>$Round(4.28,1)</i></b> returns <b>4.3</b>, 
+    and <b><i>$Round(5.2,0)</i></b> returns <b>5</b>
 
-<b>\$RoundUp(number,number_of_digits_after_decimal_point)</b> : <b><i>\$RoundUp(5.2,0)</i></b> returns <b>6</b>
+<b>$RoundUp(number,number_of_digits_after_decimal_point)</b> : <b><i>$RoundUp(5.2,0)</i></b> returns <b>6</b>
 
-<b>\$RoundDown(number,number_of_digits_after_decimal_point)</b> : <b><i>\$RoundDown(4.28,1)</i></b> returns <b>4.2</b>
+<b>$RoundDown(number,number_of_digits_after_decimal_point)</b> : <b><i>$RoundDown(4.28,1)</i></b> returns <b>4.2</b>
 
-<b>\$Name(&lt;URL&gt;)</b> : returns file name without extension and path to file. Type <b><i>&lt;URL&gt;</i></b> exactly like this, 
+<b>$Name(&lt;URL&gt;)</b> : returns file name without extension and path to file. Type <b><i>&lt;URL&gt;</i></b> exactly like this, 
     don't use other function argument value
 
-<b>\$DateCreated(&lt;URL&gt;)</b> : returns creation date/time of music file (<b><i>not</i></b> last modification date/time)
+<b>$DateCreated(&lt;URL&gt;)</b> : returns creation date/time of music file (<b><i>not</i></b> last modification date/time)
 
-<b>\$Char(hexadecimal_code)</b> : returns Unicode character with given <b><i>hexadecimal_code</i></b>, 
-    e.g. <b><i>\$Char(a7)</i></b> returns "<b>§</b>" (U+00A7)
+<b>$Char(hexadecimal_code)</b> : returns Unicode character with given <b><i>hexadecimal_code</i></b>, 
+    e.g. <b><i>$Char(a7)</i></b> returns "<b>§</b>" (U+00A7)
 
-<b>\$CharN(hexadecimal_code,decimal_number_of_times)</b> : returns Unicode character with 
-    given <b><i>hexadecimal_code</i></b> repeated the given number of times, e.g. <b><i>\$CharN(a7,3)</i></b> 
+<b>$CharN(hexadecimal_code,decimal_number_of_times)</b> : returns Unicode character with 
+    given <b><i>hexadecimal_code</i></b> repeated the given number of times, e.g. <b><i>$CharN(a7,3)</i></b> 
     returns "<b>§§§</b>" (U+00A7 repeated 3 times)
 
-<b>\$TagContainsAnyString(&lt;URL&gt;,tag_name,string1|string2|etc.)</b> : returns "<b>T</b>" if tag contains any of 
+<b>$TagContainsAnyString(&lt;URL&gt;,tag_name,string1|string2|etc.)</b> : returns "<b>T</b>" if tag contains any of 
     the strings separated by |, otherwise returns "<b>F</b>". <i>tag_name</i> must be written without angle brackets, 
-    e.g. <i>\$TagContainsAnyString(&lt;URL&gt;,Lyrics,water|river)</i>
+    e.g. <i>$TagContainsAnyString(&lt;URL&gt;,Lyrics,water|river)</i>
 
-<b>\$TagContainsAllStrings(&lt;URL&gt;,tag_name,string1|string2|etc.)</b> : returns "<b>T</b>" if tag contains all strings 
+<b>$TagContainsAllStrings(&lt;URL&gt;,tag_name,string1|string2|etc.)</b> : returns "<b>T</b>" if tag contains all strings 
     separated by |, otherwise returns "<b>F</b>"
 </pre>
 
