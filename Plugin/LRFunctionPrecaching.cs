@@ -65,7 +65,7 @@ namespace MusicBeePlugin
             newOrChangedCachedPresets = new ReportPreset[newOrChangedPresets.Count];
             newOrChangedPresets.CopyTo(newOrChangedCachedPresets, 0);
 
-            Display(this, true);
+            Display(this, null, true);
 
             LibraryReportsCommandForFunctionIds.backgroundTaskIsScheduled = false;
 

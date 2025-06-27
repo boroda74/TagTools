@@ -787,6 +787,7 @@
             resources.ApplyResources(this.customTextCheckBox, "customTextCheckBox");
             this.customTextCheckBox.Name = "customTextCheckBox";
             this.customTextCheckBox.Tag = "customTextCheckBoxLabel";
+            this.customTextCheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.customTextCheckBox, resources.GetString("customTextCheckBox.ToolTip"));
             this.customTextCheckBox.CheckedChanged += new System.EventHandler(this.customTextChecked_CheckedChanged);
             // 
@@ -801,6 +802,7 @@
             resources.ApplyResources(this.customText2CheckBox, "customText2CheckBox");
             this.customText2CheckBox.Name = "customText2CheckBox";
             this.customText2CheckBox.Tag = "customText2CheckBoxLabel";
+            this.customText2CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.customText2CheckBox, resources.GetString("customText2CheckBox.ToolTip"));
             this.customText2CheckBox.CheckedChanged += new System.EventHandler(this.customText2CheckBox_CheckedChanged);
             // 
@@ -815,6 +817,7 @@
             resources.ApplyResources(this.customText4CheckBox, "customText4CheckBox");
             this.customText4CheckBox.Name = "customText4CheckBox";
             this.customText4CheckBox.Tag = "customText4CheckBoxLabel";
+            this.customText4CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.customText4CheckBox, resources.GetString("customText4CheckBox.ToolTip"));
             this.customText4CheckBox.CheckedChanged += new System.EventHandler(this.customText4CheckBox_CheckedChanged);
             // 
@@ -829,6 +832,7 @@
             resources.ApplyResources(this.customText3CheckBox, "customText3CheckBox");
             this.customText3CheckBox.Name = "customText3CheckBox";
             this.customText3CheckBox.Tag = "customText3CheckBoxLabel";
+            this.customText3CheckBox.ThreeState = true;
             this.toolTip1.SetToolTip(this.customText3CheckBox, resources.GetString("customText3CheckBox.ToolTip"));
             this.customText3CheckBox.CheckedChanged += new System.EventHandler(this.customText3CheckBox_CheckedChanged);
             // 

@@ -888,19 +888,19 @@ for copying it to a temporary tag</value>
     <value>2</value>
   </data>
   <data name="fileNameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Right</value>
   </data>
   <data name="fileNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
   <data name="fileNameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 59</value>
+    <value>147, 59</value>
   </data>
   <data name="fileNameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="fileNameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 23</value>
+    <value>256, 23</value>
   </data>
   <data name="fileNameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -917,6 +917,9 @@ for copying it to a temporary tag</value>
   <data name="&gt;&gt;fileNameTextBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="fileNameLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="fileNameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -927,7 +930,7 @@ for copying it to a temporary tag</value>
     <value>NoControl</value>
   </data>
   <data name="fileNameLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>69, 63</value>
+    <value>81, 63</value>
   </data>
   <data name="fileNameLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1374,7 +1377,7 @@ for copying it to a temporary tag</value>
     <value>CopyTag</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.3.9302.11586, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9308.26508, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

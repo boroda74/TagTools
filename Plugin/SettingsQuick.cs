@@ -93,7 +93,7 @@ namespace MusicBeePlugin
             allowAsrLrPresetAutoExecutionCheckBox.Checked = SavedSettings.allowAsrLrPresetAutoExecution;
             allowCommandExecutionWithoutPreviewCheckBox.Checked = SavedSettings.allowCommandExecutionWithoutPreview;
 
-            minimizePluginWindowsCheckBox.Checked = SavedSettings.minimizePluginWindows;
+            minimizePluginWindowsCheckBox.Checked = !SavedSettings.hidePluginWindows;
 
             scrollPreviewToEndCheckBox.Checked = SavedSettings.scrollPreviewToEnd;
 
@@ -158,7 +158,7 @@ namespace MusicBeePlugin
             SavedSettings.allowAsrLrPresetAutoExecution = allowAsrLrPresetAutoExecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
 
-            SavedSettings.minimizePluginWindows = minimizePluginWindowsCheckBox.Checked;
+            SavedSettings.hidePluginWindows = !minimizePluginWindowsCheckBox.Checked;
 
             SavedSettings.scrollPreviewToEnd = scrollPreviewToEndCheckBox.Checked;
 
@@ -211,7 +211,7 @@ namespace MusicBeePlugin
         private void saveLastSkippedButton_Click(object sender, EventArgs e)
         {
             var tagToolsForm = new SaveLastSkippedDate(TagToolsPlugin);
-            Display(tagToolsForm, true);
+            Display(tagToolsForm, this, true);
         }
 
         private void changedLegendTextBox_MouseClick(object sender, MouseEventArgs e)

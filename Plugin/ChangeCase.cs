@@ -1999,7 +1999,7 @@ namespace MusicBeePlugin
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             var settings = new QuickSettings(TagToolsPlugin);
-            Display(settings, true);
+            Display(settings, this, true);
         }
 
         private void alwaysCapitalize1stWordCheckBoxLabel_Click(object sender, EventArgs e)
@@ -2269,7 +2269,7 @@ namespace MusicBeePlugin
 
             bool nameDefined;
             using (var tagToolsForm = new ChangeCasePresetNaming(TagToolsPlugin))
-                nameDefined = tagToolsForm.editPreset(recordedPreset);
+                nameDefined = tagToolsForm.editPreset(recordedPreset, this);
 
             if (nameDefined && !string.IsNullOrEmpty(GetDictValue(recordedPreset.names, Language)))
             {

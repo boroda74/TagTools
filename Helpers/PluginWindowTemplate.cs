@@ -3658,7 +3658,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal protected void initAndShow()
+        internal protected void initAndShow(Form ownerForm)
         {
             if (!dontShowForm) //If dontShowForm, then form is created to get DPI/font scaling only, won't show it, form will be disposed soon.
             {
@@ -3767,10 +3767,10 @@ namespace MusicBeePlugin
 
 
             SetBounds(-20 - Width, -20 - Height, Width, Height);
-            showFormInternal();
+            showFormInternal(ownerForm);
         }
 
-        internal protected void showFormInternal()
+        internal protected void showFormInternal(Form ownerform)
         {
             if (PluginClosing)
                 return;
@@ -3781,25 +3781,35 @@ namespace MusicBeePlugin
             if (MbForm.IsDisposed)
                 MbForm = Control.FromHandle(MbApiInterface.MB_GetWindowHandle()) as Form;
 
-            if (modal)
-                base.ShowDialog(MbForm);
+            if (ownerform == null)
+            {
+                if (modal)
+                    base.ShowDialog(MbForm);
+                else
+                    base.Show(MbForm);
+            }
             else
-                base.Show(MbForm);
+            {
+                if (modal)
+                    base.ShowDialog(ownerform);
+                else
+                    base.Show(ownerform);
+            }
         }
 
-        internal new void Show()
+        internal void Show(Form ownerForm = null)
         {
             modal = false;
-            initAndShow();
+            initAndShow(ownerForm);
         }
 
-        internal new void ShowDialog()
+        internal void ShowDialog(Form ownerForm = null)
         {
             modal = true;
-            initAndShow();
+            initAndShow(ownerForm);
         }
 
-        internal static void Display(PluginWindowTemplate newForm, bool modalForm = false)
+        internal static void Display(PluginWindowTemplate newForm, Form ownerForm, bool modalForm = false)
         {
             lock (OpenedForms)
             {
@@ -3843,9 +3853,9 @@ namespace MusicBeePlugin
                 AddMenuItem(OpenedFormsSubmenu, newForm.Text, null, TagToolsPlugin.openWindowActivationEventHandler, true, newForm).Image = newForm.WindowIcon;
 
                 if (modalForm)
-                    newForm.ShowDialog();
+                    newForm.ShowDialog(ownerForm);
                 else
-                    newForm.Show();
+                    newForm.Show(ownerForm);
             }
         }
 
@@ -3949,7 +3959,7 @@ namespace MusicBeePlugin
             if (result == DialogResult.Yes)
             {
                 var tagToolsForm = new Settings(TagToolsPlugin);
-                Display(tagToolsForm, true);
+                Display(tagToolsForm, null, true);
             }
         }
 
@@ -3980,7 +3990,7 @@ namespace MusicBeePlugin
                 width = RestoreBounds.Width;
                 height = RestoreBounds.Height;
 
-                if (!SavedSettings.minimizePluginWindows)
+                if (SavedSettings.hidePluginWindows)
                     Hide();
             }
             else

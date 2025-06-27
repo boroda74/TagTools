@@ -2284,12 +2284,8 @@ namespace MusicBeePlugin
             }
         }
 
-        private void prepareLocals()
+        private List<string> prepareRows()
         {
-            if (lastCachedAppliedPresetGuid == appliedPreset.guid)
-                return;
-
-
             List<string> columnNames = new List<string>();
 
             foreach (var attribs in groupingsDict.Values)
@@ -2301,6 +2297,17 @@ namespace MusicBeePlugin
             rows = new DataGridViewBoundColumnList<Row>(columnNames);
 
             Invoke(new Action(() => { source.DataSource = rows; source.ResetBindings(false); }));
+
+            return columnNames;
+        }
+
+        private void prepareLocals()
+        {
+            if (lastCachedAppliedPresetGuid == appliedPreset.guid)
+                return;
+
+
+            var columnNames = prepareRows();
 
 
             groupings.Clear();
@@ -5609,7 +5616,7 @@ namespace MusicBeePlugin
 
             if (previewIsGenerated)
             {
-                rows.Clear();
+                rows?.Clear();
                 source.ResetBindings(false);
 
                 previewIsGenerated = false;
@@ -7356,7 +7363,7 @@ namespace MusicBeePlugin
 
         internal void SetMultipleItemsSplitterComboBoxText(string text)
         {
-            if (destinationTagListCustom.SelectedIndex == 1 && string.IsNullOrEmpty(idTextBox.Text))//====
+            if (destinationTagListCustom.SelectedItem as string == NullTagName && string.IsNullOrEmpty(idTextBox.Text))//====
             {
                 enableDisableItemSplitter(true);
                 if (string.IsNullOrEmpty(text))
@@ -7773,6 +7780,9 @@ namespace MusicBeePlugin
             presetNameTextBox.Text = selectedPreset.name ?? string.Empty;
 
 
+            prepareRows(); //===
+
+
             if (presetListLastSelectedIndex != -2) //It's during form init
             {
                 Enable(true, autoApplyPresetsLabel, null);
@@ -7836,7 +7846,7 @@ namespace MusicBeePlugin
         {
             SetMultipleItemsSplitterComboBoxText(splitterBackup);
 
-            if (sourceFieldComboBoxCustom.SelectedIndex >= 0)
+            if (sourceFieldComboBoxCustom.SelectedIndex != -1 && destinationTagListCustom.SelectedItem as string == NullTagName)
             {
                 savedDestinationTagsNames[sourceFieldComboBoxCustom.SelectedIndex] = destinationTagListCustom.Text;
 
@@ -8339,7 +8349,7 @@ namespace MusicBeePlugin
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             var settings = new QuickSettings(TagToolsPlugin);
-            Display(settings, true);
+            Display(settings, this, true);
             presetList_ItemCheck(null, null); //Let's refresh auto-apply warning
         }
 

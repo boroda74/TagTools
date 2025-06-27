@@ -2860,7 +2860,9 @@
     <value> </value>
   </data>
   <data name="customTextCheckBox.ToolTip" xml:space="preserve">
-    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;
+
+Indeterminate state means that custom text is part of regex and should remain unescaped</value>
   </data>
   <data name="&gt;&gt;customTextCheckBox.Name" xml:space="preserve">
     <value>customTextCheckBox</value>
@@ -2902,7 +2904,9 @@
     <value> </value>
   </data>
   <data name="customText2CheckBox.ToolTip" xml:space="preserve">
-    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;
+
+Indeterminate state means that custom text is part of regex and should remain unescaped</value>
   </data>
   <data name="&gt;&gt;customText2CheckBox.Name" xml:space="preserve">
     <value>customText2CheckBox</value>
@@ -2974,7 +2978,9 @@
     <value> </value>
   </data>
   <data name="customText4CheckBox.ToolTip" xml:space="preserve">
-    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;
+
+Indeterminate state means that custom text is part of regex and should remain unescaped</value>
   </data>
   <data name="&gt;&gt;customText4CheckBox.Name" xml:space="preserve">
     <value>customText4CheckBox</value>
@@ -3046,7 +3052,9 @@
     <value> </value>
   </data>
   <data name="customText3CheckBox.ToolTip" xml:space="preserve">
-    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;</value>
+    <value>"\@#" chars in searched and/or replaced patterns will be substituted with &lt;Custom text #&gt;
+
+Indeterminate state means that custom text is part of regex and should remain unescaped</value>
   </data>
   <data name="&gt;&gt;customText3CheckBox.Name" xml:space="preserve">
     <value>customText3CheckBox</value>
@@ -6159,6 +6167,6 @@
     <value>AsrPresetEditor</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.3.9302.11586, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9308.26573, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

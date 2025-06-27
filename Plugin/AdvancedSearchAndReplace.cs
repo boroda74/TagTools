@@ -186,6 +186,9 @@ namespace MusicBeePlugin
         private string buttonCloseToolTip;
         private int presetListLastSelectedIndex = -2;
 
+        private string backedUpPresetName = null;
+        private AsrPresetEditor asrPresetEditor = null;
+
         private List<bool> processedRowList = new List<bool>(); //Indices of processed tracks
 
         internal AdvancedSearchAndReplace(Plugin plugin) : base(plugin)
@@ -588,13 +591,13 @@ namespace MusicBeePlugin
             public int parameterTag5Id;
             public int parameterTag6Id;
 
-            public bool customTextChecked;
+            public bool? customTextChecked;
             public string customText;
-            public bool customText2Checked;
+            public bool? customText2Checked;
             public string customText2;
-            public bool customText3Checked;
+            public bool? customText3Checked;
             public string customText3;
-            public bool customText4Checked;
+            public bool? customText4Checked;
             public string customText4;
 
             public string preserveValues;
@@ -1171,24 +1174,24 @@ namespace MusicBeePlugin
                 CustomText1 = customText;
 
 
-                if (customTextChecked && isSearchPattern)
+                if (customTextChecked == true && isSearchPattern)
                     pattern = Regex.Replace(pattern, @"\\@1", Regex.Escape(customText));
-                else if (customTextChecked) //Replaced pattern
+                else if (customTextChecked != false) //Replaced pattern
                     pattern = Regex.Replace(pattern, @"\\@1", customText);
 
-                if (customText2Checked && isSearchPattern)
+                if (customText2Checked == true && isSearchPattern)
                     pattern = Regex.Replace(pattern, @"\\@2", Regex.Escape(customText2));
-                else if (customText2Checked) //Replaced pattern
+                else if (customText2Checked != false) //Replaced pattern
                     pattern = Regex.Replace(pattern, @"\\@2", customText2);
 
-                if (customText3Checked && isSearchPattern)
+                if (customText3Checked == true && isSearchPattern)
                     pattern = Regex.Replace(pattern, @"\\@3", Regex.Escape(customText3));
-                else if (customText3Checked) //Replaced pattern
+                else if (customText3Checked != false) //Replaced pattern
                     pattern = Regex.Replace(pattern, @"\\@3", customText3);
 
-                if (customText4Checked && isSearchPattern)
+                if (customText4Checked == true && isSearchPattern)
                     pattern = Regex.Replace(pattern, @"\\@4", Regex.Escape(customText4));
-                else if (customText4Checked) //Replaced pattern
+                else if (customText4Checked != false) //Replaced pattern
                     pattern = Regex.Replace(pattern, @"\\@4", customText4);
 
                 return pattern;
@@ -3795,28 +3798,22 @@ namespace MusicBeePlugin
             return tagId;
         }
 
-        private void editPreset(Preset preset, bool itsNewPreset, bool readOnly)
+        private void AsrPresetEditor_FormClosing(object sender, EventArgs e)
         {
-            string backedUpPresetName = preset.getName();
-
-            bool presetChanged;
-            using (var tagToolsForm = new AsrPresetEditor(TagToolsPlugin))
-                presetChanged = tagToolsForm.editPreset(preset, readOnly);
-
-            if (presetChanged)
+            if (asrPresetEditor.settingsSaved)
             {
                 SerializableDictionary<string, string> normalizedNames = new SerializableDictionary<string, string>();
-                foreach (var namePair in preset.names)
+                foreach (var namePair in asrPresetEditor.preset.names)
                     normalizedNames.Add(namePair.Key, namePair.Value.Trim(' '));
 
-                preset.names = normalizedNames;
+                asrPresetEditor.preset.names = normalizedNames;
 
 
-                if (!readOnly)
+                if (!asrPresetEditor.readOnly)
                 {
-                    preset.modifiedUtc = DateTime.UtcNow;
+                    asrPresetEditor.preset.modifiedUtc = DateTime.UtcNow;
                     unsavedChanges = true;
-                    preset.changed = true;
+                    asrPresetEditor.preset.changed = true;
 
                     buttonClose.Image = warningWide;
                     toolTip1.SetToolTip(buttonClose, buttonCloseToolTip);
@@ -3824,18 +3821,33 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    preset.setCustomizationsFlag(this, backedUpPreset);
+                    asrPresetEditor.preset.setCustomizationsFlag(this, backedUpPreset);
                 }
 
-                if (itsNewPreset)
-                {
-                    PresetsInteractiveWorkingCopy.Add(preset.guid, preset);
-                    presetList.Items.Add(preset);
-                }
+                if (!PresetsInteractiveWorkingCopy.AddSkip(asrPresetEditor.preset.guid, asrPresetEditor.preset))
+                    presetList.Items.Add(asrPresetEditor.preset);
 
                 presetListLastSelectedIndex = -1;
-                refreshPresetList(preset.guid, false, false);
+                refreshPresetList(asrPresetEditor.preset.guid, false, false);
             }
+
+
+            buttonEdit.Enable((presetList.SelectedItem as Preset)?.userPreset == true || DeveloperMode);
+
+            backedUpPresetName = null;
+            asrPresetEditor = null;
+        }
+
+        private void editPreset(Preset preset, bool itsNewPreset, bool readOnly)
+        {
+            backedUpPresetName = preset.getName();
+
+            asrPresetEditor = new AsrPresetEditor(TagToolsPlugin);
+            asrPresetEditor.FormClosing += AsrPresetEditor_FormClosing;//=== disable edit/preview
+
+            buttonEdit.Enable(false);
+
+            asrPresetEditor.editPreset(preset, readOnly, this);
         }
 
         private string getCountedPresetFilename(SortedDictionary<string, int> countedPresetFilenames, string presetFilename)
@@ -4174,10 +4186,10 @@ namespace MusicBeePlugin
             FillParameterTagList(selectedPreset.parameterTag5Type, AsrGetTagName(selectedPreset.parameterTag5Id), parameterTag5ListCustom, labelTag5);
             FillParameterTagList(selectedPreset.parameterTag6Type, AsrGetTagName(selectedPreset.parameterTag6Id), parameterTag6ListCustom, labelTag6);
 
-            customTextBox.Text = selectedPreset.customTextChecked ? selectedPreset.customText : string.Empty;
-            customText2Box.Text = selectedPreset.customText2Checked ? selectedPreset.customText2 : string.Empty;
-            customText3Box.Text = selectedPreset.customText3Checked ? selectedPreset.customText3 : string.Empty;
-            customText4Box.Text = selectedPreset.customText4Checked ? selectedPreset.customText4 : string.Empty;
+            customTextBox.Text = selectedPreset.customTextChecked != false ? selectedPreset.customText : string.Empty;
+            customText2Box.Text = selectedPreset.customText2Checked != false ? selectedPreset.customText2 : string.Empty;
+            customText3Box.Text = selectedPreset.customText3Checked != false ? selectedPreset.customText3 : string.Empty;
+            customText4Box.Text = selectedPreset.customText4Checked != false ? selectedPreset.customText4 : string.Empty;
 
             var hotkeyAssigned = selectedPreset.hotkeyAssigned;
             if (asrPresetsWithHotkeysCount >= MaximumNumberOfAsrHotkeys && !hotkeyAssigned)
@@ -5659,7 +5671,7 @@ namespace MusicBeePlugin
         private void buttonSelectPreservedTags_Click(object sender, EventArgs e)
         {
             var selectedTags = processPreserveTagsTextBox.Text.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-            selectedTags = CopyTagsToClipboard.SelectTags(TagToolsPlugin, SelectTagsWindowTitle, SelectButtonName, selectedTags, false, false);
+            selectedTags = CopyTagsToClipboard.SelectTags(TagToolsPlugin, this, SelectTagsWindowTitle, SelectButtonName, selectedTags, false, false);
 
             var preserveTags = string.Empty;
             if (selectedTags.Length > 0)
@@ -6223,14 +6235,14 @@ namespace MusicBeePlugin
             labelTag6.Enable(enable && (labelTag6.IsEnabled() || !dontChangeDisabled));
             parameterTag6ListCustom.Enable(enable && (parameterTag6ListCustom.IsEnabled() || !dontChangeDisabled));
 
-            customTextLabel.Enable(enable && selectedPreset.customTextChecked); //-V3125
-            customTextBox.Enable(enable && selectedPreset.customTextChecked);
-            customText2Label.Enable(enable && selectedPreset.customText2Checked);
-            customText2Box.Enable(enable && selectedPreset.customText2Checked);
-            customText3Label.Enable(enable && selectedPreset.customText3Checked);
-            customText3Box.Enable(enable && selectedPreset.customText3Checked);
-            customText4Label.Enable(enable && selectedPreset.customText4Checked);
-            customText4Box.Enable(enable && selectedPreset.customText4Checked);
+            customTextLabel.Enable(enable && selectedPreset.customTextChecked != false); //-V3125
+            customTextBox.Enable(enable && selectedPreset.customTextChecked != false);
+            customText2Label.Enable(enable && selectedPreset.customText2Checked != false);
+            customText2Box.Enable(enable && selectedPreset.customText2Checked != false);
+            customText3Label.Enable(enable && selectedPreset.customText3Checked != false);
+            customText3Box.Enable(enable && selectedPreset.customText3Checked != false);
+            customText4Label.Enable(enable && selectedPreset.customText4Checked != false);
+            customText4Box.Enable(enable && selectedPreset.customText4Checked != false);
 
             labelPreserveTagValues.Enable(enable);
             processPreserveTagsTextBox.Enable(enable);
@@ -7033,7 +7045,7 @@ namespace MusicBeePlugin
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             var settings = new QuickSettings(TagToolsPlugin);
-            Display(settings, true);
+            Display(settings, this, true);
             showAutoApplyingWarningIfRequired();
         }
 

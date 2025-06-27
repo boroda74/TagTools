@@ -283,7 +283,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 29</value>
+    <value>746, 30</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -382,7 +382,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 29</value>
+    <value>410, 30</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -481,7 +481,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 29</value>
+    <value>74, 30</value>
   </data>
   <data name="parameterTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -580,7 +580,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 2</value>
+    <value>746, 3</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -679,7 +679,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 2</value>
+    <value>410, 3</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -778,7 +778,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 2</value>
+    <value>74, 3</value>
   </data>
   <data name="parameterTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -2133,7 +2133,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>AdvancedSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9303.8787, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9308.26573, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

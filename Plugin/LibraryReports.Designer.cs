@@ -1261,7 +1261,7 @@ namespace MusicBeePlugin
             // multipleItemsSplitterComboBox
             // 
             resources.ApplyResources(this.multipleItemsSplitterComboBox, "multipleItemsSplitterComboBox");
-            this.multipleItemsSplitterComboBox.DropDownWidth = 390;
+            this.multipleItemsSplitterComboBox.DropDownWidth = 500;
             this.dirtyErrorProvider.SetError(this.multipleItemsSplitterComboBox, resources.GetString("multipleItemsSplitterComboBox.Error"));
             this.dirtyErrorProvider.SetIconAlignment(this.multipleItemsSplitterComboBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("multipleItemsSplitterComboBox.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.multipleItemsSplitterComboBox, ((int)(resources.GetObject("multipleItemsSplitterComboBox.IconPadding"))));

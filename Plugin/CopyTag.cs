@@ -882,7 +882,7 @@ namespace MusicBeePlugin
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             var settings = new QuickSettings(TagToolsPlugin);
-            Display(settings, true);
+            Display(settings, this, true);
         }
 
         private void onlyIfDestinationEmptyCheckBoxLabel_Click(object sender, EventArgs e)

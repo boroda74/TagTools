@@ -1367,7 +1367,7 @@ namespace MusicBeePlugin
         {
             bool previewIsGeneratedBackup = previewIsGenerated;
 
-            var newDisplayedTags = CopyTagsToClipboard.SelectTags(TagToolsPlugin, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, SavedSettings.backupArtworks, false);
+            var newDisplayedTags = CopyTagsToClipboard.SelectTags(TagToolsPlugin, this, SelectDisplayedTagsWindowTitle, SelectButtonName, displayedTags, SavedSettings.backupArtworks, false);
             if (areOldAndNewDisplayedTagsDifferent(displayedTags, newDisplayedTags))
             {
                 fillAllDisplayedTagNames(newDisplayedTags);

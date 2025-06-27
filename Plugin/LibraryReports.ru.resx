@@ -1582,4 +1582,7 @@
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>341</value>
   </data>
+  <data name="expressionsDataGridViewNameColumn.HeaderText" xml:space="preserve">
+    <value>Имя колонки</value>
+  </data>
 </root>

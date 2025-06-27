@@ -77,18 +77,18 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        internal static string[] SelectTags(Plugin plugin, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
+        internal static string[] SelectTags(Plugin plugin, Form ownerForm, string formTitle, string copyButtonName, string[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
         {
             var form = new CopyTagsToClipboard(plugin, formTitle, copyButtonName);
 
             form.selectedTags = preselectedTags.Clone() as string[];
             form.fillTags(false, addArtworkAlso, addDateCreatedAlso);
-            Display(form, true);
+            Display(form, ownerForm, true);
 
             return form.selectedTags;
         }
 
-        internal static int[] SelectTags(Plugin plugin, string formTitle, string copyButtonName, int[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
+        internal static int[] SelectTags(Plugin plugin, Form ownerForm, string formTitle, string copyButtonName, int[] preselectedTags, bool addArtworkAlso, bool addDateCreatedAlso)
         {
             var form = new CopyTagsToClipboard(plugin, formTitle, copyButtonName);
 
@@ -97,7 +97,7 @@ namespace MusicBeePlugin
                 form.selectedTags[i] = GetTagName((MetaDataType)preselectedTags[i]);
 
             form.fillTags(false, addArtworkAlso, addDateCreatedAlso);
-            Display(form, true);
+            Display(form, ownerForm, true);
 
             var selectedTagIds = new int[form.selectedTags.Length];
             for (var i = 0; i < form.selectedTags.Length; i++)

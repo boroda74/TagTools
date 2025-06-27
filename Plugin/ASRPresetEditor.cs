@@ -41,9 +41,9 @@ namespace MusicBeePlugin
         private CustomComboBox languagesCustom;
 
 
-        private Preset preset;
-        private bool readOnly;
-        private bool settingsSaved;
+        internal Preset preset;
+        internal bool readOnly;
+        internal bool settingsSaved;
         private string currentLanguage;
 
         private bool fillTagComboBoxes;
@@ -202,10 +202,10 @@ namespace MusicBeePlugin
                 customText4CheckBox.Enable(false);
             }
 
-            customTextBox.Enable(customTextCheckBox.Checked);
-            customText2Box.Enable(customText2CheckBox.Checked);
-            customText3Box.Enable(customText3CheckBox.Checked);
-            customText4Box.Enable(customText4CheckBox.Checked);
+            customTextBox.Enable(customTextCheckBox.CheckState != CheckState.Unchecked);
+            customText2Box.Enable(customText2CheckBox.CheckState != CheckState.Unchecked);
+            customText3Box.Enable(customText3CheckBox.CheckState != CheckState.Unchecked);
+            customText4Box.Enable(customText4CheckBox.CheckState != CheckState.Unchecked);
 
             descriptionBox.TextChanged += descriptionBox_TextChanged;
 
@@ -232,14 +232,12 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        internal bool editPreset(Preset preset, bool openAsReadOnly)
+        internal void editPreset(Preset preset, bool openAsReadOnly, Form ownerForm)
         {
             this.preset = preset;
             readOnly = openAsReadOnly;
 
-            Display(this, true);
-
-            return settingsSaved;
+            Display(this, ownerForm, openAsReadOnly);
         }
 
         private bool saveSettings()
@@ -296,13 +294,13 @@ namespace MusicBeePlugin
 
 
             preset.customText = customTextBox.Text;
-            preset.customTextChecked = customTextCheckBox.Checked;
+            preset.customTextChecked = GetNullableBoolFromCheckState(customTextCheckBox.CheckState);
             preset.customText2 = customText2Box.Text;
-            preset.customText2Checked = customText2CheckBox.Checked;
+            preset.customText2Checked = GetNullableBoolFromCheckState(customText2CheckBox.CheckState);
             preset.customText3 = customText3Box.Text;
-            preset.customText3Checked = customText3CheckBox.Checked;
+            preset.customText3Checked = GetNullableBoolFromCheckState(customText3CheckBox.CheckState);
             preset.customText4 = customText4Box.Text;
-            preset.customText4Checked = customText4CheckBox.Checked;
+            preset.customText4Checked = GetNullableBoolFromCheckState(customText4CheckBox.CheckState);
 
 
             preset.add = add1CheckBox.Checked;
@@ -571,13 +569,13 @@ namespace MusicBeePlugin
 
         private void customTextChecked_CheckedChanged(object sender, EventArgs e)
         {
-            customTextBox.Enable(customTextCheckBox.Checked);
-            if (!customTextCheckBox.Checked)
+            customTextBox.Enable(customTextCheckBox.CheckState != CheckState.Unchecked);
+            if (customTextCheckBox.CheckState == CheckState.Unchecked)
             {
                 customTextBox.Text = string.Empty;
-                customText2CheckBox.Checked = false;
+                customText2CheckBox.CheckState = CheckState.Unchecked;
             }
-            customText2CheckBox.Enable(customTextCheckBox.Checked);
+            customText2CheckBox.Enable(customTextCheckBox.CheckState != CheckState.Unchecked);
         }
 
         private void customTextCheckBoxLabel_Click(object sender, EventArgs e)
@@ -585,18 +583,18 @@ namespace MusicBeePlugin
             if (!customTextCheckBox.IsEnabled())
                 return;
 
-            customTextCheckBox.Checked = !customTextCheckBox.Checked;
+            customTextCheckBox.CheckState = GetNextCheckState(customTextCheckBox.CheckState);
         }
 
         private void customText2CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            customText2Box.Enable(customText2CheckBox.Checked);
-            if (!customText2CheckBox.Checked)
+            customText2Box.Enable(customText2CheckBox.CheckState != CheckState.Unchecked);
+            if (customText2CheckBox.CheckState == CheckState.Unchecked)
             {
                 customText2Box.Text = string.Empty;
-                customText3CheckBox.Checked = false;
+                customText3CheckBox.CheckState = CheckState.Unchecked;
             }
-            customText3CheckBox.Enable(customText2CheckBox.Checked);
+            customText3CheckBox.Enable(customText2CheckBox.CheckState != CheckState.Unchecked);
         }
 
         private void customText2CheckBoxLabel_Click(object sender, EventArgs e)
@@ -604,18 +602,18 @@ namespace MusicBeePlugin
             if (!customText2CheckBox.IsEnabled())
                 return;
 
-            customText2CheckBox.Checked = !customText2CheckBox.Checked;
+            customText2CheckBox.CheckState = GetNextCheckState(customText2CheckBox.CheckState);
         }
 
         private void customText3CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            customText3Box.Enable(customText3CheckBox.Checked);
-            if (!customText3CheckBox.Checked)
+            customText3Box.Enable(customText3CheckBox.CheckState != CheckState.Unchecked);
+            if (customText3CheckBox.CheckState == CheckState.Unchecked)
             {
                 customText3Box.Text = string.Empty;
-                customText4CheckBox.Checked = false;
+                customText4CheckBox.CheckState = CheckState.Unchecked;
             }
-            customText4CheckBox.Enable(customText3CheckBox.Checked);
+            customText4CheckBox.Enable(customText3CheckBox.CheckState != CheckState.Unchecked);
         }
 
         private void customText3CheckBoxLabel_Click(object sender, EventArgs e)
@@ -623,13 +621,13 @@ namespace MusicBeePlugin
             if (!customText3CheckBox.IsEnabled())
                 return;
 
-            customText3CheckBox.Checked = !customText3CheckBox.Checked;
+            customText3CheckBox.CheckState = GetNextCheckState(customText3CheckBox.CheckState);
         }
 
         private void customText4CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            customText4Box.Enable(customText4CheckBox.Checked);
-            if (!customText4CheckBox.Checked)
+            customText4Box.Enable(customText4CheckBox.CheckState != CheckState.Unchecked);
+            if (customText4CheckBox.CheckState == CheckState.Unchecked)
             {
                 customText4Box.Text = string.Empty;
             }
@@ -640,7 +638,7 @@ namespace MusicBeePlugin
             if (!customText4CheckBox.IsEnabled())
                 return;
 
-            customText4CheckBox.Checked = !customText4CheckBox.Checked;
+            customText4CheckBox.CheckState = GetNextCheckState(customText4CheckBox.CheckState);
         }
 
         private void ignoreCaseCheckBoxLabel_Click(object sender, EventArgs e)
@@ -726,13 +724,13 @@ namespace MusicBeePlugin
 
 
             customTextBox.Text = preset.customText;
-            customTextCheckBox.Checked = preset.customTextChecked;
+            customTextCheckBox.CheckState = GetCheckState(preset.customTextChecked);
             customText2Box.Text = preset.customText2;
-            customText2CheckBox.Checked = preset.customText2Checked;
+            customText2CheckBox.CheckState = GetCheckState(preset.customText2Checked);
             customText3Box.Text = preset.customText3;
-            customText3CheckBox.Checked = preset.customText3Checked;
+            customText3CheckBox.CheckState = GetCheckState(preset.customText3Checked);
             customText4Box.Text = preset.customText4;
-            customText4CheckBox.Checked = preset.customText4Checked;
+            customText4CheckBox.CheckState = GetCheckState(preset.customText4Checked);
 
 
             ignoreCaseCheckBox.Checked = preset.ignoreCase;

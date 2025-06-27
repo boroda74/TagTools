@@ -1,6 +1,7 @@
 ﻿using System;
 
 using ExtensionMethods;
+using System.Windows.Forms;
 
 using static MusicBeePlugin.AdvancedSearchAndReplace;
 using static MusicBeePlugin.ChangeCase;
@@ -74,11 +75,11 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        internal bool editPreset(ChangeCasePreset preset)
+        internal bool editPreset(ChangeCasePreset preset, Form ownerForm)
         {
             this.preset = preset;
 
-            Display(this, true);
+            Display(this, ownerForm, true);
 
             return settingsSaved;
         }

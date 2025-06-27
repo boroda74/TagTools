@@ -563,7 +563,7 @@ namespace MusicBeePlugin
 
             public bool scrollPreviewToEnd;
 
-            public bool minimizePluginWindows;
+            public bool hidePluginWindows;
 
             public bool dontUseSkinColors;
 
@@ -3387,73 +3387,73 @@ namespace MusicBeePlugin
         internal void openWindowActivationEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = ((sender as ToolStripMenuItem).Tag as PluginWindowTemplate);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void copyTagEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new CopyTag(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void swapTagsEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new SwapTags(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void changeCaseEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new ChangeCase(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void reencodeTagEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new ReEncodeTag(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void reencodeTagsEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new ReEncodeTags(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void libraryReportsEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new LibraryReports(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void autoRateEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new AutoRate(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void asrEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new AdvancedSearchAndReplace(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void carEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new CalculateAverageAlbumRating(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void customSortingEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new CustomSortingForColumnBrowser(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void copyTagsToClipboardEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new CopyTagsToClipboard(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void pasteTagsFromClipboardEventHandler(object sender, EventArgs e)
@@ -3464,7 +3464,7 @@ namespace MusicBeePlugin
         internal void multipleSearchReplaceEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new MultipleSearchAndReplace(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void showHiddenEventHandler(object sender, EventArgs e)
@@ -3474,7 +3474,7 @@ namespace MusicBeePlugin
                 foreach (var form in OpenedForms)
                 {
                     if (!form.Visible || form.WindowState == FormWindowState.Minimized)
-                        PluginWindowTemplate.Display(form);
+                        PluginWindowTemplate.Display(form, null);
                 }
             }
         }
@@ -3739,7 +3739,7 @@ namespace MusicBeePlugin
         internal void autoBackupSettingsEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new AutoBackupSettings(this);
-            PluginWindowTemplate.Display(tagToolsForm);
+            PluginWindowTemplate.Display(tagToolsForm, null);
         }
 
         internal void tagHistoryEventHandler(object sender, EventArgs e)
@@ -3752,7 +3752,7 @@ namespace MusicBeePlugin
 
 
                 var tagToolsForm = new TagHistory(this, files, trackIds);
-                PluginWindowTemplate.Display(tagToolsForm);
+                PluginWindowTemplate.Display(tagToolsForm, null);
             }
             else
             {
@@ -3773,7 +3773,7 @@ namespace MusicBeePlugin
 
 
                 var tagToolsForm = new CompareTracks(this, files);
-                PluginWindowTemplate.Display(tagToolsForm);
+                PluginWindowTemplate.Display(tagToolsForm, null);
             }
             else
             {
@@ -3794,7 +3794,7 @@ namespace MusicBeePlugin
         internal void aboutEventHandler(object sender, EventArgs e)
         {
             var tagToolsForm = new About(this);
-            PluginWindowTemplate.Display(tagToolsForm, true);
+            PluginWindowTemplate.Display(tagToolsForm, null, true);
         }
 
         internal void copyPluginVersionEventHandler(object sender, EventArgs e)
@@ -5843,7 +5843,7 @@ namespace MusicBeePlugin
 
 
             SavedSettings.reportPresets = reportPresets;
-            
+
 
 
 
@@ -6062,7 +6062,7 @@ namespace MusicBeePlugin
             //if about.ConfigurationPanelHeight is set to 0, you can display your own popup window
 
             var tagToolsForm = new Settings(this);
-            PluginWindowTemplate.Display(tagToolsForm, true);
+            PluginWindowTemplate.Display(tagToolsForm, null, true);
 
             SaveSettings();
 
