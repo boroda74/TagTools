@@ -61,6 +61,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = MsrIcon;
+            TitleBarText = this.Text;
 
             new ControlBorder(this.templateNameTextBox);
         }
@@ -235,7 +236,7 @@ namespace MusicBeePlugin
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(this, string.Empty, false);
 
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
@@ -269,7 +270,7 @@ namespace MusicBeePlugin
             enableQueryingOrUpdatingButtons();
 
             updateCustomScrollBars(previewTable);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -301,7 +302,7 @@ namespace MusicBeePlugin
 
             previewTable_ProcessRowsOfTable(processedRowList);
 
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -432,7 +433,7 @@ namespace MusicBeePlugin
 
                 var currentFile = files[fileCounter];
 
-                SetStatusBarTextForFileOperations(MsrSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(this, MsrSbText, true, fileCounter, files.Length, currentFile);
 
                 var track = GetTrackRepresentation(currentFile);
 
@@ -555,7 +556,7 @@ namespace MusicBeePlugin
                         tags[i][0] = string.Empty;
 
                         processedRowList.Add(true);
-                        SetStatusBarTextForFileOperations(MsrSbText, false, i, tags.Count, currentFile);
+                        SetStatusBarTextForFileOperations(this, MsrSbText, false, i, tags.Count, currentFile);
 
                         SetFileTag(currentFile, destinationTagId, newTag);
                         CommitTagsToFile(currentFile);
@@ -570,7 +571,7 @@ namespace MusicBeePlugin
             Invoke(new Action(() => { applyingChangesStopped(); }));
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
         }
 
         private void saveSettings()
@@ -1285,7 +1286,7 @@ namespace MusicBeePlugin
                     buttonClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(MsrSbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, MsrSbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }

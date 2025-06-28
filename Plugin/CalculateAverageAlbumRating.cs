@@ -21,6 +21,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = CarIcon;
+            TitleBarText = this.Text;
         }
 
         internal protected override void initializeForm()
@@ -75,7 +76,7 @@ namespace MusicBeePlugin
                 SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
                 CommitTagsToFile(currentFile, false, true);
 
-                SetStatusBarTextForFileOperations(CarSbText, false, j, tags.Count, currentFile);
+                SetStatusBarTextForFileOperations(this, CarSbText, false, j, tags.Count, currentFile);
             }
 
             return;
@@ -89,7 +90,7 @@ namespace MusicBeePlugin
             closeFormOnStopping = false;
             ignoreClosingForm = false;
 
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             return true;
         }
@@ -97,7 +98,7 @@ namespace MusicBeePlugin
         private void closeFormOnOperationStoppingCompletionIfRequired()
         {
             backgroundTaskIsScheduled = false;
-            SetStatusBarText(null, true);
+            SetStatusBarText(this, null, true);
 
 
             if (!Disposing && !IsDisposed && IsHandleCreated)
@@ -130,7 +131,7 @@ namespace MusicBeePlugin
 
                 currentFile = files[fileCounter];
 
-                SetStatusBarTextForFileOperations(CarSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(this, CarSbText, true, fileCounter, files.Length, currentFile);
 
                 var row = new string[4];
 
@@ -142,7 +143,7 @@ namespace MusicBeePlugin
                 tags.Add(row);
             }
 
-            SetStatusBarText(CarSbText + " (" + SbSorting + ")", false);
+            SetStatusBarText(this, CarSbText + " (" + SbSorting + ")", false);
 
             var stringArrayComparer = new StringArrayComparer
             {
@@ -186,7 +187,7 @@ namespace MusicBeePlugin
             calculateAlbumRating(tags, prevRow, tags.Count);
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (SavedSettings.notifyWhenCalculationCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted,
                 string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -373,7 +374,7 @@ namespace MusicBeePlugin
                     buttonClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(AutoRateSbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, AutoRateSbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }

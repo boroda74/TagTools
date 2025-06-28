@@ -71,6 +71,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = SettingsIcon;
+            TitleBarText = this.Text;
 
             new ControlBorder(this.unitKBox);
             new ControlBorder(this.unitMBox);

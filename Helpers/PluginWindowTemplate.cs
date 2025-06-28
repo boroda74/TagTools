@@ -17,6 +17,7 @@ namespace MusicBeePlugin
     public partial class PluginWindowTemplate : Form
     {
         internal Image WindowIcon;
+        internal string TitleBarText;
 
 
         internal protected bool modal;
@@ -4335,7 +4336,7 @@ namespace MusicBeePlugin
                 if (!closeFormOnStopping && !Disposing && !IsDisposed && IsHandleCreated)
                 {
                     RefreshPanels(true);
-                    SetResultingSbText();
+                    SetResultingSbText(this);
 
                     try
                     {

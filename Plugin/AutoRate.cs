@@ -32,6 +32,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = AutorateIcon;
+            TitleBarText = this.Text;
 
             new ControlBorder(this.threshold05Box);
             new ControlBorder(this.threshold1Box);
@@ -401,7 +402,7 @@ namespace MusicBeePlugin
             {
                 if (checkStoppingStatus())
                 {
-                    SetStatusBarText(null, true);
+                    SetStatusBarText(null, null, true);
                     backgroundTaskIsStoppedOrCancelled = true;
                     return;
                 }
@@ -409,13 +410,13 @@ namespace MusicBeePlugin
 
                 var currentFile = files[fileCounter];
 
-                SetStatusBarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(null, AutoRateSbText, false, fileCounter, files.Length, currentFile);
 
                 AutoRateLive(currentFile);
             }
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(null);
 
             if (SavedSettings.notifyWhenAutoRatingCompleted) MessageBox.Show(this, MsgBackgroundTaskIsCompleted, string.Empty,
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -429,7 +430,7 @@ namespace MusicBeePlugin
             closeFormOnStopping = false;
             ignoreClosingForm = false;
 
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             return true;
         }
@@ -437,7 +438,7 @@ namespace MusicBeePlugin
         private void closeFormOnOperationStoppingCompletionIfRequired()
         {
             backgroundTaskIsScheduled = false;
-            SetStatusBarText(null, true);
+            SetStatusBarText(this, null, true);
 
 
             if (Disposing || IsDisposed || !IsHandleCreated)
@@ -484,13 +485,13 @@ namespace MusicBeePlugin
 
                 var currentFile = files[fileCounter];
 
-                SetStatusBarTextForFileOperations(AutoRateSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(this, AutoRateSbText, false, fileCounter, files.Length, currentFile);
 
                 AutoRateLive(currentFile);
             }
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             MbForm.Invoke(new Action(() => { closeFormOnOperationStoppingCompletionIfRequired(); }));
         }
@@ -639,7 +640,7 @@ namespace MusicBeePlugin
                 var currentFile = files[fileCounter];
                 var playsPerDay = GetPlaysPerDay(currentFile);
 
-                SetStatusBarText(AutoRateSbText + AutoRateSbTextCalculatingThresholds + (fileCounter + 1) + "/" + files.Length, false);
+                SetStatusBarText(this, AutoRateSbText + AutoRateSbTextCalculatingThresholds + (fileCounter + 1) + "/" + files.Length, false);
 
                 if (playsPerDay != -1) //-V3024
                 {
@@ -677,7 +678,7 @@ namespace MusicBeePlugin
             var statisticsSum = 0;
             var assignedFilesNumber = 0;
 
-            SetStatusBarText(AutoRateSbText + AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds, false);
+            SetStatusBarText(this, AutoRateSbText + AutoRateSbTextCalculatingActualPercentagesCalculatingThresholds, false);
 
             foreach (var playsPerDay in playsPerDayStatistics.Keys)
             {
@@ -849,7 +850,7 @@ namespace MusicBeePlugin
             }
 
 
-            SetStatusBarText(null, true);
+            SetStatusBarText(this, null, true);
 
             if (calculateActualSumOfPercentageOnCalculatingThresholds)
                 calculateActualSumOfPercentages();
@@ -1359,7 +1360,7 @@ namespace MusicBeePlugin
                     buttonClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(AutoRateSbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, AutoRateSbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }

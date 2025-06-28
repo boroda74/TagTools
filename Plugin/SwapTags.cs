@@ -23,6 +23,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = SwapTagsIcon;
+            TitleBarText = this.Text;
         }
 
         internal protected override void initializeForm()
@@ -75,7 +76,7 @@ namespace MusicBeePlugin
             backgroundTaskIsStoppedOrCancelled = false;
             closeFormOnStopping = false;
 
-            SetResultingSbText();
+            SetResultingSbText(null);
 
             if (closeFormOnStopping)
             {
@@ -101,7 +102,7 @@ namespace MusicBeePlugin
 
                 var currentFile = files[fileCounter];
 
-                SetStatusBarTextForFileOperations(SwapTagsSbText, false, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(null, SwapTagsSbText, false, fileCounter, files.Length, currentFile);
 
                 var sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 var destinationTagValue = GetFileTag(currentFile, destinationTagId);
@@ -118,7 +119,7 @@ namespace MusicBeePlugin
             Invoke(new Action(() => { applyingChangesStopped(); }));
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(null);
         }
 
         private void saveSettings()

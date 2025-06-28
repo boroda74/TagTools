@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Windows.Forms;
 
 using ExtensionMethods;
-using System.Windows.Forms;
 
 using static MusicBeePlugin.AdvancedSearchAndReplace;
 using static MusicBeePlugin.ChangeCase;
@@ -24,6 +24,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = ChangeCaseIcon;
+            TitleBarText = this.Text;
 
             new ControlBorder(this.nameBox);
             new ControlBorder(this.descriptionBox);

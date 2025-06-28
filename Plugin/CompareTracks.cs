@@ -47,6 +47,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = CompareTracksIcon;
+            TitleBarText = this.Text;
 
             trackUrls = files;
         }
@@ -223,7 +224,7 @@ namespace MusicBeePlugin
             previewTable.ColumnCount = 1;
 
             updateCustomScrollBars(previewTable);
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(this, string.Empty, false);
 
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
@@ -254,7 +255,7 @@ namespace MusicBeePlugin
             enableQueryingOrUpdatingButtons();
 
             updateCustomScrollBars(previewTable);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -308,7 +309,7 @@ namespace MusicBeePlugin
             ignoreClosingForm = false;
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             enableDisablePreviewOptionControls(true);
             enableQueryingButtons();
@@ -376,7 +377,7 @@ namespace MusicBeePlugin
                     row.Add(artwork);
                 }
 
-                SetStatusBarTextForFileOperations(CompareTracksSbText + CompareTracksSbTextTagNo + tagRowIndex + "/" + reallyDisplayedTags.Count, true, j, cachedTracks.Count);
+                SetStatusBarTextForFileOperations(this, CompareTracksSbText + CompareTracksSbTextTagNo + tagRowIndex + "/" + reallyDisplayedTags.Count, true, j, cachedTracks.Count);
             }
 
             rows.AddRow(row);
@@ -536,7 +537,7 @@ namespace MusicBeePlugin
 
                 string currentFile = trackUrls[i];
 
-                SetStatusBarTextForFileOperations(CompareTracksSbText, false, i, trackUrls.Length, currentFile);
+                SetStatusBarTextForFileOperations(this, CompareTracksSbText, false, i, trackUrls.Length, currentFile);
 
                 for (var j = 0; j < reallyDisplayedTags.Count; j++)
                 {
@@ -897,7 +898,7 @@ namespace MusicBeePlugin
                     buttonClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(CompareTracksSbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, CompareTracksSbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }

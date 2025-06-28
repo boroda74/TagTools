@@ -2443,7 +2443,7 @@ namespace MusicBeePlugin
                     }
                     catch (Exception ex)
                     {
-                        SetStatusBarText(ex.Message, false);
+                        SetStatusBarText(null, ex.Message, false);
                         return string.Empty;
                     }
 
@@ -2692,7 +2692,7 @@ namespace MusicBeePlugin
                 }
                 catch (Exception ex)
                 {
-                    SetStatusBarText(ex.Message, false);
+                    SetStatusBarText(null, ex.Message, false);
                     return false;
                 }
 
@@ -2873,7 +2873,12 @@ namespace MusicBeePlugin
 
         private static void delayedStatusBarTextClearing(object state)
         {
+            var form = state as PluginWindowTemplate;
+
             MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
+            if (form != null)
+                MbForm.Invoke(new Action(() => { form.Text = form.TitleBarText; }));
+
             DelayedStatusBarTextClearingTimer.Dispose();
         }
 
@@ -3197,27 +3202,34 @@ namespace MusicBeePlugin
 
         }
 
-        internal static void SetStatusBarText(string newMessage, bool autoClear)
+        internal static void SetStatusBarText(PluginWindowTemplate form, string newMessage, bool autoClear)
         {
             if (autoClear)
             {
                 if (newMessage != null && newMessage != LastMessage)
+                {
                     MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
+                    if (form != null)
+                        MbForm.Invoke(new Action(() => { form.Text = form.TitleBarText + ": " + newMessage; }));
+                }
 
                 LastMessage = newMessage;
-                DelayedStatusBarTextClearingTimer = new System.Threading.Timer(delayedStatusBarTextClearing, null, RefreshUI_Delay * 2, 0);
+                DelayedStatusBarTextClearingTimer = new System.Threading.Timer(delayedStatusBarTextClearing, form, RefreshUI_Delay * 2, 0);
             }
             else if (newMessage != null && newMessage != LastMessage)
             {
                 MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
+                if (form != null)
+                    MbForm.Invoke(new Action(() => { form.Text = form.TitleBarText + ": " + newMessage; }));
+
                 LastMessage = newMessage;
             }
         }
 
-        internal static void SetResultingSbText(string finalStatus = null, bool autoClear = true, bool sbSetFilesAsItems = false)
+        internal static void SetResultingSbText(PluginWindowTemplate form, string finalStatus = null, bool autoClear = true, bool sbSetFilesAsItems = false)
         {
             if (LastPreview)
-                SetStatusBarText(string.Empty, false);
+                SetStatusBarText(form, string.Empty, false);
 
 
             if (sbSetFilesAsItems)
@@ -3225,18 +3237,19 @@ namespace MusicBeePlugin
 
             if (string.IsNullOrEmpty(LastCommandSbText))
             {
-                SetStatusBarText(string.Empty, false);
+                SetStatusBarText(form, string.Empty, false);
                 return;
             }
             else if (LastCommandSbText == "<CUESHEET>")
             {
                 System.Media.SystemSounds.Exclamation.Play();
-                SetStatusBarText(CtlWholeCuesheetWillBeReencoded, false);
+                SetStatusBarText(form, CtlWholeCuesheetWillBeReencoded, autoClear);
                 return;
             }
             else
             {
-                SetStatusBarText(GenerateStatusBarTextForFileOperations(LastCommandSbText, LastPreview, LastFileCounter, LastFileCounterTotal, finalStatus), autoClear);
+                SetStatusBarText(form, GenerateStatusBarTextForFileOperations(LastCommandSbText, LastPreview,
+                    LastFileCounter, LastFileCounterTotal, finalStatus), autoClear);
             }
 
 
@@ -3244,7 +3257,8 @@ namespace MusicBeePlugin
                 SbItemNames = SbFiles;
         }
 
-        internal static string GenerateStatusBarTextForFileOperations(string commandSbText, bool preview, int fileCounter1Based, int filesTotal, string info = null)
+        internal static string GenerateStatusBarTextForFileOperations(string commandSbText, bool preview,
+            int fileCounter1Based, int filesTotal, string info = null)
         {
             string sbText;
 
@@ -3269,7 +3283,8 @@ namespace MusicBeePlugin
             return sbText;
         }
 
-        internal static void SetStatusBarTextForFileOperations(string commandSbText, bool preview, int fileCounter0Based, int filesTotal, string currentFile = null, int updatePercentage = 10)
+        internal static void SetStatusBarTextForFileOperations(PluginWindowTemplate form, string commandSbText, bool preview,
+            int fileCounter0Based, int filesTotal, string currentFile = null, int updatePercentage = 10)
         {
             LastCommandSbText = commandSbText;
             LastPreview = preview;
@@ -3287,11 +3302,13 @@ namespace MusicBeePlugin
             }
 
             if (updatePercentage == 0 || update || fileCounter0Based == 0 || (fileCounter0Based & StatusBarTextUpdateInterval) == 0)
-                SetStatusBarText(GenerateStatusBarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
+                SetStatusBarText(form, GenerateStatusBarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
         }
 
         private static void RegularUiRefresh(object state)
         {
+            var form = state as PluginWindowTemplate;
+
             if (UiRefreshingIsNeeded)
             {
                 lock (LastUI_RefreshLocker)
@@ -3302,12 +3319,13 @@ namespace MusicBeePlugin
                 UiRefreshingIsNeeded = false;
                 MbApiInterface.MB_RefreshPanels();
                 MbApiInterface.MB_SetBackgroundTaskMessage(LastMessage);
+                MbForm.Invoke(new Action(() => { form.Text = form.TitleBarText + ": " + LastMessage; }));
             }
         }
 
         internal static void RegularAutoBackup(object state)
         {
-            SetStatusBarText(SbAutoBackingUp, false);
+            SetStatusBarText(null, SbAutoBackingUp, false);
             BackupIndex.saveBackup(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetDefaultBackupFilename(SavedSettings.autoBackupPrefix), SbAutoBackingUp, true, false);
 
 
@@ -3365,7 +3383,7 @@ namespace MusicBeePlugin
                 backupCache = BackupCache.Load(backup);
                 if (backupCache == null)
                 {
-                    SetStatusBarText(SbBackupRestoreCantDeleteBackupFile, false);
+                    SetStatusBarText(null, SbBackupRestoreCantDeleteBackupFile, false);
 
                     if (SavedSettings.playCanceledSound)
                         System.Media.SystemSounds.Hand.Play();
@@ -3379,7 +3397,7 @@ namespace MusicBeePlugin
                 File.Delete(backup + ".mbc");
             }
 
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(null, string.Empty, false);
         }
         #endregion
 
@@ -3491,7 +3509,7 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            SetStatusBarText(SbMakingTagBackup, false);
+            SetStatusBarText(null, SbMakingTagBackup, false);
 
             if (File.Exists(dialog.FileName))
                 File.Delete(dialog.FileName);
@@ -3514,7 +3532,7 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            SetStatusBarText(SbRestoringTagsFromBackup, false);
+            SetStatusBarText(null, SbRestoringTagsFromBackup, false);
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, false, false }, MbForm);
 
             dialog.Dispose();
@@ -3532,7 +3550,7 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            SetStatusBarText(SbRestoringTagsFromBackup, false);
+            SetStatusBarText(null, SbRestoringTagsFromBackup, false);
             MbApiInterface.MB_CreateParameterisedBackgroundTask(BackupIndex.LoadBackupAsync, new object[] { BrGetBackupFilenameWithoutExtension(dialog.FileName), SbRestoringTagsFromBackup, true, e == null }, MbForm);
 
             dialog.Dispose();
@@ -3561,7 +3579,7 @@ namespace MusicBeePlugin
 
             if (openDialog.FileName == saveDialog.FileName) return;
 
-            SetStatusBarText(SbRenamingMovingBackup, false);
+            SetStatusBarText(null, SbRenamingMovingBackup, false);
 
             if (File.Exists(saveDialog.FileName))
                 File.Delete(saveDialog.FileName);
@@ -3571,7 +3589,7 @@ namespace MusicBeePlugin
             File.Move(openDialog.FileName, saveDialog.FileName);
             File.Move(BrGetBackupFilenameWithoutExtension(openDialog.FileName) + ".mbc", BrGetBackupFilenameWithoutExtension(saveDialog.FileName) + ".mbc");
 
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(null, string.Empty, false);
 
             openDialog.Dispose();
             saveDialog.Dispose();
@@ -3604,7 +3622,7 @@ namespace MusicBeePlugin
 
             if (sourceFolder == destinationFolder) return;
 
-            SetStatusBarText(SbMovingBackups, false);
+            SetStatusBarText(null, SbMovingBackups, false);
 
             foreach (var filename in openDialog.SafeFileNames)
             {
@@ -3617,7 +3635,7 @@ namespace MusicBeePlugin
                 File.Move(BrGetBackupFilenameWithoutExtension(sourceFolder + @"\" + filename) + ".mbc", BrGetBackupFilenameWithoutExtension(destinationFolder + @"\" + filename) + ".mbc");
             }
 
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(null, string.Empty, false);
 
             openDialog.Dispose();
             saveDialog.Dispose();
@@ -3670,7 +3688,7 @@ namespace MusicBeePlugin
 
 
             //Now let's create new baseline
-            SetStatusBarText(SbMakingTagBackup, false);
+            SetStatusBarText(null, SbMakingTagBackup, false);
 
             if (File.Exists(dialog.FileName))
                 File.Delete(dialog.FileName);
@@ -3718,7 +3736,7 @@ namespace MusicBeePlugin
 
             if (dialog.ShowDialog(MbForm) == DialogResult.Cancel) return;
 
-            SetStatusBarText(SbDeletingBackups, false);
+            SetStatusBarText(null, SbDeletingBackups, false);
 
             foreach (var filename in dialog.FileNames)
             {
@@ -3731,7 +3749,7 @@ namespace MusicBeePlugin
                 File.Delete(BrGetBackupFilenameWithoutExtension(filename) + ".mbc");
             }
 
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(null, string.Empty, false);
 
             dialog.Dispose();
         }

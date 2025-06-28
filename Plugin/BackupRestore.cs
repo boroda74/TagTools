@@ -303,7 +303,7 @@ namespace MusicBeePlugin
                     if (lastShownPercentage + percentageStep < percentage)
                     {
                         lastShownPercentage = percentage;
-                        SetStatusBarText(SbComparingTags + percentage + "%", false);
+                        SetStatusBarText(null, SbComparingTags + percentage + "%", false);
                     }
 
                     SerializableDictionary<int, string> tagsForIncrementalBackup;
@@ -350,9 +350,9 @@ namespace MusicBeePlugin
 
                 if (isAutoCreated && incrementalBackup.tracks.Count == 0)
                 {
-                    SetStatusBarText(SbTagAutoBackupSkipped, false);
+                    SetStatusBarText(null, SbTagAutoBackupSkipped, false);
                     System.Threading.Thread.Sleep(2000);
-                    SetStatusBarText(string.Empty, false);
+                    SetStatusBarText(null, string.Empty, false);
                     return;
                 }
             }
@@ -395,7 +395,7 @@ namespace MusicBeePlugin
 
             System.Threading.Thread.Sleep(2000);
 
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(null, string.Empty, false);
         }
 
         internal static Backup Load(string fileName, string backupFileExtension = ".xml")
@@ -657,7 +657,7 @@ namespace MusicBeePlugin
                     if (lastShownCount < percentage)
                     {
                         lastShownCount = percentage;
-                        SetStatusBarText(statusBarText + " " + percentage + "% (" + backupName + ")", false);
+                        SetStatusBarText(null, statusBarText + " " + percentage + "% (" + backupName + ")", false);
                     }
 
                     var currentFile = files[fileCounter];
@@ -715,7 +715,7 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontPlayCompletedSound && !isAutoCreated)
                 System.Media.SystemSounds.Asterisk.Play();
 
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(null, string.Empty, false);
         }
 
         internal static void LoadBackupAsync(object parameters)
@@ -770,7 +770,7 @@ namespace MusicBeePlugin
             if (!restoreFromAnotherLibrary && backup.libraryName != BrGetCurrentLibraryName())
             {
                 System.Media.SystemSounds.Hand.Play();
-                SetStatusBarText(string.Empty, false);
+                SetStatusBarText(null, string.Empty, false);
 
                 var result = (DialogResult)MbForm.Invoke(new Func<DialogResult>(() => MessageBox.Show(MbForm, MsgBrThisIsTheBackupOfDifferentLibrary, string.Empty,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2)));
@@ -805,7 +805,7 @@ namespace MusicBeePlugin
                 if (lastShownCount < percentage)
                 {
                     lastShownCount = percentage;
-                    SetStatusBarText(statusBarText + " " + percentage + "% (" + backupName + ")", false);
+                    SetStatusBarText(null, statusBarText + " " + percentage + "% (" + backupName + ")", false);
                 }
 
                 var currentFile = files[fileCounter];
@@ -831,7 +831,7 @@ namespace MusicBeePlugin
             if (!SavedSettings.dontPlayCompletedSound)
                 System.Media.SystemSounds.Asterisk.Play();
 
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(null, string.Empty, false);
             RefreshPanels(true);
         }
 

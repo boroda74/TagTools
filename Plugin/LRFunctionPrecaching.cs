@@ -26,6 +26,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = LrIcon;
+            TitleBarText = this.Text;
         }
 
         internal protected override void initializeForm()
@@ -128,7 +129,7 @@ namespace MusicBeePlugin
                         LibraryReportsCommandForFunctionIds.appliedPreset = newOrChangedCachedPresets[i];
                         LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = true;
 
-                        LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true);
+                        LibraryReportsCommandForFunctionIds.executePreset(this, null, false, true, null, false, true);
                     }
                 }
                 catch (ThreadAbortException)
@@ -193,7 +194,7 @@ namespace MusicBeePlugin
             LibraryReportsCommandForFunctionIds.backgroundTaskIsScheduled = false;
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
             Invoke(new Action(Close));
         }
 

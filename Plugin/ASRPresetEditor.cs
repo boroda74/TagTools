@@ -58,6 +58,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = AsrIcon;
+            TitleBarText = this.Text;
 
             new ControlBorder(this.nameBox);
             new ControlBorder(this.descriptionBox);

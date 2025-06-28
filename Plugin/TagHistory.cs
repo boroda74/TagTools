@@ -85,6 +85,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = TagHistoryIcon;
+            TitleBarText = this.Text;
 
             this.trackUrls = trackUrls;
             this.trackIds = trackIds;
@@ -218,7 +219,7 @@ namespace MusicBeePlugin
 
             for (var i = 1; i < trackUrls.Length + 1; i++)
             {
-                SetStatusBarText(TagHistorySbText + TagHistorySbTextFillingLibraryTagValues + i + "/" + trackUrls.Length, true);
+                SetStatusBarText(this, TagHistorySbText + TagHistorySbTextFillingLibraryTagValues + i + "/" + trackUrls.Length, true);
 
                 for (var j = 0; j < reallyDisplayedTags.Count; j++)
                 {
@@ -323,7 +324,7 @@ namespace MusicBeePlugin
                 return;
 
 
-            SetStatusBarText(TagHistorySbText + SbTextPreparingPreviewTable, false);
+            SetStatusBarText(this, TagHistorySbText + SbTextPreparingPreviewTable, false);
 
             if (!reuseTagValues)
             {
@@ -344,7 +345,7 @@ namespace MusicBeePlugin
 
                     if (reallyDisplayedTags.Count == 0)
                     {
-                        SetStatusBarText(string.Empty, false);
+                        SetStatusBarText(this, string.Empty, false);
                         backgroundTaskIsStopping = true;
                         return;
                     }
@@ -526,7 +527,7 @@ namespace MusicBeePlugin
                     return;
 
 
-                SetStatusBarTextForFileOperations(TagHistorySbText + TagHistorySbTextEnumeratingBackups, true, j, trackIds.Length);
+                SetStatusBarTextForFileOperations(this, TagHistorySbText + TagHistorySbTextEnumeratingBackups, true, j, trackIds.Length);
 
                 SortedDictionary<Guid, bool> tempBackupGuids = Plugin.BackupIndex.getBackupGuidsForTrack(libraryName, tempTrackId);
 
@@ -547,7 +548,7 @@ namespace MusicBeePlugin
 
                 string backupCacheFile = backupCacheFiles[j];
 
-                SetStatusBarTextForFileOperations(TagHistorySbText + TagHistorySbTextLoadingBackupIndexCache, true, j, backupCacheFiles.Length);
+                SetStatusBarTextForFileOperations(this, TagHistorySbText + TagHistorySbTextLoadingBackupIndexCache, true, j, backupCacheFiles.Length);
 
                 var backupCache = BackupCache.Load(BrGetBackupFilenameWithoutExtension(backupCacheFile));
                 if (backupCache == null)
@@ -571,7 +572,7 @@ namespace MusicBeePlugin
             }
 
 
-            SetStatusBarText(TagHistorySbText + TagHistorySbTextLoadingBaselineBackup, true);
+            SetStatusBarText(this, TagHistorySbText + TagHistorySbTextLoadingBaselineBackup, true);
 
             baseline = Backup.Load(BrGetBackupBaselineFilename(), ".bbl");
             if (baseline == null)
@@ -595,7 +596,7 @@ namespace MusicBeePlugin
                     return;
 
 
-                SetStatusBarTextForFileOperations(TagHistorySbText + TagHistorySbTextLoadingIncrementalBackups, true, backupIndex, backupsWithNegativeDates.Count);
+                SetStatusBarTextForFileOperations(this, TagHistorySbText + TagHistorySbTextLoadingIncrementalBackups, true, backupIndex, backupsWithNegativeDates.Count);
 
                 var backupFile = backupWithNegativeDate.Value;
                 var backup = Backup.LoadIncrementalBackupOnly(backupFile);
@@ -610,7 +611,7 @@ namespace MusicBeePlugin
             }
 
 
-            SetStatusBarText(TagHistorySbText + SbTextPerformingServiceOperations, true);
+            SetStatusBarText(this, TagHistorySbText + SbTextPerformingServiceOperations, true);
 
             originalCachedBackups.Clear();
             foreach (var cache in cachedBackups)
@@ -811,7 +812,7 @@ namespace MusicBeePlugin
             previewTable.ColumnCount = 1;
 
             updateCustomScrollBars(previewTable);
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(this, string.Empty, false);
 
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
@@ -845,7 +846,7 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true);
 
             updateCustomScrollBars(previewTable);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -873,7 +874,7 @@ namespace MusicBeePlugin
 
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             enableDisablePreviewOptionControls(true);
             enableQueryingButtons();
@@ -932,12 +933,12 @@ namespace MusicBeePlugin
 
                 if (trackIndex > 0)
                 {
-                    SetStatusBarTextForFileOperations(TagHistorySbText, true, 0, 1, TagToolsPlugin.CustomFunc_Name(trackUrls[trackIndex - 1]));
+                    SetStatusBarTextForFileOperations(this, TagHistorySbText, true, 0, 1, TagToolsPlugin.CustomFunc_Name(trackUrls[trackIndex - 1]));
 
                     fillTableInternalReuseCache(backupIndex, trackIndex);
 
                     updateCustomScrollBars(previewTable, 0, -1);
-                    SetResultingSbText();
+                    SetResultingSbText(this);
                 }
                 else
                 {
@@ -953,7 +954,7 @@ namespace MusicBeePlugin
                         fillTableInternalReuseCache(backupIndex, i);
 
                         Invoke(new Action(() => { updateCustomScrollBars(previewTable, 0, -1); }));
-                        SetStatusBarTextForFileOperations(TagHistorySbText, true, i - 1, trackUrls.Length, TagToolsPlugin.CustomFunc_Name(trackUrls[i - 1]));
+                        SetStatusBarTextForFileOperations(this, TagHistorySbText, true, i - 1, trackUrls.Length, TagToolsPlugin.CustomFunc_Name(trackUrls[i - 1]));
                     }
                 }
             }
@@ -1147,7 +1148,7 @@ namespace MusicBeePlugin
         {
             if (trackIndex > 0)
             {
-                SetStatusBarTextForFileOperations(TagHistorySbText, false, 0, 1, TagToolsPlugin.CustomFunc_Name(trackUrls[trackIndex - 1]));
+                SetStatusBarTextForFileOperations(this, TagHistorySbText, false, 0, 1, TagToolsPlugin.CustomFunc_Name(trackUrls[trackIndex - 1]));
                 saveTags(trackIndex);
             }
             else
@@ -1161,7 +1162,7 @@ namespace MusicBeePlugin
                     }
 
 
-                    SetStatusBarTextForFileOperations(TagHistorySbText, false, i, trackUrls.Length, TagToolsPlugin.CustomFunc_Name(trackUrls[i]));
+                    SetStatusBarTextForFileOperations(this, TagHistorySbText, false, i, trackUrls.Length, TagToolsPlugin.CustomFunc_Name(trackUrls[i]));
                     saveTags(i + 1);
                 }
             }
@@ -1691,7 +1692,7 @@ namespace MusicBeePlugin
                     buttonClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(TagHistorySbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, TagHistorySbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }

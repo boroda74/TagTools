@@ -158,7 +158,7 @@ namespace MusicBeePlugin
 
 
                 if ((i & 0x1f) == 0)
-                    SetStatusBarTextForFileOperations(PasteTagsSbText, false, i, files.Length, file);
+                    SetStatusBarTextForFileOperations(null, PasteTagsSbText, false, i, files.Length, file);
 
 
                 var trackMatched = false;
@@ -234,7 +234,7 @@ namespace MusicBeePlugin
             }
 
 
-            SetResultingSbText();
+            SetResultingSbText(null);
 
 
             if (matchTagIndex == -1 || autoPaste)

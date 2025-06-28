@@ -43,6 +43,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = ReencodeTagsIcon;
+            TitleBarText = this.Text;
         }
 
         internal protected override void initializeForm()
@@ -160,7 +161,7 @@ namespace MusicBeePlugin
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(this, string.Empty, false);
 
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
@@ -194,7 +195,7 @@ namespace MusicBeePlugin
             enableQueryingOrUpdatingButtons();
 
             updateCustomScrollBars(previewTable);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -226,7 +227,7 @@ namespace MusicBeePlugin
 
             previewTable_ProcessRowsOfTable(processedRowList);
 
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -328,7 +329,7 @@ namespace MusicBeePlugin
 
                 var currentFile = files[fileCounter];
 
-                SetStatusBarTextForFileOperations(ReEncodeTagSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(this, ReEncodeTagSbText, true, fileCounter, files.Length, currentFile);
 
                 var currentTags = new string[numberOfWritableTags + 2];
                 currentTags[0] = ColumnCheckedState;
@@ -386,7 +387,7 @@ namespace MusicBeePlugin
             if (wasCuesheet)
                 LastCommandSbText = "<CUESHEET>";
             else
-                SetResultingSbText();
+                SetResultingSbText(this);
         }
 
         private void applyChanges()
@@ -418,7 +419,7 @@ namespace MusicBeePlugin
                     currentTracks[i][0] = string.Empty;
 
                     processedRowList.Add(true);
-                    SetStatusBarTextForFileOperations(ReEncodeTagSbText, false, i, newTracks.Count, currentFile);
+                    SetStatusBarTextForFileOperations(this, ReEncodeTagSbText, false, i, newTracks.Count, currentFile);
 
                     var cuesheet = GetFileTag(currentFile, MetaDataType.Cuesheet);
                     if (string.IsNullOrEmpty(cuesheet))
@@ -460,7 +461,7 @@ namespace MusicBeePlugin
             Invoke(new Action(() => { applyingChangesStopped(); }));
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
         }
 
         private void saveSettings()
@@ -618,7 +619,7 @@ namespace MusicBeePlugin
                     buttonClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(ReEncodeTagSbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, ReEncodeTagSbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }

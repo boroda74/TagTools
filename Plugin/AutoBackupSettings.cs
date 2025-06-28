@@ -21,6 +21,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = SettingsIcon;
+            TitleBarText = this.Text;
 
             new ControlBorder(this.autoBackupFolderTextBox);
             new ControlBorder(this.autoBackupPrefixTextBox);
@@ -215,7 +216,7 @@ namespace MusicBeePlugin
 
             if (initialAutoBackupDirectory != SavedSettings.autoBackupDirectory)
             {
-                SetStatusBarText(SbMovingBackupsToNewFolder, false);
+                SetStatusBarText(this, SbMovingBackupsToNewFolder, false);
 
                 lock (TracksNeededToBeBackedUp)
                 {
@@ -246,7 +247,7 @@ namespace MusicBeePlugin
                     }
                 }
 
-                SetStatusBarText(string.Empty, false);
+                SetStatusBarText(this, string.Empty, false);
             }
 
             SavedSettings.backupArtworks = backupArtworksCheckBox.Checked;

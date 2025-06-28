@@ -137,11 +137,12 @@ namespace MusicBeePlugin
         //Cached UI and events workarounds
         internal static Bitmap DefaultArtwork; //Not resized. Only a sample.
         internal static string ResizedDefaultArtworkBase64; //Resized artwork base64 string. Artwork is stored in "artworkCache"
+        internal static string ResizedDefaultArtworkBase64Hash; //Resized artwork base64 hash string. Artwork is stored in "artworkCache"
 
         internal static Bitmap ArtworkTotals; //Not resized. Only a sample.
         internal static string ResizedArtworkTotalsId = "%%ALL-ARTWORKS%%"; //Resized artwork base64 string. Artwork is stored in "artworkCache"
 
-        internal SortedDictionary<string, Bitmap> resizedArtworkCache = new SortedDictionary<string, Bitmap>(); //<resized base64, resized artwork>
+        internal static SortedDictionary<string, Bitmap> ResizedArtworkCache = new SortedDictionary<string, Bitmap>(); //<resized base64, resized artwork>
         private static Bitmap CdBookletArtwork; //Not resized common artwork ror CD booklet export
         private static string CdBookletArtworkBase64 = null; //Base64 string of not resized common artwork ror CD booklet export
 
@@ -305,6 +306,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = LrIcon;
+            TitleBarText = this.Text;
 
             new ControlBorder(this.presetNameTextBox);
             new ControlBorder(this.appendTextBox);
@@ -2109,17 +2111,17 @@ namespace MusicBeePlugin
 
         private void clearArtworks()
         {
-            lock (resizedArtworkCache)
+            lock (ResizedArtworkCache)
             {
                 CdBookletArtwork?.Dispose();
                 CdBookletArtwork = null;
 
                 CdBookletArtworkBase64 = null;
 
-                foreach (var pair in resizedArtworkCache)
+                foreach (var pair in ResizedArtworkCache)
                     pair.Value?.Dispose();
 
-                resizedArtworkCache.Clear();
+                ResizedArtworkCache.Clear();
             }
         }
 
@@ -2403,9 +2405,10 @@ namespace MusicBeePlugin
                     }
 
                     ResizedDefaultArtworkBase64 = Convert.ToBase64String((byte[])tc.ConvertTo(pic2, typeof(byte[])));
+                    ResizedDefaultArtworkBase64Hash = ResizedDefaultArtworkBase64.GetHashCode().ToString("X8");
 
                     lock (artworkCache)
-                        artworkCache.AddReplace(ResizedDefaultArtworkBase64.GetHashCode().ToString("X8"), pic2);
+                        artworkCache.AddReplace(ResizedDefaultArtworkBase64Hash, pic2);
 
 
                     pic1 = CopyBitmap(ArtworkTotals);
@@ -2478,11 +2481,11 @@ namespace MusicBeePlugin
                     if (!string.IsNullOrEmpty(artworkBase64))
                         pic = tc.ConvertFrom(Convert.FromBase64String(artworkBase64)) as Bitmap;
                     else
-                        pic = CopyBitmap(DefaultArtwork);
+                        pic = ResizedArtworkCache[ResizedDefaultArtworkBase64Hash];
                 }
                 catch
                 {
-                    pic = CopyBitmap(DefaultArtwork);
+                    pic = ResizedArtworkCache[ResizedDefaultArtworkBase64Hash];
                 }
 
 
@@ -2564,7 +2567,12 @@ namespace MusicBeePlugin
             {
                 tagValue = GetFileTag(file, MetaDataType.Artwork);
 
-                if (CdBookletArtworkBase64 == null)
+                if (CdBookletArtworkBase64 == null && string.IsNullOrEmpty(tagValue))
+                {
+                    CdBookletArtworkBase64 = ResizedDefaultArtworkBase64;
+                    CdBookletArtwork = ResizedArtworkCache[ResizedDefaultArtworkBase64Hash];
+                }
+                else if (CdBookletArtworkBase64 == null)
                 {
                     CdBookletArtworkBase64 = tagValue;
                     CdBookletArtwork = ResizedArtworkProvider.DecodeArtwork(tagValue); //NOT resized common artwork for CD booklet export
@@ -2572,11 +2580,7 @@ namespace MusicBeePlugin
                 else if (CdBookletArtworkBase64 != tagValue)
                 {
                     CdBookletArtworkBase64 = ResizedDefaultArtworkBase64;
-                    CdBookletArtwork = resizedArtworkCache[ResizedDefaultArtworkBase64.GetHashCode().ToString("X8")];
-                }
-                else
-                {
-                    CdBookletArtworkBase64 = tagValue;
+                    CdBookletArtwork = ResizedArtworkCache[ResizedDefaultArtworkBase64Hash];
                 }
             }
             else if (propId != 0)
@@ -2601,7 +2605,7 @@ namespace MusicBeePlugin
                 return -1;
         }
 
-        internal string executePreset(string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId,
+        internal string executePreset(PluginWindowTemplate form, string[] queriedFiles, bool interactive, bool saveResultsToTags, string functionId,
             bool filterResults, bool forceCacheUpdate, //filterResults:
                                                        //  false - proceed as usual (filter results by this preset condition only (if defined) on tag saving only for
                                                        //  any "interactive")
@@ -2686,7 +2690,7 @@ namespace MusicBeePlugin
 
                 var appliedPresetInUse = appliedPreset;
                 appliedPreset = anotherPresetAsSource;
-                executePreset(queriedFiles, false, false, functionId, true, forceCacheUpdate);
+                executePreset(form, queriedFiles, false, false, functionId, true, forceCacheUpdate);
                 queriedFiles = lastFiles;
                 appliedPreset = appliedPresetInUse;
             }
@@ -2903,7 +2907,7 @@ namespace MusicBeePlugin
             if (functionId == null)
             {
                 clearArtworks();
-                ResizedArtworkProvider.Init(artworkField, resizedArtworkCache, appliedPreset.resizeArtwork ? appliedPreset.newArtworkSize : -1);
+                ResizedArtworkProvider.Init(artworkField, ResizedArtworkCache, appliedPreset.resizeArtwork ? appliedPreset.newArtworkSize : -1);
             }
 
 
@@ -2921,7 +2925,7 @@ namespace MusicBeePlugin
 
 
                 //Not recalculating preset based on cached grouping tags
-                if (!processFileGroupings(queriedFilesDict, interactive, queryOnlyGroupings, groupings, appliedPreset.totals,
+                if (!processFileGroupings(form, queriedFilesDict, interactive, queryOnlyGroupings, groupings, appliedPreset.totals,
                         queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                         actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                         cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
@@ -2947,7 +2951,7 @@ namespace MusicBeePlugin
             if (queryOnlyGroupings)
             {
                 updateAppliedPresetCache(tags, cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw, cachedFilesActualComposedSplitGroupingTagsList);
-                applyOnlyGroupingsPresetResults(queriedFiles, cachedFilesActualComposedSplitGroupingTagsList, interactive, filterResults);
+                applyOnlyGroupingsPresetResults(form, queriedFiles, cachedFilesActualComposedSplitGroupingTagsList, interactive, filterResults);
 
                 if (readOtherwiseProcessExcludedGroupingTags == true) //Nothing to recalculate after tag changes
                 {
@@ -3053,7 +3057,8 @@ namespace MusicBeePlugin
             if (cachedTagsAreRelevant)
             {
                 updateAppliedPresetCache(tags, cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw, cachedFilesActualComposedSplitGroupingTagsList);
-                return applyPresetResults(queriedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, saveResultsToTags, functionId, filterResults);
+                return applyPresetResults(form, queriedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, saveResultsToTags,
+                    functionId, filterResults);
             }
 
 
@@ -3063,7 +3068,7 @@ namespace MusicBeePlugin
                     newFilesDict.AddSkip(file);
 
 
-            if (!processFileGroupings(newFilesDict, interactive, false, groupings, appliedPreset.totals,
+            if (!processFileGroupings(form, newFilesDict, interactive, false, groupings, appliedPreset.totals,
                     queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                     actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                     cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
@@ -3109,7 +3114,7 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        SetStatusBarText(null, true);
+                        SetStatusBarText(form, null, true);
                         backgroundTaskIsStoppedOrCancelled = true;
                     }
 
@@ -3118,9 +3123,9 @@ namespace MusicBeePlugin
 
 
                 if (interactive)
-                    SetStatusBarTextForFileOperations(LibraryReportsSbText, true, n, potentiallyAffectedFiles.Length, appliedPreset.getName());
+                    SetStatusBarTextForFileOperations(form, LibraryReportsSbText, true, n, potentiallyAffectedFiles.Length, appliedPreset.getName());
                 else if (functionId == null && readOtherwiseProcessExcludedGroupingTags == null)
-                    SetStatusBarTextForFileOperations(ApplyingLrPresetSbText, true, n, potentiallyAffectedFiles.Length, appliedPreset.getName());
+                    SetStatusBarTextForFileOperations(form, ApplyingLrPresetSbText, true, n, potentiallyAffectedFiles.Length, appliedPreset.getName());
 
 
                 var currentFile = potentiallyAffectedFiles[n];
@@ -3203,12 +3208,12 @@ namespace MusicBeePlugin
             updateAppliedPresetCache(tags, cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw, cachedFilesActualComposedSplitGroupingTagsList);
 
             if (forceCacheUpdate) //cacheUsage: true - force cache update, false - use cache if available
-                return applyPresetResults(affectedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, true, string.Empty, filterResults);
+                return applyPresetResults(form, affectedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, true, string.Empty, filterResults);
             else
-                return applyPresetResults(affectedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, saveResultsToTags, functionId, filterResults);
+                return applyPresetResults(form, affectedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, saveResultsToTags, functionId, filterResults);
         }
 
-        private bool processFileGroupings(SortedDictionary<string, bool> queriedFilesDict, bool interactive, bool queryOnlyGroupings, PresetColumnAttributesDict groupings,
+        private bool processFileGroupings(PluginWindowTemplate form, SortedDictionary<string, bool> queriedFilesDict, bool interactive, bool queryOnlyGroupings, PresetColumnAttributesDict groupings,
             bool totals, MetaDataType[] queriedActualGroupingsTagIds, FilePropertyType[] queriedActualGroupingsPropIds,
             List<string>[] actualSplitGroupingTagsList, SortedDictionary<int, List<string>> cachedFilesActualComposedSplitGroupingTagsList,
             SortedDictionary<int, string[]> cachedFilesActualGroupingTags, SortedDictionary<int, string[]> cachedFilesActualGroupingTagsRaw,
@@ -3240,7 +3245,7 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        SetStatusBarText(null, true);
+                        SetStatusBarText(form, null, true);
                         backgroundTaskIsStoppedOrCancelled = true;
                     }
 
@@ -3275,7 +3280,7 @@ namespace MusicBeePlugin
 
 
                         if (attribs.parameterName == ArtworkName)
-                            ResizedArtworkProvider.DecodeResizeArtwork(tagValue, resizedArtworkCache);
+                            ResizedArtworkProvider.DecodeResizeArtwork(tagValue, ResizedArtworkCache);
                     }
                 }
                 else
@@ -3323,7 +3328,7 @@ namespace MusicBeePlugin
 
                         if (attribs.parameterName == ArtworkName)
                         {
-                            ResizedArtworkProvider.DecodeResizeArtwork(tagValue, resizedArtworkCache);
+                            ResizedArtworkProvider.DecodeResizeArtwork(tagValue, ResizedArtworkCache);
                             actualSplitGroupingTagsList[h].Add(tagValue.GetHashCode().ToString("X8"));
                         }
                         else
@@ -3359,7 +3364,7 @@ namespace MusicBeePlugin
         }
 
 
-        private string applyPresetResults(string[] queriedFiles, AggregatedTags tags, SortedDictionary<int, List<string>> filesActualComposedSplitGroupingTagsLists,
+        private string applyPresetResults(PluginWindowTemplate form, string[] queriedFiles, AggregatedTags tags, SortedDictionary<int, List<string>> filesActualComposedSplitGroupingTagsLists,
             bool interactive, bool saveResultsToTags, string functionId, bool filterResults)
         //filterResults:
         //  false & interactive & queriedFiles == null - clear filtering results by this preset condition
@@ -3420,7 +3425,7 @@ namespace MusicBeePlugin
                         }
                         else
                         {
-                            SetStatusBarText(null, true);
+                            SetStatusBarText(form, null, true);
                             backgroundTaskIsStoppedOrCancelled = true;
                         }
 
@@ -3465,12 +3470,12 @@ namespace MusicBeePlugin
                             {
                                 Bitmap pic;
 
-                                lock (resizedArtworkCache)
+                                lock (ResizedArtworkCache)
                                 {
                                     if (groupingsRow[artworkField] == TotalsString) //-V3054
-                                        pic = resizedArtworkCache[ResizedArtworkTotalsId];
+                                        pic = ResizedArtworkCache[ResizedArtworkTotalsId];
                                     else //if (!artworks.TryGetValue(artworkBase64, out pic))
-                                        pic = resizedArtworkCache[groupingsRow[artworkField]];
+                                        pic = ResizedArtworkCache[groupingsRow[artworkField]];
                                 }
 
                                 row.Columns[artworkField] = pic;
@@ -3540,7 +3545,8 @@ namespace MusicBeePlugin
 
 
                         //Saving preset results, see check for functionId above
-                        SetStatusBarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, groupingIndex++, groupingsCount, appliedPreset.getName(), 0);
+                        SetStatusBarTextForFileOperations(form, LibraryReportsGeneratingPreviewSbText, true, groupingIndex++, groupingsCount,
+                            appliedPreset.getName(), 0);
 
                         int rowCountToFormat1 = 0;
                         Invoke(new Action(() => { rowCountToFormat1 = previewTable_AddRowsToTable(source, rows.Count, itsFirstRowRange, false); itsFirstRowRange = false; }));
@@ -3552,30 +3558,31 @@ namespace MusicBeePlugin
                     Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat2, true, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
 
                     //Saving preset results, see check for functionId above
-                    SetResultingSbText(appliedPreset.getName(), true, true);
+                    SetResultingSbText(form, appliedPreset.getName(), true, true);
                 }
             }
 
 
             if (saveResultsToTags && functionId == null) //Saving preset results
             {
-                SetResultingSbText(appliedPreset.getName(), true, true);
-                saveFields(queriedFiles, interactive, false, tags);
+                SetResultingSbText(form, appliedPreset.getName(), true, true);
+                saveFields(form, queriedFiles, interactive, false, tags);
             }
             else if (saveResultsToTags) //functionId == "", forcing LR functions cache update, see check for functionId above
             {
-                saveFields(queriedFiles, interactive, true, tags);
+                saveFields(form, queriedFiles, interactive, true, tags);
             }
             else //Previewing report results
             {
-                SetResultingSbText(appliedPreset.getName(), true, true);
+                SetResultingSbText(form, appliedPreset.getName(), true, true);
             }
 
 
             return "...";
         }
 
-        private void applyOnlyGroupingsPresetResults(string[] queriedFiles, SortedDictionary<int, List<string>> filesActualComposedSplitGroupingTagsLists,
+        private void applyOnlyGroupingsPresetResults(PluginWindowTemplate form, string[] queriedFiles,
+            SortedDictionary<int, List<string>> filesActualComposedSplitGroupingTagsLists,
             bool interactive, bool filterResults)
         //filterResults:
         //  false & interactive - Skip or undo filtering by this preset CONDITION only (if defined)
@@ -3599,7 +3606,7 @@ namespace MusicBeePlugin
                     if (checkStoppingStatus())
                     {
                         clearAppliedPresetCache();
-                        SetStatusBarText(null, true);
+                        SetStatusBarText(form, null, true);
                         backgroundTaskIsStoppedOrCancelled = true;
                     }
 
@@ -3674,15 +3681,15 @@ namespace MusicBeePlugin
                             {
                                 Bitmap pic;
 
-                                lock (resizedArtworkCache)
+                                lock (ResizedArtworkCache)
                                 {
                                     if (string.IsNullOrEmpty(groupingsRow[artworkField]))
                                         groupingsRow[artworkField] = ResizedDefaultArtworkBase64;
 
                                     if (groupingsRow[artworkField] == TotalsString) //-V3054
-                                        pic = resizedArtworkCache[ResizedArtworkTotalsId];
+                                        pic = ResizedArtworkCache[ResizedArtworkTotalsId];
                                     else //if (!artworks.TryGetValue(artworkBase64, out pic))
-                                        pic = resizedArtworkCache[groupingsRow[artworkField]];
+                                        pic = ResizedArtworkCache[groupingsRow[artworkField]];
                                 }
 
                                 row.Columns[artworkField] = pic;
@@ -3742,7 +3749,8 @@ namespace MusicBeePlugin
                     }
 
 
-                    SetStatusBarTextForFileOperations(LibraryReportsGeneratingPreviewSbText, true, groupingIndex++, groupingsCount, appliedPreset.getName(), 0);
+                    SetStatusBarTextForFileOperations(form, LibraryReportsGeneratingPreviewSbText, true, groupingIndex++, groupingsCount,
+                        appliedPreset.getName(), 0);
 
                     int rowCountToFormat1 = 0;
                     Invoke(new Action(() => { rowCountToFormat1 = previewTable_AddRowsToTable(source, rows.Count, itsFirstRowRange, false); itsFirstRowRange = false; }));
@@ -3751,9 +3759,13 @@ namespace MusicBeePlugin
 
                 int rowCountToFormat2 = 0;
                 Invoke(new Action(() => { rowCountToFormat2 = previewTable_AddRowsToTable(source, rows.Count, itsFirstRowRange, true); }));
-                Invoke(new Action(() => { FormatChangedTags(this, previewTable, rowCountToFormat2, true, previewTableFormatRow); checkStoppedStatus(); resetFormToGeneratedPreview(); }));
+                Invoke(new Action(() =>
+                {
+                    FormatChangedTags(this, previewTable, rowCountToFormat2, true, previewTableFormatRow);
+                    checkStoppedStatus(); resetFormToGeneratedPreview();
+                }));
 
-                SetResultingSbText(appliedPreset.getName(), true, true);
+                SetResultingSbText(form, appliedPreset.getName(), true, true);
             }
         }
 
@@ -4053,7 +4065,7 @@ namespace MusicBeePlugin
             return "???";
         }
 
-        private void saveFields(string[] queriedFiles, bool interactive, bool forceCacheUpdate, AggregatedTags tags)
+        private void saveFields(PluginWindowTemplate form, string[] queriedFiles, bool interactive, bool forceCacheUpdate, AggregatedTags tags)
         {
             var filesActualComposedGroupingTags = CachedPresetsFilesActualComposedSplitGroupingTagsList[appliedPreset.guid];
 
@@ -4085,9 +4097,9 @@ namespace MusicBeePlugin
                 var tagsSet = false;
 
                 if (interactive)
-                    SetStatusBarTextForFileOperations(LibraryReportsSbText, false, i, queriedFiles.Length, appliedPreset.getName());
+                    SetStatusBarTextForFileOperations(form, LibraryReportsSbText, false, i, queriedFiles.Length, appliedPreset.getName());
                 else if (!forceCacheUpdate)
-                    SetStatusBarTextForFileOperations(ApplyingLrPresetSbText, false, i, queriedFiles.Length, appliedPreset.getName());
+                    SetStatusBarTextForFileOperations(form, ApplyingLrPresetSbText, false, i, queriedFiles.Length, appliedPreset.getName());
 
                 var composedActualGroupingTagsList = filesActualComposedGroupingTags[trackId];
                 if (composedActualGroupingTagsList.Count != 1)
@@ -4167,7 +4179,7 @@ namespace MusicBeePlugin
 
 
             if (interactive || !forceCacheUpdate)
-                SetResultingSbText(appliedPreset.getName(), true, true);
+                SetResultingSbText(form, appliedPreset.getName(), true, true);
         }
 
         //Dictionaries of tags values, arrays of groupings
@@ -4232,7 +4244,7 @@ namespace MusicBeePlugin
                         {
                             appliedPreset = autoLibraryReportsPreset;
                             backgroundTaskIsUpdatingTags = true;
-                            executePreset(null, false, true, null, false, true);
+                            executePreset(null, null, false, true, null, false, true);
                         }
                     }
                 }
@@ -4255,7 +4267,7 @@ namespace MusicBeePlugin
                     Thread.CurrentThread.Priority = ThreadPriority.Lowest;
 
                     backgroundTaskIsUpdatingTags = true;
-                    executePreset(null, false, true, null, false, true);
+                    executePreset(null, null, false, true, null, false, true);
                 }
                 catch (ThreadAbortException) //-V3163 //-V5606
                 {
@@ -4279,13 +4291,13 @@ namespace MusicBeePlugin
                     MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var selectedFiles);
                     if (selectedFiles == null || selectedFiles.Length == 0)
                     {
-                        SetStatusBarText(MsgNoTracksSelected, true);
+                        SetStatusBarText(this, MsgNoTracksSelected, true);
                         System.Media.SystemSounds.Exclamation.Play();
                     }
                     else
                     {
                         backgroundTaskIsUpdatingTags = true;
-                        executePreset(selectedFiles, false, true, null, false, true);
+                        executePreset(this, selectedFiles, false, true, null, false, true);
                     }
                 }
                 catch (ThreadAbortException) //-V3163 //-V5606
@@ -4377,7 +4389,7 @@ namespace MusicBeePlugin
                                 //queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw may be nulled. Check this! 
                                 //Let's remember grouping tag value, which must be changed soon (it's now TagsChanging notification, let's process
                                 //these tags on TagsChanged notification)
-                                LibraryReportsCommandForFunctionIds.executePreset(
+                                LibraryReportsCommandForFunctionIds.executePreset(null,
                                     new string[] { changingFile },
                                     false, true, null, false, false,
                                     queriedGroupingTagsRaw, queriedActualGroupingTags, queriedActualGroupingTagsRaw, true);
@@ -4551,7 +4563,7 @@ namespace MusicBeePlugin
                                 LibraryReportsCommandForFunctionIds.appliedPreset = idPreset.Value;
                                 LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = true;
 
-                                LibraryReportsCommandForFunctionIds.executePreset(null, false, true, null, false, true,
+                                LibraryReportsCommandForFunctionIds.executePreset(null, null, false, true, null, false, true,
                                     queriedChangingGroupingTagsRawWorkingCopy,
                                     queriedChangingActualGroupingTagsWorkingCopy,
                                     queriedChangingActualGroupingTagsRawWorkingCopy,
@@ -4559,7 +4571,7 @@ namespace MusicBeePlugin
 
                                 //LibraryReportsCommandForFunctionIds.backgroundTaskIsUpdatingTags = true;
 
-                                LibraryReportsCommandForFunctionIds.executePreset(
+                                LibraryReportsCommandForFunctionIds.executePreset(null,
                                     LrTrackCacheNeededToBeUpdatedWorkingCopy,
                                     false, true, idPreset.Key, false, true);
 
@@ -4601,7 +4613,7 @@ namespace MusicBeePlugin
 
             if (BackgroundTaskIsInProgress)
             {
-                SetStatusBarText(AnotherLrPresetIsRunningSbText, false);
+                SetStatusBarText(null, AnotherLrPresetIsRunningSbText, false);
                 System.Media.SystemSounds.Exclamation.Play();
 
                 return;
@@ -4618,7 +4630,7 @@ namespace MusicBeePlugin
         {
             if (BackgroundTaskIsInProgress && (form == null || !form.backgroundTaskIsScheduled))
             {
-                SetStatusBarText(AnotherLrPresetIsRunningSbText, false);
+                SetStatusBarText(form, AnotherLrPresetIsRunningSbText, false);
                 System.Media.SystemSounds.Exclamation.Play();
 
                 return;
@@ -4681,7 +4693,7 @@ namespace MusicBeePlugin
                 return returnValue;
 
             var selectedFiles = new[] { calculatedFile };
-            return LibraryReportsCommandForFunctionIds.executePreset(selectedFiles, false, true, functionId, false, false);
+            return LibraryReportsCommandForFunctionIds.executePreset(null, selectedFiles, false, true, functionId, false, false);
         }
 
         private static int FindFirstSlot(bool[] slots, bool searchedValue)
@@ -5517,7 +5529,7 @@ namespace MusicBeePlugin
             backgroundTaskIsStoppedOrCancelled = false;
 
             updateCustomScrollBars(previewTable);
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(this, string.Empty, false);
 
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
@@ -5534,7 +5546,7 @@ namespace MusicBeePlugin
 
         private void resetFormToGeneratedPreview()
         {
-            SetStatusBarText(SbLrResizingPreviewTable, false);
+            SetStatusBarText(this, SbLrResizingPreviewTable, false);
             previewTable.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader);
 
             previewTable.AllowUserToResizeColumns = true;
@@ -5568,8 +5580,8 @@ namespace MusicBeePlugin
 
             updateCustomScrollBars(previewTable);
 
-            SetStatusBarText(string.Empty, false);
-            //SetResultingSbText();
+            SetStatusBarText(this, string.Empty, false);
+            //SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -5596,7 +5608,7 @@ namespace MusicBeePlugin
             backgroundTaskIsStoppedOrCancelled = false;
             closeFormOnStopping = false;
 
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -5670,12 +5682,12 @@ namespace MusicBeePlugin
             MbApiInterface.Library_QueryFilesEx("domain=DisplayedFiles", out var files);
             if (files == null || files.Length == 0)
             {
-                SetStatusBarText(MsgNoTracksInCurrentView, false);
+                SetStatusBarText(this, MsgNoTracksInCurrentView, false);
                 System.Media.SystemSounds.Exclamation.Play();
                 return;
             }
 
-            executePreset(files, true, false, null, false, false);
+            executePreset(this, files, true, false, null, false, false);
 
             CachedPresetsTags.TryGetValue(appliedPreset.guid, out previewedTags);
             CachedPresetsFilesActualComposedSplitGroupingTagsList.TryGetValue(appliedPreset.guid, out previewedFilesActualComposedSplitGroupingTagsList);
@@ -6927,9 +6939,9 @@ namespace MusicBeePlugin
             backgroundTaskIsScheduled = false;
 
             if (resultsAreFiltered)
-                applyPresetResults(null, previewedTags, previewedFilesActualComposedSplitGroupingTagsList, true, false, null, false);
+                applyPresetResults(this, null, previewedTags, previewedFilesActualComposedSplitGroupingTagsList, true, false, null, false);
             else
-                applyPresetResults(null, previewedTags, previewedFilesActualComposedSplitGroupingTagsList, true, false, null, true);
+                applyPresetResults(this, null, previewedTags, previewedFilesActualComposedSplitGroupingTagsList, true, false, null, true);
 
             resultsAreFiltered = !resultsAreFiltered;
 
@@ -6975,7 +6987,7 @@ namespace MusicBeePlugin
                     buttonSaveClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(LibraryReportsSbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, LibraryReportsSbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }
@@ -7780,9 +7792,6 @@ namespace MusicBeePlugin
             presetNameTextBox.Text = selectedPreset.name ?? string.Empty;
 
 
-            prepareRows(); //===
-
-
             if (presetListLastSelectedIndex != -2) //It's during form init
             {
                 Enable(true, autoApplyPresetsLabel, null);
@@ -8020,9 +8029,9 @@ namespace MusicBeePlugin
                 };
 
 
-                SetStatusBarText(LibraryReportsSbText + " (" + SbSorting + ")", false);
+                SetStatusBarText(this, LibraryReportsSbText + " (" + SbSorting + ")", false);
                 rows.Sort(comparer);
-                SetStatusBarText(string.Empty, false);
+                SetStatusBarText(this, string.Empty, false);
 
 
                 int firstDisplayedRow = previewTable.FirstDisplayedScrollingRowIndex;

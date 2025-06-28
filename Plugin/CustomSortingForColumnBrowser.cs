@@ -67,6 +67,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = CscbIcon;
+            TitleBarText = this.Text;
         }
 
         internal protected override void initializeForm()

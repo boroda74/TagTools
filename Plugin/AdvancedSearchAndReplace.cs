@@ -196,6 +196,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = AsrIcon;
+            TitleBarText = this.Text;
 
             new ControlBorder(this.searchTextBox);
             new ControlBorder(this.customTextBox);
@@ -2944,7 +2945,7 @@ namespace MusicBeePlugin
                 {
 
                     if (preset.allTagsReplaceIdsCount > 0)
-                        SetStatusBarText(MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
+                        SetStatusBarText(null, MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
                             .Replace("%%PRESET-NAME%%!", preset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
 
                     if (ApplyPresetIfConditionSatisfied(currentFile, preset))
@@ -2952,9 +2953,9 @@ namespace MusicBeePlugin
                 }
 
                 if (appliedPresets.Count > 1)
-                    SetStatusBarText(SbAsrPresetsAreApplied.Replace("%%PRESET-COUNT%%", appliedPresets.Count.ToString()), true);
+                    SetStatusBarText(null, SbAsrPresetsAreApplied.Replace("%%PRESET-COUNT%%", appliedPresets.Count.ToString()), true);
                 else if (appliedPresets.Count == 1)
-                    SetStatusBarText(SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", Presets[appliedPresets.ElementAt(0).Key].getName()), true);
+                    SetStatusBarText(null, SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", Presets[appliedPresets.ElementAt(0).Key].getName()), true);
 
                 RefreshPanels(true);
             }
@@ -2988,11 +2989,11 @@ namespace MusicBeePlugin
                                 try
                                 {
                                     if (ApplyPresetIfConditionSatisfied(currentFile, preset))
-                                        SetStatusBarText(SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
+                                        SetStatusBarText(null, SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
                                 }
                                 catch (Exception ex)
                                 {
-                                    SetStatusBarText("ASR preset \"" + preset.getName() + "\" monthly run failed: " + ex.Message, true);//===
+                                    SetStatusBarText(null, "ASR preset \"" + preset.getName() + "\" monthly run failed: " + ex.Message, true);//===
                                 }
                             }
                         }
@@ -3041,7 +3042,7 @@ namespace MusicBeePlugin
                 return;
 
             if (preset.allTagsReplaceIdsCount > 0)
-                SetStatusBarText(MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
+                SetStatusBarText(null, MsgAsrPresetsUsingAllTagsPseudoTagNameCannotBeAutoApplied
                     .Replace("%%PRESET-NAME%%!", preset.getName()).Replace("%%AllTagsPseudoTagName%%", AllTagsPseudoTagName), true);
 
 
@@ -3060,7 +3061,7 @@ namespace MusicBeePlugin
                     var currentFile = files[i];
 
                     if (ApplyPresetIfConditionSatisfied(currentFile, preset))
-                        SetStatusBarText(SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
+                        SetStatusBarText(null, SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
                 }
             }
             else
@@ -3070,7 +3071,7 @@ namespace MusicBeePlugin
                 if (!string.IsNullOrEmpty(currentFile))
                 {
                     if (ApplyPresetIfConditionSatisfied(currentFile, preset))
-                        SetStatusBarText(SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
+                        SetStatusBarText(null, SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
                 }
             }
 
@@ -3098,7 +3099,7 @@ namespace MusicBeePlugin
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(this, string.Empty, false);
 
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
@@ -3132,7 +3133,7 @@ namespace MusicBeePlugin
             enableQueryingOrUpdatingButtons();
 
             updateCustomScrollBars(previewTable);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -3165,7 +3166,7 @@ namespace MusicBeePlugin
 
             previewTable_ProcessRowsOfTable(processedRowList);
 
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             return true;
         }
@@ -3563,7 +3564,7 @@ namespace MusicBeePlugin
                             even = !even;
                         }
 
-                        SetStatusBarTextForFileOperations(AsrSbText, true, fileCounter, files.Length, currentFile);
+                        SetStatusBarTextForFileOperations(this, AsrSbText, true, fileCounter, files.Length, currentFile);
 
                         var track = GetTrackRepresentation(currentFile);
 
@@ -3702,7 +3703,7 @@ namespace MusicBeePlugin
                     }
 
                     processedRowList.Add(true);
-                    SetStatusBarTextForFileOperations(AsrSbText, false, i, tags.Count, currentFile);
+                    SetStatusBarTextForFileOperations(this, AsrSbText, false, i, tags.Count, currentFile);
                 }
                 else
                 {
@@ -3720,7 +3721,7 @@ namespace MusicBeePlugin
             Invoke(new Action(() => { applyingChangesStopped(); }));
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
         }
 
         internal static string AsrGetTagName(int tagId)
@@ -7538,7 +7539,7 @@ namespace MusicBeePlugin
                     buttonSaveClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(AsrSbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, AsrSbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }

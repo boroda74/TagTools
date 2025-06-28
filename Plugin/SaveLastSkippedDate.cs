@@ -17,6 +17,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = LastSkippedIcon;
+            TitleBarText = this.Text;
         }
 
         internal protected override void initializeForm()

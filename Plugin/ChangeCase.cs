@@ -167,6 +167,7 @@ namespace MusicBeePlugin
             InitializeComponent();
 
             WindowIcon = ChangeCaseIcon;
+            TitleBarText = this.Text;
         }
 
         internal protected override void initializeForm()
@@ -655,7 +656,7 @@ namespace MusicBeePlugin
             (previewTable.Columns[0].HeaderCell as DataGridViewCheckBoxHeaderCell).setState(true);
 
             updateCustomScrollBars(previewTable);
-            SetStatusBarText(string.Empty, false);
+            SetStatusBarText(this, string.Empty, false);
 
             enableQueryingOrUpdatingButtons();
             enableDisablePreviewOptionControls(true);
@@ -689,7 +690,7 @@ namespace MusicBeePlugin
             enableQueryingOrUpdatingButtons();
 
             updateCustomScrollBars(previewTable);
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             if (closeFormOnStopping)
             {
@@ -722,7 +723,7 @@ namespace MusicBeePlugin
 
             previewTable_ProcessRowsOfTable(processedRowList);
 
-            SetResultingSbText();
+            SetResultingSbText(this);
 
             return true;
         }
@@ -1277,7 +1278,7 @@ namespace MusicBeePlugin
 
                 var currentFile = files[fileCounter];
 
-                SetStatusBarTextForFileOperations(ChangeCaseSbText, true, fileCounter, files.Length, currentFile);
+                SetStatusBarTextForFileOperations(this, ChangeCaseSbText, true, fileCounter, files.Length, currentFile);
 
                 var sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 var sourceTagValueRepresentation = GetTagRepresentation(sourceTagValue);
@@ -1415,7 +1416,7 @@ namespace MusicBeePlugin
                     tags[i][0] = string.Empty;
 
                     processedRowList.Add(true);
-                    SetStatusBarTextForFileOperations(ChangeCaseSbText, false, i, tags.Count, currentFile);
+                    SetStatusBarTextForFileOperations(this, ChangeCaseSbText, false, i, tags.Count, currentFile);
 
                     SetFileTag(currentFile, sourceTagId, newTagValue);
                     CommitTagsToFile(currentFile);
@@ -1429,7 +1430,7 @@ namespace MusicBeePlugin
             Invoke(new Action(() => { applyingChangesStopped(); }));
 
             RefreshPanels(true);
-            SetResultingSbText();
+            SetResultingSbText(this);
         }
 
         private void saveSettings()
@@ -2049,7 +2050,7 @@ namespace MusicBeePlugin
                     buttonClose.Enable(false);
 
                     backgroundTaskIsStopping = true;
-                    SetStatusBarText(ChangeCaseSbText + SbTextStoppingCurrentOperation, false);
+                    SetStatusBarText(this, ChangeCaseSbText + SbTextStoppingCurrentOperation, false);
 
                     e.Cancel = true;
                 }
