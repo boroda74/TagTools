@@ -807,8 +807,8 @@ namespace MusicBeePlugin
             this.scaledPx = ownerForm.scaledPx;
             this.enableFiltering = enableFiltering;
 
-            downArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
-            disabledDownArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DisabledDownArrowComboBoxImage);
+            downArrowComboBoxImage = Plugin.SafeCopyBitmap(Plugin.DownArrowComboBoxImage);
+            disabledDownArrowComboBoxImage = Plugin.SafeCopyBitmap(Plugin.DisabledDownArrowComboBoxImage);
 
             this.initialDropDownWidth = comboBox.DropDownWidth;
             //if (comboBox.DropDownWidth < comboBox.Width)
@@ -2948,12 +2948,12 @@ namespace MusicBeePlugin
             scrollBarThumbAndSpansBorderColor = Plugin.ScrollBarThumbAndSpansBorderColor;
 
 
-            UpArrowImage = Plugin.CopyBitmap(Plugin.UpArrowImage);
-            DownArrowImage = Plugin.CopyBitmap(Plugin.DownArrowImage);
+            UpArrowImage = Plugin.SafeCopyBitmap(Plugin.UpArrowImage);
+            DownArrowImage = Plugin.SafeCopyBitmap(Plugin.DownArrowImage);
 
-            ThumbTopImage = Plugin.CopyBitmap(Plugin.ThumbTopImage);
-            ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleVerticalImage);
-            ThumbBottomImage = Plugin.CopyBitmap(Plugin.ThumbBottomImage);
+            ThumbTopImage = Plugin.SafeCopyBitmap(Plugin.ThumbTopImage);
+            ThumbMiddleImage = Plugin.SafeCopyBitmap(Plugin.ThumbMiddleVerticalImage);
+            ThumbBottomImage = Plugin.SafeCopyBitmap(Plugin.ThumbBottomImage);
 
             upArrowImageHeight = UpArrowImage.Height; //-V3080
             upArrowImageWidth = UpArrowImage.Width;
@@ -3808,12 +3808,12 @@ namespace MusicBeePlugin
             scrollBarThumbAndSpansBorderColor = Plugin.ScrollBarThumbAndSpansBorderColor;
 
 
-            LeftArrowImage = Plugin.CopyBitmap(Plugin.LeftArrowImage);
-            RightArrowImage = Plugin.CopyBitmap(Plugin.RightArrowImage);
+            LeftArrowImage = Plugin.SafeCopyBitmap(Plugin.LeftArrowImage);
+            RightArrowImage = Plugin.SafeCopyBitmap(Plugin.RightArrowImage);
 
-            ThumbLeftImage = Plugin.CopyBitmap(Plugin.ThumbLeftImage);
-            ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleHorizontalImage);
-            ThumbRightImage = Plugin.CopyBitmap(Plugin.ThumbRightImage);
+            ThumbLeftImage = Plugin.SafeCopyBitmap(Plugin.ThumbLeftImage);
+            ThumbMiddleImage = Plugin.SafeCopyBitmap(Plugin.ThumbMiddleHorizontalImage);
+            ThumbRightImage = Plugin.SafeCopyBitmap(Plugin.ThumbRightImage);
 
             leftArrowImageHeight = LeftArrowImage.Height; //-V3080
             leftArrowImageWidth = LeftArrowImage.Width;

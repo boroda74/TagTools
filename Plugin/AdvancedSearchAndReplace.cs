@@ -289,8 +289,8 @@ namespace MusicBeePlugin
             ReplaceButtonBitmap(clearNextPresetButton, ClearField);
 
 
-            filterPresetChain = CopyBitmap(FilterPresetChain);
-            filterPresetChainDimmed = CopyBitmap(FilterPresetChainDimmed);
+            filterPresetChain = SafeCopyBitmap(FilterPresetChain);
+            filterPresetChainDimmed = SafeCopyBitmap(FilterPresetChainDimmed);
 
             buttonLabels[showOnlyChainedPresetsButton] = string.Empty;
             showOnlyChainedPresetsButton.Text = string.Empty;

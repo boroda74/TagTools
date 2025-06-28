@@ -589,6 +589,10 @@ namespace MusicBeePlugin
 
         internal static Bitmap SafeCopyBitmap(Bitmap bitmap)
         {
+            if (bitmap == null)
+                return null;
+
+
             var scaledBitmap = new Bitmap(bitmap.Width, bitmap.Height, bitmap.PixelFormat);
             using (var gfx = Graphics.FromImage(scaledBitmap))
             {

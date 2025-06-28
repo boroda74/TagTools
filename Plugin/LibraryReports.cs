@@ -2388,7 +2388,7 @@ namespace MusicBeePlugin
                     tc = TypeDescriptor.GetConverter(typeof(Bitmap));
 
 
-                    Bitmap pic1 = CopyBitmap(DefaultArtwork);
+                    Bitmap pic1 = SafeCopyBitmap(DefaultArtwork);
                     Bitmap pic2 = pic1;
 
                     if (newArtworkSize > 0)
@@ -2411,7 +2411,7 @@ namespace MusicBeePlugin
                         artworkCache.AddReplace(ResizedDefaultArtworkBase64Hash, pic2);
 
 
-                    pic1 = CopyBitmap(ArtworkTotals);
+                    pic1 = SafeCopyBitmap(ArtworkTotals);
                     pic2 = pic1;
 
                     if (newArtworkSize > 0)

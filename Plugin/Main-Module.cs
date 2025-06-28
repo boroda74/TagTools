@@ -6418,13 +6418,13 @@ namespace MusicBeePlugin
             return new Bitmap(newBitmap);
         }
 
-        internal static Bitmap CopyBitmap(Bitmap newBitmap)
-        {
-            if (newBitmap == null)
-                return null;
-            else
-                return MbForm.Invoke(new Func<Bitmap>(() => { return new Bitmap(newBitmap); })) as Bitmap;
-        }
+        //internal static Bitmap CopyBitmap(Bitmap newBitmap) //===
+        //{
+        //    if (newBitmap == null)
+        //        return null;
+        //    else
+        //        return MbForm.Invoke(new Func<Bitmap>(() => { return new Bitmap(newBitmap); })) as Bitmap;
+        //}
 
         internal static void DisposePluginBitmaps()
         {
