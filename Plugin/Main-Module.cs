@@ -563,7 +563,7 @@ namespace MusicBeePlugin
 
             public bool scrollPreviewToEnd;
 
-            public bool hidePluginWindows;
+            public bool hidePluginWindowsOnMinimization;
 
             public bool dontUseSkinColors;
 
@@ -6538,6 +6538,9 @@ namespace MusicBeePlugin
             const float DeepDimmedWeight = 0.32f;
             const float ScrollBarsForeWeight = 0.75f; //---
 
+            const float MinForeBackButtonBrightnessDifference = 0.3f;
+            const float ButtonInvertedAverageBrightnessContrast = 0.8f;
+
             InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
                 ElementComponent.ComponentForeground));
             InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
@@ -6669,6 +6672,10 @@ namespace MusicBeePlugin
                 var buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
 
                 ButtonForeColor = buttonForeColor;
+
+                if (GetBrightnessDifference(ButtonForeColor, ButtonBackColor) < MinForeBackButtonBrightnessDifference)
+                    ButtonForeColor = IncreaseColorContrast(ButtonForeColor, ButtonInvertedAverageBrightnessContrast);
+
                 ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor);
 
 
@@ -7188,16 +7195,18 @@ namespace MusicBeePlugin
                 }
                 else
                 {
-                    UnchangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(selectionForeColor, InvertedAverageBrightnessContrast);
-                    UnchangedCellStyle.SelectionBackColor = GetInvertedAverageBrightnessColor(selectionBackColor, InvertedAverageBrightnessContrast);
+                    UnchangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(selectionForeColor,
+                        UnchangedCellStyle.SelectionBackColor, InvertedAverageBrightnessContrast);
                 }
 
 
                 if (GetBrightnessDifference(HeaderCellStyle.ForeColor, HeaderCellStyle.BackColor) < MinForeBackBrightnessDifference)
-                    HeaderCellStyle.ForeColor = GetInvertedAverageBrightnessColor(HeaderCellStyle.ForeColor, InvertedAverageBrightnessContrast);
+                    HeaderCellStyle.ForeColor = GetInvertedAverageBrightnessColor(HeaderCellStyle.ForeColor,
+                        HeaderCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
                 if (GetBrightnessDifference(HeaderCellStyle.SelectionForeColor, HeaderCellStyle.SelectionBackColor) < MinForeBackBrightnessDifference)
-                    HeaderCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(HeaderCellStyle.SelectionForeColor, InvertedAverageBrightnessContrast);
+                    HeaderCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(HeaderCellStyle.SelectionForeColor,
+                        HeaderCellStyle.SelectionBackColor, InvertedAverageBrightnessContrast);
             }
             else
             {
@@ -7223,48 +7232,56 @@ namespace MusicBeePlugin
             if (GetBrightnessDifference(ChangedCellStyle.BackColor, ChangedForeColor) >= MinForeBrightnessDifference)
                 ChangedCellStyle.ForeColor = ChangedForeColor;
             else
-                ChangedCellStyle.ForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor, InvertedAverageBrightnessContrast);
+                ChangedCellStyle.ForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor, 
+                    ChangedCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
             if (GetBrightnessDifference(ChangedCellStyle.SelectionBackColor, ChangedForeColor) >= MinForeBrightnessDifference)
                 ChangedCellStyle.SelectionForeColor = ChangedForeColor;
             else
-                ChangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor, InvertedAverageBrightnessContrast);
+                ChangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor, 
+                    ChangedCellStyle.SelectionBackColor,  InvertedAverageBrightnessContrast);
 
 
             //DIMMED STYLE
             if (GetBrightnessDifference(DimmedCellStyle.BackColor, DimmedForeColor) >= MinForeBrightnessDifference)
                 DimmedCellStyle.ForeColor = DimmedForeColor;
             else
-                DimmedCellStyle.ForeColor = GetInvertedAverageBrightnessColor(DimmedForeColor, InvertedAverageBrightnessContrast);
+                DimmedCellStyle.ForeColor = GetInvertedAverageBrightnessColor(DimmedForeColor,
+                    DimmedCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
             if (GetBrightnessDifference(DimmedCellStyle.SelectionBackColor, DimmedForeColor) >= MinForeBrightnessDifference)
                 DimmedCellStyle.SelectionForeColor = DimmedForeColor;
             else
-                DimmedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(DimmedForeColor, InvertedAverageBrightnessContrast);
+                DimmedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(DimmedForeColor,
+                    DimmedCellStyle.SelectionBackColor, InvertedAverageBrightnessContrast);
 
 
             //PRESERVED TAG STYLE
             if (GetBrightnessDifference(PreservedTagCellStyle.BackColor, PreservedTagsForeColor) >= MinForeBrightnessDifference)
                 PreservedTagCellStyle.ForeColor = PreservedTagsForeColor;
             else
-                PreservedTagCellStyle.ForeColor = GetInvertedAverageBrightnessColor(PreservedTagsForeColor, InvertedAverageBrightnessContrast);
+                PreservedTagCellStyle.ForeColor = GetInvertedAverageBrightnessColor(PreservedTagsForeColor,
+                    PreservedTagCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
             if (GetBrightnessDifference(PreservedTagCellStyle.SelectionBackColor, PreservedTagsForeColor) >= MinForeBrightnessDifference)
                 PreservedTagCellStyle.SelectionForeColor = PreservedTagsForeColor;
             else
-                PreservedTagCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(PreservedTagsForeColor, InvertedAverageBrightnessContrast);
+                PreservedTagCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(PreservedTagsForeColor,
+                    PreservedTagCellStyle.SelectionBackColor, InvertedAverageBrightnessContrast);
 
 
             //PRESERVED TAG VALUE STYLE
             if (GetBrightnessDifference(PreservedTagValueCellStyle.BackColor, PreservedTagValuesForeColor) >= MinForeBrightnessDifference)
                 PreservedTagValueCellStyle.ForeColor = PreservedTagValuesForeColor;
             else
-                PreservedTagValueCellStyle.ForeColor = GetInvertedAverageBrightnessColor(PreservedTagValuesForeColor, InvertedAverageBrightnessContrast);
+                PreservedTagValueCellStyle.ForeColor = GetInvertedAverageBrightnessColor(PreservedTagValuesForeColor,
+                    PreservedTagValueCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
             if (GetBrightnessDifference(PreservedTagValueCellStyle.SelectionBackColor, PreservedTagValuesForeColor) >= MinForeBrightnessDifference)
                 PreservedTagValueCellStyle.SelectionForeColor = PreservedTagValuesForeColor;
             else
-                PreservedTagValueCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(PreservedTagValuesForeColor, InvertedAverageBrightnessContrast);
+                PreservedTagValueCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(PreservedTagValuesForeColor, 
+                    ChangedCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
 
             SizesColorsChanged = false;
@@ -7384,11 +7401,12 @@ namespace MusicBeePlugin
             webPage.ToolTipText = PluginWebPageToolTip; //-V3080
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
-            AddMenuItem(TagToolsSubmenu, PluginAboutString, null, aboutEventHandler);//===.Image = AboutIcon;
 
             var version = AddMenuItem(TagToolsSubmenu, PluginVersion, null, copyPluginVersionEventHandler);
             //===version.Image = VersionIcon; //-V3080
             version.ToolTipText = PluginVersionToolTip; //-V3080
+
+            AddMenuItem(TagToolsSubmenu, PluginAboutString, null, aboutEventHandler);//===.Image = AboutIcon;
         }
 
         internal void addPluginContextMenuItems() //Must be called AFTER InitLr() and InitAsr(), and BEFORE addPluginMenuItems()!

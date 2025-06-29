@@ -110,7 +110,7 @@ namespace MusicBeePlugin
         {
             Columns = new List<object>();
             for (int i = 0; i < columnCount; i++)
-                Columns.Add(new object());
+                Columns.Add(null);
         }
 
         public DataGridViewBoundColumns CreateColumns(int columnCount)
@@ -123,7 +123,7 @@ namespace MusicBeePlugin
         public DataGridViewBoundColumns AddColumns(int columnCount)
         {
             for (int i = 0; i < columnCount; i++)
-                Columns.Add(new object());
+                Columns.Add(null);
 
             return this;
         }

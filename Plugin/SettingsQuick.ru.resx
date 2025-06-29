@@ -200,19 +200,19 @@
     <value>466, 15</value>
   </data>
   <data name="showHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
-    <value>Показывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
+    <value>Показывать скрытое/свернутое окно плагина, когда его фоновая задача завершена/прервана</value>
   </data>
   <data name="closeHiddenCommandWindowsRadioButtonLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>459, 15</value>
   </data>
   <data name="closeHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
-    <value>Закрывать скрытое окно плагина, когда его фоновая задача завершена/прервана</value>
+    <value>Закрывать скрытое/свернутое окно плагина, когда его фоновая задача завершена/прервана</value>
   </data>
-  <data name="minimizePluginWindowsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="hidePluginWindowsOnMinimizationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>361, 15</value>
   </data>
-  <data name="minimizePluginWindowsCheckBoxLabel.Text" xml:space="preserve">
-    <value>Минимизировать окна плагина, вместо того чтобы скрывать их</value>
+  <data name="hidePluginWindowsOnMinimizationCheckBoxLabel.Text" xml:space="preserve">
+    <value>Скрывать окна плагина при сворачивании</value>
   </data>
   <data name="customFontButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>674, 39</value>

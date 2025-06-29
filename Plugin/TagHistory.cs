@@ -463,14 +463,20 @@ namespace MusicBeePlugin
                         if (trackIndex > 0)
                         {
                             fillTableInternalReuseCache(backupIndex, trackIndex);
-                            fillTableInternalReuseCacheFinal(backupIndex);
+                            Invoke(new Action(() =>
+                            {
+                                fillTableInternalReuseCacheFinal(backupIndex);
+                            }));
                         }
                         else
                         {
                             for (var i = 1; i < trackUrls.Length + 1; i++)
                                 fillTableInternalReuseCache(backupIndex, i);
 
-                            fillTableInternalReuseCacheFinal(backupIndex);
+                            Invoke(new Action(() =>
+                            {
+                                fillTableInternalReuseCacheFinal(backupIndex);
+                            }));
                         }
                     }
 

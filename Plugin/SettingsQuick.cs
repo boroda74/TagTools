@@ -94,7 +94,7 @@ namespace MusicBeePlugin
             allowAsrLrPresetAutoExecutionCheckBox.Checked = SavedSettings.allowAsrLrPresetAutoExecution;
             allowCommandExecutionWithoutPreviewCheckBox.Checked = SavedSettings.allowCommandExecutionWithoutPreview;
 
-            minimizePluginWindowsCheckBox.Checked = !SavedSettings.hidePluginWindows;
+            hidePluginWindowsOnMinimizationCheckBox.Checked = SavedSettings.hidePluginWindowsOnMinimization;
 
             scrollPreviewToEndCheckBox.Checked = SavedSettings.scrollPreviewToEnd;
 
@@ -159,7 +159,7 @@ namespace MusicBeePlugin
             SavedSettings.allowAsrLrPresetAutoExecution = allowAsrLrPresetAutoExecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
 
-            SavedSettings.hidePluginWindows = !minimizePluginWindowsCheckBox.Checked;
+            SavedSettings.hidePluginWindowsOnMinimization = hidePluginWindowsOnMinimizationCheckBox.Checked;
 
             SavedSettings.scrollPreviewToEnd = scrollPreviewToEndCheckBox.Checked;
 
@@ -288,9 +288,9 @@ namespace MusicBeePlugin
             highlightChangedTagsCheckBox.Checked = !highlightChangedTagsCheckBox.Checked;
         }
 
-        private void minimizePluginWindowsCheckBoxLabel_Click(object sender, EventArgs e)
+        private void hidePluginWindowsOnMinimizationCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            minimizePluginWindowsCheckBox.Checked = !minimizePluginWindowsCheckBox.Checked;
+            hidePluginWindowsOnMinimizationCheckBox.Checked = !hidePluginWindowsOnMinimizationCheckBox.Checked;
         }
 
         private void closeHiddenCommandWindowsRadioButtonLabel_Click(object sender, EventArgs e)

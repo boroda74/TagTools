@@ -1068,9 +1068,9 @@
   <data name="changedLegendTextBox.Text" xml:space="preserve">
     <value>Changed</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <data name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing">
     <value>17, 17</value>
-  </metadata>
+  </data>
   <data name="changedLegendTextBox.ToolTip" xml:space="preserve">
     <value>Click on any example field to see the colors of selected line:Click on any example field to see the colors of not selected line</value>
   </data>
@@ -1186,7 +1186,7 @@
     <value>13</value>
   </data>
   <data name="showHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
-    <value>Show hidden plugin window when related task is completed/terminated</value>
+    <value>Show hidden/minimized plugin window when related task is completed/terminated</value>
   </data>
   <data name="&gt;&gt;showHiddenCommandWindowsRadioButtonLabel.Name" xml:space="preserve">
     <value>showHiddenCommandWindowsRadioButtonLabel</value>
@@ -1213,7 +1213,7 @@
     <value>11</value>
   </data>
   <data name="closeHiddenCommandWindowsRadioButtonLabel.Text" xml:space="preserve">
-    <value>Close hidden plugin window when related task is completed/terminated</value>
+    <value>Close hidden/minimized plugin window when related task is completed/terminated</value>
   </data>
   <data name="&gt;&gt;closeHiddenCommandWindowsRadioButtonLabel.Name" xml:space="preserve">
     <value>closeHiddenCommandWindowsRadioButtonLabel</value>
@@ -1227,61 +1227,61 @@
   <data name="&gt;&gt;closeHiddenCommandWindowsRadioButtonLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="minimizePluginWindowsCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="hidePluginWindowsOnMinimizationCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="minimizePluginWindowsCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="hidePluginWindowsOnMinimizationCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>27, 63</value>
   </data>
-  <data name="minimizePluginWindowsCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="hidePluginWindowsOnMinimizationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>266, 15</value>
   </data>
-  <data name="minimizePluginWindowsCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="hidePluginWindowsOnMinimizationCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="minimizePluginWindowsCheckBoxLabel.Text" xml:space="preserve">
-    <value>Minimize plugin windows instead of hiding them</value>
+  <data name="hidePluginWindowsOnMinimizationCheckBoxLabel.Text" xml:space="preserve">
+    <value>Hide plugin windows upon minimization</value>
   </data>
-  <data name="&gt;&gt;minimizePluginWindowsCheckBoxLabel.Name" xml:space="preserve">
-    <value>minimizePluginWindowsCheckBoxLabel</value>
+  <data name="&gt;&gt;hidePluginWindowsOnMinimizationCheckBoxLabel.Name" xml:space="preserve">
+    <value>hidePluginWindowsOnMinimizationCheckBoxLabel</value>
   </data>
-  <data name="&gt;&gt;minimizePluginWindowsCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;hidePluginWindowsOnMinimizationCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;minimizePluginWindowsCheckBoxLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;hidePluginWindowsOnMinimizationCheckBoxLabel.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="&gt;&gt;minimizePluginWindowsCheckBoxLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;hidePluginWindowsOnMinimizationCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="minimizePluginWindowsCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="hidePluginWindowsOnMinimizationCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="minimizePluginWindowsCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="hidePluginWindowsOnMinimizationCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="minimizePluginWindowsCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="hidePluginWindowsOnMinimizationCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 63</value>
   </data>
-  <data name="minimizePluginWindowsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="hidePluginWindowsOnMinimizationCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
-  <data name="minimizePluginWindowsCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="hidePluginWindowsOnMinimizationCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="minimizePluginWindowsCheckBox.Text" xml:space="preserve">
+  <data name="hidePluginWindowsOnMinimizationCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
-  <data name="&gt;&gt;minimizePluginWindowsCheckBox.Name" xml:space="preserve">
-    <value>minimizePluginWindowsCheckBox</value>
+  <data name="&gt;&gt;hidePluginWindowsOnMinimizationCheckBox.Name" xml:space="preserve">
+    <value>hidePluginWindowsOnMinimizationCheckBox</value>
   </data>
-  <data name="&gt;&gt;minimizePluginWindowsCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;hidePluginWindowsOnMinimizationCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;minimizePluginWindowsCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;hidePluginWindowsOnMinimizationCheckBox.Parent" xml:space="preserve">
     <value>groupBox2</value>
   </data>
-  <data name="&gt;&gt;minimizePluginWindowsCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;hidePluginWindowsOnMinimizationCheckBox.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="customFontButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -2889,9 +2889,9 @@
   <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="$this.Localizable" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
+  </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>

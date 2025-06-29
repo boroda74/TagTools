@@ -379,21 +379,21 @@ namespace MusicBeePlugin
             return (sampleColor.R + sampleColor.G + sampleColor.B) / 3.0f / 255f;
         }
 
-        internal static Color GetInvertedAverageBrightnessColor(Color sampleColor, float contrast)
+        internal static Color GetInvertedAverageBrightnessColor(Color sampleColor, Color baseColor, float contrast)
         {
-            float avgBr = GetAverageBrightness(sampleColor);
+            float avgBr = GetAverageBrightness(baseColor);
 
             int R;
             int G;
             int B;
 
-            if (avgBr > 0.5f) //Let's decrease brightness
+            if (avgBr > 0.5f) //Let's decrease sample color brightness
             {
                 R = (int)Math.Round((sampleColor.R - 127) / 4f + 63f / contrast);
                 G = (int)Math.Round((sampleColor.G - 127) / 4f + 63f / contrast);
                 B = (int)Math.Round((sampleColor.B - 127) / 4f + 63f / contrast);
             }
-            else //Let's increase brightness
+            else //Let's increase sample color brightness
             {
                 R = (int)Math.Round((sampleColor.R - 127) / 4f + 255f - 63f / contrast);
                 G = (int)Math.Round((sampleColor.G - 127) / 4f + 255f - 63f / contrast);

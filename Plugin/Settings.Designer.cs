@@ -75,8 +75,8 @@
             this.highlightChangedTagsCheckBoxLabel = new System.Windows.Forms.Label();
             this.showHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
             this.closeHiddenCommandWindowsRadioButtonLabel = new System.Windows.Forms.Label();
-            this.minimizePluginWindowsCheckBoxLabel = new System.Windows.Forms.Label();
-            this.minimizePluginWindowsCheckBox = new System.Windows.Forms.CheckBox();
+            this.hidePluginWindowsOnMinimizationCheckBoxLabel = new System.Windows.Forms.Label();
+            this.hidePluginWindowsOnMinimizationCheckBox = new System.Windows.Forms.CheckBox();
             this.customFontButton = new System.Windows.Forms.Button();
             this.customFontTextBox = new System.Windows.Forms.TextBox();
             this.useCustomFontCheckBoxLabel = new System.Windows.Forms.Label();
@@ -369,8 +369,8 @@
             this.groupBox2.Controls.Add(this.showHiddenCommandWindowsRadioButton);
             this.groupBox2.Controls.Add(this.closeHiddenCommandWindowsRadioButtonLabel);
             this.groupBox2.Controls.Add(this.closeHiddenCommandWindowsRadioButton);
-            this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBoxLabel);
-            this.groupBox2.Controls.Add(this.minimizePluginWindowsCheckBox);
+            this.groupBox2.Controls.Add(this.hidePluginWindowsOnMinimizationCheckBoxLabel);
+            this.groupBox2.Controls.Add(this.hidePluginWindowsOnMinimizationCheckBox);
             this.groupBox2.Controls.Add(this.customFontButton);
             this.groupBox2.Controls.Add(this.customFontTextBox);
             this.groupBox2.Controls.Add(this.useCustomFontCheckBoxLabel);
@@ -455,17 +455,17 @@
             this.closeHiddenCommandWindowsRadioButtonLabel.Name = "closeHiddenCommandWindowsRadioButtonLabel";
             this.closeHiddenCommandWindowsRadioButtonLabel.Click += new System.EventHandler(this.closeHiddenCommandWindowsRadioButtonLabel_Click);
             // 
-            // minimizePluginWindowsCheckBoxLabel
+            // hidePluginWindowsOnMinimizationCheckBoxLabel
             // 
-            resources.ApplyResources(this.minimizePluginWindowsCheckBoxLabel, "minimizePluginWindowsCheckBoxLabel");
-            this.minimizePluginWindowsCheckBoxLabel.Name = "minimizePluginWindowsCheckBoxLabel";
-            this.minimizePluginWindowsCheckBoxLabel.Click += new System.EventHandler(this.minimizePluginWindowsCheckBoxLabel_Click);
+            resources.ApplyResources(this.hidePluginWindowsOnMinimizationCheckBoxLabel, "hidePluginWindowsOnMinimizationCheckBoxLabel");
+            this.hidePluginWindowsOnMinimizationCheckBoxLabel.Name = "hidePluginWindowsOnMinimizationCheckBoxLabel";
+            this.hidePluginWindowsOnMinimizationCheckBoxLabel.Click += new System.EventHandler(this.hidePluginWindowsOnMinimizationCheckBoxLabel_Click);
             // 
-            // minimizePluginWindowsCheckBox
+            // hidePluginWindowsOnMinimizationCheckBox
             // 
-            resources.ApplyResources(this.minimizePluginWindowsCheckBox, "minimizePluginWindowsCheckBox");
-            this.minimizePluginWindowsCheckBox.Name = "minimizePluginWindowsCheckBox";
-            this.minimizePluginWindowsCheckBox.Tag = "#minimizePluginWindowsCheckBoxLabel";
+            resources.ApplyResources(this.hidePluginWindowsOnMinimizationCheckBox, "hidePluginWindowsOnMinimizationCheckBox");
+            this.hidePluginWindowsOnMinimizationCheckBox.Name = "hidePluginWindowsOnMinimizationCheckBox";
+            this.hidePluginWindowsOnMinimizationCheckBox.Tag = "#hidePluginWindowsOnMinimizationCheckBoxLabel";
             // 
             // customFontButton
             // 
@@ -958,7 +958,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox minimizePluginWindowsCheckBox;
+        private System.Windows.Forms.CheckBox hidePluginWindowsOnMinimizationCheckBox;
         private System.Windows.Forms.Label showSwapTagsCheckBoxLabel;
         private System.Windows.Forms.Label showCopyTagCheckBoxLabel;
         private System.Windows.Forms.Label showLibraryReportsCheckBoxLabel;
@@ -971,7 +971,7 @@
         private System.Windows.Forms.Label showBackupRestoreCheckBoxLabel;
         private System.Windows.Forms.Label showShowHiddenWindowsCheckBoxLabel;
         private System.Windows.Forms.Label showCTCheckBoxLabel;
-        private System.Windows.Forms.Label minimizePluginWindowsCheckBoxLabel;
+        private System.Windows.Forms.Label hidePluginWindowsOnMinimizationCheckBoxLabel;
         private System.Windows.Forms.Label highlightChangedTagsCheckBoxLabel;
         private System.Windows.Forms.Label useSkinColorsCheckBoxLabel;
         private System.Windows.Forms.Label showHiddenCommandWindowsRadioButtonLabel;
