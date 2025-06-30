@@ -126,4 +126,4 @@ e.g. $NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or $SubDateTime(&lt;Date 
 
 ***
 
-Copyright © boroda 2012-2025. Help version 9.3.250623
+Copyright © boroda 2012-2025. Help version 10.0.250623

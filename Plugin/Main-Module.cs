@@ -1387,7 +1387,7 @@ namespace MusicBeePlugin
 
             //return Convert.ToBase64String(hash);
 
-            return input.GetHashCode().ToString("X");
+            return input.GetHashCode().ToString("X8");
         }
 
         internal static string GetPluralForm(string sentence, int number)
@@ -6417,14 +6417,6 @@ namespace MusicBeePlugin
 
             return new Bitmap(newBitmap);
         }
-
-        //internal static Bitmap CopyBitmap(Bitmap newBitmap) //===
-        //{
-        //    if (newBitmap == null)
-        //        return null;
-        //    else
-        //        return MbForm.Invoke(new Func<Bitmap>(() => { return new Bitmap(newBitmap); })) as Bitmap;
-        //}
 
         internal static void DisposePluginBitmaps()
         {
