@@ -112,6 +112,8 @@
             this.Controls.Add(this.saveLastSkippedCheckBoxLabel);
             this.Controls.Add(this.saveLastSkippedCheckBox);
             this.DoubleBuffered = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SaveLastSkippedDate";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.Load += new System.EventHandler(this.SaveLastSkippedDate_Load);

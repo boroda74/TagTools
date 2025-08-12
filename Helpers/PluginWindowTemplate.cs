@@ -16,7 +16,9 @@ namespace MusicBeePlugin
 {
     public partial class PluginWindowTemplate : Form
     {
-        internal Image WindowIcon;
+        internal Image WindowMenuIcon;
+        internal Icon WindowIcon;
+        internal Icon WindowIconInactive;
         internal string TitleBarText;
 
 
@@ -211,20 +213,12 @@ namespace MusicBeePlugin
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
-                if (listBox is CheckedListBox checkedListBox1)
-                    textColor = checkedListBox1.CheckedIndices.Contains(e.Index) ? ListBoxHighlightSelectedForeColor : ButtonMouseOverForeColor;
-                else
-                    textColor = ButtonMouseOverForeColor;
-
+                textColor = ButtonMouseOverForeColor;
                 e.Graphics.FillRectangle(new SolidBrush(ButtonMouseOverBackColor), e.Bounds);
             }
             else
             {
-                if (listBox is CheckedListBox checkedListBox2)
-                    textColor = checkedListBox2.CheckedIndices.Contains(e.Index) ? ListBoxHighlightForeColor : listBox.ForeColor;
-                else
-                    textColor = listBox.ForeColor;
-
+                textColor = listBox.ForeColor;
                 e.Graphics.FillRectangle(new SolidBrush(listBox.BackColor), e.Bounds);
             }
 
@@ -250,7 +244,7 @@ namespace MusicBeePlugin
             //    ControlsTools.DrawCheckBox(e.Graphics, checkBoxBounds, 1, NoColor, textColor, textColor, state);
 
             if (checkBoxSize > 0) //Variant #2
-                ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, 1, InputControlBackColor, textColor, textColor, state);
+                ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, 1, NoColor, textColor, textColor, state);
 
             //if (checkBoxSize > 0) //Variant #3
             //    ControlsTools.DrawCheckBox(e.Graphics, checkBoxBounds, state);
@@ -2857,21 +2851,21 @@ namespace MusicBeePlugin
                 {
                     if (((control.IsEnabled() && enable == null) || enable == true) && !textBox.ReadOnly)
                     {
-                        if (control.ForeColor != DimmedHighlight)
+                        if (control.ForeColor != DimmedHighlightColor)
                             control.ForeColor = InputControlForeColor;
 
                         control.BackColor = InputControlBackColor;
                     }
                     else if ((control.IsEnabled() && enable == null) || enable == true) //Enabled, but readonly
                     {
-                        if (control.ForeColor != DimmedHighlight)
+                        if (control.ForeColor != DimmedHighlightColor)
                             control.ForeColor = AccentColor;
 
                         control.BackColor = InputControlDimmedBackColor;
                     }
                     else //Disabled
                     {
-                        if (control.ForeColor != DimmedHighlight)
+                        if (control.ForeColor != DimmedHighlightColor)
                             control.ForeColor = InputControlDeepDimmedForeColor;
 
                         control.BackColor = InputControlDeepDimmedBackColor; //---
@@ -3846,12 +3840,17 @@ namespace MusicBeePlugin
 
                 if (!DontShowShowHiddenWindows && OpenedFormsSubmenu.DropDownItems.Count == 0)
                 {
-                    AddMenuItem(OpenedFormsSubmenu, ShowHiddenWindowsName, null, TagToolsPlugin.showHiddenEventHandler).Image = ShowHiddenWindowsIcon;
+                    AddMenuItem(OpenedFormsSubmenu, ShowHiddenWindowsName, null, TagToolsPlugin.showHiddenEventHandler).Image = ShowHiddenWindowsMenuIcon;
                     AddMenuItem(OpenedFormsSubmenu, "-", null, null);
                 }
 
+                OpenedFormsSubmenu.Enabled = true;
+                OpenedFormsSubmenu.ToolTipText = "List of open plugin windows\r\r" +
+                    "Click the window name to show/restore it \r" +
+                    "and/or to move it on top of all MusicBee windows";//===
 
-                AddMenuItem(OpenedFormsSubmenu, newForm.Text, null, TagToolsPlugin.openWindowActivationEventHandler, true, newForm).Image = newForm.WindowIcon;
+                AddMenuItem(OpenedFormsSubmenu, newForm.Text, null, TagToolsPlugin.openWindowActivationEventHandler, true, newForm)
+                    .Image = newForm.WindowMenuIcon;
 
                 if (modalForm)
                     newForm.ShowDialog(ownerForm);
@@ -3868,6 +3867,19 @@ namespace MusicBeePlugin
         private void PluginWindowTemplate_Load(object sender, EventArgs e)
         {
             initializeForm();
+
+            this.Activated += PluginWindowTemplate_Activated;
+            this.Deactivate += PluginWindowTemplate_Deactivate;
+        }
+
+        private void PluginWindowTemplate_Activated(object sender, EventArgs e)
+        {
+            this.Icon = WindowIcon;
+        }
+
+        private void PluginWindowTemplate_Deactivate(object sender, EventArgs e)
+        {
+            this.Icon = WindowIconInactive;
         }
 
         internal protected virtual void childClassFormShown()
@@ -3991,7 +4003,7 @@ namespace MusicBeePlugin
                 width = RestoreBounds.Width;
                 height = RestoreBounds.Height;
 
-                if (SavedSettings.hidePluginWindowsOnMinimization)
+                if (!SavedSettings.minimizePluginWindows && !(this is AsrPresetEditor))
                     Hide();
             }
             else
@@ -4074,6 +4086,11 @@ namespace MusicBeePlugin
                     OpenedFormsSubmenu.DropDownItems.RemoveAt(0);
                 }
 
+                if (OpenedFormsSubmenu.DropDownItems.Count == 0)
+                {
+                    OpenedFormsSubmenu.ToolTipText = "No open plugin windows now";//===
+                    OpenedFormsSubmenu.Enabled = false;
+                }
 
                 OpenedForms.Remove(this);
             }

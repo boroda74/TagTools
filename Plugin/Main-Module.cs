@@ -170,7 +170,7 @@ namespace MusicBeePlugin
         internal static Color DimmedAccentColor;
         internal static Color DeepDimmedAccentColor;
 
-        internal static Color DimmedHighlight;
+        internal static Color DimmedHighlightColor;
 
         internal static Color SplitterColor;
 
@@ -243,41 +243,77 @@ namespace MusicBeePlugin
         internal static Bitmap ClearField;
         internal static Bitmap Gear;
 
-        internal static Bitmap AtrtIcon;
-        internal static Bitmap WindowsIcon;
-        internal static Bitmap ShowHiddenWindowsIcon;
-        internal static Bitmap TaggingReportingIcon;
-        internal static Bitmap CopyTagIcon;
-        internal static Bitmap SwapTagsIcon;
-        internal static Bitmap ChangeCaseIcon;
-        internal static Bitmap ReencodeTagIcon;
-        internal static Bitmap ReencodeTagsIcon;
-        internal static Bitmap AsrIcon;
-        internal static Bitmap AsrPresetIcon;
-        internal static Bitmap MsrIcon;
-        internal static Bitmap LrIcon;
-        internal static Bitmap LrPresetIcon;
-        internal static Bitmap CompareTracksIcon;
-        internal static Bitmap AutorateIcon;
-        internal static Bitmap CarIcon;
-        internal static Bitmap CscbIcon;
-        internal static Bitmap CopyTagsIcon;
-        internal static Bitmap CopyTagSetIcon;
-        internal static Bitmap PasteTagsIcon;
-        internal static Bitmap BackupRestoreIcon;
-        internal static Bitmap TagHistoryIcon;
-        internal static Bitmap SettingsIcon;
-        internal static Bitmap LastSkippedIcon;
-        internal static Bitmap HelpIcon;
-        internal static Bitmap WebPageIcon;
-        internal static Bitmap AboutIcon;
-        internal static Bitmap VersionIcon;
+
+        internal static Bitmap WindowsMenuIcon;//===
+        internal static Bitmap ShowHiddenWindowsMenuIcon;//===
+
+        internal static Bitmap TaggingReportingMenuIcon;//===
+
+        internal static Bitmap CopyTagMenuIcon;
+        internal static Icon CopyTagIcon;
+        internal static Icon CopyTagIconInactive;
+        internal static Bitmap SwapTagsMenuIcon;
+        internal static Icon SwapTagsIcon;
+        internal static Icon SwapTagsIconInactive;
+        internal static Bitmap ChangeCaseMenuIcon;
+        internal static Icon ChangeCaseIcon;
+        internal static Icon ChangeCaseIconInactive;
+        internal static Bitmap ReencodeTagMenuIcon;
+        internal static Icon ReencodeTagIcon;
+        internal static Icon ReencodeTagIconInactive;
+        internal static Bitmap ReencodeTagsMenuIcon;
+        internal static Icon ReencodeTagsIcon;
+        internal static Icon ReencodeTagsIconInactive;
+        internal static Bitmap AsrMenuIcon;
+        internal static Icon AsrIcon;
+        internal static Icon AsrIconInactive;
+        internal static Bitmap MsrMenuIcon;
+        internal static Icon MsrIcon;
+        internal static Icon MsrIconInactive;
+        internal static Bitmap LrMenuIcon;
+        internal static Icon LrIcon;
+        internal static Icon LrIconInactive;
+        internal static Bitmap CompareTracksMenuIcon;
+        internal static Icon CompareTracksIcon;
+        internal static Icon CompareTracksIconInactive;
+        internal static Bitmap AutorateMenuIcon;
+        internal static Icon AutorateIcon;
+        internal static Icon AutorateIconInactive;
+        internal static Bitmap CarMenuIcon;
+        internal static Icon CarIcon;
+        internal static Icon CarIconInactive;
+        internal static Bitmap CscbMenuIcon;
+        internal static Icon CscbIcon;
+        internal static Icon CscbIconInactive;
+        internal static Bitmap CopyTagsMenuIcon;
+        internal static Icon CopyTagsIcon;
+        internal static Icon CopyTagsIconInactive;
+
+        internal static Bitmap BackupRestoreMenuIcon;//===
+
+        internal static Bitmap BackupSettingsMenuIcon;
+        internal static Icon BackupSettingsIcon;
+        internal static Icon BackupSettingsIconInactive;
+
+        internal static Bitmap TagHistoryMenuIcon;
+        internal static Icon TagHistoryIcon;
+        internal static Icon TagHistoryIconInactive;//=== add dialog icons!!!
+
+        internal static Bitmap SettingsMenuIcon;
+        internal static Icon SettingsIcon;
+        internal static Icon SettingsIconInactive;
+        internal static Bitmap LastSkippedMenuIcon;
+        internal static Icon LastSkippedIcon;
+        internal static Icon LastSkippedIconInactive;
+        internal static Bitmap AboutMenuIcon;
+        internal static Icon AboutIcon;
+        internal static Icon AboutIconInactive;
 
 
         internal static Bitmap RunMonthlyPresetsAccent;
         internal static Bitmap RunMonthlyPresetsDimmed;
 
-        internal static Bitmap AutoAppliedPresetsAccent;//===
+        internal static Bitmap AutoAppliedPresetsAccent;
         internal static Bitmap AutoAppliedPresetsDimmed;
 
         internal static Bitmap PredefinedPresetsAccent;
@@ -563,7 +599,7 @@ namespace MusicBeePlugin
 
             public bool scrollPreviewToEnd;
 
-            public bool hidePluginWindowsOnMinimization;
+            public bool minimizePluginWindows;
 
             public bool dontUseSkinColors;
 
@@ -914,14 +950,19 @@ namespace MusicBeePlugin
         internal static string AlbumGridPresetName;
 
         internal static string GenrePlayCountStatisticsPresetName;
-        internal static string AlbumArtstPlayCountStatisticsPresetName;
+        internal static string AlbumArtistPlayCountStatisticsPresetName;
         internal static string AlbumPlayCountStatisticsPresetName;
         internal static string ArtistPlayCountStatisticsPresetName;
-        internal static string TrcakPlayCountStatisticsPresetName;
+        internal static string TrackPlayCountStatisticsPresetName;
 
         internal static string EmptyPresetName;
 
         //Displayed text
+        internal static string MnuToolTipOpenedFormsEmpty;
+        internal static string MnuToolTipPluginSection;
+        internal static string MnuToolTipPluginSectionSubmenu;
+        internal static string MnuToolTipOpenedForms;
+
         internal static string ListItemConditionIs;
         internal static string ListItemConditionIsNot;
         internal static string ListItemConditionIsGreater;
@@ -2876,7 +2917,7 @@ namespace MusicBeePlugin
             var form = state as PluginWindowTemplate;
 
             MbApiInterface.MB_SetBackgroundTaskMessage(string.Empty);
-            if (form != null)
+            if (form != null && !form.IsDisposed)
                 MbForm.Invoke(new Action(() => { form.Text = form.TitleBarText; }));
 
             DelayedStatusBarTextClearingTimer.Dispose();
@@ -3199,7 +3240,6 @@ namespace MusicBeePlugin
             LastPreview = true;
             LastFileCounter = 0;
             LastFileCounterTotal = 0;
-
         }
 
         internal static void SetStatusBarText(PluginWindowTemplate form, string newMessage, bool autoClear)
@@ -3209,7 +3249,7 @@ namespace MusicBeePlugin
                 if (newMessage != null && newMessage != LastMessage)
                 {
                     MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
-                    if (form != null)
+                    if (form != null && !form.IsDisposed)
                         MbForm.Invoke(new Action(() => { form.Text = form.TitleBarText + ": " + newMessage; }));
                 }
 
@@ -3219,7 +3259,7 @@ namespace MusicBeePlugin
             else if (newMessage != null && newMessage != LastMessage)
             {
                 MbApiInterface.MB_SetBackgroundTaskMessage(newMessage);
-                if (form != null)
+                if (form != null && !form.IsDisposed)
                     MbForm.Invoke(new Action(() => { form.Text = form.TitleBarText + ": " + newMessage; }));
 
                 LastMessage = newMessage;
@@ -3305,10 +3345,8 @@ namespace MusicBeePlugin
                 SetStatusBarText(form, GenerateStatusBarTextForFileOperations(commandSbText, preview, fileCounter0Based, filesTotal, currentFile), false);
         }
 
-        private static void RegularUiRefresh(object state)
+        private static void PeriodicUiRefresh(object state)
         {
-            var form = state as PluginWindowTemplate;
-
             if (UiRefreshingIsNeeded)
             {
                 lock (LastUI_RefreshLocker)
@@ -3319,11 +3357,10 @@ namespace MusicBeePlugin
                 UiRefreshingIsNeeded = false;
                 MbApiInterface.MB_RefreshPanels();
                 MbApiInterface.MB_SetBackgroundTaskMessage(LastMessage);
-                MbForm.Invoke(new Action(() => { form.Text = form.TitleBarText + ": " + LastMessage; }));
             }
         }
 
-        internal static void RegularAutoBackup(object state)
+        internal static void PeriodicAutoBackup(object state)
         {
             SetStatusBarText(null, SbAutoBackingUp, false);
             BackupIndex.saveBackup(BrGetAutoBackupDirectory(SavedSettings.autoBackupDirectory) + @"\" + BrGetDefaultBackupFilename(SavedSettings.autoBackupPrefix), SbAutoBackingUp, true, false);
@@ -3923,6 +3960,13 @@ namespace MusicBeePlugin
 
             TagHistoryDescription = TagToolsHotkeyDescription + "Tag History";
 
+            MnuToolTipOpenedFormsEmpty = "No open plugin windows now";
+            MnuToolTipPluginSection = "Plugin section";
+            MnuToolTipPluginSectionSubmenu = "Plugin section submenu";
+            MnuToolTipOpenedForms = "List of open plugin windows\r\r" +
+                "Click the window name to show/restore it \r" +
+                "and/or to move it on top of all MusicBee windows";//===
+
             CopyTagSbText = "Copying tag";
             SwapTagsSbText = "Swapping tags";
             ChangeCaseSbText = "Changing case";
@@ -3999,10 +4043,10 @@ namespace MusicBeePlugin
             AlbumGridPresetName = "Album Grid (album list)";
 
             GenrePlayCountStatisticsPresetName = "Play & skip count statistics (Genres)";
-            AlbumArtstPlayCountStatisticsPresetName = "Play & skip count statistics (Album artists)";
+            AlbumArtistPlayCountStatisticsPresetName = "Play & skip count statistics (Album artists)";
             AlbumPlayCountStatisticsPresetName = "Play & skip count statistics (Albums)";
             ArtistPlayCountStatisticsPresetName = "Play & skip count statistics (Artists)";
-            TrcakPlayCountStatisticsPresetName = "Play & skip count statistics (Tracks)";
+            TrackPlayCountStatisticsPresetName = "Play & skip count statistics (Tracks)";
 
             EmptyPresetName = "<Empty preset>";
 
@@ -4702,6 +4746,13 @@ namespace MusicBeePlugin
 
                 TagHistoryDescription = TagToolsHotkeyDescription + "История тегов";
 
+                MnuToolTipOpenedFormsEmpty = "Сейчас нет открытых окон плагина";
+                MnuToolTipPluginSection = "Раздел плагина";
+                MnuToolTipPluginSectionSubmenu = "Подменю раздела плагина";
+                MnuToolTipOpenedForms = "Список открытых окон плагина\r\r" +
+                    "Щелкните по названию окна, чтобы отобразить/восстановить его\r" +
+                    "и/или поместить поверх всех окон MusicBee";//===
+
                 CopyTagSbText = "Копирование тегов";
                 SwapTagsSbText = "Обмен тегов местами";
                 ChangeCaseSbText = "Изменение регистра тега";
@@ -4771,10 +4822,10 @@ namespace MusicBeePlugin
                 AlbumGridPresetName = "Сетка альбомов (список альбомов)";
 
                 GenrePlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Жанры)";
-                AlbumArtstPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Исполнители альбомов)";
+                AlbumArtistPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Исполнители альбомов)";
                 AlbumPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Альбомы)";
                 ArtistPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Исполнители)";
-                TrcakPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Треки)";
+                TrackPlayCountStatisticsPresetName = "Статистика проигрываний и пропусков (Треки)";
 
                 EmptyPresetName = "<Пустой пресет>";
 
@@ -5364,9 +5415,9 @@ namespace MusicBeePlugin
 
 
             //Library Totals
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false, true);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false, true);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false, true);
 
             for (var f = 0; f < groupings.Length; f++)
                 groupings[f].columnIndices = new[] { f };
@@ -5395,7 +5446,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             var presetPermanentGuid = Guid.Parse("450A95FE-E660-44B7-B34C-1169C9466493");
             var libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryTotalsPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -5404,9 +5455,9 @@ namespace MusicBeePlugin
             groupings = new PresetColumnAttributes[3];
             functions = new PresetColumnAttributes[10];
 
-            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false);
-            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
-            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
+            groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Genre), null, null, false, true);
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false, true);
+            groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty }, new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false, true);
 
             for (var f = 0; f < groupings.Length; f++)
                 groupings[f].columnIndices = new[] { f };
@@ -5446,7 +5497,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("2759C09A-B982-4FC5-9872-FBD27A4D8F5E");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, LibraryAveragesPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -5475,7 +5526,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("C7EACE32-B70F-4E5E-BEF1-2D10BE3B74E5");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, CDBookletPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, false, LrReportFormat.HtmlDocumentCdBooklet);
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocumentCdBooklet);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -5503,7 +5554,7 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("F14133BF-7D9E-403F-B2F2-B3A2BE669BC8");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumsAndTracksPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, false, LrReportFormat.HtmlDocumentByAlbums);
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocumentByAlbums);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -5529,12 +5580,12 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("FA3D3B21-9B80-4C6C-AC67-1D8FC2A3CEBA");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumGridPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, false, LrReportFormat.HtmlDocumentAlbumGrid);
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocumentAlbumGrid);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
 
-            //Play & skip count statistics (Genres) //===
+            //Play & skip count statistics (Genres)
             groupings = new PresetColumnAttributes[2];
             functions = new PresetColumnAttributes[3];
 
@@ -5544,12 +5595,12 @@ namespace MusicBeePlugin
             if (Language == "ru")
             {
                 groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
-                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false, true);
             }
             else
             {
                 groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
-                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false, true);
             }
 
 
@@ -5594,12 +5645,12 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("9C41E34B-5314-4448-8581-FCDAC3FF53D3");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, GenrePlayCountStatisticsPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
 
-            //Play & skip count statistics (Album artists) //===
+            //Play & skip count statistics (Album artists)
             groupings = new PresetColumnAttributes[2];
             functions = new PresetColumnAttributes[3];
 
@@ -5609,12 +5660,12 @@ namespace MusicBeePlugin
             if (Language == "ru")
             {
                 groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
-                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false, true);
             }
             else
             {
                 groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
-                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false, true);
             }
 
 
@@ -5658,27 +5709,30 @@ namespace MusicBeePlugin
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("1202391C-FE44-46EE-9BFE-4B0EE3309604");
-            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumArtstPlayCountStatisticsPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumArtistPlayCountStatisticsPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
 
-            //Play & skip count statistics (Albums) //===
-            groupings = new PresetColumnAttributes[2];
+            //Play & skip count statistics (Albums)
+            groupings = new PresetColumnAttributes[3];
             functions = new PresetColumnAttributes[3];
 
             groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, DisplayedAlbumArtistName, null, null, false);
+
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
                 new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Album), null, null, false);
 
             if (Language == "ru")
             {
-                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
                     new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
             }
             else
             {
-                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
                     new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
             }
 
@@ -5724,12 +5778,12 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("57EA28DD-0B3A-4B84-8002-5AC97F347305");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, AlbumPlayCountStatisticsPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
 
-            //Play & skip count statistics (Artists) //===
+            //Play & skip count statistics (Artists)
             groupings = new PresetColumnAttributes[2];
             functions = new PresetColumnAttributes[3];
 
@@ -5739,12 +5793,12 @@ namespace MusicBeePlugin
             if (Language == "ru")
             {
                 groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
-                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false, true);
             }
             else
             {
                 groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
-                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false, true);
             }
 
 
@@ -5789,27 +5843,30 @@ namespace MusicBeePlugin
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("D1A15F15-D601-4549-99E1-9AD58746EFC8");
             libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, ArtistPlayCountStatisticsPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
 
-            //Play & skip count statistics (Tracks) //===
-            groupings = new PresetColumnAttributes[2];
+            //Play & skip count statistics (Tracks)
+            groupings = new PresetColumnAttributes[3];
             functions = new PresetColumnAttributes[3];
 
             groupings[0] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
+                new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.Artist), null, ";", true);
+
+            groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { string.Empty },
                 new[] { string.Empty }, MbApiInterface.Setting_GetFieldName(MetaDataType.TrackTitle), null, null, false);
 
             if (Language == "ru")
             {
-                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
-                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+                groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Диапазон дат" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false, true);
             }
             else
             {
-                groupings[1] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
-                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false);
+                groupings[2] = new PresetColumnAttributes(LrFunctionType.Grouping, new[] { @"$GetDatedValuesDateRange(""\@"","":"",""%"")" },
+                    new[] { "Date Range" }, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), null, "#", false, true);
             }
 
 
@@ -5853,8 +5910,8 @@ namespace MusicBeePlugin
 
             //Let's copy allowed user customizations from existing predefined preset (if it exists)
             presetPermanentGuid = Guid.Parse("AF1D4F53-6580-439C-B874-1D0C18EEE163");
-            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, TrcakPlayCountStatisticsPresetName, existingPredefinedPresets,
-                groupings, functions, destinationTags, functionIds, true, LrReportFormat.HtmlDocument);
+            libraryReportsPreset = GetCreatePredefinedPreset(presetPermanentGuid, TrackPlayCountStatisticsPresetName, existingPredefinedPresets,
+                groupings, functions, destinationTags, functionIds, LrReportFormat.HtmlDocument);
 
             reportPresets[presetCounter++] = libraryReportsPreset;
 
@@ -6127,7 +6184,7 @@ namespace MusicBeePlugin
 
 
             //Let's dispose all global bitmaps
-            DisposePluginBitmaps();
+            DisposePluginBitmapsIcons();
 
 
             LibraryReportsCommandForAutoApplying?.Dispose();
@@ -6279,7 +6336,7 @@ namespace MusicBeePlugin
                         MbForm.Invoke(new Action(() =>
                         {
                             getButtonTextBoxDpiFontScaling();
-                            prepareThemedBitmapsAndColors();
+                            prepareThemedBitmapsIconsColors();
 
                             addPluginContextMenuItems();
                             addPluginMenuItems();
@@ -6291,7 +6348,7 @@ namespace MusicBeePlugin
                     }
 
                     //Let's refresh MusicBee UI every 5 sec if there are any tags changed by plugin since last refresh
-                    PeriodicUiRefreshTimer = new System.Threading.Timer(RegularUiRefresh, null, RefreshUI_Delay, RefreshUI_Delay);
+                    PeriodicUiRefreshTimer = new System.Threading.Timer(PeriodicUiRefresh, null, RefreshUI_Delay, RefreshUI_Delay);
 
 
                     //Monthly ASR presets autorun
@@ -6418,8 +6475,119 @@ namespace MusicBeePlugin
             return new Bitmap(newBitmap);
         }
 
-        internal static void DisposePluginBitmaps()
+        internal static Color GetButtonBackColor()
         {
+            var buttonBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+            Color buttonBackColor;
+
+            //const float ButtonBackgroundWeight = LightDimmedWeight;
+            const float ButtonBackgroundWeight = 1;
+
+            if (buttonBackCode == 0) //Unsupported by older API
+                //buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, ButtonBackgroundWeight);
+                buttonBackColor = GetWeightedColor(FormBackColor, AccentColor, ButtonBackgroundWeight);
+            else if (buttonBackCode == -1) //Windows color scheme
+                buttonBackColor = InputPanelBackColor;
+            else
+                buttonBackColor = Color.FromArgb(buttonBackCode);
+
+
+            return buttonBackColor;
+        }
+
+
+        internal void getButtonTextBoxDpiFontScaling()
+        {
+            var scalingSampleForm = new PluginSampleWindow(this);
+            scalingSampleForm.dontShowForm = true;
+            scalingSampleForm.Show();
+            DpiScaling = scalingSampleForm.dpiScaling;
+            (ButtonHeightDpiFontScaling, TextBoxHeightDpiFontScaling) = scalingSampleForm.getButtonHeightDpiFontScaling();
+            scalingSampleForm.Close();
+        }
+
+        internal static void WaitPreparedThemedBitmapsAndColors()
+        {
+            while (SizesColorsChanged)
+                Thread.Sleep(ActionRetryDelay);
+        }
+
+        internal static void DisposePluginBitmapsIcons()//===
+        {
+            FilterPresetChain?.Dispose();
+            FilterPresetChainDimmed?.Dispose();
+
+            Follow?.Dispose();
+
+            Play?.Dispose();
+            Record?.Dispose();
+            Stop?.Dispose();
+
+            ClearField?.Dispose();
+
+
+            WindowsMenuIcon?.Dispose();//===
+            ShowHiddenWindowsMenuIcon?.Dispose();//===
+
+            TaggingReportingMenuIcon?.Dispose();//===
+
+            CopyTagMenuIcon?.Dispose();
+            CopyTagIcon?.Dispose();
+            CopyTagIconInactive?.Dispose();
+            SwapTagsMenuIcon?.Dispose();
+            SwapTagsIcon?.Dispose();
+            SwapTagsIconInactive?.Dispose();
+            ChangeCaseMenuIcon?.Dispose();
+            ChangeCaseIcon?.Dispose();
+            ChangeCaseIconInactive?.Dispose();
+            ReencodeTagMenuIcon?.Dispose();
+            ReencodeTagIcon?.Dispose();
+            ReencodeTagIconInactive?.Dispose();
+            ReencodeTagsMenuIcon?.Dispose();
+            ReencodeTagsIcon?.Dispose();
+            ReencodeTagsIconInactive?.Dispose();
+            AsrMenuIcon?.Dispose();
+            AsrIcon?.Dispose();
+            AsrIconInactive?.Dispose();
+            MsrMenuIcon?.Dispose();
+            MsrIcon?.Dispose();
+            MsrIconInactive?.Dispose();
+            LrMenuIcon?.Dispose();
+            LrIcon?.Dispose();
+            LrIconInactive?.Dispose();
+            CompareTracksMenuIcon?.Dispose();
+            CompareTracksIcon?.Dispose();
+            CompareTracksIconInactive?.Dispose();
+            AutorateMenuIcon?.Dispose();
+            AutorateIcon?.Dispose();
+            AutorateIconInactive?.Dispose();
+            CarMenuIcon?.Dispose();
+            CarIcon?.Dispose();
+            CarIconInactive?.Dispose();
+            CscbMenuIcon?.Dispose();
+            CscbIcon?.Dispose();
+            CscbIconInactive?.Dispose();
+            CopyTagsMenuIcon?.Dispose();
+            CopyTagsIcon?.Dispose();
+            CopyTagsIconInactive?.Dispose();
+
+            BackupRestoreMenuIcon?.Dispose();//===
+
+            TagHistoryMenuIcon?.Dispose();
+            TagHistoryIcon?.Dispose();
+            TagHistoryIconInactive?.Dispose();//=== add dialog icons!!!
+
+            SettingsMenuIcon?.Dispose();
+            SettingsIcon?.Dispose();
+            SettingsIconInactive?.Dispose();
+            LastSkippedMenuIcon?.Dispose();
+            LastSkippedIcon?.Dispose();
+            LastSkippedIconInactive?.Dispose();
+            AboutMenuIcon?.Dispose();
+            AboutIcon?.Dispose();
+            AboutIconInactive?.Dispose();
+
+
             DisabledDownArrowComboBoxImage?.Dispose();
             DownArrowComboBoxImage?.Dispose();
 
@@ -6481,43 +6649,7 @@ namespace MusicBeePlugin
             MissingArtwork?.Dispose();
         }
 
-        internal static Color GetButtonBackColor()
-        {
-            var buttonBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
-            Color buttonBackColor;
-
-            //const float ButtonBackgroundWeight = LightDimmedWeight;
-            const float ButtonBackgroundWeight = 1;
-            if (buttonBackCode == 0) //Unsupported by older API
-                //buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, ButtonBackgroundWeight);
-                buttonBackColor = GetWeightedColor(FormBackColor, AccentColor, ButtonBackgroundWeight);
-            else if (buttonBackCode == -1) //Windows color scheme
-                buttonBackColor = InputPanelBackColor;
-            else
-                buttonBackColor = Color.FromArgb(buttonBackCode);
-
-
-            return buttonBackColor;
-        }
-
-
-        internal void getButtonTextBoxDpiFontScaling()
-        {
-            var scalingSampleForm = new PluginSampleWindow(this);
-            scalingSampleForm.dontShowForm = true;
-            scalingSampleForm.Show();
-            DpiScaling = scalingSampleForm.dpiScaling;
-            (ButtonHeightDpiFontScaling, TextBoxHeightDpiFontScaling) = scalingSampleForm.getButtonHeightDpiFontScaling();
-            scalingSampleForm.Close();
-        }
-
-        internal static void WaitPreparedThemedBitmapsAndColors()
-        {
-            while (SizesColorsChanged)
-                Thread.Sleep(ActionRetryDelay);
-        }
-
-        internal void prepareThemedBitmapsAndColors()
+        internal void prepareThemedBitmapsIconsColors()
         {
             if (!SizesColorsChanged)
                 return;
@@ -6720,8 +6852,6 @@ namespace MusicBeePlugin
                 InputControlFocusedBorderColor = SystemColors.ControlDark;
 
 
-                //Color windowsAccentColor = GetWindowColorizationColor(true);
-
                 var backColorNotSkinned = SystemColors.Control;
                 AccentColor = SystemColors.ControlText;
 
@@ -6759,17 +6889,42 @@ namespace MusicBeePlugin
 
 
 
-            DimmedHighlight = GetHighlightColor(SystemColors.Highlight, AccentColor, InputControlDimmedBackColor);
-
-
             //Setting default & making themed colors
-            HighlightColor = Color.Red;
+            HighlightColor = SystemColors.Highlight;
+
+            var avgForeBrightness2 = GetAverageBrightness(HighlightColor);
+            var avgBackBrightness2 = GetAverageBrightness(FormBackColor);
+            if (Math.Abs(avgForeBrightness2 - avgBackBrightness2) < 0.35f)
+            {
+                if (avgForeBrightness2 > 0.5f)
+                    HighlightColor = GetWeightedColor(HighlightColor, Color.Black, 0.4f);
+                else
+                    HighlightColor = GetWeightedColor(HighlightColor, Color.White, 0.4f);
+            }
+
+            DimmedHighlightColor = GetHighlightColor(HighlightColor, AccentColor, InputControlDimmedBackColor);
+
+
             UntickedColor = AccentColor;
 
-            TickedColor = GetHighlightColor(HighlightColor, SystemColors.Highlight, FormBackColor, 0.5f);
+            //TickedColor = GetHighlightColor(HighlightColor, SystemColors.Highlight, FormBackColor, 0.5f);
+            TickedColor = GetWeightedColor(Color.Red, AccentColor, 0.4f);
 
-            ListBoxHighlightForeColor = GetHighlightColor(HighlightColor, ButtonMouseOverForeColor, InputControlBackColor, 0.5f);
-            ListBoxHighlightSelectedForeColor = GetHighlightColor(HighlightColor, ButtonMouseOverForeColor, InputControlBackColor, 0.5f);
+            avgForeBrightness2 = GetAverageBrightness(TickedColor);
+            avgBackBrightness2 = GetAverageBrightness(FormBackColor);
+            if (Math.Abs(avgForeBrightness2 - avgBackBrightness2) < 0.35f)
+            {
+                if (avgForeBrightness2 > 0.5f)
+                    TickedColor = GetWeightedColor(TickedColor, Color.Black, 0.4f);
+                else
+                    TickedColor = GetWeightedColor(TickedColor, Color.White, 0.4f);
+            }
+
+
+            //ListBoxHighlightForeColor = GetHighlightColor(HighlightColor, ButtonMouseOverForeColor, InputControlBackColor, 0.5f);
+            //ListBoxHighlightSelectedForeColor = GetHighlightColor(HighlightColor, ButtonMouseOverForeColor, InputControlBackColor, 0.5f);
+            ListBoxHighlightForeColor = ButtonMouseOverForeColor;
+            ListBoxHighlightSelectedForeColor = ButtonMouseOverForeColor;
 
             //Splitter is invisible by default. Let's draw it.
             SplitterColor = GetWeightedColor(SystemColors.Desktop, AccentColor, 0.8f); //---
@@ -6826,7 +6981,7 @@ namespace MusicBeePlugin
                 ThumbMiddleVerticalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor,
                     Resources.thumb_middle_vertical_c,
                     scrollBarImagesWidth - 3 * scaledPx, Resources.thumb_middle_vertical_c.Height, //Here middle thumb image is without right transparent part
-                    true, InterpolationMode.NearestNeighbor);
+                    1f, true, InterpolationMode.NearestNeighbor);
 
 
                 //OR:
@@ -6853,8 +7008,9 @@ namespace MusicBeePlugin
                 ThumbMiddleHorizontalImage?.Dispose();
                 ThumbMiddleHorizontalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor,
                     Resources.thumb_middle_horizontal_c,
-                    Resources.thumb_middle_horizontal_c.Width, scrollBarImagesWidth - 3 * scaledPx, //Here middle thumb image is without bottom transparent part
-                    true, InterpolationMode.NearestNeighbor);
+                    Resources.thumb_middle_horizontal_c.Width, scrollBarImagesWidth - 3 * scaledPx, //Here middle thumb image is without bottom
+                                                                                                    //transparent part
+                    1f, true, InterpolationMode.NearestNeighbor);
 
                 //OR:
                 //ThumbLeftImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_left_b,
@@ -6965,99 +7121,297 @@ namespace MusicBeePlugin
             }
 
 
-            //Menu icons
-            int menuIconSize = (int)Math.Round(16f * DpiScaling);
+            //Menu & title bar icons
+            int iconSize = (int)Math.Round(16f * DpiScaling);
+            const float titleBarIconContrast = 1.85f; //===
 
-            AtrtIcon?.Dispose();
-            AtrtIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.wrench, menuIconSize, menuIconSize);
+            WindowsMenuIcon?.Dispose();
+            WindowsMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.open_windows, iconSize, iconSize);
 
-            WindowsIcon?.Dispose();
-            WindowsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.windows, menuIconSize, menuIconSize);
+            ShowHiddenWindowsMenuIcon?.Dispose();
+            ShowHiddenWindowsMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.show_hidden_windows, iconSize, iconSize);
 
-            ShowHiddenWindowsIcon?.Dispose();
-            ShowHiddenWindowsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.show_hidden_windows, menuIconSize, menuIconSize);
+            TaggingReportingMenuIcon?.Dispose();
+            TaggingReportingMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tagging_reporting, iconSize, iconSize);
 
-            TaggingReportingIcon?.Dispose();
-            TaggingReportingIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tagging_reporting, menuIconSize, menuIconSize);
+            BackupRestoreMenuIcon?.Dispose();
+            BackupRestoreMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.backup, iconSize, iconSize);
+
+
+            Color activeTitleBarTextColor;
+            Color activeTitleBarBackColor;
+            Color inactiveTitleBarTextColor = Color.FromArgb(255, 170, 170, 170);//===
+
+            if (TitleBarsUseColor() == 1)
+            {
+                NativeMethods.DwmGetColorizationColor(out uint activeTitleBarBackColorUInt, out _);//===
+                activeTitleBarBackColor = Color.FromArgb((int)activeTitleBarBackColorUInt);
+            }
+            else
+            {
+                activeTitleBarBackColor = Color.White;
+            }
+
+            if (GetBrightnessDifference(activeTitleBarBackColor, Color.Black) >= 0.5f)
+                activeTitleBarTextColor = Color.Black;
+            else
+                activeTitleBarTextColor = Color.White;
+
+            
+            CopyTagMenuIcon?.Dispose();
+            CopyTagMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.copy_tag, iconSize, iconSize);
 
             CopyTagIcon?.Dispose();
-            CopyTagIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tags_copy, menuIconSize, menuIconSize);
+            Bitmap bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.copy_tag, iconSize, iconSize, titleBarIconContrast);
+            CopyTagIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            CopyTagIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.copy_tag, iconSize, iconSize, titleBarIconContrast);
+            CopyTagIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            SwapTagsMenuIcon?.Dispose();
+            SwapTagsMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.swap_tags, iconSize, iconSize);
 
             SwapTagsIcon?.Dispose();
-            SwapTagsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.swap_tags, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.swap_tags, iconSize, iconSize, titleBarIconContrast);
+            SwapTagsIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            SwapTagsIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.swap_tags, iconSize, iconSize, titleBarIconContrast);
+            SwapTagsIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            ChangeCaseMenuIcon?.Dispose();
+            ChangeCaseMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.change_case, iconSize, iconSize);
 
             ChangeCaseIcon?.Dispose();
-            ChangeCaseIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.change_case, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.change_case, iconSize, iconSize, titleBarIconContrast);
+            ChangeCaseIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            ChangeCaseIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.change_case, iconSize, iconSize, titleBarIconContrast);
+            ChangeCaseIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            ReencodeTagMenuIcon?.Dispose();
+            ReencodeTagMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tag_reencode, iconSize, iconSize);
 
             ReencodeTagIcon?.Dispose();
-            ReencodeTagIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.reencode_tag, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.tag_reencode, iconSize, iconSize, titleBarIconContrast);
+            ReencodeTagIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            ReencodeTagIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.tag_reencode, iconSize, iconSize, titleBarIconContrast);
+            ReencodeTagIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            ReencodeTagsMenuIcon?.Dispose();
+            ReencodeTagsMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tags_reencode, iconSize, iconSize);
 
             ReencodeTagsIcon?.Dispose();
-            ReencodeTagsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.reencode_tags, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.tags_reencode, iconSize, iconSize, titleBarIconContrast);
+            ReencodeTagsIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            ReencodeTagsIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.tags_reencode, iconSize, iconSize, titleBarIconContrast);
+            ReencodeTagsIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            AsrMenuIcon?.Dispose();
+            AsrMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.advanced_search_replace, iconSize, iconSize);
 
             AsrIcon?.Dispose();
-            AsrIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.asr, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.advanced_search_replace, iconSize, iconSize, titleBarIconContrast);
+            AsrIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
 
-            AsrPresetIcon?.Dispose();
-            AsrPresetIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.asr_preset, menuIconSize, menuIconSize);
+            AsrIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.advanced_search_replace, iconSize, iconSize, titleBarIconContrast);
+            AsrIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            MsrMenuIcon?.Dispose();
+            MsrMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.multiple_search_replace, iconSize, iconSize);
 
             MsrIcon?.Dispose();
-            MsrIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.msr, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.multiple_search_replace, iconSize, iconSize, titleBarIconContrast);
+            MsrIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            MsrIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.multiple_search_replace, iconSize, iconSize, titleBarIconContrast);
+            MsrIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            LrMenuIcon?.Dispose();
+            LrMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.library_reports, iconSize, iconSize);
 
             LrIcon?.Dispose();
-            LrIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.lr, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.library_reports, iconSize, iconSize, titleBarIconContrast);
+            LrIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
 
-            LrPresetIcon?.Dispose();
-            LrPresetIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.lr_preset, menuIconSize, menuIconSize);
+            LrIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.library_reports, iconSize, iconSize, titleBarIconContrast);
+            LrIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            CompareTracksMenuIcon?.Dispose();
+            CompareTracksMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.compare_tracks, iconSize, iconSize);
 
             CompareTracksIcon?.Dispose();
-            CompareTracksIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.compare_tracks, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.compare_tracks, iconSize, iconSize, titleBarIconContrast);
+            CompareTracksIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            CompareTracksIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.compare_tracks, iconSize, iconSize, titleBarIconContrast);
+            CompareTracksIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            AutorateMenuIcon?.Dispose();
+            AutorateMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.autorate_tracks, iconSize, iconSize);
 
             AutorateIcon?.Dispose();
-            AutorateIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.autorate, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.autorate_tracks, iconSize, iconSize, titleBarIconContrast);
+            AutorateIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            AutorateIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.autorate_tracks, iconSize, iconSize, titleBarIconContrast);
+            AutorateIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            CarMenuIcon?.Dispose();
+            CarMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.calculate_album_rating, iconSize, iconSize);
 
             CarIcon?.Dispose();
-            CarIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.car, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.calculate_album_rating, iconSize, iconSize, titleBarIconContrast);
+            CarIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            CarIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.calculate_album_rating, iconSize, iconSize, titleBarIconContrast);
+            CarIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            CscbMenuIcon?.Dispose();
+            CscbMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.custom_sorting_column_browser, iconSize, iconSize);
 
             CscbIcon?.Dispose();
-            CscbIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.cscb, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.custom_sorting_column_browser, iconSize, iconSize, titleBarIconContrast);
+            CscbIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            CscbIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.custom_sorting_column_browser, iconSize, iconSize, titleBarIconContrast);
+            CscbIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            CopyTagsMenuIcon?.Dispose();
+            CopyTagsMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.copy_tags, iconSize, iconSize);
 
             CopyTagsIcon?.Dispose();
-            CopyTagsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.copy, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.copy_tags, iconSize, iconSize, titleBarIconContrast);
+            CopyTagsIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
 
-            CopyTagSetIcon?.Dispose();
-            CopyTagSetIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.copy_tag_set, menuIconSize, menuIconSize);
+            CopyTagsIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.copy_tags, iconSize, iconSize, titleBarIconContrast);
+            CopyTagsIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
 
-            PasteTagsIcon?.Dispose();
-            PasteTagsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.paste, menuIconSize, menuIconSize);
 
-            BackupRestoreIcon?.Dispose();
-            BackupRestoreIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.backup_restore, menuIconSize, menuIconSize);
+            TagHistoryMenuIcon?.Dispose();
+            TagHistoryMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tag_history, iconSize, iconSize);
 
             TagHistoryIcon?.Dispose();
-            TagHistoryIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.tag_history, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.tag_history, iconSize, iconSize, titleBarIconContrast);
+            TagHistoryIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            TagHistoryIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.tag_history, iconSize, iconSize, titleBarIconContrast);
+            TagHistoryIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            BackupSettingsMenuIcon?.Dispose();
+            BackupSettingsMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.backup_settings, iconSize, iconSize);
+
+            BackupSettingsIcon?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.backup_settings, iconSize, iconSize, titleBarIconContrast);
+            BackupSettingsIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            BackupSettingsIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.backup_settings, iconSize, iconSize, titleBarIconContrast);
+            BackupSettingsIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            SettingsMenuIcon?.Dispose();
+            SettingsMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.settings, iconSize, iconSize);
 
             SettingsIcon?.Dispose();
-            SettingsIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.settings, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.settings, iconSize, iconSize, titleBarIconContrast);
+            SettingsIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+            SettingsIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.settings, iconSize, iconSize, titleBarIconContrast);
+            SettingsIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
+
+
+            LastSkippedMenuIcon?.Dispose();
+            LastSkippedMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.last_skipped, iconSize, iconSize);
 
             LastSkippedIcon?.Dispose();
-            LastSkippedIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.last_skipped, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.last_skipped, iconSize, iconSize, titleBarIconContrast);
+            LastSkippedIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
 
-            HelpIcon?.Dispose();
-            HelpIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.help, menuIconSize, menuIconSize);
+            LastSkippedIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.last_skipped, iconSize, iconSize, titleBarIconContrast);
+            LastSkippedIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
 
-            WebPageIcon?.Dispose();
-            WebPageIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.web_page, menuIconSize, menuIconSize);
+
+            AboutMenuIcon?.Dispose();
+            AboutMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.about, iconSize, iconSize);
 
             AboutIcon?.Dispose();
-            AboutIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.about, menuIconSize, menuIconSize);
+            bitmap = GetSolidImageByBitmapMask(activeTitleBarTextColor, Resources.about, iconSize, iconSize, titleBarIconContrast);
+            AboutIcon = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
 
-            VersionIcon?.Dispose();
-            VersionIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.version, menuIconSize, menuIconSize);
+            AboutIconInactive?.Dispose();
+            bitmap = GetSolidImageByBitmapMask(inactiveTitleBarTextColor, Resources.about, iconSize, iconSize, titleBarIconContrast);
+            AboutIconInactive = Icon.FromHandle(bitmap.GetHicon());
+            bitmap.Dispose();
 
 
             //ASR
-            var markSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
+            int markSize = (int)Math.Round(15f * ButtonHeightDpiFontScaling);
 
             CheckedState?.Dispose();
             CheckedState = GetSolidImageByBitmapMask(AccentColor, Resources.check_mark, markSize, markSize);
@@ -7151,10 +7505,10 @@ namespace MusicBeePlugin
 
 
             //DATAGRIDVIEW COLOR DEFINITIONS
-            const float MinForeBrightnessDifference = 0.3f; //-----
-            const float MinBackBrightnessDifference = 0.12f;
-            const float MinForeBackBrightnessDifference = 0.5f;
-            const float InvertedAverageBrightnessContrast = 2f;
+            const float MinForeBrightnessDifference = 0.25f; //-----
+            const float MinBackBrightnessDifference = 0.25f;
+            const float MinForeBackBrightnessDifference = 0.25f;
+            const float InvertedAverageBrightnessContrast = 1.125f;
 
 
             UnchangedCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
@@ -7298,56 +7652,58 @@ namespace MusicBeePlugin
         {
             TagToolsSubmenu.DropDown.Items.Clear();
             TagToolsSubmenu.DropDown.ShowItemToolTips = true;
-            //=== TagToolsSubmenu.Image = AtrtIcon;
 
             OpenedFormsSubmenu = AddMenuItem(TagToolsSubmenu, OpenWindowsMenuSectionName, null, null);
-            //=== OpenedFormsSubmenu.Image = WindowsIcon;
-            MbApiInterface.MB_RegisterCommand(ShowHiddenWindowsDescription, showHiddenEventHandler);
+            OpenedFormsSubmenu.Image = WindowsMenuIcon;
+            OpenedFormsSubmenu.ToolTipText = MnuToolTipOpenedFormsEmpty;//===
+            OpenedFormsSubmenu.Enabled = false;
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
-            AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, false);//===.Image = TaggingReportingIcon;
 
-            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagName, CopyTagDescription, copyTagEventHandler);//=== .Image = CopyTagIcon;
-            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsName, SwapTagsDescription, swapTagsEventHandler);//===.Image = SwapTagsIcon;
-            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsSubmenu, ChangeCaseName, ChangeCaseDescription, changeCaseEventHandler);//===.Image = ChangeCaseIcon;
+            MbApiInterface.MB_RegisterCommand(ShowHiddenWindowsDescription, showHiddenEventHandler);
+
+            var tagToolsMenuSection = AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, true);
+            tagToolsMenuSection.Image = TaggingReportingMenuIcon;
+            tagToolsMenuSection.ToolTipText = MnuToolTipPluginSection;//===
+
+            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagName, CopyTagDescription, copyTagEventHandler);
+            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsName, SwapTagsDescription, swapTagsEventHandler);
+            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsSubmenu, ChangeCaseName, ChangeCaseDescription, changeCaseEventHandler);
             if (!SavedSettings.dontShowReEncodeTag)
             {
-                AddMenuItem(TagToolsSubmenu, ReEncodeTagName, ReEncodeTagDescription, reencodeTagEventHandler);//===.Image = ReencodeTagIcon;
-                AddMenuItem(TagToolsSubmenu, ReEncodeTagsName, ReEncodeTagsDescription, reencodeTagsEventHandler);//===.Image = ReencodeTagsIcon;
+                AddMenuItem(TagToolsSubmenu, ReEncodeTagName, ReEncodeTagDescription, reencodeTagEventHandler);
+                AddMenuItem(TagToolsSubmenu, ReEncodeTagsName, ReEncodeTagsDescription, reencodeTagsEventHandler);
             }
             if (!SavedSettings.dontShowAsr)
             {
-                AddMenuItem(TagToolsSubmenu, AsrName, AsrDescription, asrEventHandler);//===.Image = AsrIcon;
+                AddMenuItem(TagToolsSubmenu, AsrName, AsrDescription, asrEventHandler);
                 if (AsrPresetsWithHotkeysCount > 0)
                 {
                     AsrPresetsMenuItem = AddMenuItem(TagToolsSubmenu, AsrName.Replace("...", string.Empty), null, null);
-                    ///=== AsrPresetsMenuItem.Image = AsrPresetIcon;
                     RegisterAsrPresetsHotkeysAndMenuItems(this);
                 }
-                AddMenuItem(TagToolsSubmenu, MsrName, MsrCommandDescription, multipleSearchReplaceEventHandler);//===.Image = MsrIcon;
+                AddMenuItem(TagToolsSubmenu, MsrName, MsrCommandDescription, multipleSearchReplaceEventHandler);
             }
             if (!SavedSettings.dontShowLibraryReports)
             {
-                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);//===.Image = LrIcon;
+                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);
                 if (LrPresetsWithHotkeysCount > 0)
                 {
                     LrPresetsMenuItem = AddMenuItem(TagToolsSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
-                    //===LrPresetsMenuItem.Image= LrPresetIcon;
                     RegisterLrPresetsHotkeysAndMenuItems(this);
                 }
             }
-            if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsSubmenu, CompareTracksName, CompareTracksDescription, compareTracksEventHandler);//===.Image = CompareTracksIcon;
-            if (!SavedSettings.dontShowAutoRate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);//===.Image = AutorateIcon;
-            if (!SavedSettings.dontShowCAR) AddMenuItem(TagToolsSubmenu, CarName, CarDescription, carEventHandler);//===.Image = CarIcon;
+            if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsSubmenu, CompareTracksName, CompareTracksDescription, compareTracksEventHandler);
+            if (!SavedSettings.dontShowAutoRate) AddMenuItem(TagToolsSubmenu, AutoRateName, AutoRateDescription, autoRateEventHandler);
+            if (!SavedSettings.dontShowCAR) AddMenuItem(TagToolsSubmenu, CarName, CarDescription, carEventHandler);
             if (!SavedSettings.dontShowCustomSortingForColumnBrowser)
-                AddMenuItem(TagToolsSubmenu, CustomSortingForColumnBrowserName, CustomSortingForColumnBrowserDescription, customSortingEventHandler);//===.Image = CscbIcon;
+                AddMenuItem(TagToolsSubmenu, CustomSortingForColumnBrowserName, CustomSortingForColumnBrowserDescription, customSortingEventHandler);
 
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
 
-            AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardName, CopyTagsToClipboardDescription, copyTagsToClipboardEventHandler);//===.Image = CopyTagsIcon;
+            AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardName, CopyTagsToClipboardDescription, copyTagsToClipboardEventHandler);
             CopyTagsToClipboardUsingMenuItem = AddMenuItem(TagToolsSubmenu, CopyTagsToClipboardUsingMenuDescription, null, null);
-            //===CopyTagsToClipboardUsingMenuItem.Image = CopyTagSetIcon;
             addCopyTagsToClipboardUsingMenuItems();
 
             MbApiInterface.MB_RegisterCommand(TagToolsHotkeyDescription + CopyTagsToClipboardUsingMenuDescription + " [01]", copyTagsUsingTagSet1EventHandler);
@@ -7361,7 +7717,7 @@ namespace MusicBeePlugin
             MbApiInterface.MB_RegisterCommand(TagToolsHotkeyDescription + CopyTagsToClipboardUsingMenuDescription + " [09]", copyTagsUsingTagSet9EventHandler);
             MbApiInterface.MB_RegisterCommand(TagToolsHotkeyDescription + CopyTagsToClipboardUsingMenuDescription + " [10]", copyTagsUsingTagSet10EventHandler);
 
-            AddMenuItem(TagToolsSubmenu, PasteTagsFromClipboardName, PasteTagsFromClipboardDescription, pasteTagsFromClipboardEventHandler);//===.Image = PasteTagsIcon;
+            AddMenuItem(TagToolsSubmenu, PasteTagsFromClipboardName, PasteTagsFromClipboardDescription, pasteTagsFromClipboardEventHandler);
 
 
             if (!SavedSettings.dontShowBackupRestore)
@@ -7369,9 +7725,10 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
 
                 var backupRestoreSubmenu = AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null);
-                //===backupRestoreSubmenu.Image = BackupRestoreIcon; //-V3080
+                backupRestoreSubmenu.Image = BackupRestoreMenuIcon;
+                backupRestoreSubmenu.ToolTipText = MnuToolTipPluginSectionSubmenu;//===
 
-                AddMenuItem(backupRestoreSubmenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler);//===.Image = TagHistoryIcon; //-V3080
+                AddMenuItem(backupRestoreSubmenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler); //-V3080
                 AddMenuItem(backupRestoreSubmenu, "-", null, null);
                 AddMenuItem(backupRestoreSubmenu, BackupTagsName, BackupTagsDescription, backupTagsEventHandler);
                 AddMenuItem(backupRestoreSubmenu, RestoreTagsName, RestoreTagsDescription, restoreTagsEventHandler);
@@ -7382,23 +7739,21 @@ namespace MusicBeePlugin
                 AddMenuItem(backupRestoreSubmenu, createEmptyBaselineRestoreTagsForEntireLibraryName, createEmptyBaselineRestoreTagsForEntireLibraryDescription, createEmptyBaselineRestoreTagsForEntireLibraryEventHandler);
                 AddMenuItem(backupRestoreSubmenu, DeleteBackupsName, DeleteBackupsDescription, deleteBackupsEventHandler);
                 AddMenuItem(backupRestoreSubmenu, "-", null, null);
-                AddMenuItem(backupRestoreSubmenu, AutoBackupSettingsName, AutoBackupSettingsDescription, autoBackupSettingsEventHandler);///===.Image = SettingsIcon;
+                AddMenuItem(backupRestoreSubmenu, AutoBackupSettingsName, AutoBackupSettingsDescription, autoBackupSettingsEventHandler);
             }
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
-            AddMenuItem(TagToolsSubmenu, PluginHelpString, null, helpEventHandler);//===.Image = HelpIcon;
+            AddMenuItem(TagToolsSubmenu, PluginHelpString, null, helpEventHandler);
 
             var webPage = AddMenuItem(TagToolsSubmenu, PluginWebPageString, null, webPageEventHandler);
-            //===webPage.Image = WebPageIcon; //-V3080
             webPage.ToolTipText = PluginWebPageToolTip; //-V3080
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
 
             var version = AddMenuItem(TagToolsSubmenu, PluginVersion, null, copyPluginVersionEventHandler);
-            //===version.Image = VersionIcon; //-V3080
             version.ToolTipText = PluginVersionToolTip; //-V3080
 
-            AddMenuItem(TagToolsSubmenu, PluginAboutString, null, aboutEventHandler);//===.Image = AboutIcon;
+            AddMenuItem(TagToolsSubmenu, PluginAboutString, null, aboutEventHandler);
         }
 
         internal void addPluginContextMenuItems() //Must be called AFTER InitLr() and InitAsr(), and BEFORE addPluginMenuItems()!
@@ -7407,48 +7762,47 @@ namespace MusicBeePlugin
                 return;
 
             TagToolsContextSubmenu.DropDown.Items.Clear();
-            //===TagToolsContextSubmenu.Image = AtrtIcon;
+            TagToolsContextSubmenu.DropDown.ShowItemToolTips = true;
 
-            AddMenuItem(TagToolsContextSubmenu, TagToolsMenuSectionName, null, null, false);//===.Image = TaggingReportingIcon;
+            var tagToolsMenuSection = AddMenuItem(TagToolsContextSubmenu, TagToolsMenuSectionName, null, null, true);
+            tagToolsMenuSection.Image = TaggingReportingMenuIcon;
+            tagToolsMenuSection.ToolTipText = MnuToolTipPluginSection;//===
 
-            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagName, null, copyTagEventHandler);//===.Image = CopyTagIcon;
-            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsName, null, swapTagsEventHandler);//===.Image = SwapTagsIcon;
-            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsContextSubmenu, ChangeCaseName, null, changeCaseEventHandler);//===.Image = ChangeCaseIcon;
+            if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagName, null, copyTagEventHandler);
+            if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsName, null, swapTagsEventHandler);
+            if (!SavedSettings.dontShowChangeCase) AddMenuItem(TagToolsContextSubmenu, ChangeCaseName, null, changeCaseEventHandler);
             if (!SavedSettings.dontShowAsr)
             {
-                AddMenuItem(TagToolsContextSubmenu, AsrName, null, asrEventHandler);//===.Image = AsrIcon;
+                AddMenuItem(TagToolsContextSubmenu, AsrName, null, asrEventHandler);
                 if (AsrPresetsWithHotkeysCount > 0)
-                {
                     AsrPresetsContextMenuItem = AddMenuItem(TagToolsContextSubmenu, AsrName.Replace("...", string.Empty), null, null);
-                    //===AsrPresetsContextMenuItem.Image = AsrPresetIcon;
-                }
 
-                AddMenuItem(TagToolsContextSubmenu, MsrName, null, multipleSearchReplaceEventHandler);//===.Image = MsrIcon;
+                AddMenuItem(TagToolsContextSubmenu, MsrName, null, multipleSearchReplaceEventHandler);
             }
             if (!SavedSettings.dontShowLibraryReports)
             {
-                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);//===.Image = LrIcon;
+                AddMenuItem(TagToolsSubmenu, LibraryReportsName, LibraryReportsDescription, libraryReportsEventHandler);
                 if (LrPresetsWithHotkeysCount > 0)
-                {
                     LrPresetsContextMenuItem = AddMenuItem(TagToolsContextSubmenu, LibraryReportsName.Replace("...", string.Empty), null, null);
-                    //===LrPresetsContextMenuItem.Image = LrPresetIcon;
-                }
             }
-            if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsContextSubmenu, CompareTracksName, null, compareTracksEventHandler);//===.Image = CompareTracksIcon;
+            if (!SavedSettings.dontShowCT) AddMenuItem(TagToolsContextSubmenu, CompareTracksName, null, compareTracksEventHandler);
             AddMenuItem(TagToolsContextSubmenu, "-", null, null);
-            AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardName, null, copyTagsToClipboardEventHandler);//===.Image = CopyTagsIcon;
+            AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardName, null, copyTagsToClipboardEventHandler);
 
             CopyTagsToClipboardUsingContextMenuItem = AddMenuItem(TagToolsContextSubmenu, CopyTagsToClipboardUsingMenuDescription, null, null);
-            ///===CopyTagsToClipboardUsingContextMenuItem.Image = CopyTagSetIcon;
             addCopyTagsToClipboardUsingContextMenuItems();
 
-            AddMenuItem(TagToolsContextSubmenu, PasteTagsFromClipboardName, null, pasteTagsFromClipboardEventHandler);//===.Image = PasteTagsIcon;
+            AddMenuItem(TagToolsContextSubmenu, PasteTagsFromClipboardName, null, pasteTagsFromClipboardEventHandler);
 
             if (!SavedSettings.dontShowBackupRestore)
             {
                 AddMenuItem(TagToolsContextSubmenu, "-", null, null);
-                AddMenuItem(TagToolsContextSubmenu, BackupRestoreMenuSectionName, null, null, false);//===.Image = BackupRestoreIcon;
-                AddMenuItem(TagToolsContextSubmenu, TagHistoryName, null, tagHistoryEventHandler);//===.Image = TagHistoryIcon;
+
+                var backupRestoreSubmenu = AddMenuItem(TagToolsContextSubmenu, BackupRestoreMenuSectionName, null, null, true);
+                backupRestoreSubmenu.Image = BackupRestoreMenuIcon;
+                backupRestoreSubmenu.ToolTipText = MnuToolTipPluginSection;//===
+
+                AddMenuItem(TagToolsContextSubmenu, TagHistoryName, null, tagHistoryEventHandler);
             }
 
 
@@ -7462,16 +7816,16 @@ namespace MusicBeePlugin
         {
             CopyTagsToClipboardUsingMenuItem.DropDown.Items.Clear();
 
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[0].setName, null, copyTagsUsingTagSet1EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[1].setName, null, copyTagsUsingTagSet2EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[2].setName, null, copyTagsUsingTagSet3EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[3].setName, null, copyTagsUsingTagSet4EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[4].setName, null, copyTagsUsingTagSet5EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[5].setName, null, copyTagsUsingTagSet6EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[6].setName, null, copyTagsUsingTagSet7EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[7].setName, null, copyTagsUsingTagSet8EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[8].setName, null, copyTagsUsingTagSet9EventHandler);//===.Image = CopyTagSetIcon;
-            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[9].setName, null, copyTagsUsingTagSet10EventHandler);//===.Image = CopyTagSetIcon;
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[0].setName, null, copyTagsUsingTagSet1EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[1].setName, null, copyTagsUsingTagSet2EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[2].setName, null, copyTagsUsingTagSet3EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[3].setName, null, copyTagsUsingTagSet4EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[4].setName, null, copyTagsUsingTagSet5EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[5].setName, null, copyTagsUsingTagSet6EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[6].setName, null, copyTagsUsingTagSet7EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[7].setName, null, copyTagsUsingTagSet8EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[8].setName, null, copyTagsUsingTagSet9EventHandler);
+            CopyTagsToClipboardUsingMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[9].setName, null, copyTagsUsingTagSet10EventHandler);
         }
 
         internal void addCopyTagsToClipboardUsingContextMenuItems()
@@ -7480,16 +7834,16 @@ namespace MusicBeePlugin
             {
                 CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Clear();
 
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[0].setName, null, copyTagsUsingTagSet1EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[1].setName, null, copyTagsUsingTagSet2EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[2].setName, null, copyTagsUsingTagSet3EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[3].setName, null, copyTagsUsingTagSet4EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[4].setName, null, copyTagsUsingTagSet5EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[5].setName, null, copyTagsUsingTagSet6EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[6].setName, null, copyTagsUsingTagSet7EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[7].setName, null, copyTagsUsingTagSet8EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[8].setName, null, copyTagsUsingTagSet9EventHandler);//===.Image = CopyTagSetIcon;
-                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[9].setName, null, copyTagsUsingTagSet10EventHandler);//===.Image = CopyTagSetIcon;
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[0].setName, null, copyTagsUsingTagSet1EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[1].setName, null, copyTagsUsingTagSet2EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[2].setName, null, copyTagsUsingTagSet3EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[3].setName, null, copyTagsUsingTagSet4EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[4].setName, null, copyTagsUsingTagSet5EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[5].setName, null, copyTagsUsingTagSet6EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[6].setName, null, copyTagsUsingTagSet7EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[7].setName, null, copyTagsUsingTagSet8EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[8].setName, null, copyTagsUsingTagSet9EventHandler);
+                CopyTagsToClipboardUsingContextMenuItem.DropDown.Items.Add(SavedSettings.copyTagsTagSets[9].setName, null, copyTagsUsingTagSet10EventHandler);
             }
         }
         #endregion
@@ -7507,7 +7861,7 @@ namespace MusicBeePlugin
             if (duration.Contains('.'))
                 return duration;
 
-            if (duration.Length > 6) //e.g. > :01:22
+            if (duration.Length >= 5) //e.g. >= 01:22
                 duration = duration.TrimStart('0');
 
             if (duration.StartsWith(":"))
@@ -7641,7 +7995,7 @@ namespace MusicBeePlugin
         }
 
 
-        public string CustomFunc_AddDatedValues(string originalValue, string maxMonths,//===
+        public string CustomFunc_AddDatedValues(string originalValue, string maxMonths, 
             string datePartsSeparatorChar, string dateSeparatorChar,
             string value1, string separatorChar,
             string value2, string setSeparator)
@@ -7713,7 +8067,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public string CustomFunc_GetDatedValuesDateRange(string originalValue, string dateSeparatorChar, string setSeparator)//===
+        public string CustomFunc_GetDatedValuesDateRange(string originalValue, string dateSeparatorChar, string setSeparator)
         {
             try
             {
@@ -7783,7 +8137,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public string CustomFunc_GetDatedValuesDiff(string originalValue,//===
+        public string CustomFunc_GetDatedValuesDiff(string originalValue, 
             string datePartsSeparatorChar, string dateSeparatorChar,
             string separatorChar, string setSeparator)
         {

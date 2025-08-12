@@ -20,7 +20,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = SettingsMenuIcon;
             WindowIcon = SettingsIcon;
+            WindowIconInactive = SettingsIconInactive;
             TitleBarText = this.Text;
 
             new ControlBorder(this.autoBackupFolderTextBox);

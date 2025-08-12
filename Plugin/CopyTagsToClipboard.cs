@@ -27,13 +27,18 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = CopyTagsMenuIcon;
             WindowIcon = CopyTagsIcon;
+            WindowIconInactive = CopyTagsIconInactive;
             TitleBarText = this.Text;
         }
 
         public CopyTagsToClipboard(Plugin plugin, string formTitle, string copyButtonName) : this(plugin)
         {
+            WindowMenuIcon = CopyTagsMenuIcon;
             WindowIcon = CopyTagsIcon;
+            WindowIconInactive = CopyTagsIconInactive;
+
             tagSetComboBoxCustom.Visible = false;
             Text = formTitle;
             TitleBarText = formTitle;

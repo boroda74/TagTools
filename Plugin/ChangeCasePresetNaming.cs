@@ -23,7 +23,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = ChangeCaseMenuIcon;
             WindowIcon = ChangeCaseIcon;
+            WindowIconInactive = ChangeCaseIconInactive;
             TitleBarText = this.Text;
 
             new ControlBorder(this.nameBox);

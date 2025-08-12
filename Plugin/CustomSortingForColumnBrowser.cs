@@ -66,7 +66,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = CscbMenuIcon;
             WindowIcon = CscbIcon;
+            WindowIconInactive = CscbIconInactive;
             TitleBarText = this.Text;
         }
 

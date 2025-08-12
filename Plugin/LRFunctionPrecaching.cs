@@ -25,7 +25,9 @@ namespace MusicBeePlugin
 
             InitializeComponent();
 
+            WindowMenuIcon = LrMenuIcon;
             WindowIcon = LrIcon;
+            WindowIconInactive = LrIconInactive;
             TitleBarText = this.Text;
         }
 

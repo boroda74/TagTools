@@ -88,30 +88,10 @@ namespace MusicBeePlugin
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.runMonthlyCheckBoxLabel = new System.Windows.Forms.Label();
-            this.runMonthlyCheckBox = new System.Windows.Forms.CheckBox();
-            this.gotoNextPresetButton = new System.Windows.Forms.Button();
-            this.showOnlyChainedPresetsButton = new System.Windows.Forms.Button();
-            this.clearNextPresetButton = new System.Windows.Forms.Button();
-            this.hiddenCheckBoxLabel = new System.Windows.Forms.Label();
-            this.hiddenCheckBox = new System.Windows.Forms.CheckBox();
-            this.nextPresetComboBox = new System.Windows.Forms.ComboBox();
-            this.nextPresetCheckBoxLabel = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.preserveTagValuesTextBox = new System.Windows.Forms.TextBox();
-            this.labelPreserveTagValues = new System.Windows.Forms.Label();
-            this.buttonSelectPreservedTags = new System.Windows.Forms.Button();
-            this.processPreserveTagsTextBox = new System.Windows.Forms.TextBox();
-            this.buttonProcessPreserveTags = new System.Windows.Forms.Button();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.customText4Box = new System.Windows.Forms.TextBox();
-            this.customText4Label = new System.Windows.Forms.Label();
-            this.customText3Box = new System.Windows.Forms.TextBox();
-            this.customText3Label = new System.Windows.Forms.Label();
-            this.customText2Box = new System.Windows.Forms.TextBox();
-            this.customText2Label = new System.Windows.Forms.Label();
-            this.customTextBox = new System.Windows.Forms.TextBox();
-            this.customTextLabel = new System.Windows.Forms.Label();
+            this.descriptionGroupBox = new System.Windows.Forms.GroupBox();
+            this.textBoxTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.descriptionBox = new System.Windows.Forms.TextBox();
+            this.descriptionGroupBoxLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.parameterTag6List = new System.Windows.Forms.ComboBox();
             this.labelTag6 = new System.Windows.Forms.Label();
@@ -135,6 +115,10 @@ namespace MusicBeePlugin
             this.userPresetPictureBox = new System.Windows.Forms.PictureBox();
             this.customizedPresetLabel = new System.Windows.Forms.Label();
             this.customizedPresetPictureBox = new System.Windows.Forms.PictureBox();
+            this.runMonthlyCheckBoxLabel = new System.Windows.Forms.Label();
+            this.runMonthlyCheckBox = new System.Windows.Forms.CheckBox();
+            this.hiddenCheckBoxLabel = new System.Windows.Forms.Label();
+            this.hiddenCheckBox = new System.Windows.Forms.CheckBox();
             this.favoriteCheckBoxLabel = new System.Windows.Forms.Label();
             this.favoriteCheckBox = new System.Windows.Forms.CheckBox();
             this.applyToPlayingTrackCheckBoxLabel = new System.Windows.Forms.Label();
@@ -147,10 +131,26 @@ namespace MusicBeePlugin
             this.playlistComboBox = new System.Windows.Forms.ComboBox();
             this.conditionCheckBoxLabel = new System.Windows.Forms.Label();
             this.conditionCheckBox = new System.Windows.Forms.CheckBox();
-            this.descriptionGroupBox = new System.Windows.Forms.GroupBox();
-            this.textBoxTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.descriptionBox = new System.Windows.Forms.TextBox();
-            this.descriptionGroupBoxLabel = new System.Windows.Forms.Label();
+            this.clearNextPresetButton = new System.Windows.Forms.Button();
+            this.showOnlyChainedPresetsButton = new System.Windows.Forms.Button();
+            this.gotoNextPresetButton = new System.Windows.Forms.Button();
+            this.nextPresetComboBox = new System.Windows.Forms.ComboBox();
+            this.nextPresetCheckBoxLabel = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.preserveTagValuesTextBox = new System.Windows.Forms.TextBox();
+            this.labelPreserveTagValues = new System.Windows.Forms.Label();
+            this.buttonSelectPreservedTags = new System.Windows.Forms.Button();
+            this.processPreserveTagsTextBox = new System.Windows.Forms.TextBox();
+            this.buttonProcessPreserveTags = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.customText4Box = new System.Windows.Forms.TextBox();
+            this.customText4Label = new System.Windows.Forms.Label();
+            this.customText3Box = new System.Windows.Forms.TextBox();
+            this.customText3Label = new System.Windows.Forms.Label();
+            this.customText2Box = new System.Windows.Forms.TextBox();
+            this.customText2Label = new System.Windows.Forms.Label();
+            this.customTextBox = new System.Windows.Forms.TextBox();
+            this.customTextLabel = new System.Windows.Forms.Label();
             this.listBoxTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.presetList = new System.Windows.Forms.CheckedListBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -306,8 +306,8 @@ namespace MusicBeePlugin
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.descriptionGroupBox.SuspendLayout();
+            this.textBoxTableLayoutPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureTag6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureTag5)).BeginInit();
@@ -317,8 +317,8 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.pictureTag)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).BeginInit();
-            this.descriptionGroupBox.SuspendLayout();
-            this.textBoxTableLayoutPanel.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.listBoxTableLayoutPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
@@ -399,182 +399,32 @@ namespace MusicBeePlugin
             this.panel1.Name = "panel1";
             this.panel1.Tag = "";
             // 
-            // runMonthlyCheckBoxLabel
+            // descriptionGroupBox
             // 
-            resources.ApplyResources(this.runMonthlyCheckBoxLabel, "runMonthlyCheckBoxLabel");
-            this.dirtyErrorProvider.SetIconAlignment(this.runMonthlyCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("runMonthlyCheckBoxLabel.IconAlignment"))));
-            this.runMonthlyCheckBoxLabel.Name = "runMonthlyCheckBoxLabel";
-            this.runMonthlyCheckBoxLabel.Tag = "";
-            this.toolTip1.SetToolTip(this.runMonthlyCheckBoxLabel, resources.GetString("runMonthlyCheckBoxLabel.ToolTip"));
-            this.runMonthlyCheckBoxLabel.Click += new System.EventHandler(this.runMonthlyCheckBoxLabel_Click);
+            resources.ApplyResources(this.descriptionGroupBox, "descriptionGroupBox");
+            this.descriptionGroupBox.Controls.Add(this.textBoxTableLayoutPanel);
+            this.descriptionGroupBox.Controls.Add(this.descriptionGroupBoxLabel);
+            this.descriptionGroupBox.Name = "descriptionGroupBox";
+            this.descriptionGroupBox.TabStop = false;
             // 
-            // runMonthlyCheckBox
+            // textBoxTableLayoutPanel
             // 
-            resources.ApplyResources(this.runMonthlyCheckBox, "runMonthlyCheckBox");
-            this.dirtyErrorProvider.SetIconAlignment(this.runMonthlyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("runMonthlyCheckBox.IconAlignment"))));
-            this.runMonthlyCheckBox.Name = "runMonthlyCheckBox";
-            this.runMonthlyCheckBox.Tag = "#runMonthlyCheckBoxLabel";
-            this.toolTip1.SetToolTip(this.runMonthlyCheckBox, resources.GetString("runMonthlyCheckBox.ToolTip"));
-            this.runMonthlyCheckBox.CheckedChanged += new System.EventHandler(this.runMonthlyCheckBox_CheckedChanged);
+            resources.ApplyResources(this.textBoxTableLayoutPanel, "textBoxTableLayoutPanel");
+            this.textBoxTableLayoutPanel.Controls.Add(this.descriptionBox, 0, 0);
+            this.textBoxTableLayoutPanel.Name = "textBoxTableLayoutPanel";
+            this.textBoxTableLayoutPanel.Tag = "";
             // 
-            // gotoNextPresetButton
+            // descriptionBox
             // 
-            resources.ApplyResources(this.gotoNextPresetButton, "gotoNextPresetButton");
-            this.gotoNextPresetButton.Name = "gotoNextPresetButton";
-            this.gotoNextPresetButton.Tag = "#showOnlyChainedPresetsButton@non-defaultable@square-control";
-            this.toolTip1.SetToolTip(this.gotoNextPresetButton, resources.GetString("gotoNextPresetButton.ToolTip"));
-            this.gotoNextPresetButton.Click += new System.EventHandler(this.gotoNextPresetButton_Click);
+            resources.ApplyResources(this.descriptionBox, "descriptionBox");
+            this.descriptionBox.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.descriptionBox.Name = "descriptionBox";
+            this.descriptionBox.ReadOnly = true;
             // 
-            // showOnlyChainedPresetsButton
+            // descriptionGroupBoxLabel
             // 
-            resources.ApplyResources(this.showOnlyChainedPresetsButton, "showOnlyChainedPresetsButton");
-            this.showOnlyChainedPresetsButton.Name = "showOnlyChainedPresetsButton";
-            this.showOnlyChainedPresetsButton.Tag = "#clearNextPresetButton@non-defaultable@square-control";
-            this.toolTip1.SetToolTip(this.showOnlyChainedPresetsButton, resources.GetString("showOnlyChainedPresetsButton.ToolTip"));
-            this.showOnlyChainedPresetsButton.Click += new System.EventHandler(this.showOnlyChainedPresetsButton_Click);
-            // 
-            // clearNextPresetButton
-            // 
-            resources.ApplyResources(this.clearNextPresetButton, "clearNextPresetButton");
-            this.clearNextPresetButton.Name = "clearNextPresetButton";
-            this.clearNextPresetButton.Tag = "@pinned-to-parent-x@non-defaultable@square-control";
-            this.toolTip1.SetToolTip(this.clearNextPresetButton, resources.GetString("clearNextPresetButton.ToolTip"));
-            this.clearNextPresetButton.Click += new System.EventHandler(this.clearNextPresetButton_Click);
-            // 
-            // hiddenCheckBoxLabel
-            // 
-            resources.ApplyResources(this.hiddenCheckBoxLabel, "hiddenCheckBoxLabel");
-            this.hiddenCheckBoxLabel.Name = "hiddenCheckBoxLabel";
-            this.hiddenCheckBoxLabel.Tag = "#runMonthlyCheckBox";
-            this.hiddenCheckBoxLabel.Click += new System.EventHandler(this.hiddenCheckBoxLabel_Click);
-            // 
-            // hiddenCheckBox
-            // 
-            resources.ApplyResources(this.hiddenCheckBox, "hiddenCheckBox");
-            this.hiddenCheckBox.Name = "hiddenCheckBox";
-            this.hiddenCheckBox.Tag = "#hiddenCheckBoxLabel";
-            this.hiddenCheckBox.CheckedChanged += new System.EventHandler(this.hiddenCheckBox_CheckedChanged);
-            // 
-            // nextPresetComboBox
-            // 
-            resources.ApplyResources(this.nextPresetComboBox, "nextPresetComboBox");
-            this.nextPresetComboBox.DropDownWidth = 250;
-            this.nextPresetComboBox.FormattingEnabled = true;
-            this.nextPresetComboBox.Name = "nextPresetComboBox";
-            this.nextPresetComboBox.Sorted = true;
-            this.nextPresetComboBox.Tag = "#gotoNextPresetButton";
-            this.toolTip1.SetToolTip(this.nextPresetComboBox, resources.GetString("nextPresetComboBox.ToolTip"));
-            this.nextPresetComboBox.TextChanged += new System.EventHandler(this.nextPresetComboBox_TextChanged);
-            // 
-            // nextPresetCheckBoxLabel
-            // 
-            resources.ApplyResources(this.nextPresetCheckBoxLabel, "nextPresetCheckBoxLabel");
-            this.nextPresetCheckBoxLabel.Name = "nextPresetCheckBoxLabel";
-            this.nextPresetCheckBoxLabel.Tag = "#nextPresetComboBox";
-            this.toolTip1.SetToolTip(this.nextPresetCheckBoxLabel, resources.GetString("nextPresetCheckBoxLabel.ToolTip"));
-            // 
-            // tableLayoutPanel3
-            // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.preserveTagValuesTextBox, 4, 0);
-            this.tableLayoutPanel3.Controls.Add(this.labelPreserveTagValues, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.buttonSelectPreservedTags, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.processPreserveTagsTextBox, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.buttonProcessPreserveTags, 0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            // 
-            // preserveTagValuesTextBox
-            // 
-            resources.ApplyResources(this.preserveTagValuesTextBox, "preserveTagValuesTextBox");
-            this.preserveTagValuesTextBox.Name = "preserveTagValuesTextBox";
-            this.toolTip1.SetToolTip(this.preserveTagValuesTextBox, resources.GetString("preserveTagValuesTextBox.ToolTip"));
-            this.preserveTagValuesTextBox.TextChanged += new System.EventHandler(this.preserveTagValuesTextBox_TextChanged);
-            // 
-            // labelPreserveTagValues
-            // 
-            resources.ApplyResources(this.labelPreserveTagValues, "labelPreserveTagValues");
-            this.labelPreserveTagValues.Name = "labelPreserveTagValues";
-            this.toolTip1.SetToolTip(this.labelPreserveTagValues, resources.GetString("labelPreserveTagValues.ToolTip"));
-            // 
-            // buttonSelectPreservedTags
-            // 
-            resources.ApplyResources(this.buttonSelectPreservedTags, "buttonSelectPreservedTags");
-            this.buttonSelectPreservedTags.Name = "buttonSelectPreservedTags";
-            this.buttonSelectPreservedTags.Tag = "@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonSelectPreservedTags, resources.GetString("buttonSelectPreservedTags.ToolTip"));
-            this.buttonSelectPreservedTags.Click += new System.EventHandler(this.buttonSelectPreservedTags_Click);
-            // 
-            // processPreserveTagsTextBox
-            // 
-            resources.ApplyResources(this.processPreserveTagsTextBox, "processPreserveTagsTextBox");
-            this.processPreserveTagsTextBox.Name = "processPreserveTagsTextBox";
-            this.toolTip1.SetToolTip(this.processPreserveTagsTextBox, resources.GetString("processPreserveTagsTextBox.ToolTip"));
-            this.processPreserveTagsTextBox.TextChanged += new System.EventHandler(this.processPreserveTagsTextBox_TextChanged);
-            // 
-            // buttonProcessPreserveTags
-            // 
-            resources.ApplyResources(this.buttonProcessPreserveTags, "buttonProcessPreserveTags");
-            this.buttonProcessPreserveTags.Name = "buttonProcessPreserveTags";
-            this.buttonProcessPreserveTags.Tag = "@non-defaultable";
-            this.toolTip1.SetToolTip(this.buttonProcessPreserveTags, resources.GetString("buttonProcessPreserveTags.ToolTip"));
-            this.buttonProcessPreserveTags.Click += new System.EventHandler(this.buttonProcessPreserveTags_Click);
-            // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.customText4Box, 3, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customText4Label, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customText3Box, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customText3Label, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.customText2Box, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customText2Label, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customTextBox, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customTextLabel, 0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // customText4Box
-            // 
-            resources.ApplyResources(this.customText4Box, "customText4Box");
-            this.customText4Box.Name = "customText4Box";
-            this.customText4Box.TextChanged += new System.EventHandler(this.customText4Box_TextChanged);
-            // 
-            // customText4Label
-            // 
-            resources.ApplyResources(this.customText4Label, "customText4Label");
-            this.customText4Label.Name = "customText4Label";
-            // 
-            // customText3Box
-            // 
-            resources.ApplyResources(this.customText3Box, "customText3Box");
-            this.customText3Box.Name = "customText3Box";
-            this.customText3Box.TextChanged += new System.EventHandler(this.customText3Box_TextChanged);
-            // 
-            // customText3Label
-            // 
-            resources.ApplyResources(this.customText3Label, "customText3Label");
-            this.customText3Label.Name = "customText3Label";
-            // 
-            // customText2Box
-            // 
-            resources.ApplyResources(this.customText2Box, "customText2Box");
-            this.customText2Box.Name = "customText2Box";
-            this.customText2Box.TextChanged += new System.EventHandler(this.customText2Box_TextChanged);
-            // 
-            // customText2Label
-            // 
-            resources.ApplyResources(this.customText2Label, "customText2Label");
-            this.customText2Label.Name = "customText2Label";
-            // 
-            // customTextBox
-            // 
-            resources.ApplyResources(this.customTextBox, "customTextBox");
-            this.customTextBox.Name = "customTextBox";
-            this.customTextBox.TextChanged += new System.EventHandler(this.customTextBox_TextChanged);
-            // 
-            // customTextLabel
-            // 
-            resources.ApplyResources(this.customTextLabel, "customTextLabel");
-            this.customTextLabel.Name = "customTextLabel";
+            resources.ApplyResources(this.descriptionGroupBoxLabel, "descriptionGroupBoxLabel");
+            this.descriptionGroupBoxLabel.Name = "descriptionGroupBoxLabel";
             // 
             // tableLayoutPanel1
             // 
@@ -754,6 +604,38 @@ namespace MusicBeePlugin
             this.customizedPresetPictureBox.TabStop = false;
             this.customizedPresetPictureBox.Tag = "#customizedPresetLabel@square-control@small-picture";
             // 
+            // runMonthlyCheckBoxLabel
+            // 
+            resources.ApplyResources(this.runMonthlyCheckBoxLabel, "runMonthlyCheckBoxLabel");
+            this.dirtyErrorProvider.SetIconAlignment(this.runMonthlyCheckBoxLabel, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("runMonthlyCheckBoxLabel.IconAlignment"))));
+            this.runMonthlyCheckBoxLabel.Name = "runMonthlyCheckBoxLabel";
+            this.runMonthlyCheckBoxLabel.Tag = "";
+            this.toolTip1.SetToolTip(this.runMonthlyCheckBoxLabel, resources.GetString("runMonthlyCheckBoxLabel.ToolTip"));
+            this.runMonthlyCheckBoxLabel.Click += new System.EventHandler(this.runMonthlyCheckBoxLabel_Click);
+            // 
+            // runMonthlyCheckBox
+            // 
+            resources.ApplyResources(this.runMonthlyCheckBox, "runMonthlyCheckBox");
+            this.dirtyErrorProvider.SetIconAlignment(this.runMonthlyCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("runMonthlyCheckBox.IconAlignment"))));
+            this.runMonthlyCheckBox.Name = "runMonthlyCheckBox";
+            this.runMonthlyCheckBox.Tag = "#runMonthlyCheckBoxLabel";
+            this.toolTip1.SetToolTip(this.runMonthlyCheckBox, resources.GetString("runMonthlyCheckBox.ToolTip"));
+            this.runMonthlyCheckBox.CheckedChanged += new System.EventHandler(this.runMonthlyCheckBox_CheckedChanged);
+            // 
+            // hiddenCheckBoxLabel
+            // 
+            resources.ApplyResources(this.hiddenCheckBoxLabel, "hiddenCheckBoxLabel");
+            this.hiddenCheckBoxLabel.Name = "hiddenCheckBoxLabel";
+            this.hiddenCheckBoxLabel.Tag = "#runMonthlyCheckBox";
+            this.hiddenCheckBoxLabel.Click += new System.EventHandler(this.hiddenCheckBoxLabel_Click);
+            // 
+            // hiddenCheckBox
+            // 
+            resources.ApplyResources(this.hiddenCheckBox, "hiddenCheckBox");
+            this.hiddenCheckBox.Name = "hiddenCheckBox";
+            this.hiddenCheckBox.Tag = "#hiddenCheckBoxLabel";
+            this.hiddenCheckBox.CheckedChanged += new System.EventHandler(this.hiddenCheckBox_CheckedChanged);
+            // 
             // favoriteCheckBoxLabel
             // 
             resources.ApplyResources(this.favoriteCheckBoxLabel, "favoriteCheckBoxLabel");
@@ -846,32 +728,150 @@ namespace MusicBeePlugin
             this.conditionCheckBox.Tag = "#conditionCheckBoxLabel";
             this.conditionCheckBox.CheckedChanged += new System.EventHandler(this.conditionCheckBox_CheckedChanged);
             // 
-            // descriptionGroupBox
+            // clearNextPresetButton
             // 
-            resources.ApplyResources(this.descriptionGroupBox, "descriptionGroupBox");
-            this.descriptionGroupBox.Controls.Add(this.textBoxTableLayoutPanel);
-            this.descriptionGroupBox.Controls.Add(this.descriptionGroupBoxLabel);
-            this.descriptionGroupBox.Name = "descriptionGroupBox";
-            this.descriptionGroupBox.TabStop = false;
+            resources.ApplyResources(this.clearNextPresetButton, "clearNextPresetButton");
+            this.clearNextPresetButton.Name = "clearNextPresetButton";
+            this.clearNextPresetButton.Tag = "@pinned-to-parent-x@non-defaultable@square-control";
+            this.toolTip1.SetToolTip(this.clearNextPresetButton, resources.GetString("clearNextPresetButton.ToolTip"));
+            this.clearNextPresetButton.Click += new System.EventHandler(this.clearNextPresetButton_Click);
             // 
-            // textBoxTableLayoutPanel
+            // showOnlyChainedPresetsButton
             // 
-            resources.ApplyResources(this.textBoxTableLayoutPanel, "textBoxTableLayoutPanel");
-            this.textBoxTableLayoutPanel.Controls.Add(this.descriptionBox, 0, 0);
-            this.textBoxTableLayoutPanel.Name = "textBoxTableLayoutPanel";
-            this.textBoxTableLayoutPanel.Tag = "";
+            resources.ApplyResources(this.showOnlyChainedPresetsButton, "showOnlyChainedPresetsButton");
+            this.showOnlyChainedPresetsButton.Name = "showOnlyChainedPresetsButton";
+            this.showOnlyChainedPresetsButton.Tag = "#clearNextPresetButton@non-defaultable@square-control";
+            this.toolTip1.SetToolTip(this.showOnlyChainedPresetsButton, resources.GetString("showOnlyChainedPresetsButton.ToolTip"));
+            this.showOnlyChainedPresetsButton.Click += new System.EventHandler(this.showOnlyChainedPresetsButton_Click);
             // 
-            // descriptionBox
+            // gotoNextPresetButton
             // 
-            resources.ApplyResources(this.descriptionBox, "descriptionBox");
-            this.descriptionBox.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.descriptionBox.Name = "descriptionBox";
-            this.descriptionBox.ReadOnly = true;
+            resources.ApplyResources(this.gotoNextPresetButton, "gotoNextPresetButton");
+            this.gotoNextPresetButton.Name = "gotoNextPresetButton";
+            this.gotoNextPresetButton.Tag = "#showOnlyChainedPresetsButton@non-defaultable@square-control";
+            this.toolTip1.SetToolTip(this.gotoNextPresetButton, resources.GetString("gotoNextPresetButton.ToolTip"));
+            this.gotoNextPresetButton.Click += new System.EventHandler(this.gotoNextPresetButton_Click);
             // 
-            // descriptionGroupBoxLabel
+            // nextPresetComboBox
             // 
-            resources.ApplyResources(this.descriptionGroupBoxLabel, "descriptionGroupBoxLabel");
-            this.descriptionGroupBoxLabel.Name = "descriptionGroupBoxLabel";
+            resources.ApplyResources(this.nextPresetComboBox, "nextPresetComboBox");
+            this.nextPresetComboBox.DropDownWidth = 250;
+            this.nextPresetComboBox.FormattingEnabled = true;
+            this.nextPresetComboBox.Name = "nextPresetComboBox";
+            this.nextPresetComboBox.Sorted = true;
+            this.nextPresetComboBox.Tag = "#gotoNextPresetButton";
+            this.toolTip1.SetToolTip(this.nextPresetComboBox, resources.GetString("nextPresetComboBox.ToolTip"));
+            this.nextPresetComboBox.TextChanged += new System.EventHandler(this.nextPresetComboBox_TextChanged);
+            // 
+            // nextPresetCheckBoxLabel
+            // 
+            resources.ApplyResources(this.nextPresetCheckBoxLabel, "nextPresetCheckBoxLabel");
+            this.nextPresetCheckBoxLabel.Name = "nextPresetCheckBoxLabel";
+            this.nextPresetCheckBoxLabel.Tag = "#nextPresetComboBox";
+            this.toolTip1.SetToolTip(this.nextPresetCheckBoxLabel, resources.GetString("nextPresetCheckBoxLabel.ToolTip"));
+            // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.preserveTagValuesTextBox, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.labelPreserveTagValues, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.buttonSelectPreservedTags, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.processPreserveTagsTextBox, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.buttonProcessPreserveTags, 0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // preserveTagValuesTextBox
+            // 
+            resources.ApplyResources(this.preserveTagValuesTextBox, "preserveTagValuesTextBox");
+            this.preserveTagValuesTextBox.Name = "preserveTagValuesTextBox";
+            this.toolTip1.SetToolTip(this.preserveTagValuesTextBox, resources.GetString("preserveTagValuesTextBox.ToolTip"));
+            this.preserveTagValuesTextBox.TextChanged += new System.EventHandler(this.preserveTagValuesTextBox_TextChanged);
+            // 
+            // labelPreserveTagValues
+            // 
+            resources.ApplyResources(this.labelPreserveTagValues, "labelPreserveTagValues");
+            this.labelPreserveTagValues.Name = "labelPreserveTagValues";
+            this.toolTip1.SetToolTip(this.labelPreserveTagValues, resources.GetString("labelPreserveTagValues.ToolTip"));
+            // 
+            // buttonSelectPreservedTags
+            // 
+            resources.ApplyResources(this.buttonSelectPreservedTags, "buttonSelectPreservedTags");
+            this.buttonSelectPreservedTags.Name = "buttonSelectPreservedTags";
+            this.buttonSelectPreservedTags.Tag = "@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonSelectPreservedTags, resources.GetString("buttonSelectPreservedTags.ToolTip"));
+            this.buttonSelectPreservedTags.Click += new System.EventHandler(this.buttonSelectPreservedTags_Click);
+            // 
+            // processPreserveTagsTextBox
+            // 
+            resources.ApplyResources(this.processPreserveTagsTextBox, "processPreserveTagsTextBox");
+            this.processPreserveTagsTextBox.Name = "processPreserveTagsTextBox";
+            this.toolTip1.SetToolTip(this.processPreserveTagsTextBox, resources.GetString("processPreserveTagsTextBox.ToolTip"));
+            this.processPreserveTagsTextBox.TextChanged += new System.EventHandler(this.processPreserveTagsTextBox_TextChanged);
+            // 
+            // buttonProcessPreserveTags
+            // 
+            resources.ApplyResources(this.buttonProcessPreserveTags, "buttonProcessPreserveTags");
+            this.buttonProcessPreserveTags.Name = "buttonProcessPreserveTags";
+            this.buttonProcessPreserveTags.Tag = "@non-defaultable";
+            this.toolTip1.SetToolTip(this.buttonProcessPreserveTags, resources.GetString("buttonProcessPreserveTags.ToolTip"));
+            this.buttonProcessPreserveTags.Click += new System.EventHandler(this.buttonProcessPreserveTags_Click);
+            // 
+            // tableLayoutPanel2
+            // 
+            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.customText4Box, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText4Label, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText3Box, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText3Label, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.customText2Box, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customText2Label, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customTextBox, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customTextLabel, 0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // customText4Box
+            // 
+            resources.ApplyResources(this.customText4Box, "customText4Box");
+            this.customText4Box.Name = "customText4Box";
+            this.customText4Box.TextChanged += new System.EventHandler(this.customText4Box_TextChanged);
+            // 
+            // customText4Label
+            // 
+            resources.ApplyResources(this.customText4Label, "customText4Label");
+            this.customText4Label.Name = "customText4Label";
+            // 
+            // customText3Box
+            // 
+            resources.ApplyResources(this.customText3Box, "customText3Box");
+            this.customText3Box.Name = "customText3Box";
+            this.customText3Box.TextChanged += new System.EventHandler(this.customText3Box_TextChanged);
+            // 
+            // customText3Label
+            // 
+            resources.ApplyResources(this.customText3Label, "customText3Label");
+            this.customText3Label.Name = "customText3Label";
+            // 
+            // customText2Box
+            // 
+            resources.ApplyResources(this.customText2Box, "customText2Box");
+            this.customText2Box.Name = "customText2Box";
+            this.customText2Box.TextChanged += new System.EventHandler(this.customText2Box_TextChanged);
+            // 
+            // customText2Label
+            // 
+            resources.ApplyResources(this.customText2Label, "customText2Label");
+            this.customText2Label.Name = "customText2Label";
+            // 
+            // customTextBox
+            // 
+            resources.ApplyResources(this.customTextBox, "customTextBox");
+            this.customTextBox.Name = "customTextBox";
+            this.customTextBox.TextChanged += new System.EventHandler(this.customTextBox_TextChanged);
+            // 
+            // customTextLabel
+            // 
+            resources.ApplyResources(this.customTextLabel, "customTextLabel");
+            this.customTextLabel.Name = "customTextLabel";
             // 
             // listBoxTableLayoutPanel
             // 
@@ -1703,10 +1703,10 @@ namespace MusicBeePlugin
             this.tableLayoutPanel4.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.descriptionGroupBox.ResumeLayout(false);
+            this.descriptionGroupBox.PerformLayout();
+            this.textBoxTableLayoutPanel.ResumeLayout(false);
+            this.textBoxTableLayoutPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureTag6)).EndInit();
@@ -1717,10 +1717,10 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.pictureTag)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userPresetPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.customizedPresetPictureBox)).EndInit();
-            this.descriptionGroupBox.ResumeLayout(false);
-            this.descriptionGroupBox.PerformLayout();
-            this.textBoxTableLayoutPanel.ResumeLayout(false);
-            this.textBoxTableLayoutPanel.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.listBoxTableLayoutPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).EndInit();

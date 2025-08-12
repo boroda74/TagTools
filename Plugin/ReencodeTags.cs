@@ -42,7 +42,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = ReencodeTagsMenuIcon;
             WindowIcon = ReencodeTagsIcon;
+            WindowIconInactive = ReencodeTagsIconInactive;
             TitleBarText = this.Text;
         }
 

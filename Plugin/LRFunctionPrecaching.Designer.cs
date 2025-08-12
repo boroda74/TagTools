@@ -59,6 +59,8 @@
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.progressInfoLabel);
             this.DoubleBuffered = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LrFunctionPrecaching";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.Shown += new System.EventHandler(this.LrFunctionPrecaching_Shown);

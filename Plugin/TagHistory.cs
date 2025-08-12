@@ -84,7 +84,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = TagHistoryMenuIcon;
             WindowIcon = TagHistoryIcon;
+            WindowIconInactive = TagHistoryIconInactive;
             TitleBarText = this.Text;
 
             this.trackUrls = trackUrls;

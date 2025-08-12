@@ -536,6 +536,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
             this.DoubleBuffered = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "QuickSettings";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.groupBox3.ResumeLayout(false);

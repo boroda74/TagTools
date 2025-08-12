@@ -57,7 +57,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = AsrMenuIcon;
             WindowIcon = AsrIcon;
+            WindowIconInactive = AsrIconInactive;
             TitleBarText = this.Text;
 
             new ControlBorder(this.nameBox);
@@ -214,8 +216,8 @@ namespace MusicBeePlugin
             if (useSkinColors)
             {
                 linkLabel1.DisabledLinkColor = DimmedAccentColor;
-                linkLabel1.LinkColor = TickedColor;
-                linkLabel1.ActiveLinkColor = DimmedHighlight;
+                linkLabel1.LinkColor = HighlightColor;
+                linkLabel1.ActiveLinkColor = DimmedHighlightColor;
             }
 
             if (Language == "ru")

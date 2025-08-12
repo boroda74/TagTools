@@ -166,7 +166,7 @@
     <value>4, 4, 9, 4</value>
   </data>
   <data name="nameBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>895, 23</value>
+    <value>893, 23</value>
   </data>
   <data name="nameBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -235,7 +235,7 @@
     <value>Vertical</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>875, 69</value>
+    <value>873, 69</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -301,7 +301,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPatternBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="searchedPatternBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -328,7 +328,7 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 1</value>
+    <value>634, 1</value>
   </data>
   <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -361,13 +361,13 @@
     <value>Left, Right</value>
   </data>
   <data name="searchedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>799, 2</value>
   </data>
   <data name="searchedTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="searchedTagList.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -388,13 +388,13 @@
     <value>Left, Right</value>
   </data>
   <data name="replacedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>799, 30</value>
   </data>
   <data name="replacedTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="replacedTagList.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -421,7 +421,7 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 29</value>
+    <value>634, 29</value>
   </data>
   <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -460,7 +460,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPatternBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="replacedPatternBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -523,7 +523,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>787, 691</value>
+    <value>785, 691</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 9</value>
@@ -556,7 +556,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>893, 691</value>
+    <value>891, 691</value>
   </data>
   <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 9, 9</value>
@@ -694,7 +694,7 @@
     <value>True</value>
   </data>
   <data name="label38.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 29</value>
+    <value>704, 29</value>
   </data>
   <data name="label38.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -742,7 +742,7 @@
     <value>NoControl</value>
   </data>
   <data name="condition1SneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="condition1SneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -787,7 +787,7 @@
     <value>NoControl</value>
   </data>
   <data name="condition1DneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 1</value>
+    <value>735, 1</value>
   </data>
   <data name="condition1DneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -832,7 +832,7 @@
     <value>NoControl</value>
   </data>
   <data name="add1CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 29</value>
+    <value>671, 29</value>
   </data>
   <data name="add1CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -877,7 +877,7 @@
     <value>NoControl</value>
   </data>
   <data name="append1CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 29</value>
+    <value>735, 29</value>
   </data>
   <data name="append1CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -919,7 +919,7 @@
     <value>NoControl</value>
   </data>
   <data name="label16.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 29</value>
+    <value>768, 29</value>
   </data>
   <data name="label16.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -958,7 +958,7 @@
     <value>True</value>
   </data>
   <data name="label37.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 1</value>
+    <value>704, 1</value>
   </data>
   <data name="label37.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -1000,7 +1000,7 @@
     <value>NoControl</value>
   </data>
   <data name="label15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 1</value>
+    <value>768, 1</value>
   </data>
   <data name="label15.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -1042,7 +1042,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>982, 56</value>
+    <value>980, 56</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1072,7 +1072,7 @@
     <value>0, 0, 0, 8</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 80</value>
+    <value>990, 80</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1099,7 +1099,7 @@
     <value>3, 1, 0, 1</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 23</value>
+    <value>358, 23</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1174,7 +1174,7 @@
     <value>NoControl</value>
   </data>
   <data name="condition2DneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 1</value>
+    <value>735, 1</value>
   </data>
   <data name="condition2DneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1216,7 +1216,7 @@
     <value>NoControl</value>
   </data>
   <data name="label39.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 1</value>
+    <value>704, 1</value>
   </data>
   <data name="label39.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -1252,13 +1252,13 @@
     <value>Left, Right</value>
   </data>
   <data name="replacedTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>799, 30</value>
   </data>
   <data name="replacedTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="replacedTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1288,7 +1288,7 @@
     <value>NoControl</value>
   </data>
   <data name="append2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 29</value>
+    <value>735, 29</value>
   </data>
   <data name="append2CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1330,7 +1330,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPattern2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="replacedPattern2Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1390,13 +1390,13 @@
     <value>Left, Right</value>
   </data>
   <data name="searchedTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>799, 2</value>
   </data>
   <data name="searchedTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="searchedTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1423,7 +1423,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPattern2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="searchedPattern2Box.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1489,7 +1489,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 1</value>
+    <value>634, 1</value>
   </data>
   <data name="label9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -1528,7 +1528,7 @@
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 29</value>
+    <value>634, 29</value>
   </data>
   <data name="label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -1570,7 +1570,7 @@
     <value>NoControl</value>
   </data>
   <data name="condition2SneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="condition2SneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1612,7 +1612,7 @@
     <value>NoControl</value>
   </data>
   <data name="label47.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 1</value>
+    <value>768, 1</value>
   </data>
   <data name="label47.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -1654,7 +1654,7 @@
     <value>NoControl</value>
   </data>
   <data name="label40.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 29</value>
+    <value>704, 29</value>
   </data>
   <data name="label40.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -1696,7 +1696,7 @@
     <value>NoControl</value>
   </data>
   <data name="label48.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 29</value>
+    <value>768, 29</value>
   </data>
   <data name="label48.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -1741,7 +1741,7 @@
     <value>NoControl</value>
   </data>
   <data name="add2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 29</value>
+    <value>671, 29</value>
   </data>
   <data name="add2CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1783,7 +1783,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>982, 56</value>
+    <value>980, 56</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1813,7 +1813,7 @@
     <value>0, 0, 0, 8</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 80</value>
+    <value>990, 80</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1885,7 +1885,7 @@
     <value>NoControl</value>
   </data>
   <data name="condition3DneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 1</value>
+    <value>735, 1</value>
   </data>
   <data name="condition3DneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -1927,7 +1927,7 @@
     <value>NoControl</value>
   </data>
   <data name="label41.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 1</value>
+    <value>704, 1</value>
   </data>
   <data name="label41.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -1963,13 +1963,13 @@
     <value>Left, Right</value>
   </data>
   <data name="replacedTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>799, 30</value>
   </data>
   <data name="replacedTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="replacedTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1999,7 +1999,7 @@
     <value>NoControl</value>
   </data>
   <data name="append3CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 29</value>
+    <value>735, 29</value>
   </data>
   <data name="append3CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -2041,7 +2041,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPattern3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="replacedPattern3Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2101,13 +2101,13 @@
     <value>Left, Right</value>
   </data>
   <data name="searchedTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>799, 2</value>
   </data>
   <data name="searchedTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="searchedTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2134,7 +2134,7 @@
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPattern3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="searchedPattern3Box.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2203,7 +2203,7 @@
     <value>NoControl</value>
   </data>
   <data name="condition3SneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="condition3SneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -2245,7 +2245,7 @@
     <value>NoControl</value>
   </data>
   <data name="label13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 1</value>
+    <value>634, 1</value>
   </data>
   <data name="label13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -2284,7 +2284,7 @@
     <value>NoControl</value>
   </data>
   <data name="label14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 29</value>
+    <value>634, 29</value>
   </data>
   <data name="label14.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -2323,7 +2323,7 @@
     <value>NoControl</value>
   </data>
   <data name="label49.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 1</value>
+    <value>768, 1</value>
   </data>
   <data name="label49.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2368,7 +2368,7 @@
     <value>NoControl</value>
   </data>
   <data name="add3CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 29</value>
+    <value>671, 29</value>
   </data>
   <data name="add3CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -2410,7 +2410,7 @@
     <value>NoControl</value>
   </data>
   <data name="label50.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 29</value>
+    <value>768, 29</value>
   </data>
   <data name="label50.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2452,7 +2452,7 @@
     <value>NoControl</value>
   </data>
   <data name="label42.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 29</value>
+    <value>704, 29</value>
   </data>
   <data name="label42.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2494,7 +2494,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>982, 56</value>
+    <value>980, 56</value>
   </data>
   <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2524,7 +2524,7 @@
     <value>0, 0, 0, 8</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 80</value>
+    <value>990, 80</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2689,7 +2689,7 @@
     <value>NoControl</value>
   </data>
   <data name="userPresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>892, 131</value>
+    <value>890, 131</value>
   </data>
   <data name="userPresetCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 4, 4, 4</value>
@@ -2731,7 +2731,7 @@
     <value>writable +&lt;all tags&gt;</value>
   </data>
   <data name="parameterTagTypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 3</value>
+    <value>89, 2</value>
   </data>
   <data name="parameterTagTypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2770,7 +2770,7 @@
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag2TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 3</value>
+    <value>580, 2</value>
   </data>
   <data name="parameterTag2TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2809,7 +2809,7 @@
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag3TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 30</value>
+    <value>89, 29</value>
   </data>
   <data name="parameterTag3TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -2886,7 +2886,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="customText2CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 0</value>
+    <value>495, 0</value>
   </data>
   <data name="customText2CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -2924,13 +2924,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>625, 2</value>
+    <value>624, 2</value>
   </data>
   <data name="customText2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 23</value>
+    <value>358, 23</value>
   </data>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2960,7 +2960,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="customText4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 27</value>
+    <value>495, 27</value>
   </data>
   <data name="customText4CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -2998,13 +2998,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>625, 29</value>
+    <value>624, 29</value>
   </data>
   <data name="customText4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 23</value>
+    <value>358, 23</value>
   </data>
   <data name="customText4Box.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -3078,7 +3078,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>3, 1, 0, 1</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 23</value>
+    <value>358, 23</value>
   </data>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -3111,7 +3111,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="append4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 29</value>
+    <value>735, 29</value>
   </data>
   <data name="append4CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -3156,7 +3156,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="append5CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 29</value>
+    <value>735, 29</value>
   </data>
   <data name="append5CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -3201,7 +3201,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="condition4SneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="condition4SneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -3246,7 +3246,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="condition5SneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 1</value>
+    <value>671, 1</value>
   </data>
   <data name="condition5SneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -3372,7 +3372,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="customText2CheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>522, 1</value>
+    <value>521, 1</value>
   </data>
   <data name="customText2CheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3414,7 +3414,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="customText4CheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>522, 28</value>
+    <value>521, 28</value>
   </data>
   <data name="customText4CheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3459,7 +3459,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="add4CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 29</value>
+    <value>671, 29</value>
   </data>
   <data name="add4CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -3504,7 +3504,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="condition4DneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 1</value>
+    <value>735, 1</value>
   </data>
   <data name="condition4DneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -3546,7 +3546,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label43.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 1</value>
+    <value>704, 1</value>
   </data>
   <data name="label43.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3588,7 +3588,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label44.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 29</value>
+    <value>704, 29</value>
   </data>
   <data name="label44.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3630,7 +3630,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label51.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 1</value>
+    <value>768, 1</value>
   </data>
   <data name="label51.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3672,7 +3672,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label52.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 29</value>
+    <value>768, 29</value>
   </data>
   <data name="label52.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3717,7 +3717,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="add5CheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>672, 29</value>
+    <value>671, 29</value>
   </data>
   <data name="add5CheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -3762,7 +3762,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="condition5DneCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>736, 1</value>
+    <value>735, 1</value>
   </data>
   <data name="condition5DneCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 1, 2, 1</value>
@@ -3804,7 +3804,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label53.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 1</value>
+    <value>704, 1</value>
   </data>
   <data name="label53.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3846,7 +3846,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label54.Location" type="System.Drawing.Point, System.Drawing">
-    <value>705, 29</value>
+    <value>704, 29</value>
   </data>
   <data name="label54.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3888,7 +3888,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label45.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 1</value>
+    <value>768, 1</value>
   </data>
   <data name="label45.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3930,7 +3930,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label46.Location" type="System.Drawing.Point, System.Drawing">
-    <value>769, 29</value>
+    <value>768, 29</value>
   </data>
   <data name="label46.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -3966,13 +3966,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 30</value>
+    <value>351, 29</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 23</value>
+    <value>140, 23</value>
   </data>
   <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -4032,13 +4032,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>843, 3</value>
+    <value>842, 2</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 23</value>
+    <value>140, 23</value>
   </data>
   <data name="parameterTag2List.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -4065,7 +4065,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label22.Location" type="System.Drawing.Point, System.Drawing">
-    <value>751, 1</value>
+    <value>750, 1</value>
   </data>
   <data name="label22.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4098,13 +4098,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 3</value>
+    <value>351, 2</value>
   </data>
   <data name="parameterTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 23</value>
+    <value>140, 23</value>
   </data>
   <data name="parameterTagList.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -4170,7 +4170,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label20.Location" type="System.Drawing.Point, System.Drawing">
-    <value>751, 55</value>
+    <value>750, 55</value>
   </data>
   <data name="label20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4203,13 +4203,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>843, 57</value>
+    <value>842, 56</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 23</value>
+    <value>140, 23</value>
   </data>
   <data name="parameterTag6List.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -4236,7 +4236,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label24.Location" type="System.Drawing.Point, System.Drawing">
-    <value>751, 28</value>
+    <value>750, 28</value>
   </data>
   <data name="label24.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4269,13 +4269,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 57</value>
+    <value>351, 56</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 23</value>
+    <value>140, 23</value>
   </data>
   <data name="parameterTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -4335,13 +4335,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>843, 30</value>
+    <value>842, 29</value>
   </data>
   <data name="parameterTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 23</value>
+    <value>140, 23</value>
   </data>
   <data name="parameterTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -4374,7 +4374,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag6TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 57</value>
+    <value>580, 56</value>
   </data>
   <data name="parameterTag6TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4413,7 +4413,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag5TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 57</value>
+    <value>89, 56</value>
   </data>
   <data name="parameterTag5TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4452,7 +4452,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>writable (incl. &lt;All Tags&gt;)</value>
   </data>
   <data name="parameterTag4TypeList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 30</value>
+    <value>580, 29</value>
   </data>
   <data name="parameterTag4TypeList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -4521,13 +4521,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="replacedTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>799, 30</value>
   </data>
   <data name="replacedTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="replacedTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -4554,7 +4554,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPattern4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="replacedPattern4Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -4614,13 +4614,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="searchedTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>799, 2</value>
   </data>
   <data name="searchedTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="searchedTag4List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -4647,7 +4647,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPattern4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="searchedPattern4Box.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -4713,7 +4713,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label32.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 1</value>
+    <value>634, 1</value>
   </data>
   <data name="label32.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4752,7 +4752,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label31.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 29</value>
+    <value>634, 29</value>
   </data>
   <data name="label31.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -4791,7 +4791,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>2</value>
   </data>
   <data name="tableLayoutPanel6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>982, 56</value>
+    <value>980, 56</value>
   </data>
   <data name="tableLayoutPanel6.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4821,7 +4821,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>0, 0, 0, 8</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 80</value>
+    <value>990, 80</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -4884,13 +4884,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="replacedTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 31</value>
+    <value>799, 30</value>
   </data>
   <data name="replacedTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="replacedTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="replacedTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4917,7 +4917,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>3, 1, 3, 1</value>
   </data>
   <data name="replacedPattern5Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="replacedPattern5Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -4977,13 +4977,13 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>Left, Right</value>
   </data>
   <data name="searchedTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>800, 3</value>
+    <value>799, 2</value>
   </data>
   <data name="searchedTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
   </data>
   <data name="searchedTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 23</value>
+    <value>181, 23</value>
   </data>
   <data name="searchedTag5List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -5010,7 +5010,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>3, 1, 3, 1</value>
   </data>
   <data name="searchedPattern5Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>546, 23</value>
+    <value>545, 23</value>
   </data>
   <data name="searchedPattern5Box.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -5076,7 +5076,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label36.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 1</value>
+    <value>634, 1</value>
   </data>
   <data name="label36.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -5115,7 +5115,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label35.Location" type="System.Drawing.Point, System.Drawing">
-    <value>635, 29</value>
+    <value>634, 29</value>
   </data>
   <data name="label35.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 0, 1</value>
@@ -5154,7 +5154,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>2</value>
   </data>
   <data name="tableLayoutPanel7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>982, 56</value>
+    <value>980, 56</value>
   </data>
   <data name="tableLayoutPanel7.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -5184,7 +5184,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>0, 0, 0, 8</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>992, 80</value>
+    <value>990, 80</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -5211,7 +5211,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="customizedByUserCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 131</value>
+    <value>744, 131</value>
   </data>
   <data name="customizedByUserCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 4, 4, 4</value>
@@ -5247,7 +5247,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="removePresetCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>624, 131</value>
+    <value>622, 131</value>
   </data>
   <data name="removePresetCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -5289,7 +5289,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 55</value>
+    <value>513, 55</value>
   </data>
   <data name="label26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -5334,7 +5334,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="pictureBox26.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 60</value>
+    <value>495, 60</value>
   </data>
   <data name="pictureBox26.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -5451,7 +5451,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 28</value>
+    <value>513, 28</value>
   </data>
   <data name="label28.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -5496,7 +5496,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="pictureBox28.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 33</value>
+    <value>495, 33</value>
   </data>
   <data name="pictureBox28.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -5613,7 +5613,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="label18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>514, 1</value>
+    <value>513, 1</value>
   </data>
   <data name="label18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 1, 3, 1</value>
@@ -5658,7 +5658,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="pictureBox18.Location" type="System.Drawing.Point, System.Drawing">
-    <value>496, 6</value>
+    <value>495, 6</value>
   </data>
   <data name="pictureBox18.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -5772,7 +5772,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>3</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>984, 81</value>
+    <value>982, 81</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -5808,7 +5808,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>984, 54</value>
+    <value>982, 54</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -5838,7 +5838,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="removePresetCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>649, 131</value>
+    <value>647, 131</value>
   </data>
   <data name="removePresetCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -5874,7 +5874,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="customizedByUserCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>768, 131</value>
+    <value>766, 131</value>
   </data>
   <data name="customizedByUserCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -5910,7 +5910,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>NoControl</value>
   </data>
   <data name="userPresetCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>914, 131</value>
+    <value>912, 131</value>
   </data>
   <data name="userPresetCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 9, 0</value>
@@ -5982,7 +5982,7 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>2</value>
   </data>
   <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>895, 69</value>
+    <value>893, 69</value>
   </data>
   <data name="textBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -6009,141 +6009,10 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1006, 721</value>
+    <value>1004, 719</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAQAICAAAAEACACoCAAARgAAABgYAAABACAAiAkAAO4IAAAUFAAAAQAgALgGAAB2EgAAEBAAAAEA
-        IABoBAAALhkAACgAAAAgAAAAQAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcmtlAHJs
-        ZgBybWcAc21oAHRuaAB1b2kAdXBqAHZwagB2cGsAd3FrAHdybAB4cm0AeHNtAHlzbgB6dXAAe3VwAHt2
-        cQB8d3IAfXhzAH55dAB+eXUAf3p1AIB7dgCAe3cAgX14AIJ9eACFgHwAhYF9AIaCfQCHg34Ah4N/AIiE
-        gACJhYEAiYWCAIqGggCLh4MAjYmFAI2KhgCOi4cAj4uIAJCMiQCSj4wAk5CMAJWSjwCWk5AAl5SRAJiV
-        kgCYlpMAmZaUAJqXlQCamJUAm5iWAJ2bmACem5kAnpyaAJ+dmwCgnpsAoJ+dAKGfngCioJ4Ao6KgAKSi
-        oAClo6EApaOiAKakowCmpaMAp6akAKmppwCqqagAraurALGwrwC2trYA////AAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDHzgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOgIBGwAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADoCAQJBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6AgEC
-        OgAAACwWAAAAAAAAMyQYERAXITAAAAAAAAAAOgIBAjoAAAAAFQE1AABCHAEBAQEBAQEBAQEaPQAAADoC
-        AQI6AAAAAAAVATUAIwEBAQ0kMDc3MSUQAQEBHQA6AgECOgAAAAAAABUBLhABARo+AAAAAAAAAABCHAEB
-        CAIBAjoAAAAAAAAAFQEGAQY1AAAAAAAAAAAAAAAAOwoBAQI6AAAAAAAAAAAUAQELAAAAAAAAAAAAAAAA
-        AAAAAAQBCAAAAAAAAAAAABIBAQEBAQEOAAAAAAAAAAAAAAAAAAkBHQAAAAAAAAAAHAEBAQEBAQQWDDkA
-        AAAAAAAAAAAAOwEBPQAAAAAAAAAAAAAAAAAAAAEBASAAAAAAAAAAAAAAHAEaAAAAAAAAAAAAAAAAAAAA
-        AQEBAQs5AAAAAAAAAABCAQEAAAAAAAAAAAAAAAAAAAABASoJAQEgAAAAAAAAAAAQATAAAAAAAAAAAAAA
-        AAAAAAEBRUcfAQELOQAAAAAAACUBIgAAAAAAAAAAAAAAAAAAAQFFSEg3CQEBIAAAAAAAMQEXAAAAAC0C
-        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
-        AACPxwAAwAcAAPAHAAA=
-</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -6167,6 +6036,6 @@ Indeterminate state means that custom text is part of regex and should remain un
     <value>AsrPresetEditor</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9308.26573, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9325.27210, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

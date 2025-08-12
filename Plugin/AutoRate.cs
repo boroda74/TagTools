@@ -31,7 +31,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = AutorateMenuIcon;
             WindowIcon = AutorateIcon;
+            WindowIconInactive = AutorateIconInactive;
             TitleBarText = this.Text;
 
             new ControlBorder(this.threshold05Box);

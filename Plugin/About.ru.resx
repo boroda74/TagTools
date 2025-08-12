@@ -119,31 +119,64 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>617, 8</value>
+    <value>727, 6</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>442, 20</value>
+    <value>350, 15</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>Дополнительные инструменты работы с тегами и отчетности</value>
   </data>
+  <data name="versionLabel.Text" xml:space="preserve">
+    <value>Версия: </value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>647, 20</value>
+    <value>513, 15</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Плагин добавляет дополнительные инструменты работы с тегами и отчетности в Musicbee</value>
   </data>
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>737, 47</value>
+    <value>834, 34</value>
+  </data>
+  <data name="creditLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 15</value>
+  </data>
+  <data name="creditLabel.Text" xml:space="preserve">
+    <value>Иконки для плагина созданы пользователем</value>
+  </data>
+  <data name="creditLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>262, 70</value>
+  </data>
+  <data name="iconSetLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>299, 70</value>
+  </data>
+  <data name="iconSetLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 15</value>
+  </data>
+  <data name="iconSetLabel.Text" xml:space="preserve">
+    <value>в стиле набора иконок</value>
+  </data>
+  <data name="iconSetLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>432, 70</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>486, 70</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 15</value>
+  </data>
+  <data name="toolbarButtonsLabel.Text" xml:space="preserve">
+    <value>для кнопок панели инструментов MusicBee</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>737, 213</value>
+    <value>834, 158</value>
   </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>745, 250</value>
+    <value>850, 197</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>745, 250</value>
+    <value>850, 197</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>О плагине</value>

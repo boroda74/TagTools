@@ -60,7 +60,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = MsrMenuIcon;
             WindowIcon = MsrIcon;
+            WindowIconInactive = MsrIconInactive;
             TitleBarText = this.Text;
 
             new ControlBorder(this.templateNameTextBox);

@@ -38,6 +38,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonsPanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.creditLabel = new System.Windows.Forms.Label();
+            this.creditLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.iconSetLabel = new System.Windows.Forms.Label();
+            this.iconSetLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.toolbarButtonsLabel = new System.Windows.Forms.Label();
             this.buttonsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,12 +87,55 @@
             this.label2.Name = "label2";
             this.label2.Tag = "@pinned-to-parent-x";
             // 
+            // creditLabel
+            // 
+            resources.ApplyResources(this.creditLabel, "creditLabel");
+            this.creditLabel.Name = "creditLabel";
+            this.creditLabel.Tag = "#creditLinkLabel@pinned-to-parent-x";
+            // 
+            // creditLinkLabel
+            // 
+            this.creditLinkLabel.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            resources.ApplyResources(this.creditLinkLabel, "creditLinkLabel");
+            this.creditLinkLabel.LinkColor = System.Drawing.SystemColors.HotTrack;
+            this.creditLinkLabel.Name = "creditLinkLabel";
+            this.creditLinkLabel.TabStop = true;
+            this.creditLinkLabel.Tag = "#iconSetLabel";
+            this.creditLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.creditLinkLabel_LinkClicked);
+            // 
+            // iconSetLabel
+            // 
+            resources.ApplyResources(this.iconSetLabel, "iconSetLabel");
+            this.iconSetLabel.Name = "iconSetLabel";
+            this.iconSetLabel.Tag = "#iconSetLinkLabel";
+            // 
+            // iconSetLinkLabel
+            // 
+            this.iconSetLinkLabel.ActiveLinkColor = System.Drawing.SystemColors.MenuHighlight;
+            resources.ApplyResources(this.iconSetLinkLabel, "iconSetLinkLabel");
+            this.iconSetLinkLabel.LinkColor = System.Drawing.SystemColors.HotTrack;
+            this.iconSetLinkLabel.Name = "iconSetLinkLabel";
+            this.iconSetLinkLabel.TabStop = true;
+            this.iconSetLinkLabel.Tag = "#toolbarButtonsLabel";
+            this.iconSetLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.iconSetLinkLabel_LinkClicked);
+            // 
+            // toolbarButtonsLabel
+            // 
+            resources.ApplyResources(this.toolbarButtonsLabel, "toolbarButtonsLabel");
+            this.toolbarButtonsLabel.Name = "toolbarButtonsLabel";
+            this.toolbarButtonsLabel.Tag = "";
+            // 
             // About
             // 
             this.AcceptButton = this.buttonClose;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
+            this.Controls.Add(this.toolbarButtonsLabel);
+            this.Controls.Add(this.iconSetLinkLabel);
+            this.Controls.Add(this.iconSetLabel);
+            this.Controls.Add(this.creditLinkLabel);
+            this.Controls.Add(this.creditLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonsPanel);
             this.Controls.Add(this.label1);
@@ -113,5 +161,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel buttonsPanel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label creditLabel;
+        private System.Windows.Forms.LinkLabel creditLinkLabel;
+        private System.Windows.Forms.Label iconSetLabel;
+        private System.Windows.Forms.LinkLabel iconSetLinkLabel;
+        private System.Windows.Forms.Label toolbarButtonsLabel;
     }
 }

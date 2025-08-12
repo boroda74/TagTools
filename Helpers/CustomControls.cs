@@ -44,7 +44,8 @@ namespace MusicBeePlugin
             return children;
         }
 
-        internal static void DrawCheckBox(Graphics graphics, float dpiScaling, Rectangle checkBoxBounds, int borderWidth, Color backColor, Color borderColor, Color checkMarkColor, bool state)
+        internal static void DrawCheckBox(Graphics graphics, float dpiScaling, Rectangle checkBoxBounds, int borderWidth, 
+            Color backColor, Color borderColor, Color checkMarkColor, bool state)
         {
             Point pt = new Point(checkBoxBounds.Left + (int)Math.Round(2 * dpiScaling), checkBoxBounds.Top + (int)Math.Round(4 * dpiScaling));
 
@@ -807,8 +808,8 @@ namespace MusicBeePlugin
             this.scaledPx = ownerForm.scaledPx;
             this.enableFiltering = enableFiltering;
 
-            downArrowComboBoxImage = Plugin.SafeCopyBitmap(Plugin.DownArrowComboBoxImage);
-            disabledDownArrowComboBoxImage = Plugin.SafeCopyBitmap(Plugin.DisabledDownArrowComboBoxImage);
+            downArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
+            disabledDownArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DisabledDownArrowComboBoxImage);
 
             this.initialDropDownWidth = comboBox.DropDownWidth;
             //if (comboBox.DropDownWidth < comboBox.Width)
@@ -2948,12 +2949,12 @@ namespace MusicBeePlugin
             scrollBarThumbAndSpansBorderColor = Plugin.ScrollBarThumbAndSpansBorderColor;
 
 
-            UpArrowImage = Plugin.SafeCopyBitmap(Plugin.UpArrowImage);
-            DownArrowImage = Plugin.SafeCopyBitmap(Plugin.DownArrowImage);
+            UpArrowImage = Plugin.CopyBitmap(Plugin.UpArrowImage);
+            DownArrowImage = Plugin.CopyBitmap(Plugin.DownArrowImage);
 
-            ThumbTopImage = Plugin.SafeCopyBitmap(Plugin.ThumbTopImage);
-            ThumbMiddleImage = Plugin.SafeCopyBitmap(Plugin.ThumbMiddleVerticalImage);
-            ThumbBottomImage = Plugin.SafeCopyBitmap(Plugin.ThumbBottomImage);
+            ThumbTopImage = Plugin.CopyBitmap(Plugin.ThumbTopImage);
+            ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleVerticalImage);
+            ThumbBottomImage = Plugin.CopyBitmap(Plugin.ThumbBottomImage);
 
             upArrowImageHeight = UpArrowImage.Height; //-V3080
             upArrowImageWidth = UpArrowImage.Width;
@@ -3808,12 +3809,12 @@ namespace MusicBeePlugin
             scrollBarThumbAndSpansBorderColor = Plugin.ScrollBarThumbAndSpansBorderColor;
 
 
-            LeftArrowImage = Plugin.SafeCopyBitmap(Plugin.LeftArrowImage);
-            RightArrowImage = Plugin.SafeCopyBitmap(Plugin.RightArrowImage);
+            LeftArrowImage = Plugin.CopyBitmap(Plugin.LeftArrowImage);
+            RightArrowImage = Plugin.CopyBitmap(Plugin.RightArrowImage);
 
-            ThumbLeftImage = Plugin.SafeCopyBitmap(Plugin.ThumbLeftImage);
-            ThumbMiddleImage = Plugin.SafeCopyBitmap(Plugin.ThumbMiddleHorizontalImage);
-            ThumbRightImage = Plugin.SafeCopyBitmap(Plugin.ThumbRightImage);
+            ThumbLeftImage = Plugin.CopyBitmap(Plugin.ThumbLeftImage);
+            ThumbMiddleImage = Plugin.CopyBitmap(Plugin.ThumbMiddleHorizontalImage);
+            ThumbRightImage = Plugin.CopyBitmap(Plugin.ThumbRightImage);
 
             leftArrowImageHeight = LeftArrowImage.Height; //-V3080
             leftArrowImageWidth = LeftArrowImage.Width;

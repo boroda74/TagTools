@@ -16,7 +16,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = LastSkippedMenuIcon;
             WindowIcon = LastSkippedIcon;
+            WindowIconInactive = LastSkippedIconInactive;
             TitleBarText = this.Text;
         }
 

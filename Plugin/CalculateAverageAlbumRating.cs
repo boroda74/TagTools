@@ -20,7 +20,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = CarMenuIcon;
             WindowIcon = CarIcon;
+            WindowIconInactive =  CarIconInactive;
             TitleBarText = this.Text;
         }
 

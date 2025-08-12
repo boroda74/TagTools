@@ -70,7 +70,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = SettingsMenuIcon;
             WindowIcon = SettingsIcon;
+            WindowIconInactive = SettingsIconInactive;
             TitleBarText = this.Text;
 
             new ControlBorder(this.unitKBox);
@@ -113,7 +115,7 @@ namespace MusicBeePlugin
 
             showBackupRestoreCheckBox.Checked = !SavedSettings.dontShowBackupRestore;
 
-            hidePluginWindowsOnMinimizationCheckBox.Checked = SavedSettings.hidePluginWindowsOnMinimization;
+            hidePluginWindowsOnMinimizationCheckBox.Checked = !SavedSettings.minimizePluginWindows;
 
             scrollPreviewToEndCheckBox.Checked = SavedSettings.scrollPreviewToEnd;
 
@@ -198,7 +200,7 @@ namespace MusicBeePlugin
 
             SavedSettings.dontShowBackupRestore = !showBackupRestoreCheckBox.Checked;
 
-            SavedSettings.hidePluginWindowsOnMinimization = hidePluginWindowsOnMinimizationCheckBox.Checked;
+            SavedSettings.minimizePluginWindows = !hidePluginWindowsOnMinimizationCheckBox.Checked;
 
             SavedSettings.scrollPreviewToEnd = scrollPreviewToEndCheckBox.Checked;
 
@@ -229,7 +231,7 @@ namespace MusicBeePlugin
             SavedSettings.unitG = unitGBox.Text;
 
             TagToolsPlugin.getButtonTextBoxDpiFontScaling();
-            TagToolsPlugin.prepareThemedBitmapsAndColors();
+            TagToolsPlugin.prepareThemedBitmapsIconsColors();
 
             TagToolsPlugin.SaveSettings();
 

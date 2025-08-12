@@ -70,7 +70,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = SettingsMenuIcon;
             WindowIcon = SettingsIcon;
+            WindowIconInactive = SettingsIconInactive;
             TitleBarText = this.Text;
 
             new ControlBorder(this.customFontTextBox);
@@ -94,7 +96,7 @@ namespace MusicBeePlugin
             allowAsrLrPresetAutoExecutionCheckBox.Checked = SavedSettings.allowAsrLrPresetAutoExecution;
             allowCommandExecutionWithoutPreviewCheckBox.Checked = SavedSettings.allowCommandExecutionWithoutPreview;
 
-            hidePluginWindowsOnMinimizationCheckBox.Checked = SavedSettings.hidePluginWindowsOnMinimization;
+            hidePluginWindowsOnMinimizationCheckBox.Checked = !SavedSettings.minimizePluginWindows;
 
             scrollPreviewToEndCheckBox.Checked = SavedSettings.scrollPreviewToEnd;
 
@@ -159,7 +161,7 @@ namespace MusicBeePlugin
             SavedSettings.allowAsrLrPresetAutoExecution = allowAsrLrPresetAutoExecutionCheckBox.Checked;
             SavedSettings.allowCommandExecutionWithoutPreview = allowCommandExecutionWithoutPreviewCheckBox.Checked;
 
-            SavedSettings.hidePluginWindowsOnMinimization = hidePluginWindowsOnMinimizationCheckBox.Checked;
+            SavedSettings.minimizePluginWindows = !hidePluginWindowsOnMinimizationCheckBox.Checked;
 
             SavedSettings.scrollPreviewToEnd = scrollPreviewToEndCheckBox.Checked;
 
@@ -185,7 +187,7 @@ namespace MusicBeePlugin
             SavedSettings.dontPlayTickedAutoApplyingAsrLrPresetSound = !playTickedAsrPresetSoundCheckBox.Checked;
 
             TagToolsPlugin.getButtonTextBoxDpiFontScaling();
-            TagToolsPlugin.prepareThemedBitmapsAndColors();
+            TagToolsPlugin.prepareThemedBitmapsIconsColors();
 
             TagToolsPlugin.SaveSettings();
 

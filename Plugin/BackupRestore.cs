@@ -66,7 +66,7 @@ namespace MusicBeePlugin
             }
 
             if (!SavedSettings.dontShowBackupRestore && SavedSettings.autoBackupInterval != 0)
-                PeriodicAutoBackupTimer = new System.Threading.Timer(RegularAutoBackup, null,
+                PeriodicAutoBackupTimer = new System.Threading.Timer(PeriodicAutoBackup, null,
                     new TimeSpan(0, 0, (int)SavedSettings.autoBackupInterval * 60), new TimeSpan(0, 0, (int)SavedSettings.autoBackupInterval * 60));
         }
 

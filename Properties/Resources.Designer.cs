@@ -73,19 +73,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap asr {
+        internal static System.Drawing.Bitmap advanced_search_replace {
             get {
-                object obj = ResourceManager.GetObject("asr", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap asr_preset {
-            get {
-                object obj = ResourceManager.GetObject("asr_preset", resourceCulture);
+                object obj = ResourceManager.GetObject("advanced_search_replace", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +93,29 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap autorate {
+        internal static System.Drawing.Bitmap autorate_tracks {
             get {
-                object obj = ResourceManager.GetObject("autorate", resourceCulture);
+                object obj = ResourceManager.GetObject("autorate_tracks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon background_work {
+            get {
+                object obj = ResourceManager.GetObject("background_work", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap backup {
+            get {
+                object obj = ResourceManager.GetObject("backup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +123,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap backup_restore {
+        internal static System.Drawing.Bitmap backup_settings {
             get {
-                object obj = ResourceManager.GetObject("backup_restore", resourceCulture);
+                object obj = ResourceManager.GetObject("backup_settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +133,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap car {
+        internal static System.Drawing.Bitmap calculate_album_rating {
             get {
-                object obj = ResourceManager.GetObject("car", resourceCulture);
+                object obj = ResourceManager.GetObject("calculate_album_rating", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -172,9 +182,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap copy {
+        internal static System.Drawing.Bitmap copy_tag {
             get {
-                object obj = ResourceManager.GetObject("copy", resourceCulture);
+                object obj = ResourceManager.GetObject("copy_tag", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -182,9 +192,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap copy_tag_set {
+        internal static System.Drawing.Bitmap copy_tags {
             get {
-                object obj = ResourceManager.GetObject("copy_tag_set", resourceCulture);
+                object obj = ResourceManager.GetObject("copy_tags", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -192,9 +202,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cscb {
+        internal static System.Drawing.Bitmap custom_sorting_column_browser {
             get {
-                object obj = ResourceManager.GetObject("cscb", resourceCulture);
+                object obj = ResourceManager.GetObject("custom_sorting_column_browser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -282,16 +292,6 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap help {
-            get {
-                object obj = ResourceManager.GetObject("help", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap hidden_presets {
             get {
                 object obj = ResourceManager.GetObject("hidden_presets", resourceCulture);
@@ -332,19 +332,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap lr {
+        internal static System.Drawing.Bitmap library_reports {
             get {
-                object obj = ResourceManager.GetObject("lr", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap lr_preset {
-            get {
-                object obj = ResourceManager.GetObject("lr_preset", resourceCulture);
+                object obj = ResourceManager.GetObject("library_reports", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -355,16 +345,6 @@ namespace MusicBeePlugin.Properties {
         internal static System.Drawing.Bitmap missing_artwork {
             get {
                 object obj = ResourceManager.GetObject("missing_artwork", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap msr {
-            get {
-                object obj = ResourceManager.GetObject("msr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -392,9 +372,19 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap paste {
+        internal static System.Drawing.Bitmap multiple_search_replace {
             get {
-                object obj = ResourceManager.GetObject("paste", resourceCulture);
+                object obj = ResourceManager.GetObject("multiple_search_replace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap open_windows {
+            get {
+                object obj = ResourceManager.GetObject("open_windows", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -435,26 +425,6 @@ namespace MusicBeePlugin.Properties {
         internal static System.Drawing.Bitmap record {
             get {
                 object obj = ResourceManager.GetObject("record", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap reencode_tag {
-            get {
-                object obj = ResourceManager.GetObject("reencode_tag", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap reencode_tags {
-            get {
-                object obj = ResourceManager.GetObject("reencode_tags", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -532,6 +502,16 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap tag_reencode {
+            get {
+                object obj = ResourceManager.GetObject("tag_reencode", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tagging_reporting {
             get {
                 object obj = ResourceManager.GetObject("tagging_reporting", resourceCulture);
@@ -542,9 +522,9 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap tags_copy {
+        internal static System.Drawing.Bitmap tags_reencode {
             get {
-                object obj = ResourceManager.GetObject("tags_copy", resourceCulture);
+                object obj = ResourceManager.GetObject("tags_reencode", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -622,16 +602,6 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap version {
-            get {
-                object obj = ResourceManager.GetObject("version", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap warning {
             get {
                 object obj = ResourceManager.GetObject("warning", resourceCulture);
@@ -672,16 +642,6 @@ namespace MusicBeePlugin.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap web_page {
-            get {
-                object obj = ResourceManager.GetObject("web_page", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap window {
             get {
                 object obj = ResourceManager.GetObject("window", resourceCulture);
@@ -695,26 +655,6 @@ namespace MusicBeePlugin.Properties {
         internal static System.Drawing.Bitmap window_23 {
             get {
                 object obj = ResourceManager.GetObject("window_23", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap windows {
-            get {
-                object obj = ResourceManager.GetObject("windows", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap wrench {
-            get {
-                object obj = ResourceManager.GetObject("wrench", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

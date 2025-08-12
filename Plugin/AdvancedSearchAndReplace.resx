@@ -163,7 +163,7 @@
     <value>Vertical</value>
   </data>
   <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>968, 56</value>
+    <value>966, 56</value>
   </data>
   <data name="descriptionBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -193,7 +193,7 @@
     <value>2</value>
   </data>
   <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>988, 56</value>
+    <value>986, 56</value>
   </data>
   <data name="textBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -256,7 +256,7 @@
     <value>6, 0, 6, 7</value>
   </data>
   <data name="descriptionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 79</value>
+    <value>998, 79</value>
   </data>
   <data name="descriptionGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -283,13 +283,13 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 30</value>
+    <value>746, 29</value>
   </data>
   <data name="parameterTag6List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 23</value>
+    <value>256, 23</value>
   </data>
   <data name="parameterTag6List.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -382,7 +382,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 30</value>
+    <value>410, 29</value>
   </data>
   <data name="parameterTag5List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -481,7 +481,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 30</value>
+    <value>74, 29</value>
   </data>
   <data name="parameterTag4List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -580,13 +580,13 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>746, 3</value>
+    <value>746, 2</value>
   </data>
   <data name="parameterTag3List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 23</value>
+    <value>256, 23</value>
   </data>
   <data name="parameterTag3List.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -679,7 +679,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>410, 3</value>
+    <value>410, 2</value>
   </data>
   <data name="parameterTag2List.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -778,7 +778,7 @@
     <value>Left, Right</value>
   </data>
   <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 3</value>
+    <value>74, 2</value>
   </data>
   <data name="parameterTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
@@ -889,7 +889,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1010, 54</value>
+    <value>1008, 54</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -919,7 +919,7 @@
     <value>NoControl</value>
   </data>
   <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>917, 56</value>
+    <value>915, 56</value>
   </data>
   <data name="userPresetLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 6, 0</value>
@@ -952,7 +952,7 @@
     <value>NoControl</value>
   </data>
   <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>901, 56</value>
+    <value>899, 56</value>
   </data>
   <data name="userPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 3, 4, 3</value>
@@ -988,7 +988,7 @@
     <value>NoControl</value>
   </data>
   <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>753, 56</value>
+    <value>751, 56</value>
   </data>
   <data name="customizedPresetLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 0, 0</value>
@@ -1021,7 +1021,7 @@
     <value>NoControl</value>
   </data>
   <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>737, 56</value>
+    <value>735, 56</value>
   </data>
   <data name="customizedPresetPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1102,7 +1102,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1026, 663</value>
+    <value>1024, 661</value>
   </data>
   <data name="filtersPanel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1114,7 +1114,7 @@
     <value>NoControl</value>
   </data>
   <data name="runMonthlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>522, 6</value>
+    <value>520, 6</value>
   </data>
   <data name="runMonthlyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1153,7 +1153,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="hiddenPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>760, 6</value>
+    <value>758, 6</value>
   </data>
   <data name="hiddenPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1219,7 +1219,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>Run monthly</value>
   </data>
   <data name="filterComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>821, 4</value>
+    <value>819, 4</value>
   </data>
   <data name="filterComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 6, 3</value>
@@ -1255,7 +1255,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>788, 6</value>
+    <value>786, 6</value>
   </data>
   <data name="uncheckAllFiltersPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1291,7 +1291,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="hotkeyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>731, 6</value>
+    <value>729, 6</value>
   </data>
   <data name="hotkeyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1330,7 +1330,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="functionIdPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>701, 6</value>
+    <value>699, 6</value>
   </data>
   <data name="functionIdPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1369,7 +1369,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="playlistPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>671, 6</value>
+    <value>669, 6</value>
   </data>
   <data name="playlistPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1408,7 +1408,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="userPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>641, 6</value>
+    <value>639, 6</value>
   </data>
   <data name="userPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1447,7 +1447,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="customizedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>611, 6</value>
+    <value>609, 6</value>
   </data>
   <data name="customizedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1486,7 +1486,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="predefinedPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>581, 6</value>
+    <value>579, 6</value>
   </data>
   <data name="predefinedPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1525,7 +1525,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="tickedOnlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>551, 6</value>
+    <value>549, 6</value>
   </data>
   <data name="tickedOnlyPictureBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1564,7 +1564,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>489, 4</value>
+    <value>487, 4</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -1597,7 +1597,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>NoControl</value>
   </data>
   <data name="clearSearchButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>454, 4</value>
+    <value>452, 4</value>
   </data>
   <data name="clearSearchButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -1636,7 +1636,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>4, 3, 4, 3</value>
   </data>
   <data name="searchTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>414, 23</value>
+    <value>412, 23</value>
   </data>
   <data name="searchTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1693,7 +1693,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>4, 0, 4, 0</value>
   </data>
   <data name="filtersPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1014, 32</value>
+    <value>1012, 32</value>
   </data>
   <data name="filtersPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1726,7 +1726,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>12, 6, 12, 0</value>
   </data>
   <data name="autoApplyPresetsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>999, 48</value>
+    <value>997, 48</value>
   </data>
   <data name="autoApplyPresetsLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1748,137 +1748,6 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAQAICAAAAEACACoCAAARgAAABgYAAABACAAiAkAAO4IAAAUFAAAAQAgALgGAAB2EgAAEBAAAAEA
-        IABoBAAALhkAACgAAAAgAAAAQAAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcmtlAHJs
-        ZgBybWcAc21oAHRuaAB1b2kAdXBqAHZwagB2cGsAd3FrAHdybAB4cm0AeHNtAHlzbgB6dXAAe3VwAHt2
-        cQB8d3IAfXhzAH55dAB+eXUAf3p1AIB7dgCAe3cAgX14AIJ9eACFgHwAhYF9AIaCfQCHg34Ah4N/AIiE
-        gACJhYEAiYWCAIqGggCLh4MAjYmFAI2KhgCOi4cAj4uIAJCMiQCSj4wAk5CMAJWSjwCWk5AAl5SRAJiV
-        kgCYlpMAmZaUAJqXlQCamJUAm5iWAJ2bmACem5kAnpyaAJ+dmwCgnpsAoJ+dAKGfngCioJ4Ao6KgAKSi
-        oAClo6EApaOiAKakowCmpaMAp6akAKmppwCqqagAraurALGwrwC2trYA////AAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDHzgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOgIBGwAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADoCAQJBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6AgEC
-        OgAAACwWAAAAAAAAMyQYERAXITAAAAAAAAAAOgIBAjoAAAAAFQE1AABCHAEBAQEBAQEBAQEaPQAAADoC
-        AQI6AAAAAAAVATUAIwEBAQ0kMDc3MSUQAQEBHQA6AgECOgAAAAAAABUBLhABARo+AAAAAAAAAABCHAEB
-        CAIBAjoAAAAAAAAAFQEGAQY1AAAAAAAAAAAAAAAAOwoBAQI6AAAAAAAAAAAUAQELAAAAAAAAAAAAAAAA
-        AAAAAAQBCAAAAAAAAAAAABIBAQEBAQEOAAAAAAAAAAAAAAAAAAkBHQAAAAAAAAAAHAEBAQEBAQQWDDkA
-        AAAAAAAAAAAAOwEBPQAAAAAAAAAAAAAAAAAAAAEBASAAAAAAAAAAAAAAHAEaAAAAAAAAAAAAAAAAAAAA
-        AQEBAQs5AAAAAAAAAABCAQEAAAAAAAAAAAAAAAAAAAABASoJAQEgAAAAAAAAAAAQATAAAAAAAAAAAAAA
-        AAAAAAEBRUcfAQELOQAAAAAAACUBIgAAAAAAAAAAAAAAAAAAAQFFSEg3CQEBIAAAAAAAMQEXAAAAAC0C
-        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
-        AACPxwAAwAcAAPAHAAA=
-</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2133,7 +2002,7 @@ Presets must meet ALL checked filters SIMULTANEOUSLY</value>
     <value>AdvancedSearchAndReplace</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9308.26573, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9325.27210, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2665,7 +2534,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>985, 27</value>
+    <value>983, 27</value>
   </data>
   <data name="clearIdButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 6, 3</value>
@@ -2698,7 +2567,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>Top, Right</value>
   </data>
   <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>840, 27</value>
+    <value>838, 27</value>
   </data>
   <data name="idTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -2734,7 +2603,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="idLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>663, 31</value>
+    <value>661, 31</value>
   </data>
   <data name="idLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>20, 0, 0, 0</value>
@@ -2770,7 +2639,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>4, 3, 4, 3</value>
   </data>
   <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 23</value>
+    <value>299, 23</value>
   </data>
   <data name="playlistComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2860,7 +2729,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="clearNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>985, 2</value>
+    <value>983, 2</value>
   </data>
   <data name="clearNextPresetButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 6, 3</value>
@@ -2896,7 +2765,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="showOnlyChainedPresetsButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>958, 2</value>
+    <value>956, 2</value>
   </data>
   <data name="showOnlyChainedPresetsButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -2932,7 +2801,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>NoControl</value>
   </data>
   <data name="gotoNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>931, 2</value>
+    <value>929, 2</value>
   </data>
   <data name="gotoNextPresetButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 3, 4, 3</value>
@@ -2947,7 +2816,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>☛</value>
   </data>
   <data name="gotoNextPresetButton.ToolTip" xml:space="preserve">
-    <value>Go to next presets from the preset execution chain</value>
+    <value>Go to next preset from the preset execution chain</value>
   </data>
   <data name="&gt;&gt;gotoNextPresetButton.Name" xml:space="preserve">
     <value>gotoNextPresetButton</value>
@@ -2974,7 +2843,7 @@ You will need to reassign hotkey if the preset name is changed</value>
     <value>4, 3, 6, 3</value>
   </data>
   <data name="nextPresetComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>620, 23</value>
+    <value>618, 23</value>
   </data>
   <data name="nextPresetComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3041,13 +2910,13 @@ Hit "Right" key to select the drop-down item under cursor</value>
     <value>Left, Right</value>
   </data>
   <data name="preserveTagValuesTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>653, 2</value>
+    <value>652, 2</value>
   </data>
   <data name="preserveTagValuesTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="preserveTagValuesTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>351, 23</value>
+    <value>350, 23</value>
   </data>
   <data name="preserveTagValuesTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3077,7 +2946,7 @@ Hit "Right" key to select the drop-down item under cursor</value>
     <value>NoControl</value>
   </data>
   <data name="labelPreserveTagValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>539, 3</value>
+    <value>538, 3</value>
   </data>
   <data name="labelPreserveTagValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 0, 3</value>
@@ -3119,7 +2988,7 @@ Hit "Right" key to select the drop-down item under cursor</value>
     <value>NoControl</value>
   </data>
   <data name="buttonSelectPreservedTags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>510, 1</value>
+    <value>509, 1</value>
   </data>
   <data name="buttonSelectPreservedTags.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -3158,7 +3027,7 @@ Hit "Right" key to select the drop-down item under cursor</value>
     <value>4, 1, 4, 1</value>
   </data>
   <data name="processPreserveTagsTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>352, 23</value>
+    <value>351, 23</value>
   </data>
   <data name="processPreserveTagsTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3231,7 +3100,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1010, 27</value>
+    <value>1008, 27</value>
   </data>
   <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -3261,13 +3130,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="customText4Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 29</value>
+    <value>609, 29</value>
   </data>
   <data name="customText4Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText4Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 23</value>
+    <value>393, 23</value>
   </data>
   <data name="customText4Box.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -3294,7 +3163,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customText4Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 28</value>
+    <value>508, 28</value>
   </data>
   <data name="customText4Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
@@ -3333,7 +3202,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText3Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 23</value>
+    <value>393, 23</value>
   </data>
   <data name="customText3Box.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -3393,13 +3262,13 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>Left, Right</value>
   </data>
   <data name="customText2Box.Location" type="System.Drawing.Point, System.Drawing">
-    <value>610, 2</value>
+    <value>609, 2</value>
   </data>
   <data name="customText2Box.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customText2Box.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 23</value>
+    <value>393, 23</value>
   </data>
   <data name="customText2Box.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3426,7 +3295,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>NoControl</value>
   </data>
   <data name="customText2Label.Location" type="System.Drawing.Point, System.Drawing">
-    <value>509, 1</value>
+    <value>508, 1</value>
   </data>
   <data name="customText2Label.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
@@ -3465,7 +3334,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>4, 1, 6, 1</value>
   </data>
   <data name="customTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 23</value>
+    <value>393, 23</value>
   </data>
   <data name="customTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3531,7 +3400,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1010, 54</value>
+    <value>1008, 54</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -3558,7 +3427,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1014, 297</value>
+    <value>1012, 297</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3597,7 +3466,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>True</value>
   </data>
   <data name="presetList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>980, 68</value>
+    <value>978, 68</value>
   </data>
   <data name="presetList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3624,7 +3493,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="listBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 88</value>
+    <value>998, 88</value>
   </data>
   <data name="listBoxTableLayoutPanel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3654,7 +3523,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>2</value>
   </data>
   <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1014, 385</value>
+    <value>1012, 385</value>
   </data>
   <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -3981,7 +3850,7 @@ Ctrl-click on checkboxes on the left side of preview adds/removes the tag referr
     <value>51</value>
   </data>
   <data name="previewTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1000, 94</value>
+    <value>998, 92</value>
   </data>
   <data name="previewTable.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -4157,7 +4026,7 @@ Ctrl-click to save preset definitions without closing this window</value>
     <value>4</value>
   </data>
   <data name="settingsProcessingGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>732, 3</value>
+    <value>730, 3</value>
   </data>
   <data name="settingsProcessingGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 3, 4, 3</value>
@@ -4615,7 +4484,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>0, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1014, 184</value>
+    <value>1012, 182</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4648,7 +4517,7 @@ If you have deleted some predefined presets, then they won't be reinstalled</val
     <value>170</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1014, 572</value>
+    <value>1012, 570</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>385</value>

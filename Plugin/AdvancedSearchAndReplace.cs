@@ -195,7 +195,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = AsrMenuIcon;
             WindowIcon = AsrIcon;
+            WindowIconInactive = AsrIconInactive;
             TitleBarText = this.Text;
 
             new ControlBorder(this.searchTextBox);
@@ -289,8 +291,8 @@ namespace MusicBeePlugin
             ReplaceButtonBitmap(clearNextPresetButton, ClearField);
 
 
-            filterPresetChain = SafeCopyBitmap(FilterPresetChain);
-            filterPresetChainDimmed = SafeCopyBitmap(FilterPresetChainDimmed);
+            filterPresetChain = CopyBitmap(FilterPresetChain);
+            filterPresetChainDimmed = CopyBitmap(FilterPresetChainDimmed);
 
             buttonLabels[showOnlyChainedPresetsButton] = string.Empty;
             showOnlyChainedPresetsButton.Text = string.Empty;
@@ -301,7 +303,7 @@ namespace MusicBeePlugin
             ReplaceButtonBitmap(buttonSettings, Gear);
 
             //Setting themed colors
-            descriptionBox.ForeColor = DimmedHighlight;
+            descriptionBox.ForeColor = DimmedHighlightColor;
             descriptionBox.BackColor = BackColor;
 
 
@@ -2180,64 +2182,64 @@ namespace MusicBeePlugin
                     switch (i)
                     {
                         case 0:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);
                             break;
                         case 1:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);
                             break;
                         case 2:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);
                             break;
                         case 3:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);
                             break;
                         case 4:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);
                             break;
                         case 5:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);
                             break;
                         case 6:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);
                             break;
                         case 7:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);
                             break;
                         case 8:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);
                             break;
                         case 9:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);
                             break;
                         case 10:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);
                             break;
                         case 11:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);
                             break;
                         case 12:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);
                             break;
                         case 13:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);
                             break;
                         case 14:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);
                             break;
                         case 15:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);
                             break;
                         case 16:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);
                             break;
                         case 17:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);
                             break;
                         case 18:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);
                             break;
                         case 19:
-                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);
                             break;
                         default:
                             throw new Exception("Incorrect ASR hotkey slot: " + i + "!");
@@ -2249,64 +2251,64 @@ namespace MusicBeePlugin
                     switch (i)
                     {
                         case 0:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset1EventHandler);
                             break;
                         case 1:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset2EventHandler);
                             break;
                         case 2:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset3EventHandler);
                             break;
                         case 3:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset4EventHandler);
                             break;
                         case 4:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset5EventHandler);
                             break;
                         case 5:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset6EventHandler);
                             break;
                         case 6:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset7EventHandler);
                             break;
                         case 7:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset8EventHandler);
                             break;
                         case 8:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset9EventHandler);
                             break;
                         case 9:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset10EventHandler);
                             break;
                         case 10:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset11EventHandler);
                             break;
                         case 11:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset12EventHandler);
                             break;
                         case 12:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset13EventHandler);
                             break;
                         case 13:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset14EventHandler);
                             break;
                         case 14:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset15EventHandler);
                             break;
                         case 15:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset16EventHandler);
                             break;
                         case 16:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset17EventHandler);
                             break;
                         case 17:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset18EventHandler);
                             break;
                         case 18:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset19EventHandler);
                             break;
                         case 19:
-                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);//===.Image = AsrPresetIcon;
+                            AsrPresetsContextMenuItem.DropDown.Items.Add(preset.getName(), null, plugin.AsrPreset20EventHandler);
                             break;
                         default:
                             throw new Exception("Incorrect ASR hotkey slot: " + i + "!");
@@ -2967,7 +2969,7 @@ namespace MusicBeePlugin
                 return;
 
 
-            Thread.CurrentThread.Priority = ThreadPriority.Lowest;//===
+            Thread.CurrentThread.Priority = ThreadPriority.Lowest;
 
             MbApiInterface.Library_QueryFilesEx("domain=Library", out var files);
             if (files == null || files.Length == 0)
@@ -3801,6 +3803,9 @@ namespace MusicBeePlugin
 
         private void AsrPresetEditor_FormClosing(object sender, EventArgs e)
         {
+            asrPresetEditor.FormClosing -= AsrPresetEditor_FormClosing;
+
+
             if (asrPresetEditor.settingsSaved)
             {
                 SerializableDictionary<string, string> normalizedNames = new SerializableDictionary<string, string>();
@@ -3833,10 +3838,12 @@ namespace MusicBeePlugin
             }
 
 
-            buttonEdit.Enable((presetList.SelectedItem as Preset)?.userPreset == true || DeveloperMode);
-
             backedUpPresetName = null;
             asrPresetEditor = null;
+
+
+            enableDisablePreviewOptionControls(true);
+            presetList.Enable(true);
         }
 
         private void editPreset(Preset preset, bool itsNewPreset, bool readOnly)
@@ -3844,9 +3851,11 @@ namespace MusicBeePlugin
             backedUpPresetName = preset.getName();
 
             asrPresetEditor = new AsrPresetEditor(TagToolsPlugin);
-            asrPresetEditor.FormClosing += AsrPresetEditor_FormClosing;//=== disable edit/preview
 
-            buttonEdit.Enable(false);
+            asrPresetEditor.FormClosing += AsrPresetEditor_FormClosing;
+
+            enableDisablePreviewOptionControls(false);
+            presetList.Enable(false);
 
             asrPresetEditor.editPreset(preset, readOnly, this);
         }
@@ -6177,7 +6186,7 @@ namespace MusicBeePlugin
         {
             bool initialEnable = enable;
 
-            if (enable && previewIsGenerated)
+            if (enable && (previewIsGenerated || asrPresetEditor != null))
                 return;
 
             buttonCreate.Enable(enable);
@@ -7312,7 +7321,7 @@ namespace MusicBeePlugin
             filterPresetList();
         }
 
-        private void tickedOnlyPictureBox_Click(object sender, EventArgs e)//===
+        private void tickedOnlyPictureBox_Click(object sender, EventArgs e)
         {
             showTickedOnlyChecked = !showTickedOnlyChecked;
 

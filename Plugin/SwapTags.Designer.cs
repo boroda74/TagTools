@@ -133,6 +133,8 @@
             this.Controls.Add(this.sourceTagList);
             this.Controls.Add(this.SwapTagLabel);
             this.DoubleBuffered = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SwapTags";
             this.Tag = "@min-max-width-same@min-max-height-same";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SwapTags_FormClosing);

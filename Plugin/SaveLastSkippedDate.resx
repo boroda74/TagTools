@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lastSkippedTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 5</value>
+    <value>214, 5</value>
   </data>
   <data name="lastSkippedTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 8, 4</value>
@@ -151,7 +151,7 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 62</value>
+    <value>346, 62</value>
   </data>
   <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 8, 7</value>
@@ -181,7 +181,7 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 62</value>
+    <value>250, 62</value>
   </data>
   <data name="buttonOK.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 7</value>
@@ -271,7 +271,7 @@
     <value>Top, Right</value>
   </data>
   <data name="lastSkippedDateFormatTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 32</value>
+    <value>214, 32</value>
   </data>
   <data name="lastSkippedDateFormatTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 8, 4</value>
@@ -361,7 +361,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>446, 91</value>
+    <value>444, 89</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
@@ -544,6 +544,6 @@
     <value>SaveLastSkippedDate</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.3.9302.11586, Culture=neutral, PublicKeyToken=null</value>
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9325.27210, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

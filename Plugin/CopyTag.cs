@@ -68,7 +68,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = CopyTagMenuIcon;
             WindowIcon = CopyTagIcon;
+            WindowIconInactive = CopyTagIconInactive;
             TitleBarText = this.Text;
         }
 

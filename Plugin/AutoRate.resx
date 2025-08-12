@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="buttonClose.Location" type="System.Drawing.Point, System.Drawing">
-    <value>822, 8</value>
+    <value>820, 8</value>
   </data>
   <data name="buttonClose.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 9, 4</value>
@@ -304,7 +304,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="baseRatingTrackBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 45</value>
+    <value>230, 42</value>
   </data>
   <data name="baseRatingTrackBar.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1915,8 +1915,11 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>936, 597</value>
+    <value>934, 595</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="buttonSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -1927,7 +1930,7 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>773, 8</value>
+    <value>771, 8</value>
   </data>
   <data name="buttonSettings.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 22, 4</value>
@@ -1938,9 +1941,6 @@
   <data name="buttonSettings.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="buttonSettings.ToolTip" xml:space="preserve">
     <value>Open quick settings</value>
   </data>
@@ -1959,27 +1959,6 @@
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="labelTotalTracks.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelTotalTracks.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI Semibold, 9pt, style=Bold</value>
-  </data>
-  <data name="labelTotalTracks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 328</value>
-  </data>
-  <data name="labelTotalTracks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="labelTotalTracks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 15</value>
-  </data>
-  <data name="labelTotalTracks.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="labelTotalTracks.Text" xml:space="preserve">
-    <value>Number of ever played tracks in your library:  </value>
-  </data>
   <data name="&gt;&gt;labelTotalTracks.Name" xml:space="preserve">
     <value>labelTotalTracks</value>
   </data>
@@ -1991,6 +1970,931 @@
   </data>
   <data name="&gt;&gt;labelTotalTracks.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;labelSum.Name" xml:space="preserve">
+    <value>labelSum</value>
+  </data>
+  <data name="&gt;&gt;labelSum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSum.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelSum.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;buttonNormalizePercentages.Name" xml:space="preserve">
+    <value>buttonNormalizePercentages</value>
+  </data>
+  <data name="&gt;&gt;buttonNormalizePercentages.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonNormalizePercentages.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;buttonNormalizePercentages.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.Name" xml:space="preserve">
+    <value>groupBox1Label</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1Label.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>525, 205</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 9, 4</value>
+  </data>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 383</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;threshold05Box.Name" xml:space="preserve">
+    <value>threshold05Box</value>
+  </data>
+  <data name="&gt;&gt;threshold05Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold05Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold05Box.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.Name" xml:space="preserve">
+    <value>checkBox05Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox05Label.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;threshold1Box.Name" xml:space="preserve">
+    <value>threshold1Box</value>
+  </data>
+  <data name="&gt;&gt;threshold1Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold1Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold1Box.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;checkBox1Label.Name" xml:space="preserve">
+    <value>checkBox1Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox1Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox1Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox1Label.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;threshold15Box.Name" xml:space="preserve">
+    <value>threshold15Box</value>
+  </data>
+  <data name="&gt;&gt;threshold15Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold15Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold15Box.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;checkBox15Label.Name" xml:space="preserve">
+    <value>checkBox15Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox15Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox15Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox15Label.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;threshold2Box.Name" xml:space="preserve">
+    <value>threshold2Box</value>
+  </data>
+  <data name="&gt;&gt;threshold2Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold2Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold2Box.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;checkBox2Label.Name" xml:space="preserve">
+    <value>checkBox2Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox2Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox2Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox2Label.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;threshold3Box.Name" xml:space="preserve">
+    <value>threshold3Box</value>
+  </data>
+  <data name="&gt;&gt;threshold3Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold3Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold3Box.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;checkBox3Label.Name" xml:space="preserve">
+    <value>checkBox3Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox3Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox3Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox3Label.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;threshold35Box.Name" xml:space="preserve">
+    <value>threshold35Box</value>
+  </data>
+  <data name="&gt;&gt;threshold35Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold35Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold35Box.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;checkBox35Label.Name" xml:space="preserve">
+    <value>checkBox35Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox35Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox35Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox35Label.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;threshold4Box.Name" xml:space="preserve">
+    <value>threshold4Box</value>
+  </data>
+  <data name="&gt;&gt;threshold4Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold4Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold4Box.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;checkBox4Label.Name" xml:space="preserve">
+    <value>checkBox4Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox4Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox4Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox4Label.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;threshold45Box.Name" xml:space="preserve">
+    <value>threshold45Box</value>
+  </data>
+  <data name="&gt;&gt;threshold45Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold45Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold45Box.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;checkBox45Label.Name" xml:space="preserve">
+    <value>checkBox45Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox45Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox45Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox45Label.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;threshold5Box.Name" xml:space="preserve">
+    <value>threshold5Box</value>
+  </data>
+  <data name="&gt;&gt;threshold5Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold5Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold5Box.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.Name" xml:space="preserve">
+    <value>checkBox5Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox5Label.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;groupBox2Label.Name" xml:space="preserve">
+    <value>groupBox2Label</value>
+  </data>
+  <data name="&gt;&gt;groupBox2Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2Label.ZOrder" xml:space="preserve">
+    <value>41</value>
+  </data>
+  <data name="&gt;&gt;threshold25Box.Name" xml:space="preserve">
+    <value>threshold25Box</value>
+  </data>
+  <data name="&gt;&gt;threshold25Box.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;threshold25Box.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;threshold25Box.ZOrder" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="&gt;&gt;checkBox25Label.Name" xml:space="preserve">
+    <value>checkBox25Label</value>
+  </data>
+  <data name="&gt;&gt;checkBox25Label.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox25Label.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;checkBox25Label.ZOrder" xml:space="preserve">
+    <value>43</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 205</value>
+  </data>
+  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 4, 4, 4</value>
+  </data>
+  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>508, 383</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>34, 123</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>329, 15</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Calculate "Plays per days in library" instead of "Plays per day"</value>
+  </data>
+  <data name="sinceAddedCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Usually "Plays per day" means the average number of times you played track since it was added to 
+the library and till the day it was last played. So if you played track frequently in past and didn't 
+play it for a long time then it will have high "Plays per day" value. 
+
+Sometimes it's better to use this option which will treat "Plays per day" as average number of times 
+track was played since it was added to the library till today (no matter when it was last played). 
+
+It's recommended to "Auto rate on startup" your tracks if you want to use this option because 
+"Plays per days in library" value depends on "today" date which is dynamic value and auto rating 
+should change every day for each track in this case. 
+</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Name" xml:space="preserve">
+    <value>sinceAddedCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="sinceAddedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="sinceAddedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 123</value>
+  </data>
+  <data name="sinceAddedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 4, 4, 4</value>
+  </data>
+  <data name="sinceAddedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="sinceAddedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="sinceAddedCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="sinceAddedCheckBox.ToolTip" xml:space="preserve">
+    <value>Usually "Plays per day" means the average number of times you played track since it was added to 
+the library and till the day it was last played. So if you played track frequently in past and didn't 
+play it for a long time then it will have high "Plays per day" value. 
+
+Sometimes it's better to use this option which will treat "Plays per day" as average number of times 
+track was played since it was added to the library till today (no matter when it was last played). 
+
+It's recommended to "Auto rate on startup" your tracks if you want to use this option because 
+"Plays per days in library" value depends on "today" date which is dynamic value and auto rating 
+should change every day for each track in this case. </value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBox.Name" xml:space="preserve">
+    <value>sinceAddedCheckBox</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;sinceAddedCheckBox.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 96</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 15</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto rate songs automatically if they are played</value>
+  </data>
+  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Name" xml:space="preserve">
+    <value>autoRateOnTrackPropertiesCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>204, 68</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 15</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Text" xml:space="preserve">
+    <value>Notify when auto rating is completed</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Name" xml:space="preserve">
+    <value>notifyWhenAutoRatingCompletedCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>179, 68</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="notifyWhenAutoRatingCompletedCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Name" xml:space="preserve">
+    <value>notifyWhenAutoRatingCompletedCheckBox</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 68</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 15, 0</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 15</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto rate on startup</value>
+  </data>
+  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Name" xml:space="preserve">
+    <value>autoRateAtStartUpCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="playsPerDayTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 36</value>
+  </data>
+  <data name="playsPerDayTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="playsPerDayTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 23</value>
+  </data>
+  <data name="playsPerDayTagList.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;playsPerDayTagList.Name" xml:space="preserve">
+    <value>playsPerDayTagList</value>
+  </data>
+  <data name="&gt;&gt;playsPerDayTagList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;playsPerDayTagList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;playsPerDayTagList.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 42</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 15</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="storePlaysPerDayCheckBoxLabel.Text" xml:space="preserve">
+    <value>Store number of plays per day in tag:</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Name" xml:space="preserve">
+    <value>storePlaysPerDayCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="storePlaysPerDayCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="storePlaysPerDayCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 42</value>
+  </data>
+  <data name="storePlaysPerDayCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 4, 4, 4</value>
+  </data>
+  <data name="storePlaysPerDayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="storePlaysPerDayCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="storePlaysPerDayCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBox.Name" xml:space="preserve">
+    <value>storePlaysPerDayCheckBox</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;storePlaysPerDayCheckBox.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>554, 42</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 15</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+    <value>Auto calculate thresholds on startup</value>
+  </data>
+  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Name" xml:space="preserve">
+    <value>holdsAtStartUpCheckBoxLabel</value>
+  </data>
+  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>529, 42</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 19</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="calculateThresholdsAtStartUpCheckBox.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.Name" xml:space="preserve">
+    <value>calculateThresholdsAtStartUpCheckBox</value>
+  </data>
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>950, 634</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Auto Rate Tracks</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
+    <value>dirtyErrorProvider</value>
+  </data>
+  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>AutoRate</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=10.0.9325.27210, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAQAICAAAAEAIACoEAAARgAAABgYAAABACAAiAkAAO4QAAAUFAAAAQAgALgGAAB2GgAAEBAAAAEA
+        IABoBAAALiEAACgAAAAgAAAAQAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awqBdmsxgXZrUYF2a2aBdmtugXZrboF2
+        a2aBdmtRgXZrMYF2awoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2ayWBdmuBgXZrvIF2a7+Bdmu/gXZrv4F2
+        a7+Bdmu/gXZrv4F2a7+Bdmu/gXZrvIF2a4GBdmslAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awqBdmt2gXZrv4F2a7+Bdmu/gXZrs4F2
+        a4WBdmtjgXZrVIF2a1SBdmtjgXZrhYF2a7OBdmu/gXZrv4F2a7+Bdmt2gXZrCgAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmscgXZrpIF2a7+Bdmu/gXZrmYF2
+        a0CBdmsEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrBIF2a0CBdmuZgXZrv4F2a7+BdmukgXZrHAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrHoF2a7CBdmu/gXZruIF2
+        a02BdmsBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awGBdmtNgXZruIF2
+        a7+BdmuwgXZrHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2aw2BdmupgXZrv4F2
+        a7CBdmslAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACBdmslgXZrsIF2a7+BdmupgXZrDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrgYF2
+        a7+Bdmu2gXZrIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmsjgXZrtoF2a7+BdmuBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2
+        azSBdmu/gXZrv4F2a0QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmtEgXZrv4F2a7+Bdms0AAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgXZrkoF2a7+BdmuMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmuMgXZrv4F2a5IAAAAAAAAAAAAA
+        AAAAAAAAAAAAAIF2ax2Bdmu/gXZrv4F2ay0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2ay2Bdmu/gXZrv4F2
+        ax0AAAAAAAAAAAAAAAAAAAAAgXZrWoF2a7+BdmukAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2
+        a6SBdmu/gXZrWgAAAAAAAAAAAAAAAAAAAACBdmuFgXZrv4F2a24AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgXZrboF2a7+BdmuFAAAAAAAAAAAAAAAAAAAAAIF2a6OBdmu/gXZrSQAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmtJgXZrv4F2a6MAAAAAAAAAAAAAAAAAAAAAgXZrs4F2a7+Bdms2AAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrA4F2a5GBdmuSgXZrEAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2azaBdmu/gXZrswAAAAAAAAAAAAAAAAAAAACBdmu0gXZrv4F2
+        azIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsJgXZrt4F2a7+BdmuegXZrEAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrMoF2a7+Bdmu0AAAAAAAAAAAAAAAAAAAAAIF2
+        a6qBdmu/gXZrQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsxgXZruIF2
+        a7+BdmuegXZrEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmtBgXZrv4F2a6oAAAAAAAAAAAAA
+        AAAAAAAAgXZrkYF2a7+BdmtgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACBdmsxgXZruIF2a7+BdmuegXZrEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2a2CBdmu/gXZrkQAA
+        AAAAAAAAAAAAAAAAAACBdmtpgXZrv4F2a5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmsxgXZruIF2a7+BdmuegXZrEAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrkIF2
+        a7+BdmtpAAAAAAAAAAAAAAAAAAAAAIF2azSBdmu/gXZrvoF2axUAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsxgXZruIF2a7+BdmuegXZrEAAAAAAAAAAAAAAAAIF2
+        axWBdmu+gXZrv4F2azQAAAAAAAAAAAAAAAAAAAAAgXZrAoF2a6uBdmu/gXZrbAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsxgXZruIF2a7+BdmtqAAAAAAAA
+        AAAAAAAAgXZrbIF2a7+BdmurgXZrAgAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrVIF2a7+Bdmu7gXZrHwAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmswgXZrjIF2
+        ay4AAAAAAAAAAIF2ax+Bdmu7gXZrv4F2a1QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsFgXZro4F2
+        a7+BdmucgXZrBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmsHgXZrnIF2a7+BdmujgXZrBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACBdmspgXZrvIF2a7+BdmuLgXZrBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAgXZrB4F2a4uBdmu/gXZrvIF2aykAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmtJgXZrv4F2a7+BdmuXgXZrGQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2axmBdmuXgXZrv4F2a7+BdmtJAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmtLgXZrvoF2a7+Bdmu3gXZrW4F2awkAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awmBdmtbgXZrt4F2a7+Bdmu+gXZrSwAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsvgXZrq4F2a7+Bdmu/gXZrtoF2
+        a3uBdmtGgXZrJYF2axWBdmsVgXZrJYF2a0aBdmt7gXZrtoF2a7+Bdmu/gXZrq4F2ay8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsKgXZrZIF2
+        a7WBdmu/gXZrv4F2a7+Bdmu/gXZrv4F2a7+Bdmu/gXZrv4F2a7+Bdmu/gXZrtYF2a2SBdmsKAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgXZrCoF2a0mBdmuBgXZrq4F2a7+Bdmu/gXZrv4F2a7+BdmurgXZrgYF2a0mBdmsKAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrH4F2a7+Bdmu/gXZrHwAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAgXZrAYF2azuBdmtIgXZrSIF2a0iBdmtXgXZrv4F2a7+BdmtXgXZrSIF2
+        a0iBdmtIgXZrO4F2awEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsugXZrv4F2a7+Bdmu/gXZrv4F2a7+Bdmu/gXZrv4F2
+        a7+Bdmu/gXZrv4F2a7+Bdmu/gXZrLgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awqBdmtmgXZrdIF2a3SBdmt0gXZrdIF2
+        a3mBdmt5gXZrdIF2a3SBdmt0gXZrdIF2a2aBdmsKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA/+AH//+AAf/+AAB//AfgP/gf+B/wf/4P8P//D+H//4fj///Hw///w8f//+PH///jx///48f8
+        P+PH/B/jx/4P48f/B+PH/4Pjw//Bw8P/4cPh//GH4P//B/B//g/4P/wf/A/wP/4AAH//AAD//8AD///8
+        P///gAH//4AB//+AAf8oAAAAGAAAADAAAAABACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAgXZrAoF2axWBdmsxgXZrWoF2a3SBdmuBgXZrgYF2a3SBdmtagXZrMYF2
+        axWBdmsCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsEgXZrSYF2
+        a4mBdmu2gXZrs4F2a5mBdmuLgXZri4F2a5mBdmuzgXZrtoF2a4mBdmtJgXZrBAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awqBdmtjgXZrsYF2a7GBdmtwgXZrLIF2ax2BdmsWgXZrFoF2
+        ax2BdmssgXZrcIF2a7GBdmuxgXZrY4F2awoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrE4F2
+        a3qBdmu5gXZrfYF2ax0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2ax2Bdmt9gXZruYF2
+        a3qBdmsTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrYoF2a7eBdmt+gXZrDgAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsOgXZrfoF2a7eBdmtiAAAAAAAAAAAAAAAAAAAAAAAA
+        AACBdmsdgXZrs4F2a5CBdmsfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgXZrH4F2a5CBdmuzgXZrHQAAAAAAAAAAAAAAAIF2awSBdmt4gXZrrIF2azoAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2azqBdmusgXZreIF2
+        awQAAAAAAAAAAIF2ax6BdmuegXZri4F2awsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awuBdmuLgXZrnoF2ax4AAAAAAAAAAIF2az2BdmuugXZrXQAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACBdmtdgXZrroF2az0AAAAAAAAAAIF2a1OBdmu5gXZrMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACBdmsbgXZrHIF2awIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmszgXZruYF2a1MAAAAAAAAAAIF2
+        a1qBdmu8gXZrJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awOBdmt8gXZrlIF2ay+BdmsCAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmsngXZrvIF2a1oAAAAAAAAAAIF2a1aBdmu6gXZrLgAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAIF2awGBdms+gXZruYF2a5mBdmsoAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsugXZruoF2
+        a1YAAAAAAAAAAIF2a0OBdmuxgXZrUQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrQYF2
+        a6qBdmusgXZrKIF2awIAAAAAAAAAAAAAAACBdmtRgXZrsYF2a0MAAAAAAAAAAIF2ayeBdmujgXZrgIF2
+        awUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrBoF2a0aBdmuqgXZrmYF2ay+BdmsCAAAAAIF2
+        awWBdmuAgXZro4F2aycAAAAAAAAAAIF2aweBdmuIgXZrpYF2aysAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAIF2awaBdmtBgXZruYF2a4WBdmsVAAAAAIF2ayuBdmulgXZriIF2awcAAAAAAAAAAAAA
+        AACBdmswgXZruYF2a32BdmsRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrNYF2
+        a0aBdmsJgXZrEYF2a32Bdmu5gXZrMAAAAAAAAAAAAAAAAAAAAACBdmsCgXZrfIF2a7WBdmtigXZrAwAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsDgXZrYoF2a7WBdmt8gXZrAgAA
+        AAAAAAAAAAAAAAAAAAAAAAAAgXZrIYF2a5KBdmu1gXZrW4F2awkAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAIF2awmBdmtbgXZrtYF2a5KBdmshAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2
+        axyBdmuCgXZruoF2a5aBdmtEgXZrG4F2aw2BdmsGgXZrBoF2aw2BdmsbgXZrRIF2a5aBdmu6gXZrgoF2
+        axwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsSgXZraIF2a6aBdmu6gXZrloF2
+        a3qBdmtsgXZrbIF2a3qBdmuWgXZruoF2a6aBdmtogXZrEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAgXZrCIF2ayeBdmtagXZrmIF2a7eBdmu/gXZrv4F2a7eBdmuYgXZrWoF2
+        ayeBdmsIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2
+        aweBdmsRgXZrEoF2ax+BdmuagXZrmoF2ax+BdmsSgXZrEYF2awcAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrBoF2a0qBdmuCgXZrg4F2a4eBdmuygXZrsoF2
+        a4eBdmuDgXZrgoF2a0qBdmsGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgXZrBYF2a0iBdmuEgXZrh4F2a4eBdmuKgXZrioF2a4eBdmuHgXZrhIF2a0iBdmsFAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAA/AA/APgAHwDwAA8A4P8HAOH/hwDD/8MAh//hAIf/4QCP//EAj+PxAI/B
+        8QCPwfEAj/BxAIfwIQCH+CEAw/4DAMH/gwDg/wcA8AAPAPgAHwD8AD8A/gB/APwAPwD8AD8AKAAAABQA
+        AAAoAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrBYF2
+        ayuBdmtZgXZre4F2a4qBdmuKgXZre4F2a1mBdmsrgXZrBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgXZrAYF2axKBdmt2gXZrp4F2a6eBdmuBgXZraIF2a2iBdmuBgXZrp4F2a6eBdmt2gXZrEoF2
+        awEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsjgXZrlYF2a6eBdmtWgXZrEQAAAAAAAAAAAAAAAAAA
+        AACBdmsRgXZrVoF2a6eBdmuVgXZrIwAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrFIF2a5aBdmufgXZrIIF2
+        awIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsCgXZrIIF2a5+BdmuWgXZrFAAAAAAAAAAAAAAAAIF2
+        awSBdmtkgXZrqIF2azIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrMoF2
+        a6iBdmtkgXZrBAAAAAAAAAAAgXZrG4F2a7GBdmtZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAgXZrWYF2a7GBdmsbAAAAAAAAAACBdmtKgXZrsYF2axwAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmscgXZrsYF2a0oAAAAAAAAAAIF2
+        a3SBdmuNgXZrCwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2
+        awuBdmuNgXZrdAAAAAAAAAAAgXZrh4F2a3uBdmsHAAAAAAAAAAAAAAAAAAAAAIF2awGBdmtXgXZraYF2
+        aw8AAAAAAAAAAAAAAAAAAAAAgXZrB4F2a3uBdmuHAAAAAAAAAACBdmuEgXZrfYF2awcAAAAAAAAAAAAA
+        AAAAAAAAgXZrAYF2az+Bdmu4gXZrb4F2awUAAAAAAAAAAAAAAACBdmsHgXZrfYF2a4QAAAAAAAAAAIF2
+        a2mBdmuYgXZrDgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2a0WBdmusgXZreIF2awwAAAAAAAAAAIF2
+        aw6BdmuYgXZraQAAAAAAAAAAgXZrPIF2a7iBdmsnAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrBYF2
+        a0iBdmuvgXZrbIF2awkAAAAAgXZrJ4F2a7iBdms8AAAAAAAAAACBdmsRgXZrn4F2a3iBdmsGAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAgXZrA4F2a0aBdmuJgXZrHIF2awaBdmt4gXZrn4F2axEAAAAAAAAAAIF2
+        awKBdmtLgXZrrYF2a1CBdmsBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrA4F2aw2BdmsDgXZrUIF2
+        a62BdmtLgXZrAgAAAAAAAAAAAAAAAIF2awiBdmt6gXZrs4F2a0KBdmsEAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgXZrBIF2a0KBdmuzgXZreoF2awgAAAAAAAAAAAAAAAAAAAAAAAAAAIF2awyBdmtngXZruIF2
+        a4iBdms8gXZrGoF2awqBdmsKgXZrGoF2azyBdmuIgXZruIF2a2eBdmsMAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAIF2aweBdmtIgXZrl4F2a6qBdmuegXZrloF2a5aBdmuegXZrqoF2a5eBdmtIgXZrBwAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmsIgXZrMoF2a1mBdmuhgXZroYF2
+        a1mBdmsygXZrCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrBYF2
+        a0SBdmtdgXZrYIF2a5+BdmufgXZrYIF2a12BdmtEgXZrBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmsJgXZrbIF2a5CBdmuQgXZrkoF2a5KBdmuQgXZrkIF2a2yBdmsJAAAAAAAA
+        AAAAAAAAAAAAAAAAAAD4AfAA4ABwAODwcADB+DAAh/4QAI//EACP/xAAj/8QAI8PEACPBxAAj8MQAI/B
+        EACH4BAAg/AQAMH4MADgAHAA8ADwAPwD8AD4AfAA+AHwACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrCYF2a1KBdmuAgXZrlIF2a5SBdmuAgXZrUoF2
+        awkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrMoF2a62BdmuWgXZrT4F2ay6BdmsugXZrT4F2
+        a5aBdmutgXZrMgAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrNYF2a7eBdmtKAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgXZrSoF2a7eBdms1AAAAAAAAAAAAAAAAgXZrDYF2a6+BdmtHAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmtHgXZrr4F2aw0AAAAAAAAAAIF2a1uBdmuOAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2a46BdmtbAAAAAAAAAACBdmuXgXZrRAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmtEgXZrlwAAAAAAAAAAgXZrtYF2ayAAAAAAAAAAAAAA
+        AAAAAAAAgXZrJYF2aygAAAAAAAAAAAAAAAAAAAAAgXZrIIF2a7UAAAAAAAAAAIF2a7eBdmsdAAAAAAAA
+        AAAAAAAAAAAAAIF2azyBdmu1gXZrLwAAAAAAAAAAAAAAAIF2ax2Bdmu3AAAAAAAAAACBdmuegXZrPAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAgXZrRoF2a7WBdmsvAAAAAAAAAACBdms8gXZrngAAAAAAAAAAgXZraIF2
+        a4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACBdmtGgXZrtYF2ax4AAAAAgXZrgIF2a2gAAAAAAAAAAIF2
+        axaBdmu3gXZrMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2ay+BdmsLgXZrMIF2a7eBdmsWAAAAAAAA
+        AAAAAAAAgXZrS4F2a7KBdmsuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrLoF2a7KBdmtLAAAAAAAA
+        AAAAAAAAAAAAAAAAAACBdmtOgXZruIF2a3aBdmswgXZrDoF2aw6BdmswgXZrdoF2a7iBdmtOAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIF2axuBdmtygXZrqoF2a7+Bdmu/gXZrqoF2a3KBdmsbAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrIYF2aySBdmt9gXZrfYF2aySBdmshAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgXZrDoF2a5aBdmuZgXZrm4F2a5uBdmuZgXZrloF2
+        aw4AAAAAAAAAAAAAAAAAAAAA8A8AAOAHAADH4wAAj/EAAJ/5AACf+QAAnnkAAJ45AACfGQAAn4kAAI/B
+        AADH4wAA4AcAAPAPAAD4HwAA8A8AAA==
+</value>
+  </data>
+  <data name="buttonCalculate.Error" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="buttonCalculate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonCalculate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 353</value>
+  </data>
+  <data name="buttonCalculate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="buttonCalculate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>290, 23</value>
+  </data>
+  <data name="buttonCalculate.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="buttonCalculate.Text" xml:space="preserve">
+    <value>Calculate thresholds now</value>
+  </data>
+  <data name="&gt;&gt;buttonCalculate.Name" xml:space="preserve">
+    <value>buttonCalculate</value>
+  </data>
+  <data name="&gt;&gt;buttonCalculate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonCalculate.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;buttonCalculate.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="labelSum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2024,6 +2928,39 @@
   </data>
   <data name="&gt;&gt;labelSum.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="labelTotalTracks.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelTotalTracks.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 9pt, style=Bold</value>
+  </data>
+  <data name="labelTotalTracks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 328</value>
+  </data>
+  <data name="labelTotalTracks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="labelTotalTracks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 15</value>
+  </data>
+  <data name="labelTotalTracks.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="labelTotalTracks.Text" xml:space="preserve">
+    <value>Number of ever played tracks in your library:  </value>
+  </data>
+  <data name="&gt;&gt;labelTotalTracks.Name" xml:space="preserve">
+    <value>labelTotalTracks</value>
+  </data>
+  <data name="&gt;&gt;labelTotalTracks.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTotalTracks.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;labelTotalTracks.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="buttonNormalizePercentages.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -2093,36 +3030,6 @@
   </data>
   <data name="&gt;&gt;groupBox1Label.ZOrder" xml:space="preserve">
     <value>24</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>527, 205</value>
-  </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 9, 4</value>
-  </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>398, 383</value>
-  </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
   </data>
   <data name="threshold05Box.Location" type="System.Drawing.Point, System.Drawing">
     <value>200, 271</value>
@@ -2694,776 +3601,7 @@
   <data name="&gt;&gt;checkBox25Label.ZOrder" xml:space="preserve">
     <value>43</value>
   </data>
-  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 205</value>
-  </data>
-  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 4, 4, 4</value>
-  </data>
-  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 383</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="sinceAddedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="sinceAddedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 123</value>
-  </data>
-  <data name="sinceAddedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="sinceAddedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>329, 15</value>
-  </data>
-  <data name="sinceAddedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="sinceAddedCheckBoxLabel.Text" xml:space="preserve">
-    <value>Calculate "Plays per days in library" instead of "Plays per day"</value>
-  </data>
-  <data name="sinceAddedCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Usually "Plays per day" means the average number of times you played track since it was added to 
-the library and till the day it was last played. So if you played track frequently in past and didn't 
-play it for a long time then it will have high "Plays per day" value. 
-
-Sometimes it's better to use this option which will treat "Plays per day" as average number of times 
-track was played since it was added to the library till today (no matter when it was last played). 
-
-It's recommended to "Auto rate on startup" your tracks if you want to use this option because 
-"Plays per days in library" value depends on "today" date which is dynamic value and auto rating 
-should change every day for each track in this case. 
-</value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Name" xml:space="preserve">
-    <value>sinceAddedCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="sinceAddedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="sinceAddedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 123</value>
-  </data>
-  <data name="sinceAddedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 4, 4, 4</value>
-  </data>
-  <data name="sinceAddedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="sinceAddedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="sinceAddedCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="sinceAddedCheckBox.ToolTip" xml:space="preserve">
-    <value>Usually "Plays per day" means the average number of times you played track since it was added to 
-the library and till the day it was last played. So if you played track frequently in past and didn't 
-play it for a long time then it will have high "Plays per day" value. 
-
-Sometimes it's better to use this option which will treat "Plays per day" as average number of times 
-track was played since it was added to the library till today (no matter when it was last played). 
-
-It's recommended to "Auto rate on startup" your tracks if you want to use this option because 
-"Plays per days in library" value depends on "today" date which is dynamic value and auto rating 
-should change every day for each track in this case. </value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBox.Name" xml:space="preserve">
-    <value>sinceAddedCheckBox</value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;sinceAddedCheckBox.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 96</value>
-  </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 15</value>
-  </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="autoRateOnTrackPropertiesCheckBoxLabel.Text" xml:space="preserve">
-    <value>Auto rate songs automatically if they are played</value>
-  </data>
-  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Name" xml:space="preserve">
-    <value>autoRateOnTrackPropertiesCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autoRateOnTrackPropertiesCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 68</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 15</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBoxLabel.Text" xml:space="preserve">
-    <value>Notify when auto rating is completed</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Name" xml:space="preserve">
-    <value>notifyWhenAutoRatingCompletedCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 68</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="notifyWhenAutoRatingCompletedCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Name" xml:space="preserve">
-    <value>notifyWhenAutoRatingCompletedCheckBox</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;notifyWhenAutoRatingCompletedCheckBox.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 68</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 15, 0</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 15</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="autoRateAtStartUpCheckBoxLabel.Text" xml:space="preserve">
-    <value>Auto rate on startup</value>
-  </data>
-  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Name" xml:space="preserve">
-    <value>autoRateAtStartUpCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;autoRateAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="playsPerDayTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 36</value>
-  </data>
-  <data name="playsPerDayTagList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="playsPerDayTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 23</value>
-  </data>
-  <data name="playsPerDayTagList.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;playsPerDayTagList.Name" xml:space="preserve">
-    <value>playsPerDayTagList</value>
-  </data>
-  <data name="&gt;&gt;playsPerDayTagList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;playsPerDayTagList.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;playsPerDayTagList.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="storePlaysPerDayCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="storePlaysPerDayCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 42</value>
-  </data>
-  <data name="storePlaysPerDayCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="storePlaysPerDayCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 15</value>
-  </data>
-  <data name="storePlaysPerDayCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="storePlaysPerDayCheckBoxLabel.Text" xml:space="preserve">
-    <value>Store number of plays per day in tag:</value>
-  </data>
-  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Name" xml:space="preserve">
-    <value>storePlaysPerDayCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;storePlaysPerDayCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>22</value>
-  </data>
-  <data name="storePlaysPerDayCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="storePlaysPerDayCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 42</value>
-  </data>
-  <data name="storePlaysPerDayCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 4, 4, 4</value>
-  </data>
-  <data name="storePlaysPerDayCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="storePlaysPerDayCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="storePlaysPerDayCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;storePlaysPerDayCheckBox.Name" xml:space="preserve">
-    <value>storePlaysPerDayCheckBox</value>
-  </data>
-  <data name="&gt;&gt;storePlaysPerDayCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;storePlaysPerDayCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;storePlaysPerDayCheckBox.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>554, 42</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 15</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
-    <value>Auto calculate thresholds on startup</value>
-  </data>
-  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Name" xml:space="preserve">
-    <value>holdsAtStartUpCheckBoxLabel</value>
-  </data>
-  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
-    <value>24</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>529, 42</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 19</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="calculateThresholdsAtStartUpCheckBox.Text" xml:space="preserve">
-    <value> </value>
-  </data>
-  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.Name" xml:space="preserve">
-    <value>calculateThresholdsAtStartUpCheckBox</value>
-  </data>
-  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBox.ZOrder" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
-  </data>
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAQAICAAAAEAIACoEAAARgAAABgYAAABACAAiAkAAO4QAAAUFAAAAQAgALgGAAB2GgAAEBAAAAEA
-        IABoBAAALiEAACgAAAAgAAAAQAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAmAAAAZwAAAGYAAAAqAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAALsAAAC/AAAAvwAAAL8AAAB8AAAADgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABbAAAAvwAAAKYAAACIAAAAvwAAAL8AAACuAAAAPAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANAAAAjQAAAGMAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFEAAAC/AAAAogAAAAAAAABIAAAAtAAA
-        AL8AAAC/AAAAfAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADoAAAC/AAAAsgAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgAAAL8AAAC/AAAAEAAA
-        AAAAAAAUAAAAhwAAAL8AAAC/AAAArgAAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAA
-        AL8AAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAtQAA
-        AL8AAAA/AAAAAAAAAAAAAAAAAAAARAAAALIAAAC/AAAAvwAAAEEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAA8AAAAvwAAALQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAACKAAAAvwAAAG0AAAAAAAAAAAAAAAAAAAAAAAAAEgAAAIIAAAC8AAAAOQAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAADwAAAC/AAAAtAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAFoAAAC/AAAAnAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAL8AAAC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAALQAAAL8AAAC+AAAACwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAvwAAALQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAuAAAAL8AAAA5AAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAC/AAAAtAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAvwAAAGYAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAKMAAACXAAAAEAAAAAAAAAAAAAAAPAAAAL8AAAC0AAAAAAAA
-        AAAAAAAAAAAAOgAAALMAAABNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIIAAAC/AAAAfwAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAuAAAAL8AAACeAAAAEAAAAAAAAAA8AAAAvwAA
-        ALQAAAAAAAAAAAAAADoAAAC7AAAAvwAAAGEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAB2AAAAvwAA
-        AL8AAABPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxAAAAuAAAAL8AAACeAAAAEAAA
-        ADwAAAC/AAAAtAAAAAAAAAA6AAAAuwAAAL8AAACeAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAAiwAA
-        AL8AAAC/AAAAcgAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxAAAAuAAA
-        AL8AAACeAAAARgAAAL8AAAC0AAAAOgAAALsAAAC/AAAAngAAABAAAAAAAAAAAAAAAAAAAAAAAAAAFAAA
-        AJwAAAC/AAAAvwAAAFoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAxAAAAuAAAAL8AAACpAAAAvwAAALgAAAC7AAAAvwAAAJ4AAAAQAAAAAAAAAAAAAAAAAAAAAAAA
-        ACIAAACqAAAAvwAAALsAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAxAAAAuAAAAL8AAAC/AAAAvwAAAL8AAACeAAAAEAAAAAAAAAAAAAAAAAAA
-        AAAAAAAzAAAAtQAAAL8AAACzAAAALgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxAAAAugAAAL8AAAC/AAAAngAAABAAAAAAAAAAAAAA
-        AAAAAAAAAAAAJQAAALsAAAC/AAAAqAAAAB8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxAAAAuAAAAJ0AAAAQAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAABoAAAAvwAAAJoAAAASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAQAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGcAAAC/AAAAqQAAAIwAAAB/AAAAcwAAAGYAAABZAAAATAAA
-        AD8AAAAxAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAAL0AAAC/AAAAvwAAAL8AAAC/AAAAvwAA
-        AL8AAAC/AAAAvwAAAL8AAAC7AAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABDAAAAAQAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwAAAE8AAABcAAAAaQAA
-        AHYAAACDAAAAkQAAAJ4AAACrAAAAuAAAAL8AAACsAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAABAAAAqQAA
-        AL8AAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAvQAAAL8AAAA6AAAAAAAAAAAAAAAAAAAAAAAA
-        ADQAAAC/AAAAvgAAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACFAAAAvwAAAIIAAAAAAAAAAAAA
-        AAAAAAAAAAAAfgAAAL8AAACLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD0AAAC/AAAAuwAA
-        ABAAAAAAAAAAAAAAAAwAAAC6AAAAvwAAAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA
-        ALAAAAC/AAAAVAAAAAAAAAAAAAAATwAAAL8AAAC0AAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAbAAAAL8AAACdAAAAAAAAAAAAAACXAAAAvwAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAjAAAAvwAAAL8AAAAlAAAAIQAAAL8AAAC/AAAAKAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACaAAAAvwAAAG0AAABpAAAAvwAAAJ8AAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFIAAAC/AAAAsgAAAK8AAAC/AAAAVwAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQAAALUAAAC/AAAAvwAA
-        ALYAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQAA
-        AGYAAABmAAAAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        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
-        AAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAABsAAAAsAAAANgAAAD4AAABHAAAAUQAA
-        AF0AAACoAAAAkAAAAA8AAAAAAAAAAAAAAA0AAACOAAAAmAAAABIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAABvAAAAqwAAADgAAAAAAAAAAAAA
-        ADYAAACqAAAAcwAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAjAAAAuwAAAG4AAAAIAAAABwAAAGwAAAC8AAAAJgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAmgAA
-        AJwAAAAeAAAAHQAAAJkAAACdAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWAAAALsAAABCAAAAQAAAALoAAABbAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAIgAAAKMAAACOAAAAjAAAAKYAAAAjAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAHUAAAC5AAAAuAAA
-        AHcAAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAACUAAABvAAAAbwAAACUAAAABAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAA4H//AOA/jwDgD48A4AePAPGHjwDxh48A8P+PAPDwiAD48AgA4PgAAMH8
-        AACD/gEAB/8HAA//hwAAf98AADx/AAAYfwD+GH8A/wD/AP8A/wD/gf8A/4H/AP+B/wD/gf8AKAAAABQA
-        AAAoAAAAAQAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB8AAAB4AAAAeQAA
-        ADYAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAXgAAALMAAACVAAAAqQAAAGMAAAASAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAKAAAAZgAA
-        ABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABVAAAAtgAAABIAAABcAAAAsQAAAJIAAAA2AAAAAAAA
-        AAAAAAAAAAAAAAAAACUAAAC6AAAALQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC8AAAC4AAAAKwAA
-        AAQAAAAqAAAAiwAAAK4AAAAiAAAAAAAAAAAAAAAAAAAAJQAAALsAAAAtAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAGwAAAKAAAABWAAAAAAAAAAAAAAAQAAAAPgAAAA0AAAAAAAAAAAAAAAAAAAAlAAAAuwAA
-        AC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAgQAAAIIAAAAHAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAACUAAAC7AAAALQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAmwAA
-        ABcAAAAAAAAAAAAAAAAAAAADAAAAXwAAAEoAAAAFAAAAJQAAALsAAAAtAAAABAAAAEgAAABZAAAAAAAA
-        AAAAAAAAAAAAEAAAAHoAAACeAAAAGgAAAAAAAAAAAAAAAAAAAAMAAABiAAAAtQAAAE4AAAAoAAAAuwAA
-        ADEAAABMAAAAsQAAAGMAAAAAAAAAAQAAABkAAACIAAAArAAAAD8AAAADAAAAAAAAAAAAAAAAAAAAAAAA
-        AAsAAABmAAAArAAAAHIAAAC7AAAAdwAAALEAAABtAAAADAAAAAAAAAAbAAAAkgAAAKgAAABAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAABvAAAAuAAAAL4AAAC7AAAAeAAAAAwAAAAAAAAALwAA
-        AKQAAACZAAAAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAABgAAAAuQAA
-        AG8AAAAFAAAAAAAAAAAAAAB+AAAAoAAAAC8AAAAPAAAADAAAAAkAAAAGAAAAAQAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAgAAAAuAAAADAAAAAAAAAAAAAAAAAAAAHQAAAC1AAAAogAAAJgAAACOAAAAgwAA
-        AHcAAABDAAAABAAAAAAAAAAAAAAAAgAAABkAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwAA
-        AEMAAABVAAAAYwAAAG8AAAB+AAAAkgAAALEAAAAfAAAAAAAAAAAAAAAcAAAApgAAAC4AAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXAAAArAAAAFgAAAAAAAAAAAAA
-        AFUAAACvAAAAGQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAUAAABwAAAAlwAAABAAAAAOAAAAlgAAAHMAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADoAAACqAAAAOQAAADYAAACpAAAAPQAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAJ4AAAB1AAAAcwAA
-        AKAAAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAXQAAALMAAACxAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZAAAAdgAAAHYAAAAaAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAADg//AA4DxwAOA8cADgHHAA4xxwAOH8cADxwAAA4cAAAIHgAACH8BAAD/gwAAD8
-        cAAAY/AAAGPwAPxj8AD8A/AA/gfwAP4H8AD/D/AA/w/wACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAACCAAAAgwAAACIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAArAAAAsQAAAGQAAAC4AAAAXgAAAAMAAAAAAAAAAAAA
-        AAAAAAASAAAAmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAAALwAAAAUAAAAJwAAAJ0AAACaAAAAEAAA
-        AAAAAAAAAAAAHgAAALkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACYAAAAQgAAAAAAAAAEAAAATwAA
-        AA4AAAAAAAAAAAAAAB4AAAC5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAagAAAHAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAeAAAAuQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAACZAAAAAAAA
-        AAAAAAAAAAAABgAAAKwAAAAvAAAAHgAAALkAAAAAAAAATAAAAIgAAAAAAAAAAAAAACYAAACtAAAAYAAA
-        AAAAAAAAAAAAAAAAAAAAAABGAAAAtQAAAEwAAAC5AAAATAAAALYAAAAuAAAAAAAAADgAAAC1AAAAVwAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEYAAAC4AAAAvQAAALYAAAAvAAAAAAAAAEUAAAC3AAAAQAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARwAAALUAAAAvAAAAAAAAAAAAAACTAAAAeAAA
-        ADwAAAAwAAAAIwAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAQQAA
-        AIoAAACXAAAApAAAALIAAAC8AAAAPAAAAAAAAAAAAAAAMgAAAE4AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAVQAAAI4AAAAAAAAAAAAAAIwAAABXAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAC6AAAAGQAAABcAAAC7AAAAEgAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgwAAAGAAAABeAAAAhQAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADsAAACnAAAApQAAAD0AAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAfwAAAH8AAAAEAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAw/8AAMDnAADAZwAA5GcAAOfnAADnBAAAx4AAAI/BAAAf4wAAA/cAAAGf
-        AAD5nwAA+B8AAPw/AAD8PwAA/D8AAA==
-</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>950, 634</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Auto Rate Tracks</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
-    <value>toolTip1</value>
-  </data>
-  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
-    <value>dirtyErrorProvider</value>
-  </data>
-  <data name="&gt;&gt;dirtyErrorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>AutoRate</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>MusicBeePlugin.PluginWindowTemplate, mb_TagTools, Version=9.3.9302.11586, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="dirtyErrorProvider.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-        AADH4wAA4AcAAPAPAAD4HwAA8A8AAA==
-</value>
-  </data>
-  <data name="buttonCalculate.Error" xml:space="preserve">
-    <value>Error!</value>
-  </data>
-  <data name="buttonCalculate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="buttonCalculate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 353</value>
-  </data>
-  <data name="buttonCalculate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
-  <data name="buttonCalculate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 23</value>
-  </data>
-  <data name="buttonCalculate.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="buttonCalculate.Text" xml:space="preserve">
-    <value>Calculate thresholds now</value>
-  </data>
-  <data name="&gt;&gt;buttonCalculate.Name" xml:space="preserve">
-    <value>buttonCalculate</value>
-  </data>
-  <data name="&gt;&gt;buttonCalculate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buttonCalculate.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;buttonCalculate.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

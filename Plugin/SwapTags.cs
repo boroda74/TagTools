@@ -22,7 +22,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = SwapTagsMenuIcon;
             WindowIcon = SwapTagsIcon;
+            WindowIconInactive = SwapTagsIconInactive;
             TitleBarText = this.Text;
         }
 

@@ -46,7 +46,9 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
+            WindowMenuIcon = CompareTracksMenuIcon;
             WindowIcon = CompareTracksIcon;
+            WindowIconInactive = CompareTracksIconInactive;
             TitleBarText = this.Text;
 
             trackUrls = files;
