@@ -1090,7 +1090,7 @@ namespace MusicBeePlugin
             }
         }
 
-        internal static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName,//====
+        internal static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName,
             SortedDictionary<Guid, ReportPreset> existingPredefinedPresets,
             PresetColumnAttributes[] groupings, PresetColumnAttributes[] functions,
             string[] destinationTags, string[] functionIds, 
@@ -5116,7 +5116,7 @@ namespace MusicBeePlugin
                 colName = string.Empty;
             }
 
-            var columnAttributes = new ColumnAttributes(type, expression, colName, fieldName, parameter2Name, splitter, trimValues, totals);//===
+            var columnAttributes = new ColumnAttributes(type, expression, colName, fieldName, parameter2Name, splitter, trimValues, totals);
 
 
             var uniqueId = columnAttributes.getUniqueId();

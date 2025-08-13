@@ -244,10 +244,10 @@ namespace MusicBeePlugin
         internal static Bitmap Gear;
 
 
-        internal static Bitmap WindowsMenuIcon;//===
-        internal static Bitmap ShowHiddenWindowsMenuIcon;//===
+        internal static Bitmap WindowsMenuIcon;
+        internal static Bitmap ShowHiddenWindowsMenuIcon;
 
-        internal static Bitmap TaggingReportingMenuIcon;//===
+        internal static Bitmap TaggingReportingMenuIcon;
 
         internal static Bitmap CopyTagMenuIcon;
         internal static Icon CopyTagIcon;
@@ -289,7 +289,7 @@ namespace MusicBeePlugin
         internal static Icon CopyTagsIcon;
         internal static Icon CopyTagsIconInactive;
 
-        internal static Bitmap BackupRestoreMenuIcon;//===
+        internal static Bitmap BackupRestoreMenuIcon;
 
         internal static Bitmap BackupSettingsMenuIcon;
         internal static Icon BackupSettingsIcon;
@@ -297,7 +297,7 @@ namespace MusicBeePlugin
 
         internal static Bitmap TagHistoryMenuIcon;
         internal static Icon TagHistoryIcon;
-        internal static Icon TagHistoryIconInactive;//=== add dialog icons!!!
+        internal static Icon TagHistoryIconInactive;
 
         internal static Bitmap SettingsMenuIcon;
         internal static Icon SettingsIcon;
@@ -3965,7 +3965,7 @@ namespace MusicBeePlugin
             MnuToolTipPluginSectionSubmenu = "Plugin section submenu";
             MnuToolTipOpenedForms = "List of open plugin windows\r\r" +
                 "Click the window name to show/restore it \r" +
-                "and/or to move it on top of all MusicBee windows";//===
+                "and/or to move it on top of all MusicBee windows";
 
             CopyTagSbText = "Copying tag";
             SwapTagsSbText = "Swapping tags";
@@ -4751,7 +4751,7 @@ namespace MusicBeePlugin
                 MnuToolTipPluginSectionSubmenu = "Подменю раздела плагина";
                 MnuToolTipOpenedForms = "Список открытых окон плагина\r\r" +
                     "Щелкните по названию окна, чтобы отобразить/восстановить его\r" +
-                    "и/или поместить поверх всех окон MusicBee";//===
+                    "и/или поместить поверх всех окон MusicBee";
 
                 CopyTagSbText = "Копирование тегов";
                 SwapTagsSbText = "Обмен тегов местами";
@@ -6512,7 +6512,7 @@ namespace MusicBeePlugin
                 Thread.Sleep(ActionRetryDelay);
         }
 
-        internal static void DisposePluginBitmapsIcons()//===
+        internal static void DisposePluginBitmapsIcons()
         {
             FilterPresetChain?.Dispose();
             FilterPresetChainDimmed?.Dispose();
@@ -6526,10 +6526,10 @@ namespace MusicBeePlugin
             ClearField?.Dispose();
 
 
-            WindowsMenuIcon?.Dispose();//===
-            ShowHiddenWindowsMenuIcon?.Dispose();//===
+            WindowsMenuIcon?.Dispose();
+            ShowHiddenWindowsMenuIcon?.Dispose();
 
-            TaggingReportingMenuIcon?.Dispose();//===
+            TaggingReportingMenuIcon?.Dispose();
 
             CopyTagMenuIcon?.Dispose();
             CopyTagIcon?.Dispose();
@@ -6571,11 +6571,11 @@ namespace MusicBeePlugin
             CopyTagsIcon?.Dispose();
             CopyTagsIconInactive?.Dispose();
 
-            BackupRestoreMenuIcon?.Dispose();//===
+            BackupRestoreMenuIcon?.Dispose();
 
             TagHistoryMenuIcon?.Dispose();
             TagHistoryIcon?.Dispose();
-            TagHistoryIconInactive?.Dispose();//=== add dialog icons!!!
+            TagHistoryIconInactive?.Dispose();
 
             SettingsMenuIcon?.Dispose();
             SettingsIcon?.Dispose();
@@ -7123,7 +7123,7 @@ namespace MusicBeePlugin
 
             //Menu & title bar icons
             int iconSize = (int)Math.Round(16f * DpiScaling);
-            const float titleBarIconContrast = 1.85f; //===
+            const float titleBarIconContrast = 1.85f; //---
 
             WindowsMenuIcon?.Dispose();
             WindowsMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.open_windows, iconSize, iconSize);
@@ -7140,11 +7140,11 @@ namespace MusicBeePlugin
 
             Color activeTitleBarTextColor;
             Color activeTitleBarBackColor;
-            Color inactiveTitleBarTextColor = Color.FromArgb(255, 170, 170, 170);//===
+            Color inactiveTitleBarTextColor = Color.FromArgb(255, 170, 170, 170);
 
             if (TitleBarsUseColor() == 1)
             {
-                NativeMethods.DwmGetColorizationColor(out uint activeTitleBarBackColorUInt, out _);//===
+                NativeMethods.DwmGetColorizationColor(out uint activeTitleBarBackColorUInt, out _);
                 activeTitleBarBackColor = Color.FromArgb((int)activeTitleBarBackColorUInt);
             }
             else
@@ -7655,7 +7655,7 @@ namespace MusicBeePlugin
 
             OpenedFormsSubmenu = AddMenuItem(TagToolsSubmenu, OpenWindowsMenuSectionName, null, null);
             OpenedFormsSubmenu.Image = WindowsMenuIcon;
-            OpenedFormsSubmenu.ToolTipText = MnuToolTipOpenedFormsEmpty;//===
+            OpenedFormsSubmenu.ToolTipText = MnuToolTipOpenedFormsEmpty;
             OpenedFormsSubmenu.Enabled = false;
 
             AddMenuItem(TagToolsSubmenu, "-", null, null);
@@ -7664,7 +7664,7 @@ namespace MusicBeePlugin
 
             var tagToolsMenuSection = AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, true);
             tagToolsMenuSection.Image = TaggingReportingMenuIcon;
-            tagToolsMenuSection.ToolTipText = MnuToolTipPluginSection;//===
+            tagToolsMenuSection.ToolTipText = MnuToolTipPluginSection;
 
             if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagName, CopyTagDescription, copyTagEventHandler);
             if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsSubmenu, SwapTagsName, SwapTagsDescription, swapTagsEventHandler);
@@ -7726,7 +7726,7 @@ namespace MusicBeePlugin
 
                 var backupRestoreSubmenu = AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null);
                 backupRestoreSubmenu.Image = BackupRestoreMenuIcon;
-                backupRestoreSubmenu.ToolTipText = MnuToolTipPluginSectionSubmenu;//===
+                backupRestoreSubmenu.ToolTipText = MnuToolTipPluginSectionSubmenu;
 
                 AddMenuItem(backupRestoreSubmenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler); //-V3080
                 AddMenuItem(backupRestoreSubmenu, "-", null, null);
@@ -7766,7 +7766,7 @@ namespace MusicBeePlugin
 
             var tagToolsMenuSection = AddMenuItem(TagToolsContextSubmenu, TagToolsMenuSectionName, null, null, true);
             tagToolsMenuSection.Image = TaggingReportingMenuIcon;
-            tagToolsMenuSection.ToolTipText = MnuToolTipPluginSection;//===
+            tagToolsMenuSection.ToolTipText = MnuToolTipPluginSection;
 
             if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagName, null, copyTagEventHandler);
             if (!SavedSettings.dontShowSwapTags) AddMenuItem(TagToolsContextSubmenu, SwapTagsName, null, swapTagsEventHandler);
@@ -7800,7 +7800,7 @@ namespace MusicBeePlugin
 
                 var backupRestoreSubmenu = AddMenuItem(TagToolsContextSubmenu, BackupRestoreMenuSectionName, null, null, true);
                 backupRestoreSubmenu.Image = BackupRestoreMenuIcon;
-                backupRestoreSubmenu.ToolTipText = MnuToolTipPluginSection;//===
+                backupRestoreSubmenu.ToolTipText = MnuToolTipPluginSection;
 
                 AddMenuItem(TagToolsContextSubmenu, TagHistoryName, null, tagHistoryEventHandler);
             }

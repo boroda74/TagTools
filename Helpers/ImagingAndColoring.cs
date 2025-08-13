@@ -66,7 +66,7 @@ namespace MusicBeePlugin
                     //copy the mask to the Alpha layer
                     for (var i = 0; i + 2 < finalMaskedImageRGBAData.Length; i += 4)
                     {
-                        int alpha = (int)Math.Round(contrast * preparedMaskRGBAData[i + 3]);//===
+                        int alpha = (int)Math.Round(contrast * preparedMaskRGBAData[i + 3]);
                         alpha = alpha > 255 ? 255 : alpha;
                         alpha = alpha < 0 ? 0 : alpha;
                         finalMaskedImageRGBAData[i + 3] = (byte)alpha; //Alpha

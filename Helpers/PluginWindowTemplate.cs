@@ -3838,19 +3838,20 @@ namespace MusicBeePlugin
                 OpenedForms.Add(newForm);
 
 
-                if (!DontShowShowHiddenWindows && OpenedFormsSubmenu.DropDownItems.Count == 0)
+                if (OpenedFormsSubmenu != null)
                 {
-                    AddMenuItem(OpenedFormsSubmenu, ShowHiddenWindowsName, null, TagToolsPlugin.showHiddenEventHandler).Image = ShowHiddenWindowsMenuIcon;
-                    AddMenuItem(OpenedFormsSubmenu, "-", null, null);
+                    if (!DontShowShowHiddenWindows && OpenedFormsSubmenu.DropDownItems.Count == 0)
+                    {
+                        AddMenuItem(OpenedFormsSubmenu, ShowHiddenWindowsName, null, TagToolsPlugin.showHiddenEventHandler).Image = ShowHiddenWindowsMenuIcon;
+                        AddMenuItem(OpenedFormsSubmenu, "-", null, null);
+                    }
+
+                    OpenedFormsSubmenu.Enabled = true;
+                    OpenedFormsSubmenu.ToolTipText = MnuToolTipOpenedForms;
+
+                    AddMenuItem(OpenedFormsSubmenu, newForm.Text, null, TagToolsPlugin.openWindowActivationEventHandler, true, newForm)
+                        .Image = newForm.WindowMenuIcon;
                 }
-
-                OpenedFormsSubmenu.Enabled = true;
-                OpenedFormsSubmenu.ToolTipText = "List of open plugin windows\r\r" +
-                    "Click the window name to show/restore it \r" +
-                    "and/or to move it on top of all MusicBee windows";//===
-
-                AddMenuItem(OpenedFormsSubmenu, newForm.Text, null, TagToolsPlugin.openWindowActivationEventHandler, true, newForm)
-                    .Image = newForm.WindowMenuIcon;
 
                 if (modalForm)
                     newForm.ShowDialog(ownerForm);
@@ -4088,7 +4089,7 @@ namespace MusicBeePlugin
 
                 if (OpenedFormsSubmenu.DropDownItems.Count == 0)
                 {
-                    OpenedFormsSubmenu.ToolTipText = "No open plugin windows now";//===
+                    OpenedFormsSubmenu.ToolTipText = MnuToolTipOpenedForms;
                     OpenedFormsSubmenu.Enabled = false;
                 }
 

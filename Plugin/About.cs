@@ -11,7 +11,7 @@ namespace MusicBeePlugin
         {
             InitializeComponent();
 
-            WindowMenuIcon = AboutMenuIcon;//=== remove form icons everywhere!!!
+            WindowMenuIcon = AboutMenuIcon;
             WindowIcon = AboutIcon;
             WindowIconInactive = AboutIconInactive;
             TitleBarText = this.Text;

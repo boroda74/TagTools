@@ -2995,7 +2995,7 @@ namespace MusicBeePlugin
                                 }
                                 catch (Exception ex)
                                 {
-                                    SetStatusBarText(null, "ASR preset \"" + preset.getName() + "\" monthly run failed: " + ex.Message, true);//===
+                                    SetStatusBarText(null, "ASR preset \"" + preset.getName() + "\" monthly run failed: " + ex.Message, true);
                                 }
                             }
                         }
