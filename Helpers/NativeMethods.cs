@@ -246,7 +246,7 @@ internal static class NativeMethods
 
     [DllImport("dwmapi.dll", PreserveSig = false)]
     internal static extern void DwmGetColorizationColor(out uint ColorizationColor, [MarshalAs(UnmanagedType.Bool)] out bool ColorizationOpaqueBlend);
-    
+
     [DllImport("Gdi32.dll", CharSet = CharSet.Auto)]
     internal static extern IntPtr CreateCompatibleDC(IntPtr hdc);
 

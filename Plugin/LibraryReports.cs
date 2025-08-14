@@ -1093,7 +1093,7 @@ namespace MusicBeePlugin
         internal static ReportPreset GetCreatePredefinedPreset(Guid presetPermanentGuid, string presetName,
             SortedDictionary<Guid, ReportPreset> existingPredefinedPresets,
             PresetColumnAttributes[] groupings, PresetColumnAttributes[] functions,
-            string[] destinationTags, string[] functionIds, 
+            string[] destinationTags, string[] functionIds,
             LrReportFormat fileFormatIndex
             )
         {
@@ -2950,7 +2950,7 @@ namespace MusicBeePlugin
 
 
                 //Not recalculating preset based on cached grouping tags
-                if (!processFileGroupings(form, queriedFilesDict, interactive, queryOnlyGroupings, groupings, 
+                if (!processFileGroupings(form, queriedFilesDict, interactive, queryOnlyGroupings, groupings,
                         queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                         actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                         cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
@@ -3093,7 +3093,7 @@ namespace MusicBeePlugin
                     newFilesDict.AddSkip(file);
 
 
-            if (!processFileGroupings(form, newFilesDict, interactive, false, groupings, 
+            if (!processFileGroupings(form, newFilesDict, interactive, false, groupings,
                     queriedActualGroupingsTagIds, queriedActualGroupingsPropIds,
                     actualSplitGroupingTagsList, cachedFilesActualComposedSplitGroupingTagsList,
                     cachedFilesActualGroupingTags, cachedFilesActualGroupingTagsRaw,
@@ -3238,7 +3238,7 @@ namespace MusicBeePlugin
                 return applyPresetResults(form, affectedFiles, tags, cachedFilesActualComposedSplitGroupingTagsList, interactive, saveResultsToTags, functionId, filterResults);
         }
 
-        private bool processFileGroupings(PluginWindowTemplate form, SortedDictionary<string, bool> queriedFilesDict, bool interactive, 
+        private bool processFileGroupings(PluginWindowTemplate form, SortedDictionary<string, bool> queriedFilesDict, bool interactive,
             bool queryOnlyGroupings, PresetColumnAttributesDict groupings,
             MetaDataType[] queriedActualGroupingsTagIds, FilePropertyType[] queriedActualGroupingsPropIds,
             List<string>[] actualSplitGroupingTagsList, SortedDictionary<int, List<string>> cachedFilesActualComposedSplitGroupingTagsList,
@@ -6520,7 +6520,7 @@ namespace MusicBeePlugin
             multipleItemsSplitterComboBoxCustom.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
             multipleItemsSplitterLabel.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
 
-            totalsCheckBox.Enable(enable && !previewIsGenerated && totalsBackup != null && selectedPreset.userPreset);
+            totalsCheckBox.Enable(enable && !previewIsGenerated && selectedPreset.userPreset);
 
             expressionLabel.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
             expressionTextBox.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
@@ -7307,7 +7307,7 @@ namespace MusicBeePlugin
             deselectAllRows(expressionsDataGridView);
 
             if (newExpression == false)
-             {
+            {
                 selectRow(expressionsDataGridView, 0);
 
                 expressionBackup = expressionsDataGridView.Rows[0].Cells[1].Tag as string;
@@ -7356,7 +7356,7 @@ namespace MusicBeePlugin
                 var expression = expressionsDataGridView.Rows[e.RowIndex].Cells[1].Tag as string;
                 var columnName = expressionsDataGridView.Rows[e.RowIndex].Cells[2].Tag as string;
 
-                removeColumn(commonAttr.parameterName, commonAttr.parameter2Name, commonAttr.functionType, commonAttr.splitter, commonAttr.trimValues, 
+                removeColumn(commonAttr.parameterName, commonAttr.parameter2Name, commonAttr.functionType, commonAttr.splitter, commonAttr.trimValues,
                     commonAttr.totals, expression, columnName);
 
                 updateCustomScrollBars(previewTable);

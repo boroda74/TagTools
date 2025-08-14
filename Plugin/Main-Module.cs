@@ -7157,7 +7157,7 @@ namespace MusicBeePlugin
             else
                 activeTitleBarTextColor = Color.White;
 
-            
+
             CopyTagMenuIcon?.Dispose();
             CopyTagMenuIcon = GetSolidImageByBitmapMask(MenuForeColor, Resources.copy_tag, iconSize, iconSize);
 
@@ -7578,14 +7578,14 @@ namespace MusicBeePlugin
             if (GetBrightnessDifference(ChangedCellStyle.BackColor, ChangedForeColor) >= MinForeBrightnessDifference)
                 ChangedCellStyle.ForeColor = ChangedForeColor;
             else
-                ChangedCellStyle.ForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor, 
+                ChangedCellStyle.ForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor,
                     ChangedCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
             if (GetBrightnessDifference(ChangedCellStyle.SelectionBackColor, ChangedForeColor) >= MinForeBrightnessDifference)
                 ChangedCellStyle.SelectionForeColor = ChangedForeColor;
             else
-                ChangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor, 
-                    ChangedCellStyle.SelectionBackColor,  InvertedAverageBrightnessContrast);
+                ChangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(ChangedForeColor,
+                    ChangedCellStyle.SelectionBackColor, InvertedAverageBrightnessContrast);
 
 
             //DIMMED STYLE
@@ -7626,7 +7626,7 @@ namespace MusicBeePlugin
             if (GetBrightnessDifference(PreservedTagValueCellStyle.SelectionBackColor, PreservedTagValuesForeColor) >= MinForeBrightnessDifference)
                 PreservedTagValueCellStyle.SelectionForeColor = PreservedTagValuesForeColor;
             else
-                PreservedTagValueCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(PreservedTagValuesForeColor, 
+                PreservedTagValueCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(PreservedTagValuesForeColor,
                     ChangedCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
 
@@ -7663,7 +7663,7 @@ namespace MusicBeePlugin
             MbApiInterface.MB_RegisterCommand(ShowHiddenWindowsDescription, showHiddenEventHandler);
 
             var tagToolsMenuSection = AddMenuItem(TagToolsSubmenu, TagToolsMenuSectionName, null, null, true);
-            tagToolsMenuSection.Image = TaggingReportingMenuIcon;
+            tagToolsMenuSection.Image = TaggingReportingMenuIcon; //-V3080
             tagToolsMenuSection.ToolTipText = MnuToolTipPluginSection;
 
             if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsSubmenu, CopyTagName, CopyTagDescription, copyTagEventHandler);
@@ -7725,7 +7725,7 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsSubmenu, "-", null, null);
 
                 var backupRestoreSubmenu = AddMenuItem(TagToolsSubmenu, BackupRestoreMenuSectionName, null, null);
-                backupRestoreSubmenu.Image = BackupRestoreMenuIcon;
+                backupRestoreSubmenu.Image = BackupRestoreMenuIcon; //-V3080
                 backupRestoreSubmenu.ToolTipText = MnuToolTipPluginSectionSubmenu;
 
                 AddMenuItem(backupRestoreSubmenu, TagHistoryName, TagHistoryDescription, tagHistoryEventHandler); //-V3080
@@ -7765,7 +7765,7 @@ namespace MusicBeePlugin
             TagToolsContextSubmenu.DropDown.ShowItemToolTips = true;
 
             var tagToolsMenuSection = AddMenuItem(TagToolsContextSubmenu, TagToolsMenuSectionName, null, null, true);
-            tagToolsMenuSection.Image = TaggingReportingMenuIcon;
+            tagToolsMenuSection.Image = TaggingReportingMenuIcon; //-V3080
             tagToolsMenuSection.ToolTipText = MnuToolTipPluginSection;
 
             if (!SavedSettings.dontShowCopyTag) AddMenuItem(TagToolsContextSubmenu, CopyTagName, null, copyTagEventHandler);
@@ -7799,7 +7799,7 @@ namespace MusicBeePlugin
                 AddMenuItem(TagToolsContextSubmenu, "-", null, null);
 
                 var backupRestoreSubmenu = AddMenuItem(TagToolsContextSubmenu, BackupRestoreMenuSectionName, null, null, true);
-                backupRestoreSubmenu.Image = BackupRestoreMenuIcon;
+                backupRestoreSubmenu.Image = BackupRestoreMenuIcon; //-V3080
                 backupRestoreSubmenu.ToolTipText = MnuToolTipPluginSection;
 
                 AddMenuItem(TagToolsContextSubmenu, TagHistoryName, null, tagHistoryEventHandler);
@@ -7995,7 +7995,7 @@ namespace MusicBeePlugin
         }
 
 
-        public string CustomFunc_AddDatedValues(string originalValue, string maxMonths, 
+        public string CustomFunc_AddDatedValues(string originalValue, string maxMonths,
             string datePartsSeparatorChar, string dateSeparatorChar,
             string value1, string separatorChar,
             string value2, string setSeparator)
@@ -8137,7 +8137,7 @@ namespace MusicBeePlugin
             }
         }
 
-        public string CustomFunc_GetDatedValuesDiff(string originalValue, 
+        public string CustomFunc_GetDatedValuesDiff(string originalValue,
             string datePartsSeparatorChar, string dateSeparatorChar,
             string separatorChar, string setSeparator)
         {
@@ -8692,7 +8692,6 @@ namespace MusicBeePlugin
             var tagValue = GetFileTag(url, tagId); //-V5609
             var textParts = text.Split('|');
 
-            var result = ColumnCheckedState;
             foreach (var textPart in textParts)
             {
                 var escTextPart = Regex.Escape(textPart);

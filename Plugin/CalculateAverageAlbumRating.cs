@@ -22,7 +22,7 @@ namespace MusicBeePlugin
 
             WindowMenuIcon = CarMenuIcon;
             WindowIcon = CarIcon;
-            WindowIconInactive =  CarIconInactive;
+            WindowIconInactive = CarIconInactive;
             TitleBarText = this.Text;
         }
 

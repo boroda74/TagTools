@@ -44,7 +44,7 @@ namespace MusicBeePlugin
             return children;
         }
 
-        internal static void DrawCheckBox(Graphics graphics, float dpiScaling, Rectangle checkBoxBounds, int borderWidth, 
+        internal static void DrawCheckBox(Graphics graphics, float dpiScaling, Rectangle checkBoxBounds, int borderWidth,
             Color backColor, Color borderColor, Color checkMarkColor, bool state)
         {
             Point pt = new Point(checkBoxBounds.Left + (int)Math.Round(2 * dpiScaling), checkBoxBounds.Top + (int)Math.Round(4 * dpiScaling));
@@ -2826,7 +2826,6 @@ namespace MusicBeePlugin
         private int initialHeight;
         private readonly int sbBorderWidth;
         private readonly int reservedBordersSpace;
-        private int reservedSpace;
         private readonly int minimumThumbHeight = 5; //5px, will be scaled according to DPI in constructor
         private readonly int scaledPx;
         private readonly int upImageAdditionalTopHeight = 3; //3px, will be scaled according to DPI in constructor
@@ -3068,7 +3067,7 @@ namespace MusicBeePlugin
         internal void ResetMetricsSize(int newParentHeight)
         {
             initialHeight = newParentHeight - reservedBordersSpace;
-            Height = initialHeight - reservedSpace;
+            Height = initialHeight;
 
 
             var (nRealRange, nPixelRange, nTrackHeight, nThumbHeight, fThumbHeight) = GetMetrics();

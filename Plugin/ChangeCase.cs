@@ -125,7 +125,6 @@ namespace MusicBeePlugin
         private ComboBox sentenceSeparatorsEnumComboBox;
         private int sentenceSeparatorsLastSelectedIndex;
 
-        private bool closingExceptionCharsBoxLeaving;
         private bool ignoreComboBoxSelectedIndexChanged;
 
         private readonly DataGridViewCellStyle unchangedCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
@@ -1838,12 +1837,8 @@ namespace MusicBeePlugin
 
             if (ActiveControl != openingExceptionCharsBoxCustom && !CheckIfTheSameNumberOfCharsInStrings(openingExceptionCharsBoxCustom.Text, closingExceptionCharsBoxCustom.Text))
             {
-                closingExceptionCharsBoxLeaving = true;
-
                 MessageBox.Show(MbForm, MsgCsTheNumberOfOpeningExceptionCharactersMustBe,
                     string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                closingExceptionCharsBoxLeaving = false;
 
                 closingExceptionCharsBoxCustom.Focus();
                 closingExceptionCharsBoxCustom.SelectionStart = closingExceptionCharsBoxCustom.Text.Length + 1;
@@ -2262,6 +2257,16 @@ namespace MusicBeePlugin
             buttonStopRecordingPreset.Enable(true);
 
             recordMode = true;
+
+            if (useSkinColors)
+            {
+                exceptionWordsBoxCustom.recordMode = true;
+                exceptionCharsBoxCustom.recordMode = true;
+                openingExceptionCharsBoxCustom.recordMode = true;
+                closingExceptionCharsBoxCustom.recordMode = true;
+                sentenceSeparatorsBoxCustom.recordMode = true;
+            }
+
             recordedPreset = new ChangeCasePreset();
             currentStep = new ChangeCaseStep();
         }
@@ -2281,7 +2286,17 @@ namespace MusicBeePlugin
             }
 
             recordedPreset = null;
+
             recordMode = false;
+
+            if (useSkinColors)
+            {
+                exceptionWordsBoxCustom.recordMode = false;
+                exceptionCharsBoxCustom.recordMode = false;
+                openingExceptionCharsBoxCustom.recordMode = false;
+                closingExceptionCharsBoxCustom.recordMode = false;
+                sentenceSeparatorsBoxCustom.recordMode = false;
+            }
 
             buttonOK.Enable(false);
 

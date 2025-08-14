@@ -405,7 +405,7 @@ namespace MusicBeePlugin
                 B = (int)Math.Round((sampleColor.B - 127) / 4f + 255f - 63f * contrast);
             }
 
-            
+
             if (R < 0)
                 R = 0;
 

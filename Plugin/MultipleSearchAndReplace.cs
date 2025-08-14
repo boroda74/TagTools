@@ -40,10 +40,6 @@ namespace MusicBeePlugin
         private FilePropertyType sourcePropId;
         private MetaDataType destinationTagId;
 
-        private MetaDataType[] sourceTagIds;
-        private FilePropertyType[] sourcePropIds;
-        private string[] sourceTagNames;
-
         private bool smartOperation;
 
         private string[] files = Array.Empty<string>();
@@ -339,10 +335,6 @@ namespace MusicBeePlugin
             sourceTagId = 0;
             sourcePropId = 0;
             destinationTagId = 0;
-
-            sourceTagIds = null;
-            sourcePropIds = null;
-            sourceTagNames = null;
 
             sourceTagId = GetTagId(sourceTagListCustom.Text);
             sourcePropId = GetPropId(sourceTagListCustom.Text);

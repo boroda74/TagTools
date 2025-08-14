@@ -1928,7 +1928,7 @@ namespace MusicBeePlugin
             var (totalLines, visibleLines) = GetTextBoxMetrics(textBox);
             var nRowRange = totalLines - visibleLines;
 
-            var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics();
+            var (_, nPixelRange, _, _, _) = customVScrollBar.GetMetrics(); //-V3080
 
             var nThumbTop = 0;
             if (nRowRange > 0)
