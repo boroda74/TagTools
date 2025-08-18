@@ -4089,7 +4089,7 @@ namespace MusicBeePlugin
 
                 if (OpenedFormsSubmenu.DropDownItems.Count == 0)
                 {
-                    OpenedFormsSubmenu.ToolTipText = MnuToolTipOpenedForms;
+                    OpenedFormsSubmenu.ToolTipText = MnuToolTipOpenedFormsEmpty;
                     OpenedFormsSubmenu.Enabled = false;
                 }
 

@@ -2258,14 +2258,11 @@ namespace MusicBeePlugin
 
             recordMode = true;
 
-            if (useSkinColors)
-            {
-                exceptionWordsBoxCustom.recordMode = true;
-                exceptionCharsBoxCustom.recordMode = true;
-                openingExceptionCharsBoxCustom.recordMode = true;
-                closingExceptionCharsBoxCustom.recordMode = true;
-                sentenceSeparatorsBoxCustom.recordMode = true;
-            }
+            exceptionWordsBoxCustom.recordMode = true;
+            exceptionCharsBoxCustom.recordMode = true;
+            openingExceptionCharsBoxCustom.recordMode = true;
+            closingExceptionCharsBoxCustom.recordMode = true;
+            sentenceSeparatorsBoxCustom.recordMode = true;
 
             recordedPreset = new ChangeCasePreset();
             currentStep = new ChangeCaseStep();
@@ -2289,14 +2286,11 @@ namespace MusicBeePlugin
 
             recordMode = false;
 
-            if (useSkinColors)
-            {
-                exceptionWordsBoxCustom.recordMode = false;
-                exceptionCharsBoxCustom.recordMode = false;
-                openingExceptionCharsBoxCustom.recordMode = false;
-                closingExceptionCharsBoxCustom.recordMode = false;
-                sentenceSeparatorsBoxCustom.recordMode = false;
-            }
+            exceptionWordsBoxCustom.recordMode = false;
+            exceptionCharsBoxCustom.recordMode = false;
+            openingExceptionCharsBoxCustom.recordMode = false;
+            closingExceptionCharsBoxCustom.recordMode = false;
+            sentenceSeparatorsBoxCustom.recordMode = false;
 
             buttonOK.Enable(false);
 
