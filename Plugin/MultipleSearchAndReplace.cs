@@ -330,7 +330,7 @@ namespace MusicBeePlugin
                 return true;
 
             resetPreviewData();
-
+            
 
             sourceTagId = 0;
             sourcePropId = 0;

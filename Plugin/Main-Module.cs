@@ -4490,10 +4490,11 @@ namespace MusicBeePlugin
                 || (SavedSettings.exceptedWords[0] as string).Length < 2 || (SavedSettings.exceptedWords[0] as string)[1] != ' ')
             {
                 SavedSettings.exceptedWords = new object[10];
-                SavedSettings.exceptedWords[0] = "1 a an and at in of or the";
+                SavedSettings.exceptedWords[0] = "1 a an and as at but by down for from if in into like near nor of off on once onto out or over " +
+                    "past so than that the to upon when with yet al de la le mix remix vs. y ze feat.";
                 SavedSettings.exceptedWords[1] = "2 #RN U2 UB40";
                 SavedSettings.exceptedWords[2] = "3 allegretto";
-                SavedSettings.exceptedWords[3] = "# a al an and as at but by de for in la le mix nor of on or remix the to vs. y ze feat.";
+                SavedSettings.exceptedWords[3] = string.Empty;
                 SavedSettings.exceptedWords[4] = string.Empty;
                 SavedSettings.exceptedWords[5] = string.Empty;
                 SavedSettings.exceptedWords[6] = string.Empty;
@@ -7633,7 +7634,8 @@ namespace MusicBeePlugin
             SizesColorsChanged = false;
         }
 
-        internal static ToolStripMenuItem AddMenuItem(ToolStripMenuItem menuItemGroup, string itemName, string hotkeyDescription, EventHandler handler, bool enabled = true, Form form = null)
+        internal static ToolStripMenuItem AddMenuItem(ToolStripMenuItem menuItemGroup, string itemName, string hotkeyDescription, 
+            EventHandler handler, bool enabled = true, Form form = null)
         {
             if (hotkeyDescription != null)
                 MbApiInterface.MB_RegisterCommand(hotkeyDescription, handler);
