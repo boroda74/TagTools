@@ -7542,6 +7542,7 @@ namespace MusicBeePlugin
                 }
                 else
                 {
+                    UnchangedCellStyle.SelectionBackColor = IncreaseColorContrast(selectionBackColor);
                     UnchangedCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(selectionForeColor,
                         UnchangedCellStyle.SelectionBackColor, InvertedAverageBrightnessContrast);
                 }

@@ -43,8 +43,8 @@ e.g. $NumberOfDays(&lt;Year&gt;,&lt;Original Year&gt;) or $SubDateTime(&lt;Date 
     character <b>`</b> <b><i>surrounded</i></b> by spaces. Also, you can omit any parameter(s) in the middle of the parameter list 
     by simply typing two (or more, for more omitted parameters) commas in a row if you are using 
     <i>Musicbee virtual tag editor</i>, e.g. <b><i>$SentenceCase(&lt;Titlegt;>,,:)</i></b>. <i>Musicbee virtual
-    tag</i> 
-    <i>editor</i> will auto-add empty quotes for you (i.e. <b><i>$SentenceCase&lt;Title&gt;,"",":")</i></b>), and this is acceptable
+    tag editor</i> will 
+    auto-add empty quotes for you (i.e. <b><i>$SentenceCase&lt;Title&gt;,"",":")</i></b>), and this is acceptable
 
     If you are using the plugin with MusicBee 3.6 or later, then you can omit any number of the 
     end parameters simply by putting closing parenthesis earlier, e.g., $SentenceCase(string) 
