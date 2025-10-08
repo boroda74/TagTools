@@ -66,7 +66,7 @@ namespace MusicBeePlugin
         private void periodicCacheClearing(object state)
         {
             if ((PluginClosing || SavedSettings.dontShowLibraryReports || CachedPresetsTags.Count > PresetCacheCountThreshold)
-                && !BackgroundTaskIsInProgress)
+                && !BackgroundTaskIsInProgress && !PresetIsExecuted)
             {
                 lock (CachedPresetsTags)
                 {
@@ -206,6 +206,7 @@ namespace MusicBeePlugin
         private bool sourceFieldComboBoxIndexChanging;
 
         internal static volatile bool BackgroundTaskIsInProgress;
+        internal static volatile bool PresetIsExecuted;
 
         //Not reliable. Make sure to call checkAllPresetChains() before use!
         private bool resultsAreFiltered;
@@ -2541,8 +2542,8 @@ namespace MusicBeePlugin
             return sequenceNumber;
         }
 
-        private void updateAppliedPresetCache(AggregatedTags tags, SortedDictionary<int, string[]> filesGroupingTags, SortedDictionary<int, string[]> filesGroupingTagsRaw,
-            SortedDictionary<int, List<string>> filesActualComposedGroupingTags)
+        private void updateAppliedPresetCache(AggregatedTags tags, SortedDictionary<int, string[]> filesGroupingTags, 
+            SortedDictionary<int, string[]> filesGroupingTagsRaw, SortedDictionary<int, List<string>> filesActualComposedGroupingTags)
         {
             lock (CachedPresetsTags)
             {
@@ -2889,6 +2890,8 @@ namespace MusicBeePlugin
                     CachedPresetsFilesActualGroupingTags.Add(appliedPreset.guid, cachedFilesActualGroupingTags);
                 }
 
+                PresetIsExecuted = true;
+
                 if (!CachedPresetsFilesActualGroupingTagsRaw.TryGetValue(appliedPreset.guid, out cachedFilesActualGroupingTagsRaw))
                 {
                     cachedFilesActualGroupingTagsRaw = new SortedDictionary<int, string[]>(); //<URLs, Grouping tag[]s>
@@ -2896,7 +2899,8 @@ namespace MusicBeePlugin
                 }
 
                 //cachedFilesActualComposedSplitGroupingTagsList: <TrackId, List of <composed groupings>>
-                if (!CachedPresetsFilesActualComposedSplitGroupingTagsList.TryGetValue(appliedPreset.guid, out cachedFilesActualComposedSplitGroupingTagsList))
+                if (!CachedPresetsFilesActualComposedSplitGroupingTagsList.TryGetValue(appliedPreset.guid, 
+                    out cachedFilesActualComposedSplitGroupingTagsList))
                 {
                     cachedFilesActualComposedSplitGroupingTagsList = new SortedDictionary<int, List<string>>(); //<URL, List of <composed groupings>>
                     CachedPresetsFilesActualComposedSplitGroupingTagsList.Add(appliedPreset.guid, cachedFilesActualComposedSplitGroupingTagsList);
@@ -3247,7 +3251,6 @@ namespace MusicBeePlugin
             SortedDictionary<string, bool>[] queriedActualGroupingTags, SortedDictionary<string, bool>[] queriedActualGroupingTagsRaw,
             string[] queriedNativeTagNames)
         {
-            List<string> composedActualSplitGroupingTagsList = null;
             int lastSeqNumInOrder = 1;
 
             var n = -1;
@@ -3284,7 +3287,7 @@ namespace MusicBeePlugin
                 //sequenceNumberField == -1 is because of sequence numbers can be different every time
                 if (sequenceNumberField == -1 && cachedFilesActualGroupingTags.TryGetValue(trackId, out var actualGroupingTags)
                     && cachedFilesActualGroupingTagsRaw.TryGetValue(trackId, out var actualGroupingTagsRaw)
-                    && cachedFilesActualComposedSplitGroupingTagsList.TryGetValue(trackId, out composedActualSplitGroupingTagsList))
+                    && cachedFilesActualComposedSplitGroupingTagsList.ContainsKey(trackId))
                 {
                     var h = -1;
                     foreach (var attribs in groupings.Values)
@@ -3376,7 +3379,8 @@ namespace MusicBeePlugin
                     var presetColumnAttribs = new PresetColumnAttributes[groupings.Count];
                     groupings.Values.CopyTo(presetColumnAttribs, 0);
 
-                    composedActualSplitGroupingTagsList = AggregatedTags.GetComposedGroupingTags(actualSplitGroupingTagsList, dependentGroupingColumns, presetColumnAttribs);
+                    var composedActualSplitGroupingTagsList = AggregatedTags.GetComposedGroupingTags(actualSplitGroupingTagsList, 
+                        dependentGroupingColumns, presetColumnAttribs);
 
                     //cachedFilesActualComposedSplitGroupingTagsList: <TrackId, List of <composed groupings>>
                     cachedFilesActualComposedSplitGroupingTagsList.AddReplace(trackId, composedActualSplitGroupingTagsList);
@@ -3458,6 +3462,8 @@ namespace MusicBeePlugin
                             SetStatusBarText(form, null, true);
                             backgroundTaskIsStoppedOrCancelled = true;
                         }
+
+                        PresetIsExecuted = false;
 
                         return string.Empty;
                     }
@@ -3555,6 +3561,8 @@ namespace MusicBeePlugin
                                     stopButtonClickedMethod(prepareBackgroundPreview);
                             }));
 
+                            PresetIsExecuted = false;
+
                             return string.Empty;
                         }
 
@@ -3607,6 +3615,7 @@ namespace MusicBeePlugin
                 SetResultingSbText(form, appliedPreset.getName(), true, true);
             }
 
+            PresetIsExecuted = false;
 
             return "...";
         }
@@ -3657,7 +3666,7 @@ namespace MusicBeePlugin
                 lastFiles = new string[filteredFiles.Count];
                 filteredFiles.CopyTo(lastFiles);
             }
-            else //if (interactive) //!interactive & !filterResults is prohibited (because only groupings never saved to tags, so it's senseless)
+            else //if (interactive) //!interactive & !filterResults is prohibited (because only groupings never saved to tags as it's senseless)
             {
                 Invoke(new Action(() =>
                 {
@@ -3682,13 +3691,17 @@ namespace MusicBeePlugin
                                 stopButtonClickedMethod(prepareBackgroundPreview);
                         }));
 
+                        PresetIsExecuted = false;
+
                         return;
                     }
 
 
+                    var trackIdStr = GetPersistentTrackId(queriedFiles[i]);
                     var trackId = GetPersistentTrackIdInt(queriedFiles[i]);
 
-                    var composedSplitGroupingTagsList = filesActualComposedSplitGroupingTagsLists[trackId];
+                    List<string> composedSplitGroupingTagsList = filesActualComposedSplitGroupingTagsLists[trackId];
+
                     foreach (var composedSplitGroupingTags in composedSplitGroupingTagsList)
                     {
                         var showRow = true;
@@ -3757,6 +3770,8 @@ namespace MusicBeePlugin
                                 stopButtonClickedMethod(prepareBackgroundPreview);
                         }));
 
+                        PresetIsExecuted = false;
+
                         return;
                     }
 
@@ -3794,6 +3809,8 @@ namespace MusicBeePlugin
 
                 SetResultingSbText(form, appliedPreset.getName(), true, true);
             }
+
+            PresetIsExecuted = false;
         }
 
         private bool checkCondition(int comparisonResult)

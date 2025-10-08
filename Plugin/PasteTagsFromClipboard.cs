@@ -24,7 +24,7 @@ namespace MusicBeePlugin
             }
 
 
-            var fileTags = System.Windows.Clipboard.GetText().Split(new[] { '\n' }, StringSplitOptions.None);
+            var fileTags = Clipboard.GetText().Split(new[] { '\n' }, StringSplitOptions.None);
 
             if (fileTags.Length < 2) //1st row must be tag names, 2nd row and further are tag values
             {

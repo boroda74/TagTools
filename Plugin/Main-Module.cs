@@ -1217,6 +1217,14 @@ namespace MusicBeePlugin
 
 
         #region Common methods/functions
+        //Correct clipboard handling
+        internal static void CopyTextToClipboard(string text)
+        {
+            NativeMethods.CloseClipboard();
+            Clipboard.Clear();
+            Clipboard.SetText(text);
+        }
+
         //UI flicker-free ListBox & ComboBox list re-filling
         internal static void FillListByList(System.Collections.IList filledList, System.Collections.IList sourceList)
         {
@@ -3854,10 +3862,7 @@ namespace MusicBeePlugin
 
         internal void copyPluginVersionEventHandler(object sender, EventArgs e)
         {
-            NativeMethods.CloseClipboard();
-            Clipboard.Clear();
-            Clipboard.SetText(PluginVersion);
-
+            CopyTextToClipboard(PluginVersion);
             ClickPlayer.Play();
         }
         #endregion
@@ -7144,14 +7149,9 @@ namespace MusicBeePlugin
             Color inactiveTitleBarTextColor = Color.FromArgb(255, 170, 170, 170);
 
             if (TitleBarsUseColor() == 1)
-            {
-                NativeMethods.DwmGetColorizationColor(out uint activeTitleBarBackColorUInt, out _);
-                activeTitleBarBackColor = Color.FromArgb((int)activeTitleBarBackColorUInt);
-            }
+                activeTitleBarBackColor = NativeMethods.GetWindowColorizationColor(false);
             else
-            {
                 activeTitleBarBackColor = Color.White;
-            }
 
             if (GetBrightnessDifference(activeTitleBarBackColor, Color.Black) >= 0.5f)
                 activeTitleBarTextColor = Color.Black;

@@ -72,29 +72,29 @@ internal static class NativeMethods
     //   internal int nTrackPos;
     //}
 
-    //internal struct DWMCOLORIZATIONPARAMS
-    //{
-    //   internal uint ColorizationColor,
-    //       ColorizationAfterglow,
-    //       ColorizationColorBalance,
-    //       ColorizationAfterglowBalance,
-    //       ColorizationBlurBalance,
-    //       ColorizationGlassReflectionIntensity,
-    //       ColorizationOpaqueBlend;
-    //}
+    internal struct DWMCOLORIZATIONPARAMS
+    {
+        internal uint ColorizationColor,
+            ColorizationAfterglow,
+            ColorizationColorBalance,
+            ColorizationAfterglowBalance,
+            ColorizationBlurBalance,
+            ColorizationGlassReflectionIntensity,
+            ColorizationOpaqueBlend;
+    }
 
-    //internal static Color GetWindowColorizationColor(bool opaque)
-    //{
-    //   DWMCOLORIZATIONPARAMS args = default;
-    //   NativeMethods.DwmGetColorizationParameters(ref args);
+    internal static Color GetWindowColorizationColor(bool opaque)
+    {
+        DWMCOLORIZATIONPARAMS args = default;
+        NativeMethods.DwmGetColorizationParameters(ref args);
 
-    //   return Color.FromArgb(
-    //       (byte)(opaque ? 255 : args.ColorizationColor >> 24),
-    //       (byte)(args.ColorizationColor >> 16),
-    //       (byte)(args.ColorizationColor >> 8),
-    //       (byte)args.ColorizationColor
-    //   );
-    //}
+        return Color.FromArgb(
+            (byte)(opaque ? 255 : args.ColorizationColor >> 24),
+            (byte)(args.ColorizationColor >> 16),
+            (byte)(args.ColorizationColor >> 8),
+            (byte)args.ColorizationColor
+        );
+    }
 
 
     [DllImport("user32.dll")]
@@ -186,8 +186,8 @@ internal static class NativeMethods
     //[DllImport("user32.dll", SetLastError = true)]
     //internal static extern int GetScrollInfo(IntPtr hWnd, int n, ref ScrollInfoStruct lpScrollInfo);
 
-    //[DllImport("dwmapi.dll", EntryPoint = "#127")]
-    //internal static extern void DwmGetColorizationParameters(ref DWMCOLORIZATIONPARAMS args);
+    [DllImport("dwmapi.dll", EntryPoint = "#127")]
+    internal static extern void DwmGetColorizationParameters(ref DWMCOLORIZATIONPARAMS args);
 
     internal static void SetCue(this TextBox textBox, string cue)
     {
@@ -244,8 +244,8 @@ internal static class NativeMethods
     internal const int GWL_WNDPROC = -4;
 
 
-    [DllImport("dwmapi.dll", PreserveSig = false)]
-    internal static extern void DwmGetColorizationColor(out uint ColorizationColor, [MarshalAs(UnmanagedType.Bool)] out bool ColorizationOpaqueBlend);
+    //[DllImport("dwmapi.dll", PreserveSig = false)]
+    //internal static extern void DwmGetColorizationColor(out uint ColorizationColor, [MarshalAs(UnmanagedType.Bool)] out bool ColorizationOpaqueBlend);
 
     [DllImport("Gdi32.dll", CharSet = CharSet.Auto)]
     internal static extern IntPtr CreateCompatibleDC(IntPtr hdc);

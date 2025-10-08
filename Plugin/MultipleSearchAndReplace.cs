@@ -155,14 +155,14 @@ namespace MusicBeePlugin
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 
-        private void moveScaleButtonAdd()
+        private void moveButtonAdd()
         {
             buttonAdd.Left = sourceTagList.Left;
         }
 
-        private void moveScaleButtonDelete()
+        private void moveButtonPaste()
         {
-            buttonDelete.Left = sourceTagList.Left + sourceTagList.Width - buttonDelete.Width;
+            buttonPaste.Left = sourceTagList.Left + sourceTagList.Width - buttonPaste.Width;
         }
 
         private void moveScaleAutoApplyCheckBox()
@@ -1257,8 +1257,8 @@ namespace MusicBeePlugin
             ignoreSplitterMovedEvent = false; //-V3008
 
 
-            moveScaleButtonAdd();
-            moveScaleButtonDelete();
+            moveButtonAdd();
+            moveButtonPaste();
 
 
             moveScaleButtonSave();
@@ -1301,6 +1301,49 @@ namespace MusicBeePlugin
         private void previewTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void buttonCopy_Click(object sender, EventArgs e)
+        {
+            string clipboardText = string.Empty;
+
+            for (int i = 0; i < templateTable.RowCount; i++)
+                clipboardText += templateTable.Rows[i].Cells[2].Value as string + "\t" + templateTable.Rows[i].Cells[3].Value as string + "\r\n";
+
+            clipboardText = clipboardText.TrimEnd('\n');
+            clipboardText = clipboardText.TrimEnd('\r');
+
+            CopyTextToClipboard(clipboardText);
+        }
+
+        private void buttonPaste_Click(object sender, EventArgs e)
+        {
+            for (int i = 1; i < templateTable.RowCount; i++)
+                buttonDelete_Click(null, null);
+
+            try
+            {
+                string clipboardText = Clipboard.GetText();
+
+                string[] rows = clipboardText.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+
+                for (int i = 0; i < rows.Length; i++)
+                {
+                    if (i != 0)
+                        buttonAdd_Click(null, null);
+
+                    string[] values = rows[i].Split('\t');
+                    templateTable.Rows[i].Cells[2].Value = values[0];
+                    templateTable.Rows[i].Cells[3].Value = values[1];
+                }
+            }
+            catch 
+            {
+                if (Language == "ru")
+                    MessageBox.Show(this, "Неверный формат данных буфера обмена.", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(this, "Incorrect clipboard data format.", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

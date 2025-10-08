@@ -3717,7 +3717,7 @@ namespace MusicBeePlugin
             if (selectedPreset.replacedTagId == (int)ClipboardTagId || selectedPreset.replacedTag2Id == (int)ClipboardTagId || selectedPreset.replacedTag3Id == (int)ClipboardTagId
                 || selectedPreset.replacedTag4Id == (int)ClipboardTagId || selectedPreset.replacedTag5Id == (int)ClipboardTagId)
 
-                Invoke(new Action(() => { Clipboard.SetText(clipboardText); }));
+                Invoke(new Action(() => { CopyTextToClipboard(clipboardText); }));
 
 
             Invoke(new Action(() => { applyingChangesStopped(); }));
