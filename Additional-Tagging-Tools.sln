@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.3.32804.467
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11109.219 d18.0-oob
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Additional-Tagging-Tools-Plugin", "Additional-Tagging-Tools-Plugin.csproj", "{F5D46BA1-6F21-40EF-9695-46105CCACD08}"
 EndProject
@@ -32,11 +32,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D732ED16-2C5A-4F75-B855-C00357709EAF}
-		RESX_SaveFilesImmediatelyUponChange = False
-		RESX_SortFileContentOnSave = True
-		RESX_PrefixTranslations = True
-		RESX_ExcelExportMode = Text
 		RESX_PrefixFieldType = Value, TargetComment
+		RESX_ExcelExportMode = Text
+		RESX_SaveFilesImmediatelyUponChange = False
+		SolutionGuid = {D732ED16-2C5A-4F75-B855-C00357709EAF}
 	EndGlobalSection
 EndGlobal

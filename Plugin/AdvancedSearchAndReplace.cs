@@ -2409,7 +2409,10 @@ namespace MusicBeePlugin
 
             try
             {
-                isMatch = Regex.IsMatch(value, searchedPattern, RegexOptions.IgnoreCase);
+                if (ignoreCase == false)
+                    isMatch = Regex.IsMatch(value, searchedPattern, RegexOptions.None);
+                else
+                    isMatch = Regex.IsMatch(value, searchedPattern, RegexOptions.IgnoreCase);
 
                 if (!isMatch)
                     return value;
@@ -2642,7 +2645,11 @@ namespace MusicBeePlugin
             }
 
 
-            SetTags.TryGetValue(tagId, out var cachedTagValue);
+            string cachedTagValue = string.Empty;
+
+            if (tagId != (int)NullTagId)
+                SetTags.TryGetValue(tagId, out cachedTagValue);
+
 
             if (cachedTagValue == null)
             {
@@ -2766,7 +2773,8 @@ namespace MusicBeePlugin
             SetTag(replacedTagId, replacedTagValue);
         }
 
-        internal static SearchedAndReplacedTagsStruct GetReplacedTags(string currentFile, ref Preset preset, AdvancedSearchAndReplace asrCommand = null, bool copyPreset = true)
+        internal static SearchedAndReplacedTagsStruct GetReplacedTags(string currentFile, ref Preset preset, 
+            AdvancedSearchAndReplace asrCommand = null, bool copyPreset = true)
         {
             if (copyPreset)
                 preset = new Preset(preset);

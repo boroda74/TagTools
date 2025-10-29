@@ -8,7 +8,11 @@ If you are familiar with the plugin quick update process, you can always [downlo
 
 *Note:*
 
-Pay attention to tool tips over buttons/fields in plugin windows.
+Plugin's advanced features are very sophisticated and can be confusing, though basic ones are pretty simple to use. But you can disable almost any part of plugin functionality (of course, you can re-enable any part later). Disabling any plugin menu item in settings not only hides the menu item itself but also turns off the entire corresponding plugin functionality.
+
+*Note:*
+
+Pay attention to tool tips over buttons/fields in plugin windows. Use help: Tools> Additional Tagging & Reporting Tools> Help.
 
 ### Plugin adding/updating/removing
 
