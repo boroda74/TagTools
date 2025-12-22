@@ -54,7 +54,7 @@ namespace MusicBeePlugin
         private void calculateAlbumRating(List<string[]> tags, int prevRow, int currentTagsIndex)
         {
             double sumRating = 0;
-            double avgRating;
+            int avgRating;
             int numberOfTracks = 0;
 
             for (var j = prevRow; j < currentTagsIndex; j++)
@@ -69,7 +69,10 @@ namespace MusicBeePlugin
             if (numberOfTracks == 0)
                 avgRating = 0;
             else
-                avgRating = Math.Round(sumRating / 10 / numberOfTracks) * 10;
+                avgRating = (int)Math.Round(sumRating / numberOfTracks);
+
+            if (avgRating <= 5)
+                avgRating = 0;
 
             for (var j = prevRow; j < currentTagsIndex; j++)
             {
@@ -267,7 +270,7 @@ namespace MusicBeePlugin
             if (numberOfTracks == 0)
                 avgRating = 0;
             else
-                avgRating = Math.Round(sumRating / 10 / numberOfTracks) * 10;
+                avgRating = Math.Round(sumRating / numberOfTracks);
 
             for (var j = 0; j < tags.Count; j++)
             {

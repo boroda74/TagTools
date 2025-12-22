@@ -5231,7 +5231,7 @@ namespace MusicBeePlugin
                 predefinedPreset.names.Add("en", "Sentence case.");
                 predefinedPreset.names.Add("ru", "Как в предложениях.");
 
-                predefinedPreset.descriptions.Add("en", "General words will became Sentence case. The words form item #1 of \"Except for words\" list will become uppercase. \r\n" +
+                predefinedPreset.descriptions.Add("en", "General words will became Sentence case. The words from item #1 of \"Except for words\" list will become uppercase. \r\n" +
                     "You can use special pseudo-word \"#RN\" in this list item to uppercase Roman numerals (e.g., III, VI, X). \r\n" +
                     "Characters from item #1 of \"Symbols to treat as sentence separators\" list are characters after which the words will become capitalized. \r\n" +
                     "A dot, followed by a space, is always treated as a sentence separator.");
