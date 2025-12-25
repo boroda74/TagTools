@@ -272,6 +272,9 @@ namespace MusicBeePlugin
             else
                 avgRating = Math.Round(sumRating / numberOfTracks);
 
+            if (avgRating <= 5)
+                avgRating = 0;
+
             for (var j = 0; j < tags.Count; j++)
             {
                 file = tags[j][3];
