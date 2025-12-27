@@ -382,7 +382,7 @@ namespace MusicBeePlugin
 
             if (enabled && acceptButton && !mouseOver)
                 borderColor = ButtonFocusedBorderColor;
-            else if (enabled && mouseOver && ButtonMouseOverBackColor != InputPanelBackColor)
+            else if (enabled && mouseOver && ButtonBackColor == ButtonBorderColor)
                 borderColor = ButtonMouseOverBackColor;
             else if (enabled && mouseOver)
                 borderColor = ButtonFocusedBorderColor;

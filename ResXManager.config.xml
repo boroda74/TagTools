@@ -2,4 +2,4 @@
 <Values xmlns="urn:tom-englert.de/Configuration/1/0">
   <Value Key="SortFileContentOnSave">True</Value>
   <Value Key="PrefixTranslations">True</Value>
-</Values>
+<Value Key="SaveFilesImmediatelyUponChange">False</Value><Value Key="PrefixFieldType">Value, TargetComment</Value><Value Key="ExcelExportMode">Text</Value></Values>
