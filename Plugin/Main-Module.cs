@@ -6822,7 +6822,7 @@ namespace MusicBeePlugin
 
                 ButtonBorderColor = buttonBorderColor;
                 ButtonFocusedBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor);
-                ButtonDisabledBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor, 0.25f);
+                ButtonDisabledBorderColor = GetWeightedColor(ButtonBorderColor, FormBackColor, 0.25f);
 
 
                 ControlHighlightBackColor = buttonBackColor; //--- buttonBackLightDimmedAccentColor;
