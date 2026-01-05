@@ -213,8 +213,8 @@ namespace MusicBeePlugin
 
             if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
             {
-                textColor = ButtonMouseOverForeColor;
-                e.Graphics.FillRectangle(new SolidBrush(ButtonMouseOverBackColor), e.Bounds);
+                textColor = UnchangedCellStyle.SelectionForeColor;
+                e.Graphics.FillRectangle(new SolidBrush(UnchangedCellStyle.SelectionBackColor), e.Bounds);
             }
             else
             {

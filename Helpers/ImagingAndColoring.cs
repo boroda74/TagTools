@@ -431,7 +431,7 @@ namespace MusicBeePlugin
             return invertedBrightnessColor;
         }
 
-        internal static Color IncreaseColorContrast(Color sampleColor, float scale = 1.2f)
+        internal static Color IncreaseColorContrast(Color sampleColor, float scale = 1.5f)
         {
             float r = sampleColor.R;
             float g = sampleColor.G;
