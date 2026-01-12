@@ -523,7 +523,7 @@ namespace ExtensionMethods
             if (control is Label)
             {
                 form.controlsReferencedX.TryGetValue(control, out var control2);
-                if (!(control2 is CheckBox || control2 is RadioButton))
+                //if (!(control2 is CheckBox || control2 is RadioButton)) //----------
                     form.setSkinnedControlColors(control, enable);
 
                 return;

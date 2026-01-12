@@ -843,7 +843,7 @@ namespace MusicBeePlugin
         public class PresetColumnAttributes : ColumnAttributesBase
         {
             public string[] expressions = new[] { string.Empty };
-            public int[] columnIndices = Array.Empty<int>(); //per expression for current grouping/function
+            public int[] columnIndices = new[] { 0 }; //per expression for current grouping/function
             public string[] columnNames = new[] { string.Empty };
 
             public PresetColumnAttributes()
@@ -1887,7 +1887,7 @@ namespace MusicBeePlugin
             {
                 if (string.IsNullOrEmpty(keyValue.Key))
                 {
-                    return Array.Empty<object>();
+                    return new object[] { string.Empty };
                 }
                 else
                 {
@@ -1913,7 +1913,7 @@ namespace MusicBeePlugin
             {
                 if (string.IsNullOrEmpty(composedGroupings))
                 {
-                    return Array.Empty<string>();
+                    return new string[] { string.Empty };
                 }
                 else
                 {
@@ -6533,15 +6533,21 @@ namespace MusicBeePlugin
             functionComboBoxCustom.Enable(enable && !previewIsGenerated && newColumn == true);
             labelFunction.Enable(enable && !previewIsGenerated && newColumn == true);
 
-            multipleItemsSplitterTrimCheckBox.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
-            multipleItemsSplitterComboBoxCustom.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
-            multipleItemsSplitterLabel.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
+            multipleItemsSplitterTrimCheckBox.Enable(enable && !previewIsGenerated && expressionBackup != null 
+                && selectedPreset.userPreset && newColumn != false);
+            multipleItemsSplitterComboBoxCustom.Enable(enable && !previewIsGenerated && expressionBackup != null 
+                && selectedPreset.userPreset && newColumn != false);
+            multipleItemsSplitterLabel.Enable(enable && !previewIsGenerated && expressionBackup != null 
+                && selectedPreset.userPreset && newColumn != false);
 
-            totalsCheckBox.Enable(enable && !previewIsGenerated && selectedPreset.userPreset);
+            totalsCheckBox.Enable(enable && !previewIsGenerated && selectedPreset.userPreset && newColumn != false);
 
-            expressionLabel.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
-            expressionTextBox.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
-            buttonClearExpression.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
+            expressionLabel.Enable(enable && !previewIsGenerated && expressionBackup != null 
+                && selectedPreset.userPreset && newColumn != false);
+            expressionTextBox.Enable(enable && !previewIsGenerated && expressionBackup != null 
+                && selectedPreset.userPreset && newColumn != false);
+            buttonClearExpression.Enable(enable && !previewIsGenerated && expressionBackup != null 
+                && selectedPreset.userPreset && newColumn != false);
 
             columnNameTextBox.Enable(enable && !previewIsGenerated && expressionBackup != null && selectedPreset.userPreset);
 
@@ -7431,7 +7437,8 @@ namespace MusicBeePlugin
 
         internal void SetMultipleItemsSplitterComboBoxText(string text)
         {
-            if (destinationTagListCustom.SelectedItem as string == NullTagName && string.IsNullOrEmpty(idTextBox.Text))
+            if (destinationTagListCustom.SelectedItem == null || destinationTagListCustom.SelectedItem as string == NullTagName 
+                && string.IsNullOrEmpty(idTextBox.Text))
             {
                 enableDisableItemSplitter(true);
                 if (string.IsNullOrEmpty(text))
