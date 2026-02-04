@@ -132,7 +132,7 @@ namespace MusicBeePlugin
             this.autoRateAtStartUpCheckBoxLabel = new System.Windows.Forms.Label();
             this.notifyWhenAutoRatingCompletedCheckBoxLabel = new System.Windows.Forms.Label();
             this.autoRateOnTrackPropertiesCheckBoxLabel = new System.Windows.Forms.Label();
-            this.holdsAtStartUpCheckBoxLabel = new System.Windows.Forms.Label();
+            this.calculateThresholdsAtStartUpCheckBoxLabel = new System.Windows.Forms.Label();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.baseRatingTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.perCent5UpDown)).BeginInit();
@@ -442,7 +442,7 @@ namespace MusicBeePlugin
             this.perCent5UpDown.Name = "perCent5UpDown";
             this.perCent5UpDown.Tag = "";
             this.perCent5UpDown.ValueChanged += new System.EventHandler(this.perCent5_ValueChanged);
-            this.perCent5UpDown.Leave += new System.EventHandler(this.perCent5_ValueChanged);
+            this.perCent5UpDown.ValueChanged += new System.EventHandler(this.perCent5_ValueChanged);
             // 
             // perCentLabel5
             // 
@@ -462,7 +462,7 @@ namespace MusicBeePlugin
             this.perCent45UpDown.Name = "perCent45UpDown";
             this.perCent45UpDown.Tag = "";
             this.perCent45UpDown.ValueChanged += new System.EventHandler(this.perCent45_ValueChanged);
-            this.perCent45UpDown.Leave += new System.EventHandler(this.perCent45_ValueChanged);
+            this.perCent45UpDown.ValueChanged += new System.EventHandler(this.perCent45_ValueChanged);
             // 
             // perCentLabel4
             // 
@@ -476,7 +476,7 @@ namespace MusicBeePlugin
             this.perCent4UpDown.Name = "perCent4UpDown";
             this.perCent4UpDown.Tag = "";
             this.perCent4UpDown.ValueChanged += new System.EventHandler(this.perCent4_ValueChanged);
-            this.perCent4UpDown.Leave += new System.EventHandler(this.perCent4_ValueChanged);
+            this.perCent4UpDown.ValueChanged += new System.EventHandler(this.perCent4_ValueChanged);
             // 
             // perCentLabel35
             // 
@@ -490,7 +490,7 @@ namespace MusicBeePlugin
             this.perCent35UpDown.Name = "perCent35UpDown";
             this.perCent35UpDown.Tag = "";
             this.perCent35UpDown.ValueChanged += new System.EventHandler(this.perCent35_ValueChanged);
-            this.perCent35UpDown.Leave += new System.EventHandler(this.perCent35_ValueChanged);
+            this.perCent35UpDown.ValueChanged += new System.EventHandler(this.perCent35_ValueChanged);
             // 
             // perCentLabel3
             // 
@@ -504,7 +504,7 @@ namespace MusicBeePlugin
             this.perCent3UpDown.Name = "perCent3UpDown";
             this.perCent3UpDown.Tag = "";
             this.perCent3UpDown.ValueChanged += new System.EventHandler(this.perCent3_ValueChanged);
-            this.perCent3UpDown.Leave += new System.EventHandler(this.perCent3_ValueChanged);
+            this.perCent3UpDown.ValueChanged += new System.EventHandler(this.perCent3_ValueChanged);
             // 
             // perCentLabel25
             // 
@@ -518,7 +518,7 @@ namespace MusicBeePlugin
             this.perCent25UpDown.Name = "perCent25UpDown";
             this.perCent25UpDown.Tag = "";
             this.perCent25UpDown.ValueChanged += new System.EventHandler(this.perCent25_ValueChanged);
-            this.perCent25UpDown.Leave += new System.EventHandler(this.perCent25_ValueChanged);
+            this.perCent25UpDown.ValueChanged += new System.EventHandler(this.perCent25_ValueChanged);
             // 
             // perCentLabel2
             // 
@@ -532,7 +532,7 @@ namespace MusicBeePlugin
             this.perCent2UpDown.Name = "perCent2UpDown";
             this.perCent2UpDown.Tag = "";
             this.perCent2UpDown.ValueChanged += new System.EventHandler(this.perCent2_ValueChanged);
-            this.perCent2UpDown.Leave += new System.EventHandler(this.perCent2_ValueChanged);
+            this.perCent2UpDown.ValueChanged += new System.EventHandler(this.perCent2_ValueChanged);
             // 
             // perCentLabel15
             // 
@@ -546,7 +546,7 @@ namespace MusicBeePlugin
             this.perCent15UpDown.Name = "perCent15UpDown";
             this.perCent15UpDown.Tag = "";
             this.perCent15UpDown.ValueChanged += new System.EventHandler(this.perCent15_ValueChanged);
-            this.perCent15UpDown.Leave += new System.EventHandler(this.perCent15_ValueChanged);
+            this.perCent15UpDown.ValueChanged += new System.EventHandler(this.perCent15_ValueChanged);
             // 
             // perCentLabel1
             // 
@@ -560,7 +560,7 @@ namespace MusicBeePlugin
             this.perCent1UpDown.Name = "perCent1UpDown";
             this.perCent1UpDown.Tag = "";
             this.perCent1UpDown.ValueChanged += new System.EventHandler(this.perCent1_ValueChanged);
-            this.perCent1UpDown.Leave += new System.EventHandler(this.perCent1_ValueChanged);
+            this.perCent1UpDown.ValueChanged += new System.EventHandler(this.perCent1_ValueChanged);
             // 
             // perCentLabel05
             // 
@@ -574,7 +574,7 @@ namespace MusicBeePlugin
             this.perCent05UpDown.Name = "perCent05UpDown";
             this.perCent05UpDown.Tag = "";
             this.perCent05UpDown.ValueChanged += new System.EventHandler(this.perCent05_ValueChanged);
-            this.perCent05UpDown.Leave += new System.EventHandler(this.perCent05_ValueChanged);
+            this.perCent05UpDown.ValueChanged += new System.EventHandler(this.perCent05_ValueChanged);
             // 
             // buttonCalculate
             // 
@@ -593,7 +593,7 @@ namespace MusicBeePlugin
             // 
             resources.ApplyResources(this.calculateThresholdsAtStartUpCheckBox, "calculateThresholdsAtStartUpCheckBox");
             this.calculateThresholdsAtStartUpCheckBox.Name = "calculateThresholdsAtStartUpCheckBox";
-            this.calculateThresholdsAtStartUpCheckBox.Tag = "#holdsAtStartUpCheckBoxLabel";
+            this.calculateThresholdsAtStartUpCheckBox.Tag = "#calculateThresholdsAtStartUpCheckBoxLabel";
             // 
             // groupBox1
             // 
@@ -709,7 +709,7 @@ namespace MusicBeePlugin
             0});
             this.threshold05Box.Name = "threshold05Box";
             this.threshold05Box.Tag = "";
-            this.threshold05Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold05Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox05Label
             // 
@@ -728,7 +728,7 @@ namespace MusicBeePlugin
             0});
             this.threshold1Box.Name = "threshold1Box";
             this.threshold1Box.Tag = "";
-            this.threshold1Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold1Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox1Label
             // 
@@ -747,7 +747,7 @@ namespace MusicBeePlugin
             0});
             this.threshold15Box.Name = "threshold15Box";
             this.threshold15Box.Tag = "";
-            this.threshold15Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold15Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox15Label
             // 
@@ -766,7 +766,7 @@ namespace MusicBeePlugin
             0});
             this.threshold2Box.Name = "threshold2Box";
             this.threshold2Box.Tag = "";
-            this.threshold2Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold2Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox2Label
             // 
@@ -785,7 +785,7 @@ namespace MusicBeePlugin
             0});
             this.threshold3Box.Name = "threshold3Box";
             this.threshold3Box.Tag = "";
-            this.threshold3Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold3Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox3Label
             // 
@@ -804,7 +804,7 @@ namespace MusicBeePlugin
             0});
             this.threshold35Box.Name = "threshold35Box";
             this.threshold35Box.Tag = "";
-            this.threshold35Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold35Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox35Label
             // 
@@ -823,7 +823,7 @@ namespace MusicBeePlugin
             0});
             this.threshold4Box.Name = "threshold4Box";
             this.threshold4Box.Tag = "";
-            this.threshold4Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold4Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox4Label
             // 
@@ -842,7 +842,7 @@ namespace MusicBeePlugin
             0});
             this.threshold45Box.Name = "threshold45Box";
             this.threshold45Box.Tag = "";
-            this.threshold45Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold45Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox45Label
             // 
@@ -861,7 +861,7 @@ namespace MusicBeePlugin
             0});
             this.threshold5Box.Name = "threshold5Box";
             this.threshold5Box.Tag = "";
-            this.threshold5Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold5Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox5Label
             // 
@@ -885,7 +885,7 @@ namespace MusicBeePlugin
             0});
             this.threshold25Box.Name = "threshold25Box";
             this.threshold25Box.Tag = "";
-            this.threshold25Box.Leave += new System.EventHandler(this.threshold_TextChanged);
+            this.threshold25Box.ValueChanged += new System.EventHandler(this.threshold_ValueChanged);
             // 
             // checkBox25Label
             // 
@@ -977,12 +977,12 @@ namespace MusicBeePlugin
             this.autoRateOnTrackPropertiesCheckBoxLabel.Tag = "";
             this.autoRateOnTrackPropertiesCheckBoxLabel.Click += new System.EventHandler(this.autoRateOnTrackPropertiesCheckBoxLabel_Click);
             // 
-            // holdsAtStartUpCheckBoxLabel
+            // calculateThresholdsAtStartUpCheckBoxLabel
             // 
-            resources.ApplyResources(this.holdsAtStartUpCheckBoxLabel, "holdsAtStartUpCheckBoxLabel");
-            this.holdsAtStartUpCheckBoxLabel.Name = "holdsAtStartUpCheckBoxLabel";
-            this.holdsAtStartUpCheckBoxLabel.Tag = "";
-            this.holdsAtStartUpCheckBoxLabel.Click += new System.EventHandler(this.holdsAtStartUpCheckBoxLabel_Click);
+            resources.ApplyResources(this.calculateThresholdsAtStartUpCheckBoxLabel, "calculateThresholdsAtStartUpCheckBoxLabel");
+            this.calculateThresholdsAtStartUpCheckBoxLabel.Name = "calculateThresholdsAtStartUpCheckBoxLabel";
+            this.calculateThresholdsAtStartUpCheckBoxLabel.Tag = "";
+            this.calculateThresholdsAtStartUpCheckBoxLabel.Click += new System.EventHandler(this.calculateThresholdsAtStartUpCheckBoxLabel_Click);
             // 
             // dirtyErrorProvider
             // 
@@ -1020,7 +1020,7 @@ namespace MusicBeePlugin
             this.Controls.Add(this.playsPerDayTagList);
             this.Controls.Add(this.storePlaysPerDayCheckBoxLabel);
             this.Controls.Add(this.storePlaysPerDayCheckBox);
-            this.Controls.Add(this.holdsAtStartUpCheckBoxLabel);
+            this.Controls.Add(this.calculateThresholdsAtStartUpCheckBoxLabel);
             this.Controls.Add(this.calculateThresholdsAtStartUpCheckBox);
             this.Controls.Add(this.autoRatingTagList);
             this.Controls.Add(this.label4);
@@ -1147,7 +1147,7 @@ namespace MusicBeePlugin
         private Label checkBox15Label;
         private Label checkBox1Label;
         private Label checkBox05Label;
-        private Label holdsAtStartUpCheckBoxLabel;
+        private Label calculateThresholdsAtStartUpCheckBoxLabel;
         private Label groupBox1Label;
         private Label groupBox2Label;
         private Button buttonSettings;

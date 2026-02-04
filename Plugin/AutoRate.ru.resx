@@ -1562,25 +1562,25 @@
   <data name="storePlaysPerDayCheckBox.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Error" xml:space="preserve">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>MiddleRight</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>684, 42</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 15</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
     <value>Автоматически рассчитывать пороговые значения при запуске</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.ToolTip" xml:space="preserve">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.Error" xml:space="preserve">

@@ -2605,37 +2605,37 @@ should change every day for each track in this case. </value>
   <data name="&gt;&gt;storePlaysPerDayCheckBox.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>554, 42</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 15</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="holdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
+  <data name="calculateThresholdsAtStartUpCheckBoxLabel.Text" xml:space="preserve">
     <value>Auto calculate thresholds on startup</value>
   </data>
-  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Name" xml:space="preserve">
-    <value>holdsAtStartUpCheckBoxLabel</value>
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBoxLabel.Name" xml:space="preserve">
+    <value>calculateThresholdsAtStartUpCheckBoxLabel</value>
   </data>
-  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Type" xml:space="preserve">
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBoxLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBoxLabel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;holdsAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;calculateThresholdsAtStartUpCheckBoxLabel.ZOrder" xml:space="preserve">
     <value>24</value>
   </data>
   <data name="calculateThresholdsAtStartUpCheckBox.AutoSize" type="System.Boolean, mscorlib">

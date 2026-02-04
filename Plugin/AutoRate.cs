@@ -16,7 +16,7 @@ namespace MusicBeePlugin
         private CustomComboBox playsPerDayTagListCustom;
 
 
-        bool formIsOpening;
+        bool ignoreChangedThresholds;
 
         private string[] files = Array.Empty<string>();
 
@@ -103,7 +103,7 @@ namespace MusicBeePlugin
             toolTip1.SetToolTip(buttonOK, MsgThresholdsDescription);
 
             toolTip1.SetToolTip(calculateThresholdsAtStartUpCheckBox, MsgAutoCalculationOfThresholdsDescription);
-            toolTip1.SetToolTip(holdsAtStartUpCheckBoxLabel, MsgAutoCalculationOfThresholdsDescription);
+            toolTip1.SetToolTip(calculateThresholdsAtStartUpCheckBoxLabel, MsgAutoCalculationOfThresholdsDescription);
             toolTip1.SetToolTip(perCent5UpDown, MsgAutoCalculationOfThresholdsDescription);
             toolTip1.SetToolTip(perCent45UpDown, MsgAutoCalculationOfThresholdsDescription);
             toolTip1.SetToolTip(perCent4UpDown, MsgAutoCalculationOfThresholdsDescription);
@@ -127,7 +127,7 @@ namespace MusicBeePlugin
             playsPerDayTagListCustom.Text = GetTagName(SavedSettings.playsPerDayTagId);
 
 
-            formIsOpening = true;
+            ignoreChangedThresholds = true;
 
 
             storePlaysPerDayCheckBox.Checked = SavedSettings.storePlaysPerDay;
@@ -177,7 +177,7 @@ namespace MusicBeePlugin
             labelTotalTracks.Text = MsgNumberOfPlayedTracks + CtlAutoRateCalculating.ToLower();
 
 
-            formIsOpening = false;
+            ignoreChangedThresholds = false;
 
             decimal fullPercentageSum = sumOfPercentages();
 
@@ -309,10 +309,14 @@ namespace MusicBeePlugin
             }
 
 
+            ignoreChangedThresholds = true;
+
             if (calculateActualSumOfPercentageOnCalculatingThresholds && InvokeRequired)
                 MbForm.Invoke(new Action(() => { fillThresholdsPercentagesUi(); }));
             else if (calculateActualSumOfPercentageOnCalculatingThresholds)
                 fillThresholdsPercentagesUi();
+
+            ignoreChangedThresholds = false;
         }
 
         private static double RoundPlaysPerDay(double value)
@@ -1066,7 +1070,7 @@ namespace MusicBeePlugin
 
         private void perCentN_ValueChanged(NumericUpDown perCent, CheckBox checkBox, Label perCentLabel, decimal actualPerCent)
         {
-            if (!formIsOpening)
+            if (!ignoreChangedThresholds)
             {
                 calculateThresholdsAtStartUpCheckBox.Checked = false;
                 calculateThresholdsAtStartUpCheckBox.Enable(false);
@@ -1174,7 +1178,7 @@ namespace MusicBeePlugin
             perCentN_ValueChanged(perCent05UpDown, checkBox05, perCentLabel05, SavedSettings.actualPerCent05);
         }
 
-        private void threshold_TextChanged(object sender, EventArgs e)
+        private void threshold_ValueChanged(object sender, EventArgs e)
         {
             (sender as NumericUpDown).Text = ConvertDoubleToString(RoundPlaysPerDay((sender as NumericUpDown).Text));
         }
@@ -1258,9 +1262,10 @@ namespace MusicBeePlugin
             buttonOK.Enable(false);
         }
 
-        private void holdsAtStartUpCheckBoxLabel_Click(object sender, EventArgs e)
+        private void calculateThresholdsAtStartUpCheckBoxLabel_Click(object sender, EventArgs e)
         {
-            calculateThresholdsAtStartUpCheckBox.Checked = !calculateThresholdsAtStartUpCheckBox.Checked;
+            if (calculateThresholdsAtStartUpCheckBox.IsEnabled())
+                calculateThresholdsAtStartUpCheckBox.Checked = !calculateThresholdsAtStartUpCheckBox.Checked;
         }
 
         private void autoRateOnTrackPropertiesCheckBoxLabel_Click(object sender, EventArgs e)
