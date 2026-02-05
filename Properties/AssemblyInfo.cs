@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 //set of attributes. Change these attribute values to modify the information
 //associated with an assembly.
 [assembly: AssemblyTitle("Additional Tagging & Reporting Tools")]
-[assembly: AssemblyDescription("Plugin adds several commands to MusicBee main menu for extended tag editing, exporting them to external applications, gathering library statistics, making (auto)backups of tags, etc.")]
+[assembly: AssemblyDescription("Plugin adds several commands to MusicBee main menu for extended tag editing, exporting them to external applications, collecting library statistics, making (auto)backups of tags, etc.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Additional Tagging & Reporting Tools")]
-[assembly: AssemblyCopyright("Copyright © boroda 2012-2025")]
+[assembly: AssemblyCopyright("Copyright © boroda 2012-2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,8 +32,8 @@ using System.Runtime.InteropServices;
 //You can specify all the values, or you can default the Build and Revision Numbers 
 //by using the '*' as shown below:
 //[assembly: AssemblyVersion("10.0.*")]
-[assembly: AssemblyVersion("10.0.9530.30559")]
-[assembly: AssemblyFileVersion("10.0.9530.30559")]
+[assembly: AssemblyVersion("10.0.9532.27893")]
+[assembly: AssemblyFileVersion("10.0.9532.27893")]
 [assembly: NeutralResourcesLanguage("en")]
 
-[assembly: AssemblyInformationalVersion("10.0.9530.30559")]
+[assembly: AssemblyInformationalVersion("10.0.9532.27893")]
