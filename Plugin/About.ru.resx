@@ -134,7 +134,7 @@
     <value>513, 15</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
-    <value>Плагин добавляет дополнительные инструменты работы с тегами и отчетности в Musicbee</value>
+    <value>Плагин добавляет дополнительные инструменты работы с тегами и отчетности в MusicBee</value>
   </data>
   <data name="buttonsPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>834, 34</value>
@@ -160,12 +160,6 @@
   <data name="iconSetLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>432, 70</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>486, 70</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 15</value>
-  </data>
   <data name="toolbarButtonsLabel.Text" xml:space="preserve">
     <value>для кнопок панели инструментов MusicBee</value>
   </data>
@@ -180,5 +174,11 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>О плагине</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>486, 70</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 15</value>
   </data>
 </root>
