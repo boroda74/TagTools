@@ -7943,7 +7943,7 @@ namespace MusicBeePlugin
         {
             SetMultipleItemsSplitterComboBoxText(splitterBackup);
 
-            if (sourceFieldComboBoxCustom.SelectedIndex != -1 && destinationTagListCustom.SelectedItem as string == NullTagName)
+            if (sourceFieldComboBoxCustom.SelectedIndex != -1)
             {
                 savedDestinationTagsNames[sourceFieldComboBoxCustom.SelectedIndex] = destinationTagListCustom.Text;
 

@@ -78,7 +78,11 @@ namespace MusicBeePlugin
             {
                 string currentFile = tags[j][3];
 
-                SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
+                if (avgRating == 0)
+                    SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), string.Empty, true);
+                else
+                    SetFileTag(currentFile, GetTagId(SavedSettings.albumRatingTagName), avgRating.ToString(), true);
+
                 CommitTagsToFile(currentFile, false, true);
 
                 SetStatusBarTextForFileOperations(this, CarSbText, false, j, tags.Count, currentFile);
