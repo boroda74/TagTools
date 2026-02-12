@@ -2749,7 +2749,9 @@ namespace MusicBeePlugin
             {
                 clearAppliedPresetCache();
 
-                if (interactive)
+                if (interactive && InvokeRequired)
+                    MbForm.Invoke(new Action(() => MessageBox.Show(MbForm, SbLrSenselessToSaveSpitGroupingsTo1File, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error)));
+                else if (interactive)
                     MessageBox.Show(MbForm, SbLrSenselessToSaveSpitGroupingsTo1File, string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return SbLrSenselessToSaveSpitGroupingsTo1File;
@@ -3431,7 +3433,6 @@ namespace MusicBeePlugin
             {
                 Invoke(new Action(() =>
                 {
-                    previewTable.ColumnCount = 0;
                     previewTable.DataSource = source;
                     formatTrackColumns();
                 }));
@@ -4341,7 +4342,7 @@ namespace MusicBeePlugin
                     else
                     {
                         backgroundTaskIsUpdatingTags = true;
-                        executePreset(this, selectedFiles, false, true, null, false, true);
+                        executePreset(this, selectedFiles, true, true, null, false, true);
                     }
                 }
                 catch (ThreadAbortException) //-V3163 //-V5606
