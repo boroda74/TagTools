@@ -59,7 +59,7 @@ namespace MusicBeePlugin
 
             for (var j = prevRow; j < currentTagsIndex; j++)
             {
-                if (!string.IsNullOrEmpty(tags[j][2]) || SavedSettings.considerUnrated)
+                if (tags[j][2] != "0" || SavedSettings.considerUnrated)
                 {
                     sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
                     numberOfTracks++;
