@@ -264,7 +264,7 @@ namespace MusicBeePlugin
 
             for (var j = 0; j < tags.Count; j++)
             {
-                if (!string.IsNullOrEmpty(tags[j][2]) || SavedSettings.considerUnrated)
+                if (tags[j][2] != "0" || SavedSettings.considerUnrated)
                 {
                     sumRating += ConvertStrings(tags[j][2], ResultType.Double, DataType.Rating).resultD;
                     numberOfTracks++;
