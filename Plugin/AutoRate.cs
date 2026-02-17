@@ -389,7 +389,10 @@ namespace MusicBeePlugin
                     autoRating = 0;
             }
 
-            SetFileTag(currentFile, autoRateTagId, (10 * autoRating).ToString(), true);
+            if (autoRating == 0)
+                SetFileTag(currentFile, autoRateTagId, string.Empty, true);
+            else
+                SetFileTag(currentFile, autoRateTagId, (10 * autoRating).ToString(), true);
 
             if (SavedSettings.storePlaysPerDay)
                 SetFileTag(currentFile, playsPerDayTagId, ConvertDoubleToString(playsPerDay));
@@ -518,8 +521,8 @@ namespace MusicBeePlugin
             {
                 daysSinceAdded =
                     (DateTime.Parse(string.Empty +
-                                    MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.DateAdded)) -
-                     DateTime.Now).TotalDays;
+                        MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.DateAdded)) -
+                        DateTime.Now).TotalDays;
             }
             catch (FormatException)
             {
@@ -531,7 +534,8 @@ namespace MusicBeePlugin
                 if (SavedSettings.sinceAdded)
                     daysSinceLastPlayed = 0;
                 else
-                    daysSinceLastPlayed = (DateTime.Parse(string.Empty + MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.LastPlayed)) - DateTime.Now).TotalDays;
+                    daysSinceLastPlayed = (DateTime.Parse(string.Empty + MbApiInterface.Library_GetFileProperty(currentFile, FilePropertyType.LastPlayed)) - 
+                        DateTime.Now).TotalDays;
             }
             catch (FormatException) { daysSinceLastPlayed = 0; }
 
@@ -1086,7 +1090,8 @@ namespace MusicBeePlugin
             if (actualSumOfPercentages == -1)
                 labelSum.Text = MsgSum + sumOfPercentages() + "% (" + (100 - sumOfPercentages()) + MsgNumberOfNotRatedTracks;
             else
-                labelSum.Text = MsgSum + sumOfPercentages() + MsgActualPercent + actualSumOfPercentages + "% (" + (100 - actualSumOfPercentages) + MsgNumberOfNotRatedTracks;
+                labelSum.Text = MsgSum + sumOfPercentages() + MsgActualPercent + actualSumOfPercentages + "% (" + (100 - actualSumOfPercentages) + 
+                    MsgNumberOfNotRatedTracks;
 
 
             if (actualPerCent == -1)
