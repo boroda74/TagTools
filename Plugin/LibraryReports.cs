@@ -2314,7 +2314,7 @@ namespace MusicBeePlugin
 
             rows = new DataGridViewBoundColumnList<Row>(columnNames);
 
-            Invoke(new Action(() => { source.DataSource = rows; source.ResetBindings(false); }));
+            MbForm.Invoke(new Action(() => { source.DataSource = rows; source.ResetBindings(false); }));
 
             return columnNames;
         }
@@ -2324,10 +2324,6 @@ namespace MusicBeePlugin
             if (lastCachedAppliedPresetGuid == appliedPreset.guid)
                 return;
 
-
-            var columnNames = prepareRows();
-
-
             groupings.Clear();
             groupingsDict.Clear();
             var columnCount = prepareDict(groupingsDict, groupings, appliedPreset.groupings, 0);
@@ -2335,9 +2331,12 @@ namespace MusicBeePlugin
             functionsDict.Clear();
             prepareDict(functionsDict, null, appliedPreset.functions, columnCount);
 
+
+            var columnNames = prepareRows();
+
+
             savedFunctionIds.Clear();
             savedFunctionIds.AddRange(appliedPreset.functionIds);
-
 
             operations.Clear();
             operations.AddRange(appliedPreset.operations);
@@ -6974,10 +6973,7 @@ namespace MusicBeePlugin
                 return;
             }
 
-            previewTable.AllowUserToResizeColumns = false;
-            previewTable.AllowUserToResizeRows = false;
-            foreach (DataGridViewColumn column in previewTable.Columns)
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            prepareBackgroundPreview();
 
             ApplyReportPreset(selectedPreset, getReportPresetsArrayUI(), this);
         }
