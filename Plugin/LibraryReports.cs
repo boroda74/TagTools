@@ -3008,6 +3008,10 @@ namespace MusicBeePlugin
             {
                 potentiallyAffectedFiles = queriedFiles;
             }
+            else if (form != null && interactive) //Not recalculating preset based on cached grouping tags
+            {
+                potentiallyAffectedFiles = queriedFiles;
+            }
             //If recalculating preset based on cached grouping tags, then queriedGroupingTagsRaw, queriedActualGroupingTags & queriedActualGroupingTagsRaw
             //are passed as parameters
             else
@@ -4325,7 +4329,7 @@ namespace MusicBeePlugin
             RefreshPanels(true);
         }
 
-        internal void applyReportPresetToSelectedTracks()
+        internal void applyReportPresetToSelectedTracksInteractive()
         {
             lock (LrPresetExecutionLocker)
             {
@@ -4343,6 +4347,36 @@ namespace MusicBeePlugin
                     {
                         backgroundTaskIsUpdatingTags = true;
                         executePreset(this, selectedFiles, true, true, null, false, true);
+                    }
+                }
+                catch (ThreadAbortException) //-V3163 //-V5606
+                {
+                    //Let's just stop the thread...
+                }
+            }
+
+            BackgroundTaskIsInProgress = false;
+            RefreshPanels(true);
+        }
+
+        internal void applyReportPresetToSelectedTracks()
+        {
+            lock (LrPresetExecutionLocker)
+            {
+                try
+                {
+                    Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+
+                    MbApiInterface.Library_QueryFilesEx("domain=SelectedFiles", out var selectedFiles);
+                    if (selectedFiles == null || selectedFiles.Length == 0)
+                    {
+                        SetStatusBarText(this, MsgNoTracksSelected, true);
+                        System.Media.SystemSounds.Exclamation.Play();
+                    }
+                    else
+                    {
+                        backgroundTaskIsUpdatingTags = true;
+                        executePreset(null, selectedFiles, false, true, null, false, true);
                     }
                 }
                 catch (ThreadAbortException) //-V3163 //-V5606
@@ -4691,7 +4725,8 @@ namespace MusicBeePlugin
                 form.appliedPreset = preset;
                 form.backgroundTaskIsUpdatingTags = true;
 
-                form.switchOperation(form.applyReportPresetToSelectedTracks, form.buttonOK, form.buttonOK, form.buttonPreview, form.buttonClose, true, null);
+                form.switchOperation(form.applyReportPresetToSelectedTracksInteractive, form.buttonOK, form.buttonOK, form.buttonPreview, form.buttonClose, 
+                    true, null);
             }
             else
             {
