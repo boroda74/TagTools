@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Security.Policy;
+using System.Windows.Forms;
 
 namespace MusicBeePlugin
 {
@@ -34,13 +37,14 @@ namespace MusicBeePlugin
                     CopyMemory(ref this, apiInterfacePtr, 692);
                 else if (MusicBeeVersion == MusicBeeVersion.v3_4_1)
                     CopyMemory(ref this, apiInterfacePtr, 696);
+                else if (MusicBeeVersion == MusicBeeVersion.v3_5)
+                    CopyMemory(ref this, apiInterfacePtr, 700);
                 else
                     CopyMemory(ref this, apiInterfacePtr, Marshal.SizeOf(this));
             }
             public MusicBeeVersion MusicBeeVersion
             {
-                get
-                {
+                get {
                     if (ApiRevision <= 25)
                         return MusicBeeVersion.v2_0;
                     else if (ApiRevision <= 31)
@@ -276,8 +280,7 @@ namespace MusicBeePlugin
             // api version 57
             public Library_GetNoArtworkDelegate Library_GetNoArtworkUrl;
             // api version 58
-            //public FileList_ClearDelegate FileList_Clear;
-            //public FileList_AddFilesDelegate FileList_AddFiles;
+            public NowPlaying_GetPeakDelegate NowPlaying_GetPeak;
         }
 
         public enum MusicBeeVersion
@@ -290,7 +293,7 @@ namespace MusicBeePlugin
             v2_5 = 5,
             v3_0 = 6,
             v3_1 = 7,
-            v3_4 = 8,
+			v3_4 = 8,
             v3_4_1 = 9,
             v3_5 = 10,
             v3_6 = 11
@@ -317,7 +320,7 @@ namespace MusicBeePlugin
         [StructLayout(LayoutKind.Sequential)]
         public class PluginInfo
         {
-            public short PluginInfoVersion; //-V3085
+            public short PluginInfoVersion;
             public PluginType Type;
             public string Name;
             public string Description;
@@ -326,8 +329,8 @@ namespace MusicBeePlugin
             public short VersionMajor;
             public short VersionMinor;
             public short Revision;
-            public short MinInterfaceVersion; //-V3085
-            public short MinApiRevision; //-V3085
+            public short MinInterfaceVersion;
+            public short MinApiRevision;
             public ReceiveNotificationFlags ReceiveNotifications;
             public int ConfigurationPanelHeight;
         }
@@ -381,16 +384,18 @@ namespace MusicBeePlugin
             MusicBeeStarted = 34,
             PlayingTracksChanged = 35,
             PlayingTracksQueueChanged = 36,
-            PlaylistCreated = 37,
-            PlaylistUpdated = 38,
-            PlaylistDeleted = 39,
+			PlaylistCreated = 37,
+			PlaylistUpdated = 38,
+			PlaylistDeleted = 39,
             PlaylistMoved = 40,
             SelectedFileChanged = 41,
             SelectedNodeChanged = 42,
             SelectedFilterChanged = 43,
             FileRemovedFromLibrary = 44,
             FileRemovedFromInbox = 45,
-            FileRenamed = 46
+            FileRenamed = 46,
+			TaskAbortClicked = 47,
+			TempoChanged = 48
         }
 
         public enum PluginCloseReason
@@ -428,7 +433,7 @@ namespace MusicBeePlugin
             Channels = 8,
             SampleRate = 9,
             Bitrate = 10,
-            Bitdepth = 183,
+			Bitdepth = 183,
             DateModified = 11,
             DateAdded = 12,
             LastPlayed = 13,
@@ -445,12 +450,12 @@ namespace MusicBeePlugin
         {
             TrackTitle = 65,
             Album = 30,
-            AlbumUniqueId = 108,
+			AlbumUniqueId = 108,
             AlbumArtist = 31,        // displayed album artist
             AlbumArtistRaw = 34,     // stored album artist
             Artist = 32,             // displayed artist
             MultiArtist = 33,        // individual artists, separated by a null char
-            PrimaryArtist = 19,      // first artist from multi-artist tagged file, otherwise displayed artist
+			PrimaryArtist = 19,      // first artist from multi-artist tagged file, otherwise displayed artist
             Artists = 144,
             ArtistsWithArtistRole = 145,
             ArtistsWithPerformerRole = 146,
@@ -482,7 +487,7 @@ namespace MusicBeePlugin
             Custom18 = 214,
             Custom19 = 215,
             Custom20 = 216,
-            Decade = 105,
+			Decade = 105,
             DiscNo = 52,
             DiscCount = 54,
             Encoder = 55,
@@ -530,33 +535,33 @@ namespace MusicBeePlugin
             Virtual23 = 155,
             Virtual24 = 156,
             Virtual25 = 157,
-            Virtual26 = 185,
-            Virtual27 = 186,
-            Virtual28 = 187,
-            Virtual29 = 188,
-            Virtual30 = 189,
-            Virtual31 = 190,
-            Virtual32 = 191,
-            Virtual33 = 194,
-            Virtual34 = 195,
-            Virtual35 = 196,
-            Virtual36 = 197,
-            Virtual37 = 198,
-            Virtual38 = 199,
-            Virtual39 = 200,
-            Virtual40 = 201,
-            Virtual41 = 202,
-            Virtual42 = 203,
-            Virtual43 = 204,
-            Virtual44 = 205,
-            Virtual45 = 206,
-            Virtual46 = 207,
-            Virtual47 = 208,
-            Virtual48 = 209,
-            Virtual49 = 210,
-            Virtual50 = 211,
+			Virtual26 = 185,
+			Virtual27 = 186,
+			Virtual28 = 187,
+			Virtual29 = 188,
+			Virtual30 = 189,
+			Virtual31 = 190,
+			Virtual32 = 191,
+			Virtual33 = 194,
+			Virtual34 = 195,
+			Virtual35 = 196,
+			Virtual36 = 197,
+			Virtual37 = 198,
+			Virtual38 = 199,
+			Virtual39 = 200,
+			Virtual40 = 201,
+			Virtual41 = 202,
+			Virtual42 = 203,
+			Virtual43 = 204,
+			Virtual44 = 205,
+			Virtual45 = 206,
+			Virtual46 = 207,
+			Virtual47 = 208,
+			Virtual48 = 209,
+			Virtual49 = 210,
+			Virtual50 = 211,
             Year = 88,
-            YearOnly = 35,
+			YearOnly = 35,
             SortTitle = 163,
             SortAlbum = 164,
             SortAlbumArtist = 165,
@@ -571,8 +576,7 @@ namespace MusicBeePlugin
             OriginalArtist = 174,
             OriginalYear = 175,
             OriginalTitle = 177,
-            InstrumentsPerformers = 182,
-
+			InstrumentsPerformers = 182,
 
             Cuesheet = 18 //Added by me
         }
@@ -623,9 +627,9 @@ namespace MusicBeePlugin
             AppleDevice = 2,
             GooglePlay2 = 3,
             AppleDevice2 = 4,
-            WebDrivePluginOneDrive = 5,
-            WebDrivePluginGoogleDrive = 6,
-            WebDrivePluginDropBox = 7
+			WebDrivePluginOneDrive = 5,
+			WebDrivePluginGoogleDrive = 6,
+			WebDrivePluginDropBox = 7
         }
 
         public enum DataType
@@ -741,20 +745,24 @@ namespace MusicBeePlugin
         public enum SkinElement
         {
             SkinSubPanel = 0,
-            SkinButton = 2,
+			SkinButton = 2,
             SkinInputControl = 7,
+			SkinInputScrollBar = 8,
             SkinInputPanel = 10,
             SkinInputPanelLabel = 14,
-            SkinTrackAndArtistPanel = -1,
             SkinElementPanel = 15,
             SkinTrackDetailsPanel = 16,
             SkinArtworkPanel = 17,
+            SkinTrackAndArtistPanel = -1
         }
 
         public enum ElementState
         {
             ElementStateDefault = 0,
-            ElementStateModified = 6
+			ElementStateLowLight = 1,
+            ElementStateHighlight = 2,
+            ElementStateDisabled = 3,
+            ElementStateModified = 4
         }
 
         public enum ElementComponent
@@ -783,7 +791,7 @@ namespace MusicBeePlugin
             Album = 2,
             Smart = 3
         }
-
+        
         public enum PlayStatisticType
         {
             NoChange = 0,
@@ -794,9 +802,9 @@ namespace MusicBeePlugin
         public enum Command
         {
             NavigateTo = 1,
-            BanPicture = 6
+			BanPicture = 6
         }
-
+        
         public enum DownloadTarget
         {
             Inbox = 0,
@@ -805,7 +813,7 @@ namespace MusicBeePlugin
         }
 
         [Flags()]
-        public enum PictureLocations : byte
+        public enum PictureLocations: byte
         {
             None = 0,
             EmbedInFile = 1,
@@ -954,6 +962,7 @@ namespace MusicBeePlugin
         public delegate int NowPlaying_GetSpectrumDataDelegate(float[] fftData);
         public delegate bool NowPlaying_GetSoundGraphDelegate(float[] graphData);
         public delegate bool NowPlaying_GetSoundGraphExDelegate(float[] graphData, float[] peakData);
+        public delegate bool NowPlaying_GetPeakDelegate(float[] peak, bool rms);
         public delegate int NowPlayingList_GetCurrentIndexDelegate();
         public delegate int NowPlayingList_GetNextIndexDelegate(int offset);
         public delegate bool NowPlayingList_IsAnyPriorTracksDelegate();

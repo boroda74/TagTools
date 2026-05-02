@@ -136,6 +136,7 @@ namespace MusicBeePlugin
 
         internal static Color ButtonFocusedBorderColor;
         internal static Color ButtonBorderColor;
+        internal static Color ButtonMouseOverBorderColor;
         internal static Color ButtonDisabledBorderColor;
 
         internal static Color ButtonForeColor;
@@ -143,9 +144,6 @@ namespace MusicBeePlugin
 
         internal static Color ButtonMouseOverForeColor;
         internal static Color ButtonMouseOverBackColor;
-
-        internal static Color MenuForeColor;
-        internal static Color MenuBackColor;
 
         internal static Color ButtonDisabledForeColor;
         internal static Color ButtonDisabledBackColor;
@@ -186,6 +184,8 @@ namespace MusicBeePlugin
         internal static Color ScrollBarThumbAndSpansBorderColor = NoColor;
 
         internal static Color ScrollBarFocusedBorderColor = NoColor;
+
+        internal static Color MenuForeColor;
 
 
         //Themed colors for ASR/LR
@@ -2259,7 +2259,7 @@ namespace MusicBeePlugin
             return trackRepresentation;
         }
 
-        internal static SwappedTags SwapTags(string sourceTagValue, string destinationTagValue, MetaDataType sourceTagId, MetaDataType destinationTagId,
+        internal static SwappedTags SwapTags(string sourceTagValue, string origDestinationTagValue, string destinationTagValue, MetaDataType sourceTagId, MetaDataType destinationTagId,
             bool smartOperation, bool appendSourceToDestination = false, string appendedText = "", bool addSourceToDestination = false, string addedText = "")
         {
             var swappedTags = new SwappedTags();
@@ -2302,7 +2302,7 @@ namespace MusicBeePlugin
                 }
 
                 swappedTags.newDestinationNormalizedTagValue = ReplaceMSIds(RemoveRoleIds(swappedTags.newDestinationTagValue));
-                swappedTags.destinationNormalizedTagValue = GetTagRepresentation(destinationTagValue);
+                swappedTags.destinationNormalizedTagValue = GetTagRepresentation(origDestinationTagValue);
 
                 if (sourceTagId == destinationTagId) //Smart conversion of multiple items of one tag
                 {
@@ -2344,7 +2344,7 @@ namespace MusicBeePlugin
                 }
 
                 swappedTags.newDestinationNormalizedTagValue = swappedTags.newDestinationTagValue;
-                swappedTags.destinationNormalizedTagValue = destinationTagValue;
+                swappedTags.destinationNormalizedTagValue = origDestinationTagValue;
 
 
                 appendedAddedValue = destinationTagValue;
@@ -6483,16 +6483,10 @@ namespace MusicBeePlugin
 
         internal static Color GetButtonBackColor()
         {
-            var buttonBackCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+            var buttonBackCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
             Color buttonBackColor;
 
-            //const float ButtonBackgroundWeight = LightDimmedWeight;
-            const float ButtonBackgroundWeight = 1;
-
-            if (buttonBackCode == 0) //Unsupported by older API
-                //buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, ButtonBackgroundWeight);
-                buttonBackColor = GetWeightedColor(FormBackColor, AccentColor, ButtonBackgroundWeight);
-            else if (buttonBackCode == -1) //Windows color scheme
+            if (buttonBackCode == -1) //Windows color scheme
                 buttonBackColor = InputPanelBackColor;
             else
                 buttonBackColor = Color.FromArgb(buttonBackCode);
@@ -6686,7 +6680,7 @@ namespace MusicBeePlugin
                     ElementComponent.ComponentBackground));
                 InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBorder));
-                InputControlFocusedBorderColor = GetWeightedColor(InputControlBorderColor, InputControlForeColor);
+                InputControlFocusedBorderColor = InputControlBorderColor; //----- GetWeightedColor(InputControlBorderColor, InputControlForeColor);
 
 
                 AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
@@ -6705,7 +6699,6 @@ namespace MusicBeePlugin
 
 
                 //SKINNING BUTTONS (ESPECIALLY DISABLED BUTTONS)
-                //Below: (SkinElement)2 - BUTTON??? enum code //-----
 
                 //Back colors
                 Color buttonBackColor = GetButtonBackColor();
@@ -6716,83 +6709,50 @@ namespace MusicBeePlugin
 
 
                 ButtonBackColor = buttonBackColor;
-                ButtonDisabledBackColor = ButtonBackColor;
-
+                ButtonDisabledBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDisabled,
+                    ElementComponent.ComponentBackground));
 
                 InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
                 InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.85f); //Read-only input control background //-----
-                InputControlDeepDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.36f); //Disabled input control background //-----
 
-                InputControlDeepDimmedForeColor = IncreaseColorContrast(InputControlDeepDimmedBackColor, 1.6f); //Disabled input control foreground //-----
+                int inputControlDeepDimmedBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                    ElementComponent.ComponentBackground);
+                if (inputControlDeepDimmedBackColorCode == -1)
+                    InputControlDeepDimmedBackColor = SystemColors.Control;
+                else
+                    InputControlDeepDimmedBackColor = Color.FromArgb(inputControlDeepDimmedBackColorCode); //Disabled input control background
 
-
-
-                //START: Workaround to get color similar to button mouseover one (similarity depend on the skin) //-----
-                TagToolsContextSubmenu.DropDown.Items.Clear();
-
-
-                var buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■■■■■■■■■■■■■■■■■■■■■■■■", null, null);
-                buttonMouseOverColorsMenuItem.Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
-                TagToolsContextSubmenu.DropDown.Items[0].Select();
-                //TagToolsContextSubmenu.DropDown.Show();
-                Bitmap testBitmap = new Bitmap((int)(88 * DpiScaling), (int)(28 * DpiScaling), PixelFormat.Format24bppRgb);
-                TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, (int)(88 * DpiScaling), (int)(28 * DpiScaling)));
-
-                ButtonMouseOverBackColor = testBitmap.GetPixel((int)(5 * DpiScaling), (int)(5 * DpiScaling));
-                ButtonMouseOverForeColor = testBitmap.GetPixel((int)(40 * DpiScaling), (int)(12 * DpiScaling));
-
-                TagToolsContextSubmenu = MbApiInterface.MB_AddMenuItem("context.Main/" + PluginMenuGroupName, null, null) as ToolStripMenuItem;
-                buttonMouseOverColorsMenuItem.Dispose();
-                testBitmap.Dispose();
-                TagToolsContextSubmenu.DropDown.Items.Clear();
+                int inputControlDeepDimmedForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                        ElementComponent.ComponentForeground);
+                if (inputControlDeepDimmedForeColorCode == -1)
+                    InputControlDeepDimmedForeColor = SystemColors.GrayText;
+                else
+                    InputControlDeepDimmedForeColor = Color.FromArgb(inputControlDeepDimmedForeColorCode); //Disabled input control foreground
 
 
-                buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■■■■■■■■■■■■■■■■■■■■■■■■", null, null);
-                buttonMouseOverColorsMenuItem.Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
-                //TagToolsContextSubmenu.DropDown.Show();
-                testBitmap = new Bitmap((int)(88 * DpiScaling), (int)(28 * DpiScaling), PixelFormat.Format24bppRgb);
-                TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, (int)(88 * DpiScaling), (int)(28 * DpiScaling)));
+                int buttonMouseOverBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentBackground);
+                if (buttonMouseOverBackColorCode == -1)
+                    ButtonMouseOverBackColor = SystemColors.Control;
+                else
+                    ButtonMouseOverBackColor = Color.FromArgb(buttonMouseOverBackColorCode);
 
-                MenuBackColor = testBitmap.GetPixel((int)(5 * DpiScaling), (int)(5 * DpiScaling));
-                MenuForeColor = testBitmap.GetPixel((int)(40 * DpiScaling), (int)(12 * DpiScaling));
-
-                buttonMouseOverColorsMenuItem.Dispose();
-                testBitmap.Dispose();
-                TagToolsContextSubmenu.DropDown.Items.Clear();
-                //END: Workaround to get color similar to button mouseover one (similarity depend on the skin)
-
-
-
-                //START: Old workaround (much worse than above) //-----
-                //const float MouseOverButtonBackColor = 0.535f;
-                //ButtonMouseOverBackColor = GetWeightedColor(ButtonBackColor, FormBackColor, MouseOverButtonBackColor);
-                //END: Old workaround (much worse than above) //-----
-
-
-
-                //-----
-                //float avgForeBrightness = GetAverageBrightness(_buttonBackColor);
-                //float avgBackBrightness = GetAverageBrightness(_buttonBackColor);
-                //if (Math.Abs(avgForeBrightness - avgBackBrightness) < 0.5f)
-                //{
-                //   if (avgBackBrightness < 0.5f)
-                //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.Black, 0.6f);
-                //   else
-                //       _buttonDisabledBackColor = GetWeightedColor(_buttonBackColor, Color.White, 0.6f);
-                //}
-                //-----
+                int buttonMouseOverForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentForeground);
+                if (buttonMouseOverForeColorCode == -1)
+                    ButtonMouseOverForeColor = SystemColors.ControlText;
+                else
+                    ButtonMouseOverForeColor = Color.FromArgb(buttonMouseOverForeColorCode);
 
 
                 //Fore colors
-                var buttonForeCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                var buttonForeCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
                 if (buttonForeCode != -1)
                     UseNativeButtonPaint = false;
 
                 Color buttonForeColor;
 
-                if (buttonForeCode == 0) //Unsupported by older API
-                    buttonForeColor = AccentColor;
-                else if (buttonForeCode == -1) //Windows color scheme
+                if (buttonForeCode == -1) //Windows color scheme
                     buttonForeColor = SystemColors.ControlText;
                 else
                     buttonForeColor = Color.FromArgb(buttonForeCode);
@@ -6803,26 +6763,37 @@ namespace MusicBeePlugin
 
                 ButtonForeColor = buttonForeColor;
 
-                if (GetBrightnessDifference(ButtonForeColor, ButtonBackColor) < MinForeBackButtonBrightnessDifference)
-                    ButtonForeColor = IncreaseColorContrast(ButtonForeColor, ButtonInvertedAverageBrightnessContrast);
+                //if (GetBrightnessDifference(ButtonForeColor, ButtonBackColor) < MinForeBackButtonBrightnessDifference)
+                //    ButtonForeColor = IncreaseColorContrast(ButtonForeColor, ButtonInvertedAverageBrightnessContrast);
 
-                ButtonDisabledForeColor = GetWeightedColor(ButtonForeColor, ButtonDisabledBackColor);
+                int buttonDisabledForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDisabled,
+                    ElementComponent.ComponentForeground);
+                if (buttonDisabledForeColorCode == -1)
+                    ButtonDisabledForeColor = SystemColors.GrayText;
+                else
+                    ButtonDisabledForeColor = Color.FromArgb(buttonDisabledForeColorCode);
 
 
                 //Border colors
-                var buttonBorderCode = MbApiInterface.Setting_GetSkinElementColour((SkinElement)2, ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
-                Color buttonBorderColor;
-
-                if (buttonBorderCode == 0) //Unsupported by older API
-                    buttonBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
-                else if (buttonBorderCode == -1) //Windows color scheme
-                    buttonBorderColor = SystemColors.ControlText;
+                int buttonBorderCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
+                if (buttonBorderCode == -1) //Windows color scheme
+                    ButtonBorderColor = SystemColors.ControlText;
                 else
-                    buttonBorderColor = Color.FromArgb(buttonBorderCode);
+                    ButtonBorderColor = Color.FromArgb(buttonBorderCode);
 
-                ButtonBorderColor = buttonBorderColor;
                 ButtonFocusedBorderColor = GetWeightedColor(ButtonBorderColor, ButtonForeColor);
-                ButtonDisabledBorderColor = GetWeightedColor(ButtonBorderColor, FormBackColor, 0.25f);
+
+                int buttonDisabledBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDisabled, ElementComponent.ComponentBorder);
+                if (buttonDisabledBorderColorCode == -1) //Windows color scheme
+                    ButtonDisabledBorderColor = SystemColors.ControlText;
+                else
+                    ButtonDisabledBorderColor = Color.FromArgb(buttonDisabledBorderColorCode);
+
+                int buttonMouseOverBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight, ElementComponent.ComponentBorder);
+                if (buttonMouseOverBorderColorCode == -1) //Windows color scheme
+                    ButtonMouseOverBorderColor = SystemColors.ControlText;
+                else
+                    ButtonMouseOverBorderColor = Color.FromArgb(buttonMouseOverBorderColorCode);
 
 
                 ControlHighlightBackColor = buttonBackColor; //--- buttonBackLightDimmedAccentColor;
@@ -6839,16 +6810,55 @@ namespace MusicBeePlugin
                 }
 
 
-                ScrollBarBackColor = InputControlBackColor;
-                ScrollBarBorderColor = DeepDimmedAccentColor;
-                NarrowScrollBarBackColor = InputControlBackColor;
-                ScrollBarThumbAndSpansForeColor = GetWeightedColor(AccentColor, InputPanelBackColor, ScrollBarsForeWeight); //---
-                ScrollBarThumbAndSpansBackColor = InputControlBackColor;
-                ScrollBarThumbAndSpansBorderColor = InputControlBackColor;
+                int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
+                    ElementComponent.ComponentBackground);
+                if (scrollBarBackColorCode == -1)
+                    ScrollBarBackColor = SystemColors.ScrollBar;
+                else
+                    ScrollBarBackColor = Color.FromArgb(scrollBarBackColorCode);
 
-                ScrollBarFocusedBorderColor = GetWeightedColor(ScrollBarBorderColor, ScrollBarThumbAndSpansForeColor);
+                int scrollBarBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
+                    ElementComponent.ComponentBorder);
+                if (scrollBarBorderColorCode == -1)
+                    ScrollBarBorderColor = SystemColors.ControlText;
+                else
+                    ScrollBarBorderColor = Color.FromArgb(scrollBarBorderColorCode);
 
-                InputPanelBorderColor = ScrollBarBorderColor; //-----
+                NarrowScrollBarBackColor = ScrollBarBackColor; //-----
+
+                ScrollBarThumbAndSpansForeColor = GetWeightedColor(AccentColor, InputPanelBackColor, ScrollBarsForeWeight); //-----
+
+                ScrollBarThumbAndSpansBackColor = ScrollBarBackColor;
+                
+                ScrollBarThumbAndSpansBorderColor = ScrollBarBorderColor;
+
+                int scrollBarFocusedBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentBorder);
+                if (scrollBarFocusedBorderColorCode == -1)
+                    ScrollBarFocusedBorderColor = SystemColors.ControlText;
+                else
+                    ScrollBarFocusedBorderColor = Color.FromArgb(scrollBarFocusedBorderColorCode);
+
+                int inputPanelBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
+                    ElementComponent.ComponentBorder);
+                if (inputPanelBorderColorCode == -1)
+                    InputPanelBorderColor = SystemColors.ControlText;
+                else
+                    InputPanelBorderColor = Color.FromArgb(inputPanelBorderColorCode);
+
+
+                TagToolsContextSubmenu.DropDown.Items.Clear();
+
+                var buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■■■■■■■■■■■■■■■■■■■■■■■■", null, null);
+                buttonMouseOverColorsMenuItem.Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
+                var testBitmap = new Bitmap((int)(88 * DpiScaling), (int)(28 * DpiScaling), PixelFormat.Format24bppRgb);
+                TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, (int)(88 * DpiScaling), (int)(28 * DpiScaling)));
+
+                MenuForeColor = testBitmap.GetPixel((int)(40 * DpiScaling), (int)(12 * DpiScaling));
+
+                buttonMouseOverColorsMenuItem.Dispose();
+                testBitmap.Dispose();
+                TagToolsContextSubmenu.DropDown.Items.Clear();
             }
             else
             {
@@ -6891,6 +6901,8 @@ namespace MusicBeePlugin
                 ScrollBarThumbAndSpansBorderColor = SystemColors.ControlText;
 
                 ScrollBarFocusedBorderColor = SystemColors.ControlText;
+
+                MenuForeColor = SystemColors.MenuText;
             }
 
 

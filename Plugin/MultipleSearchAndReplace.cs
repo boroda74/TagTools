@@ -437,7 +437,7 @@ namespace MusicBeePlugin
                     sourceTagValue = MbApiInterface.Library_GetFileProperty(currentFile, sourcePropId);
 
                 var destinationTagValue = GetFileTag(currentFile, destinationTagId);
-                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperation);
+                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperation);
 
 
                 string newDestinationTagValue1 = null;

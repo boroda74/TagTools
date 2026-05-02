@@ -462,27 +462,27 @@ namespace MusicBeePlugin
 
                 if (appendSource == null && addSource == false)
                 {
-                    swappedTags = SwapTags(sourceTagValue, string.Empty, sourceTagId, destinationTagId,
+                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, string.Empty, sourceTagId, destinationTagId,
                         smartOperation, true, appendedText, false, addedText);
                 }
                 else if (appendSource == false && addSource == null)
                 {
-                    swappedTags = SwapTags(sourceTagValue, string.Empty, sourceTagId, destinationTagId,
+                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, string.Empty, sourceTagId, destinationTagId,
                     smartOperation, false, appendedText, true, addedText);
                 }
                 else if (appendSource == true && addSource == false)
                 {
-                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
+                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, destinationTagValue, sourceTagId, destinationTagId,
                     smartOperation, true, appendedText, false, addedText);
                 }
                 else if (appendSource == false && addSource == true)
                 {
-                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
+                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, destinationTagValue, sourceTagId, destinationTagId,
                     smartOperation, false, appendedText, true, addedText);
                 }
                 else //if (appendSource == false && addSource == false)
                 {
-                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId,
+                    swappedTags = SwapTags(sourceTagValue, destinationTagValue, destinationTagValue, sourceTagId, destinationTagId,
                     smartOperation, false, appendedText, false, addedText);
                 }
 

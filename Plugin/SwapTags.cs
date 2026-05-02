@@ -109,7 +109,7 @@ namespace MusicBeePlugin
                 var sourceTagValue = GetFileTag(currentFile, sourceTagId);
                 var destinationTagValue = GetFileTag(currentFile, destinationTagId);
 
-                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperation);
+                var swappedTags = SwapTags(sourceTagValue, destinationTagValue, destinationTagValue, sourceTagId, destinationTagId, smartOperation);
 
                 if (sourceTagId != destinationTagId)
                     SetFileTag(currentFile, destinationTagId, swappedTags.newDestinationNormalizedTagValue);
