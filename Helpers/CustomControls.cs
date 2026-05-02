@@ -152,9 +152,9 @@ namespace MusicBeePlugin
 
     internal sealed class ControlBorder : UserControl
     {
-        private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
-        private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
-        private readonly Color borderColor = Plugin.ScrollBarBorderColor;
+        private readonly Color borderColorDisabled = Plugin.InputControlDeepDimmedBorderColor;
+        private readonly Color borderColorActive = Plugin.InputControlFocusedBorderColor;
+        private readonly Color borderColor = Plugin.InputControlBorderColor;
 
         internal readonly Control control;
         private bool ignoreControl_LocationChanged = false;
@@ -286,9 +286,9 @@ namespace MusicBeePlugin
 
     internal class CustomComboBox : UserControl
     {
-        private readonly Color borderColorDisabled = Plugin.ScrollBarBorderColor;
-        private readonly Color borderColorActive = Plugin.ScrollBarFocusedBorderColor;
-        private readonly Color borderColor = Plugin.ScrollBarBorderColor;
+        private readonly Color borderColorDisabled = Plugin.InputControlDeepDimmedBorderColor;
+        private readonly Color borderColorActive = Plugin.InputControlFocusedBorderColor;
+        private readonly Color borderColor = Plugin.InputControlBorderColor;
 
         private Bitmap downArrowComboBoxImage;
         private Bitmap disabledDownArrowComboBoxImage;
@@ -871,8 +871,8 @@ namespace MusicBeePlugin
             this.button = new Button();
             this.button.Font = this.Font;
             this.button.Margin = Padding.Empty;
-            this.button.Location = new Point(comboBox.Width - customScrollBarInitialWidth, 0);
-            this.button.Size = new Size(customScrollBarInitialWidth, this.textBox.Height);
+            this.button.Location = new Point(comboBox.Width - customScrollBarInitialWidth - 1, 1);
+            this.button.Size = new Size(customScrollBarInitialWidth, this.textBox.Height - 2);
             this.button.Anchor = AnchorStyles.Right | AnchorStyles.Top;
             this.button.Text = string.Empty;
             this.button.ImageAlign = ContentAlignment.MiddleCenter;

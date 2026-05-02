@@ -85,13 +85,27 @@ namespace MusicBeePlugin
 
 
         //Opened form cached colors (for button repainting)
-        internal protected Color controlHighlightForeColor;
-        internal protected Color controlHighlightBackColor;
+        internal protected Color formBackColor;
+        internal protected Color accentColor;
+        internal protected Color dimmedAccentColor;
+        internal protected Color inputPanelBackColor;
+        internal protected Color inputPanelBorderColor;
+        internal protected Color inputControlForeColor;
+        internal protected Color inputControlBackColor;
+        internal protected Color inputControlDimmedForeColor;
+        internal protected Color inputControlDimmedBackColor;
+        internal protected Color inputControlDeepDimmedForeColor;
+        internal protected Color inputControlDeepDimmedBackColor;
         internal protected Color buttonForeColor;
         internal protected Color buttonBackColor;
         internal protected Color buttonBorderColor;
+        internal protected Color buttonFocusedBorderColor;
+        internal protected Color buttonMouseOverForeColor;
+        internal protected Color buttonMouseOverBackColor;
+        internal protected Color buttonMouseOverBorderColor;
         internal protected Color buttonDisabledForeColor;
         internal protected Color buttonDisabledBackColor;
+        internal protected Color buttonDisabledBorderColor;
 
 
         //Skin button labels for rendering disabled buttons, combo boxes & contol borders
@@ -381,13 +395,13 @@ namespace MusicBeePlugin
             Color borderColor;
 
             if (enabled && acceptButton && !mouseOver)
-                borderColor = ButtonFocusedBorderColor;
+                borderColor = buttonFocusedBorderColor;
             else if (enabled && mouseOver)
-                borderColor = ButtonMouseOverBorderColor;
+                borderColor = buttonMouseOverBorderColor;
             else if (enabled)
-                borderColor = ButtonBorderColor;
+                borderColor = buttonBorderColor;
             else
-                borderColor = ButtonDisabledBorderColor;
+                borderColor = buttonDisabledBorderColor;
 
             return borderColor;
         }
@@ -2703,18 +2717,18 @@ namespace MusicBeePlugin
                 {
                     var acceptButton = AcceptButton as Button;
 
-                    if (!(button.Parent is CustomComboBox))
+                    //if (!(button.Parent is CustomComboBox))
                     {
-                        button.FlatAppearance.MouseOverBackColor = ButtonMouseOverBackColor;
-                        button.FlatAppearance.MouseDownBackColor = ButtonMouseOverBackColor;
+                        button.FlatAppearance.MouseOverBackColor = buttonMouseOverBackColor;
+                        button.FlatAppearance.MouseDownBackColor = buttonMouseOverBackColor;
                     }
 
 
                     //Default button
                     if (((control.IsEnabled() && enable == null) || enable == true) && button == acceptButton)
                     {
-                        button.ForeColor = controlHighlightForeColor;
-                        button.BackColor = controlHighlightBackColor;
+                        button.ForeColor = buttonForeColor;
+                        button.BackColor = buttonBackColor;
 
                         if (button.FlatStyle == FlatStyle.Flat)
                             button.FlatAppearance.BorderColor
@@ -2722,16 +2736,16 @@ namespace MusicBeePlugin
                     }
                     //else if (((control.IsEnabled() && state == null) || enable == true) && button.Focused) //It's done on button's OnPaint function
                     //{
-                    //   button.ForeColor = _buttonForeColor;
-                    //   button.BackColor = _buttonBackColor;
-                    //   button.FlatAppearance.BorderColor = ButtonFocusedBorderColor;
+                    //   button.ForeColor = buttonForeColor;
+                    //   button.BackColor = buttonBackColor;
+                    //   button.FlatAppearance.BorderColor = buttonFocusedBorderColor;
                     //}
                     //Combo box button
                     else if (((control.IsEnabled() && enable == null) || enable == true) && button.Parent is CustomComboBox)
                     {
-                        button.ForeColor = buttonForeColor;
-                        button.BackColor = NarrowScrollBarBackColor;
-                        button.FlatAppearance.BorderColor = ScrollBarBorderColor;//---
+                        button.ForeColor = inputControlForeColor;
+                        button.BackColor = inputControlBackColor;
+                        button.FlatAppearance.BorderColor = inputControlBackColor;//---
                     }
                     //Generic button
                     else if ((control.IsEnabled() && enable == null) || enable == true)
@@ -2747,13 +2761,13 @@ namespace MusicBeePlugin
                     //Combo box disabled button
                     else if (button.Parent is CustomComboBox)
                     {
-                        button.ForeColor = InputControlDeepDimmedForeColor;
-                        button.BackColor = InputControlDeepDimmedBackColor;
-                        //button.FlatAppearance.BorderColor = InputControlDeepDimmedBackColor;//----
+                        button.ForeColor = inputControlDeepDimmedForeColor;
+                        button.BackColor = inputControlDeepDimmedBackColor;
+                        button.FlatAppearance.BorderColor = inputControlDeepDimmedBackColor;//----
 
                         //button.ForeColor = buttonForeColor;
                         //button.BackColor = NarrowScrollBarBackColor;
-                        button.FlatAppearance.BorderColor = ScrollBarBorderColor;//----
+                        button.FlatAppearance.BorderColor = inputControlDeepDimmedBackColor;//----
 
                         //button.ForeColor = buttonForeColor;
                         //button.BackColor = InputPanelBackColor; //----
@@ -2815,32 +2829,32 @@ namespace MusicBeePlugin
                 {
                     if ((control.IsEnabled() && enable == null) || enable == true)
                     {
-                        comboBox.ForeColor = InputControlForeColor;
-                        comboBox.BackColor = InputControlBackColor;
+                        comboBox.ForeColor = inputControlForeColor;
+                        comboBox.BackColor = inputControlBackColor;
                     }
                     else
                     {
-                        comboBox.ForeColor = InputControlDeepDimmedForeColor;
-                        //comboBox.BackColor = InputPanelBackColor; //---
-                        comboBox.BackColor = InputControlDimmedBackColor; //---
+                        comboBox.ForeColor = inputControlDeepDimmedForeColor;
+                        //comboBox.BackColor = inputPanelBackColor; //---
+                        comboBox.BackColor = inputControlDimmedBackColor; //---
                     }
                 }
                 else if (control is NumericUpDown numericUpDown)
                 {
                     if (((control.IsEnabled() && enable == null) || enable == true) && !numericUpDown.ReadOnly)
                     {
-                        control.ForeColor = InputControlForeColor;
-                        control.BackColor = InputControlBackColor;
+                        control.ForeColor = inputControlForeColor;
+                        control.BackColor = inputControlBackColor;
                     }
                     else if ((control.IsEnabled() && enable == null) || enable == true) //Enabled, but readonly
                     {
-                        control.ForeColor = AccentColor;
-                        control.BackColor = InputControlDimmedBackColor;
+                        control.ForeColor = accentColor;
+                        control.BackColor = inputControlDimmedBackColor;
                     }
                     else //Disabled
                     {
-                        control.ForeColor = InputControlDeepDimmedForeColor;
-                        control.BackColor = InputControlDeepDimmedBackColor; //---
+                        control.ForeColor = inputControlDeepDimmedForeColor;
+                        control.BackColor = inputControlDeepDimmedBackColor; //---
                     }
                 }
                 else if (control is TextBox && control.Parent is CustomComboBox)
@@ -2852,37 +2866,37 @@ namespace MusicBeePlugin
                     if (((control.IsEnabled() && enable == null) || enable == true) && !textBox.ReadOnly)
                     {
                         if (control.ForeColor != DimmedHighlightColor)
-                            control.ForeColor = InputControlForeColor;
+                            control.ForeColor = inputControlForeColor;
 
-                        control.BackColor = InputControlBackColor;
+                        control.BackColor = inputControlBackColor;
                     }
                     else if ((control.IsEnabled() && enable == null) || enable == true) //Enabled, but readonly
                     {
                         if (control.ForeColor != DimmedHighlightColor)
-                            control.ForeColor = AccentColor;
+                            control.ForeColor = accentColor;
 
-                        control.BackColor = InputControlDimmedBackColor;
+                        control.BackColor = inputControlDimmedBackColor;
                     }
                     else //Disabled
                     {
                         if (control.ForeColor != DimmedHighlightColor)
-                            control.ForeColor = InputControlDeepDimmedForeColor;
+                            control.ForeColor = inputControlDeepDimmedForeColor;
 
-                        control.BackColor = InputControlDeepDimmedBackColor; //---
+                        control.BackColor = inputControlDeepDimmedBackColor; //---
                     }
                 }
                 else if (control is ListBox listBox)
                 {
                     if ((control.IsEnabled() && enable == null) || enable == true)
                     {
-                        control.ForeColor = InputControlForeColor;
-                        control.BackColor = InputControlBackColor;
+                        control.ForeColor = inputControlForeColor;
+                        control.BackColor = inputControlBackColor;
                     }
                     else
                     {
-                        control.ForeColor = DimmedAccentColor;
-                        //control.BackColor = InputPanelBackColor; //---
-                        control.BackColor = InputControlDeepDimmedBackColor; //---
+                        control.ForeColor = dimmedAccentColor;
+                        //control.BackColor = inputPanelBackColor; //---
+                        control.BackColor = inputControlDeepDimmedBackColor; //---
                     }
                 }
                 else if (control is DataGridView dataGridView)
@@ -2894,9 +2908,9 @@ namespace MusicBeePlugin
                 {
                     if ((control.IsEnabled() && enable == null) || enable == true)
                     {
-                        tabControl.ForeColor = AccentColor;
-                        tabControl.BackColor = InputPanelBackColor;
-                        tabControl.BorderColor = InputPanelBorderColor;
+                        tabControl.ForeColor = accentColor;
+                        tabControl.BackColor = inputPanelBackColor;
+                        tabControl.BorderColor = inputPanelBorderColor;
 
                         foreach (TabPage child in tabControl.TabPages)
                         {
@@ -2907,15 +2921,15 @@ namespace MusicBeePlugin
                     }
                     else
                     {
-                        tabControl.ForeColor = DimmedAccentColor;
-                        tabControl.BackColor = InputPanelBackColor;
-                        tabControl.BorderColor = InputPanelBorderColor;
+                        tabControl.ForeColor = dimmedAccentColor;
+                        tabControl.BackColor = inputPanelBackColor;
+                        tabControl.BorderColor = inputPanelBorderColor;
 
                         foreach (TabPage child in tabControl.TabPages)
                         {
-                            child.ForeColor = DimmedAccentColor;
-                            child.BackColor = InputPanelBackColor;
-                            //child.myBorderColor = InputPanelBorderColor;
+                            child.ForeColor = dimmedAccentColor;
+                            child.BackColor = inputPanelBackColor;
+                            //child.myBorderColor = inputPanelBorderColor;
                         }
                     }
                 }
@@ -2927,11 +2941,11 @@ namespace MusicBeePlugin
                 else
                 {
                     if ((control.IsEnabled() && enable == null) || enable == true)
-                        control.ForeColor = AccentColor;
+                        control.ForeColor = accentColor;
                     else
-                        control.ForeColor = DimmedAccentColor;
+                        control.ForeColor = dimmedAccentColor;
 
-                    control.BackColor = FormBackColor;
+                    control.BackColor = formBackColor;
                 }
             }
         }
@@ -3328,13 +3342,27 @@ namespace MusicBeePlugin
         internal void skinMoveScaleAllControls()
         {
             //Opened form cached colors (for button repainting)
-            controlHighlightForeColor = ControlHighlightForeColor;
-            controlHighlightBackColor = ControlHighlightBackColor;
+            formBackColor = FormBackColor;
+            accentColor = AccentColor;
+            dimmedAccentColor = DimmedAccentColor;
+            inputPanelBackColor = InputPanelBackColor;
+            inputPanelBorderColor = InputPanelBorderColor;
+            inputControlForeColor = InputControlForeColor;
+            inputControlBackColor = InputControlBackColor;
+            inputControlDimmedForeColor = InputControlDimmedForeColor;
+            inputControlDimmedBackColor = InputControlDimmedBackColor;
+            inputControlDeepDimmedForeColor = InputControlDeepDimmedForeColor;
+            inputControlDeepDimmedBackColor = InputControlDeepDimmedBackColor;
             buttonForeColor = ButtonForeColor;
             buttonBackColor = ButtonBackColor;
             buttonBorderColor = ButtonBorderColor;
+            buttonFocusedBorderColor = ButtonFocusedBorderColor;
+            buttonMouseOverForeColor = ButtonMouseOverForeColor;
+            buttonMouseOverBackColor = ButtonMouseOverBackColor;
+            buttonMouseOverBorderColor = ButtonMouseOverBorderColor;
             buttonDisabledForeColor = ButtonDisabledForeColor;
             buttonDisabledBackColor = ButtonDisabledBackColor;
+            buttonDisabledBorderColor = ButtonDisabledBorderColor;
 
 
             if (useSkinColors)
