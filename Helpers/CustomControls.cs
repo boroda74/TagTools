@@ -291,6 +291,7 @@ namespace MusicBeePlugin
         private readonly Color borderColor = Plugin.InputControlBorderColor;
 
         private Bitmap downArrowComboBoxImage;
+        private Bitmap mouseOverDownArrowComboBoxImage;
         private Bitmap disabledDownArrowComboBoxImage;
 
         private int scaledPx = 1;
@@ -809,6 +810,7 @@ namespace MusicBeePlugin
             this.enableFiltering = enableFiltering;
 
             downArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DownArrowComboBoxImage);
+            mouseOverDownArrowComboBoxImage = Plugin.CopyBitmap(Plugin.MouseOverDownArrowComboBoxImage);
             disabledDownArrowComboBoxImage = Plugin.CopyBitmap(Plugin.DisabledDownArrowComboBoxImage);
 
             this.initialDropDownWidth = comboBox.DropDownWidth;
@@ -881,6 +883,8 @@ namespace MusicBeePlugin
             this.button.TabStop = false;
 
             this.button.Click += button_Click;
+            this.button.MouseEnter += button_MouseEnter;
+            this.button.MouseLeave += button_MouseLeave;
 
 
             this.Controls.Add(textBox);
@@ -2160,6 +2164,16 @@ namespace MusicBeePlugin
 
             textBox.Text = text;
             listBox.SelectedIndex = index;
+        }
+
+        private void button_MouseEnter(object sender, EventArgs e)
+        {
+            this.button.Image = mouseOverDownArrowComboBoxImage;
+        }
+
+        private void button_MouseLeave(object sender, EventArgs e)
+        {
+            this.button.Image = downArrowComboBoxImage;
         }
 
         private void button_Click(object sender, EventArgs e)

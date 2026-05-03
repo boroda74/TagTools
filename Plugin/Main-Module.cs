@@ -202,6 +202,7 @@ namespace MusicBeePlugin
 
         internal static Bitmap DisabledDownArrowComboBoxImage;
         internal static Bitmap DownArrowComboBoxImage;
+        internal static Bitmap MouseOverDownArrowComboBoxImage;
 
         internal static Bitmap UpArrowImage;
         internal static Bitmap DownArrowImage;
@@ -6484,7 +6485,13 @@ namespace MusicBeePlugin
             var buttonBackCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
             Color buttonBackColor;
 
-            if (buttonBackCode == -1) //Windows color scheme
+            //const float buttonBackgroundWeight = LightDimmedWeight;
+            const float buttonBackgroundWeight = 1;
+
+            if (buttonBackCode == 0) //Unsupported by older API
+                //buttonBackColor = GetWeightedColor(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinTrackAndArtistPanel, ElementState.ElementStateDefault, ElementComponent.ComponentBackground)), AccentColor, ButtonBackgroundWeight);
+                buttonBackColor = GetWeightedColor(FormBackColor, AccentColor, buttonBackgroundWeight);
+            else if (buttonBackCode == -1) //Windows color scheme
                 buttonBackColor = InputPanelBackColor;
             else
                 buttonBackColor = Color.FromArgb(buttonBackCode);
@@ -6588,6 +6595,7 @@ namespace MusicBeePlugin
 
             DisabledDownArrowComboBoxImage?.Dispose();
             DownArrowComboBoxImage?.Dispose();
+            MouseOverDownArrowComboBoxImage?.Dispose();
 
             UpArrowImage?.Dispose();
             DownArrowImage?.Dispose();
@@ -6658,7 +6666,7 @@ namespace MusicBeePlugin
             const float LightDimmedWeight = 0.90f;
             const float DimmedWeight = 0.65f;
             const float DeepDimmedWeight = 0.32f;
-            const float ScrollBarsForeWeight = 0.75f; //---
+            const float ScrollBarsForeWeight = 0.3f; //---
 
             const float MinForeBackButtonBrightnessDifference = 0.3f;
             const float ButtonInvertedAverageBrightnessContrast = 0.8f;
@@ -6674,12 +6682,16 @@ namespace MusicBeePlugin
             {
                 InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
                     ElementComponent.ComponentForeground));
-                InputControlBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBackground));
+                int inputControlBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
+                    ElementComponent.ComponentBackground);
                 InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBorder));
                 InputControlFocusedBorderColor = InputControlBorderColor; //----- GetWeightedColor(InputControlBorderColor, InputControlForeColor);
 
+                if (inputControlBackColorCode == 0)
+                    InputControlBackColor = SystemColors.Window;
+                else
+                    InputControlBackColor = Color.FromArgb(inputControlBackColorCode);
 
                 AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault,
                     ElementComponent.ComponentForeground));
@@ -6716,7 +6728,9 @@ namespace MusicBeePlugin
 
                 int inputControlDeepDimmedBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
                     ElementComponent.ComponentBackground);
-                if (inputControlDeepDimmedBackColorCode == -1)
+                if (inputControlDeepDimmedBackColorCode == 0)
+                    InputControlDeepDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.36f);
+                else if (inputControlDeepDimmedBackColorCode == -1)
                     InputControlDeepDimmedBackColor = SystemColors.Control;
                 else
                     InputControlDeepDimmedBackColor = Color.FromArgb(inputControlDeepDimmedBackColorCode); //Disabled input control background
@@ -6738,17 +6752,12 @@ namespace MusicBeePlugin
 
                 int buttonMouseOverBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
                     ElementComponent.ComponentBackground);
-                if (buttonMouseOverBackColorCode == -1)
+                if (buttonMouseOverBackColorCode == 0)
+                    ButtonMouseOverBackColor = ButtonBackColor;
+                else if (buttonMouseOverBackColorCode == -1)
                     ButtonMouseOverBackColor = SystemColors.Control;
                 else
                     ButtonMouseOverBackColor = Color.FromArgb(buttonMouseOverBackColorCode);
-
-                int buttonMouseOverForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentForeground);
-                if (buttonMouseOverForeColorCode == -1)
-                    ButtonMouseOverForeColor = SystemColors.ControlText;
-                else
-                    ButtonMouseOverForeColor = Color.FromArgb(buttonMouseOverForeColorCode);
 
 
                 //Fore colors
@@ -6768,6 +6777,15 @@ namespace MusicBeePlugin
                 var buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
 
                 ButtonForeColor = buttonForeColor;
+
+                int buttonMouseOverForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentForeground);
+                if (buttonMouseOverForeColorCode == 0)
+                    ButtonMouseOverForeColor = ButtonForeColor;
+                else if (buttonMouseOverForeColorCode == -1)
+                    ButtonMouseOverForeColor = SystemColors.ControlText;
+                else
+                    ButtonMouseOverForeColor = Color.FromArgb(buttonMouseOverForeColorCode);
 
                 //if (GetBrightnessDifference(ButtonForeColor, ButtonBackColor) < MinForeBackButtonBrightnessDifference)
                 //    ButtonForeColor = IncreaseColorContrast(ButtonForeColor, ButtonInvertedAverageBrightnessContrast);
@@ -6809,7 +6827,7 @@ namespace MusicBeePlugin
                 else
                     ScrollBarBackColor = Color.FromArgb(scrollBarBackColorCode);
 
-                int scrollBarBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
+                int scrollBarBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBackground);
                 if (scrollBarBorderColorCode == -1)
                     ScrollBarBorderColor = SystemColors.ControlText;
@@ -6818,19 +6836,19 @@ namespace MusicBeePlugin
 
                 NarrowScrollBarBackColor = ScrollBarBackColor; //-----
 
-                int scrollBarThumbAndSpansForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentForeground);
-                if (scrollBarThumbAndSpansForeColorCode == -1)
-                    ScrollBarThumbAndSpansForeColor = SystemColors.ControlText;
-                else
-                    ScrollBarThumbAndSpansForeColor = Color.FromArgb(scrollBarThumbAndSpansForeColorCode);
-                //ScrollBarThumbAndSpansForeColor = GetWeightedColor(AccentColor, InputPanelBackColor, ScrollBarsForeWeight); //-----
+                //int scrollBarThumbAndSpansForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
+                //    ElementComponent.ComponentForeground);
+                //if (scrollBarThumbAndSpansForeColorCode == -1)
+                //    ScrollBarThumbAndSpansForeColor = SystemColors.ControlText;
+                //else
+                //    ScrollBarThumbAndSpansForeColor = Color.FromArgb(scrollBarThumbAndSpansForeColorCode);
+                ScrollBarThumbAndSpansForeColor = GetWeightedColor(InputControlForeColor, InputControlBackColor, ScrollBarsForeWeight);
 
-                ScrollBarThumbAndSpansBackColor = ScrollBarBackColor;
+                ScrollBarThumbAndSpansBackColor = NarrowScrollBarBackColor;
                 
                 ScrollBarThumbAndSpansBorderColor = ScrollBarBorderColor;
 
-                int scrollBarFocusedBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateHighlight,
+                int scrollBarFocusedBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBackground);
                 if (scrollBarFocusedBorderColorCode == -1)
                     ScrollBarFocusedBorderColor = SystemColors.ControlText;
@@ -6967,16 +6985,19 @@ namespace MusicBeePlugin
 
 
                 DisabledDownArrowComboBoxImage?.Dispose();
-                if (GetAverageBrightness(ButtonBackColor) >= 0.5)
-                    DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.Black,
-                        Resources.down_arrow_combobox_b, scrollBarImagesWidth, scrollBarImagesWidth);
-                else
-                    DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.White,
-                        Resources.down_arrow_combobox_b, scrollBarImagesWidth, scrollBarImagesWidth);
+                DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                    ElementComponent.ComponentForeground)),
+                    Resources.down_arrow_combobox_b, scrollBarImagesWidth, scrollBarImagesWidth);
+
+
+                MouseOverDownArrowComboBoxImage?.Dispose();
+                MouseOverDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                    ElementComponent.ComponentBackground)),
+                    Resources.down_arrow_combobox_b, scrollBarImagesWidth, scrollBarImagesWidth);
 
 
                 DownArrowComboBoxImage?.Dispose();
-                DownArrowComboBoxImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor,
+                DownArrowComboBoxImage = GetSolidImageByBitmapMask(InputControlForeColor,
                     Resources.down_arrow_combobox_b, scrollBarImagesWidth, scrollBarImagesWidth);
 
 
@@ -6996,19 +7017,6 @@ namespace MusicBeePlugin
                     1f, true, InterpolationMode.NearestNeighbor);
 
 
-                //OR:
-                //ThumbTopImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_top_b,
-                //   scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_top_b.Height / Resources.thumb_top_b.Width));
-                //ThemedBitmapAddRef(EmptyForm, ThumbTopImage);
-
-                //ThumbMiddleImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_middle_b,
-                //   scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_middle_b.Height / Resources.thumb_middle_b.Width));
-                //ThemedBitmapAddRef(EmptyForm, ThumbMiddleImage);
-
-                //ThumbBottomImage = MirrorBitmap(ThumbTopImage, true);
-                //ThemedBitmapAddRef(EmptyForm, ThumbBottomImage);
-
-
                 LeftArrowImage?.Dispose();
                 LeftArrowImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor,
                     Resources.left_arrow_b, scrollBarImagesWidth, scrollBarImagesWidth);
@@ -7023,19 +7031,6 @@ namespace MusicBeePlugin
                     Resources.thumb_middle_horizontal_c.Width, scrollBarImagesWidth - 3 * scaledPx, //Here middle thumb image is without bottom
                                                                                                     //transparent part
                     1f, true, InterpolationMode.NearestNeighbor);
-
-                //OR:
-                //ThumbLeftImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_left_b,
-                //   scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_left_b.Height / Resources.thumb_left_b.Width));
-                //ThemedBitmapAddRef(EmptyForm, ThumbLeftImage);
-
-                //ThumbMiddleImage = GetSolidImageByBitmapMask(_scrollBarThumbAndSpansForeColor, Resources.thumb_middle_b,
-                //   scrollBarImagesWidth, (int)Math.Round(_dpiScaling * scrollBarImagesWidth * Resources.thumb_middle_b.Height / Resources.thumb_middle_b.Width));
-                //ThemedBitmapAddRef(EmptyForm, ThumbMiddleImage);
-
-                //ThumbRightImage = MirrorBitmap(ThumbLeftImage, true);
-                //ThemedBitmapAddRef(EmptyForm, ThumbRightImage);
-
 
                 WarningWide?.Dispose();
                 WarningWide = ScaleBitmap(Resources.warning_wide, PixelFormat.Format32bppArgb, InterpolationMode.HighQualityBicubic,
