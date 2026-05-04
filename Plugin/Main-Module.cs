@@ -6750,16 +6750,6 @@ namespace MusicBeePlugin
                     InputControlDeepDimmedBorderColor = Color.FromArgb(inputControlDeepDimmedBorderColorCode); //Disabled input control border
 
 
-                int buttonMouseOverBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentBackground);
-                if (buttonMouseOverBackColorCode == 0)
-                    ButtonMouseOverBackColor = ButtonBackColor;
-                else if (buttonMouseOverBackColorCode == -1)
-                    ButtonMouseOverBackColor = SystemColors.Control;
-                else
-                    ButtonMouseOverBackColor = Color.FromArgb(buttonMouseOverBackColorCode);
-
-
                 //Fore colors
                 var buttonForeCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
                 if (buttonForeCode != -1)
@@ -6772,23 +6762,11 @@ namespace MusicBeePlugin
                 else
                     buttonForeColor = Color.FromArgb(buttonForeCode);
 
-                var buttonLightForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, LightDimmedWeight);
-                var buttonForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DimmedWeight);
-                var buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
+                //var buttonLightForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, LightDimmedWeight); //-----
+                //var buttonForeDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DimmedWeight);
+                //var buttonForeDeepDimmedColor = GetWeightedColor(buttonForeColor, ButtonBackColor, DeepDimmedWeight);
 
                 ButtonForeColor = buttonForeColor;
-
-                int buttonMouseOverForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentForeground);
-                if (buttonMouseOverForeColorCode == 0)
-                    ButtonMouseOverForeColor = ButtonForeColor;
-                else if (buttonMouseOverForeColorCode == -1)
-                    ButtonMouseOverForeColor = SystemColors.ControlText;
-                else
-                    ButtonMouseOverForeColor = Color.FromArgb(buttonMouseOverForeColorCode);
-
-                //if (GetBrightnessDifference(ButtonForeColor, ButtonBackColor) < MinForeBackButtonBrightnessDifference)
-                //    ButtonForeColor = IncreaseColorContrast(ButtonForeColor, ButtonInvertedAverageBrightnessContrast);
 
                 int buttonDisabledForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDisabled,
                     ElementComponent.ComponentForeground);
@@ -6820,7 +6798,8 @@ namespace MusicBeePlugin
                     ButtonMouseOverBorderColor = Color.FromArgb(buttonMouseOverBorderColorCode);
 
 
-                int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
+                //int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
+                int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
                     ElementComponent.ComponentBackground);
                 if (scrollBarBackColorCode == -1)
                     ScrollBarBackColor = SystemColors.ScrollBar;
@@ -6863,18 +6842,64 @@ namespace MusicBeePlugin
                     InputPanelBorderColor = Color.FromArgb(inputPanelBorderColorCode);
 
 
+
+                //Button mouse over colors
+                //START: Workaround to get color similar to button mouseover one (similarity depend on the skin); for older skins, which don't provide correct mouse over colors
                 TagToolsContextSubmenu.DropDown.Items.Clear();
+
 
                 var buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■■■■■■■■■■■■■■■■■■■■■■■■", null, null);
                 buttonMouseOverColorsMenuItem.Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
-                var testBitmap = new Bitmap((int)(88 * DpiScaling), (int)(28 * DpiScaling), PixelFormat.Format24bppRgb);
+                TagToolsContextSubmenu.DropDown.Items[0].Select();
+                //TagToolsContextSubmenu.DropDown.Show();
+                Bitmap testBitmap = new Bitmap((int)(88 * DpiScaling), (int)(28 * DpiScaling), PixelFormat.Format24bppRgb);
                 TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, (int)(88 * DpiScaling), (int)(28 * DpiScaling)));
 
+                Color buttonMouseOverBackColor = testBitmap.GetPixel((int)(5 * DpiScaling), (int)(5 * DpiScaling));
+                Color buttonMouseOverForeColor = testBitmap.GetPixel((int)(40 * DpiScaling), (int)(12 * DpiScaling));
+
+                TagToolsContextSubmenu = MbApiInterface.MB_AddMenuItem("context.Main/" + PluginMenuGroupName, null, null) as ToolStripMenuItem;
+                buttonMouseOverColorsMenuItem.Dispose();
+                testBitmap.Dispose();
+                TagToolsContextSubmenu.DropDown.Items.Clear();
+
+
+                buttonMouseOverColorsMenuItem = AddMenuItem(TagToolsContextSubmenu, "■■■■■■■■■■■■■■■■■■■■■■■■", null, null);
+                buttonMouseOverColorsMenuItem.Font = new Font("Lucida Console", 20f, FontStyle.Regular, GraphicsUnit.Pixel);
+                //TagToolsContextSubmenu.DropDown.Show();
+                testBitmap = new Bitmap((int)(88 * DpiScaling), (int)(28 * DpiScaling), PixelFormat.Format24bppRgb);
+                TagToolsContextSubmenu.DropDown.DrawToBitmap(testBitmap, new Rectangle(0, 0, (int)(88 * DpiScaling), (int)(28 * DpiScaling)));
+
+                //MenuBackColor = testBitmap.GetPixel((int)(5 * DpiScaling), (int)(5 * DpiScaling));
                 MenuForeColor = testBitmap.GetPixel((int)(40 * DpiScaling), (int)(12 * DpiScaling));
 
                 buttonMouseOverColorsMenuItem.Dispose();
                 testBitmap.Dispose();
                 TagToolsContextSubmenu.DropDown.Items.Clear();
+                //END: Workaround to get color similar to button mouseover one (similarity depend on the skin)
+
+
+                int buttonMouseOverForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentForeground);
+                if (buttonMouseOverForeColorCode == 0)
+                    ButtonMouseOverForeColor = buttonMouseOverForeColor;
+                else if (buttonMouseOverForeColorCode == -1)
+                    ButtonMouseOverForeColor = SystemColors.ControlText;
+                else
+                    ButtonMouseOverForeColor = Color.FromArgb(buttonMouseOverForeColorCode);
+
+
+                int buttonMouseOverBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentBackground);
+                if (buttonMouseOverBackColorCode == 0)
+                    ButtonMouseOverBackColor = buttonMouseOverBackColor;
+                else if (buttonMouseOverBackColorCode == -1)
+                    ButtonMouseOverBackColor = SystemColors.Control;
+                else
+                    ButtonMouseOverBackColor = Color.FromArgb(buttonMouseOverBackColorCode);
+
+                if (GetBrightnessDifference(ButtonMouseOverForeColor, ButtonMouseOverBackColor) < MinForeBackButtonBrightnessDifference)
+                    ButtonMouseOverForeColor = IncreaseColorContrast(ButtonMouseOverForeColor, ButtonInvertedAverageBrightnessContrast);
             }
             else
             {
