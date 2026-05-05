@@ -3255,7 +3255,7 @@ namespace MusicBeePlugin
                 dataGridView.BorderStyle = BorderStyle.FixedSingle;
                 dataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
                 dataGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-                dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                dataGridView.CellBorderStyle = DataGridViewCellBorderStyle.None;
                 dataGridView.BackgroundColor = UnchangedCellStyle.BackColor;
                 dataGridView.DefaultCellStyle = new DataGridViewCellStyle(UnchangedCellStyle);
 
