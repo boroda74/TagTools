@@ -30,21 +30,14 @@ namespace MusicBeePlugin
             CustomTagNames[13] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom14);
             CustomTagNames[14] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom15);
             CustomTagNames[15] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom16);
-
-            if (MbApiInterface.MusicBeeVersion >= MusicBeeVersion.v3_6)
-            {
-                CustomTagNames[16] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17);
-                CustomTagNames[17] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18);
-                CustomTagNames[18] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19);
-                CustomTagNames[19] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20);
-            }
+            CustomTagNames[16] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17);
+            CustomTagNames[17] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18);
+            CustomTagNames[18] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19);
+            CustomTagNames[19] = MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20);
 
 
             //Read only tags
-            if (MbApiInterface.MusicBeeVersion >= MusicBeeVersion.v3_6)
-                ReadonlyTagsNames = new string[66];
-            else
-                ReadonlyTagsNames = new string[48];
+            ReadonlyTagsNames = new string[66];
 
             ReadonlyTagsNames[0] = GenreCategoryName;
             ReadonlyTagsNames[1] = SynchronisedLyricsName;
@@ -99,28 +92,24 @@ namespace MusicBeePlugin
             ReadonlyTagsNames[45] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual30);
             ReadonlyTagsNames[46] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual31);
             ReadonlyTagsNames[47] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual32);
-
-            if (MbApiInterface.MusicBeeVersion >= MusicBeeVersion.v3_6)
-            {
-                ReadonlyTagsNames[48] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33);
-                ReadonlyTagsNames[49] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34);
-                ReadonlyTagsNames[50] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35);
-                ReadonlyTagsNames[51] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36);
-                ReadonlyTagsNames[52] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37);
-                ReadonlyTagsNames[53] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38);
-                ReadonlyTagsNames[54] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39);
-                ReadonlyTagsNames[55] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40);
-                ReadonlyTagsNames[56] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41);
-                ReadonlyTagsNames[57] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42);
-                ReadonlyTagsNames[58] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43);
-                ReadonlyTagsNames[59] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44);
-                ReadonlyTagsNames[60] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45);
-                ReadonlyTagsNames[61] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46);
-                ReadonlyTagsNames[62] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47);
-                ReadonlyTagsNames[63] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48);
-                ReadonlyTagsNames[64] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49);
-                ReadonlyTagsNames[65] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50);
-            }
+            ReadonlyTagsNames[48] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33);
+            ReadonlyTagsNames[49] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34);
+            ReadonlyTagsNames[50] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35);
+            ReadonlyTagsNames[51] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36);
+            ReadonlyTagsNames[52] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37);
+            ReadonlyTagsNames[53] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38);
+            ReadonlyTagsNames[54] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39);
+            ReadonlyTagsNames[55] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40);
+            ReadonlyTagsNames[56] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41);
+            ReadonlyTagsNames[57] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42);
+            ReadonlyTagsNames[58] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43);
+            ReadonlyTagsNames[59] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44);
+            ReadonlyTagsNames[60] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45);
+            ReadonlyTagsNames[61] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46);
+            ReadonlyTagsNames[62] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47);
+            ReadonlyTagsNames[63] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48);
+            ReadonlyTagsNames[64] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49);
+            ReadonlyTagsNames[65] = MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50);
 
 
             //Tags
@@ -803,192 +792,186 @@ namespace MusicBeePlugin
                 wereErrors = true;
                 file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual32) + " / " + MetaDataType.Virtual32);
             }
-
-            //Only MB 3.6+
-            if (MbApiInterface.MusicBeeVersion >= MusicBeeVersion.v3_6)
+            try
             {
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33) + " / " + MetaDataType.Virtual33);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33), MetaDataType.Virtual33);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33) + " / " + MetaDataType.Virtual33);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34) + " / " + MetaDataType.Virtual34);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34), MetaDataType.Virtual34);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34) + " / " + MetaDataType.Virtual34);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35) + " / " + MetaDataType.Virtual35);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35), MetaDataType.Virtual35);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35) + " / " + MetaDataType.Virtual35);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36) + " / " + MetaDataType.Virtual36);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36), MetaDataType.Virtual36);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36) + " / " + MetaDataType.Virtual36);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37) + " / " + MetaDataType.Virtual37);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37), MetaDataType.Virtual37);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37) + " / " + MetaDataType.Virtual37);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38) + " / " + MetaDataType.Virtual38);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38), MetaDataType.Virtual38);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38) + " / " + MetaDataType.Virtual38);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39) + " / " + MetaDataType.Virtual39);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39), MetaDataType.Virtual39);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39) + " / " + MetaDataType.Virtual39);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40) + " / " + MetaDataType.Virtual40);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40), MetaDataType.Virtual40);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40) + " / " + MetaDataType.Virtual40);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41) + " / " + MetaDataType.Virtual41);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41), MetaDataType.Virtual41);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41) + " / " + MetaDataType.Virtual41);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42) + " / " + MetaDataType.Virtual42);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42), MetaDataType.Virtual42);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42) + " / " + MetaDataType.Virtual42);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43) + " / " + MetaDataType.Virtual43);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43), MetaDataType.Virtual43);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43) + " / " + MetaDataType.Virtual43);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44) + " / " + MetaDataType.Virtual44);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44), MetaDataType.Virtual44);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44) + " / " + MetaDataType.Virtual44);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45) + " / " + MetaDataType.Virtual45);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45), MetaDataType.Virtual45);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45) + " / " + MetaDataType.Virtual45);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46) + " / " + MetaDataType.Virtual46);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46), MetaDataType.Virtual46);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46) + " / " + MetaDataType.Virtual46);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47) + " / " + MetaDataType.Virtual47);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47), MetaDataType.Virtual47);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47) + " / " + MetaDataType.Virtual47);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48) + " / " + MetaDataType.Virtual48);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48), MetaDataType.Virtual48);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48) + " / " + MetaDataType.Virtual48);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49) + " / " + MetaDataType.Virtual49);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49), MetaDataType.Virtual49);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49) + " / " + MetaDataType.Virtual49);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50) + " / " + MetaDataType.Virtual50);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50), MetaDataType.Virtual50);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50) + " / " + MetaDataType.Virtual50);
-                }
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33) + " / " + MetaDataType.Virtual33);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33), MetaDataType.Virtual33);
             }
-
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33) + " / " + MetaDataType.Virtual33);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34) + " / " + MetaDataType.Virtual34);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34), MetaDataType.Virtual34);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34) + " / " + MetaDataType.Virtual34);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35) + " / " + MetaDataType.Virtual35);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35), MetaDataType.Virtual35);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35) + " / " + MetaDataType.Virtual35);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36) + " / " + MetaDataType.Virtual36);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36), MetaDataType.Virtual36);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36) + " / " + MetaDataType.Virtual36);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37) + " / " + MetaDataType.Virtual37);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37), MetaDataType.Virtual37);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37) + " / " + MetaDataType.Virtual37);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38) + " / " + MetaDataType.Virtual38);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38), MetaDataType.Virtual38);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38) + " / " + MetaDataType.Virtual38);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39) + " / " + MetaDataType.Virtual39);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39), MetaDataType.Virtual39);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39) + " / " + MetaDataType.Virtual39);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40) + " / " + MetaDataType.Virtual40);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40), MetaDataType.Virtual40);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40) + " / " + MetaDataType.Virtual40);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41) + " / " + MetaDataType.Virtual41);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41), MetaDataType.Virtual41);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41) + " / " + MetaDataType.Virtual41);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42) + " / " + MetaDataType.Virtual42);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42), MetaDataType.Virtual42);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42) + " / " + MetaDataType.Virtual42);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43) + " / " + MetaDataType.Virtual43);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43), MetaDataType.Virtual43);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43) + " / " + MetaDataType.Virtual43);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44) + " / " + MetaDataType.Virtual44);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44), MetaDataType.Virtual44);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44) + " / " + MetaDataType.Virtual44);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45) + " / " + MetaDataType.Virtual45);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45), MetaDataType.Virtual45);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45) + " / " + MetaDataType.Virtual45);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46) + " / " + MetaDataType.Virtual46);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46), MetaDataType.Virtual46);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46) + " / " + MetaDataType.Virtual46);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47) + " / " + MetaDataType.Virtual47);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47), MetaDataType.Virtual47);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47) + " / " + MetaDataType.Virtual47);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48) + " / " + MetaDataType.Virtual48);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48), MetaDataType.Virtual48);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48) + " / " + MetaDataType.Virtual48);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49) + " / " + MetaDataType.Virtual49);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49), MetaDataType.Virtual49);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49) + " / " + MetaDataType.Virtual49);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50) + " / " + MetaDataType.Virtual50);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50), MetaDataType.Virtual50);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50) + " / " + MetaDataType.Virtual50);
+            }
             try
             {
                 file1.WriteLine("Adding " + LyricsName + " / " + LyricsId);
@@ -1189,52 +1172,46 @@ namespace MusicBeePlugin
                 wereErrors = true;
                 file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom16) + " / " + MetaDataType.Custom16);
             }
-
-            //Only MB 3.6+
-            if (MbApiInterface.MusicBeeVersion >= MusicBeeVersion.v3_6)
+            try
             {
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17) + " / " + MetaDataType.Custom17);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), MetaDataType.Custom17);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17) + " / " + MetaDataType.Custom17);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18) + " / " + MetaDataType.Custom18);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18), MetaDataType.Custom18);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18) + " / " + MetaDataType.Custom18);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19) + " / " + MetaDataType.Custom19);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19), MetaDataType.Custom19);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19) + " / " + MetaDataType.Custom19);
-                }
-                try
-                {
-                    file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20) + " / " + MetaDataType.Custom20);
-                    TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20), MetaDataType.Custom20);
-                }
-                catch (ArgumentException)
-                {
-                    wereErrors = true;
-                    file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20) + " / " + MetaDataType.Custom20);
-                }
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17) + " / " + MetaDataType.Custom17);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17), MetaDataType.Custom17);
             }
-
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17) + " / " + MetaDataType.Custom17);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18) + " / " + MetaDataType.Custom18);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18), MetaDataType.Custom18);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18) + " / " + MetaDataType.Custom18);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19) + " / " + MetaDataType.Custom19);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19), MetaDataType.Custom19);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19) + " / " + MetaDataType.Custom19);
+            }
+            try
+            {
+                file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20) + " / " + MetaDataType.Custom20);
+                TagNamesIds.Add(MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20), MetaDataType.Custom20);
+            }
+            catch (ArgumentException)
+            {
+                wereErrors = true;
+                file1.WriteLine("Cant add " + MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20) + " / " + MetaDataType.Custom20);
+            }
             try
             {
                 file1.WriteLine("Adding " + MbApiInterface.Setting_GetFieldName(MetaDataType.Genres) + " / " + MetaDataType.Genres);
@@ -1607,29 +1584,24 @@ namespace MusicBeePlugin
             TagIdsNames.Add(MetaDataType.Virtual30, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual30));
             TagIdsNames.Add(MetaDataType.Virtual31, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual31));
             TagIdsNames.Add(MetaDataType.Virtual32, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual32));
-
-            //Only MB 3.6+
-            if (MbApiInterface.MusicBeeVersion >= MusicBeeVersion.v3_6)
-            {
-                TagIdsNames.Add(MetaDataType.Virtual33, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33));
-                TagIdsNames.Add(MetaDataType.Virtual34, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34));
-                TagIdsNames.Add(MetaDataType.Virtual35, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35));
-                TagIdsNames.Add(MetaDataType.Virtual36, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36));
-                TagIdsNames.Add(MetaDataType.Virtual37, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37));
-                TagIdsNames.Add(MetaDataType.Virtual38, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38));
-                TagIdsNames.Add(MetaDataType.Virtual39, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39));
-                TagIdsNames.Add(MetaDataType.Virtual40, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40));
-                TagIdsNames.Add(MetaDataType.Virtual41, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41));
-                TagIdsNames.Add(MetaDataType.Virtual42, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42));
-                TagIdsNames.Add(MetaDataType.Virtual43, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43));
-                TagIdsNames.Add(MetaDataType.Virtual44, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44));
-                TagIdsNames.Add(MetaDataType.Virtual45, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45));
-                TagIdsNames.Add(MetaDataType.Virtual46, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46));
-                TagIdsNames.Add(MetaDataType.Virtual47, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47));
-                TagIdsNames.Add(MetaDataType.Virtual48, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48));
-                TagIdsNames.Add(MetaDataType.Virtual49, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49));
-                TagIdsNames.Add(MetaDataType.Virtual50, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50));
-            }
+            TagIdsNames.Add(MetaDataType.Virtual33, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual33));
+            TagIdsNames.Add(MetaDataType.Virtual34, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual34));
+            TagIdsNames.Add(MetaDataType.Virtual35, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual35));
+            TagIdsNames.Add(MetaDataType.Virtual36, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual36));
+            TagIdsNames.Add(MetaDataType.Virtual37, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual37));
+            TagIdsNames.Add(MetaDataType.Virtual38, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual38));
+            TagIdsNames.Add(MetaDataType.Virtual39, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual39));
+            TagIdsNames.Add(MetaDataType.Virtual40, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual40));
+            TagIdsNames.Add(MetaDataType.Virtual41, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual41));
+            TagIdsNames.Add(MetaDataType.Virtual42, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual42));
+            TagIdsNames.Add(MetaDataType.Virtual43, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual43));
+            TagIdsNames.Add(MetaDataType.Virtual44, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual44));
+            TagIdsNames.Add(MetaDataType.Virtual45, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual45));
+            TagIdsNames.Add(MetaDataType.Virtual46, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual46));
+            TagIdsNames.Add(MetaDataType.Virtual47, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual47));
+            TagIdsNames.Add(MetaDataType.Virtual48, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual48));
+            TagIdsNames.Add(MetaDataType.Virtual49, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual49));
+            TagIdsNames.Add(MetaDataType.Virtual50, MbApiInterface.Setting_GetFieldName(MetaDataType.Virtual50));
 
             TagIdsNames.Add(LyricsId, LyricsName);
             TagIdsNames.Add(SynchronisedLyricsId, SynchronisedLyricsName);
@@ -1651,15 +1623,10 @@ namespace MusicBeePlugin
             TagIdsNames.Add(MetaDataType.Custom14, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom14));
             TagIdsNames.Add(MetaDataType.Custom15, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom15));
             TagIdsNames.Add(MetaDataType.Custom16, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom16));
-
-            //Only MB 3.6+
-            if (MbApiInterface.MusicBeeVersion >= MusicBeeVersion.v3_6)
-            {
-                TagIdsNames.Add(MetaDataType.Custom17, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17));
-                TagIdsNames.Add(MetaDataType.Custom18, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18));
-                TagIdsNames.Add(MetaDataType.Custom19, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19));
-                TagIdsNames.Add(MetaDataType.Custom20, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20));
-            }
+            TagIdsNames.Add(MetaDataType.Custom17, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom17));
+            TagIdsNames.Add(MetaDataType.Custom18, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom18));
+            TagIdsNames.Add(MetaDataType.Custom19, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom19));
+            TagIdsNames.Add(MetaDataType.Custom20, MbApiInterface.Setting_GetFieldName(MetaDataType.Custom20));
 
             TagIdsNames.Add(MetaDataType.Genres, MbApiInterface.Setting_GetFieldName(MetaDataType.Genres));
             TagIdsNames.Add(MetaDataType.Artists, MbApiInterface.Setting_GetFieldName(MetaDataType.Artists));

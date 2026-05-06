@@ -879,16 +879,16 @@ namespace MusicBeePlugin
             this.button.Text = string.Empty;
             this.button.ImageAlign = ContentAlignment.MiddleCenter;
             this.button.TextImageRelation = TextImageRelation.Overlay;
-            this.button.Image = downArrowComboBoxImage;
             this.button.TabStop = false;
 
             this.button.Click += button_Click;
             this.button.MouseEnter += button_MouseEnter;
             this.button.MouseLeave += button_MouseLeave;
 
+            setButtonColors(false);
 
-            this.Controls.Add(textBox);
             this.Controls.Add(button);
+            this.Controls.Add(textBox);
 
             ownerForm.skinControl(this.textBox);
             ownerForm.skinControl(this.button);
@@ -1888,7 +1888,7 @@ namespace MusicBeePlugin
                 textBox.ReadOnly = ReadOnly || !enabled;
                 button.Enable(enabled);
 
-                setButtonColors();
+                setButtonColors(false);
                 SetTextBoxColors(enabled);
             }
             else
@@ -1989,11 +1989,13 @@ namespace MusicBeePlugin
             }
         }
 
-        private void setButtonColors()
+        private void setButtonColors(bool mouseOver)
         {
             ownerForm.setSkinnedControlColors(button, enabled);
 
-            if (this.IsEnabled())
+            if (this.IsEnabled() && mouseOver)
+                button.Image = mouseOverDownArrowComboBoxImage;
+            else if (this.IsEnabled())
                 button.Image = downArrowComboBoxImage;
             else
                 button.Image = disabledDownArrowComboBoxImage;
@@ -2168,12 +2170,14 @@ namespace MusicBeePlugin
 
         private void button_MouseEnter(object sender, EventArgs e)
         {
-            this.button.Image = mouseOverDownArrowComboBoxImage;
+            if (IsReallyEnabled())
+                setButtonColors(true);
         }
 
         private void button_MouseLeave(object sender, EventArgs e)
         {
-            this.button.Image = downArrowComboBoxImage;
+            if (IsReallyEnabled())
+                setButtonColors(false);
         }
 
         private void button_Click(object sender, EventArgs e)

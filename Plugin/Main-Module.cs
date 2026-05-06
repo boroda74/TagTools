@@ -145,6 +145,19 @@ namespace MusicBeePlugin
         internal static Color ButtonDisabledForeColor;
         internal static Color ButtonDisabledBackColor;
 
+        internal static Color ComboBoxButtonBorderColor;
+        internal static Color ComboBoxButtonMouseOverBorderColor;
+        internal static Color ComboBoxButtonDisabledBorderColor;
+
+        internal static Color ComboBoxButtonForeColor;
+        internal static Color ComboBoxButtonBackColor;
+
+        internal static Color ComboBoxButtonMouseOverForeColor;
+        internal static Color ComboBoxButtonMouseOverBackColor;
+
+        internal static Color ComboBoxButtonDisabledForeColor;
+        internal static Color ComboBoxButtonDisabledBackColor;
+
         internal static Color InputPanelForeColor;
         internal static Color InputPanelBackColor;
         internal static Color InputPanelBorderColor;
@@ -6924,6 +6937,96 @@ namespace MusicBeePlugin
 
                 if (GetBrightnessDifference(ButtonMouseOverForeColor, ButtonMouseOverBackColor) < MinForeBackButtonBrightnessDifference)
                     ButtonMouseOverForeColor = IncreaseColorContrast(ButtonMouseOverForeColor, ButtonInvertedAverageBrightnessContrast);
+
+
+                int downArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDefault,
+                    ElementComponent.ComponentForeground);
+                if (buttonMouseOverBackColorCode == 0)
+                    ComboBoxButtonForeColor = InputControlForeColor;
+                else if (buttonMouseOverBackColorCode == -1)
+                    ComboBoxButtonForeColor = SystemColors.Control;
+                else
+                    ComboBoxButtonForeColor = Color.FromArgb(downArrowComboBoxColorCode);
+
+                int disabledDownArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDisabled,
+                    ElementComponent.ComponentForeground);
+                if (buttonMouseOverBackColorCode == 0)
+                    ComboBoxButtonDisabledForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                        ElementComponent.ComponentForeground));
+                else if (buttonMouseOverBackColorCode == -1)
+                    ComboBoxButtonDisabledForeColor = SystemColors.GrayText;
+                else
+                    ComboBoxButtonDisabledForeColor = Color.FromArgb(disabledDownArrowComboBoxColorCode);
+
+                int mouseOverDownArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentForeground);
+                if (buttonMouseOverBackColorCode == 0)
+                    ComboBoxButtonMouseOverForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                        ElementComponent.ComponentBackground));
+                else if (buttonMouseOverBackColorCode == -1)
+                    ComboBoxButtonMouseOverForeColor = SystemColors.ControlText;
+                else
+                    ComboBoxButtonMouseOverForeColor = Color.FromArgb(mouseOverDownArrowComboBoxColorCode);
+
+
+                int downArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDefault,
+                    ElementComponent.ComponentBackground);
+                if (buttonMouseOverBackColorCode == 0)
+                    ComboBoxButtonBackColor = InputControlBackColor;
+                else if (buttonMouseOverBackColorCode == -1)
+                    ComboBoxButtonBackColor = SystemColors.Control;
+                else
+                    ComboBoxButtonBackColor = Color.FromArgb(downArrowComboBoxBackColorCode);
+
+                int disabledDownArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDisabled,
+                    ElementComponent.ComponentBackground);
+                if (buttonMouseOverBackColorCode == 0)
+                    ComboBoxButtonDisabledBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                        ElementComponent.ComponentBackground));
+                else if (buttonMouseOverBackColorCode == -1)
+                    ComboBoxButtonDisabledBackColor = SystemColors.Control;
+                else
+                    ComboBoxButtonDisabledBackColor = Color.FromArgb(disabledDownArrowComboBoxBackColorCode);
+
+                int mouseOverDownArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentBackground);
+                if (buttonMouseOverBackColorCode == 0)
+                    ComboBoxButtonMouseOverBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                        ElementComponent.ComponentBackground));
+                else if (buttonMouseOverBackColorCode == -1)
+                    ComboBoxButtonMouseOverBackColor = SystemColors.ControlText;
+                else
+                    ComboBoxButtonMouseOverBackColor = Color.FromArgb(mouseOverDownArrowComboBoxBackColorCode);
+
+
+                int downArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDefault,
+                    ElementComponent.ComponentBorder);
+                if (buttonMouseOverBackColorCode == 0)
+                    ComboBoxButtonBorderColor = InputControlBackColor;
+                else if (buttonMouseOverBackColorCode == -1)
+                    ComboBoxButtonBorderColor = SystemColors.Control;
+                else
+                    ComboBoxButtonBorderColor = Color.FromArgb(downArrowComboBoxBorderColorCode);
+
+                int disabledDownArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDisabled,
+                    ElementComponent.ComponentBorder);
+                if (buttonMouseOverBorderColorCode == 0)
+                    ComboBoxButtonDisabledBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                        ElementComponent.ComponentBackground));
+                else if (buttonMouseOverBorderColorCode == -1)
+                    ComboBoxButtonDisabledBorderColor = SystemColors.Control;
+                else
+                    ComboBoxButtonDisabledBorderColor = Color.FromArgb(disabledDownArrowComboBoxBorderColorCode);
+
+                int mouseOverDownArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentBorder);
+                if (buttonMouseOverBorderColorCode == 0)
+                    ComboBoxButtonMouseOverBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
+                        ElementComponent.ComponentBackground));
+                else if (buttonMouseOverBorderColorCode == -1)
+                    ComboBoxButtonMouseOverBorderColor = SystemColors.ControlText;
+                else
+                    ComboBoxButtonMouseOverBorderColor = Color.FromArgb(mouseOverDownArrowComboBoxBorderColorCode);
             }
             else
             {
@@ -7034,19 +7137,17 @@ namespace MusicBeePlugin
 
 
                 DisabledDownArrowComboBoxImage?.Dispose();
-                DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentForeground)),
+                DisabledDownArrowComboBoxImage = GetSolidImageByBitmapMask(ComboBoxButtonDisabledForeColor,
                     Resources.down_arrow_combobox_b, scrollBarImagesWidth, scrollBarImagesWidth);
 
 
                 MouseOverDownArrowComboBoxImage?.Dispose();
-                MouseOverDownArrowComboBoxImage = GetSolidImageByBitmapMask(Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentBackground)),
+                MouseOverDownArrowComboBoxImage = GetSolidImageByBitmapMask(ComboBoxButtonMouseOverForeColor,
                     Resources.down_arrow_combobox_b, scrollBarImagesWidth, scrollBarImagesWidth);
 
 
                 DownArrowComboBoxImage?.Dispose();
-                DownArrowComboBoxImage = GetSolidImageByBitmapMask(InputControlForeColor,
+                DownArrowComboBoxImage = GetSolidImageByBitmapMask(ComboBoxButtonForeColor,
                     Resources.down_arrow_combobox_b, scrollBarImagesWidth, scrollBarImagesWidth);
 
 
@@ -7556,9 +7657,9 @@ namespace MusicBeePlugin
 
 
             //DATAGRIDVIEW COLOR DEFINITIONS
-            const float MinForeBrightnessDifference = 0.25f; //-----
-            const float MinBackBrightnessDifference = 0.25f;
-            const float MinForeBackBrightnessDifference = 0.25f;
+            const float MinForeBrightnessDifference = 0.1f; //-----
+            const float MinBackBrightnessDifference = 0.1f;
+            const float MinForeBackBrightnessDifference = 0.1f;
             const float InvertedAverageBrightnessContrast = 1.125f;
 
 
@@ -7572,15 +7673,17 @@ namespace MusicBeePlugin
                 HeaderCellStyle.SelectionForeColor = InputControlDeepDimmedForeColor;
                 HeaderCellStyle.SelectionBackColor = InputControlDeepDimmedBackColor;
 
-                var selectionForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentForeground));
-                var selectionBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentBackground));
+                int selectionForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentForeground);
+                var selectionForeColor = Color.FromArgb(selectionForeColorCode);
+                int selectionBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateHighlight,
+                    ElementComponent.ComponentBackground);
+                var selectionBackColor = Color.FromArgb(selectionBackColorCode);
 
                 UnchangedCellStyle.ForeColor = InputControlForeColor;
                 UnchangedCellStyle.BackColor = InputControlBackColor;
 
-                if (GetBrightnessDifference(selectionBackColor, UnchangedCellStyle.BackColor) >= MinBackBrightnessDifference)
+                if (selectionForeColorCode != 0 && selectionBackColorCode != 0) //----- GetBrightnessDifference(selectionBackColor, UnchangedCellStyle.BackColor) >= MinBackBrightnessDifference)
                 {
                     UnchangedCellStyle.SelectionForeColor = selectionForeColor;
                     UnchangedCellStyle.SelectionBackColor = selectionBackColor;

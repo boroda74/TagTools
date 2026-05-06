@@ -106,6 +106,16 @@ namespace MusicBeePlugin
         internal protected Color buttonDisabledForeColor;
         internal protected Color buttonDisabledBackColor;
         internal protected Color buttonDisabledBorderColor;
+        internal protected Color comboBoxButtonForeColor;
+        internal protected Color comboBoxButtonBackColor;
+        internal protected Color comboBoxButtonBorderColor;
+        internal protected Color comboBoxButtonFocusedBorderColor;
+        internal protected Color comboBoxButtonMouseOverForeColor;
+        internal protected Color comboBoxButtonMouseOverBackColor;
+        internal protected Color comboBoxButtonMouseOverBorderColor;
+        internal protected Color comboBoxButtonDisabledForeColor;
+        internal protected Color comboBoxButtonDisabledBackColor;
+        internal protected Color comboBoxButtonDisabledBorderColor;
 
 
         //Skin button labels for rendering disabled buttons, combo boxes & contol borders
@@ -430,7 +440,7 @@ namespace MusicBeePlugin
             button.Refresh();
         }
 
-        internal protected bool isMouseOverControl(Control control)
+        internal bool isMouseOverControl(Control control)
         {
             if (useSkinColors)
                 return control.ClientRectangle.Contains(control.PointToClient(Cursor.Position));
@@ -2717,10 +2727,15 @@ namespace MusicBeePlugin
                 {
                     var acceptButton = AcceptButton as Button;
 
-                    //if (!(button.Parent is CustomComboBox))
+                    if (!(button.Parent is CustomComboBox)) //Generic button
                     {
                         button.FlatAppearance.MouseOverBackColor = buttonMouseOverBackColor;
                         button.FlatAppearance.MouseDownBackColor = buttonMouseOverBackColor;
+                    }
+                    else //Combo box button
+                    {
+                        button.FlatAppearance.MouseOverBackColor = comboBoxButtonMouseOverBackColor;
+                        button.FlatAppearance.MouseDownBackColor = comboBoxButtonMouseOverBackColor;
                     }
 
 
@@ -2743,9 +2758,18 @@ namespace MusicBeePlugin
                     //Combo box button
                     else if (((control.IsEnabled() && enable == null) || enable == true) && button.Parent is CustomComboBox)
                     {
-                        button.ForeColor = inputControlForeColor;
-                        button.BackColor = inputControlBackColor;
-                        button.FlatAppearance.BorderColor = inputControlBackColor;//---
+                        if (isMouseOverControl(button))
+                        {
+                            button.ForeColor = comboBoxButtonMouseOverForeColor;
+                            button.BackColor = comboBoxButtonMouseOverBackColor;
+                            button.FlatAppearance.BorderColor = comboBoxButtonMouseOverBorderColor;
+                        }
+                        else
+                        {
+                            button.ForeColor = comboBoxButtonForeColor;
+                            button.BackColor = comboBoxButtonBackColor;
+                            button.FlatAppearance.BorderColor = comboBoxButtonBorderColor;
+                        }
                     }
                     //Generic button
                     else if ((control.IsEnabled() && enable == null) || enable == true)
@@ -2761,17 +2785,9 @@ namespace MusicBeePlugin
                     //Combo box disabled button
                     else if (button.Parent is CustomComboBox)
                     {
-                        button.ForeColor = inputControlDeepDimmedForeColor;
-                        button.BackColor = inputControlDeepDimmedBackColor;
-                        button.FlatAppearance.BorderColor = inputControlDeepDimmedBackColor;//----
-
-                        //button.ForeColor = buttonForeColor;
-                        //button.BackColor = NarrowScrollBarBackColor;
-                        button.FlatAppearance.BorderColor = inputControlDeepDimmedBackColor;//----
-
-                        //button.ForeColor = buttonForeColor;
-                        //button.BackColor = InputPanelBackColor; //----
-                        //button.FlatAppearance.BorderColor = ButtonBorderColor;
+                        button.ForeColor = comboBoxButtonDisabledForeColor;
+                        button.BackColor = comboBoxButtonDisabledBackColor;
+                        button.FlatAppearance.BorderColor = comboBoxButtonDisabledBorderColor;
                     }
                     //Generic disabled button
                     else
@@ -3364,6 +3380,15 @@ namespace MusicBeePlugin
             buttonDisabledBackColor = ButtonDisabledBackColor;
             buttonDisabledBorderColor = ButtonDisabledBorderColor;
 
+            comboBoxButtonForeColor = ComboBoxButtonForeColor;
+            comboBoxButtonBackColor = ComboBoxButtonBackColor;
+            comboBoxButtonBorderColor = ComboBoxButtonBorderColor;
+            comboBoxButtonMouseOverForeColor = ComboBoxButtonMouseOverForeColor;
+            comboBoxButtonMouseOverBackColor = ComboBoxButtonMouseOverBackColor;
+            comboBoxButtonMouseOverBorderColor = ComboBoxButtonMouseOverBorderColor;
+            comboBoxButtonDisabledForeColor = ComboBoxButtonDisabledForeColor;
+            comboBoxButtonDisabledBackColor = ComboBoxButtonDisabledBackColor;
+            comboBoxButtonDisabledBorderColor = ComboBoxButtonDisabledBorderColor;
 
             if (useSkinColors)
             {
