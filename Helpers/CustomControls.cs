@@ -1824,7 +1824,7 @@ namespace MusicBeePlugin
                     var inputControlForeColor = Plugin.InputControlForeColor;
 
                     if (textBox.Focused && textBox.ReadOnly)
-                        inputControlForeColor = Plugin.InputControlSelectedForeColor;
+                        inputControlForeColor = Plugin.UnchangedCellStyle.SelectionForeColor;
 
                     //Let's show cue for readonly mode if cue is defined
                     if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && textBox.ReadOnly)
@@ -1837,7 +1837,7 @@ namespace MusicBeePlugin
                         textBox.ForeColor = inputControlForeColor;
 
                     if (textBox.Focused && textBox.ReadOnly)
-                        textBox.BackColor = Plugin.InputControlSelectedBackColor;
+                        textBox.BackColor = Plugin.UnchangedCellStyle.SelectionBackColor;
                     else
                         textBox.BackColor = Plugin.InputControlBackColor;
                 }

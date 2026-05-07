@@ -423,6 +423,8 @@ namespace MusicBeePlugin
             if (!useSkinColors || button.FlatStyle != FlatStyle.Flat || button.Parent is CustomComboBox)
                 return;
 
+            if (button.Name == "buttonSettings")
+                button.Image = MouseOverGear;
 
             button.FlatAppearance.BorderColor = getButtonBorderColor(true, button.IsEnabled(), button == button.FindForm().AcceptButton);
             button.Refresh();
@@ -435,6 +437,9 @@ namespace MusicBeePlugin
             if (!useSkinColors || button.FlatStyle != FlatStyle.Flat || button.Parent is CustomComboBox)
                 return;
 
+
+            if (button.Name == "buttonSettings")
+                button.Image = Gear;
 
             button.FlatAppearance.BorderColor = getButtonBorderColor(false, button.IsEnabled(), button == button.FindForm().AcceptButton);
             button.Refresh();
@@ -3915,7 +3920,7 @@ namespace MusicBeePlugin
 
         internal protected virtual void initializeForm()
         {
-            //Implemented in derived classes... 
+            //Implemented in derived classes...
         }
 
         private void PluginWindowTemplate_Load(object sender, EventArgs e)
