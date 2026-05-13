@@ -2211,6 +2211,9 @@ namespace MusicBeePlugin
                 if (sender != null)
                     textBox.Focus();
 
+                textBox.SelectionStart = 0;
+                textBox.SelectionLength = 0;
+
                 droppedDown = false;
 
                 Events[EVENT_DROPDOWNCLOSED]?.DynamicInvoke(this, null);
