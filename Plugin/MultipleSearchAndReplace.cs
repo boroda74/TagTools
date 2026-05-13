@@ -1308,7 +1308,7 @@ namespace MusicBeePlugin
             string clipboardText = string.Empty;
 
             for (int i = 0; i < templateTable.RowCount; i++)
-                clipboardText += templateTable.Rows[i].Cells[2].Value as string + "\t" + templateTable.Rows[i].Cells[3].Value as string + "\r\n";
+                clipboardText += templateTable.Rows[i].Cells[2].Value as string + "\t" + (templateTable.Rows[i].Cells[3].Value as string) + "\r\n";
 
             clipboardText = clipboardText.TrimEnd('\n');
             clipboardText = clipboardText.TrimEnd('\r');
