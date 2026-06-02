@@ -7197,7 +7197,6 @@ namespace MusicBeePlugin
                 DownArrowImage = MirrorBitmap(UpArrowImage, true);
 
 
-                //EITHER:
                 ThumbMiddleVerticalImage?.Dispose();
                 ThumbMiddleVerticalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor,
                     Resources.thumb_middle_vertical_c,
@@ -7212,7 +7211,7 @@ namespace MusicBeePlugin
                 RightArrowImage?.Dispose();
                 RightArrowImage = MirrorBitmap(LeftArrowImage, false);
 
-                //EITHER:
+
                 ThumbMiddleHorizontalImage?.Dispose();
                 ThumbMiddleHorizontalImage = GetSolidImageByBitmapMask(ScrollBarThumbAndSpansForeColor,
                     Resources.thumb_middle_horizontal_c,

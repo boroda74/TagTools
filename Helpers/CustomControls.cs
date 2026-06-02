@@ -2196,6 +2196,9 @@ namespace MusicBeePlugin
                 else
                     listBox.Focus();
 
+                textBox.SelectionStart = 0;
+                textBox.SelectionLength = 0;
+
                 droppedDown = true;
             }
             else

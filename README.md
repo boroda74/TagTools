@@ -4,7 +4,7 @@ Plugin requires MusicBee version **3.5** or higher.
 
 *Note:*
 
-If you are familiar with the plugin quick update process, you can always [download latest plugin version here](https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file) (NOTE: this latest version always requires the latest version of MusicBee which sometimes may be available as a beta. The latest MusicBee version was **3.6** at the time of writing this help file). Copy all files from the archive “mb_TagTools_latest.zip” to the MusicBee “Plugins” folder, overwriting existing files.
+If you are familiar with the plugin quick update process, you can always *[download latest plugin version here](https://www.mediafire.com/file/h2t08o9562efboi/mb_TagTools_latest.zip/file)*. (NOTE: this latest version always requires [the latest patch of MusicBee](https://getmusicbee.com/patches/MusicBee37_Patched.zip). Unzip all files to MB folder, overwriting existing files.) Copy all files from the archive "mb_TagTools_latest.zip" to the MusicBee "Plugins" folder, overwriting existing files. Then "install new" ASR presets.
 
 *Note:*
 
@@ -38,4 +38,4 @@ This project has been checked by PVS-Studio.
 
 ***
 
-Copyright © boroda 2012-2025. Help version 10.0.250623
+Copyright © boroda 2012-2026. Help version 10.7.260602
