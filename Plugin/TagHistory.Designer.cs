@@ -73,6 +73,15 @@
             this.controlsPanel = new System.Windows.Forms.Panel();
             this.buttonPreview = new System.Windows.Forms.Button();
             this.placeholderLabel3 = new System.Windows.Forms.Label();
+
+            //MusicBee
+            this.rememberColumnAsDefaultWidthCheckBox.Dispose();
+            this.autoSelectTagsCheckBox.Dispose();
+
+            this.rememberColumnAsDefaultWidthCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.autoSelectTagsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            //~MusicBee
+
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfBackupsNumericUpDown)).BeginInit();
             this.optionsPanel.SuspendLayout();

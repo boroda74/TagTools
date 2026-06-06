@@ -232,6 +232,21 @@ namespace MusicBeePlugin
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             //MusicBee
+            this.runMonthlyCheckBox.Dispose();
+            this.hiddenCheckBox.Dispose();
+            this.favoriteCheckBox.Dispose();
+            this.applyToPlayingTrackCheckBox.Dispose();
+            this.assignHotkeyCheckBox.Dispose();
+            this.conditionCheckBox.Dispose();
+
+            this.runMonthlyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.hiddenCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.favoriteCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.applyToPlayingTrackCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.assignHotkeyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.conditionCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
             this.presetList.Dispose();
             this.searchTextBox.Dispose();
             this.customTextBox.Dispose();
@@ -936,6 +951,7 @@ namespace MusicBeePlugin
             this.previewTable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PreviewTable_MouseDown);
             this.previewTable.MouseLeave += new System.EventHandler(this.PreviewTable_MouseLeave);
             this.previewTable.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PreviewTable_MouseUp);
+            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             // 
             // PresetGuid
             // 

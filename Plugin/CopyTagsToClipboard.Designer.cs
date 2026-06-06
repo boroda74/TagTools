@@ -50,6 +50,11 @@ namespace MusicBeePlugin
             this.infoLabel = new System.Windows.Forms.Label();
 
             //MusicBee
+            this.checkUncheckAllCheckBox.Dispose();
+
+            this.checkUncheckAllCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
             this.checkedSourceTagList.Dispose();
             this.sourceTagList.Dispose();
 

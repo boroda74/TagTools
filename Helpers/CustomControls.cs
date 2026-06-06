@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 
 using ExtensionMethods;
@@ -45,51 +46,74 @@ namespace MusicBeePlugin
         }
 
         internal static void DrawCheckBox(Graphics graphics, float dpiScaling, Rectangle checkBoxBounds, int borderWidth,
-            Color backColor, Color borderColor, Color checkMarkColor, bool state)
+            Color backColor, Color borderColor, Color checkMarkColor,
+            bool? state)
         {
-            Point pt = new Point(checkBoxBounds.Left + (int)Math.Round(2 * dpiScaling), checkBoxBounds.Top + (int)Math.Round(4 * dpiScaling));
+            int height = (int)Math.Round(12f * dpiScaling);
+            int offset = (checkBoxBounds.Height - height) / 2;
 
-            int inflateOffset = (int)Math.Round(4 * dpiScaling);
+            Rectangle markBounds = new Rectangle(checkBoxBounds.Left + offset + 2, checkBoxBounds.Top + offset, height, height);
 
-            checkBoxBounds.Inflate(-inflateOffset, -inflateOffset);
-            checkBoxBounds.Offset(0, -(int)Math.Round(dpiScaling));
-
-            Rectangle checkMarkBounds = new Rectangle(checkBoxBounds.Left + (int)Math.Round(dpiScaling), checkBoxBounds.Top - (int)Math.Round(2 * dpiScaling),
-                checkBoxBounds.Width + (int)Math.Round(4 * dpiScaling), checkBoxBounds.Height + (int)Math.Round(4 * dpiScaling));
-            checkMarkBounds.Inflate(-borderWidth - (int)Math.Round(dpiScaling), -borderWidth - (int)Math.Round(dpiScaling));
-            checkMarkBounds.Offset((int)Math.Round(-3 * dpiScaling), (int)Math.Round(dpiScaling));
+            Rectangle markBounds2 = new Rectangle(markBounds.Left - (int)Math.Round(1.49f * dpiScaling), markBounds.Top,// + (int)Math.Round(0.4 * dpiScaling),
+                markBounds.Width + (int)Math.Round(4 * dpiScaling), markBounds.Height + (int)Math.Round(4 * dpiScaling));
+            markBounds2.Inflate(-borderWidth - (int)Math.Round(dpiScaling), -borderWidth - (int)Math.Round(dpiScaling));
 
             if (backColor != Plugin.NoColor)
-                graphics.FillRectangle(new SolidBrush(backColor), checkBoxBounds);
+                using (var brush = new SolidBrush(backColor))
+                    graphics.FillRectangle(brush, markBounds);
 
-            if (state)
+            if (state == true)
             {
                 string marks = "";
                 string mark = marks[4].ToString();
 
-                using (Font wing = new Font("Segoe Fluent Icons", (int)Math.Round(checkBoxBounds.Height * 0.9f), FontStyle.Regular, GraphicsUnit.Pixel))
-                    graphics.DrawString(mark, wing, new SolidBrush(checkMarkColor), checkMarkBounds);
+                using (Font font = new Font("Segoe Fluent Icons", (int)Math.Round(markBounds2.Height * 0.7f), FontStyle.Bold, GraphicsUnit.Pixel))
+                    graphics.DrawString(mark, font, new SolidBrush(checkMarkColor), markBounds2);
+            }
+            else if (state == null)
+            {
+                markBounds2.Offset((int)Math.Round(-1.6f * dpiScaling), (int)Math.Round(-1.6f * dpiScaling));
+
+                string marks = "";
+                string mark = marks[1].ToString();
+
+                using (Font font = new Font("Segoe UI Symbol", (int)Math.Round(markBounds2.Height * 0.7f), FontStyle.Regular, GraphicsUnit.Pixel))
+                    graphics.DrawString(mark, font, new SolidBrush(checkMarkColor), markBounds2);
             }
 
-            graphics.DrawRectangle(new Pen(borderColor, borderWidth), checkBoxBounds);
+            using (var pen = new Pen(borderColor, borderWidth))
+                graphics.DrawRectangle(pen, markBounds);
         }
 
-        internal static void DrawCheckBox(Graphics graphics, float dpiScaling, Rectangle checkBoxBounds, bool state)
+        internal static void DrawRadioButton(Graphics graphics, float dpiScaling, Rectangle radioButtonBounds, int borderWidth,
+            Color backColor, Color borderColor, Color radioColor, bool state)
         {
-            var p = new Point();
-            var s = CheckBoxRenderer.GetGlyphSize(graphics,
-            System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
+            int inflateOffset = (int)Math.Round(4 * dpiScaling);
 
-            p.X = checkBoxBounds.Location.X + (checkBoxBounds.Width / 2) - (s.Width / 2) - 1;
-            p.Y = checkBoxBounds.Location.Y + (checkBoxBounds.Height / 2) - (s.Height / 2) - 1;
+            radioButtonBounds.Inflate(-inflateOffset, -inflateOffset);
+            radioButtonBounds.Offset((int)Math.Round(1f * dpiScaling), -(int)Math.Round(0 * dpiScaling));
 
-            Point checkBoxLocation = p;
-            System.Windows.Forms.VisualStyles.CheckBoxState cbState = System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
+            Rectangle radioBounds = new Rectangle(radioButtonBounds.Left + (int)Math.Round(dpiScaling), radioButtonBounds.Top - (int)Math.Round(2 * dpiScaling),
+                radioButtonBounds.Width + (int)Math.Round(4 * dpiScaling), radioButtonBounds.Height + (int)Math.Round(4 * dpiScaling));
+            radioBounds.Inflate(-borderWidth - (int)Math.Round(dpiScaling), -borderWidth - (int)Math.Round(dpiScaling));
+
+            if (backColor != Plugin.NoColor)
+                using (var brush = new SolidBrush(backColor))
+                    graphics.FillEllipse(brush, radioButtonBounds);
 
             if (state)
-                cbState = System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal;
+            {
+                radioBounds.Offset((int)Math.Round(-1.5f * dpiScaling), (int)Math.Round(2.4f * dpiScaling));
 
-            CheckBoxRenderer.DrawCheckBox(graphics, checkBoxLocation, cbState);
+                string marks = "";
+                string mark = marks[2].ToString();
+
+                using (Font font = new Font("Segoe Fluent Icons", (int)Math.Round(radioButtonBounds.Height * 0.7f), FontStyle.Regular, GraphicsUnit.Pixel))
+                    graphics.DrawString(mark, font, new SolidBrush(radioColor), radioBounds);
+            }
+
+            using (var pen = new Pen(borderColor, borderWidth))
+                graphics.DrawEllipse(pen, radioButtonBounds);
         }
 
         internal static int GetCustomScrollBarInitialWidth(float dpiScaling, int sbBorderWidth)
@@ -135,7 +159,7 @@ namespace MusicBeePlugin
                 if (!control.IsEnabled())
                     ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, control.Width, control.Height), disabledColor,
                         ButtonBorderStyle.Solid);
-                else if (control.ContainsFocus)
+                else if (control.ContainsFocus || control.ClientRectangle.Contains(control.PointToClient(Cursor.Position)))
                     ControlPaint.DrawBorder(graphics, new Rectangle(0, 0, control.Width, control.Height), focusedColor,
                         ButtonBorderStyle.Solid);
                 else
@@ -2839,6 +2863,222 @@ namespace MusicBeePlugin
         }
     }
 
+    internal class CustomCheckBox : CheckBox
+    {
+        private readonly Color inputControlForeColor = Plugin.InputControlForeColor;
+        private readonly Color inputControlBackColor = Plugin.InputControlBackColor;
+        private readonly Color inputControlBorderColor = Plugin.InputControlBorderColor;
+
+        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDeepDimmedForeColor;
+        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDeepDimmedBackColor;
+        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDeepDimmedBorderColor;
+
+        private int scaledPx = 1;
+        private readonly bool dontUseSkinColors;
+
+        internal CustomCheckBox(PluginWindowTemplate ownerForm, bool dontUseSkinColors)
+        {
+            this.dontUseSkinColors = dontUseSkinColors;
+            this.scaledPx = ownerForm.scaledPx;
+
+            InitializeComponent();
+
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.Selectable, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+
+            //TODO: Add any initialization after the InitForm call
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            switch (m.Msg)
+            {
+                case WM_PAINT:
+                    IntPtr hDC = GetWindowDC(this.Handle);
+                    Graphics g = Graphics.FromHdc(hDC);
+
+                    Rectangle rect = new Rectangle();
+
+                    GetClientRect(this.Handle, ref rect);
+
+                    OnPaint(new PaintEventArgs(g, rect));
+
+                    g.Dispose();
+                    ReleaseDC(this.Handle, hDC);
+
+
+                    // return 0 (processed)
+                    m.Result = IntPtr.Zero;
+
+                    // validate current rect
+                    ValidateRect(this.Handle, ref rect);
+
+                    break;
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (this.dontUseSkinColors || !Visible)
+                return;
+
+            Rectangle checkBox = e.ClipRectangle;
+
+            Brush br = new SolidBrush(Plugin.InputPanelBackColor);
+            e.Graphics.FillRectangle(br, checkBox);
+            br.Dispose();
+
+            float dpiScaling = Plugin.DpiScaling;
+
+            Rectangle checkBoxBounds = new Rectangle(checkBox.Left - 5 * scaledPx, checkBox.Top - 1 * scaledPx, checkBox.Height, checkBox.Height);
+
+            if (this.IsEnabled())
+            {
+                if ((this.ThreeState && this.CheckState == CheckState.Checked) || (!this.ThreeState && this.Checked)) //Checked
+                    ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, scaledPx,
+                        inputControlBackColor, inputControlBorderColor, inputControlForeColor, true);
+                else if (this.ThreeState && this.CheckState == CheckState.Indeterminate) //Indeterminate
+                    ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, scaledPx,
+                        inputControlBackColor, inputControlBorderColor, inputControlForeColor, null);
+                else
+                    ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, scaledPx,
+                        inputControlBackColor, inputControlBorderColor, inputControlForeColor, false);
+            }
+            else
+            {
+                if ((this.ThreeState && this.CheckState == CheckState.Checked) || (!this.ThreeState && this.Checked)) //Checked
+                    ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, scaledPx,
+                        inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor, true);
+                else if (this.ThreeState && this.CheckState == CheckState.Indeterminate) //Indeterminate
+                    ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, scaledPx,
+                        inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor, null);
+                else
+                    ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, scaledPx,
+                        inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor, false);
+            }
+        }
+
+        private void InitializeComponent()
+        {
+            //Nothing for now...
+        }
+    }
+
+    internal class CustomRadioButton : RadioButton
+    {
+        private readonly Color inputControlForeColor = Plugin.InputControlForeColor;
+        private readonly Color inputControlBackColor = Plugin.InputControlBackColor;
+        private readonly Color inputControlBorderColor = Plugin.InputControlBorderColor;
+
+        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDeepDimmedForeColor;
+        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDeepDimmedBackColor;
+        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDeepDimmedBorderColor;
+
+        private int scaledPx = 1;
+        private readonly bool dontUseSkinColors;
+
+        internal CustomRadioButton(PluginWindowTemplate ownerForm, bool dontUseSkinColors,
+            Color? inputControlForeColor = null, Color? inputControlBackColor = null, Color? inputControlBorderColor = null)
+        {
+            this.dontUseSkinColors = dontUseSkinColors;
+            this.scaledPx = ownerForm.scaledPx;
+
+            if (inputControlForeColor != null)
+                this.inputControlForeColor = (Color)inputControlForeColor;
+
+            if (inputControlBackColor != null)
+                this.inputControlBackColor = (Color)inputControlBackColor;
+
+            if (inputControlBorderColor != null)
+                this.inputControlBorderColor = (Color)inputControlBorderColor;
+
+            InitializeComponent();
+
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.Selectable, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+
+            //TODO: Add any initialization after the InitForm call
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            switch (m.Msg)
+            {
+                case WM_PAINT:
+                    IntPtr hDC = GetWindowDC(this.Handle);
+                    Graphics g = Graphics.FromHdc(hDC);
+
+                    Rectangle rect = new Rectangle();
+
+                    GetClientRect(this.Handle, ref rect);
+
+                    OnPaint(new PaintEventArgs(g, rect));
+
+                    g.Dispose();
+                    ReleaseDC(this.Handle, hDC);
+
+
+                    // return 0 (processed)
+                    m.Result = IntPtr.Zero;
+
+                    // validate current rect
+                    ValidateRect(this.Handle, ref rect);
+
+                    break;
+            }
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            if (this.dontUseSkinColors || !Visible)
+                return;
+
+            Rectangle radioButton = e.ClipRectangle;
+
+            Brush br = new SolidBrush(Plugin.InputPanelBackColor);
+            e.Graphics.FillRectangle(br, radioButton);
+            br.Dispose();
+
+            float dpiScaling = Plugin.DpiScaling;
+
+            Rectangle radioButtonBounds = new Rectangle(radioButton.Left - 5 * scaledPx, radioButton.Top - 1 * scaledPx, radioButton.Height, radioButton.Height);
+
+
+            if (this.IsEnabled())
+            {
+                if (this.Checked) //Checked
+                    ControlsTools.DrawRadioButton(e.Graphics, dpiScaling, radioButtonBounds, scaledPx,
+                        inputControlBackColor, inputControlBorderColor, inputControlForeColor, true);
+                else
+                    ControlsTools.DrawRadioButton(e.Graphics, dpiScaling, radioButtonBounds, scaledPx,
+                        inputControlBackColor, inputControlBorderColor, inputControlForeColor, false);
+            }
+            else
+            {
+                if (this.Checked) //Checked
+                    ControlsTools.DrawRadioButton(e.Graphics, dpiScaling, radioButtonBounds, scaledPx,
+                        inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor, true);
+                else
+                    ControlsTools.DrawRadioButton(e.Graphics, dpiScaling, radioButtonBounds, scaledPx,
+                        inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor, false);
+            }
+        }
+
+        private void InitializeComponent()
+        {
+            //Nothing for now...
+        }
+    }
 
     //Returns Minimum, Maximum, SmallChange, LargeChange
     internal delegate (int, int, int, int) GetScrollBarMetricsDelegate(Control scrolledControl, Control refScrollBar);

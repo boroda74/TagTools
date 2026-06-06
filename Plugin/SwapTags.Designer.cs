@@ -42,6 +42,13 @@
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.smartOperationCheckBoxLabel = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+
+            //MusicBee
+            this.smartOperationCheckBox.Dispose();
+
+            this.smartOperationCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            //~MusicBee
+
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 

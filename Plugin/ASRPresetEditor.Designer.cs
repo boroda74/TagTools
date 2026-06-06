@@ -1,4 +1,6 @@
-﻿namespace MusicBeePlugin
+﻿using System.Web.UI.Design;
+
+namespace MusicBeePlugin
 {
     partial class AsrPresetEditor
     {
@@ -199,6 +201,65 @@
             this.textBoxTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 
             //MusicBee
+            ignoreCaseCheckBox.Dispose();
+            condition1SneCheckBox.Dispose();
+            condition1DneCheckBox.Dispose();
+            add1CheckBox.Dispose();
+            append1CheckBox.Dispose();
+            condition2SneCheckBox.Dispose();
+            condition2DneCheckBox.Dispose();
+            add2CheckBox.Dispose();
+            append2CheckBox.Dispose();
+            condition3SneCheckBox.Dispose();
+            condition3DneCheckBox.Dispose();
+            add3CheckBox.Dispose();
+            append3CheckBox.Dispose();
+            condition4SneCheckBox.Dispose();
+            condition4DneCheckBox.Dispose();
+            add4CheckBox.Dispose();
+            append4CheckBox.Dispose();
+            condition5SneCheckBox.Dispose();
+            condition5DneCheckBox.Dispose();
+            add5CheckBox.Dispose();
+            append5CheckBox.Dispose();
+            customizedByUserCheckBox.Dispose();
+            removePresetCheckBox.Dispose();
+            customTextCheckBox.Dispose();
+            customText2CheckBox.Dispose();
+            customText3CheckBox.Dispose();
+            customText4CheckBox.Dispose();
+            userPresetCheckBox.Dispose();
+
+            this.ignoreCaseCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition1SneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition1DneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.add1CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.append1CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition2SneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition2DneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.add2CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.append2CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition3SneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition3DneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.add3CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.append3CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition4SneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition4DneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.add4CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.append4CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition5SneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.condition5DneCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.add5CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.append5CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.customizedByUserCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.removePresetCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.customTextCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.customText2CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.customText3CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.customText4CheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.userPresetCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
             this.nameBox.Dispose();
             this.descriptionBox.Dispose();
             this.customTextBox.Dispose();

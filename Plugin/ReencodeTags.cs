@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -27,8 +28,8 @@ namespace MusicBeePlugin
         private BindingSource source = new BindingSource();
 
         private string[] files = Array.Empty<string>();
-        private readonly List<string[]> currentTracks = new List<string[]>();
-        private readonly List<string[]> newTracks = new List<string[]>();
+        private readonly List<List<string>> currentTracks = new List<List<string>>();
+        private readonly List<List<string>> newTracks = new List<List<string>>();
         private readonly List<string> cuesheetTracks = new List<string>();
         private List<bool> processedRowList = new List<bool>(); //Indices of processed tracks
 
@@ -88,12 +89,15 @@ namespace MusicBeePlugin
                 ThreeState = true,
                 FalseValue = ColumnUncheckedState,
                 TrueValue = ColumnCheckedState,
-                IndeterminateValue = string.Empty,
+                IndeterminateValue = ColumnIndeterminateState,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
                 Resizable = DataGridViewTriState.False,
                 DataPropertyName = "Checked",
             };
+
+            if (useSkinColors)
+                colCB.CellTemplate = new CustomDataGridViewCheckBoxCell();
 
             previewTable.Columns.Insert(0, colCB);
 
@@ -137,7 +141,7 @@ namespace MusicBeePlugin
                 previewTable.CurrentCell = previewTable.Rows[i].Cells[0];
 
                 if (processedRowList[i])
-                    previewTable.Rows[i].Cells[0].Value = null;
+                    previewTable.Rows[i].Cells[0].Value = ColumnIndeterminateState;
             }
         }
 
@@ -333,29 +337,35 @@ namespace MusicBeePlugin
 
                 SetStatusBarTextForFileOperations(this, ReEncodeTagSbText, true, fileCounter, files.Length, currentFile);
 
-                var currentTags = new string[numberOfWritableTags + 2];
-                currentTags[0] = ColumnCheckedState;
-                currentTags[1] = currentFile;
+                var currentTags = new List<string>();
+                currentTags.Add(ColumnCheckedState);
+                currentTags.Add(currentFile);
 
-                var newTags = new string[numberOfWritableTags + 2];
-                newTags[0] = ColumnCheckedState;
-                newTags[1] = currentFile;
+                var newTags = new List<string>();
+                newTags.Add(ColumnCheckedState);
+                newTags.Add(currentFile);
 
                 if (!string.IsNullOrEmpty(GetFileTag(currentFile, MetaDataType.Cuesheet)))
                     wasCuesheet = true;
 
-                var tagNames = new string[numberOfWritableTags + 2];
-                var j = 0;
+                var tagNames = new List<string>();
+                tagNames.Add(null); tagNames.Add(null);
+
+                var tagIds = new List<MetaDataType>();
+                tagIds.Add(0); tagIds.Add(0);
+
+                var j = 2;
                 foreach (var tagIdName in TagIdsNames)
                 {
-                    for (var i = 0; i < ReadonlyTagsNames.Length; i++)
-                        if (ReadonlyTagsNames[i] == tagIdName.Value || MetaDataType.Artwork == tagIdName.Key)
-                            goto loopEnd;
+                    if ((int)tagIdName.Key <= 0 || (tagIdName.Key != MetaDataType.AlbumArtist && ReadonlyTagsNames.Contains(tagIdName.Value)) 
+                        || tagIdName.Key == MetaDataType.Artwork)
+                        goto loopEnd;
 
-                    currentTags[j + 2] = GetFileTag(currentFile, tagIdName.Key);
-                    newTags[j + 2] = reencodeTag(currentTags[j + 2]);
+                    currentTags.Add(GetFileTag(currentFile, tagIdName.Key));
+                    newTags.Add(reencodeTag(currentTags[j]));
 
-                    tagNames[j + 2] = tagIdName.Value;
+                    tagNames.Add(tagIdName.Value);
+                    tagIds.Add(tagIdName.Key);
 
                     j++;
 
@@ -367,8 +377,8 @@ namespace MusicBeePlugin
                 {
                     Checked = ColumnCheckedState,
                     File = currentFile,
-                    Track = GetTrackRepresentation(currentTags, newTags, tagNames, previewSortTags),
-                    NewTrack = GetTrackRepresentation(newTags, currentTags, tagNames, previewSortTags),
+                    Track = GetTrackRepresentation(currentTags, newTags, tagNames, tagIds, previewSortTags),
+                    NewTrack = GetTrackRepresentation(newTags, currentTags, tagNames, tagIds, previewSortTags),
                 };
 
                 rows.Add(row);
@@ -426,17 +436,14 @@ namespace MusicBeePlugin
                     var cuesheet = GetFileTag(currentFile, MetaDataType.Cuesheet);
                     if (string.IsNullOrEmpty(cuesheet))
                     {
-                        var j = 0;
+                        var j = 2;
                         foreach (var tagIdName in TagIdsNames)
                         {
-                            for (var k = 0; k < ReadonlyTagsNames.Length; k++)
-                                if (ReadonlyTagsNames[k] == tagIdName.Value)
-                                    goto loopEnd;
-
-                            if (tagIdName.Key == MetaDataType.Artwork)
+                            if ((int)tagIdName.Key <= 0 || (tagIdName.Key != MetaDataType.AlbumArtist && ReadonlyTagsNames.Contains(tagIdName.Value))
+                                || tagIdName.Key == MetaDataType.Artwork)
                                 goto loopEnd;
 
-                            SetFileTag(currentFile, tagIdName.Key, newTracks[i][j + 2]);
+                            SetFileTag(currentFile, tagIdName.Key, newTracks[i][j]);
 
                             j++;
 
@@ -501,18 +508,20 @@ namespace MusicBeePlugin
 
             for (int i = 0; i < rows.Count; i++)
             {
-                if (rows[0].Checked == null)
+                if (rows[i].Checked == ColumnIndeterminateState)
                     continue;
 
                 if (state)
-                    rows[0].Checked = ColumnUncheckedState;
+                    rows[i].Checked = ColumnUncheckedState;
                 else
-                    rows[0].Checked = ColumnCheckedState;
+                    rows[i].Checked = ColumnCheckedState;
             }
 
             int firstRow = previewTable.FirstDisplayedCell.RowIndex;
 
             source.ResetBindings(false);
+            for (int i = 0; i < rows.Count; i++)
+                previewTable_CellContentClick(previewTable, new DataGridViewCellEventArgs(0, i));
 
             var firstCell = previewTable.Rows[firstRow].Cells[0];
             previewTable.FirstDisplayedCell = firstCell;
@@ -554,6 +563,7 @@ namespace MusicBeePlugin
 
             initialEncodingListCustom.Enable(enable);
             usedEncodingListCustom.Enable(enable);
+            previewSortTagsСheckBox.Enable(enable);
         }
 
         internal override void enableQueryingButtons()
@@ -606,8 +616,8 @@ namespace MusicBeePlugin
 
             if (value.Item1 != 0)
             {
-                previewTable.Columns[1].FillWeight = value.Item1;
-                previewTable.Columns[2].FillWeight = value.Item2;
+                previewTable.Columns[2].FillWeight = value.Item1;
+                previewTable.Columns[3].FillWeight = value.Item2;
             }
         }
 
@@ -628,8 +638,21 @@ namespace MusicBeePlugin
             }
             else
             {
-                saveWindowLayout(previewTable.Columns[1].Width, previewTable.Columns[2].Width);
+                saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[3].Width);
             }
+        }
+
+        private void previewTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
+        private void previewSortTagsСheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!previewSortTagsСheckBox.IsEnabled())
+                return;
+
+            previewSortTagsСheckBox.Checked = !previewSortTagsСheckBox.Checked;
         }
     }
 }

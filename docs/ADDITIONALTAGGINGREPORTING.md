@@ -159,4 +159,4 @@ It inserts a different number of invisible zero-width spaces at the beginning of
 
 ***
 
-Copyright © boroda 2012-2026. Help version 10.7.260602
+Copyright © boroda 2012-2026. Help version 10.7.260604

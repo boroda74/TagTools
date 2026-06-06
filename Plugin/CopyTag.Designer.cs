@@ -85,6 +85,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.fieldsPanel.SuspendLayout();
             this.SuspendLayout();
+
+            //MusicBee
+            this.appendCheckBox.Dispose();
+            this.smartOperationCheckBox.Dispose();
+            this.onlyIfDestinationEmptyCheckBox.Dispose();
+            this.addCheckBox.Dispose();
+            this.onlyIfSourceNotEmptyCheckBox.Dispose();
+
+            this.appendCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.smartOperationCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.onlyIfDestinationEmptyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.addCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.onlyIfSourceNotEmptyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            //~MusicBee
+
             // 
             // copyTagLabel
             // 
@@ -188,6 +203,7 @@
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.previewTable.Tag = "#CopyTag&CopyTag@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
+            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             // 
             // File
             // 

@@ -113,7 +113,7 @@ namespace MusicBeePlugin
 
         internal const string ColumnCheckedState = "T";
         internal const string ColumnUncheckedState = "F";
-        internal const string ColumnIndeterminateState = "I";
+        internal const string ColumnIndeterminateState = "";
 
 
         //Skinning
@@ -2224,36 +2224,42 @@ namespace MusicBeePlugin
             return trackRepresentation;
         }
 
-        internal static string GetTrackRepresentation(string[] tags, string[] tags2, string[] tagNames, bool previewSortTags)
+        internal static string GetTrackRepresentation(List<string> tags, List<string> tags2, List<string> tagNames, List<MetaDataType> tagIds, bool previewSortTags)
         {
             var trackRepresentation = string.Empty;
 
-            trackRepresentation += tags[12]; //12 - track number
-            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[28] : ("-" + tags[28]); //28 - disk number
+            trackRepresentation += tags[tagIds.IndexOf(MetaDataType.TrackNo)]; //Track number
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[tagIds.IndexOf(MetaDataType.DiscNo)] 
+                : ("-" + tags[tagIds.IndexOf(MetaDataType.DiscNo)]); //Disk number
             trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? string.Empty : ". ";
 
-            trackRepresentation += tags[5]; //5 - Album artist or artist
-            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[3] : (" - " + tags[3]); //3 - album name
-            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[2] : (" - " + tags[2]); //2 - track tiltle
+            trackRepresentation += tags[tagIds.IndexOf(MetaDataType.AlbumArtist)]; //Album artist or artist
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[tagIds.IndexOf(MetaDataType.Album)] 
+                : (" - " + tags[tagIds.IndexOf(MetaDataType.Album)]); //Album name
+            trackRepresentation += string.IsNullOrEmpty(trackRepresentation) ? tags[tagIds.IndexOf(MetaDataType.TrackTitle)] 
+                : (" - " + tags[tagIds.IndexOf(MetaDataType.TrackTitle)]); //Track title
 
             trackRepresentation += " (";
 
-            for (var i = 0; i < tags.Length; i++)
+            for (var i = 0; i < tags.Count; i++)
             {
-                if (i == 12)
+                if (tagIds[i] == MetaDataType.TrackNo)
                     continue;
-                else if (i == 28)
+                else if (tagIds[i] == MetaDataType.DiscNo)
                     continue;
-                else if (i == 4)
+                else if (tagIds[i] == MetaDataType.AlbumArtist)
                     continue;
-                else if (i == 3)
+                else if (tagIds[i] == MetaDataType.Album)
                     continue;
-                else if (i == 2)
+                else if (tagIds[i] == MetaDataType.TrackTitle)
+                    continue;
+                else if (tagIds[i] == MetaDataType.Lyrics)
                     continue;
 
                 if (!previewSortTags)
                 {
-                    if (i == 52 || i == 53 || i == 54 || i == 55 || i == 56)
+                    if (tagIds[i] == MetaDataType.SortAlbum || tagIds[i] == MetaDataType.SortAlbumArtist || tagIds[i] == MetaDataType.SortArtist 
+                        || tagIds[i] == MetaDataType.SortComposer || tagIds[i] == MetaDataType.SortTitle)
                         continue;
                 }
 
@@ -6844,7 +6850,8 @@ namespace MusicBeePlugin
 
 
                 //Fore colors
-                int buttonForeCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                int buttonForeCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, 
+                    ElementComponent.ComponentForeground);
                 int buttonDisabledForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDisabled,
                     ElementComponent.ComponentForeground);
 

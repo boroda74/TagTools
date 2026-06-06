@@ -141,6 +141,8 @@ namespace MusicBeePlugin
             }
 
 
+            sourceTagComboBoxCustom.SelectionLength = 0;
+            tagComboBoxCustom.SelectionLength = 0;
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
 

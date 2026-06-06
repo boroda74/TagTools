@@ -55,6 +55,11 @@ namespace MusicBeePlugin
             this.buttonCopy = new System.Windows.Forms.Button();
 
             //MusicBee
+            this.autoCopyCheckBox.Dispose();
+
+            this.autoCopyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
             this.tagList.Dispose();
 
             this.tagList = new CustomListBox(Plugin.SavedSettings.dontUseSkinColors);

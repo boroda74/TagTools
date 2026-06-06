@@ -905,6 +905,8 @@ namespace MusicBeePlugin
 
             previewIsGenerated = false;
 
+            trackListComboBox.SelectedIndex = 0;
+
             if (backgroundTaskIsWorking())
                 return true;
 
@@ -1632,7 +1634,7 @@ namespace MusicBeePlugin
             {
                 trackIndex = trackListComboBoxCustom.SelectedIndex;
                 fillTable(searchFolderComboBoxCustom.Text, false, (int)numberOfBackupsNumericUpDown.Value,
-                    true, getReallyDisplayedTags(trackListComboBoxCustom.SelectedIndex, true));
+                    true, true);
             }
         }
 

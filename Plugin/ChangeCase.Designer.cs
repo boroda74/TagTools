@@ -107,6 +107,38 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
+            //MusicBee
+            this.sentenceCaseRadioButton.Dispose();
+            this.lowerCaseRadioButton.Dispose();
+            this.upperCaseRadioButton.Dispose();
+            this.titleCaseRadioButton.Dispose();
+            this.toggleCaseRadioButton.Dispose();
+
+            this.sentenceCaseRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.lowerCaseRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.upperCaseRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.titleCaseRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.toggleCaseRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
+            this.exceptionWordsCheckBox.Dispose();
+            this.exceptionCharsCheckBox.Dispose();
+            this.sentenceSeparatorsCheckBox.Dispose();
+            this.alwaysCapitalize1stWordCheckBox.Dispose();
+            this.alwaysCapitalizeLastWordCheckBox.Dispose();
+            this.exceptionCharPairsCheckBox.Dispose();
+            this.ignoreSingleLetterExceptedWordsCheckBox.Dispose();
+
+            this.exceptionWordsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.exceptionCharsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.sentenceSeparatorsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.alwaysCapitalize1stWordCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.alwaysCapitalizeLastWordCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.exceptionCharPairsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.ignoreSingleLetterExceptedWordsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            //~MusicBee
+
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.fieldsPanel.SuspendLayout();
@@ -239,6 +271,7 @@
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.previewTable.Tag = "#ChangeCase&ChangeCase@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
+            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             // 
             // File
             // 

@@ -57,6 +57,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.previewSortTagsСheckBoxLabel = new System.Windows.Forms.Label();
             this.controlsPanel = new System.Windows.Forms.Panel();
+
+            //MusicBee
+            this.previewSortTagsСheckBox.Dispose();
+
+            this.previewSortTagsСheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            //~MusicBee
+
             ((System.ComponentModel.ISupportInitialize)(this.previewTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.controlsPanel.SuspendLayout();
@@ -126,6 +133,7 @@
             this.previewTable.Tag = "#ReEncodeTags&ReEncodeTags@pinned-to-parent-x";
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             this.previewTable.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentDoubleClick);
+            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             // 
             // File
             // 
@@ -229,6 +237,7 @@
             // 
             resources.ApplyResources(this.previewSortTagsСheckBoxLabel, "previewSortTagsСheckBoxLabel");
             this.previewSortTagsСheckBoxLabel.Name = "previewSortTagsСheckBoxLabel";
+            this.previewSortTagsСheckBoxLabel.Click += new System.EventHandler(this.previewSortTagsСheckBoxLabel_Click);
             // 
             // controlsPanel
             // 

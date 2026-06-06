@@ -10,4 +10,4 @@ Some presets are checked:
 
 ***
 
-Copyright © boroda 2012-2026. Help version 10.7.260602
+Copyright © boroda 2012-2026. Help version 10.7.260604

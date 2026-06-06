@@ -9,14 +9,95 @@ namespace MusicBeePlugin
 {
     internal delegate void CheckBoxClickedHandler(bool state);
 
+    internal class CustomDataGridViewCheckBoxCell : DataGridViewCheckBoxCell
+    {
+        private readonly Color inputControlForeColor = Plugin.InputControlForeColor;
+        private readonly Color inputControlBackColor = Plugin.InputControlBackColor;
+        private readonly Color inputControlBorderColor = Plugin.InputControlBorderColor;
+
+        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDeepDimmedForeColor;
+        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDeepDimmedBackColor;
+        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDeepDimmedBorderColor;
+
+        protected override void Paint(Graphics graphics,
+            Rectangle clipBounds,
+            Rectangle cellBounds,
+            int rowIndex,
+            DataGridViewElementStates dataGridViewElementState,
+            object value,
+            object formattedValue,
+            string errorText,
+            DataGridViewCellStyle cellStyle,
+            DataGridViewAdvancedBorderStyle advancedBorderStyle,
+            DataGridViewPaintParts paintParts)
+        {
+            if (rowIndex != -2)
+            {
+                base.Paint(graphics, clipBounds, cellBounds, rowIndex,
+                    dataGridViewElementState, value,
+                    formattedValue, errorText, cellStyle,
+                    advancedBorderStyle, paintParts);
+            }
+
+            float dpiScaling = Plugin.DpiScaling;
+
+            var p = new Point();
+            var s = new Size((int)Math.Round(12f * dpiScaling), (int)Math.Round(12f * dpiScaling));
+
+            p.X = cellBounds.Location.X + (cellBounds.Width / 2) - (s.Width / 2) - (int)Math.Round(2f * dpiScaling);
+            p.Y = cellBounds.Location.Y + (cellBounds.Height / 2) - (s.Height / 2);// - (int)Math.Round(1f * dpiScaling);
+
+            string strValue = string.Empty;
+            if (value != null)
+                strValue = value.ToString();
+
+            if (this.DataGridView.Enabled)
+            {
+                if (strValue == Plugin.ColumnCheckedState || strValue == "True")
+                    ControlsTools.DrawCheckBox(graphics, dpiScaling, new Rectangle(p, s), (int)Math.Round(dpiScaling),
+                        inputControlBackColor, inputControlBorderColor, inputControlForeColor,
+                        true);
+                else if (strValue == Plugin.ColumnUncheckedState || strValue == "False")
+                    ControlsTools.DrawCheckBox(graphics, dpiScaling, new Rectangle(p, s), (int)Math.Round(dpiScaling),
+                        inputControlBackColor, inputControlBorderColor, inputControlForeColor,
+                        false);
+                else
+                    ControlsTools.DrawCheckBox(graphics, dpiScaling, new Rectangle(p, s), (int)Math.Round(dpiScaling),
+                        inputControlBackColor, inputControlBorderColor, inputControlForeColor,
+                        null);
+            }
+            else
+            {
+                if (strValue == Plugin.ColumnCheckedState || strValue == "True")
+                    ControlsTools.DrawCheckBox(graphics, dpiScaling, new Rectangle(p, s), (int)Math.Round(dpiScaling),
+                        inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor,
+                        true);
+                else if (strValue == Plugin.ColumnUncheckedState || strValue == "False")
+                    ControlsTools.DrawCheckBox(graphics, dpiScaling, new Rectangle(p, s), (int)Math.Round(dpiScaling),
+                        inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor,
+                        false);
+                else
+                    ControlsTools.DrawCheckBox(graphics, dpiScaling, new Rectangle(p, s), (int)Math.Round(dpiScaling),
+                        inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor,
+                        null);
+            }
+        }
+    }
+
     internal class DataGridViewCheckBoxHeaderCell : DataGridViewColumnHeaderCell
     {
         private Point checkBoxLocation;
         private Size checkBoxSize;
         private bool checkedState;
         private Point cellLocation;
-        private System.Windows.Forms.VisualStyles.CheckBoxState cbState =
-            System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
+
+        private readonly Color inputControlForeColor = Plugin.InputControlForeColor;
+        private readonly Color inputControlBackColor = Plugin.InputControlBackColor;
+        private readonly Color inputControlBorderColor = Plugin.InputControlBorderColor;
+
+        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDeepDimmedForeColor;
+        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDeepDimmedBackColor;
+        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDeepDimmedBorderColor;
 
         internal event CheckBoxClickedHandler OnCheckBoxClicked;
 
@@ -40,23 +121,30 @@ namespace MusicBeePlugin
                     advancedBorderStyle, paintParts);
             }
 
-            var p = new Point();
-            var s = CheckBoxRenderer.GetGlyphSize(graphics,
-            System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal);
+            float dpiScaling = Plugin.DpiScaling;
 
-            p.X = cellBounds.Location.X + (cellBounds.Width / 2) - (s.Width / 2) - 1;
-            p.Y = cellBounds.Location.Y + (cellBounds.Height / 2) - (s.Height / 2) - 1;
+            var p = new Point();
+            var s = new Size((int)Math.Round(12f * dpiScaling), (int)Math.Round(12f * dpiScaling));
+
+            p.X = cellBounds.Location.X + (cellBounds.Width / 2) - (s.Width / 2) - (int)Math.Round(2f * dpiScaling);
+            p.Y = cellBounds.Location.Y + (cellBounds.Height / 2) - (s.Height / 2);// - (int)Math.Round(1f * dpiScaling);
 
             cellLocation = cellBounds.Location;
             checkBoxLocation = p;
             checkBoxSize = s;
 
-            if (checkedState)
-                cbState = System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal;
+            if (this.DataGridView.Enabled)
+            {
+                ControlsTools.DrawCheckBox(graphics, dpiScaling, new Rectangle(p, s), (int)Math.Round(dpiScaling),
+                    inputControlBackColor, inputControlBorderColor, inputControlForeColor, 
+                    checkedState);
+            }
             else
-                cbState = System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
-
-            CheckBoxRenderer.DrawCheckBox(graphics, checkBoxLocation, cbState);
+            {
+                ControlsTools.DrawCheckBox(graphics, dpiScaling, new Rectangle(p, s), (int)Math.Round(dpiScaling),
+                    inputControlDeepDimmedBackColor, inputControlDeepDimmedBorderColor, inputControlDeepDimmedForeColor, 
+                    checkedState);
+            }
         }
 
         internal void changeState()

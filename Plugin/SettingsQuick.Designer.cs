@@ -94,6 +94,46 @@
             this.versionLabel = new System.Windows.Forms.Label();
 
             //MusicBee
+            this.closeHiddenCommandWindowsRadioButton.Dispose();
+            this.showHiddenCommandWindowsRadioButton.Dispose();
+
+            this.closeHiddenCommandWindowsRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showHiddenCommandWindowsRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
+            this.playTickedAsrPresetSoundCheckBox.Dispose();
+            this.playStoppedSoundCheckBox.Dispose();
+            this.playStartedSoundCheckBox.Dispose();
+            this.playCompletedSoundCheckBox.Dispose();
+            this.useSkinColorsCheckBox.Dispose();
+            this.highlightChangedTagsCheckBox.Dispose();
+            this.scrollPreviewToEndCheckBox.Dispose();
+            this.hidePluginWindowsOnMinimizationCheckBox.Dispose();
+            this.useCustomFontCheckBox.Dispose();
+            this.useMusicBeeFontCheckBox.Dispose();
+            this.allowCommandExecutionWithoutPreviewCheckBox.Dispose();
+            this.allowAsrLrPresetAutoExecutionCheckBox.Dispose();
+            this.includePreservedTagValuesCheckBox.Dispose();
+            this.includePreservedTagsCheckBox.Dispose();
+            this.includeNotChangedTagsCheckBox.Dispose();
+
+            this.playTickedAsrPresetSoundCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.playStoppedSoundCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.playStartedSoundCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.playCompletedSoundCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.useSkinColorsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.highlightChangedTagsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.scrollPreviewToEndCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.hidePluginWindowsOnMinimizationCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.useCustomFontCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.useMusicBeeFontCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.allowCommandExecutionWithoutPreviewCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.allowAsrLrPresetAutoExecutionCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.includePreservedTagValuesCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.includePreservedTagsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.includeNotChangedTagsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
             this.customFontTextBox.Dispose();
             this.preservedTagValuesLegendTextBox.Dispose();
             this.preservedTagsLegendTextBox.Dispose();

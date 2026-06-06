@@ -161,6 +161,28 @@ namespace MusicBeePlugin
                 this.presetTabControl = new FlatTabControl();
             }
 
+
+            this.hidePreviewCheckBox.Dispose();
+            this.smartOperationCheckBox.Dispose();
+            this.conditionCheckBox.Dispose();
+            this.openReportCheckBox.Dispose();
+            this.resizeArtworkCheckBox.Dispose();
+            this.useHotkeyForSelectedTracksCheckBox.Dispose();
+            this.assignHotkeyCheckBox.Dispose();
+            this.totalsCheckBox.Dispose();
+            this.multipleItemsSplitterTrimCheckBox.Dispose();
+
+            this.hidePreviewCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.smartOperationCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.conditionCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.openReportCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.resizeArtworkCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.useHotkeyForSelectedTracksCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.assignHotkeyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.totalsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.multipleItemsSplitterTrimCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
             this.presetList.Dispose();
             this.presetNameTextBox.Dispose();
             this.appendTextBox.Dispose();

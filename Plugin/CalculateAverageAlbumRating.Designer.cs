@@ -50,6 +50,19 @@
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.buttonSettings = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+
+            //MusicBee
+            this.notifyWhenCalculationCompletedCheckBox.Dispose();
+            this.calculateAlbumRatingAtStartUpCheckBox.Dispose();
+            this.considerUnratedCheckBox.Dispose();
+            this.calculateAlbumRatingAtTagsChangedCheckBox.Dispose();
+
+            this.notifyWhenCalculationCompletedCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.calculateAlbumRatingAtStartUpCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.considerUnratedCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.calculateAlbumRatingAtTagsChangedCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            //~MusicBee
+
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 

@@ -365,12 +365,15 @@ namespace MusicBeePlugin
                 ThreeState = true,
                 FalseValue = ColumnUncheckedState,
                 TrueValue = ColumnCheckedState,
-                IndeterminateValue = string.Empty,
+                IndeterminateValue = ColumnIndeterminateState,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
                 Resizable = DataGridViewTriState.False,
                 DataPropertyName = "Checked",
             };
+
+            if (useSkinColors)
+                colCB.CellTemplate = new CustomDataGridViewCheckBoxCell();
 
             previewTable.Columns.Insert(0, colCB);
             previewTable.Columns[1].HeaderCell.Style = headerCellStyle;
@@ -2392,7 +2395,7 @@ namespace MusicBeePlugin
                 previewTable.CurrentCell = previewTable.Rows[i].Cells[0];
 
                 if (processedRowList[i])
-                    previewTable.Rows[i].Cells[0].Value = null;
+                    previewTable.Rows[i].Cells[0].Value = ColumnIndeterminateState;
 
                 previewTableFormatRow(i);
             }
@@ -6268,6 +6271,7 @@ namespace MusicBeePlugin
             preserveTagValuesTextBox.Enable(enable);
 
             buttonProcessPreserveTags.Enable(false);
+            buttonSelectPreservedTags.Enable(false);
 
             buttonExport.Enable(enable && (editButtonEnabled || selectedPreset.getCustomizationsFlag()));
 
@@ -7590,6 +7594,11 @@ namespace MusicBeePlugin
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void previewTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 

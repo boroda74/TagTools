@@ -64,6 +64,23 @@
             this.emptyLabel = new System.Windows.Forms.Label();
 
             //MusicBee
+            this.autoBackupCheckBox.Dispose();
+            this.autoDeleteOldCheckBox.Dispose();
+            this.autoDeleteManyCheckBox.Dispose();
+            this.backupArtworksCheckBox.Dispose();
+            this.dontTryToGuessLibraryNameCheckBox.Dispose();
+            this.storeTrackIdsInCustomTagCheckBox.Dispose();
+            this.dontSkipAutoBackupsIfPlayCountsChangedCheckBox.Dispose();
+
+            this.autoBackupCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.autoDeleteOldCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.autoDeleteManyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.backupArtworksCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.dontTryToGuessLibraryNameCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.storeTrackIdsInCustomTagCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.dontSkipAutoBackupsIfPlayCountsChangedCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
             this.autoBackupFolderTextBox.Dispose();
             this.autoBackupPrefixTextBox.Dispose();
 

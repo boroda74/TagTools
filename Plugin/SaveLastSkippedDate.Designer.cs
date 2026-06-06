@@ -38,6 +38,13 @@
             this.lastSkippedDateFormatTagList = new System.Windows.Forms.ComboBox();
             this.saveLastSkippedCheckBoxLabel = new System.Windows.Forms.Label();
             this.placeholderCheckBox = new System.Windows.Forms.CheckBox();
+
+            //MusicBee
+            this.saveLastSkippedCheckBox.Dispose();
+
+            this.saveLastSkippedCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            //~MusicBee
+
             this.SuspendLayout();
             // 
             // lastSkippedTagList

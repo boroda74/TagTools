@@ -18,7 +18,8 @@ namespace MusicBeePlugin
             public string Track { get; set; }
             public string OriginalTagValue { get; set; }
             public string NewTagValue { get; set; }
-        }
+       }
+
 
         private CustomComboBox sourceTagListCustom;
         private CustomComboBox initialEncodingListCustom;
@@ -98,12 +99,15 @@ namespace MusicBeePlugin
                 ThreeState = true,
                 FalseValue = ColumnUncheckedState,
                 TrueValue = ColumnCheckedState,
-                IndeterminateValue = string.Empty,
+                IndeterminateValue = ColumnIndeterminateState,
                 Width = 25,
                 AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
                 Resizable = DataGridViewTriState.False,
                 DataPropertyName = "Checked",
             };
+
+            if (useSkinColors)
+                colCB.CellTemplate = new CustomDataGridViewCheckBoxCell();
 
             previewTable.Columns.Insert(0, colCB);
             previewTable.Columns[2].HeaderCell.Style = headerCellStyle;
@@ -148,7 +152,7 @@ namespace MusicBeePlugin
                 previewTable.CurrentCell = previewTable.Rows[i].Cells[0];
 
                 if (processedRowList[i])
-                    previewTable.Rows[i].Cells[0].Value = null;
+                    previewTable.Rows[i].Cells[0].Value = ColumnIndeterminateState;
 
                 previewTableFormatRow(previewTable, i);
             }
@@ -463,20 +467,20 @@ namespace MusicBeePlugin
 
             for (int i = 0; i < rows.Count; i++)
             {
-                if (rows[0].Checked == null)
+                if (rows[i].Checked == ColumnIndeterminateState)
                     continue;
 
                 if (state)
-                    rows[0].Checked = ColumnUncheckedState;
+                    rows[i].Checked = ColumnUncheckedState;
                 else
-                    rows[0].Checked = ColumnCheckedState;
+                    rows[i].Checked = ColumnCheckedState;
             }
 
             int firstRow = previewTable.FirstDisplayedCell.RowIndex;
 
             source.ResetBindings(false);
             for (int i = 0; i < rows.Count; i++)
-                previewTableFormatRow(previewTable, i);
+                previewTable_CellContentClick(previewTable, new DataGridViewCellEventArgs(0, i));
 
             var firstCell = previewTable.Rows[firstRow].Cells[0];
             previewTable.FirstDisplayedCell = firstCell;
@@ -616,6 +620,11 @@ namespace MusicBeePlugin
             {
                 saveWindowLayout(previewTable.Columns[2].Width, previewTable.Columns[3].Width, previewTable.Columns[4].Width);
             }
+        }
+
+        private void previewTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
         }
     }
 }

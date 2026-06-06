@@ -134,6 +134,43 @@ namespace MusicBeePlugin
             this.autoRateOnTrackPropertiesCheckBoxLabel = new System.Windows.Forms.Label();
             this.calculateThresholdsAtStartUpCheckBoxLabel = new System.Windows.Forms.Label();
             this.dirtyErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+
+            //MusicBee
+            this.autoRateAtStartUpCheckBox.Dispose();
+            this.autoRateOnTrackPropertiesCheckBox.Dispose();
+            this.checkBox5.Dispose();
+            this.checkBox45.Dispose();
+            this.checkBox4.Dispose();
+            this.checkBox35.Dispose();
+            this.checkBox3.Dispose();
+            this.checkBox25.Dispose();
+            this.checkBox2.Dispose();
+            this.checkBox15.Dispose();
+            this.checkBox1.Dispose();
+            this.checkBox05.Dispose();
+            this.calculateThresholdsAtStartUpCheckBox.Dispose();
+            this.sinceAddedCheckBox.Dispose();
+            this.notifyWhenAutoRatingCompletedCheckBox.Dispose();
+            this.storePlaysPerDayCheckBox.Dispose();
+
+            this.autoRateAtStartUpCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.autoRateOnTrackPropertiesCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox5 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox45 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox4 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox35 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox3 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox25 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox2 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox15 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox1 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.checkBox05 = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.calculateThresholdsAtStartUpCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.sinceAddedCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.notifyWhenAutoRatingCompletedCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.storePlaysPerDayCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            //~MusicBee
+
             ((System.ComponentModel.ISupportInitialize)(this.baseRatingTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.perCent5UpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.perCent45UpDown)).BeginInit();

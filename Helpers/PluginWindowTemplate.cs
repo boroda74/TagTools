@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
@@ -92,6 +93,7 @@ namespace MusicBeePlugin
         internal protected Color inputPanelBorderColor;
         internal protected Color inputControlForeColor;
         internal protected Color inputControlBackColor;
+        internal protected Color inputControlBorderColor;
         internal protected Color inputControlDimmedForeColor;
         internal protected Color inputControlDimmedBackColor;
         internal protected Color inputControlDeepDimmedForeColor;
@@ -227,6 +229,10 @@ namespace MusicBeePlugin
         {
             var listBox = sender as ListBox;
 
+            if (!listBox.Visible)
+                return;
+
+
             if (e.Index >= listBox.Items.Count)
                 return;
 
@@ -267,8 +273,12 @@ namespace MusicBeePlugin
             //if (checkBoxSize > 0) //Variant #1
             //    ControlsTools.DrawCheckBox(e.Graphics, checkBoxBounds, 1, NoColor, textColor, textColor, state);
 
-            if (checkBoxSize > 0) //Variant #2
-                ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, 1, NoColor, textColor, textColor, state);
+            if (checkBoxSize > 0 && listBox.IsEnabled()) //Variant #2
+                ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, scaledPx, inputControlBackColor, inputControlBorderColor,
+                    inputControlForeColor, state);
+            else if (checkBoxSize > 0) //Variant #2
+                ControlsTools.DrawCheckBox(e.Graphics, dpiScaling, checkBoxBounds, scaledPx, inputControlDeepDimmedBackColor, inputControlBorderColor,
+                    inputControlForeColor, state);
 
             //if (checkBoxSize > 0) //Variant #3
             //    ControlsTools.DrawCheckBox(e.Graphics, checkBoxBounds, state);
@@ -3370,6 +3380,7 @@ namespace MusicBeePlugin
             inputPanelBorderColor = InputPanelBorderColor;
             inputControlForeColor = InputControlForeColor;
             inputControlBackColor = InputControlBackColor;
+            inputControlBorderColor = InputControlBorderColor;
             inputControlDimmedForeColor = InputControlDimmedForeColor;
             inputControlDimmedBackColor = InputControlDimmedBackColor;
             inputControlDeepDimmedForeColor = InputControlDeepDimmedForeColor;
@@ -3998,6 +4009,7 @@ namespace MusicBeePlugin
             // Call after - don't use when "call before" is used
             base.WndProc(ref m);
         }
+
         private void PluginWindowTemplate_Shown(object sender, EventArgs e)
         {
             for (var i = allControls.Count - 1; i >= 0; i--)
@@ -4027,7 +4039,9 @@ namespace MusicBeePlugin
                 return;
 
             SavedSettings.not1stTimeUsage = true;
-            var result = MessageBox.Show(MbForm, Msg1stTimeUsage, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            var result = MessageBox.Show(MbForm, Msg1stTimeUsage, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Information, 
+                MessageBoxDefaultButton.Button1);
+
             if (result == DialogResult.Yes)
             {
                 var tagToolsForm = new Settings(TagToolsPlugin);

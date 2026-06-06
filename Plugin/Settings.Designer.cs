@@ -134,6 +134,72 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
 
             //MusicBee
+            this.closeHiddenCommandWindowsRadioButton.Dispose();
+            this.showHiddenCommandWindowsRadioButton.Dispose();
+
+            this.closeHiddenCommandWindowsRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showHiddenCommandWindowsRadioButton = new CustomRadioButton(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
+            this.playTickedAsrPresetSoundCheckBox.Dispose();
+            this.playStoppedSoundCheckBox.Dispose();
+            this.playStartedSoundCheckBox.Dispose();
+            this.playCompletedSoundCheckBox.Dispose();
+            this.useSkinColorsCheckBox.Dispose();
+            this.highlightChangedTagsCheckBox.Dispose();
+            this.scrollPreviewToEndCheckBox.Dispose();
+            this.hidePluginWindowsOnMinimizationCheckBox.Dispose();
+            this.useCustomFontCheckBox.Dispose();
+            this.useMusicBeeFontCheckBox.Dispose();
+            this.showReEncodeTagCheckBox.Dispose();
+            this.showChangeCaseCheckBox.Dispose();
+            this.showLibraryReportsCheckBox.Dispose();
+            this.showCopyTagCheckBox.Dispose();
+            this.showAutoRateCheckBox.Dispose();
+            this.showSwapTagsCheckBox.Dispose();
+            this.showAsrCheckBox.Dispose();
+            this.showShowHiddenWindowsCheckBox.Dispose();
+            this.showCARCheckBox.Dispose();
+            this.showBackupRestoreCheckBox.Dispose();
+            this.contextMenuCheckBox.Dispose();
+            this.showCTCheckBox.Dispose();
+            this.showCustomSortingForColumnBrowserCheckBox.Dispose();
+            this.allowCommandExecutionWithoutPreviewCheckBox.Dispose();
+            this.allowAsrLrPresetAutoExecutionCheckBox.Dispose();
+            this.includePreservedTagValuesCheckBox.Dispose();
+            this.includePreservedTagsCheckBox.Dispose();
+            this.includeNotChangedTagsCheckBox.Dispose();
+
+            this.playTickedAsrPresetSoundCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.playStoppedSoundCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.playStartedSoundCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.playCompletedSoundCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.useSkinColorsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.highlightChangedTagsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.scrollPreviewToEndCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.hidePluginWindowsOnMinimizationCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.useCustomFontCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.useMusicBeeFontCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showReEncodeTagCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showChangeCaseCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showLibraryReportsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showCopyTagCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showAutoRateCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showSwapTagsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showAsrCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showShowHiddenWindowsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showCARCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showBackupRestoreCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.contextMenuCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showCTCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.showCustomSortingForColumnBrowserCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.allowCommandExecutionWithoutPreviewCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.allowAsrLrPresetAutoExecutionCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.includePreservedTagValuesCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.includePreservedTagsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.includeNotChangedTagsCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+
+
             this.unitKBox.Dispose();
             this.unitMBox.Dispose();
             this.unitGBox.Dispose();
