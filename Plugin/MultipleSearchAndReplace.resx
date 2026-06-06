@@ -192,7 +192,7 @@
   <data name="buttonAdd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="autoDestinationTagCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="manualDestinationTagCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 8</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
@@ -795,8 +795,8 @@ later for auto-execution or assign hotkey to it</value>
   <data name="dataGridViewTextBoxColumn8.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;autoDestinationTagCheckBox.Name" xml:space="preserve">
-    <value>autoDestinationTagCheckBox</value>
+  <data name="&gt;&gt;manualDestinationTagCheckBox.Name" xml:space="preserve">
+    <value>manualDestinationTagCheckBox</value>
   </data>
   <data name="buttonDeleteSaved.ToolTip" xml:space="preserve">
     <value>Delete ASR preset</value>
@@ -828,7 +828,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="fromTagLabel.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;autoDestinationTagCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;manualDestinationTagCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="File.HeaderText" xml:space="preserve">
@@ -915,7 +915,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="&gt;&gt;dataGridViewTextBoxColumn4.Name" xml:space="preserve">
     <value>dataGridViewTextBoxColumn4</value>
   </data>
-  <data name="autoDestinationTagCheckBox.ToolTip" xml:space="preserve">
+  <data name="manualDestinationTagCheckBox.ToolTip" xml:space="preserve">
     <value>Always use the same destination tag as the source tag</value>
   </data>
   <data name="autoApplyPictureBox.Error" xml:space="preserve">
@@ -930,7 +930,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
     <value>buttonOK</value>
   </data>
-  <data name="autoDestinationTagCheckBox.AutoSize" type="System.Boolean, mscorlib">
+  <data name="manualDestinationTagCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="&gt;&gt;Track.Type" xml:space="preserve">
@@ -966,7 +966,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="&gt;&gt;dirtyErrorProvider.Name" xml:space="preserve">
     <value>dirtyErrorProvider</value>
   </data>
-  <data name="autoDestinationTagCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+  <data name="manualDestinationTagCheckBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
   <data name="toTagLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -1191,7 +1191,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="buttonSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
   </data>
-  <data name="autoDestinationTagCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="manualDestinationTagCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="buttonClose.IconPadding" type="System.Int32, mscorlib">
@@ -1272,7 +1272,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="dataGridViewTextBoxColumn2.MinimumWidth" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="autoDestinationTagCheckBox.Error" xml:space="preserve">
+  <data name="manualDestinationTagCheckBox.Error" xml:space="preserve">
     <value />
   </data>
   <data name="&gt;&gt;buttonPreview.Parent" xml:space="preserve">
@@ -1590,7 +1590,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="autoApplyPictureBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="autoDestinationTagCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="manualDestinationTagCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="&gt;&gt;buttonDelete.ZOrder" xml:space="preserve">
@@ -1710,7 +1710,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="buttonClose.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autoDestinationTagCheckBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="manualDestinationTagCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="&gt;&gt;sourceTagList.Name" xml:space="preserve">
@@ -1722,7 +1722,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="&gt;&gt;ReplaceWith.Name" xml:space="preserve">
     <value>ReplaceWith</value>
   </data>
-  <data name="autoDestinationTagCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="manualDestinationTagCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 19</value>
   </data>
   <data name="smartOperationCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
@@ -1767,7 +1767,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="templateNameTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
     <value>TopLeft</value>
   </data>
-  <data name="&gt;&gt;autoDestinationTagCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;manualDestinationTagCheckBox.Parent" xml:space="preserve">
     <value>controlsPanel</value>
   </data>
   <data name="&gt;&gt;smartOperationCheckBoxLabel.Parent" xml:space="preserve">
@@ -1821,7 +1821,7 @@ later for auto-execution or assign hotkey to it</value>
   <data name="buttonCopy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="autoDestinationTagCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="manualDestinationTagCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="dataGridViewTextBoxColumn7.Visible" type="System.Boolean, mscorlib">
@@ -1871,7 +1871,7 @@ if this option is unchecked; however, this may be useful only if the source and 
   <data name="&gt;&gt;dataGridViewComboBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;autoDestinationTagCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;manualDestinationTagCheckBox.ZOrder" xml:space="preserve">
     <value>21</value>
   </data>
   <data name="buttonCopy.Location" type="System.Drawing.Point, System.Drawing">
@@ -1895,7 +1895,7 @@ if this option is unchecked; however, this may be useful only if the source and 
   <data name="smartOperationCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="autoDestinationTagCheckBox.Text" xml:space="preserve">
+  <data name="manualDestinationTagCheckBox.Text" xml:space="preserve">
     <value> </value>
   </data>
   <data name="buttonSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">

@@ -39,6 +39,7 @@ namespace MusicBeePlugin
                     advancedBorderStyle, paintParts);
             }
 
+
             float dpiScaling = Plugin.DpiScaling;
 
             var p = new Point();

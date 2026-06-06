@@ -642,6 +642,7 @@ namespace MusicBeePlugin
             public string copySourceTagName;
             public string changeCaseSourceTagName;
             public string swapTagsSourceTagName;
+            public bool manualDestinationTag;
 
             public string copyDestinationTagName;
             public string swapTagsDestinationTagName;

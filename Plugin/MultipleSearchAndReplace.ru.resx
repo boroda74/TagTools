@@ -413,13 +413,13 @@
   <data name="toTagLabel.ToolTip" xml:space="preserve">
     <value />
   </data>
-  <data name="autoDestinationTagCheckBox.Error" xml:space="preserve">
+  <data name="manualDestinationTagCheckBox.Error" xml:space="preserve">
     <value />
   </data>
-  <data name="autoDestinationTagCheckBox.IconPadding" type="System.Int32, mscorlib">
+  <data name="manualDestinationTagCheckBox.IconPadding" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="autoDestinationTagCheckBox.ToolTip" xml:space="preserve">
+  <data name="manualDestinationTagCheckBox.ToolTip" xml:space="preserve">
     <value>Всегда использовать тот же тег назначения, что и тег источника</value>
   </data>
   <data name="sourceTagList.Error" xml:space="preserve">

@@ -84,13 +84,14 @@ namespace MusicBeePlugin
             ReplaceButtonBitmap(buttonSettings, Gear);
 
 
-            FillListByTagNames(destinationTagListCustom.Items, false, false, false);
-            destinationTagListCustom.Text = SavedSettings.copyDestinationTagName;
+            smartOperationCheckBox.Checked = SavedSettings.smartOperation;
+            manualDestinationTagCheckBox.Checked = SavedSettings.manualDestinationTag;
 
             FillListByTagNames(sourceTagListCustom.Items, true, false, false);
-            sourceTagListCustom.Text = SavedSettings.copySourceTagName;
+            FillListByTagNames(destinationTagListCustom.Items, false, false, false);
 
-            smartOperationCheckBox.Checked = SavedSettings.smartOperation;
+            destinationTagListCustom.Text = SavedSettings.copyDestinationTagName;
+            sourceTagListCustom.Text = SavedSettings.copySourceTagName;
 
 
             var headerCheckBoxCellStyle = new DataGridViewCellStyle(HeaderCellStyle);
@@ -157,6 +158,7 @@ namespace MusicBeePlugin
 
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
+            manualDestinationTagCheckBox_CheckedChanged(null, null);
 
             button_GotFocus(AcceptButton, null); //Let's mark active button
         }
@@ -580,6 +582,7 @@ namespace MusicBeePlugin
             SavedSettings.copySourceTagName = sourceTagListCustom.Text;
             SavedSettings.copyDestinationTagName = destinationTagListCustom.Text;
             SavedSettings.smartOperation = smartOperationCheckBox.Checked;
+            SavedSettings.manualDestinationTag = manualDestinationTagCheckBox.Checked;
 
             TagToolsPlugin.SaveSettings();
         }
@@ -702,7 +705,7 @@ namespace MusicBeePlugin
             //ignoreTemplateNameTextBoxTextChanged = false;
 
             sourceTagListCustom.Enable(enable);
-            destinationTagListCustom.Enable(enable && !autoDestinationTagCheckBox.Checked);
+            destinationTagListCustom.Enable(enable && !manualDestinationTagCheckBox.Checked);
             fromTagLabel.Enable(enable);
             toTagLabel.Enable(enable);
             presetLabel.Enable(enable);
@@ -710,7 +713,7 @@ namespace MusicBeePlugin
             loadComboBoxCustom.Enable(enable);
             buttonAdd.Enable(enable);
             templateTable.Enable(enable);
-            autoDestinationTagCheckBox.Enable(enable);
+            manualDestinationTagCheckBox.Enable(enable);
             smartOperationCheckBox.Enable(enable);
             autoApplyCheckBox.Enable(enable);
 
@@ -1139,9 +1142,9 @@ namespace MusicBeePlugin
             templateTable.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells);
         }
 
-        private void autoDestinationTagCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void manualDestinationTagCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!autoDestinationTagCheckBox.Checked)
+            if (!manualDestinationTagCheckBox.Checked)
             {
                 destinationTagListCustom.Enable(false);
                 var destinationTagListSelectedIndex = destinationTagListCustom.SelectedIndex;
@@ -1156,17 +1159,17 @@ namespace MusicBeePlugin
             }
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void manualDestinationTag_Click(object sender, EventArgs e)
         {
-            if (!autoDestinationTagCheckBox.IsEnabled())
+            if (!manualDestinationTagCheckBox.IsEnabled())
                 return;
 
-            autoDestinationTagCheckBox.Checked = !autoDestinationTagCheckBox.Checked;
+            manualDestinationTagCheckBox.Checked = !manualDestinationTagCheckBox.Checked;
         }
 
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            autoDestinationTagCheckBox_CheckedChanged(null, null);
+            manualDestinationTagCheckBox_CheckedChanged(null, null);
         }
 
         private void buttonDeleteSaved_Click(object sender, EventArgs e)

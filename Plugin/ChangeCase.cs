@@ -446,8 +446,9 @@ namespace MusicBeePlugin
             enableDisablePreviewOptionControls(true, true);
             enableQueryingOrUpdatingButtons();
 
-            presetBoxCustom.SelectionLength = 0;
             button_GotFocus(AcceptButton, null); //Let's mark active button
+            presetBoxCustom.SelectionStart = 0;
+            presetBoxCustom.SelectionLength = 0;
         }
 
         private string addSubstituteListBoxSpecialState(string itemText, string state, int specialStateCharCount)

@@ -72,7 +72,7 @@
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.loadComboBox = new System.Windows.Forms.ComboBox();
-            this.autoDestinationTagCheckBox = new System.Windows.Forms.CheckBox();
+            this.manualDestinationTagCheckBox = new System.Windows.Forms.CheckBox();
             this.buttonSettings = new System.Windows.Forms.Button();
             this.buttonDeleteSaved = new System.Windows.Forms.Button();
             this.smartOperationCheckBox = new System.Windows.Forms.CheckBox();
@@ -101,11 +101,11 @@
             this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             //MusicBee
-            this.autoDestinationTagCheckBox.Dispose();
+            this.manualDestinationTagCheckBox.Dispose();
             this.smartOperationCheckBox.Dispose();
             this.autoApplyCheckBox.Dispose();
 
-            this.autoDestinationTagCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
+            this.manualDestinationTagCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
             this.smartOperationCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
             this.autoApplyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
 
@@ -351,7 +351,7 @@
             this.dirtyErrorProvider.SetIconAlignment(this.sourceTagList, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("sourceTagList.IconAlignment"))));
             this.dirtyErrorProvider.SetIconPadding(this.sourceTagList, ((int)(resources.GetObject("sourceTagList.IconPadding"))));
             this.sourceTagList.Name = "sourceTagList";
-            this.sourceTagList.Tag = "#autoDestinationTagCheckBox";
+            this.sourceTagList.Tag = "#manualDestinationTagCheckBox";
             this.toolTip1.SetToolTip(this.sourceTagList, resources.GetString("sourceTagList.ToolTip"));
             this.sourceTagList.SelectedIndexChanged += new System.EventHandler(this.sourceTagList_SelectedIndexChanged);
             // 
@@ -364,7 +364,7 @@
             this.toTagLabel.Name = "toTagLabel";
             this.toTagLabel.Tag = "#destinationTagList";
             this.toolTip1.SetToolTip(this.toTagLabel, resources.GetString("toTagLabel.ToolTip"));
-            this.toTagLabel.Click += new System.EventHandler(this.label2_Click);
+            this.toTagLabel.Click += new System.EventHandler(this.manualDestinationTag_Click);
             // 
             // destinationTagList
             // 
@@ -439,16 +439,16 @@
             this.toolTip1.SetToolTip(this.loadComboBox, resources.GetString("loadComboBox.ToolTip"));
             this.loadComboBox.SelectedIndexChanged += new System.EventHandler(this.loadComboBox_SelectedIndexChanged);
             // 
-            // autoDestinationTagCheckBox
+            // manualDestinationTagCheckBox
             // 
-            resources.ApplyResources(this.autoDestinationTagCheckBox, "autoDestinationTagCheckBox");
-            this.dirtyErrorProvider.SetError(this.autoDestinationTagCheckBox, resources.GetString("autoDestinationTagCheckBox.Error"));
-            this.dirtyErrorProvider.SetIconAlignment(this.autoDestinationTagCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("autoDestinationTagCheckBox.IconAlignment"))));
-            this.dirtyErrorProvider.SetIconPadding(this.autoDestinationTagCheckBox, ((int)(resources.GetObject("autoDestinationTagCheckBox.IconPadding"))));
-            this.autoDestinationTagCheckBox.Name = "autoDestinationTagCheckBox";
-            this.autoDestinationTagCheckBox.Tag = "#toTagLabel";
-            this.toolTip1.SetToolTip(this.autoDestinationTagCheckBox, resources.GetString("autoDestinationTagCheckBox.ToolTip"));
-            this.autoDestinationTagCheckBox.CheckedChanged += new System.EventHandler(this.autoDestinationTagCheckBox_CheckedChanged);
+            resources.ApplyResources(this.manualDestinationTagCheckBox, "manualDestinationTagCheckBox");
+            this.dirtyErrorProvider.SetError(this.manualDestinationTagCheckBox, resources.GetString("manualDestinationTagCheckBox.Error"));
+            this.dirtyErrorProvider.SetIconAlignment(this.manualDestinationTagCheckBox, ((System.Windows.Forms.ErrorIconAlignment)(resources.GetObject("manualDestinationTagCheckBox.IconAlignment"))));
+            this.dirtyErrorProvider.SetIconPadding(this.manualDestinationTagCheckBox, ((int)(resources.GetObject("manualDestinationTagCheckBox.IconPadding"))));
+            this.manualDestinationTagCheckBox.Name = "manualDestinationTagCheckBox";
+            this.manualDestinationTagCheckBox.Tag = "#toTagLabel";
+            this.toolTip1.SetToolTip(this.manualDestinationTagCheckBox, resources.GetString("manualDestinationTagCheckBox.ToolTip"));
+            this.manualDestinationTagCheckBox.CheckedChanged += new System.EventHandler(this.manualDestinationTagCheckBox_CheckedChanged);
             // 
             // buttonSettings
             // 
@@ -531,7 +531,7 @@
             this.controlsPanel.Controls.Add(this.buttonSettings);
             this.controlsPanel.Controls.Add(this.destinationTagList);
             this.controlsPanel.Controls.Add(this.toTagLabel);
-            this.controlsPanel.Controls.Add(this.autoDestinationTagCheckBox);
+            this.controlsPanel.Controls.Add(this.manualDestinationTagCheckBox);
             this.controlsPanel.Controls.Add(this.sourceTagList);
             this.controlsPanel.Controls.Add(this.fromTagLabel);
             this.dirtyErrorProvider.SetError(this.controlsPanel, resources.GetString("controlsPanel.Error"));
@@ -788,7 +788,7 @@
         private System.Windows.Forms.PictureBox autoApplyPictureBox;
         private System.Windows.Forms.CheckBox autoApplyCheckBox;
         private System.Windows.Forms.Button buttonDeleteSaved;
-        private System.Windows.Forms.CheckBox autoDestinationTagCheckBox;
+        private System.Windows.Forms.CheckBox manualDestinationTagCheckBox;
         private System.Windows.Forms.ComboBox loadComboBox;
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonUp;
