@@ -305,7 +305,7 @@ namespace MusicBeePlugin
             else if (e.State == (DrawItemState.Disabled | DrawItemState.NoAccelerator
                 | DrawItemState.NoFocusRect | DrawItemState.ComboBoxEdit))
             {
-                foreColor = DimmedAccentColor;
+                foreColor = DisabledAccentColor;
                 backColor = comboBox.BackColor;
             }
             else //if (control.IsEnabled())
@@ -2820,7 +2820,7 @@ namespace MusicBeePlugin
                     if ((control.IsEnabled() && enable == null) || enable == true)
                         control.ForeColor = FormForeColor;
                     else
-                        control.ForeColor = DimmedAccentColor;
+                        control.ForeColor = DisabledAccentColor;
 
                     control.BackColor = FormBackColor;
                 }
@@ -2829,7 +2829,7 @@ namespace MusicBeePlugin
                     if ((control.IsEnabled() && enable == null) || enable == true)
                         control.ForeColor = FormForeColor;
                     else
-                        control.ForeColor = DimmedAccentColor;
+                        control.ForeColor = DisabledAccentColor;
 
                     control.BackColor = FormBackColor;
                 }
@@ -2837,17 +2837,17 @@ namespace MusicBeePlugin
                 {
                     if ((control.IsEnabled() && enable == null) || enable == true)
                     {
-                        if (control.ForeColor == FormForeColor || control.ForeColor == AccentColor || control.ForeColor == DimmedAccentColor)
+                        if (control.ForeColor == FormForeColor || control.ForeColor == AccentColor || control.ForeColor == DisabledAccentColor)
                             control.ForeColor = AccentColor;
                         else
                             control.ForeColor = GetHighlightColor(control.ForeColor, AccentColor, FormBackColor);
                     }
                     else
                     {
-                        if (control.ForeColor == FormForeColor || control.ForeColor == AccentColor || control.ForeColor == DimmedAccentColor)
-                            control.ForeColor = DimmedAccentColor;
+                        if (control.ForeColor == FormForeColor || control.ForeColor == AccentColor || control.ForeColor == DisabledAccentColor)
+                            control.ForeColor = DisabledAccentColor;
                         else
-                            control.ForeColor = GetHighlightColor(control.ForeColor, DimmedAccentColor, FormBackColor);
+                            control.ForeColor = GetHighlightColor(control.ForeColor, DisabledAccentColor, FormBackColor);
                     }
 
                     control.BackColor = FormBackColor;
@@ -2896,21 +2896,21 @@ namespace MusicBeePlugin
                 {
                     if (((control.IsEnabled() && enable == null) || enable == true) && !textBox.ReadOnly)
                     {
-                        if (control.ForeColor != DimmedHighlightColor)
+                        if (control.ForeColor != HyperlinkColor)
                             control.ForeColor = inputControlForeColor;
 
                         control.BackColor = inputControlBackColor;
                     }
                     else if ((control.IsEnabled() && enable == null) || enable == true) //Enabled, but readonly
                     {
-                        if (control.ForeColor != DimmedHighlightColor)
+                        if (control.ForeColor != HyperlinkColor)
                             control.ForeColor = accentColor;
 
                         control.BackColor = inputControlDimmedBackColor;
                     }
                     else //Disabled
                     {
-                        if (control.ForeColor != DimmedHighlightColor)
+                        if (control.ForeColor != HyperlinkColor)
                             control.ForeColor = inputControlDeepDimmedForeColor;
 
                         control.BackColor = inputControlDeepDimmedBackColor; //---
@@ -3375,16 +3375,16 @@ namespace MusicBeePlugin
             //Opened form cached colors (for button repainting)
             formBackColor = FormBackColor;
             accentColor = AccentColor;
-            dimmedAccentColor = DimmedAccentColor;
+            dimmedAccentColor = DisabledAccentColor;
             inputPanelBackColor = InputPanelBackColor;
             inputPanelBorderColor = InputPanelBorderColor;
             inputControlForeColor = InputControlForeColor;
             inputControlBackColor = InputControlBackColor;
             inputControlBorderColor = InputControlBorderColor;
-            inputControlDimmedForeColor = InputControlDimmedForeColor;
-            inputControlDimmedBackColor = InputControlDimmedBackColor;
-            inputControlDeepDimmedForeColor = InputControlDeepDimmedForeColor;
-            inputControlDeepDimmedBackColor = InputControlDeepDimmedBackColor;
+            inputControlDimmedForeColor = InputControlReadonlyForeColor;
+            inputControlDimmedBackColor = InputControlReadonlyBackColor;
+            inputControlDeepDimmedForeColor = InputControlDisabledForeColor;
+            inputControlDeepDimmedBackColor = InputControlDisabledBackColor;
             buttonForeColor = ButtonForeColor;
             buttonBackColor = ButtonBackColor;
             buttonBorderColor = ButtonBorderColor;

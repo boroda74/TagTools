@@ -303,7 +303,7 @@ namespace MusicBeePlugin
             ReplaceButtonBitmap(buttonSettings, Gear);
 
             //Setting themed colors
-            descriptionBox.ForeColor = DimmedHighlightColor;
+            descriptionBox.ForeColor = HyperlinkColor;
             descriptionBox.BackColor = BackColor;
 
 

@@ -25,13 +25,13 @@ namespace MusicBeePlugin
 
             if (useSkinColors)
             {
-                creditLinkLabel.DisabledLinkColor = DimmedAccentColor;
+                creditLinkLabel.DisabledLinkColor = DisabledAccentColor;
                 creditLinkLabel.LinkColor = HighlightColor;
-                creditLinkLabel.ActiveLinkColor = DimmedHighlightColor;
+                creditLinkLabel.ActiveLinkColor = HyperlinkColor;
 
-                iconSetLinkLabel.DisabledLinkColor = DimmedAccentColor;
+                iconSetLinkLabel.DisabledLinkColor = DisabledAccentColor;
                 iconSetLinkLabel.LinkColor = HighlightColor;
-                iconSetLinkLabel.ActiveLinkColor = DimmedHighlightColor;
+                iconSetLinkLabel.ActiveLinkColor = HyperlinkColor;
             }
 
             button_GotFocus(AcceptButton, null); //Let's mark active button

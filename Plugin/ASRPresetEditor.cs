@@ -215,9 +215,9 @@ namespace MusicBeePlugin
 
             if (useSkinColors)
             {
-                linkLabel1.DisabledLinkColor = DimmedAccentColor;
+                linkLabel1.DisabledLinkColor = DisabledAccentColor;
                 linkLabel1.LinkColor = HighlightColor;
-                linkLabel1.ActiveLinkColor = DimmedHighlightColor;
+                linkLabel1.ActiveLinkColor = HyperlinkColor;
             }
 
             if (Language == "ru")

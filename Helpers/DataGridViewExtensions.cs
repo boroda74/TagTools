@@ -15,9 +15,9 @@ namespace MusicBeePlugin
         private readonly Color inputControlBackColor = Plugin.InputControlBackColor;
         private readonly Color inputControlBorderColor = Plugin.InputControlBorderColor;
 
-        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDeepDimmedForeColor;
-        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDeepDimmedBackColor;
-        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDeepDimmedBorderColor;
+        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDisabledForeColor;
+        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDisabledBackColor;
+        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDisabledBorderColor;
 
         protected override void Paint(Graphics graphics,
             Rectangle clipBounds,
@@ -45,8 +45,8 @@ namespace MusicBeePlugin
             var p = new Point();
             var s = new Size((int)Math.Round(12f * dpiScaling), (int)Math.Round(12f * dpiScaling));
 
-            p.X = cellBounds.Location.X + (cellBounds.Width / 2) - (s.Width / 2) - (int)Math.Round(2f * dpiScaling);
-            p.Y = cellBounds.Location.Y + (cellBounds.Height / 2) - (s.Height / 2);// - (int)Math.Round(1f * dpiScaling);
+            p.X = cellBounds.Location.X + (cellBounds.Width / 2) - (s.Width / 2) - (int)Math.Round(2.2f * dpiScaling);
+            p.Y = cellBounds.Location.Y + (cellBounds.Height / 2) - (s.Height / 2) - (int)Math.Round(0.48f * dpiScaling);
 
             string strValue = string.Empty;
             if (value != null)
@@ -96,9 +96,9 @@ namespace MusicBeePlugin
         private readonly Color inputControlBackColor = Plugin.InputControlBackColor;
         private readonly Color inputControlBorderColor = Plugin.InputControlBorderColor;
 
-        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDeepDimmedForeColor;
-        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDeepDimmedBackColor;
-        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDeepDimmedBorderColor;
+        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDisabledForeColor;
+        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDisabledBackColor;
+        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDisabledBorderColor;
 
         internal event CheckBoxClickedHandler OnCheckBoxClicked;
 
@@ -127,8 +127,8 @@ namespace MusicBeePlugin
             var p = new Point();
             var s = new Size((int)Math.Round(12f * dpiScaling), (int)Math.Round(12f * dpiScaling));
 
-            p.X = cellBounds.Location.X + (cellBounds.Width / 2) - (s.Width / 2) - (int)Math.Round(2f * dpiScaling);
-            p.Y = cellBounds.Location.Y + (cellBounds.Height / 2) - (s.Height / 2);// - (int)Math.Round(1f * dpiScaling);
+            p.X = cellBounds.Location.X + (cellBounds.Width / 2) - (s.Width / 2) - (int)Math.Round(2.2f * dpiScaling);
+            p.Y = cellBounds.Location.Y + (cellBounds.Height / 2) - (s.Height / 2) - (int)Math.Round(0.48f * dpiScaling);
 
             cellLocation = cellBounds.Location;
             checkBoxLocation = p;

@@ -549,7 +549,7 @@ namespace ExtensionMethods
             if (Plugin.SavedSettings.dontUseSkinColors)
                 disabledColor = SystemColors.GrayText;
             else
-                disabledColor = Plugin.DimmedAccentColor;
+                disabledColor = Plugin.DisabledAccentColor;
 
 
             if (control.AccessibleDescription == Plugin.DisabledState)

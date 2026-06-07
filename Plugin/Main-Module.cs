@@ -167,22 +167,22 @@ namespace MusicBeePlugin
         internal static Color InputControlBorderColor;
         internal static Color InputControlFocusedBorderColor;
 
-        internal static Color InputControlDimmedForeColor;
-        internal static Color InputControlDimmedBackColor;
+        internal static Color InputControlReadonlyForeColor;
+        internal static Color InputControlReadonlyBackColor;
 
-        internal static Color InputControlDeepDimmedForeColor;
-        internal static Color InputControlDeepDimmedBackColor;
-        internal static Color InputControlDeepDimmedBorderColor;
+        internal static Color InputControlDisabledForeColor;
+        internal static Color InputControlDisabledBackColor;
+        internal static Color InputControlDisabledBorderColor;
 
         internal static Color InputControlSelectedForeColor;
         internal static Color InputControlSelectedBackColor;
 
         internal static Color AccentColor;
         internal static Color AccentSelectedColor;
-        internal static Color DimmedAccentColor;
+        internal static Color DisabledAccentColor;
         internal static Color DeepDimmedAccentColor;
 
-        internal static Color DimmedHighlightColor;
+        internal static Color HyperlinkColor;
 
         internal static Color SplitterColor;
 
@@ -6696,49 +6696,31 @@ namespace MusicBeePlugin
             const float MinForeBackButtonBrightnessDifference = 0.3f;
             const float ButtonInvertedAverageBrightnessContrast = 0.8f;
 
-            InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
-                ElementComponent.ComponentForeground));
-            InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
-                ElementComponent.ComponentBackground));
-            //InputPanelBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault, //-----
-            //    ElementComponent.ComponentBorder));
+            InputPanelForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, 
+                ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+            InputPanelBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, 
+                ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+            InputPanelBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel,
+                ElementState.ElementStateDefault, ElementComponent.ComponentBorder)); //----- This is not used at the moment
+
 
             if (!SavedSettings.dontUseSkinColors)
             {
-                InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentForeground));
-                int inputControlBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBackground);
-                InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBorder));
-                InputControlFocusedBorderColor = InputControlBorderColor; //----- GetWeightedColor(InputControlBorderColor, InputControlForeColor);
-
-                if (inputControlBackColorCode == 0)
-                    InputControlBackColor = SystemColors.Window;
-                else
-                    InputControlBackColor = Color.FromArgb(inputControlBackColorCode);
-
-                AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentForeground));
+                //GENERAL COLORS
+                AccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
                 AccentSelectedColor = NoColor; //---
 
-                DimmedAccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentForeground));
+                DisabledAccentColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, 
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentForeground));
                 DeepDimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DeepDimmedWeight);
 
-                FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentForeground));
-                FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBackground));
-                FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBorder));
 
-
-                //SKINNING BUTTONS
-
+                //BUTTONS
                 //Button mouse over colors workaround for older skins
 
-                //START: Workaround to get color similar to button mouseover one (similarity depend on the skin); for older skins, which don't provide correct mouse over colors
+                //START: Workaround to get color similar to button mouseover one (similarity depend on the skin); for older skins,
+                //which don't provide correct mouse over colors
                 TagToolsContextSubmenu.DropDown.Items.Clear();
 
 
@@ -6782,79 +6764,15 @@ namespace MusicBeePlugin
 
 
                 ButtonBackColor = buttonBackColor;
-                ButtonDisabledBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentBackground));
-
-                InputControlDimmedForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
-                InputControlDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.85f); //Read-only input control background //-----
-
-                int inputControlDeepDimmedBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentBackground);
-                if (inputControlDeepDimmedBackColorCode == 0)
-                    InputControlDeepDimmedBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.36f);
-                else if (inputControlDeepDimmedBackColorCode == -1)
-                    InputControlDeepDimmedBackColor = SystemColors.Control;
-                else
-                    InputControlDeepDimmedBackColor = Color.FromArgb(inputControlDeepDimmedBackColorCode); //Disabled input control background
-
-                int inputControlDeepDimmedForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                        ElementComponent.ComponentForeground);
-                if (inputControlDeepDimmedForeColorCode == 0)
-                    InputControlDeepDimmedBackColor = GetWeightedColor(InputControlForeColor, ButtonBackColor, 0.5f);
-                else if (inputControlDeepDimmedForeColorCode == -1)
-                    InputControlDeepDimmedForeColor = SystemColors.GrayText;
-                else
-                    InputControlDeepDimmedForeColor = Color.FromArgb(inputControlDeepDimmedForeColorCode); //Disabled input control foreground
-
-                int inputControlDeepDimmedBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                        ElementComponent.ComponentBorder);
-                if (inputControlDeepDimmedBorderColorCode == 0)
-                    InputControlDeepDimmedBorderColor = GetWeightedColor(InputControlForeColor, ButtonBackColor, 0.5f);
-                else if (inputControlDeepDimmedBorderColorCode == -1)
-                    InputControlDeepDimmedBorderColor = SystemColors.ControlText;
-                else
-                    InputControlDeepDimmedBorderColor = Color.FromArgb(inputControlDeepDimmedBorderColorCode); //Disabled input control border
-
-
-                int inputControlSelectedForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateHighlight,
-                        ElementComponent.ComponentForeground);
-                if (inputControlSelectedForeColorCode == 0)
-                {
-                    if (GetBrightnessDifference(ButtonMouseOverBackColor, ButtonBackColor) >= 0.15)
-                        InputControlSelectedForeColor = buttonMouseOverForeColor;
-                    else
-                        InputControlSelectedForeColor = IncreaseColorContrast(buttonMouseOverBackColor);
-                }
-                else if (inputControlSelectedForeColorCode == -1)
-                    InputControlSelectedForeColor = SystemColors.MenuText;
-                else
-                    InputControlSelectedForeColor = Color.FromArgb(inputControlSelectedForeColorCode); //Selected input control foreground
-
-                int inputControlSelectedBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentBackground);
-                if (inputControlSelectedBackColorCode == 0)
-                {
-                    if (GetBrightnessDifference(ButtonMouseOverBackColor, InputControlBackColor) >= 0.15)
-                    {
-                        InputControlSelectedBackColor = buttonMouseOverBackColor;
-                    }
-                    else
-                    {
-                        InputControlSelectedBackColor = GetInvertedAverageBrightnessColor(InputControlSelectedForeColor,
-                            InputControlBackColor, 1.125f);
-                    }
-                }
-                else if (inputControlSelectedBackColorCode == -1)
-                    InputControlSelectedBackColor = SystemColors.MenuHighlight;
-                else
-                    InputControlSelectedBackColor = Color.FromArgb(inputControlSelectedBackColorCode); //Selected input control background
+                ButtonDisabledBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, 
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentBackground));
 
 
                 //Fore colors
-                int buttonForeCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, 
-                    ElementComponent.ComponentForeground);
-                int buttonDisabledForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentForeground);
+                int buttonForeCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                int buttonDisabledForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, 
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentForeground);
 
                 if (buttonForeCode != -1)
                     UseNativeButtonPaint = false;
@@ -6878,10 +6796,39 @@ namespace MusicBeePlugin
                     ButtonDisabledForeColor = Color.FromArgb(buttonDisabledForeColorCode);
 
 
+                //Button mouseover colors 
+                int buttonMouseOverForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, 
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentForeground);
+                int buttonMouseOverBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, 
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentBackground);
+
+
+                if (buttonMouseOverForeColorCode == 0)
+                    ButtonMouseOverForeColor = buttonMouseOverForeColor;
+                else if (buttonMouseOverForeColorCode == -1)
+                    ButtonMouseOverForeColor = SystemColors.ControlText;
+                else
+                    ButtonMouseOverForeColor = Color.FromArgb(buttonMouseOverForeColorCode);
+
+
+                if (buttonMouseOverBackColorCode == 0)
+                    ButtonMouseOverBackColor = buttonMouseOverBackColor;
+                else if (buttonMouseOverBackColorCode == -1)
+                    ButtonMouseOverBackColor = SystemColors.Control;
+                else
+                    ButtonMouseOverBackColor = Color.FromArgb(buttonMouseOverBackColorCode);
+
+                if (GetBrightnessDifference(ButtonMouseOverForeColor, ButtonMouseOverBackColor) < MinForeBackButtonBrightnessDifference)
+                    ButtonMouseOverForeColor = IncreaseColorContrast(ButtonMouseOverForeColor, ButtonInvertedAverageBrightnessContrast);
+
+
                 //Border colors
-                int buttonBorderCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
-                int buttonDisabledBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateDisabled, ElementComponent.ComponentBorder);
-                int buttonMouseOverBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight, ElementComponent.ComponentBorder);
+                int buttonBorderCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
+                int buttonDisabledBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, 
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentBorder);
+                int buttonMouseOverBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, 
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentBorder);
 
                 if (buttonBorderCode == 0) //Unsupported by older API
                     ButtonBorderColor = ButtonForeColor;
@@ -6907,20 +6854,116 @@ namespace MusicBeePlugin
                     ButtonMouseOverBorderColor = Color.FromArgb(buttonMouseOverBorderColorCode);
 
 
-                int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBackground);
-                int scrollBarBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBackground);
-                int scrollBarThumbAndSpansForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentForeground);
-                int scrollBarFocusedBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentBackground);
-                int inputPanelBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBorder);
+                //CONTROLS, FORMS
+                InputControlForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                int inputControlBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+                InputControlBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+                InputControlFocusedBorderColor = InputControlBorderColor; //----- GetWeightedColor(InputControlBorderColor, InputControlForeColor);
 
+                if (inputControlBackColorCode == 0)
+                    InputControlBackColor = SystemColors.Window;
+                else
+                    InputControlBackColor = Color.FromArgb(inputControlBackColorCode);
+
+                FormForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanelLabel, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentForeground));
+                FormBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
+                FormBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBorder));
+
+                InputControlReadonlyForeColor = GetWeightedColor(InputControlForeColor, FormBackColor, DimmedWeight);
+                InputControlReadonlyBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.85f); //Read-only input control background //-----
+
+                int inputControlDeepDimmedBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentBackground);
+                if (inputControlDeepDimmedBackColorCode == 0)
+                    InputControlDisabledBackColor = GetWeightedColor(InputControlBackColor, ButtonBackColor, 0.36f);
+                else if (inputControlDeepDimmedBackColorCode == -1)
+                    InputControlDisabledBackColor = SystemColors.Control;
+                else
+                    InputControlDisabledBackColor = Color.FromArgb(inputControlDeepDimmedBackColorCode); //Disabled input control background
+
+                int inputControlDeepDimmedForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentForeground);
+                if (inputControlDeepDimmedForeColorCode == 0)
+                    InputControlDisabledBackColor = GetWeightedColor(InputControlForeColor, ButtonBackColor, 0.5f);
+                else if (inputControlDeepDimmedForeColorCode == -1)
+                    InputControlDisabledForeColor = SystemColors.GrayText;
+                else
+                    InputControlDisabledForeColor = Color.FromArgb(inputControlDeepDimmedForeColorCode); //Disabled input control foreground
+
+                int inputControlDeepDimmedBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentBorder);
+                if (inputControlDeepDimmedBorderColorCode == 0)
+                    InputControlDisabledBorderColor = GetWeightedColor(InputControlForeColor, ButtonBackColor, 0.5f);
+                else if (inputControlDeepDimmedBorderColorCode == -1)
+                    InputControlDisabledBorderColor = SystemColors.ControlText;
+                else
+                    InputControlDisabledBorderColor = Color.FromArgb(inputControlDeepDimmedBorderColorCode); //Disabled input control border
+
+
+                int inputControlSelectedForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentForeground);
+                if (inputControlSelectedForeColorCode == 0)
+                {
+                    if (GetBrightnessDifference(ButtonMouseOverBackColor, ButtonBackColor) >= 0.15)
+                        InputControlSelectedForeColor = buttonMouseOverForeColor;
+                    else
+                        InputControlSelectedForeColor = IncreaseColorContrast(buttonMouseOverBackColor);
+                }
+                else if (inputControlSelectedForeColorCode == -1)
+                    InputControlSelectedForeColor = SystemColors.MenuText;
+                else
+                    InputControlSelectedForeColor = Color.FromArgb(inputControlSelectedForeColorCode); //Selected input control foreground
+
+                int inputControlSelectedBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentBackground);
+                if (inputControlSelectedBackColorCode == 0)
+                {
+                    if (GetBrightnessDifference(ButtonMouseOverBackColor, InputControlBackColor) >= 0.15)
+                    {
+                        InputControlSelectedBackColor = buttonMouseOverBackColor;
+                    }
+                    else
+                    {
+                        InputControlSelectedBackColor = GetInvertedAverageBrightnessColor(InputControlSelectedForeColor, InputControlBackColor, 1.125f);
+                    }
+                }
+                else if (inputControlSelectedBackColorCode == -1)
+                    InputControlSelectedBackColor = SystemColors.MenuHighlight;
+                else
+                    InputControlSelectedBackColor = Color.FromArgb(inputControlSelectedBackColorCode); //Selected input control background
+
+
+                //SCROLLBARS
+                int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+                int scrollBarBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+                int scrollBarThumbAndSpansForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                int scrollBarFocusedBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, 
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentBackground);
+                int inputPanelBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, 
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
+
+
+                //Workaround for older skins. Rollback to existing colors.
                 if (scrollBarBackColorCode == 0)
-                    ScrollBarBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, ElementState.ElementStateDefault,
-                        ElementComponent.ComponentBackground));
+                    scrollBarBackColorCode = scrollBarBorderColorCode;
+
+                if (scrollBarBorderColorCode == 0)
+                    scrollBarBorderColorCode = scrollBarBackColorCode;
+
+
+                //Coloring
+                if (scrollBarBackColorCode == 0)
+                    ScrollBarBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, 
+                        ElementState.ElementStateDefault, ElementComponent.ComponentBackground));
                 else if (scrollBarBackColorCode == -1)
                     ScrollBarBackColor = SystemColors.ScrollBar;
                 else
@@ -6945,8 +6988,8 @@ namespace MusicBeePlugin
                 ScrollBarThumbAndSpansBorderColor = ScrollBarBorderColor;
 
                 if (scrollBarFocusedBorderColorCode == 0)
-                    ScrollBarFocusedBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, ElementState.ElementStateHighlight,
-                        ElementComponent.ComponentBorder));
+                    ScrollBarFocusedBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, 
+                        ElementState.ElementStateHighlight, ElementComponent.ComponentBorder));
                 else if (scrollBarFocusedBorderColorCode == -1)
                     ScrollBarFocusedBorderColor = SystemColors.ControlText;
                 else
@@ -6958,97 +7001,74 @@ namespace MusicBeePlugin
                     InputPanelBorderColor = Color.FromArgb(inputPanelBorderColorCode);
 
 
-                int buttonMouseOverForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentForeground);
-                int buttonMouseOverBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinButton, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentBackground);
-                int downArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentForeground);
-                int disabledDownArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentForeground);
-                int mouseOverDownArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentForeground);
-                int downArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBackground);
-                int disabledDownArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentBackground);
-                int mouseOverDownArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentBackground);
-                int downArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDefault,
-                    ElementComponent.ComponentBorder);
-                int disabledDownArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateDisabled,
-                    ElementComponent.ComponentBorder);
-                int mouseOverDownArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton, ElementState.ElementStateHighlight,
-                    ElementComponent.ComponentBorder);
+                //COMBO BOXES
+                int downArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
+                int disabledDownArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentForeground);
+                int mouseOverDownArrowComboBoxColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentForeground);
+                int downArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+                int disabledDownArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentBackground);
+                int mouseOverDownArrowComboBoxBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentBackground);
+                int downArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
+                int disabledDownArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateDisabled, ElementComponent.ComponentBorder);
+                int mouseOverDownArrowComboBoxBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputComboBoxButton,
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentBorder);
 
 
-                if (buttonMouseOverForeColorCode == 0)
-                    ButtonMouseOverForeColor = buttonMouseOverForeColor;
-                else if (buttonMouseOverForeColorCode == -1)
-                    ButtonMouseOverForeColor = SystemColors.ControlText;
-                else
-                    ButtonMouseOverForeColor = Color.FromArgb(buttonMouseOverForeColorCode);
-
-
-                if (buttonMouseOverBackColorCode == 0)
-                    ButtonMouseOverBackColor = buttonMouseOverBackColor;
-                else if (buttonMouseOverBackColorCode == -1)
-                    ButtonMouseOverBackColor = SystemColors.Control;
-                else
-                    ButtonMouseOverBackColor = Color.FromArgb(buttonMouseOverBackColorCode);
-
-                if (GetBrightnessDifference(ButtonMouseOverForeColor, ButtonMouseOverBackColor) < MinForeBackButtonBrightnessDifference)
-                    ButtonMouseOverForeColor = IncreaseColorContrast(ButtonMouseOverForeColor, ButtonInvertedAverageBrightnessContrast);
-
-
-                if (buttonMouseOverBackColorCode == 0)
+                //Combo box fore colors
+                if (downArrowComboBoxColorCode == 0)
                     ComboBoxButtonForeColor = InputControlForeColor;
-                else if (buttonMouseOverBackColorCode == -1)
-                    ComboBoxButtonForeColor = SystemColors.Control;
+                else if (downArrowComboBoxColorCode == -1)
+                    ComboBoxButtonForeColor = SystemColors.ControlText;
                 else
                     ComboBoxButtonForeColor = Color.FromArgb(downArrowComboBoxColorCode);
 
-                if (buttonMouseOverBackColorCode == 0)
-                    ComboBoxButtonDisabledForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                        ElementComponent.ComponentForeground));
-                else if (buttonMouseOverBackColorCode == -1)
+                if (disabledDownArrowComboBoxColorCode == 0)
+                    ComboBoxButtonDisabledForeColor = ButtonDisabledForeColor;
+                else if (disabledDownArrowComboBoxColorCode == -1)
                     ComboBoxButtonDisabledForeColor = SystemColors.GrayText;
                 else
                     ComboBoxButtonDisabledForeColor = Color.FromArgb(disabledDownArrowComboBoxColorCode);
 
-                if (buttonMouseOverBackColorCode == 0)
-                    ComboBoxButtonMouseOverForeColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                        ElementComponent.ComponentBackground));
-                else if (buttonMouseOverBackColorCode == -1)
+                if (mouseOverDownArrowComboBoxColorCode == 0)
+                    ComboBoxButtonMouseOverForeColor = ButtonMouseOverForeColor;
+                else if (mouseOverDownArrowComboBoxColorCode == -1)
                     ComboBoxButtonMouseOverForeColor = SystemColors.ControlText;
                 else
                     ComboBoxButtonMouseOverForeColor = Color.FromArgb(mouseOverDownArrowComboBoxColorCode);
 
 
-                if (buttonMouseOverBackColorCode == 0)
+                //Combo box back colors
+                if (downArrowComboBoxBackColorCode == 0)
                     ComboBoxButtonBackColor = InputControlBackColor;
-                else if (buttonMouseOverBackColorCode == -1)
+                else if (downArrowComboBoxBackColorCode == -1)
                     ComboBoxButtonBackColor = SystemColors.Control;
                 else
                     ComboBoxButtonBackColor = Color.FromArgb(downArrowComboBoxBackColorCode);
 
-                if (buttonMouseOverBackColorCode == 0)
-                    ComboBoxButtonDisabledBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                        ElementComponent.ComponentBackground));
-                else if (buttonMouseOverBackColorCode == -1)
+                if (disabledDownArrowComboBoxBackColorCode == 0)
+                    ComboBoxButtonDisabledBackColor = ButtonDisabledBackColor;
+                else if (disabledDownArrowComboBoxBackColorCode == -1)
                     ComboBoxButtonDisabledBackColor = SystemColors.Control;
                 else
                     ComboBoxButtonDisabledBackColor = Color.FromArgb(disabledDownArrowComboBoxBackColorCode);
 
-                if (buttonMouseOverBackColorCode == 0)
-                    ComboBoxButtonMouseOverBackColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                        ElementComponent.ComponentBackground));
-                else if (buttonMouseOverBackColorCode == -1)
+                if (mouseOverDownArrowComboBoxBackColorCode == 0)
+                    ComboBoxButtonMouseOverBackColor = ButtonMouseOverBackColor;
+                else if (mouseOverDownArrowComboBoxBackColorCode == -1)
                     ComboBoxButtonMouseOverBackColor = SystemColors.ControlText;
                 else
                     ComboBoxButtonMouseOverBackColor = Color.FromArgb(mouseOverDownArrowComboBoxBackColorCode);
 
 
+                //Combo box border colors
                 if (buttonMouseOverBackColorCode == 0)
                     ComboBoxButtonBorderColor = InputControlBackColor;
                 else if (buttonMouseOverBackColorCode == -1)
@@ -7056,18 +7076,16 @@ namespace MusicBeePlugin
                 else
                     ComboBoxButtonBorderColor = Color.FromArgb(downArrowComboBoxBorderColorCode);
 
-                if (buttonMouseOverBorderColorCode == 0)
-                    ComboBoxButtonDisabledBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                        ElementComponent.ComponentBackground));
-                else if (buttonMouseOverBorderColorCode == -1)
+                if (disabledDownArrowComboBoxBorderColorCode == 0)
+                    ComboBoxButtonDisabledBorderColor = InputControlBackColor;
+                else if (disabledDownArrowComboBoxBorderColorCode == -1)
                     ComboBoxButtonDisabledBorderColor = SystemColors.Control;
                 else
                     ComboBoxButtonDisabledBorderColor = Color.FromArgb(disabledDownArrowComboBoxBorderColorCode);
 
-                if (buttonMouseOverBorderColorCode == 0)
-                    ComboBoxButtonMouseOverBorderColor = Color.FromArgb(MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateDisabled,
-                        ElementComponent.ComponentBackground));
-                else if (buttonMouseOverBorderColorCode == -1)
+                if (mouseOverDownArrowComboBoxBorderColorCode == 0)
+                    ComboBoxButtonMouseOverBorderColor = ComboBoxButtonBorderColor;
+                else if (mouseOverDownArrowComboBoxBorderColorCode == -1)
                     ComboBoxButtonMouseOverBorderColor = SystemColors.ControlText;
                 else
                     ComboBoxButtonMouseOverBorderColor = Color.FromArgb(mouseOverDownArrowComboBoxBorderColorCode);
@@ -7083,7 +7101,7 @@ namespace MusicBeePlugin
                 var backColorNotSkinned = SystemColors.Control;
                 AccentColor = SystemColors.ControlText;
 
-                DimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DimmedWeight); //This is not used at the moment
+                DisabledAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DimmedWeight); //This is not used at the moment
                 DeepDimmedAccentColor = GetWeightedColor(AccentColor, backColorNotSkinned, DeepDimmedWeight); //This is not used at the moment
 
                 FormBackColor = SystemColors.Control;
@@ -7130,7 +7148,7 @@ namespace MusicBeePlugin
                     HighlightColor = GetWeightedColor(HighlightColor, Color.White, 0.4f);
             }
 
-            DimmedHighlightColor = GetHighlightColor(HighlightColor, AccentColor, InputControlDimmedBackColor);
+            HyperlinkColor = GetHighlightColor(HighlightColor, AccentColor, InputControlReadonlyBackColor);
 
 
             UntickedColor = AccentColor;
@@ -7708,9 +7726,9 @@ namespace MusicBeePlugin
 
 
             //DATAGRIDVIEW COLOR DEFINITIONS
-            const float MinForeBrightnessDifference = 0.1f; //-----
-            const float MinBackBrightnessDifference = 0.1f;
-            const float MinForeBackBrightnessDifference = 0.1f;
+            const float MinForeBrightnessDifference = 0.2f; //-----
+            const float MinBackBrightnessDifference = 0.2f;
+            const float MinForeBackBrightnessDifference = 0.2f;
             const float InvertedAverageBrightnessContrast = 1.125f;
 
 
@@ -7718,11 +7736,11 @@ namespace MusicBeePlugin
 
             if (!SavedSettings.dontUseSkinColors)
             {
-                HeaderCellStyle.ForeColor = InputControlDeepDimmedForeColor;
-                HeaderCellStyle.BackColor = InputControlDeepDimmedBackColor;
+                HeaderCellStyle.ForeColor = InputControlDisabledForeColor;
+                HeaderCellStyle.BackColor = InputControlDisabledBackColor;
 
-                HeaderCellStyle.SelectionForeColor = InputControlDeepDimmedForeColor;
-                HeaderCellStyle.SelectionBackColor = InputControlDeepDimmedBackColor;
+                HeaderCellStyle.SelectionForeColor = InputControlDisabledForeColor;
+                HeaderCellStyle.SelectionBackColor = InputControlDisabledBackColor;
 
                 int selectionForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, ElementState.ElementStateHighlight,
                     ElementComponent.ComponentForeground);
@@ -7734,7 +7752,8 @@ namespace MusicBeePlugin
                 UnchangedCellStyle.ForeColor = InputControlForeColor;
                 UnchangedCellStyle.BackColor = InputControlBackColor;
 
-                if (selectionForeColorCode != 0 && selectionBackColorCode != 0) //----- GetBrightnessDifference(selectionBackColor, UnchangedCellStyle.BackColor) >= MinBackBrightnessDifference)
+                if (selectionForeColorCode != 0 && selectionBackColorCode != 0) //----- GetBrightnessDifference(selectionBackColor,
+                                                                                //      UnchangedCellStyle.BackColor) >= MinBackBrightnessDifference)
                 {
                     UnchangedCellStyle.SelectionForeColor = selectionForeColor;
                     UnchangedCellStyle.SelectionBackColor = selectionBackColor;
@@ -7749,11 +7768,11 @@ namespace MusicBeePlugin
 
                 if (GetBrightnessDifference(HeaderCellStyle.ForeColor, HeaderCellStyle.BackColor) < MinForeBackBrightnessDifference)
                     HeaderCellStyle.ForeColor = GetInvertedAverageBrightnessColor(HeaderCellStyle.ForeColor,
-                        HeaderCellStyle.BackColor, InvertedAverageBrightnessContrast);
+                    HeaderCellStyle.BackColor, InvertedAverageBrightnessContrast);
 
                 if (GetBrightnessDifference(HeaderCellStyle.SelectionForeColor, HeaderCellStyle.SelectionBackColor) < MinForeBackBrightnessDifference)
                     HeaderCellStyle.SelectionForeColor = GetInvertedAverageBrightnessColor(HeaderCellStyle.SelectionForeColor,
-                        HeaderCellStyle.SelectionBackColor, InvertedAverageBrightnessContrast);
+                    HeaderCellStyle.SelectionBackColor, InvertedAverageBrightnessContrast);
             }
             else
             {

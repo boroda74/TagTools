@@ -176,7 +176,7 @@ namespace MusicBeePlugin
 
     internal sealed class ControlBorder : UserControl
     {
-        private readonly Color borderColorDisabled = Plugin.InputControlDeepDimmedBorderColor;
+        private readonly Color borderColorDisabled = Plugin.InputControlDisabledBorderColor;
         private readonly Color borderColorActive = Plugin.InputControlFocusedBorderColor;
         private readonly Color borderColor = Plugin.InputControlBorderColor;
 
@@ -310,7 +310,7 @@ namespace MusicBeePlugin
 
     internal class CustomComboBox : UserControl
     {
-        private readonly Color borderColorDisabled = Plugin.InputControlDeepDimmedBorderColor;
+        private readonly Color borderColorDisabled = Plugin.InputControlDisabledBorderColor;
         private readonly Color borderColorActive = Plugin.InputControlFocusedBorderColor;
         private readonly Color borderColor = Plugin.InputControlBorderColor;
 
@@ -1855,7 +1855,7 @@ namespace MusicBeePlugin
                         textBox.ForeColor = inputControlForeColor;
                     //Let's show cue for editable mode if cue is defined
                     else if (listBox.SelectedIndex == -1 && (string.IsNullOrEmpty(textBox.Text) || textBox.Text == cue) && !textBox.ReadOnly)
-                        textBox.ForeColor = Plugin.InputControlDimmedForeColor;
+                        textBox.ForeColor = Plugin.InputControlReadonlyForeColor;
                     //No cue, just "Text"
                     else
                         textBox.ForeColor = inputControlForeColor;
@@ -1867,8 +1867,8 @@ namespace MusicBeePlugin
                 }
                 else //Disabled
                 {
-                    textBox.ForeColor = Plugin.InputControlDeepDimmedForeColor;//---
-                    textBox.BackColor = Plugin.InputControlDeepDimmedBackColor; //---
+                    textBox.ForeColor = Plugin.InputControlDisabledForeColor;//---
+                    textBox.BackColor = Plugin.InputControlDisabledBackColor; //---
                 }
             }
         }
@@ -2869,9 +2869,9 @@ namespace MusicBeePlugin
         private readonly Color inputControlBackColor = Plugin.InputControlBackColor;
         private readonly Color inputControlBorderColor = Plugin.InputControlBorderColor;
 
-        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDeepDimmedForeColor;
-        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDeepDimmedBackColor;
-        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDeepDimmedBorderColor;
+        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDisabledForeColor;
+        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDisabledBackColor;
+        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDisabledBorderColor;
 
         private int scaledPx = 1;
         private readonly bool dontUseSkinColors;
@@ -2975,9 +2975,9 @@ namespace MusicBeePlugin
         private readonly Color inputControlBackColor = Plugin.InputControlBackColor;
         private readonly Color inputControlBorderColor = Plugin.InputControlBorderColor;
 
-        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDeepDimmedForeColor;
-        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDeepDimmedBackColor;
-        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDeepDimmedBorderColor;
+        private readonly Color inputControlDeepDimmedForeColor = Plugin.InputControlDisabledForeColor;
+        private readonly Color inputControlDeepDimmedBackColor = Plugin.InputControlDisabledBackColor;
+        private readonly Color inputControlDeepDimmedBorderColor = Plugin.InputControlDisabledBorderColor;
 
         private int scaledPx = 1;
         private readonly bool dontUseSkinColors;
