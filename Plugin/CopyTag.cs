@@ -58,6 +58,9 @@ namespace MusicBeePlugin
         private string[] fileTags;
         private List<bool> processedRowList = new List<bool>(); //Indices of processed tracks
 
+        private string hasLyricsName = MbApiInterface.Setting_GetFieldName(MetaDataType.HasLyrics);
+        private string destinationTagListLastText = MbApiInterface.Setting_GetFieldName(MetaDataType.HasLyrics);
+
         string appendCheckBoxLabel1;
         string appendCheckBoxLabel2;
 
@@ -677,7 +680,7 @@ namespace MusicBeePlugin
 
         private void destinationTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (destinationTagListCustom.Text == MbApiInterface.Setting_GetFieldName(MetaDataType.HasLyrics))
+            if (destinationTagListCustom.Text == hasLyricsName)
             {
                 sourceTagListCustom.ItemsClear();
                 sourceTagListCustom.Add("<Null>");
@@ -685,7 +688,7 @@ namespace MusicBeePlugin
 
                 sourceTagListCustom.SelectedIndex = 0;
             }
-            else
+            else if (destinationTagListLastText == hasLyricsName)
             {
                 var selectedIndex = sourceTagListCustom.SelectedIndex;
 
@@ -706,6 +709,8 @@ namespace MusicBeePlugin
                 {
                     sourceTagListCustom.SelectedIndex = 0;
                 }
+
+                destinationTagListLastText = destinationTagListCustom.Text;
             }
         }
 

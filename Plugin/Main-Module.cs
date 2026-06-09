@@ -6715,6 +6715,14 @@ namespace MusicBeePlugin
                     ElementState.ElementStateDisabled, ElementComponent.ComponentForeground));
                 DeepDimmedAccentColor = GetWeightedColor(AccentColor, InputPanelBackColor, DeepDimmedWeight);
 
+                int inputPanelBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel,
+                    ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
+
+                if (inputPanelBorderColorCode == -1)
+                    InputPanelBorderColor = SystemColors.ControlText;
+                else
+                    InputPanelBorderColor = Color.FromArgb(inputPanelBorderColorCode);
+
 
                 //BUTTONS
                 //Button mouse over colors workaround for older skins
@@ -6940,17 +6948,16 @@ namespace MusicBeePlugin
 
 
                 //SCROLLBARS
-                int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, 
+                //int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar,
+                //    ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
+                int scrollBarBackColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl,
                     ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
                 int scrollBarBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputControl, 
                     ElementState.ElementStateDefault, ElementComponent.ComponentBackground);
                 int scrollBarThumbAndSpansForeColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, 
                     ElementState.ElementStateDefault, ElementComponent.ComponentForeground);
                 int scrollBarFocusedBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputScrollBar, 
-                    ElementState.ElementStateHighlight, ElementComponent.ComponentBackground);
-                int inputPanelBorderColorCode = MbApiInterface.Setting_GetSkinElementColour(SkinElement.SkinInputPanel, 
-                    ElementState.ElementStateDefault, ElementComponent.ComponentBorder);
-
+                    ElementState.ElementStateHighlight, ElementComponent.ComponentBorder);
 
                 //Workaround for older skins. Rollback to existing colors.
                 if (scrollBarBackColorCode == 0)
@@ -6969,22 +6976,23 @@ namespace MusicBeePlugin
                 else
                     ScrollBarBackColor = Color.FromArgb(scrollBarBackColorCode);
 
+                NarrowScrollBarBackColor = ScrollBarBackColor; //-----
+
+                ScrollBarThumbAndSpansBackColor = NarrowScrollBarBackColor;
+
+
                 if (scrollBarBorderColorCode == -1)
                     ScrollBarBorderColor = SystemColors.Control;
                 else
                     ScrollBarBorderColor = Color.FromArgb(scrollBarBorderColorCode);
 
-                NarrowScrollBarBackColor = ScrollBarBackColor; //-----
-
                 if (scrollBarThumbAndSpansForeColorCode == 0)
-                    ScrollBarThumbAndSpansForeColor = GetWeightedColor(InputControlForeColor, InputControlBackColor, ScrollBarsForeWeight);
+                    ScrollBarThumbAndSpansForeColor = GetWeightedColor(InputControlForeColor, ScrollBarBackColor, ScrollBarsForeWeight);
                 else if (scrollBarThumbAndSpansForeColorCode == -1)
                         ScrollBarThumbAndSpansForeColor = SystemColors.ControlText;
                 else
                     ScrollBarThumbAndSpansForeColor = Color.FromArgb(scrollBarThumbAndSpansForeColorCode);
 
-                ScrollBarThumbAndSpansBackColor = NarrowScrollBarBackColor;
-                
                 ScrollBarThumbAndSpansBorderColor = ScrollBarBorderColor;
 
                 if (scrollBarFocusedBorderColorCode == 0)
@@ -6994,11 +7002,6 @@ namespace MusicBeePlugin
                     ScrollBarFocusedBorderColor = SystemColors.ControlText;
                 else
                     ScrollBarFocusedBorderColor = Color.FromArgb(scrollBarFocusedBorderColorCode);
-
-                if (inputPanelBorderColorCode == -1)
-                    InputPanelBorderColor = SystemColors.ControlText;
-                else
-                    InputPanelBorderColor = Color.FromArgb(inputPanelBorderColorCode);
 
 
                 //COMBO BOXES

@@ -3621,11 +3621,11 @@ namespace MusicBeePlugin
 
 
             //draw top image background
-            if (scrollBarThumbAndSpansBackBrush != null)
-                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(sbBorderWidth + offsetX,
-                    sbBorderWidth,
-                    initialWidth - 2 * sbBorderWidth, upArrowImageArg.Height
-                    + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
+            //if (scrollBarThumbAndSpansBackBrush != null)
+            //    e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(sbBorderWidth + offsetX,
+            //        sbBorderWidth,
+            //        initialWidth - 2 * sbBorderWidth, upArrowImageArg.Height
+            //        + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
 
             //draw top image
             //+1 scaled px nTop offset due to scroll bar top border
@@ -3646,7 +3646,7 @@ namespace MusicBeePlugin
 
             //draw spans & thumb background, thumb image(s) will be drawn over it later
             if (scrollBarThumbAndSpansBackBrush != null)
-                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(scaledPx + sbBorderWidth + offsetX,
+                e.Graphics.FillRectangle(scrollBarBackBrush, new Rectangle(scaledPx + sbBorderWidth + offsetX,
                     nTop + sbBorderWidth,
                     initialWidth - 2 * sbBorderWidth - scaledPx, nThumbHeight - sbBorderWidth));
 
@@ -3687,12 +3687,12 @@ namespace MusicBeePlugin
 
 
             //draw bottom image background
-            if (scrollBarThumbAndSpansBackBrush != null)
-                e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(sbBorderWidth + offsetX,
-                    Height - downArrowImageArg.Height
-                    - upImageAdditionalTopHeight - upImageAdditionalBottomHeight - sbBorderWidth,
-                    initialWidth - 2 * sbBorderWidth, downArrowImageArg.Height
-                    + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
+            //if (scrollBarThumbAndSpansBackBrush != null)
+            //    e.Graphics.FillRectangle(scrollBarThumbAndSpansBackBrush, new Rectangle(sbBorderWidth + offsetX,
+            //        Height - downArrowImageArg.Height
+            //        - upImageAdditionalTopHeight - upImageAdditionalBottomHeight - sbBorderWidth,
+            //        initialWidth - 2 * sbBorderWidth, downArrowImageArg.Height
+            //        + upImageAdditionalTopHeight + upImageAdditionalBottomHeight));
 
             //draw bottom image
             //-1 scaled px vertical offset due to scroll bar bottom border
