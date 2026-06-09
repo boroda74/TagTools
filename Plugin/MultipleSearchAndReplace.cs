@@ -1314,7 +1314,7 @@ namespace MusicBeePlugin
             }
         }
 
-        private void templateTable_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void templateTable_DataError(object sender, DataGridViewDataErrorEventArgs e) //-V3013
         {
             e.Cancel = true;
         }

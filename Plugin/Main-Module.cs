@@ -8391,7 +8391,7 @@ namespace MusicBeePlugin
         {
             try
             {
-                return RandomGenerator.Next(int.Parse(max_number) + 1).ToString("D" + Math.Ceiling((decimal)Math.Log10(float.Parse(max_number) + 1)));
+                return RandomGenerator.Next(int.Parse(max_number) + 1).ToString("D" + Math.Ceiling((decimal)Math.Log10(float.Parse(max_number) + 1))); //-V3217
             }
             catch (Exception ex)
             {

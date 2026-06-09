@@ -1644,9 +1644,9 @@ namespace MusicBeePlugin
                         else
                         {
                             string text = comboBox.Items[comboBox.SelectedIndex].ToString();
-                            if (defaultSpecialState != null && text.Length > GetSpecialStateCharCount(true))
+                            if (text.Length > GetSpecialStateCharCount(true))
                                 text = text.Substring(GetSpecialStateCharCount(true));
-                            else if (defaultSpecialState != null)
+                            else
                                 text = string.Empty;
 
                             return text;
@@ -1670,7 +1670,7 @@ namespace MusicBeePlugin
 
                     textBox.Text = string.Empty;
 
-                    if (oldSelectedIndex != listBox.SelectedIndex)
+                    if (oldSelectedIndex != listBox.SelectedIndex) //-V3029
                         Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
                     if (oldSelectedIndex != listBox.SelectedIndex)
@@ -1685,7 +1685,7 @@ namespace MusicBeePlugin
                     var oldSelectedIndex = comboBox.SelectedIndex;
                     comboBox.SelectedIndex = -1;
 
-                    if (oldSelectedIndex != comboBox.SelectedIndex)
+                    if (oldSelectedIndex != comboBox.SelectedIndex) //-V3029
                         Events[EVENT_SELECTEDINDEXCHANGED]?.DynamicInvoke(this, null);
 
                     if (oldSelectedIndex != comboBox.SelectedIndex)
@@ -3359,7 +3359,7 @@ namespace MusicBeePlugin
             Invalidate();
         }
 
-        internal void AdjustReservedSpace(int space)
+        internal void AdjustReservedSpace(int space) //-V3203
         {
             //reservedSpace = space; //---
             //Height = initialHeight - space;

@@ -3972,7 +3972,7 @@ namespace MusicBeePlugin
             DialogResult result = DialogResult.No;
 
             if (selectedPreset.nextPresetGuid != Guid.Empty && !SavedSettings.dontShowInteractivePresetChainWarning)
-                MessageBox.Show(this, MsgAsrPresetChainWontBeExecutedInInteractiveMode, string.Empty,
+                result = MessageBox.Show(this, MsgAsrPresetChainWontBeExecutedInInteractiveMode, string.Empty,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
 
             if (result == DialogResult.Yes)
@@ -6522,7 +6522,7 @@ namespace MusicBeePlugin
 
             if (BuildItemChain(PresetsInteractiveWorkingCopy.Values, presetChain, referencePreset, AddSkipItem, GetNextItem))
             {
-                foreach (Preset preset in presetChain)
+                foreach (Preset preset in presetChain) //-V3087
                     if (autoAppliedAsrPresetGuids.ContainsKey(preset.guid))
                         autoAppliedPresetsInChain++;
 
