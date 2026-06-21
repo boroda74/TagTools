@@ -219,6 +219,9 @@ namespace MusicBeePlugin
             Enable(false, autoApplyPresetsLabel, presetList);
 
 
+            onStartupCheckBox.Checked = SavedSettings.autoAsrOnStartup;
+            onStartupCheckBox.Enable(SavedSettings.allowAsrLrPresetAutoExecution);
+
             parameterTag6ListCustom = namesComboBoxes["parameterTag6List"];
             parameterTag5ListCustom = namesComboBoxes["parameterTag5List"];
             parameterTag4ListCustom = namesComboBoxes["parameterTag4List"];
@@ -2978,6 +2981,8 @@ namespace MusicBeePlugin
         {
             if (SavedSettings.dontShowAsr)
                 return;
+            else if (!SavedSettings.allowAsrLrPresetAutoExecution)
+                return;
 
 
             Thread.CurrentThread.Priority = ThreadPriority.Lowest;
@@ -3009,6 +3014,46 @@ namespace MusicBeePlugin
                                     SetStatusBarText(null, "ASR preset \"" + preset.getName() + "\" monthly run failed: " + ex.Message, true);
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        internal static void AutorunPresetsOnStartup()
+        {
+            if (SavedSettings.dontShowAsr)
+                return;
+            else if (!SavedSettings.allowAsrLrPresetAutoExecution)
+                return;
+            else if (AsrAutoAppliedPresets.Count == 0)
+                return;
+            else if (!SavedSettings.autoAsrOnStartup)
+                return;
+
+
+            Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+
+            MbApiInterface.Library_QueryFilesEx("domain=Library", out var files);
+            if (files == null || files.Length == 0)
+                return;
+
+            lock (AsrAutoAppliedPresets)
+            {
+                for (var i = 0; i < files.Length; i++)
+                {
+                    var currentFile = files[i];
+
+                    foreach (var preset in AsrAutoAppliedPresets)
+                    {
+                        try
+                        {
+                            if (ApplyPresetIfConditionSatisfied(currentFile, preset))
+                                SetStatusBarText(null, SbAsrPresetIsApplied.Replace("%%PRESET-NAME%%", preset.getName()), true);
+                        }
+                        catch (Exception ex)
+                        {
+                            SetStatusBarText(null, "ASR preset \"" + preset.getName() + "\" monthly run failed: " + ex.Message, true);
                         }
                     }
                 }
@@ -3891,6 +3936,8 @@ namespace MusicBeePlugin
 
         private void saveSettings()
         {
+            SavedSettings.autoAsrOnStartup = onStartupCheckBox.Checked;
+
             var savedPresetPaths = new SortedDictionary<string, bool>();
             var countedPresetFilenames = new SortedDictionary<string, int>();
             foreach (var preset in PresetsInteractiveWorkingCopy.Values)
@@ -6233,6 +6280,16 @@ namespace MusicBeePlugin
             clearNextPresetButton.Enable(enable
                 && selectedPreset.nextPresetGuid != Guid.Empty && (clearNextPresetButton.IsEnabled() || !dontChangeDisabled));
 
+            if (SavedSettings.dontShowAsr)
+                return;
+            else if (!SavedSettings.allowAsrLrPresetAutoExecution)
+                return;
+            else if (AsrAutoAppliedPresets.Count == 0)
+                return;
+            else if (!SavedSettings.autoAsrOnStartup)
+                return;
+
+            onStartupCheckBox.Enable(enable && SavedSettings.allowAsrLrPresetAutoExecution);
             assignHotkeyCheckBox.Enable(enable && (assignHotkeyCheckBox.IsEnabled() || !dontChangeDisabled));
             applyToPlayingTrackCheckBox.Enable(enable && assignHotkeyCheckBox.Checked);
             conditionCheckBox.Enable(enable && (conditionCheckBox.IsEnabled() || !dontChangeDisabled));
@@ -6738,6 +6795,14 @@ namespace MusicBeePlugin
                 presetListLastSelectedIndex = -3;
                 presetList_SelectedIndexChanged(null, null);
             }
+        }
+
+        private void onStartupCheckBoxLabel_Click(object sender, EventArgs e)
+        {
+            if (!onStartupCheckBox.IsEnabled())
+                return;
+
+            onStartupCheckBox.Checked = !onStartupCheckBox.Checked;
         }
 
         private static bool ExcludePresetFromChain(Preset selected, Preset current)

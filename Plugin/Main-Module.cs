@@ -705,6 +705,8 @@ namespace MusicBeePlugin
             public bool storePlaysPerDay;
             public MetaDataType playsPerDayTagId;
 
+            public bool autoAsrOnStartup;
+
             public bool autoRateAtStartUp;
             public bool notifyWhenAutoRatingCompleted;
             public bool calculateThresholdsAtStartUp;
@@ -6379,6 +6381,9 @@ namespace MusicBeePlugin
                     //Let's refresh MusicBee UI every 5 sec if there are any tags changed by plugin since last refresh
                     PeriodicUiRefreshTimer = new System.Threading.Timer(PeriodicUiRefresh, null, RefreshUI_Delay, RefreshUI_Delay);
 
+
+                    //Startup ASR presets autorun
+                    new Thread(AutorunPresetsOnStartup).Start();
 
                     //Monthly ASR presets autorun
                     new Thread(AutorunPresetsMonthly).Start();

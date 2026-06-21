@@ -135,7 +135,6 @@
             resources.ApplyResources(this.destinationTagList, "destinationTagList");
             this.destinationTagList.Name = "destinationTagList";
             this.destinationTagList.Tag = "#forSelectedTracksLabel";
-            this.destinationTagList.SelectedIndexChanged += new System.EventHandler(this.destinationTagList_SelectedIndexChanged);
             // 
             // forSelectedTracksLabel
             // 

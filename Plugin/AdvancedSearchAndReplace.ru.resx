@@ -127,6 +127,24 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1356, 663</value>
   </data>
+  <data name="onStartupCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>988, 37</value>
+  </data>
+  <data name="onStartupCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>345, 15</value>
+  </data>
+  <data name="onStartupCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически применять отмеченные пресеты при запуске</value>
+  </data>
+  <data name="onStartupCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="onStartupCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>964, 36</value>
+  </data>
+  <data name="onStartupCheckBox.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="runMonthlyPictureBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>738, 6</value>
   </data>
@@ -411,7 +429,7 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Inherit</value>
+    <value>NoControl</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>1370, 700</value>
@@ -1021,6 +1039,147 @@
         ngDxxx4A8MYeAPBMPgD4AD4A/AB+AP8B/gD///4A///+AP///gA=
 </value>
   </data>
+  <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1299, 58</value>
+  </data>
+  <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1319, 58</value>
+  </data>
+  <data name="descriptionGroupBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 15</value>
+  </data>
+  <data name="descriptionGroupBoxLabel.Text" xml:space="preserve">
+    <value>  Описание пресета  </value>
+  </data>
+  <data name="descriptionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1331, 81</value>
+  </data>
+  <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>967, 28</value>
+  </data>
+  <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 23</value>
+  </data>
+  <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>914, 28</value>
+  </data>
+  <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 25</value>
+  </data>
+  <data name="labelTag6.Text" xml:space="preserve">
+    <value>&lt;Тег 6&gt;</value>
+  </data>
+  <data name="pictureTag6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>898, 33</value>
+  </data>
+  <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>520, 28</value>
+  </data>
+  <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 23</value>
+  </data>
+  <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 28</value>
+  </data>
+  <data name="labelTag5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 25</value>
+  </data>
+  <data name="labelTag5.Text" xml:space="preserve">
+    <value>&lt;Тег 5&gt;</value>
+  </data>
+  <data name="pictureTag5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>451, 33</value>
+  </data>
+  <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 28</value>
+  </data>
+  <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 23</value>
+  </data>
+  <data name="labelTag4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 25</value>
+  </data>
+  <data name="labelTag4.Text" xml:space="preserve">
+    <value>&lt;Тег 4&gt;</value>
+  </data>
+  <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>967, 1</value>
+  </data>
+  <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>369, 23</value>
+  </data>
+  <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>914, 1</value>
+  </data>
+  <data name="labelTag3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 25</value>
+  </data>
+  <data name="labelTag3.Text" xml:space="preserve">
+    <value>&lt;Тег 3&gt;</value>
+  </data>
+  <data name="pictureTag3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>898, 6</value>
+  </data>
+  <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
+    <value>520, 1</value>
+  </data>
+  <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 23</value>
+  </data>
+  <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>467, 1</value>
+  </data>
+  <data name="labelTag2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 25</value>
+  </data>
+  <data name="labelTag2.Text" xml:space="preserve">
+    <value>&lt;Тег 2&gt;</value>
+  </data>
+  <data name="pictureTag2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>451, 6</value>
+  </data>
+  <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>73, 1</value>
+  </data>
+  <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>368, 23</value>
+  </data>
+  <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 25</value>
+  </data>
+  <data name="labelTag.Text" xml:space="preserve">
+    <value>&lt;Тег 1&gt;</value>
+  </data>
+  <data name="labelTag.ToolTip" xml:space="preserve">
+    <value>Этот пресет использует псевдо-тег &lt;ВСЕ ТЕГИ&gt;. БУДЬТЕ ОСТОРОЖНЫ!</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1342, 54</value>
+  </data>
+  <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1215, 56</value>
+  </data>
+  <data name="userPresetLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 15</value>
+  </data>
+  <data name="userPresetLabel.Text" xml:space="preserve">
+    <value>Пресет пользователя</value>
+  </data>
+  <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1199, 56</value>
+  </data>
+  <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1036, 56</value>
+  </data>
+  <data name="customizedPresetLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 15</value>
+  </data>
+  <data name="customizedPresetLabel.Text" xml:space="preserve">
+    <value>Настроен пользователем</value>
+  </data>
+  <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1020, 56</value>
+  </data>
   <data name="runMonthlyCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>797, 56</value>
   </data>
@@ -1039,24 +1198,6 @@
   <data name="runMonthlyCheckBox.ToolTip" xml:space="preserve">
     <value>Автоматически запускать выбранный пресет ежемесячно при первом запуске Musicbee в новом месяце</value>
   </data>
-  <data name="gotoNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1263, 2</value>
-  </data>
-  <data name="gotoNextPresetButton.ToolTip" xml:space="preserve">
-    <value>Перейти к следующему пресету в цепочке применения</value>
-  </data>
-  <data name="showOnlyChainedPresetsButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1290, 2</value>
-  </data>
-  <data name="showOnlyChainedPresetsButton.ToolTip" xml:space="preserve">
-    <value>Показывать только пресеты из цепочки применения пресетов/показывать все пресеты</value>
-  </data>
-  <data name="clearNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1317, 2</value>
-  </data>
-  <data name="clearNextPresetButton.ToolTip" xml:space="preserve">
-    <value>Очистить поле поиска следующего применяемого пресета</value>
-  </data>
   <data name="hiddenCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>709, 56</value>
   </data>
@@ -1068,6 +1209,106 @@
   </data>
   <data name="hiddenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>688, 55</value>
+  </data>
+  <data name="favoriteCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>595, 56</value>
+  </data>
+  <data name="favoriteCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 15</value>
+  </data>
+  <data name="favoriteCheckBoxLabel.Text" xml:space="preserve">
+    <value>♥ ЛЮБИМЫЙ</value>
+  </data>
+  <data name="favoriteCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>574, 55</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>351, 56</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 15</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBoxLabel.Text" xml:space="preserve">
+    <value>Применить к проигрываемому треку</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Применить к проигрываемому треку</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>325, 55</value>
+  </data>
+  <data name="applyToPlayingTrackCheckBox.ToolTip" xml:space="preserve">
+    <value>Применить к проигрываемому треку</value>
+  </data>
+  <data name="assignHotkeyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 15</value>
+  </data>
+  <data name="assignHotkeyCheckBoxLabel.Text" xml:space="preserve">
+    <value>Назначить комбинацию клавиш. Осталось:  20/20</value>
+  </data>
+  <data name="assignHotkeyCheckBoxLabel.ToolTip" xml:space="preserve">
+    <value>Сначала включите комбинацию клавиш для одного или нескольких пресетов, потом сохраните изменения и 
+откройте настройки горячих клавиш MusicBee: Правка&gt; Настройки&gt; Горячие клавиши
+
+Потребуется заново назначить комбинацию клавиш, если изменится название пресета
+</value>
+  </data>
+  <data name="assignHotkeyCheckBox.ToolTip" xml:space="preserve">
+    <value>Сначала включите комбинацию клавиш для одного или нескольких пресетов, потом сохраните изменения и 
+откройте настройки горячих клавиш MusicBee: Правка&gt; Настройки&gt; Горячие клавиши
+
+Потребуется заново назначить комбинацию клавиш, если изменится название пресета</value>
+  </data>
+  <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1317, 27</value>
+  </data>
+  <data name="clearIdButton.ToolTip" xml:space="preserve">
+    <value>Удалить назначение ID-а функции виртуальных тегов пресету</value>
+  </data>
+  <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1172, 27</value>
+  </data>
+  <data name="idTextBox.ToolTip" xml:space="preserve">
+    <value>Разрешены только латинские буквы, цифры и символы - : _ .</value>
+  </data>
+  <data name="idLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>981, 31</value>
+  </data>
+  <data name="idLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 15</value>
+  </data>
+  <data name="idLabel.Text" xml:space="preserve">
+    <value>ID функции виртуальных тегов</value>
+  </data>
+  <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>430, 27</value>
+  </data>
+  <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>543, 23</value>
+  </data>
+  <data name="conditionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 15</value>
+  </data>
+  <data name="conditionCheckBoxLabel.Text" xml:space="preserve">
+    <value>Автоматически применять пресет, только если трек есть в плейлисте </value>
+  </data>
+  <data name="clearNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1317, 2</value>
+  </data>
+  <data name="clearNextPresetButton.ToolTip" xml:space="preserve">
+    <value>Очистить поле поиска следующего применяемого пресета</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1290, 2</value>
+  </data>
+  <data name="showOnlyChainedPresetsButton.ToolTip" xml:space="preserve">
+    <value>Показывать только пресеты из цепочки применения пресетов/показывать все пресеты</value>
+  </data>
+  <data name="gotoNextPresetButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1263, 2</value>
+  </data>
+  <data name="gotoNextPresetButton.ToolTip" xml:space="preserve">
+    <value>Перейти к следующему пресету в цепочке применения</value>
   </data>
   <data name="nextPresetComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>300, 2</value>
@@ -1185,229 +1426,6 @@
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>1342, 54</value>
-  </data>
-  <data name="parameterTag6List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>967, 29</value>
-  </data>
-  <data name="parameterTag6List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 23</value>
-  </data>
-  <data name="labelTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>914, 28</value>
-  </data>
-  <data name="labelTag6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 25</value>
-  </data>
-  <data name="labelTag6.Text" xml:space="preserve">
-    <value>&lt;Тег 6&gt;</value>
-  </data>
-  <data name="pictureTag6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>898, 33</value>
-  </data>
-  <data name="parameterTag5List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>520, 29</value>
-  </data>
-  <data name="parameterTag5List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 23</value>
-  </data>
-  <data name="labelTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>467, 28</value>
-  </data>
-  <data name="labelTag5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 25</value>
-  </data>
-  <data name="labelTag5.Text" xml:space="preserve">
-    <value>&lt;Тег 5&gt;</value>
-  </data>
-  <data name="pictureTag5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>451, 33</value>
-  </data>
-  <data name="parameterTag4List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 29</value>
-  </data>
-  <data name="parameterTag4List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 23</value>
-  </data>
-  <data name="labelTag4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 25</value>
-  </data>
-  <data name="labelTag4.Text" xml:space="preserve">
-    <value>&lt;Тег 4&gt;</value>
-  </data>
-  <data name="parameterTag3List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>967, 2</value>
-  </data>
-  <data name="parameterTag3List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>369, 23</value>
-  </data>
-  <data name="labelTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>914, 1</value>
-  </data>
-  <data name="labelTag3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 25</value>
-  </data>
-  <data name="labelTag3.Text" xml:space="preserve">
-    <value>&lt;Тег 3&gt;</value>
-  </data>
-  <data name="pictureTag3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>898, 6</value>
-  </data>
-  <data name="parameterTag2List.Location" type="System.Drawing.Point, System.Drawing">
-    <value>520, 2</value>
-  </data>
-  <data name="parameterTag2List.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 23</value>
-  </data>
-  <data name="labelTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>467, 1</value>
-  </data>
-  <data name="labelTag2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 25</value>
-  </data>
-  <data name="labelTag2.Text" xml:space="preserve">
-    <value>&lt;Тег 2&gt;</value>
-  </data>
-  <data name="pictureTag2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>451, 6</value>
-  </data>
-  <data name="parameterTagList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 2</value>
-  </data>
-  <data name="parameterTagList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>368, 23</value>
-  </data>
-  <data name="labelTag.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 25</value>
-  </data>
-  <data name="labelTag.Text" xml:space="preserve">
-    <value>&lt;Тег 1&gt;</value>
-  </data>
-  <data name="labelTag.ToolTip" xml:space="preserve">
-    <value>Этот пресет использует псевдо-тег &lt;ВСЕ ТЕГИ&gt;. БУДЬТЕ ОСТОРОЖНЫ!</value>
-  </data>
-  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1342, 54</value>
-  </data>
-  <data name="userPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1215, 56</value>
-  </data>
-  <data name="userPresetLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>124, 15</value>
-  </data>
-  <data name="userPresetLabel.Text" xml:space="preserve">
-    <value>Пресет пользователя</value>
-  </data>
-  <data name="userPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1199, 56</value>
-  </data>
-  <data name="customizedPresetLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1036, 56</value>
-  </data>
-  <data name="customizedPresetLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 15</value>
-  </data>
-  <data name="customizedPresetLabel.Text" xml:space="preserve">
-    <value>Настроен пользователем</value>
-  </data>
-  <data name="customizedPresetPictureBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1020, 56</value>
-  </data>
-  <data name="favoriteCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>595, 56</value>
-  </data>
-  <data name="favoriteCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 15</value>
-  </data>
-  <data name="favoriteCheckBoxLabel.Text" xml:space="preserve">
-    <value>♥ ЛЮБИМЫЙ</value>
-  </data>
-  <data name="favoriteCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>574, 55</value>
-  </data>
-  <data name="applyToPlayingTrackCheckBoxLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>351, 56</value>
-  </data>
-  <data name="applyToPlayingTrackCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 15</value>
-  </data>
-  <data name="applyToPlayingTrackCheckBoxLabel.Text" xml:space="preserve">
-    <value>Применить к проигрываемому треку</value>
-  </data>
-  <data name="applyToPlayingTrackCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Применить к проигрываемому треку</value>
-  </data>
-  <data name="applyToPlayingTrackCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 55</value>
-  </data>
-  <data name="applyToPlayingTrackCheckBox.ToolTip" xml:space="preserve">
-    <value>Применить к проигрываемому треку</value>
-  </data>
-  <data name="assignHotkeyCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 15</value>
-  </data>
-  <data name="assignHotkeyCheckBoxLabel.Text" xml:space="preserve">
-    <value>Назначить комбинацию клавиш. Осталось:  20/20</value>
-  </data>
-  <data name="assignHotkeyCheckBoxLabel.ToolTip" xml:space="preserve">
-    <value>Сначала включите комбинацию клавиш для одного или нескольких пресетов, потом сохраните изменения и 
-откройте настройки горячих клавиш MusicBee: Правка&gt; Настройки&gt; Горячие клавиши
-
-Потребуется заново назначить комбинацию клавиш, если изменится название пресета
-</value>
-  </data>
-  <data name="assignHotkeyCheckBox.ToolTip" xml:space="preserve">
-    <value>Сначала включите комбинацию клавиш для одного или нескольких пресетов, потом сохраните изменения и 
-откройте настройки горячих клавиш MusicBee: Правка&gt; Настройки&gt; Горячие клавиши
-
-Потребуется заново назначить комбинацию клавиш, если изменится название пресета</value>
-  </data>
-  <data name="clearIdButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1317, 27</value>
-  </data>
-  <data name="clearIdButton.ToolTip" xml:space="preserve">
-    <value>Удалить назначение ID-а функции виртуальных тегов пресету</value>
-  </data>
-  <data name="idTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1172, 27</value>
-  </data>
-  <data name="idTextBox.ToolTip" xml:space="preserve">
-    <value>Разрешены только латинские буквы, цифры и символы - : _ .</value>
-  </data>
-  <data name="idLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>981, 31</value>
-  </data>
-  <data name="idLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 15</value>
-  </data>
-  <data name="idLabel.Text" xml:space="preserve">
-    <value>ID функции виртуальных тегов</value>
-  </data>
-  <data name="playlistComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 27</value>
-  </data>
-  <data name="playlistComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>543, 23</value>
-  </data>
-  <data name="conditionCheckBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 15</value>
-  </data>
-  <data name="conditionCheckBoxLabel.Text" xml:space="preserve">
-    <value>Автоматически применять пресет, только если трек есть в плейлисте </value>
-  </data>
-  <data name="descriptionBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1299, 58</value>
-  </data>
-  <data name="textBoxTableLayoutPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1319, 58</value>
-  </data>
-  <data name="descriptionGroupBoxLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 15</value>
-  </data>
-  <data name="descriptionGroupBoxLabel.Text" xml:space="preserve">
-    <value>  Описание пресета  </value>
-  </data>
-  <data name="descriptionGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1331, 81</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 86</value>

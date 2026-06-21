@@ -580,7 +580,8 @@ namespace MusicBeePlugin
         private void saveSettings()
         {
             SavedSettings.copySourceTagName = sourceTagListCustom.Text;
-            SavedSettings.copyDestinationTagName = destinationTagListCustom.Text;
+            if (manualDestinationTagCheckBox.Checked)
+                SavedSettings.copyDestinationTagName = destinationTagListCustom.Text;
             SavedSettings.smartOperation = smartOperationCheckBox.Checked;
             SavedSettings.manualDestinationTag = manualDestinationTagCheckBox.Checked;
 

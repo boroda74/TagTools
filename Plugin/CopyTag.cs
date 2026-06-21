@@ -100,9 +100,15 @@ namespace MusicBeePlugin
 
             ReplaceButtonBitmap(buttonSettings, Gear);
 
-            FillListByTagNames(destinationTagListCustom.Items);
-            destinationTagListCustom.Text = SavedSettings.copyDestinationTagName;
+            FillListByTagNames(sourceTagListCustom.Items, true, false, false);
+            FillListByPropNames(sourceTagListCustom.Items);
+            sourceTagListCustom.Add(ClipboardTagName);
+            sourceTagListCustom.Add(TextFileTagName);
+            sourceTagListCustom.Add(SequenceNumberName);
 
+            FillListByTagNames(destinationTagListCustom.Items);
+
+            destinationTagListCustom.Text = SavedSettings.copyDestinationTagName;
             sourceTagListCustom.Text = SavedSettings.copySourceTagName;
 
             onlyIfDestinationEmptyCheckBox.Checked = SavedSettings.onlyIfDestinationIsEmpty;
@@ -670,48 +676,12 @@ namespace MusicBeePlugin
 
         private void sourceTagList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var test = (sourceTagListCustom.Text == TextFileTagName);
-            fileNameLabel.Enable(test);
-            test = (sourceTagListCustom.Text == TextFileTagName);
-            fileNameTextBoxCustom.Enable(test);
-            test = (sourceTagListCustom.Text == TextFileTagName);
-            buttonBrowse.Enable(test);
-        }
-
-        private void destinationTagList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (destinationTagListCustom.Text == hasLyricsName)
-            {
-                sourceTagListCustom.ItemsClear();
-                sourceTagListCustom.Add("<Null>");
-                sourceTagListCustom.Add("<+>");
-
-                sourceTagListCustom.SelectedIndex = 0;
-            }
-            else if (destinationTagListLastText == hasLyricsName)
-            {
-                var selectedIndex = sourceTagListCustom.SelectedIndex;
-
-                sourceTagListCustom.ItemsClear();
-
-                FillListByTagNames(sourceTagListCustom.Items, true);
-                FillListByPropNames(sourceTagListCustom.Items);
-                //sourceTagListCustom.Items.Add(MusicBeePlugin.emptyValueTagName);
-                sourceTagListCustom.Add(ClipboardTagName);
-                sourceTagListCustom.Add(TextFileTagName);
-                sourceTagListCustom.Add(SequenceNumberName);
-
-                try
-                {
-                    sourceTagListCustom.SelectedIndex = selectedIndex;
-                }
-                catch
-                {
-                    sourceTagListCustom.SelectedIndex = 0;
-                }
-
-                destinationTagListLastText = destinationTagListCustom.Text;
-            }
+            var fromFile = (sourceTagListCustom.Text == TextFileTagName);
+            fileNameLabel.Enable(fromFile);
+            fromFile = (sourceTagListCustom.Text == TextFileTagName);
+            fileNameTextBoxCustom.Enable(fromFile);
+            fromFile = (sourceTagListCustom.Text == TextFileTagName);
+            buttonBrowse.Enable(fromFile);
         }
 
         private void customTextBox_EnabledChanged(object sender, EventArgs e)

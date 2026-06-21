@@ -207,6 +207,8 @@ namespace MusicBeePlugin
             this.customizedPictureBox = new System.Windows.Forms.PictureBox();
             this.predefinedPictureBox = new System.Windows.Forms.PictureBox();
             this.tickedOnlyPictureBox = new System.Windows.Forms.PictureBox();
+            this.onStartupCheckBoxLabel = new System.Windows.Forms.Label();
+            this.onStartupCheckBox = new System.Windows.Forms.CheckBox();
             this.autoApplyPresetsLabel = new System.Windows.Forms.Label();
             this.filtersPanel = new System.Windows.Forms.Panel();
             this.searchPictureBox = new System.Windows.Forms.PictureBox();
@@ -232,6 +234,7 @@ namespace MusicBeePlugin
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 
             //MusicBee
+            this.onStartupCheckBox.Dispose();
             this.runMonthlyCheckBox.Dispose();
             this.hiddenCheckBox.Dispose();
             this.favoriteCheckBox.Dispose();
@@ -239,6 +242,7 @@ namespace MusicBeePlugin
             this.assignHotkeyCheckBox.Dispose();
             this.conditionCheckBox.Dispose();
 
+            this.onStartupCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
             this.runMonthlyCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
             this.hiddenCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
             this.favoriteCheckBox = new CustomCheckBox(this, Plugin.SavedSettings.dontUseSkinColors);
@@ -948,10 +952,10 @@ namespace MusicBeePlugin
             this.previewTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.previewTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previewTable_CellContentClick);
             this.previewTable.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.previewTable_ColumnWidthChanged);
+            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             this.previewTable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PreviewTable_MouseDown);
             this.previewTable.MouseLeave += new System.EventHandler(this.PreviewTable_MouseLeave);
             this.previewTable.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PreviewTable_MouseUp);
-            this.previewTable.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.previewTable_DataError);
             // 
             // PresetGuid
             // 
@@ -1459,6 +1463,19 @@ namespace MusicBeePlugin
             this.toolTip1.SetToolTip(this.tickedOnlyPictureBox, resources.GetString("tickedOnlyPictureBox.ToolTip"));
             this.tickedOnlyPictureBox.Click += new System.EventHandler(this.tickedOnlyPictureBox_Click);
             // 
+            // onStartupCheckBoxLabel
+            // 
+            resources.ApplyResources(this.onStartupCheckBoxLabel, "onStartupCheckBoxLabel");
+            this.onStartupCheckBoxLabel.Name = "onStartupCheckBoxLabel";
+            this.onStartupCheckBoxLabel.Tag = "";
+            this.onStartupCheckBoxLabel.Click += new System.EventHandler(this.onStartupCheckBoxLabel_Click);
+            // 
+            // onStartupCheckBox
+            // 
+            resources.ApplyResources(this.onStartupCheckBox, "onStartupCheckBox");
+            this.onStartupCheckBox.Name = "onStartupCheckBox";
+            this.onStartupCheckBox.Tag = "#onStartupCheckBoxLabel";
+            // 
             // autoApplyPresetsLabel
             // 
             resources.ApplyResources(this.autoApplyPresetsLabel, "autoApplyPresetsLabel");
@@ -1705,6 +1722,8 @@ namespace MusicBeePlugin
             this.AcceptButton = this.buttonPreview;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.onStartupCheckBoxLabel);
+            this.Controls.Add(this.onStartupCheckBox);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.filtersPanel);
             this.Controls.Add(this.autoApplyPresetsLabel);
@@ -1759,6 +1778,7 @@ namespace MusicBeePlugin
             ((System.ComponentModel.ISupportInitialize)(this.searchPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dirtyErrorProvider)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1909,5 +1929,7 @@ namespace MusicBeePlugin
         private Label runMonthlyCheckBoxLabel;
         private CheckBox runMonthlyCheckBox;
         private PictureBox runMonthlyPictureBox;
+        private Label onStartupCheckBoxLabel;
+        private CheckBox onStartupCheckBox;
     }
 }
