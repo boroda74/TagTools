@@ -6382,11 +6382,11 @@ namespace MusicBeePlugin
                     PeriodicUiRefreshTimer = new System.Threading.Timer(PeriodicUiRefresh, null, RefreshUI_Delay, RefreshUI_Delay);
 
 
-                    //Startup ASR presets autorun
-                    new Thread(AutorunPresetsOnStartup).Start();
-
                     //Monthly ASR presets autorun
                     new Thread(AutorunPresetsMonthly).Start();
+
+                    //Startup ASR presets autorun
+                    new Thread(AutorunPresetsOnStartup).Start();
 
 
                     //Auto rate at startup

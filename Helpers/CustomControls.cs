@@ -2032,6 +2032,8 @@ namespace MusicBeePlugin
 
         private void changeTextBoxBackground(object sender, EventArgs e)
         {
+            textBox.SelectionStart = 0;
+            textBox.SelectionLength = 0;
             SetTextBoxColors(null);
         }
 

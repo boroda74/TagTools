@@ -3033,6 +3033,7 @@ namespace MusicBeePlugin
 
 
             Thread.CurrentThread.Priority = ThreadPriority.Lowest;
+            Thread.Sleep(60000);
 
             MbApiInterface.Library_QueryFilesEx("domain=Library", out var files);
             if (files == null || files.Length == 0)
